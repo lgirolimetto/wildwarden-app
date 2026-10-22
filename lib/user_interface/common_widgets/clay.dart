@@ -1,0 +1,428 @@
+import 'package:druid_app/user_interface/theme/druid_tokens.dart';
+import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+/// Stile "plastilina" (claymorphism): forme morbide con un riflesso in alto a sinistra, un'ombra diffusa sotto e
+/// angoli molto arrotondati. Con una livrea piatta (`DruidTokens.clay == false`) gli stessi widget restano piatti.
+
+Color _lighten(Color c, double amount) => Color.lerp(c, Colors.white, amount)!;
+
+Color _darken(Color c, double amount) => Color.lerp(c, Colors.black, amount)!;
+
+/// Decorazione in plastilina per un rettangolo arrotondato.
+BoxDecoration clayDecoration(BuildContext context, {required Color color, double? radius, bool pressed = false}) {
+  final tokens = context.druid;
+  final r = BorderRadius.circular(radius ?? tokens.cardRadius);
+  if (!tokens.clay) {
+    return BoxDecoration(
+      color: color,
+      borderRadius: r,
+      border: Border.all(color: context.colors.outlineVariant),
+    );
+  }
+  return BoxDecoration(
+    borderRadius: r,
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [_lighten(color, 0.10), color, _darken(color, 0.06)],
+      stops: const [0, 0.55, 1],
+    ),
+    boxShadow: pressed
+        ? [BoxShadow(color: tokens.clayShadow, blurRadius: 6, offset: const Offset(0, 2))]
+        : [
+            BoxShadow(color: tokens.clayShadow, blurRadius: 22, offset: const Offset(0, 10)),
+            BoxShadow(
+              color: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * 0.6),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+  );
+}
+
+/// Riflesso sul bordo superiore: dà l'effetto "gonfio" della plastilina. Va sovrapposto al contenuto.
+class _ClayHighlight extends StatelessWidget {
+  final BorderRadius radius;
+
+  const _ClayHighlight({required this.radius});
+
+  @override
+  Widget build(BuildContext context) => IgnorePointer(
+    child: DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: radius,
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.center,
+          colors: [Colors.white.withValues(alpha: 0.28), Colors.white.withValues(alpha: 0)],
+        ),
+      ),
+    ),
+  );
+}
+
+/// Scheda in plastilina.
+class ClayCard extends StatelessWidget {
+  final Color? color;
+  final Widget child;
+  final EdgeInsetsGeometry padding;
+  final double? radius;
+  final VoidCallback? onTap;
+
+  const ClayCard({
+    super.key,
+    this.color,
+    required this.child,
+    this.padding = const EdgeInsets.all(Gaps.l),
+    this.radius,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final r = BorderRadius.circular(radius ?? context.druid.cardRadius);
+    final content = Stack(
+      children: [
+        Padding(padding: padding, child: child),
+        if (context.druid.clay) Positioned.fill(child: _ClayHighlight(radius: r)),
+      ],
+    );
+    return DecoratedBox(
+      decoration: clayDecoration(context, color: color ?? context.colors.surfaceContainerLow, radius: radius),
+      child: ClipRRect(
+        borderRadius: r,
+        child: onTap == null
+            ? content
+            : Material(
+                type: MaterialType.transparency,
+                child: InkWell(onTap: onTap, child: content),
+              ),
+      ),
+    );
+  }
+}
+
+/// Sfera in plastilina con un'icona (o un'emoji) al centro: per icone di sezione, tratti, livelli.
+class ClayCircle extends StatelessWidget {
+  final Color color;
+  final double size;
+  final IconData? icon;
+  final String? emoji;
+  final Color? iconColor;
+  final Widget? child;
+
+  const ClayCircle({super.key, required this.color, this.size = 44, this.icon, this.emoji, this.iconColor, this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    final foreground =
+        iconColor ??
+        (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : const Color(0xFF2B2118));
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: tokens.clay ? null : color,
+        gradient: tokens.clay
+            ? RadialGradient(
+                center: const Alignment(-0.35, -0.45),
+                radius: 0.95,
+                colors: [_lighten(color, 0.45), color, _darken(color, 0.18)],
+                stops: const [0, 0.55, 1],
+              )
+            : null,
+        boxShadow: tokens.clay
+            ? [BoxShadow(color: tokens.clayShadow, blurRadius: size * 0.35, offset: Offset(0, size * 0.14))]
+            : null,
+      ),
+      child:
+          child ??
+          (emoji != null
+              ? Text(emoji!, style: TextStyle(fontSize: size * 0.48, height: 1))
+              : icon != null
+              ? Icon(icon, size: size * 0.5, color: foreground)
+              : null),
+    );
+  }
+}
+
+/// Pulsante tondo in plastilina (indietro, taccuino, glossario…): sostituisce le icone delle barre classiche.
+class ClayIconButton extends StatelessWidget {
+  final IconData icon;
+  final VoidCallback onPressed;
+  final String tooltip;
+  final Color? color;
+
+  const ClayIconButton({super.key, required this.icon, required this.onPressed, required this.tooltip, this.color});
+
+  @override
+  Widget build(BuildContext context) => Tooltip(
+    message: tooltip,
+    child: GestureDetector(
+      onTap: onPressed,
+      child: ClayCircle(
+        color: color ?? context.colors.surfaceContainerLow,
+        icon: icon,
+        iconColor: context.colors.onSurface,
+        size: 44,
+      ),
+    ),
+  );
+}
+
+/// Pulsante a pillola in plastilina che "si schiaccia" quando lo tocchi.
+class ClayButton extends StatefulWidget {
+  final String label;
+  final VoidCallback? onPressed;
+  final IconData? icon;
+  final Color? color;
+  final Color? foreground;
+
+  const ClayButton({super.key, required this.label, required this.onPressed, this.icon, this.color, this.foreground});
+
+  @override
+  State<ClayButton> createState() => _ClayButtonState();
+}
+
+class _ClayButtonState extends State<ClayButton> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final enabled = widget.onPressed != null;
+    final color = widget.color ?? context.colors.primary;
+    final fg = widget.foreground ?? context.colors.onPrimary;
+    return GestureDetector(
+      onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
+      onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
+      onTapUp: enabled ? (_) => setState(() => _pressed = false) : null,
+      onTap: widget.onPressed,
+      child: AnimatedScale(
+        scale: _pressed ? 0.96 : 1,
+        duration: const Duration(milliseconds: 90),
+        child: Opacity(
+          opacity: enabled ? 1 : 0.5,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: Gaps.xl, vertical: Gaps.m),
+            decoration: clayDecoration(context, color: color, radius: 999, pressed: _pressed),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (widget.icon != null) ...[Icon(widget.icon, size: 18, color: fg), const SizedBox(width: Gaps.s)],
+                Flexible(
+                  child: Text(
+                    widget.label,
+                    textAlign: TextAlign.center,
+                    style: context.texts.labelLarge?.copyWith(color: fg, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Emoji del tratto se l'etichetta ne inizia con una (es. "🌕 Lunare" → "🌕"), altrimenti `null`.
+String? leadingEmoji(String label) {
+  if (label.isEmpty) return null;
+  final first = label.characters.first;
+  return first.runes.first > 0x2000 ? first : null;
+}
+
+/// Barra in alto "integrata": nessuno sfondo, il titolo in serif e un pulsante tondo in plastilina per tornare
+/// indietro (o chiudere). Sostituisce l'AppBar Material sulle pagine aperte sopra la home.
+PreferredSizeWidget clayAppBar(
+  BuildContext context, {
+  String? title,
+  List<Widget> actions = const [],
+  IconData leadingIcon = Icons.arrow_back_rounded,
+  VoidCallback? onLeading,
+  String? leadingTooltip,
+  bool overImage = false,
+}) => AppBar(
+  // Sopra una foto la barra di stato va chiara (la foto ha una velatura scura in alto).
+  systemOverlayStyle: overImage ? SystemUiOverlayStyle.light : null,
+  backgroundColor: Colors.transparent,
+  surfaceTintColor: Colors.transparent,
+  elevation: 0,
+  scrolledUnderElevation: 0,
+  // Sopra una foto la barra è più alta: il pulsante sta alla stessa distanza dal bordo sopra e a sinistra.
+  toolbarHeight: overImage ? 84 : 68,
+  // Sopra una foto con i margini laterali il pulsante sta dentro la foto, non a cavallo del bordo.
+  leadingWidth: overImage ? 68 + Gaps.l : 68,
+  automaticallyImplyLeading: false,
+  leading: Padding(
+    padding: EdgeInsets.only(left: overImage ? Gaps.l : 0),
+    child: Center(
+      child: ClayIconButton(
+        key: const ValueKey('clay-back'),
+        icon: leadingIcon,
+        tooltip: leadingTooltip ?? MaterialLocalizations.of(context).backButtonTooltip,
+        onPressed: onLeading ?? () => Navigator.of(context).maybePop(),
+      ),
+    ),
+  ),
+  title: title == null ? null : Text(title, style: context.texts.headlineSmall),
+  actions: [
+    for (final a in actions)
+      Padding(
+        padding: const EdgeInsets.only(right: Gaps.s),
+        child: a,
+      ),
+    const SizedBox(width: Gaps.s),
+  ],
+);
+
+/// Intestazione di una pagina principale: titolo grande in serif, sottotitolo e (facoltativa) sfera-icona.
+class ClayPageHeader extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final Widget? trailing;
+  final IconData? icon;
+  final Color? iconColor;
+
+  const ClayPageHeader({super.key, required this.title, this.subtitle, this.trailing, this.icon, this.iconColor});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: Gaps.s, bottom: Gaps.l),
+    child: Row(
+      children: [
+        if (icon != null) ...[
+          ClayCircle(color: iconColor ?? context.colors.primaryContainer, icon: icon, size: 52),
+          const SizedBox(width: Gaps.m),
+        ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title, style: context.texts.headlineMedium),
+              if (subtitle != null)
+                Text(subtitle!, style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
+            ],
+          ),
+        ),
+        ?trailing,
+      ],
+    ),
+  );
+}
+
+/// Titolo di sezione con una piccola sfera-icona davanti.
+class ClaySectionTitle extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  final Color? color;
+  final Widget? trailing;
+
+  const ClaySectionTitle({super.key, required this.title, required this.icon, this.color, this.trailing});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: Gaps.s),
+    child: Row(
+      children: [
+        ClayCircle(color: color ?? context.colors.secondaryContainer, icon: icon, size: 36),
+        const SizedBox(width: Gaps.m),
+        Expanded(child: Text(title, style: context.texts.titleLarge)),
+        ?trailing,
+      ],
+    ),
+  );
+}
+
+/// Spazio in fondo alle pagine della home, per non finire sotto la barra di navigazione fluttuante.
+const homeBottomInset = 120.0;
+
+/// Barra di navigazione fluttuante in plastilina: una pillola sollevata dal fondo con le voci come sfere.
+class ClayNavBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onSelected;
+  final List<(IconData, String)> items;
+
+  const ClayNavBar({super.key, required this.selectedIndex, required this.onSelected, required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    return SafeArea(
+      top: false,
+      minimum: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.m),
+      child: Container(
+        height: 76,
+        padding: const EdgeInsets.symmetric(horizontal: Gaps.s),
+        decoration: clayDecoration(context, color: colors.surfaceContainerLow, radius: 38),
+        child: Row(
+          children: [
+            for (final (i, (icon, label)) in items.indexed)
+              Expanded(
+                child: Semantics(
+                  selected: i == selectedIndex,
+                  button: true,
+                  child: InkResponse(
+                    onTap: () => onSelected(i),
+                    radius: 36,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AnimatedScale(
+                          scale: i == selectedIndex ? 1 : 0.82,
+                          duration: const Duration(milliseconds: 160),
+                          child: i == selectedIndex
+                              ? ClayCircle(color: colors.primary, icon: icon, iconColor: colors.onPrimary, size: 40)
+                              : SizedBox(width: 40, height: 40, child: Icon(icon, color: colors.onSurfaceVariant)),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.texts.labelSmall?.copyWith(
+                            color: i == selectedIndex ? colors.onSurface : colors.onSurfaceVariant,
+                            fontWeight: i == selectedIndex ? FontWeight.w700 : FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Stile in plastilina per i pulsanti Material (usato dal tema delle livree `clay`): pillola con sfumatura, riflesso
+/// e ombra morbida che si abbassa quando lo premi. Disattivato, il pulsante si spegne verso il colore della pagina.
+ButtonStyle clayButtonStyle({required Color color, required Color foreground, required Color disabled}) => ButtonStyle(
+  backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
+  foregroundColor: WidgetStateProperty.resolveWith(
+    (states) => states.contains(WidgetState.disabled) ? foreground.withValues(alpha: 0.45) : foreground,
+  ),
+  overlayColor: WidgetStatePropertyAll(foreground.withValues(alpha: 0.08)),
+  elevation: const WidgetStatePropertyAll(0),
+  side: const WidgetStatePropertyAll(BorderSide.none),
+  shape: const WidgetStatePropertyAll(StadiumBorder()),
+  padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 22, vertical: 14)),
+  backgroundBuilder: (context, states, child) => AnimatedContainer(
+    duration: const Duration(milliseconds: 90),
+    decoration: clayDecoration(
+      context,
+      color: states.contains(WidgetState.disabled) ? disabled : color,
+      radius: 999,
+      pressed: states.contains(WidgetState.pressed) || states.contains(WidgetState.disabled),
+    ),
+    child: child,
+  ),
+);

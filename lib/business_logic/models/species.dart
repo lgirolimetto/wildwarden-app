@@ -1,0 +1,88 @@
+import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
+import 'package:druid_app/business_logic/models/enums/season.dart';
+import 'package:druid_app/business_logic/models/localized_text.dart';
+
+/// Foto di riferimento di una specie, sempre con licenza CC0 o CC BY 4.0 verificata sulla singola foto.
+class SpeciesImage {
+  final String url;
+  final String creator;
+  final String license;
+  final int gbifOccurrence;
+
+  /// `true` se la foto è stata scattata nella zona del catalogo.
+  final bool local;
+
+  const SpeciesImage({
+    required this.url,
+    required this.creator,
+    required this.license,
+    required this.gbifOccurrence,
+    required this.local,
+  });
+
+  factory SpeciesImage.fromJson(Map<String, dynamic> json) => SpeciesImage(
+    url: json['url'] as String,
+    creator: json['creator'] as String,
+    license: json['license'] as String,
+    gbifOccurrence: json['gbifOccurrence'] as int,
+    local: json['local'] as bool,
+  );
+}
+
+/// Specie del catalogo di una zona, con i dati ricavati dalle osservazioni GBIF.
+class Species {
+  /// Nome scientifico: è la chiave stabile della specie in tutta l'app.
+  final String sci;
+  final LocalizedText name;
+  final String family;
+  final String genus;
+  final int observations;
+
+  /// Peso relativo di ogni mese (indice 0 = gennaio), già corretto per l'attività degli osservatori.
+  final List<double> monthsRelative;
+
+  /// Mesi (1-12) in cui la specie si osserva di più.
+  final List<int> bestMonths;
+  final Map<Season, double> seasonShare;
+  final Season peakSeason;
+  final double? elevationMedian;
+  final int elevationSamples;
+  final Map<AltitudeBand, double> bandShare;
+  final List<SpeciesImage> images;
+
+  const Species({
+    required this.sci,
+    required this.name,
+    required this.family,
+    required this.genus,
+    required this.observations,
+    required this.monthsRelative,
+    required this.bestMonths,
+    required this.seasonShare,
+    required this.peakSeason,
+    required this.elevationMedian,
+    required this.elevationSamples,
+    required this.bandShare,
+    required this.images,
+  });
+
+  factory Species.fromJson(Map<String, dynamic> json) => Species(
+    sci: json['sci'] as String,
+    name: LocalizedText.fromJson(json['name'] as Map<String, dynamic>),
+    family: json['family'] as String,
+    genus: json['genus'] as String,
+    observations: json['observations'] as int,
+    monthsRelative: (json['monthsRelative'] as List).map((v) => (v as num).toDouble()).toList(),
+    bestMonths: (json['bestMonths'] as List).cast<int>(),
+    seasonShare: (json['seasonShare'] as Map<String, dynamic>).map(
+      (id, share) => MapEntry(Season.fromId(id), (share as num).toDouble()),
+    ),
+    peakSeason: Season.fromId(json['peakSeason'] as String),
+    elevationMedian: (json['elevationMedian'] as num?)?.toDouble(),
+    elevationSamples: json['elevationSamples'] as int,
+    bandShare: (json['bandShare'] as Map<String, dynamic>).map(
+      (id, share) => MapEntry(AltitudeBand.fromId(id), (share as num).toDouble()),
+    ),
+    images: (json['images'] as List).map((i) => SpeciesImage.fromJson(i as Map<String, dynamic>)).toList(),
+  );
+}

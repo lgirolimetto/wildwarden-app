@@ -1,0 +1,662 @@
+{
+  "@@locale": "it",
+  "appTitle": "Druid",
+  "navErbario": "Erbario",
+  "navSettings": "Impostazioni",
+  "erbarioTitle": "Erbario",
+  "erbarioFound": "{found}/{total} trovate",
+  "@erbarioFound": {
+    "placeholders": {
+      "found": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "unknownSpecies": "???",
+  "hintFamily": "Una pianta della famiglia {family}",
+  "@hintFamily": {
+    "placeholders": {
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "hintSeasonWinter": "che si fa notare soprattutto in inverno",
+  "hintSeasonSpring": "che si fa notare soprattutto in primavera",
+  "hintSeasonSummer": "che si fa notare soprattutto d'estate",
+  "hintSeasonAutumn": "che si fa notare soprattutto in autunno",
+  "hintBandPlain": "in pianura",
+  "hintBandHill": "in collina",
+  "hintBandMountain": "in montagna",
+  "settingsTitle": "Impostazioni",
+  "liveryLabel": "Livrea",
+  "liveryErbario": "Erbario",
+  "liveryNotturna": "Notturna",
+  "themeModeLabel": "Aspetto",
+  "themeModeSystem": "Sistema",
+  "themeModeLight": "Chiaro",
+  "themeModeDark": "Scuro",
+  "loadingError": "Non è stato possibile caricare i dati",
+  "retry": "Riprova",
+  "erbarioEncounteredSection": "Incontrate",
+  "erbarioMissingSection": "Da trovare nel bolognese",
+  "simulateEncounter": "Simula incontro",
+  "levelToStudy": "Da studiare",
+  "levelRecognise": "Riconoscere",
+  "levelKnow": "Conoscere",
+  "levelWhereWhen": "Dove e quando",
+  "levelMastery": "Maestria",
+  "navStudy": "Studio",
+  "navRecipes": "Ricette",
+  "rankApprentice": "Apprendista",
+  "rankWanderer": "Viandante",
+  "rankSeeker": "Cercatore",
+  "rankWarden": "Custode",
+  "rankBotanomancer": "Botanomante",
+  "xpTotal": "{xp} PE",
+  "@xpTotal": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "nextRank": "Prossimo titolo: {rank} a {xp} PE",
+  "@nextRank": {
+    "placeholders": {
+      "rank": {
+        "type": "String"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "maxRankReached": "Hai raggiunto il titolo più alto",
+  "seasonWinter": "inverno",
+  "seasonSpring": "primavera",
+  "seasonSummer": "estate",
+  "seasonAutumn": "autunno",
+  "bandPlain": "Pianura (sotto i 150 m)",
+  "bandHill": "Collina (150–600 m)",
+  "bandMountain": "Montagna (oltre i 600 m)",
+  "qPhotoToName": "Che pianta è questa?",
+  "qNameToPhoto": "Quale foto mostra: {name}?",
+  "@qNameToPhoto": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qSciToCommon": "Come si chiama comunemente {sci}?",
+  "@qSciToCommon": {
+    "placeholders": {
+      "sci": {
+        "type": "String"
+      }
+    }
+  },
+  "qCommonToSci": "Qual è il nome scientifico di: {name}?",
+  "@qCommonToSci": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qFamilyFromCommon": "A quale famiglia appartiene: {name}?",
+  "@qFamilyFromCommon": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qFamilyFromSci": "A quale famiglia appartiene {sci}?",
+  "@qFamilyFromSci": {
+    "placeholders": {
+      "sci": {
+        "type": "String"
+      }
+    }
+  },
+  "qFamilyFromPhoto": "A quale famiglia appartiene la pianta in foto?",
+  "qRelativeOf": "Quale di queste piante è della stessa famiglia di: {name}?",
+  "@qRelativeOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qOddOneOut": "Quale NON è della stessa famiglia delle altre?",
+  "qSeasonOf": "In quale stagione si fa notare di più {name}, qui?",
+  "@qSeasonOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qBestMonthOf": "In quale di questi mesi è più facile trovare {name}?",
+  "@qBestMonthOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qBandOf": "Dove incontri più spesso {name}, qui?",
+  "@qBandOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qWhichInBand": "Quale di queste piante trovi più facilmente {band}?",
+  "@qWhichInBand": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "factAppearance": "{name} ({sci})",
+  "@factAppearance": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sci": {
+        "type": "String"
+      }
+    }
+  },
+  "factName": "{name} = {sci}",
+  "@factName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sci": {
+        "type": "String"
+      }
+    }
+  },
+  "factFamily": "{name} appartiene alla famiglia {family}.",
+  "@factFamily": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "factRelatives": "{name} è parente di: {relatives} ({family}).",
+  "@factRelatives": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "relatives": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "factSeason": "{name} si fa notare soprattutto in {season}. Mesi migliori: {months}.",
+  "@factSeason": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "season": {
+        "type": "String"
+      },
+      "months": {
+        "type": "String"
+      }
+    }
+  },
+  "factAltitude": "{name} si incontra soprattutto {band} (quota mediana {meters} m).",
+  "@factAltitude": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "band": {
+        "type": "String"
+      },
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "answerRight": "Giusto!",
+  "answerWrong": "Non proprio.",
+  "answerWillReturn": "Tornerà tra poco, in un'altra forma.",
+  "answerRemembered": "Te lo ricordavi! Prossimo ripasso tra {days} giorni.",
+  "@answerRemembered": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "answerForgotten": "Dimenticato: tornerà nei ripassi di domani.",
+  "xpGained": "+{xp} PE",
+  "@xpGained": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "next": "Avanti",
+  "close": "Chiudi",
+  "studyLevelTitle": "{name} · livello {level}",
+  "@studyLevelTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewTitle": "Ripasso",
+  "studyProgress": "{done} di {total}",
+  "@studyProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryTitle": "Fine sessione",
+  "summaryLevelPassed": "Livello {level} superato: {name} entra nei ripassi da domani.",
+  "@summaryLevelPassed": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryReviewDone": "Ripassi completati.",
+  "summaryAnswers": "Risposte giuste: {correct} su {answers}",
+  "@summaryAnswers": {
+    "placeholders": {
+      "correct": {
+        "type": "int"
+      },
+      "answers": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryMastery": "Maestria raggiunta!",
+  "summaryRecipeUnlocked": "Ricetta sbloccata: {recipe}",
+  "@summaryRecipeUnlocked": {
+    "placeholders": {
+      "recipe": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryNewFunFacts": "Nuove curiosità in arrivo: le riceverai una al giorno.",
+  "saveToNotebook": "Salva nel taccuino",
+  "savedToNotebook": "Nel taccuino",
+  "notebookLocked": "Salva nel taccuino",
+  "diarioUpsell": "Con il Diario dell'Erborista salvi in un tocco ciò che impari e lo ritrovi quando ti serve, anche durante lo studio. Senza Diario puoi fare lo stesso con un quaderno vero e con le note per specie, che restano gratuite.",
+  "notebookTitle": "Taccuino",
+  "notebookSearch": "Cerca: famiglia, mese, specie, note…",
+  "notebookEmpty": "Ancora vuoto: durante lo studio usa \"Salva nel taccuino\".",
+  "notebookNoResults": "Nessun risultato.",
+  "notesTitle": "Le tue note",
+  "notesHint": "Dove l'hai vista, come riconoscerla…",
+  "notesSave": "Salva nota",
+  "notesSaved": "Nota salvata",
+  "funOfDayTitle": "Curiosità del giorno",
+  "funOfDayCount": "{seen} scoperte su {total}",
+  "@funOfDayCount": {
+    "placeholders": {
+      "seen": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "funOfDayEmpty": "Incontra e studia una specie per ricevere ogni giorno una curiosità su ciò che hai imparato.",
+  "funToVerify": "da verificare",
+  "funRank": "{name} è al {rank}° posto tra le piante spontanee più osservate della zona.",
+  "@funRank": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "funHigh": "{name} è tra le 5 specie della zona che vivono più in alto: metà delle osservazioni supera i {meters} m.",
+  "@funHigh": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "funLow": "{name} è tra le 5 specie più di pianura della zona: quota mediana {meters} m.",
+  "@funLow": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "funPeak": "{name} si fa notare soprattutto a {month}.",
+  "@funPeak": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "month": {
+        "type": "String"
+      }
+    }
+  },
+  "reviewsTitle": "Ripassi",
+  "reviewsDue": "{count} fatti da ripassare oggi",
+  "@reviewsDue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewsNone": "Niente da ripassare oggi. I fatti imparati tornano dopo 1, 3, 7 e 21 giorni.",
+  "reviewsStart": "Ripassa",
+  "desiderataTitle": "Desiderata",
+  "desiderataCount": "{count} su {max}",
+  "@desiderataCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "desiderataEmpty": "Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
+  "desiderataSuggestions": "In stagione adesso",
+  "desiderataAdd": "Aggiungi alle desiderata",
+  "desiderataRemove": "Togli dalle desiderata",
+  "desiderataFull": "Hai già 3 desiderata: completane o togline una.",
+  "desiderataWhere": "Dove: {band}",
+  "@desiderataWhere": {
+    "placeholders": {
+      "band": {
+        "type": "String"
+      }
+    }
+  },
+  "desiderataWhen": "Quando: {months}",
+  "@desiderataWhen": {
+    "placeholders": {
+      "months": {
+        "type": "String"
+      }
+    }
+  },
+  "desiderataFamily": "Famiglia: {family}",
+  "@desiderataFamily": {
+    "placeholders": {
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "yourSpecies": "Le tue specie",
+  "yourSpeciesEmpty": "Nessuna specie incontrata ancora.",
+  "studyLevelButton": "Studia il livello {level}",
+  "@studyLevelButton": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "studyComplete": "Domande completate",
+  "levelsTitle": "Livelli di studio",
+  "lockedSection": "Si rivela al livello {level} ({name})",
+  "@lockedSection": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionSci": "Nome scientifico",
+  "sectionFamily": "Famiglia",
+  "sectionRelatives": "Parenti nella zona",
+  "sectionWhen": "Quando si osserva",
+  "sectionWhere": "Dove (quota mediana {meters} m)",
+  "@sectionWhere": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionLore": "Lore",
+  "sectionFunFacts": "Curiosità {seen}/{total}",
+  "@sectionFunFacts": {
+    "placeholders": {
+      "seen": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "sectionFunFactsHidden": "{count} ancora da scoprire",
+  "@sectionFunFactsHidden": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "safetyWarning": "⚠️ {text} · da verificare",
+  "@safetyWarning": {
+    "placeholders": {
+      "text": {
+        "type": "String"
+      }
+    }
+  },
+  "protectedNote": "Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.",
+  "masteryTitle": "Maestria",
+  "masteryFacts": "Fatti consolidati (ricordati a 1 e 3 giorni): {done}/{total}",
+  "@masteryFacts": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "masteryDraws": "Essenze attinte: {done}/{total} · tratti diversi: {traits}/{needed}",
+  "@masteryDraws": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "traits": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "masteryOnlyField": "Con il solo studio non si arriva alla maestria: servono anche le essenze attinte sul campo.",
+  "masteryReached": "Maestria raggiunta",
+  "simulateDraw": "Simula attingere",
+  "noTrait": "Nessun tratto",
+  "traitFrost": "❄️ Gelo",
+  "traitRain": "🌧 Pioggia",
+  "traitFog": "🌫 Nebbia",
+  "traitSun": "☀️ Solare",
+  "traitMoon": "🌕 Lunare",
+  "traitDew": "💧 Rugiada",
+  "traitDusk": "🌅 Crepuscolo",
+  "recipesTitle": "Ricette",
+  "recipeUnlocked": "Sbloccata",
+  "recipeLocked": "Bloccata",
+  "recipeKnownIngredients": "Ingredienti noti {known}/{total}",
+  "@recipeKnownIngredients": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeUnknownIngredient": "???",
+  "recipeHint": "Indizio: {hint}",
+  "@recipeHint": {
+    "placeholders": {
+      "hint": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeAnySpecies": "qualsiasi specie",
+  "recipeCurrentLevel": "ora: livello {level}",
+  "@recipeCurrentLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "erbarioPages": "Pagine compilate {done}/{total}",
+  "@erbarioPages": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "missionLabel": "Missione {index} di {total}",
+  "@missionLabel": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "missionVisitErbarioTitle": "Apri l'erbario",
+  "missionVisitErbarioBody": "L'erbario raccoglie le specie della zona. Quelle che non hai ancora incontrato sono velate: sotto ognuna c'è un indizio.",
+  "missionMarkDesiderataTitle": "Scegli le tue desiderata",
+  "missionMarkDesiderataBody": "Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
+  "missionFirstEncounterTitle": "Incontra una specie",
+  "missionFirstEncounterBody": "Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell'erbario. Fotografa, non raccogliere.",
+  "missionFirstLevelTitle": "Studiala",
+  "missionFirstLevelBody": "Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.",
+  "missionFirstRecipeTitle": "La prima ricetta",
+  "missionFirstRecipeBody": "Porta una specie al livello richiesto da una ricetta per sbloccarla. Le ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.",
+  "missionSkip": "Salta l'apprendistato",
+  "missionGlossary": "Glossario",
+  "apprenticeshipComplete": "Apprendistato completato!",
+  "glossaryTitle": "Glossario",
+  "glossErbarioTerm": "Erbario",
+  "glossErbarioText": "Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che incontri e studi.",
+  "glossDesiderataTerm": "Desiderata",
+  "glossDesiderataText": "Negli erbari e tra i collezionisti, l'elenco degli esemplari che si desidera trovare. Qui sono le specie (al massimo 3) che hai scelto di cercare.",
+  "glossErborizzareTerm": "Erborizzare",
+  "glossErborizzareText": "Andare per campi e boschi a osservare e studiare le piante: è il verbo storico dei botanici in escursione.",
+  "glossStazioneTerm": "Stazione",
+  "glossStazioneText": "In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai incontrato una specie e dove potrai tornare ad attingere.",
+  "glossTrattoTerm": "Tratto",
+  "glossTrattoText": "La condizione del momento in cui attingi un'essenza (luna piena, pioggia, nebbia, rugiada…). Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.",
+  "glossAttingereTerm": "Attingere",
+  "glossAttingereText": "Trarre l'essenza da una stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.",
+  "glossMaestriaTerm": "Maestria",
+  "glossMaestriaText": "L'ultimo livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver attinto la specie sul campo in condizioni diverse.",
+  "glossMissioneTerm": "Missione",
+  "glossMissioneText": "Un obiettivo da raggiungere nel mondo reale o nello studio: incontrare una specie, superare un livello, sbloccare una ricetta.",
+  "debugTitle": "Strumenti di prova",
+  "debugDays": "Giorno simulato: +{days}",
+  "@debugDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "debugAdvance": "+{days} g",
+  "@debugAdvance": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "debugDiario": "Diario dell'Erborista (abbonamento simulato)",
+  "debugReset": "Azzera i progressi",
+  "debugResetConfirm": "Tocca di nuovo per cancellare tutto",
+  "debugResetDone": "Progressi azzerati",
+  "notEncounteredYet": "Non ancora incontrata",
+  "desiderataAddShort": "Aggiungi",
+  "simulateShort": "Simula",
+  "liverySottobosco": "Sottobosco",
+  "dayTimeDawn": "all'alba",
+  "dayTimeDay": "di giorno",
+  "dayTimeDusk": "al tramonto",
+  "dayTimeNight": "di notte"
+}

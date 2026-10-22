@@ -1,0 +1,394 @@
+{
+ "formatVersion": 1,
+ "region": {
+  "id": "bologna",
+  "name": {
+   "it": "Provincia di Bologna"
+  },
+  "gadm": "ITA.6.1_1"
+ },
+ "species": [
+  {
+   "sci": "Helleborus viridis",
+   "name": {
+    "it": "Elleboro verde"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Helleborus",
+   "observations": 224,
+   "monthsRelative": [
+    0.35,
+    0.308,
+    0.115,
+    0.058,
+    0.018,
+    0.015,
+    0.027,
+    0.008,
+    0.0,
+    0.017,
+    0.036,
+    0.048
+   ],
+   "bestMonths": [
+    1,
+    2
+   ],
+   "seasonShare": {
+    "winter": 0.706,
+    "spring": 0.191,
+    "summer": 0.05,
+    "autumn": 0.053
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 262.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.2,
+    "hill": 0.667,
+    "mountain": 0.133
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656935475/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6274054812,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/259391711/medium.png",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4937222256,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265910971/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 4080957110,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Malva sylvestris",
+   "name": {
+    "it": "Malva selvatica"
+   },
+   "family": "Malvaceae",
+   "genus": "Malva",
+   "observations": 222,
+   "monthsRelative": [
+    0.031,
+    0.029,
+    0.056,
+    0.051,
+    0.221,
+    0.132,
+    0.132,
+    0.087,
+    0.049,
+    0.132,
+    0.081,
+    0.0
+   ],
+   "bestMonths": [
+    5,
+    6,
+    7,
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.059,
+    "spring": 0.328,
+    "summer": 0.35,
+    "autumn": 0.263
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 59.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.983,
+    "hill": 0.017,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625110490/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179419929,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/633698785/medium.jpg",
+     "creator": "Philip Schaffer",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6188143065,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/650795949/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6253078584,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Eranthis hyemalis",
+   "name": {
+    "it": "Piè di gallo"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Eranthis",
+   "observations": 200,
+   "monthsRelative": [
+    0.517,
+    0.416,
+    0.034,
+    0.013,
+    0.001,
+    0.0,
+    0.0,
+    0.003,
+    0.0,
+    0.0,
+    0.0,
+    0.016
+   ],
+   "bestMonths": [
+    1,
+    2
+   ],
+   "seasonShare": {
+    "winter": 0.95,
+    "spring": 0.048,
+    "summer": 0.003,
+    "autumn": 0.0
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 177.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.417,
+    "hill": 0.533,
+    "mountain": 0.05
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/179014352/medium.jpg",
+     "creator": "Extra Account",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067294537,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62424529/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2576312878,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63752863/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2580180930,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Fagus sylvatica",
+   "name": {
+    "it": "Faggio comune"
+   },
+   "family": "Fagaceae",
+   "genus": "Fagus",
+   "observations": 164,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.014,
+    0.058,
+    0.089,
+    0.166,
+    0.266,
+    0.082,
+    0.051,
+    0.094,
+    0.181
+   ],
+   "bestMonths": [
+    7,
+    8,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.181,
+    "spring": 0.072,
+    "summer": 0.52,
+    "autumn": 0.227
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 930.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.15,
+    "hill": 0.167,
+    "mountain": 0.683
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/399743736/medium.jpeg",
+     "creator": "Jonáš Gaigr",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6551665485,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45420672/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2429219742,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/47702204/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2350352854,
+     "local": true
+    }
+   ]
+  }
+ ],
+ "recipes": [
+  {
+   "name": {
+    "it": "Tintura della Lanterna d'Inverno"
+   },
+   "tier": "Intermedia",
+   "unlock": {
+    "species": "Eranthis hyemalis",
+    "level": 2
+   },
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Eranthis hyemalis",
+     "trait": "❄️ Gelo",
+     "note": {
+      "it": "Data plausibile: gen–feb (dai dati GBIF)"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Helleborus viridis",
+     "trait": null,
+     "note": {
+      "it": "Data plausibile: gen–feb, in collina"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Il campo dove la usi rigenera energia anche nelle giornate più corte (effetto di gioco)."
+   }
+  },
+  {
+   "name": {
+    "it": "Distillato della Quota Silenziosa"
+   },
+   "tier": "Rara",
+   "unlock": {
+    "species": "Fagus sylvatica",
+    "level": 3
+   },
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Fagus sylvatica",
+     "trait": "🌫 Nebbia",
+     "note": {
+      "it": "Plausibile solo in montagna: quota mediana ~930 m"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Sambucus ebulus",
+     "trait": null,
+     "note": {
+      "it": "Estate, spesso in montagna"
+     }
+    },
+    {
+     "qty": 1,
+     "species": null,
+     "trait": "🌕 Lunare",
+     "note": {
+      "it": "Qualunque specie raccolta nella fase di luna piena"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Aumenta la purezza delle essenze raccolte nei campi oltre i 600 m (effetto di gioco)."
+   }
+  }
+ ],
+ "lore": {
+  "Eranthis hyemalis": {
+   "it": "Il Piè di gallo fiorisce quando il bosco dorme ancora: il suo oro trattiene la prima luce dell'anno. Gli erboristi lo chiamano 'la lanterna di gennaio'."
+  },
+  "Helleborus viridis": {
+   "it": "L'Elleboro verde non teme la neve. La sua essenza è fredda e paziente, e conserva le cose invece di trasformarle."
+  },
+  "Fagus sylvatica": {
+   "it": "Sotto i faggi il silenzio ha un peso. L'essenza di faggio si raccoglie solo in quota, dove le voci della pianura non arrivano."
+  },
+  "Malva sylvestris": {
+   "it": "La Malva non chiede nulla: cresce nei fossi, nei cortili, lungo i binari. La sua essenza è comune, ma nessuna ricetta di base ne fa a meno."
+  }
+ },
+ "funFacts": {
+  "Eranthis hyemalis": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Eranthis viene dal greco 'er' (primavera) e 'anthos' (fiore), mentre hyemalis significa 'invernale': un fiore di primavera che sboccia in pieno inverno."
+    },
+    "verified": false
+   }
+  ],
+  "Malva sylvestris": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Un vecchio proverbio dice 'la malva, da ogni mal ti salva': per secoli è stata tra le piante più presenti nella tradizione popolare."
+    },
+    "verified": false
+   }
+  ],
+  "Fagus sylvatica": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Secondo un'etimologia diffusa (ma discussa), il tedesco Buch, 'libro', viene da Buche, 'faggio': le prime rune si incidevano su tavolette di faggio."
+    },
+    "verified": false
+   }
+  ]
+ },
+ "safety": {
+  "Helleborus viridis": {
+   "it": "tossica"
+  },
+  "Eranthis hyemalis": {
+   "it": "tossica"
+  }
+ }
+}

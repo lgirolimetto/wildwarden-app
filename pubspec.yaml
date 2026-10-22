@@ -1,0 +1,43 @@
+name: druid_app
+description: "Druid: l'app dell'erborista."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.10.7
+
+dependencies:
+  bitapp_functional_dart: ^1.0.4
+  cached_network_image: ^3.4.1
+  dio: ^5.11.1
+  drift: ^2.35.2
+  drift_flutter: ^0.3.1
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  get: ^4.7.3
+  intl: ^0.20.2
+  path_provider: ^2.1.6
+  shared_preferences: ^2.5.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.5
+  http_mock_adapter: ^0.6.1
+  drift_dev: ^2.35.1
+  build_runner: ^2.16.2
+
+flutter:
+  uses-material-design: true
+  generate: true
+  assets:
+    - assets/content/bologna/
+  fonts:
+    # Young Serif, SIL Open Font License 1.1 (assets/fonts/YoungSerif-OFL.txt): titoli della livrea Sottobosco.
+    - family: YoungSerif
+      fonts:
+        - asset: assets/fonts/YoungSerif-Regular.ttf
+

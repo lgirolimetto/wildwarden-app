@@ -1,0 +1,3508 @@
+{
+ "formatVersion": 1,
+ "region": {
+  "id": "bologna",
+  "name": {
+   "it": "Provincia di Bologna"
+  },
+  "gadm": "ITA.6.1_1"
+ },
+ "species": [
+  {
+   "sci": "Viburnum tinus",
+   "name": {
+    "it": "Lentaggine"
+   },
+   "family": "Viburnaceae",
+   "genus": "Viburnum",
+   "observations": 727,
+   "monthsRelative": [
+    0.226,
+    0.089,
+    0.124,
+    0.052,
+    0.021,
+    0.015,
+    0.03,
+    0.036,
+    0.041,
+    0.084,
+    0.104,
+    0.179
+   ],
+   "bestMonths": [
+    1,
+    3,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.495,
+    "spring": 0.196,
+    "summer": 0.08,
+    "autumn": 0.229
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 108.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.633,
+    "hill": 0.333,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608189958/medium.jpg",
+     "creator": "StarStats",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6131262589,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/614225046/medium.gif",
+     "creator": "Golfopolikayak",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6147187048,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618171303/medium.jpg",
+     "creator": "Daniel Cahen",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6162851081,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Anemone hortensis",
+   "name": {
+    "it": "Anemone fior di stella"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Anemone",
+   "observations": 705,
+   "monthsRelative": [
+    0.04,
+    0.414,
+    0.44,
+    0.097,
+    0.003,
+    0.001,
+    0.002,
+    0.002,
+    0.0,
+    0.002,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    2,
+    3
+   ],
+   "seasonShare": {
+    "winter": 0.454,
+    "spring": 0.54,
+    "summer": 0.004,
+    "autumn": 0.002
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 197.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.333,
+    "hill": 0.667,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627782856/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185098283,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/628893592/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185354476,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627779102/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185461569,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Orchis purpurea",
+   "name": {
+    "it": "Orchide maggiore"
+   },
+   "family": "Orchidaceae",
+   "genus": "Orchis",
+   "observations": 602,
+   "monthsRelative": [
+    0.018,
+    0.0,
+    0.006,
+    0.633,
+    0.3,
+    0.006,
+    0.017,
+    0.016,
+    0.005,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.018,
+    "spring": 0.938,
+    "summer": 0.038,
+    "autumn": 0.005
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 57.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.7,
+    "hill": 0.25,
+    "mountain": 0.05
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661795315/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6320076491,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661798323/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6320092665,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661799748/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6320109527,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Euphorbia helioscopia",
+   "name": {
+    "it": "Euforbia calenzuola"
+   },
+   "family": "Euphorbiaceae",
+   "genus": "Euphorbia",
+   "observations": 434,
+   "monthsRelative": [
+    0.013,
+    0.33,
+    0.497,
+    0.143,
+    0.013,
+    0.001,
+    0.0,
+    0.0,
+    0.0,
+    0.003,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    2,
+    3
+   ],
+   "seasonShare": {
+    "winter": 0.342,
+    "spring": 0.653,
+    "summer": 0.001,
+    "autumn": 0.003
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 81.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.6,
+    "hill": 0.4,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/619791918/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6171160185,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620503239/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6171010099,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620503295/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6171243528,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Prunus spinosa",
+   "name": {
+    "it": "Prugnolo"
+   },
+   "family": "Rosaceae",
+   "genus": "Prunus",
+   "observations": 399,
+   "monthsRelative": [
+    0.025,
+    0.035,
+    0.453,
+    0.026,
+    0.011,
+    0.04,
+    0.069,
+    0.118,
+    0.082,
+    0.067,
+    0.074,
+    0.0
+   ],
+   "bestMonths": [
+    3
+   ],
+   "seasonShare": {
+    "winter": 0.061,
+    "spring": 0.489,
+    "summer": 0.227,
+    "autumn": 0.223
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 161.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.483,
+    "hill": 0.367,
+    "mountain": 0.15
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620198158/medium.jpg",
+     "creator": "Samuele Papeschi",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6178326640,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/624848562/medium.jpg",
+     "creator": "fabrizio_mariani_montesorbo",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179557020,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/628870120/medium.jpg",
+     "creator": "Marcello Manara",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185271789,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Paliurus spina-christi",
+   "name": {
+    "it": "Marruca"
+   },
+   "family": "Rhamnaceae",
+   "genus": "Paliurus",
+   "observations": 368,
+   "monthsRelative": [
+    0.093,
+    0.037,
+    0.022,
+    0.006,
+    0.107,
+    0.148,
+    0.126,
+    0.098,
+    0.089,
+    0.081,
+    0.098,
+    0.095
+   ],
+   "bestMonths": [
+    1,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.225,
+    "spring": 0.135,
+    "summer": 0.372,
+    "autumn": 0.269
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 168.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.5,
+    "hill": 0.5,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/674590900/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6399167989,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/285308553/medium.jpeg",
+     "creator": "Aurèle Baretje",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4129803107,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/135680718/medium.jpg",
+     "creator": "Extra Account",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067652491,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Alliaria petiolata",
+   "name": {
+    "it": "Alliaria comune"
+   },
+   "family": "Brassicaceae",
+   "genus": "Alliaria",
+   "observations": 358,
+   "monthsRelative": [
+    0.039,
+    0.037,
+    0.34,
+    0.369,
+    0.052,
+    0.007,
+    0.0,
+    0.011,
+    0.0,
+    0.005,
+    0.0,
+    0.14
+   ],
+   "bestMonths": [
+    3,
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.216,
+    "spring": 0.761,
+    "summer": 0.018,
+    "autumn": 0.005
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 153.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.5,
+    "hill": 0.4,
+    "mountain": 0.1
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/622435209/medium.jpg",
+     "creator": "Paolo Zucca",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179422906,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/631060362/medium.jpg",
+     "creator": "Mattis",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6184797813,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/630368074/medium.jpg",
+     "creator": "Marco Simonazzi",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185013791,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Euonymus europaeus",
+   "name": {
+    "it": "Berretto da prete"
+   },
+   "family": "Celastraceae",
+   "genus": "Euonymus",
+   "observations": 349,
+   "monthsRelative": [
+    0.052,
+    0.0,
+    0.003,
+    0.02,
+    0.013,
+    0.014,
+    0.009,
+    0.011,
+    0.032,
+    0.132,
+    0.445,
+    0.269
+   ],
+   "bestMonths": [
+    11,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.321,
+    "spring": 0.036,
+    "summer": 0.034,
+    "autumn": 0.608
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 119.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.617,
+    "hill": 0.317,
+    "mountain": 0.067
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/594040080/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5903771011,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/593335378/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5903985127,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/331237516/medium.jpeg",
+     "creator": "Gabriele Pradelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6479223316,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Clematis vitalba",
+   "name": {
+    "it": "Clematide vitalba"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Clematis",
+   "observations": 336,
+   "monthsRelative": [
+    0.118,
+    0.048,
+    0.022,
+    0.015,
+    0.05,
+    0.192,
+    0.137,
+    0.109,
+    0.111,
+    0.15,
+    0.047,
+    0.0
+   ],
+   "bestMonths": [
+    1,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.166,
+    "spring": 0.087,
+    "summer": 0.438,
+    "autumn": 0.308
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 101.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.633,
+    "hill": 0.3,
+    "mountain": 0.067
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/674584234/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6400849034,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/461651080/medium.jpg",
+     "creator": "Jessica",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5007625561,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/153086437/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4153518374,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Ruscus aculeatus",
+   "name": {
+    "it": "Ruscolo pungitopo"
+   },
+   "family": "Asparagaceae",
+   "genus": "Ruscus",
+   "observations": 332,
+   "monthsRelative": [
+    0.223,
+    0.108,
+    0.061,
+    0.026,
+    0.02,
+    0.024,
+    0.023,
+    0.041,
+    0.029,
+    0.059,
+    0.126,
+    0.26
+   ],
+   "bestMonths": [
+    1,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.591,
+    "spring": 0.107,
+    "summer": 0.088,
+    "autumn": 0.214
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 229.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.3,
+    "hill": 0.667,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/665117730/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6333870731,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675205850/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6399442841,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675219411/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6399554908,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Cotinus coggygria",
+   "name": {
+    "it": "Sommacco selvatico"
+   },
+   "family": "Anacardiaceae",
+   "genus": "Cotinus",
+   "observations": 329,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.05,
+    0.174,
+    0.256,
+    0.094,
+    0.153,
+    0.09,
+    0.079,
+    0.066,
+    0.037
+   ],
+   "bestMonths": [
+    5,
+    6,
+    8
+   ],
+   "seasonShare": {
+    "winter": 0.037,
+    "spring": 0.224,
+    "summer": 0.504,
+    "autumn": 0.235
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 64.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.75,
+    "hill": 0.25,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675212290/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6399840794,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/674556373/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6400259642,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Laurus nobilis",
+   "name": {
+    "it": "Alloro"
+   },
+   "family": "Lauraceae",
+   "genus": "Laurus",
+   "observations": 310,
+   "monthsRelative": [
+    0.112,
+    0.131,
+    0.085,
+    0.068,
+    0.017,
+    0.038,
+    0.036,
+    0.083,
+    0.079,
+    0.057,
+    0.113,
+    0.181
+   ],
+   "bestMonths": [
+    1,
+    2,
+    11,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.424,
+    "spring": 0.17,
+    "summer": 0.157,
+    "autumn": 0.249
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 94.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.633,
+    "hill": 0.333,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/610418674/medium.jpg",
+     "creator": "Paolo Zucca",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6129902352,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/608190214/medium.jpg",
+     "creator": "StarStats",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6131512732,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/619883306/medium.jpg",
+     "creator": "Paolo Zucca",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185986815,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Cornus sanguinea",
+   "name": {
+    "it": "Corniolo sanguinello"
+   },
+   "family": "Cornaceae",
+   "genus": "Cornus",
+   "observations": 303,
+   "monthsRelative": [
+    0.0,
+    0.009,
+    0.003,
+    0.054,
+    0.199,
+    0.036,
+    0.034,
+    0.19,
+    0.165,
+    0.118,
+    0.059,
+    0.133
+   ],
+   "bestMonths": [
+    5,
+    8,
+    9,
+    10,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.142,
+    "spring": 0.256,
+    "summer": 0.26,
+    "autumn": 0.343
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 121.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.6,
+    "hill": 0.317,
+    "mountain": 0.083
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/262004096/medium.jpeg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4430874140,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Viburnum lantana",
+   "name": {
+    "it": "Viburno lantana"
+   },
+   "family": "Viburnaceae",
+   "genus": "Viburnum",
+   "observations": 287,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.018,
+    0.169,
+    0.093,
+    0.137,
+    0.319,
+    0.089,
+    0.054,
+    0.006,
+    0.036,
+    0.08
+   ],
+   "bestMonths": [
+    4,
+    7
+   ],
+   "seasonShare": {
+    "winter": 0.08,
+    "spring": 0.28,
+    "summer": 0.544,
+    "autumn": 0.096
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 178.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.45,
+    "hill": 0.5,
+    "mountain": 0.05
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/263510492/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4096738594,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/147075742/medium.jpg",
+     "creator": "Extra Account",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067327510,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Chelidonium majus",
+   "name": {
+    "it": "Celidonia"
+   },
+   "family": "Papaveraceae",
+   "genus": "Chelidonium",
+   "observations": 282,
+   "monthsRelative": [
+    0.045,
+    0.127,
+    0.201,
+    0.298,
+    0.074,
+    0.028,
+    0.01,
+    0.013,
+    0.024,
+    0.023,
+    0.036,
+    0.121
+   ],
+   "bestMonths": [
+    3,
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.293,
+    "spring": 0.573,
+    "summer": 0.051,
+    "autumn": 0.083
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 63.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.867,
+    "hill": 0.1,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625111283/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179344220,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656794384/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6273576509,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62424579/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2576264692,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Celtis australis",
+   "name": {
+    "it": "Bagolaro"
+   },
+   "family": "Cannabaceae",
+   "genus": "Celtis",
+   "observations": 277,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.003,
+    0.032,
+    0.124,
+    0.108,
+    0.09,
+    0.13,
+    0.193,
+    0.193,
+    0.127,
+    0.0
+   ],
+   "bestMonths": [
+    5,
+    6,
+    8,
+    9,
+    10,
+    11
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.159,
+    "summer": 0.328,
+    "autumn": 0.513
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 58.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.883,
+    "hill": 0.117,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/136237542/medium.jpg",
+     "creator": "Extra Account",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067364489,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Fraxinus ornus",
+   "name": {
+    "it": "Frassino da manna"
+   },
+   "family": "Oleaceae",
+   "genus": "Fraxinus",
+   "observations": 275,
+   "monthsRelative": [
+    0.032,
+    0.0,
+    0.0,
+    0.453,
+    0.189,
+    0.029,
+    0.071,
+    0.045,
+    0.034,
+    0.08,
+    0.067,
+    0.0
+   ],
+   "bestMonths": [
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.032,
+    "spring": 0.642,
+    "summer": 0.145,
+    "autumn": 0.181
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 238.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.283,
+    "hill": 0.65,
+    "mountain": 0.067
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265013309/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6579289360,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Corylus avellana",
+   "name": {
+    "it": "Nocciolo comune"
+   },
+   "family": "Betulaceae",
+   "genus": "Corylus",
+   "observations": 265,
+   "monthsRelative": [
+    0.112,
+    0.314,
+    0.011,
+    0.058,
+    0.072,
+    0.056,
+    0.098,
+    0.091,
+    0.065,
+    0.069,
+    0.026,
+    0.029
+   ],
+   "bestMonths": [
+    2
+   ],
+   "seasonShare": {
+    "winter": 0.455,
+    "spring": 0.14,
+    "summer": 0.245,
+    "autumn": 0.159
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 168.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.45,
+    "hill": 0.383,
+    "mountain": 0.167
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/180094342/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067666537,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62423808/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2576413469,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45419420/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2294575665,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Melissa officinalis",
+   "name": {
+    "it": "Melissa vera"
+   },
+   "family": "Lamiaceae",
+   "genus": "Melissa",
+   "observations": 248,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.045,
+    0.193,
+    0.182,
+    0.109,
+    0.095,
+    0.102,
+    0.105,
+    0.122,
+    0.048,
+    0.0
+   ],
+   "bestMonths": [
+    4,
+    5,
+    6,
+    8,
+    9,
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.419,
+    "summer": 0.306,
+    "autumn": 0.275
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 114.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.583,
+    "hill": 0.317,
+    "mountain": 0.1
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/469498255/medium.jpg",
+     "creator": "Paolo Zucca",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5064131963,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/519864816/medium.jpg",
+     "creator": "Paolo Zucca",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5198691968,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/530377288/medium.jpg",
+     "creator": "Gianmaria Bonari",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6133362685,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Acer campestre",
+   "name": {
+    "it": "Acero oppio"
+   },
+   "family": "Sapindaceae",
+   "genus": "Acer",
+   "observations": 240,
+   "monthsRelative": [
+    0.044,
+    0.0,
+    0.0,
+    0.069,
+    0.119,
+    0.069,
+    0.108,
+    0.129,
+    0.141,
+    0.122,
+    0.162,
+    0.039
+   ],
+   "bestMonths": [
+    5,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "seasonShare": {
+    "winter": 0.082,
+    "spring": 0.188,
+    "summer": 0.307,
+    "autumn": 0.424
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 92.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.717,
+    "hill": 0.25,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/632521800/medium.jpg",
+     "creator": "Saman Ghasemian Sorboni",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6188025031,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/633573778/medium.jpg",
+     "creator": "Paolo Zucca",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6188384635,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/634339505/medium.jpg",
+     "creator": "pavlaki1968",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6195792675,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Juglans regia",
+   "name": {
+    "it": "Noce comune"
+   },
+   "family": "Juglandaceae",
+   "genus": "Juglans",
+   "observations": 231,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.004,
+    0.04,
+    0.113,
+    0.202,
+    0.148,
+    0.178,
+    0.108,
+    0.064,
+    0.053,
+    0.09
+   ],
+   "bestMonths": [
+    5,
+    6,
+    7,
+    8,
+    9
+   ],
+   "seasonShare": {
+    "winter": 0.09,
+    "spring": 0.156,
+    "summer": 0.528,
+    "autumn": 0.226
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 166.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.483,
+    "hill": 0.333,
+    "mountain": 0.183
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/640078801/medium.jpg",
+     "creator": "Matteo Martini",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6234185045,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652171665/medium.jpg",
+     "creator": "Matteo Martini",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6251526256,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652266605/medium.jpg",
+     "creator": "Piermario Maculan",
+     "license": "CC0",
+     "gbifOccurrence": 6252620774,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Salvia pratensis",
+   "name": {
+    "it": "Salvia comune"
+   },
+   "family": "Lamiaceae",
+   "genus": "Salvia",
+   "observations": 230,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.302,
+    0.32,
+    0.061,
+    0.017,
+    0.066,
+    0.021,
+    0.049,
+    0.164,
+    0.0
+   ],
+   "bestMonths": [
+    4,
+    5,
+    11
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.622,
+    "summer": 0.144,
+    "autumn": 0.234
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 181.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.45,
+    "hill": 0.433,
+    "mountain": 0.117
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661791763/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6479223225,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661791746/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6479307269,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/661790636/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6481466620,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Borago officinalis",
+   "name": {
+    "it": "Borragine comune"
+   },
+   "family": "Boraginaceae",
+   "genus": "Borago",
+   "observations": 226,
+   "monthsRelative": [
+    0.158,
+    0.11,
+    0.182,
+    0.154,
+    0.125,
+    0.053,
+    0.036,
+    0.03,
+    0.014,
+    0.04,
+    0.098,
+    0.0
+   ],
+   "bestMonths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    11
+   ],
+   "seasonShare": {
+    "winter": 0.268,
+    "spring": 0.461,
+    "summer": 0.119,
+    "autumn": 0.152
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 181.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.4,
+    "hill": 0.6,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/261217195/medium.jpg",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4936443983,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62424169/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2576413471,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63667503/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2580104592,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Cornus mas",
+   "name": {
+    "it": "Corniolo maschio"
+   },
+   "family": "Cornaceae",
+   "genus": "Cornus",
+   "observations": 226,
+   "monthsRelative": [
+    0.0,
+    0.283,
+    0.153,
+    0.007,
+    0.019,
+    0.022,
+    0.141,
+    0.247,
+    0.11,
+    0.018,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    2,
+    3,
+    8
+   ],
+   "seasonShare": {
+    "winter": 0.283,
+    "spring": 0.178,
+    "summer": 0.411,
+    "autumn": 0.128
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 177.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.417,
+    "hill": 0.417,
+    "mountain": 0.167
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/263511947/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6170811191,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/287892082/medium.jpeg",
+     "creator": "Александра Курипко",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4133662116,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62423862/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2856629349,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Melittis melissophyllum",
+   "name": {
+    "it": "Erba limona comune"
+   },
+   "family": "Lamiaceae",
+   "genus": "Melittis",
+   "observations": 225,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.018,
+    0.291,
+    0.595,
+    0.096,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    5
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.904,
+    "summer": 0.096,
+    "autumn": 0.0
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 264.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.2,
+    "hill": 0.717,
+    "mountain": 0.083
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656937213/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6273578680,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/196501403/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 3772505424,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/40455721/medium.jpg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2265800758,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Helleborus viridis",
+   "name": {
+    "it": "Elleboro verde"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Helleborus",
+   "observations": 224,
+   "monthsRelative": [
+    0.35,
+    0.308,
+    0.115,
+    0.058,
+    0.018,
+    0.015,
+    0.027,
+    0.008,
+    0.0,
+    0.017,
+    0.036,
+    0.048
+   ],
+   "bestMonths": [
+    1,
+    2
+   ],
+   "seasonShare": {
+    "winter": 0.706,
+    "spring": 0.191,
+    "summer": 0.05,
+    "autumn": 0.053
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 262.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.2,
+    "hill": 0.667,
+    "mountain": 0.133
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656935475/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6274054812,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/259391711/medium.png",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4937222256,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265910971/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 4080957110,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Euphorbia cyparissias",
+   "name": {
+    "it": "Euforbia cipressina"
+   },
+   "family": "Euphorbiaceae",
+   "genus": "Euphorbia",
+   "observations": 223,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.128,
+    0.339,
+    0.137,
+    0.072,
+    0.04,
+    0.05,
+    0.076,
+    0.045,
+    0.113,
+    0.0
+   ],
+   "bestMonths": [
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.604,
+    "summer": 0.162,
+    "autumn": 0.234
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 157.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.5,
+    "hill": 0.483,
+    "mountain": 0.017
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652221451/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6252712683,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/262425189/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6579914727,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63608059/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 3090548676,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Malva sylvestris",
+   "name": {
+    "it": "Malva selvatica"
+   },
+   "family": "Malvaceae",
+   "genus": "Malva",
+   "observations": 222,
+   "monthsRelative": [
+    0.031,
+    0.029,
+    0.056,
+    0.051,
+    0.221,
+    0.132,
+    0.132,
+    0.087,
+    0.049,
+    0.132,
+    0.081,
+    0.0
+   ],
+   "bestMonths": [
+    5,
+    6,
+    7,
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.059,
+    "spring": 0.328,
+    "summer": 0.35,
+    "autumn": 0.263
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 59.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.983,
+    "hill": 0.017,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625110490/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179419929,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/633698785/medium.jpg",
+     "creator": "Philip Schaffer",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6188143065,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/650795949/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6253078584,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Prunus cerasifera",
+   "name": {
+    "it": "Mirabolano"
+   },
+   "family": "Rosaceae",
+   "genus": "Prunus",
+   "observations": 219,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.235,
+    0.129,
+    0.152,
+    0.165,
+    0.077,
+    0.019,
+    0.091,
+    0.078,
+    0.054,
+    0.0
+   ],
+   "bestMonths": [
+    3,
+    4,
+    5,
+    6
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.516,
+    "summer": 0.261,
+    "autumn": 0.223
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 70.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.767,
+    "hill": 0.15,
+    "mountain": 0.083
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652513173/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6253089864,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Anacamptis pyramidalis",
+   "name": {
+    "it": "Orchide piramidale"
+   },
+   "family": "Orchidaceae",
+   "genus": "Anacamptis",
+   "observations": 219,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.004,
+    0.217,
+    0.681,
+    0.087,
+    0.0,
+    0.0,
+    0.011,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    6
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.221,
+    "summer": 0.768,
+    "autumn": 0.011
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 284.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.233,
+    "hill": 0.667,
+    "mountain": 0.1
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675214511/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6398603389,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675216957/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6400099501,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675145011/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6400149322,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Ostrya carpinifolia",
+   "name": {
+    "it": "Carpino nero"
+   },
+   "family": "Betulaceae",
+   "genus": "Ostrya",
+   "observations": 210,
+   "monthsRelative": [
+    0.073,
+    0.011,
+    0.004,
+    0.018,
+    0.065,
+    0.226,
+    0.193,
+    0.145,
+    0.085,
+    0.05,
+    0.0,
+    0.13
+   ],
+   "bestMonths": [
+    6,
+    7,
+    8,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.215,
+    "spring": 0.087,
+    "summer": 0.564,
+    "autumn": 0.135
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 225.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.483,
+    "hill": 0.35,
+    "mountain": 0.167
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/615029378/medium.jpg",
+     "creator": "Marco Mussita",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6159524286,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/620196250/medium.jpg",
+     "creator": "Marco Mussita",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6171363340,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/623933428/medium.jpg",
+     "creator": "Marco Mussita",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179319286,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Glechoma hederacea",
+   "name": {
+    "it": "Edera terrestre"
+   },
+   "family": "Lamiaceae",
+   "genus": "Glechoma",
+   "observations": 212,
+   "monthsRelative": [
+    0.029,
+    0.081,
+    0.379,
+    0.23,
+    0.053,
+    0.01,
+    0.013,
+    0.008,
+    0.031,
+    0.015,
+    0.046,
+    0.104
+   ],
+   "bestMonths": [
+    3,
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.214,
+    "spring": 0.662,
+    "summer": 0.031,
+    "autumn": 0.092
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 53.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.867,
+    "hill": 0.133,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/618989648/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6170857716,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/619545765/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6171113683,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/356092778/medium.png",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4935704676,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Linaria vulgaris",
+   "name": {
+    "it": "Linaiola comune"
+   },
+   "family": "Plantaginaceae",
+   "genus": "Linaria",
+   "observations": 211,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.001,
+    0.008,
+    0.004,
+    0.062,
+    0.223,
+    0.532,
+    0.17,
+    0.0
+   ],
+   "bestMonths": [
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.001,
+    "summer": 0.074,
+    "autumn": 0.925
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 55.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.9,
+    "hill": 0.05,
+    "mountain": 0.05
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/590157945/medium.jpg",
+     "creator": "Giuseppe Distefano",
+     "license": "CC0",
+     "gbifOccurrence": 5892598534,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/294471014/medium.jpeg",
+     "creator": "Aurèle Baretje",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4145212982,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/325307125/medium.png",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4935738234,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Populus alba",
+   "name": {
+    "it": "Pioppo bianco"
+   },
+   "family": "Salicaceae",
+   "genus": "Populus",
+   "observations": 204,
+   "monthsRelative": [
+    0.027,
+    0.0,
+    0.009,
+    0.062,
+    0.101,
+    0.093,
+    0.126,
+    0.158,
+    0.186,
+    0.162,
+    0.028,
+    0.047
+   ],
+   "bestMonths": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.074,
+    "spring": 0.171,
+    "summer": 0.378,
+    "autumn": 0.377
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 54.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.783,
+    "hill": 0.183,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/652514818/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6253154585,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/654740669/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6273245666,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/704614938/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6469712475,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Anacamptis morio",
+   "name": {
+    "it": "Orchide minore"
+   },
+   "family": "Orchidaceae",
+   "genus": "Anacamptis",
+   "observations": 205,
+   "monthsRelative": [
+    0.046,
+    0.0,
+    0.196,
+    0.621,
+    0.101,
+    0.0,
+    0.01,
+    0.026,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.046,
+    "spring": 0.918,
+    "summer": 0.036,
+    "autumn": 0.0
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 401.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.167,
+    "hill": 0.733,
+    "mountain": 0.1
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/359683336/medium.jpg",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4935722859,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/362898450/medium.jpg",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4935668437,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/368485895/medium.png",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4935704851,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Senecio vulgaris",
+   "name": {
+    "it": "Senecione comune"
+   },
+   "family": "Asteraceae",
+   "genus": "Senecio",
+   "observations": 197,
+   "monthsRelative": [
+    0.25,
+    0.254,
+    0.221,
+    0.037,
+    0.008,
+    0.0,
+    0.0,
+    0.004,
+    0.004,
+    0.011,
+    0.055,
+    0.157
+   ],
+   "bestMonths": [
+    1,
+    2,
+    3,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.661,
+    "spring": 0.265,
+    "summer": 0.004,
+    "autumn": 0.07
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 55.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.85,
+    "hill": 0.15,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/621998975/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6178324844,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/621999256/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6178367153,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/621998937/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6178420943,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Lunaria annua",
+   "name": {
+    "it": "Erba d'argento"
+   },
+   "family": "Brassicaceae",
+   "genus": "Lunaria",
+   "observations": 201,
+   "monthsRelative": [
+    0.149,
+    0.028,
+    0.192,
+    0.197,
+    0.081,
+    0.037,
+    0.061,
+    0.093,
+    0.04,
+    0.06,
+    0.063,
+    0.0
+   ],
+   "bestMonths": [
+    1,
+    3,
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.177,
+    "spring": 0.469,
+    "summer": 0.19,
+    "autumn": 0.164
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 212.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.367,
+    "hill": 0.517,
+    "mountain": 0.117
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627784145/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185282324,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/254218831/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067627688,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Eranthis hyemalis",
+   "name": {
+    "it": "Piè di gallo"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Eranthis",
+   "observations": 200,
+   "monthsRelative": [
+    0.517,
+    0.416,
+    0.034,
+    0.013,
+    0.001,
+    0.0,
+    0.0,
+    0.003,
+    0.0,
+    0.0,
+    0.0,
+    0.016
+   ],
+   "bestMonths": [
+    1,
+    2
+   ],
+   "seasonShare": {
+    "winter": 0.95,
+    "spring": 0.048,
+    "summer": 0.003,
+    "autumn": 0.0
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 177.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.417,
+    "hill": 0.533,
+    "mountain": 0.05
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/179014352/medium.jpg",
+     "creator": "Extra Account",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067294537,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62424529/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2576312878,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63752863/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2580180930,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Convolvulus arvensis",
+   "name": {
+    "it": "Vilucchio comune"
+   },
+   "family": "Convolvulaceae",
+   "genus": "Convolvulus",
+   "observations": 194,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.011,
+    0.226,
+    0.252,
+    0.248,
+    0.204,
+    0.02,
+    0.019,
+    0.02,
+    0.0
+   ],
+   "bestMonths": [
+    5,
+    6,
+    7,
+    8
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.237,
+    "summer": 0.703,
+    "autumn": 0.06
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 58.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.9,
+    "hill": 0.05,
+    "mountain": 0.05
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656938056/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6273375414,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/676999141/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6399187212,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/301094535/medium.jpeg",
+     "creator": "Aurèle Baretje",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4162311726,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Ligustrum vulgare",
+   "name": {
+    "it": "Ligustro comune"
+   },
+   "family": "Oleaceae",
+   "genus": "Ligustrum",
+   "observations": 197,
+   "monthsRelative": [
+    0.122,
+    0.021,
+    0.018,
+    0.016,
+    0.052,
+    0.024,
+    0.007,
+    0.017,
+    0.045,
+    0.186,
+    0.3,
+    0.191
+   ],
+   "bestMonths": [
+    10,
+    11,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.335,
+    "spring": 0.085,
+    "summer": 0.048,
+    "autumn": 0.532
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 162.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.467,
+    "hill": 0.517,
+    "mountain": 0.017
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/254334766/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067362678,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/63752374/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5935912633,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Helleborus foetidus",
+   "name": {
+    "it": "Elleboro puzzolente"
+   },
+   "family": "Ranunculaceae",
+   "genus": "Helleborus",
+   "observations": 197,
+   "monthsRelative": [
+    0.292,
+    0.207,
+    0.069,
+    0.026,
+    0.012,
+    0.008,
+    0.026,
+    0.017,
+    0.013,
+    0.018,
+    0.124,
+    0.188
+   ],
+   "bestMonths": [
+    1,
+    2,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.687,
+    "spring": 0.108,
+    "summer": 0.051,
+    "autumn": 0.154
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 365.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.25,
+    "hill": 0.45,
+    "mountain": 0.3
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/656935601/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6273433483,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265907423/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 4080490106,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/62424554/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 2576296807,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Vinca major",
+   "name": {
+    "it": "Pervinca maggiore"
+   },
+   "family": "Apocynaceae",
+   "genus": "Vinca",
+   "observations": 196,
+   "monthsRelative": [
+    0.079,
+    0.11,
+    0.26,
+    0.319,
+    0.146,
+    0.036,
+    0.018,
+    0.011,
+    0.0,
+    0.0,
+    0.021,
+    0.0
+   ],
+   "bestMonths": [
+    3,
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.189,
+    "spring": 0.725,
+    "summer": 0.065,
+    "autumn": 0.021
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 120.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.567,
+    "hill": 0.4,
+    "mountain": 0.033
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625118532/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6178806860,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625113945/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6179302482,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/627701325/medium.jpg",
+     "creator": "francesco valle",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6184992676,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Tragopogon porrifolius",
+   "name": {
+    "it": "Barba di Becco violetta"
+   },
+   "family": "Asteraceae",
+   "genus": "Tragopogon",
+   "observations": 191,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.256,
+    0.646,
+    0.064,
+    0.0,
+    0.018,
+    0.0,
+    0.016,
+    0.0,
+    0.0
+   ],
+   "bestMonths": [
+    5
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.903,
+    "summer": 0.081,
+    "autumn": 0.016
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 177.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.45,
+    "hill": 0.383,
+    "mountain": 0.167
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/674912992/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6400226353,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Hedera helix",
+   "name": {
+    "it": "Edera"
+   },
+   "family": "Araliaceae",
+   "genus": "Hedera",
+   "observations": 192,
+   "monthsRelative": [
+    0.136,
+    0.103,
+    0.056,
+    0.035,
+    0.035,
+    0.031,
+    0.015,
+    0.062,
+    0.114,
+    0.121,
+    0.081,
+    0.212
+   ],
+   "bestMonths": [
+    1,
+    9,
+    10,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.45,
+    "spring": 0.125,
+    "summer": 0.108,
+    "autumn": 0.316
+   },
+   "peakSeason": "winter",
+   "elevationMedian": 80.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.683,
+    "hill": 0.25,
+    "mountain": 0.067
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/156896355/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 3391361535,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/58807107/medium.jpeg",
+     "creator": "Damiano Oldoni",
+     "license": "CC0",
+     "gbifOccurrence": 2543072630,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/6340824/medium.jpeg",
+     "creator": "gianluigi",
+     "license": "CC0",
+     "gbifOccurrence": 1453445067,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Cyclamen hederifolium",
+   "name": {
+    "it": "Ciclamino napoletano"
+   },
+   "family": "Primulaceae",
+   "genus": "Cyclamen",
+   "observations": 189,
+   "monthsRelative": [
+    0.134,
+    0.069,
+    0.016,
+    0.005,
+    0.0,
+    0.0,
+    0.0,
+    0.019,
+    0.228,
+    0.205,
+    0.157,
+    0.168
+   ],
+   "bestMonths": [
+    1,
+    9,
+    10,
+    11,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.371,
+    "spring": 0.021,
+    "summer": 0.019,
+    "autumn": 0.589
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 189.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.383,
+    "hill": 0.5,
+    "mountain": 0.117
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/461653233/medium.jpg",
+     "creator": "Jessica",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5006884430,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/462760094/medium.jpg",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5036820712,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/589663296/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5892380837,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Hippocrepis emerus",
+   "name": {
+    "it": "Erba cornetta"
+   },
+   "family": "Fabaceae",
+   "genus": "Hippocrepis",
+   "observations": 185,
+   "monthsRelative": [
+    0.076,
+    0.035,
+    0.275,
+    0.356,
+    0.043,
+    0.017,
+    0.017,
+    0.032,
+    0.041,
+    0.048,
+    0.06,
+    0.0
+   ],
+   "bestMonths": [
+    3,
+    4
+   ],
+   "seasonShare": {
+    "winter": 0.111,
+    "spring": 0.673,
+    "summer": 0.066,
+    "autumn": 0.149
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 301.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.133,
+    "hill": 0.783,
+    "mountain": 0.083
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/675207295/medium.jpg",
+     "creator": "Michal Honskus",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6400057664,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/262424468/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4430884182,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/265956799/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 4080669136,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Fagus sylvatica",
+   "name": {
+    "it": "Faggio comune"
+   },
+   "family": "Fagaceae",
+   "genus": "Fagus",
+   "observations": 164,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.014,
+    0.058,
+    0.089,
+    0.166,
+    0.266,
+    0.082,
+    0.051,
+    0.094,
+    0.181
+   ],
+   "bestMonths": [
+    7,
+    8,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.181,
+    "spring": 0.072,
+    "summer": 0.52,
+    "autumn": 0.227
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 930.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.15,
+    "hill": 0.167,
+    "mountain": 0.683
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/399743736/medium.jpeg",
+     "creator": "Jonáš Gaigr",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6551665485,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/45420672/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2429219742,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/47702204/medium.jpeg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 2350352854,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Althaea cannabina",
+   "name": {
+    "it": "Altea canapina"
+   },
+   "family": "Malvaceae",
+   "genus": "Althaea",
+   "observations": 172,
+   "monthsRelative": [
+    0.028,
+    0.0,
+    0.0,
+    0.013,
+    0.059,
+    0.084,
+    0.156,
+    0.204,
+    0.208,
+    0.204,
+    0.044,
+    0.0
+   ],
+   "bestMonths": [
+    7,
+    8,
+    9,
+    10
+   ],
+   "seasonShare": {
+    "winter": 0.028,
+    "spring": 0.072,
+    "summer": 0.445,
+    "autumn": 0.456
+   },
+   "peakSeason": "autumn",
+   "elevationMedian": 96.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.65,
+    "hill": 0.333,
+    "mountain": 0.017
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/325520024/medium.jpg",
+     "creator": "Edoardo Nardelli",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4936918377,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/146778458/medium.jpg",
+     "creator": "Extra Account",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067254482,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/156919863/medium.jpeg",
+     "creator": "Irene Saltini",
+     "license": "CC0",
+     "gbifOccurrence": 3391300522,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Sambucus ebulus",
+   "name": {
+    "it": "Sambuco lebbio"
+   },
+   "family": "Viburnaceae",
+   "genus": "Sambucus",
+   "observations": 174,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.0,
+    0.015,
+    0.038,
+    0.1,
+    0.287,
+    0.383,
+    0.148,
+    0.014,
+    0.015,
+    0.0
+   ],
+   "bestMonths": [
+    7,
+    8
+   ],
+   "seasonShare": {
+    "winter": 0.0,
+    "spring": 0.053,
+    "summer": 0.77,
+    "autumn": 0.177
+   },
+   "peakSeason": "summer",
+   "elevationMedian": 599.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.3,
+    "hill": 0.217,
+    "mountain": 0.483
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/565540879/medium.jpg",
+     "creator": "Jiri Klimes",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5828605457,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/153086793/medium.jpg",
+     "creator": "Daniele_00",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4067631498,
+     "local": true
+    }
+   ]
+  },
+  {
+   "sci": "Equisetum telmateia",
+   "name": {
+    "it": "Equiseto massimo"
+   },
+   "family": "Equisetaceae",
+   "genus": "Equisetum",
+   "observations": 75,
+   "monthsRelative": [
+    0.0,
+    0.0,
+    0.148,
+    0.129,
+    0.124,
+    0.101,
+    0.092,
+    0.046,
+    0.044,
+    0.083,
+    0.087,
+    0.146
+   ],
+   "bestMonths": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    10,
+    11,
+    12
+   ],
+   "seasonShare": {
+    "winter": 0.146,
+    "spring": 0.401,
+    "summer": 0.24,
+    "autumn": 0.213
+   },
+   "peakSeason": "spring",
+   "elevationMedian": 87.0,
+   "elevationSamples": 60,
+   "bandShare": {
+    "plain": 0.7,
+    "hill": 0.2,
+    "mountain": 0.1
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/625111098/medium.jpg",
+     "creator": "Leonardo Rapisarda",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6195482436,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/663839090/medium.jpg",
+     "creator": "Jessica",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6333898756,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/33371789/medium.jpg",
+     "creator": "silk128",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 4080938311,
+     "local": true
+    }
+   ]
+  }
+ ],
+ "recipes": [
+  {
+   "name": {
+    "it": "Tintura della Lanterna d'Inverno"
+   },
+   "tier": "Intermedia",
+   "unlock": {
+    "species": "Eranthis hyemalis",
+    "level": 2
+   },
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Eranthis hyemalis",
+     "trait": "❄️ Gelo",
+     "note": {
+      "it": "Data plausibile: gen–feb (dai dati GBIF)"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Helleborus viridis",
+     "trait": null,
+     "note": {
+      "it": "Data plausibile: gen–feb, in collina"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Il campo dove la usi rigenera energia anche nelle giornate più corte (effetto di gioco)."
+   }
+  },
+  {
+   "name": {
+    "it": "Distillato della Quota Silenziosa"
+   },
+   "tier": "Rara",
+   "unlock": {
+    "species": "Fagus sylvatica",
+    "level": 3
+   },
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Fagus sylvatica",
+     "trait": "🌫 Nebbia",
+     "note": {
+      "it": "Plausibile solo in montagna: quota mediana ~930 m"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Sambucus ebulus",
+     "trait": null,
+     "note": {
+      "it": "Estate, spesso in montagna"
+     }
+    },
+    {
+     "qty": 1,
+     "species": null,
+     "trait": "🌕 Lunare",
+     "note": {
+      "it": "Qualunque specie raccolta nella fase di luna piena"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Aumenta la purezza delle essenze raccolte nei campi oltre i 600 m (effetto di gioco)."
+   }
+  },
+  {
+   "name": {
+    "it": "Unguento dei Muri Vecchi"
+   },
+   "tier": "Base",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Chelidonium majus",
+     "trait": null,
+     "note": {
+      "it": "Primavera, in pianura e in città"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Malva sylvestris",
+     "trait": "🌧 Pioggia",
+     "note": {
+      "it": "Maggio–ottobre, in pianura"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Ricetta di base pensata per chi gioca in città (effetto di gioco)."
+   }
+  },
+  {
+   "name": {
+    "it": "Essenza dell'Ultimo Fiore"
+   },
+   "tier": "Intermedia",
+   "unlock": {
+    "species": "Cyclamen hederifolium",
+    "level": 2
+   },
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Cyclamen hederifolium",
+     "trait": "🌅 Crepuscolo",
+     "note": {
+      "it": "Autunno, collina"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Melissa officinalis",
+     "trait": "💧 Rugiada",
+     "note": {
+      "it": "Aprile–ottobre"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Riduce lo stress di un campo sfruttato (effetto di gioco)."
+   }
+  }
+ ],
+ "lore": {
+  "Eranthis hyemalis": {
+   "it": "Il Piè di gallo fiorisce quando il bosco dorme ancora: il suo oro trattiene la prima luce dell'anno. Gli erboristi lo chiamano 'la lanterna di gennaio'."
+  },
+  "Helleborus viridis": {
+   "it": "L'Elleboro verde non teme la neve. La sua essenza è fredda e paziente, e conserva le cose invece di trasformarle."
+  },
+  "Fagus sylvatica": {
+   "it": "Sotto i faggi il silenzio ha un peso. L'essenza di faggio si raccoglie solo in quota, dove le voci della pianura non arrivano."
+  },
+  "Anacamptis pyramidalis": {
+   "it": "L'Orchide piramidale compare a giugno, per poche settimane, nei prati che nessuno falcia. Chi la trova sa di essere arrivato al momento giusto."
+  },
+  "Cyclamen hederifolium": {
+   "it": "Il Ciclamino fiorisce quando gli altri si arrendono all'autunno. La sua essenza ricorda: c'è ancora tempo."
+  },
+  "Chelidonium majus": {
+   "it": "La Celidonia cresce sui muri vecchi e ai bordi delle strade, dove nessuno guarda. Gli erboristi di città la conoscono bene."
+  },
+  "Melissa officinalis": {
+   "it": "La Melissa profuma di limone appena la sfiori. È l'essenza più gentile del bolognese, e la prima che molti apprendisti imparano."
+  },
+  "Malva sylvestris": {
+   "it": "La Malva non chiede nulla: cresce nei fossi, nei cortili, lungo i binari. La sua essenza è comune, ma nessuna ricetta di base ne fa a meno."
+  }
+ },
+ "funFacts": {
+  "Laurus nobilis": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Dal nome latino dell'alloro, laurus, viene la parola 'laurea': nell'antichità le corone d'alloro premiavano poeti e vincitori."
+    },
+    "verified": false
+   }
+  ],
+  "Eranthis hyemalis": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Eranthis viene dal greco 'er' (primavera) e 'anthos' (fiore), mentre hyemalis significa 'invernale': un fiore di primavera che sboccia in pieno inverno."
+    },
+    "verified": false
+   }
+  ],
+  "Chelidonium majus": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Il nome viene dal greco chelidón, 'rondine': la tradizione legava la celidonia al ritorno delle rondini."
+    },
+    "verified": false
+   }
+  ],
+  "Melissa officinalis": [
+   {
+    "level": 1,
+    "text": {
+     "it": "In greco melissa significa 'ape': è una delle piante più amate dalle api."
+    },
+    "verified": false
+   }
+  ],
+  "Juglans regia": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Juglans viene dal latino Iovis glans, 'ghianda di Giove': per i Romani la noce era un frutto degno degli dèi."
+    },
+    "verified": false
+   }
+  ],
+  "Euonymus europaeus": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Si chiama berretta del prete per i frutti, che ricordano il copricapo a quattro punte dei sacerdoti."
+    },
+    "verified": false
+   }
+  ],
+  "Cyclamen hederifolium": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Un vecchio nome popolare del ciclamino è 'pan porcino': i maiali ne vanno in cerca dei tuberi, che per noi invece sono tossici."
+    },
+    "verified": false
+   }
+  ],
+  "Ruscus aculeatus": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Il nome pungitopo viene da un uso antico: i rametti spinosi si mettevano intorno ai cibi conservati per tenere lontani i topi."
+    },
+    "verified": false
+   }
+  ],
+  "Fraxinus ornus": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Incidendo la corteccia del frassino da manna esce una linfa zuccherina, la 'manna', che in Sicilia si raccoglie ancora oggi."
+    },
+    "verified": false
+   }
+  ],
+  "Prunus spinosa": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Con le bacche del prugnolo, raccolte dopo le prime gelate, in Emilia si prepara il bargnolino, un liquore tradizionale."
+    },
+    "verified": false
+   }
+  ],
+  "Equisetum telmateia": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Gli equiseti sono ricchi di silice: un tempo si usavano per lucidare pentole e metalli."
+    },
+    "verified": false
+   }
+  ],
+  "Cornus mas": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Il legno di corniolo è durissimo: nell'antichità si usava per le aste delle lance."
+    },
+    "verified": false
+   }
+  ],
+  "Clematis vitalba": [
+   {
+    "level": 2,
+    "text": {
+     "it": "In Francia la vitalba era detta 'erba dei pezzenti': si racconta che i mendicanti la usassero per arrossarsi la pelle e impietosire i passanti."
+    },
+    "verified": false
+   }
+  ],
+  "Malva sylvestris": [
+   {
+    "level": 1,
+    "text": {
+     "it": "Un vecchio proverbio dice 'la malva, da ogni mal ti salva': per secoli è stata tra le piante più presenti nella tradizione popolare."
+    },
+    "verified": false
+   }
+  ],
+  "Fagus sylvatica": [
+   {
+    "level": 2,
+    "text": {
+     "it": "Secondo un'etimologia diffusa (ma discussa), il tedesco Buch, 'libro', viene da Buche, 'faggio': le prime rune si incidevano su tavolette di faggio."
+    },
+    "verified": false
+   }
+  ],
+  "Hedera helix": [
+   {
+    "level": 2,
+    "text": {
+     "it": "L'edera era sacra a Dioniso, il Bacco dei Romani, che veniva raffigurato con una corona d'edera."
+    },
+    "verified": false
+   }
+  ]
+ },
+ "safety": {
+  "Helleborus viridis": {
+   "it": "tossica"
+  },
+  "Helleborus foetidus": {
+   "it": "tossica"
+  },
+  "Eranthis hyemalis": {
+   "it": "tossica"
+  },
+  "Chelidonium majus": {
+   "it": "tossica (lattice irritante)"
+  },
+  "Euonymus europaeus": {
+   "it": "tossica (frutti)"
+  },
+  "Euphorbia helioscopia": {
+   "it": "lattice irritante"
+  },
+  "Euphorbia cyparissias": {
+   "it": "lattice irritante"
+  },
+  "Clematis vitalba": {
+   "it": "irritante"
+  },
+  "Hedera helix": {
+   "it": "tossica (bacche)"
+  },
+  "Ligustrum vulgare": {
+   "it": "tossica (bacche)"
+  },
+  "Ruscus aculeatus": {
+   "it": "bacche da non ingerire"
+  },
+  "Sambucus ebulus": {
+   "it": "tossica (bacche); somiglia al sambuco nero commestibile"
+  }
+ }
+}
