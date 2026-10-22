@@ -627,9 +627,7 @@ class _BandBar extends StatelessWidget {
     child: Row(
       children: [
         SizedBox(width: 170, child: Text(label, style: context.texts.bodySmall)),
-        Expanded(
-          child: LinearProgressIndicator(value: share, borderRadius: BorderRadius.circular(4)),
-        ),
+        Expanded(child: ClayProgressBar(value: share, height: 4)),
         SizedBox(width: 44, child: Text('${(share * 100).round()}%', textAlign: TextAlign.end)),
       ],
     ),

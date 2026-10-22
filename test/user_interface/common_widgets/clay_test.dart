@@ -149,6 +149,18 @@ void main() {
       expect(find.byType(Switch), findsOneWidget);
     });
 
+    testWidgets('barra di avanzamento neumorfica: parte piena in proporzione, valori fuori scala limitati', (
+      tester,
+    ) async {
+      await _pump(tester, const SizedBox(width: 200, child: ClayProgressBar(value: 0.4)), livery: const FeltroLivery());
+      expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.4);
+      await _pump(tester, const SizedBox(width: 200, child: ClayProgressBar(value: 1.7)), livery: const FeltroLivery());
+      expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 1);
+      await _pump(tester, const SizedBox(width: 200, child: ClayProgressBar(value: 0.4)));
+      await tester.pumpAndSettle(); // il cambio di livrea è animato
+      expect(find.byType(LinearProgressIndicator), findsOneWidget);
+    });
+
     test('emoji iniziale dei tratti', () {
       expect(leadingEmoji('🌕 Lunare'), '🌕');
       expect(leadingEmoji('❄️ Gelo'), '❄️');

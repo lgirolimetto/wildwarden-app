@@ -173,12 +173,12 @@ class _RankCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: Gaps.m),
-            LinearProgressIndicator(
+            ClayProgressBar(
               value: progress,
-              minHeight: 6,
               color: onHero,
-              backgroundColor: onHero.withValues(alpha: 0.25),
-              borderRadius: BorderRadius.circular(4),
+              trackColor: onHero.withValues(alpha: 0.25),
+              // La barra sta sulla scheda verde, non sulla pagina: l'incavo prende ombra e luce da lei.
+              surface: tokens.heroGradient.first,
             ),
             const SizedBox(height: Gaps.s),
             Text(

@@ -573,6 +573,11 @@ class NeuInset extends StatelessWidget {
   /// `true`: l'incavo si disegna sopra il figlio (per una foto "sul fondo" dell'incavo), non sotto.
   final bool overChild;
 
+  /// Colori di ombra e luce al posto di quelli della livrea, per incavi su un fondo diverso dalla pagina (l'ombra
+  /// della livrea chiara è un beige: su un fondo scuro sembrerebbe una luce).
+  final Color? darkColor;
+  final Color? lightColor;
+
   /// `true`: luce e ombra invertite, la superficie sembra bombata verso l'alto (una smussatura in rilievo) invece che
   /// scavata. Non riempie la forma: funziona su qualunque fondo.
   final bool convex;
@@ -591,6 +596,8 @@ class NeuInset extends StatelessWidget {
     this.lightStrength,
     this.overChild = false,
     this.convex = false,
+    this.darkColor,
+    this.lightColor,
   });
 
   @override
@@ -599,8 +606,12 @@ class NeuInset extends StatelessWidget {
     final painter = _InsetPainter(
       radius: radius,
       fill: overChild ? null : color,
-      dark: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * strength),
-      light: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * (lightStrength ?? strength)).clamp(0, 1)),
+      dark: (darkColor ?? tokens.clayShadow).withValues(
+        alpha: ((darkColor ?? tokens.clayShadow).a * strength).clamp(0, 1),
+      ),
+      light: (lightColor ?? tokens.neuLight).withValues(
+        alpha: ((lightColor ?? tokens.neuLight).a * (lightStrength ?? strength)).clamp(0, 1),
+      ),
       depth: depth,
       convex: convex,
     );
@@ -807,6 +818,82 @@ class ClaySwitch extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Barra di avanzamento. Nelle livree neumorfiche: un binario sottile scavato in cui la parte piena è una chip
+/// appena bombata, così il vuoto si vede scavato e il pieno in rilievo (a barra completa sembra una chip). Rilievo e
+/// incavo sono leggerissimi, la barra resta sottile. Altrove una `LinearProgressIndicator`.
+class ClayProgressBar extends StatelessWidget {
+  final double value;
+  final double height;
+
+  /// Colore della parte piena (`null`: quello delle azioni).
+  final Color? color;
+
+  /// Colore del binario fuori dal neumorfismo.
+  final Color? trackColor;
+
+  /// Colore del fondo su cui la barra è appoggiata, se non è la pagina (es. la scheda verde del titolo): l'incavo
+  /// ricava ombra e luce da qui, invece che dai colori della livrea pensati per la pagina.
+  final Color? surface;
+
+  const ClayProgressBar({super.key, required this.value, this.height = 6, this.color, this.trackColor, this.surface});
+
+  @override
+  Widget build(BuildContext context) {
+    final v = value.clamp(0.0, 1.0);
+    final radius = BorderRadius.circular(height);
+    if (!context.druid.neu) {
+      return LinearProgressIndicator(
+        value: v,
+        minHeight: height,
+        color: color,
+        backgroundColor: trackColor,
+        borderRadius: radius,
+      );
+    }
+    final trackHeight = height + 2;
+    // Luce e ombra ricavate dai colori reali: del fondo per l'incavo, della parte piena per il suo rilievo.
+    final bg = surface;
+    final fill = color ?? context.colors.primary;
+    return Semantics(
+      value: '${(v * 100).round()}%',
+      child: SizedBox(
+        height: trackHeight,
+        child: NeuInset(
+          radius: BorderRadius.circular(trackHeight),
+          depth: 1,
+          strength: 0.6,
+          darkColor: bg == null ? null : _darken(bg, 0.45),
+          lightColor: bg == null ? null : _lighten(bg, 0.25),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: FractionallySizedBox(
+              widthFactor: v,
+              heightFactor: 1,
+              child: v == 0
+                  ? const SizedBox.shrink()
+                  : Padding(
+                      padding: const EdgeInsets.all(1),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(color: fill, borderRadius: radius),
+                        child: NeuInset(
+                          radius: radius,
+                          depth: 0.8,
+                          strength: 0.5,
+                          darkColor: _darken(fill, 0.35),
+                          lightColor: _lighten(fill, 0.6),
+                          convex: true,
+                          child: const SizedBox.expand(),
+                        ),
+                      ),
+                    ),
             ),
           ),
         ),
