@@ -554,6 +554,10 @@ class NeuInset extends StatelessWidget {
   /// `true`: l'incavo si disegna sopra il figlio (per una foto "sul fondo" dell'incavo), non sotto.
   final bool overChild;
 
+  /// `true`: luce e ombra invertite, la superficie sembra bombata verso l'alto (una smussatura in rilievo) invece che
+  /// scavata. Non riempie la forma: funziona su qualunque fondo.
+  final bool convex;
+
   /// Larghezza della sfumatura dell'ombra interna per una data profondità: il margine da lasciare libero lungo il
   /// bordo perché l'incavo si veda intero.
   static double spread(double depth) => depth + depth * 1.2 * 2;
@@ -567,6 +571,7 @@ class NeuInset extends StatelessWidget {
     this.strength = 1,
     this.lightStrength,
     this.overChild = false,
+    this.convex = false,
   });
 
   @override
@@ -578,6 +583,7 @@ class NeuInset extends StatelessWidget {
       dark: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * strength),
       light: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * (lightStrength ?? strength)).clamp(0, 1)),
       depth: depth,
+      convex: convex,
     );
     return overChild
         ? CustomPaint(foregroundPainter: painter, child: child)
@@ -591,6 +597,7 @@ class _InsetPainter extends CustomPainter {
   final Color dark;
   final Color light;
   final double depth;
+  final bool convex;
 
   const _InsetPainter({
     required this.radius,
@@ -598,6 +605,7 @@ class _InsetPainter extends CustomPainter {
     required this.dark,
     required this.light,
     required this.depth,
+    this.convex = false,
   });
 
   @override
@@ -613,16 +621,19 @@ class _InsetPainter extends CustomPainter {
       ..addRect((Offset.zero & size).inflate(depth * 6))
       ..addRRect(rrect);
     final blur = MaskFilter.blur(BlurStyle.normal, depth * 1.2);
+    // Scavato: ombra lungo il bordo in alto a sinistra, luce in basso a destra. Bombato: il contrario.
+    final topLeft = convex ? light : dark;
+    final bottomRight = convex ? dark : light;
     canvas.drawPath(
       ring.shift(Offset(depth, depth)),
       Paint()
-        ..color = dark
+        ..color = topLeft
         ..maskFilter = blur,
     );
     canvas.drawPath(
       ring.shift(Offset(-depth, -depth)),
       Paint()
-        ..color = light
+        ..color = bottomRight
         ..maskFilter = blur,
     );
     canvas.restore();
@@ -630,7 +641,12 @@ class _InsetPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_InsetPainter old) =>
-      old.radius != radius || old.fill != fill || old.dark != dark || old.light != light || old.depth != depth;
+      old.radius != radius ||
+      old.fill != fill ||
+      old.dark != dark ||
+      old.light != light ||
+      old.depth != depth ||
+      old.convex != convex;
 }
 
 /// Chip di scelta. Nelle livree neumorfiche: in rilievo se non scelta, scavata (premuta) se scelta, con testo e icona

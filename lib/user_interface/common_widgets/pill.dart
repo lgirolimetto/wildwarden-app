@@ -16,11 +16,26 @@ class Pill extends StatelessWidget {
     final color = context.colors.onSurface;
     final emoji = context.druid.clay ? leadingEmoji(text) : null;
     const radius = BorderRadius.all(Radius.circular(999));
-    // Nelle livree neumorfiche la pillola è scavata nella scheda.
+    // Nelle livree neumorfiche la pillola non si preme, quindi non è scavata: un solco sottile tutt'intorno e,
+    // subito dentro, la pillola che risale in rilievo (come la foto della scheda specie).
+    // Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45, rilievo depth 0.8 / strength 0.35.
+    // Variante appena più accennata, provata e da tenere come alternativa: solco depth 1 / strength 0.6,
+    // rilievo depth 1 / strength 0.5.
     Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => context.druid.neu
         ? NeuInset(
             radius: radius,
-            child: Padding(padding: padding, child: child),
+            depth: 0.8,
+            strength: 0.45,
+            child: Padding(
+              padding: const EdgeInsets.all(3),
+              child: NeuInset(
+                radius: radius,
+                depth: 0.8,
+                strength: 0.35,
+                convex: true,
+                child: Padding(padding: padding, child: child),
+              ),
+            ),
           )
         : Container(padding: padding, decoration: flat, child: child);
     if (emoji != null) {
