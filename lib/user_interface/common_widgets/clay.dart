@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -48,15 +50,28 @@ class _ClayHighlight extends StatelessWidget {
 
   const _ClayHighlight({required this.radius});
 
+  /// Altezza massima del riflesso: sulle schede lunghe (i vassoi dell'erbario) "fino a metà" schiarirebbe tutto ciò
+  /// che si vede, slavando il colore.
+  static const maxHeight = 64.0;
+
   @override
   Widget build(BuildContext context) => IgnorePointer(
-    child: DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: radius,
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.center,
-          colors: [Colors.white.withValues(alpha: 0.28), Colors.white.withValues(alpha: 0)],
+    child: LayoutBuilder(
+      builder: (context, constraints) => Align(
+        alignment: Alignment.topCenter,
+        child: SizedBox(
+          height: min(constraints.maxHeight / 2, maxHeight),
+          width: double.infinity,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(topLeft: radius.topLeft, topRight: radius.topRight),
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.white.withValues(alpha: 0.28), Colors.white.withValues(alpha: 0)],
+              ),
+            ),
+          ),
         ),
       ),
     ),
@@ -325,7 +340,17 @@ class ClaySectionTitle extends StatelessWidget {
   final Color? color;
   final Widget? trailing;
 
-  const ClaySectionTitle({super.key, required this.title, required this.icon, this.color, this.trailing});
+  /// Colore del titolo, per i titoli su fondi scuri.
+  final Color? titleColor;
+
+  const ClaySectionTitle({
+    super.key,
+    required this.title,
+    required this.icon,
+    this.color,
+    this.trailing,
+    this.titleColor,
+  });
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -334,7 +359,9 @@ class ClaySectionTitle extends StatelessWidget {
       children: [
         ClayCircle(color: color ?? context.colors.secondaryContainer, icon: icon, size: 36),
         const SizedBox(width: Gaps.m),
-        Expanded(child: Text(title, style: context.texts.titleLarge)),
+        Expanded(
+          child: Text(title, style: context.texts.titleLarge?.copyWith(color: titleColor)),
+        ),
         ?trailing,
       ],
     ),

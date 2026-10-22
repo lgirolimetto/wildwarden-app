@@ -43,10 +43,12 @@ Color _tint(Species species) {
   return HSLColor.fromAHSL(1, hue, 0.5, 0.8).toColor();
 }
 
-/// Marrone caldo del tassello, uguale di giorno e di sera: sta su tinte pastello, non sul colore della pagina.
-const _brown = Color(0xFF94592C);
+/// Colore del tassello: di sera marrone caldo; di giorno verde bosco, che lega con la livrea e non aggiunge un
+/// altro tono caldo accanto alle tessere sabbia.
+Color mysteryTileColor(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.light ? const Color(0xFF2F5D4E) : const Color(0xFF94592C);
 
-/// Tassello di plastilina marrone caldo con il "?".
+/// Tassello di plastilina con il "?".
 class _QuestionTile extends StatelessWidget {
   const _QuestionTile();
 
@@ -58,7 +60,7 @@ class _QuestionTile extends StatelessWidget {
         width: size,
         height: size,
         alignment: Alignment.center,
-        decoration: clayDecoration(context, color: _brown, radius: size * 0.3),
+        decoration: clayDecoration(context, color: mysteryTileColor(context), radius: size * 0.3),
         child: Text(
           '?',
           style: context.texts.headlineMedium?.copyWith(
