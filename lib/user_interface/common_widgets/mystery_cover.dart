@@ -71,7 +71,7 @@ class _QuestionTile extends StatelessWidget {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.white.withValues(
-                      alpha: Theme.of(context).brightness == Brightness.light ? 0.75 : 0.32,
+                      alpha: Theme.of(context).brightness == Brightness.light ? 0.75 : 0.26,
                     ),
                     blurRadius: 14,
                     offset: const Offset(-5, -5),

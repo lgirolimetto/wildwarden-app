@@ -243,6 +243,12 @@ class SpeciesPhotoHeader extends StatelessWidget {
   static const _photoHeight = 380.0;
   static const radius = BorderRadius.all(Radius.circular(28));
 
+  /// Profondità dell'incavo della foto nelle livree neumorfiche: più leggera di quella delle chip.
+  static const _wellDepth = 2.0;
+
+  /// Larghezza del solco inciso attorno alla foto.
+  static const _grooveWidth = 5.0;
+
   final Widget image;
   final String title;
   final String subtitle;
@@ -267,14 +273,23 @@ class SpeciesPhotoHeader extends StatelessWidget {
     // Si misura la sola barra di stato: il padding della pagina include anche la barra trasparente dei pulsanti.
     final view = View.of(context);
     final statusBar = view.padding.top / view.devicePixelRatio;
-    const photoTop = 0.0;
-    final photoHeight = _photoHeight + statusBar;
-    const bottomRadius = radius;
+    // Nelle livree neumorfiche la foto si stacca anche dal bordo in alto: si vede tutto il contorno in rilievo.
+    final photoTop = tokens.neu ? statusBar + Gaps.s : 0.0;
+    final photoHeight = tokens.neu ? _photoHeight : _photoHeight + statusBar;
+    // Nelle livree neumorfiche la foto è incorniciata da un bordo del colore delle schede: è la cornice a essere in
+    // rilievo, e il rilievo si legge anche quando la foto è scura.
+    final frame = tokens.neu ? Gaps.m : 0.0;
+    // La foto sta sul fondo di un incavo leggero; il margine attorno si ricava dalla sfumatura dell'ombra interna,
+    // così l'ombra cade sul fondo e non sulla foto, dove sparirebbe.
+    final well = tokens.neu ? _wellDepth : 0.0;
+    // Solco sottile attorno alla foto, come inciso con uno stuzzicadente: subito dopo la foto risale in rilievo.
+    final wellMargin = tokens.neu ? _grooveWidth : 0.0;
+    final bottomRadius = tokens.neu ? BorderRadius.circular(radius.topLeft.x - frame) : radius;
     return SizedBox(
       height: photoTop + photoHeight,
       child: Stack(
         children: [
-          // Solo un'ombra leggera sotto la foto: la stacca dalla pagina senza effetto 3D marcato.
+          // Un'ombra leggera sotto la foto: la stacca dalla pagina senza effetto 3D marcato.
           Positioned(
             left: Gaps.l,
             right: Gaps.l,
@@ -282,58 +297,87 @@ class SpeciesPhotoHeader extends StatelessWidget {
             height: photoHeight,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                borderRadius: bottomRadius,
-                boxShadow: [
-                  BoxShadow(
-                    color: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * 0.6),
-                    blurRadius: 18,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
+                color: tokens.neu ? context.colors.surfaceContainerLow : null,
+                borderRadius: radius,
+                // Nelle livree neumorfiche luce in alto a sinistra e ombra in basso a destra, come le altre superfici
+                // in rilievo.
+                boxShadow: tokens.neu
+                    ? [
+                        BoxShadow(color: tokens.neuLight, blurRadius: 18, offset: const Offset(-8, -8)),
+                        BoxShadow(color: tokens.clayShadow, blurRadius: 18, offset: const Offset(8, 8)),
+                      ]
+                    : [
+                        BoxShadow(
+                          color: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * 0.6),
+                          blurRadius: 18,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
               ),
             ),
           ),
           Positioned(
-            left: Gaps.l,
-            right: Gaps.l,
-            top: photoTop,
-            height: photoHeight,
-            child: ClipRRect(
-              borderRadius: bottomRadius,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  image,
-                  // Velatura in alto: barra di stato, pulsante e crediti si leggono su qualunque foto.
-                  const DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.center,
-                        colors: [Color(0x59000000), Color(0x00000000)],
-                      ),
-                    ),
+            left: Gaps.l + frame,
+            right: Gaps.l + frame,
+            top: photoTop + frame,
+            height: photoHeight - frame * 2,
+            // Nelle livree neumorfiche: cornice in rilievo, un solco sottile inciso e la foto di nuovo in rilievo.
+            child: NeuInset(
+              radius: bottomRadius,
+              depth: well,
+              overChild: false,
+              child: Padding(
+                padding: EdgeInsets.all(wellMargin),
+                child: DecoratedBox(
+                  // La foto risale dal solco: piccola luce in alto a sinistra, piccola ombra in basso a destra.
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(bottomRadius.topLeft.x - wellMargin),
+                    boxShadow: tokens.neu
+                        ? [
+                            BoxShadow(color: tokens.neuLight, blurRadius: 4, offset: const Offset(-2, -2)),
+                            BoxShadow(color: tokens.clayShadow, blurRadius: 4, offset: const Offset(2, 2)),
+                          ]
+                        : null,
                   ),
-                  // Nome su vetro smerigliato dentro la foto: la foto resta un unico oggetto, come una copertina.
-                  Positioned(
-                    left: Gaps.m,
-                    right: Gaps.m,
-                    bottom: Gaps.m,
-                    child: _GlassLabel(title: title, subtitle: subtitle, level: level),
-                  ),
-                  if (credit != null)
-                    Positioned(
-                      right: Gaps.l,
-                      top: statusBar + 70,
-                      child: Text(
-                        credit!,
-                        style: context.texts.labelSmall?.copyWith(
-                          color: Colors.white,
-                          shadows: const [Shadow(color: Colors.black54, blurRadius: 4)],
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(bottomRadius.topLeft.x - wellMargin),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        image,
+                        // Velatura in alto: barra di stato, pulsante e crediti si leggono su qualunque foto.
+                        const DecoratedBox(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.center,
+                              colors: [Color(0x59000000), Color(0x00000000)],
+                            ),
+                          ),
                         ),
-                      ),
+                        // Nome su vetro smerigliato dentro la foto: la foto resta un unico oggetto, come una copertina.
+                        Positioned(
+                          left: Gaps.m,
+                          right: Gaps.m,
+                          bottom: Gaps.m,
+                          child: _GlassLabel(title: title, subtitle: subtitle, level: level),
+                        ),
+                        if (credit != null)
+                          Positioned(
+                            right: Gaps.l,
+                            top: tokens.neu ? Gaps.l + Gaps.s : statusBar + 70,
+                            child: Text(
+                              credit!,
+                              style: context.texts.labelSmall?.copyWith(
+                                color: Colors.white,
+                                shadows: const [Shadow(color: Colors.black54, blurRadius: 4)],
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
-                ],
+                  ),
+                ),
               ),
             ),
           ),

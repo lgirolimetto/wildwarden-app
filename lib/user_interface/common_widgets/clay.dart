@@ -296,13 +296,14 @@ PreferredSizeWidget clayAppBar(
   surfaceTintColor: Colors.transparent,
   elevation: 0,
   scrolledUnderElevation: 0,
-  // Sopra una foto la barra è più alta: il pulsante sta alla stessa distanza dal bordo sopra e a sinistra.
-  toolbarHeight: overImage ? 84 : 68,
+  // Sopra una foto la barra è più alta: il pulsante sta alla stessa distanza dal bordo sopra e a sinistra. Nelle
+  // livree neumorfiche la foto ha un margine anche in alto, quindi il pulsante scende e rientra un po' di più.
+  toolbarHeight: overImage ? (context.druid.neu ? 128 : 84) : 68,
   // Sopra una foto con i margini laterali il pulsante sta dentro la foto, non a cavallo del bordo.
-  leadingWidth: overImage ? 68 + Gaps.l : 68,
+  leadingWidth: overImage ? 68 + Gaps.l + (context.druid.neu ? Gaps.l + Gaps.s : 0) : 68,
   automaticallyImplyLeading: false,
   leading: Padding(
-    padding: EdgeInsets.only(left: overImage ? Gaps.l : 0),
+    padding: EdgeInsets.only(left: overImage ? Gaps.l + (context.druid.neu ? Gaps.l + Gaps.s : 0) : 0),
     child: Center(
       child: ClayIconButton(
         key: const ValueKey('clay-back'),
@@ -496,21 +497,39 @@ class NeuInset extends StatelessWidget {
   final Color? color;
   final double depth;
 
-  const NeuInset({super.key, required this.child, required this.radius, this.color, this.depth = 3});
+  /// Intensità di luce e ombra (1 = quelle della livrea).
+  final double strength;
+
+  /// `true`: l'incavo si disegna sopra il figlio (per una foto "sul fondo" dell'incavo), non sotto.
+  final bool overChild;
+
+  /// Larghezza della sfumatura dell'ombra interna per una data profondità: il margine da lasciare libero lungo il
+  /// bordo perché l'incavo si veda intero.
+  static double spread(double depth) => depth + depth * 1.2 * 2;
+
+  const NeuInset({
+    super.key,
+    required this.child,
+    required this.radius,
+    this.color,
+    this.depth = 3,
+    this.strength = 1,
+    this.overChild = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
-    return CustomPaint(
-      painter: _InsetPainter(
-        radius: radius,
-        fill: color,
-        dark: tokens.clayShadow,
-        light: tokens.neuLight,
-        depth: depth,
-      ),
-      child: child,
+    final painter = _InsetPainter(
+      radius: radius,
+      fill: overChild ? null : color,
+      dark: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * strength),
+      light: tokens.neuLight.withValues(alpha: tokens.neuLight.a * strength),
+      depth: depth,
     );
+    return overChild
+        ? CustomPaint(foregroundPainter: painter, child: child)
+        : CustomPaint(painter: painter, child: child);
   }
 }
 

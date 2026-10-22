@@ -103,7 +103,7 @@ class FeltroLivery extends Livery {
       clay: true,
       neu: true,
       // Di sera la luce dev'essere ben visibile, altrimenti il rilievo sparisce e resta solo un'ombra normale.
-      neuLight: light ? const Color(0xE6FBF6EE) : const Color(0x24FFFFFF),
+      neuLight: light ? const Color(0xE6FBF6EE) : const Color(0x1CFFFFFF),
       clayShadow: light ? const Color(0xB3B3A086) : const Color(0xB3121816),
     );
   }
