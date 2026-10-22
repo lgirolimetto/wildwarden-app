@@ -751,4 +751,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dayTimeNight => 'at night';
+
+  @override
+  String get liveryFeltro => 'Felt';
 }

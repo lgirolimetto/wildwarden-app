@@ -68,7 +68,11 @@ class _ErbarioContent extends StatelessWidget {
           _Tray(
             title: context.l10n.erbarioEncounteredSection,
             icon: Icons.eco_rounded,
-            color: Color.lerp(context.druid.levelColor(2), context.colors.surface, 0.55)!,
+            // Nelle livree neumorfiche i vassoi riprendono le schede delle ricette: trovate come "Base" (la più
+            // chiara), da trovare come "Intermedia".
+            color: context.druid.neu
+                ? context.druid.accent(2).background
+                : Color.lerp(context.druid.levelColor(2), context.colors.surface, 0.55)!,
             orbColor: context.druid.levelColor(2),
             tiles: [
               for (final s in encountered)
@@ -92,10 +96,12 @@ class _ErbarioContent extends StatelessWidget {
             icon: Icons.search_rounded,
             // Di giorno verde bosco, lo stesso del tassello "?" delle copertine, con le tessere crema; di sera verde
             // bosco più profondo, un po' più chiaro delle tessere verde notte. Titolo crema in entrambi.
-            color: Theme.of(context).brightness == Brightness.light
+            color: context.druid.neu
+                ? context.druid.accent(0).background
+                : Theme.of(context).brightness == Brightness.light
                 ? mysteryTileColor(context)
                 : Color.lerp(context.colors.primaryContainer, Colors.black, 0.2)!,
-            foreground: context.druid.onHero,
+            foreground: context.druid.neu ? null : context.druid.onHero,
             orbColor: context.druid.levelColor(4),
             tiles: [
               for (final s in missing)

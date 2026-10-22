@@ -1327,6 +1327,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'di notte'**
   String get dayTimeNight;
+
+  /// No description provided for @liveryFeltro.
+  ///
+  /// In it, this message translates to:
+  /// **'Feltro'**
+  String get liveryFeltro;
 }
 
 class _AppLocalizationsDelegate

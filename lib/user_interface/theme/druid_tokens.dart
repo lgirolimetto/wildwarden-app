@@ -49,6 +49,11 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   /// Colore delle ombre morbide dello stile plastilina.
   final Color clayShadow;
 
+  /// Variante neumorfica dello stile plastilina: superfici dello stesso colore della pagina, sollevate solo da una
+  /// luce in alto a sinistra ([neuLight]) e da un'ombra in basso a destra ([clayShadow]). Richiede [clay].
+  final bool neu;
+  final Color neuLight;
+
   const DruidTokens({
     required this.levelColors,
     required this.hint,
@@ -62,6 +67,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     this.leafPattern = Colors.transparent,
     this.clay = false,
     this.clayShadow = const Color(0x33000000),
+    this.neu = false,
+    this.neuLight = Colors.transparent,
   }) : assert(levelColors.length == 5, 'Servono 5 colori: livelli 0-4'),
        assert(accentCards.length >= 3, 'Servono almeno 3 schede decorative');
 
@@ -83,6 +90,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     Color? leafPattern,
     bool? clay,
     Color? clayShadow,
+    bool? neu,
+    Color? neuLight,
   }) => DruidTokens(
     levelColors: levelColors ?? this.levelColors,
     hint: hint ?? this.hint,
@@ -96,6 +105,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     leafPattern: leafPattern ?? this.leafPattern,
     clay: clay ?? this.clay,
     clayShadow: clayShadow ?? this.clayShadow,
+    neu: neu ?? this.neu,
+    neuLight: neuLight ?? this.neuLight,
   );
 
   @override
@@ -120,6 +131,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
       leafPattern: Color.lerp(leafPattern, other.leafPattern, t)!,
       clay: t < 0.5 ? clay : other.clay,
       clayShadow: Color.lerp(clayShadow, other.clayShadow, t)!,
+      neu: t < 0.5 ? neu : other.neu,
+      neuLight: Color.lerp(neuLight, other.neuLight, t)!,
     );
   }
 }

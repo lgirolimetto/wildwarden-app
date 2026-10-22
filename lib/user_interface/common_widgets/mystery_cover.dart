@@ -60,6 +60,7 @@ class _QuestionTile extends StatelessWidget {
         width: size,
         height: size,
         alignment: Alignment.center,
+        // Nelle livree neumorfiche resta l'alone chiaro della luce attorno al tassello: dà l'effetto in rilievo.
         decoration: clayDecoration(context, color: mysteryTileColor(context), radius: size * 0.3),
         child: Text(
           '?',

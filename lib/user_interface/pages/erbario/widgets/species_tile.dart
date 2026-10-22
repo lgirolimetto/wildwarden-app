@@ -20,6 +20,7 @@ class UnknownSpeciesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _TileFrame(
     aspect: tileAspect(species),
+    color: context.druid.neu ? context.colors.surfaceBright : null,
     image: species.images.isEmpty
         ? const SizedBox.shrink()
         : MysteryCover(species: species, borderRadius: _photoRadius(context)),
@@ -52,6 +53,9 @@ class EncounteredSpeciesTile extends StatelessWidget {
   Widget build(BuildContext context) => _TileFrame(
     aspect: tileAspect(species),
     image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
+    // Nelle livree neumorfiche le tessere hanno colori propri: incontrate le più chiare (`surfaceContainerLowest`),
+    // da trovare un tono sotto (`surfaceBright`).
+    color: context.druid.neu ? context.colors.surfaceContainerLowest : null,
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
       const SizedBox(height: Gaps.xs),
@@ -77,10 +81,14 @@ class _TileFrame extends StatelessWidget {
   final double aspect;
   final List<Widget> children;
 
-  const _TileFrame({required this.image, required this.aspect, required this.children});
+  /// Colore della tessera (`null`: quello delle schede).
+  final Color? color;
+
+  const _TileFrame({required this.image, required this.aspect, required this.children, this.color});
 
   @override
   Widget build(BuildContext context) => ClayCard(
+    color: color,
     padding: const EdgeInsets.all(Gaps.s),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

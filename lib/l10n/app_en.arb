@@ -204,5 +204,6 @@
   "dayTimeDawn": "at dawn",
   "dayTimeDay": "by day",
   "dayTimeDusk": "at dusk",
-  "dayTimeNight": "at night"
+  "dayTimeNight": "at night",
+  "liveryFeltro": "Felt"
 }

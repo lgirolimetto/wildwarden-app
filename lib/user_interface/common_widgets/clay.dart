@@ -23,6 +23,7 @@ BoxDecoration clayDecoration(BuildContext context, {required Color color, double
       border: Border.all(color: context.colors.outlineVariant),
     );
   }
+  if (tokens.neu) return _neuDecoration(tokens, color: color, radius: r, pressed: pressed);
   return BoxDecoration(
     borderRadius: r,
     gradient: LinearGradient(
@@ -41,6 +42,28 @@ BoxDecoration clayDecoration(BuildContext context, {required Color color, double
               offset: const Offset(0, 2),
             ),
           ],
+  );
+}
+
+/// Neumorfismo: colore pieno, una luce in alto a sinistra e un'ombra in basso a destra. Premuto, il rilievo quasi
+/// sparisce (la superficie torna a filo della pagina).
+BoxDecoration _neuDecoration(
+  DruidTokens tokens, {
+  required Color color,
+  BorderRadius? radius,
+  bool pressed = false,
+  BoxShape shape = BoxShape.rectangle,
+  double distance = 7,
+}) {
+  final d = pressed ? distance * 0.3 : distance;
+  return BoxDecoration(
+    color: color,
+    shape: shape,
+    borderRadius: shape == BoxShape.circle ? null : radius,
+    boxShadow: [
+      BoxShadow(color: tokens.neuLight, blurRadius: d * 2.2, offset: Offset(-d, -d)),
+      BoxShadow(color: tokens.clayShadow, blurRadius: d * 2.2, offset: Offset(d, d)),
+    ],
   );
 }
 
@@ -101,7 +124,7 @@ class ClayCard extends StatelessWidget {
     final content = Stack(
       children: [
         // Il riflesso sta sotto il contenuto: illumina la plastilina, non le foto e i colori appoggiati sopra.
-        if (context.druid.clay) Positioned.fill(child: _ClayHighlight(radius: r)),
+        if (context.druid.clay && !context.druid.neu) Positioned.fill(child: _ClayHighlight(radius: r)),
         Padding(padding: padding, child: child),
       ],
     );
@@ -141,21 +164,23 @@ class ClayCircle extends StatelessWidget {
       width: size,
       height: size,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: tokens.clay ? null : color,
-        gradient: tokens.clay
-            ? RadialGradient(
-                center: const Alignment(-0.35, -0.45),
-                radius: 0.95,
-                colors: [_lighten(color, 0.45), color, _darken(color, 0.18)],
-                stops: const [0, 0.55, 1],
-              )
-            : null,
-        boxShadow: tokens.clay
-            ? [BoxShadow(color: tokens.clayShadow, blurRadius: size * 0.35, offset: Offset(0, size * 0.14))]
-            : null,
-      ),
+      decoration: tokens.neu
+          ? _neuDecoration(tokens, color: color, shape: BoxShape.circle, distance: (size * 0.09).clamp(2, 6))
+          : BoxDecoration(
+              shape: BoxShape.circle,
+              color: tokens.clay ? null : color,
+              gradient: tokens.clay
+                  ? RadialGradient(
+                      center: const Alignment(-0.35, -0.45),
+                      radius: 0.95,
+                      colors: [_lighten(color, 0.45), color, _darken(color, 0.18)],
+                      stops: const [0, 0.55, 1],
+                    )
+                  : null,
+              boxShadow: tokens.clay
+                  ? [BoxShadow(color: tokens.clayShadow, blurRadius: size * 0.35, offset: Offset(0, size * 0.14))]
+                  : null,
+            ),
       child:
           child ??
           (emoji != null
