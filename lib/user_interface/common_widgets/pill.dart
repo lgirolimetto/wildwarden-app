@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 /// Etichetta a pillola (livello di una ricetta, tratto di un ingrediente). Prende il colore del testo del contesto,
 /// quindi si legge sia sulle pagine sia dentro le schede colorate. Se il testo comincia con un'emoji (i tratti) e la
-/// livrea è in plastilina, l'emoji diventa una piccola sfera pastello.
+/// livrea è in plastilina, l'emoji diventa una piccola sfera pastello; nelle livree neumorfiche un'icona incisa.
 class Pill extends StatelessWidget {
   final String text;
 
@@ -40,12 +40,21 @@ class Pill extends StatelessWidget {
         : Container(padding: padding, decoration: flat, child: child);
     if (emoji != null) {
       return frame(
-        // Nell'incavo la sfera si stacca dal bordo sinistro, che è in ombra.
-        EdgeInsets.fromLTRB(context.druid.neu ? Gaps.s : Gaps.xs, Gaps.xs, Gaps.m, Gaps.xs),
+        // Nell'incavo l'icona si stacca dal bordo sinistro, che è in ombra.
+        EdgeInsets.fromLTRB(
+          context.druid.neu ? Gaps.m : Gaps.xs,
+          Gaps.xs + (context.druid.neu ? 2 : 0),
+          Gaps.m,
+          Gaps.xs + (context.druid.neu ? 2 : 0),
+        ),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
+            // Nelle livree neumorfiche niente sfera colorata: l'icona del tratto, di un solo colore, incisa.
+            if (context.druid.neu)
+              _EngravedIcon(_traitIcon(emoji), color: color)
+            else
+              ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
             const SizedBox(width: Gaps.s),
             Text(text.substring(emoji.length).trim(), style: context.texts.labelLarge?.copyWith(color: color)),
           ],
@@ -75,3 +84,38 @@ Color _orbColor(String emoji) => switch (emoji) {
   '🌅' => const Color(0xFFF7C4A8),
   _ => const Color(0xFFE8DCC6),
 };
+
+/// Icona monocromatica di un tratto, dall'emoji con cui il catalogo lo scrive.
+IconData _traitIcon(String emoji) => switch (emoji) {
+  '❄️' || '❄' => Icons.ac_unit_rounded,
+  '🌧' => Icons.umbrella_rounded,
+  '💧' => Icons.water_drop_outlined,
+  '🌫' => Icons.foggy,
+  '☀️' || '☀' => Icons.wb_sunny_outlined,
+  '🌕' => Icons.nightlight_outlined,
+  '🌅' => Icons.wb_twilight_rounded,
+  _ => Icons.eco_outlined,
+};
+
+/// Icona "incisa", come stampata a secco: un filo d'ombra in alto a sinistra e uno di luce in basso a destra
+/// sotto il segno, che così sembra scavato nella superficie.
+class _EngravedIcon extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+
+  const _EngravedIcon(this.icon, {required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    return Icon(
+      icon,
+      size: 20,
+      color: color.withValues(alpha: 0.7),
+      shadows: [
+        Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+        Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+      ],
+    );
+  }
+}
