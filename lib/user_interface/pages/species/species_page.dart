@@ -401,7 +401,7 @@ class _GlassLabel extends StatelessWidget {
     final tokens = context.druid;
     // Angoli concentrici a quelli della foto: raggio della foto meno il margine.
     final radius = BorderRadius.circular(SpeciesPhotoHeader.radius.topLeft.x - Gaps.m);
-    return ClipRRect(
+    final glass = ClipRRect(
       borderRadius: radius,
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
@@ -409,8 +409,13 @@ class _GlassLabel extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.m, Gaps.m, Gaps.m),
           decoration: BoxDecoration(
             borderRadius: radius,
-            color: context.colors.surfaceContainerLow.withValues(alpha: 0.6),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.45), width: 1.2),
+            // Nel neumorfismo di giorno velo quasi bianco e più coprente: la foto sfocata, mescolata a un velo sabbia,
+            // virerebbe al grigio.
+            color: tokens.neu && Theme.of(context).brightness == Brightness.light
+                ? context.colors.surfaceContainerLowest.withValues(alpha: 0.72)
+                : context.colors.surfaceContainerLow.withValues(alpha: 0.6),
+            // Nelle livree neumorfiche il bordo chiaro lo fa la luce dell'incavo.
+            border: tokens.neu ? null : Border.all(color: Colors.white.withValues(alpha: 0.45), width: 1.2),
           ),
           child: Row(
             children: [
@@ -444,6 +449,19 @@ class _GlassLabel extends StatelessWidget {
         ),
       ),
     );
+    // Nelle livree neumorfiche la targhetta è scavata nella foto: ombra interna in alto a sinistra, luce in basso a
+    // destra, disegnate sopra il vetro.
+    return tokens.neu
+        ? NeuInset(
+            radius: radius,
+            depth: 3,
+            strength: 1.4,
+            // Di giorno luce ridotta: piena, sul vetro chiaro, sembrerebbe un riflesso lucido.
+            lightStrength: Theme.of(context).brightness == Brightness.light ? 0.5 : null,
+            overChild: true,
+            child: glass,
+          )
+        : glass;
   }
 }
 

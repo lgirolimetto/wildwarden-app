@@ -500,6 +500,10 @@ class NeuInset extends StatelessWidget {
   /// Intensità di luce e ombra (1 = quelle della livrea).
   final double strength;
 
+  /// Intensità della sola luce, se diversa da [strength] (su fondi chiari e traslucidi una luce piena sembra un
+  /// riflesso di vetro).
+  final double? lightStrength;
+
   /// `true`: l'incavo si disegna sopra il figlio (per una foto "sul fondo" dell'incavo), non sotto.
   final bool overChild;
 
@@ -514,6 +518,7 @@ class NeuInset extends StatelessWidget {
     this.color,
     this.depth = 3,
     this.strength = 1,
+    this.lightStrength,
     this.overChild = false,
   });
 
@@ -524,7 +529,7 @@ class NeuInset extends StatelessWidget {
       radius: radius,
       fill: overChild ? null : color,
       dark: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * strength),
-      light: tokens.neuLight.withValues(alpha: tokens.neuLight.a * strength),
+      light: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * (lightStrength ?? strength)).clamp(0, 1)),
       depth: depth,
     );
     return overChild
