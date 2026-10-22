@@ -29,6 +29,11 @@ void main() {
       expect(elleboro.images, isNotEmpty);
     });
 
+    test('tinta delle specie da trovare: letta se c\'è, assente altrimenti', () {
+      expect(catalog.speciesBySci('Helleborus viridis')!.mysteryColor, 0xC9EBAD);
+      expect(catalog.speciesBySci('Fagus sylvatica')!.mysteryColor, isNull);
+    });
+
     test('ricetta con sblocco e ingrediente "qualsiasi specie"', () {
       final quota = catalog.recipes.firstWhere((r) => r.name.resolve('it').contains('Quota'));
       expect(quota.unlock!.speciesSci, 'Fagus sylvatica');

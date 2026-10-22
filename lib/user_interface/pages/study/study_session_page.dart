@@ -81,10 +81,7 @@ class _QuestionView extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(Gaps.l),
       children: [
-        LinearProgressIndicator(
-          value: study.totalFacts == 0 ? 0 : study.completedFacts / study.totalFacts,
-          borderRadius: BorderRadius.circular(4),
-        ),
+        ClayProgressBar(value: study.totalFacts == 0 ? 0 : study.completedFacts / study.totalFacts, height: 4),
         const SizedBox(height: Gaps.xs),
         Text(context.l10n.studyProgress(study.completedFacts, study.totalFacts), style: context.texts.bodySmall),
         const SizedBox(height: Gaps.l),

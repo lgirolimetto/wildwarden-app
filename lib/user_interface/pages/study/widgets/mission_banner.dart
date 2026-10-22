@@ -53,8 +53,8 @@ class MissionBanner extends StatelessWidget {
         Text(context.game.missionBody(mission)),
         const SizedBox(height: Gaps.s),
         Wrap(
-          spacing: Gaps.s,
-          runSpacing: Gaps.xs,
+          spacing: Gaps.chip,
+          runSpacing: Gaps.chipRun,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             for (final term in _missionTerms[mission]!) GlossaryChip(term),

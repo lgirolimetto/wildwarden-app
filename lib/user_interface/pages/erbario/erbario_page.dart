@@ -5,6 +5,7 @@ import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
+import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/pages/erbario/hint_text.dart';
 import 'package:druid_app/user_interface/pages/erbario/widgets/species_tile.dart';
@@ -67,7 +68,11 @@ class _ErbarioContent extends StatelessWidget {
           _Tray(
             title: context.l10n.erbarioEncounteredSection,
             icon: Icons.eco_rounded,
-            color: Color.lerp(context.druid.levelColor(2), context.colors.surface, 0.55)!,
+            // Nelle livree neumorfiche i vassoi riprendono le schede delle ricette: trovate come "Base" (la più
+            // chiara), da trovare come "Intermedia".
+            color: context.druid.neu
+                ? context.druid.accent(2).background
+                : Color.lerp(context.druid.levelColor(2), context.colors.surface, 0.55)!,
             orbColor: context.druid.levelColor(2),
             tiles: [
               for (final s in encountered)
@@ -89,7 +94,14 @@ class _ErbarioContent extends StatelessWidget {
           _Tray(
             title: context.l10n.erbarioMissingSection,
             icon: Icons.search_rounded,
-            color: Color.lerp(context.colors.secondaryContainer, context.colors.secondary, 0.18)!,
+            // Di giorno verde bosco, lo stesso del tassello "?" delle copertine, con le tessere crema; di sera verde
+            // bosco più profondo, un po' più chiaro delle tessere verde notte. Titolo crema in entrambi.
+            color: context.druid.neu
+                ? context.druid.accent(0).background
+                : Theme.of(context).brightness == Brightness.light
+                ? mysteryTileColor(context)
+                : Color.lerp(context.colors.primaryContainer, Colors.black, 0.2)!,
+            foreground: context.druid.neu ? null : context.druid.onHero,
             orbColor: context.druid.levelColor(4),
             tiles: [
               for (final s in missing)
@@ -120,6 +132,9 @@ class _Tray extends StatelessWidget {
   final Color color;
   final Color orbColor;
 
+  /// Colore del titolo e del conteggio, se il vassoio è scuro.
+  final Color? foreground;
+
   /// Tessere con la loro altezza stimata (in larghezze di tessera), per distribuirle nelle colonne.
   final List<(double, Widget)> tiles;
 
@@ -129,6 +144,7 @@ class _Tray extends StatelessWidget {
     required this.color,
     required this.orbColor,
     required this.tiles,
+    this.foreground,
   });
 
   @override
@@ -143,11 +159,15 @@ class _Tray extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(Gaps.xs, Gaps.xs, Gaps.xs, Gaps.s),
-              child: ClaySectionTitle(
-                title: title,
-                icon: icon,
-                color: orbColor,
-                trailing: Text('${tiles.length}', style: context.texts.titleMedium),
+              child: DefaultTextStyle.merge(
+                style: TextStyle(color: foreground),
+                child: ClaySectionTitle(
+                  title: title,
+                  titleColor: foreground,
+                  icon: icon,
+                  color: orbColor,
+                  trailing: Text('${tiles.length}', style: context.texts.titleMedium?.copyWith(color: foreground)),
+                ),
               ),
             ),
             _Masonry(tiles: tiles),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 /// Etichetta a pillola (livello di una ricetta, tratto di un ingrediente). Prende il colore del testo del contesto,
 /// quindi si legge sia sulle pagine sia dentro le schede colorate. Se il testo comincia con un'emoji (i tratti) e la
-/// livrea è in plastilina, l'emoji diventa una piccola sfera pastello.
+/// livrea è in plastilina, l'emoji diventa una piccola sfera pastello; nelle livree neumorfiche un'icona incisa.
 class Pill extends StatelessWidget {
   final String text;
 
@@ -15,28 +15,61 @@ class Pill extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = context.colors.onSurface;
     final emoji = context.druid.clay ? leadingEmoji(text) : null;
+    const radius = BorderRadius.all(Radius.circular(999));
+    // Nelle livree neumorfiche la pillola non si preme, quindi non è scavata: un solco sottile tutt'intorno e,
+    // subito dentro, la pillola che risale in rilievo (come la foto della scheda specie).
+    // Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45, rilievo depth 0.8 / strength 0.35.
+    // Variante appena più accennata, provata e da tenere come alternativa: solco depth 1 / strength 0.6,
+    // rilievo depth 1 / strength 0.5.
+    Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => context.druid.neu
+        ? NeuInset(
+            radius: radius,
+            depth: 0.8,
+            strength: 0.45,
+            child: Padding(
+              padding: const EdgeInsets.all(3),
+              child: NeuInset(
+                radius: radius,
+                depth: 0.8,
+                strength: 0.35,
+                convex: true,
+                child: Padding(padding: padding, child: child),
+              ),
+            ),
+          )
+        : Container(padding: padding, decoration: flat, child: child);
     if (emoji != null) {
-      return Container(
-        padding: const EdgeInsets.fromLTRB(Gaps.xs, Gaps.xs, Gaps.m, Gaps.xs),
-        decoration: BoxDecoration(color: color.withValues(alpha: 0.10), borderRadius: BorderRadius.circular(999)),
-        child: Row(
+      return frame(
+        // Nell'incavo l'icona si stacca dal bordo sinistro, che è in ombra.
+        EdgeInsets.fromLTRB(
+          context.druid.neu ? Gaps.m : Gaps.xs,
+          Gaps.xs + (context.druid.neu ? 2 : 0),
+          Gaps.m,
+          Gaps.xs + (context.druid.neu ? 2 : 0),
+        ),
+        Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
+            // Nelle livree neumorfiche niente sfera colorata: l'icona del tratto, di un solo colore, incisa.
+            if (context.druid.neu)
+              _EngravedIcon(_traitIcon(emoji), color: color)
+            else
+              ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
             const SizedBox(width: Gaps.s),
             Text(text.substring(emoji.length).trim(), style: context.texts.labelLarge?.copyWith(color: color)),
           ],
         ),
+        BoxDecoration(color: color.withValues(alpha: 0.10), borderRadius: radius),
       );
     }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: Gaps.m, vertical: Gaps.xs),
-      decoration: BoxDecoration(
+    return frame(
+      const EdgeInsets.symmetric(horizontal: Gaps.m, vertical: Gaps.xs + 2),
+      Text(text, style: context.texts.labelLarge?.copyWith(color: color)),
+      BoxDecoration(
         color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: radius,
         border: Border.all(color: color.withValues(alpha: 0.35)),
       ),
-      child: Text(text, style: context.texts.labelLarge?.copyWith(color: color)),
     );
   }
 }
@@ -51,3 +84,38 @@ Color _orbColor(String emoji) => switch (emoji) {
   '🌅' => const Color(0xFFF7C4A8),
   _ => const Color(0xFFE8DCC6),
 };
+
+/// Icona monocromatica di un tratto, dall'emoji con cui il catalogo lo scrive.
+IconData _traitIcon(String emoji) => switch (emoji) {
+  '❄️' || '❄' => Icons.ac_unit_rounded,
+  '🌧' => Icons.umbrella_rounded,
+  '💧' => Icons.water_drop_outlined,
+  '🌫' => Icons.foggy,
+  '☀️' || '☀' => Icons.wb_sunny_outlined,
+  '🌕' => Icons.nightlight_outlined,
+  '🌅' => Icons.wb_twilight_rounded,
+  _ => Icons.eco_outlined,
+};
+
+/// Icona "incisa", come stampata a secco: un filo d'ombra in alto a sinistra e uno di luce in basso a destra
+/// sotto il segno, che così sembra scavato nella superficie.
+class _EngravedIcon extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+
+  const _EngravedIcon(this.icon, {required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    return Icon(
+      icon,
+      size: 20,
+      color: color.withValues(alpha: 0.7),
+      shadows: [
+        Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+        Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+      ],
+    );
+  }
+}

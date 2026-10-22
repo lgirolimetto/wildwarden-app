@@ -749,4 +749,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get dayTimeNight => 'di notte';
+
+  @override
+  String get liveryFeltro => 'Feltro';
 }

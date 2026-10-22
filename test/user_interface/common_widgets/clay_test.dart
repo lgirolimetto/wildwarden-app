@@ -4,17 +4,17 @@ import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/user_interface/theme/app_theme.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/erbario_livery.dart';
+import 'package:druid_app/user_interface/theme/liveries/feltro_livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/sottobosco_livery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Future<void> _pump(WidgetTester tester, Widget child, {Livery livery = const SottoboscoLivery()}) =>
-    tester.pumpWidget(
-      MaterialApp(
-        theme: buildTheme(livery, Brightness.light),
-        home: Scaffold(body: Center(child: child)),
-      ),
-    );
+Future<void> _pump(WidgetTester tester, Widget child, {Livery livery = const SottoboscoLivery()}) => tester.pumpWidget(
+  MaterialApp(
+    theme: buildTheme(livery, Brightness.light),
+    home: Scaffold(body: Center(child: child)),
+  ),
+);
 
 BoxDecoration _decorationOf(WidgetTester tester, Finder finder) =>
     tester.widget<DecoratedBox>(find.descendant(of: finder, matching: find.byType(DecoratedBox)).first).decoration
@@ -42,7 +42,11 @@ void main() {
       for (final hour in [6, 12, 19, 23]) {
         await _pump(
           tester,
-          SizedBox(width: 400, height: 300, child: Diorama(moment: DateTime(2027, month, 10, hour), fadeTo: Colors.white)),
+          SizedBox(
+            width: 400,
+            height: 300,
+            child: Diorama(moment: DateTime(2027, month, 10, hour), fadeTo: Colors.white),
+          ),
         );
         expect(tester.takeException(), isNull, reason: '$season alle $hour');
       }
@@ -58,7 +62,11 @@ void main() {
     });
 
     testWidgets('con una livrea piatta la stessa scheda resta piatta', (tester) async {
-      await _pump(tester, const ClayCard(key: ValueKey('card'), child: Text('x')), livery: const ErbarioLivery());
+      await _pump(
+        tester,
+        const ClayCard(key: ValueKey('card'), child: Text('x')),
+        livery: const ErbarioLivery(),
+      );
       final decoration = _decorationOf(tester, find.byKey(const ValueKey('card')));
       expect(decoration.gradient, isNull);
       expect(decoration.boxShadow, isNull);
@@ -94,6 +102,63 @@ void main() {
       await tester.pumpAndSettle();
       expect(selected, 1);
       expect(find.descendant(of: find.byType(ClayNavBar), matching: find.byType(ClayCircle)), findsOneWidget);
+    });
+
+    testWidgets('nel neumorfismo la chip scelta è scavata (premuta), le altre in rilievo', (tester) async {
+      var taps = 0;
+      await _pump(
+        tester,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClayChip(label: 'Uno', selected: false, onTap: () => taps++),
+            const ClayChip(label: 'Due', selected: true),
+          ],
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.ancestor(of: find.text('Uno'), matching: find.byType(NeuInset)), findsNothing);
+      expect(find.ancestor(of: find.text('Due'), matching: find.byType(NeuInset)), findsOneWidget);
+      await tester.tap(find.text('Uno'));
+      expect(taps, 1);
+    });
+
+    testWidgets('senza neumorfismo la chip resta una ChoiceChip', (tester) async {
+      await _pump(tester, const ClayChip(label: 'Uno', selected: false));
+      expect(find.byType(ChoiceChip), findsOneWidget);
+    });
+
+    testWidgets('interruttore neumorfico: tocco cambia valore, sfera a destra se acceso', (tester) async {
+      var value = false;
+      await _pump(
+        tester,
+        StatefulBuilder(
+          builder: (context, setState) => ClaySwitch(value: value, onChanged: (v) => setState(() => value = v)),
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.byType(NeuInset), findsOneWidget);
+      await tester.tap(find.byType(ClaySwitch));
+      await tester.pumpAndSettle();
+      expect(value, isTrue);
+      expect(tester.widget<AnimatedAlign>(find.byType(AnimatedAlign)).alignment, Alignment.centerRight);
+    });
+
+    testWidgets('fuori dal neumorfismo l\'interruttore è uno Switch', (tester) async {
+      await _pump(tester, ClaySwitch(value: true, onChanged: (_) {}));
+      expect(find.byType(Switch), findsOneWidget);
+    });
+
+    testWidgets('barra di avanzamento neumorfica: parte piena in proporzione, valori fuori scala limitati', (
+      tester,
+    ) async {
+      await _pump(tester, const SizedBox(width: 200, child: ClayProgressBar(value: 0.4)), livery: const FeltroLivery());
+      expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.4);
+      await _pump(tester, const SizedBox(width: 200, child: ClayProgressBar(value: 1.7)), livery: const FeltroLivery());
+      expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 1);
+      await _pump(tester, const SizedBox(width: 200, child: ClayProgressBar(value: 0.4)));
+      await tester.pumpAndSettle(); // il cambio di livrea è animato
+      expect(find.byType(LinearProgressIndicator), findsOneWidget);
     });
 
     test('emoji iniziale dei tratti', () {

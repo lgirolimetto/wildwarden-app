@@ -57,10 +57,10 @@ class GlossaryChip extends StatelessWidget {
   const GlossaryChip(this.term, {super.key});
 
   @override
-  Widget build(BuildContext context) => ActionChip(
+  Widget build(BuildContext context) => ClayChip(
     avatar: const Icon(Icons.menu_book_outlined, size: 16),
-    label: Text(term.term(context.l10n)),
-    onPressed: () => showGlossaryTerm(context, term),
+    label: term.term(context.l10n),
+    onTap: () => showGlossaryTerm(context, term),
   );
 }
 

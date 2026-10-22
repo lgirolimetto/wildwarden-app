@@ -28,15 +28,16 @@ class SettingsPage extends StatelessWidget {
         Text(context.l10n.liveryLabel, style: context.texts.titleMedium),
         const SizedBox(height: Gaps.s),
         Wrap(
-          spacing: Gaps.s,
+          spacing: Gaps.chip,
+          runSpacing: Gaps.chipRun,
           children: [
             for (final livery in LiveryRegistry.all)
-              ChoiceChip(
+              ClayChip(
                 key: ValueKey('livery-${livery.id}'),
-                label: Text(livery.displayName(context.l10n)),
+                label: livery.displayName(context.l10n),
                 avatar: ClayCircle(color: livery.seed, size: 22),
                 selected: controller.livery.id == livery.id,
-                onSelected: (_) => controller.selectLivery(livery),
+                onTap: () => controller.selectLivery(livery),
               ),
           ],
         ),
@@ -45,20 +46,20 @@ class SettingsPage extends StatelessWidget {
         const SizedBox(height: Gaps.s),
         // Pillole come per le livree, con una sfera-icona: più giocoso del selettore segmentato.
         Wrap(
-          spacing: Gaps.s,
-          runSpacing: Gaps.s,
+          spacing: Gaps.chip,
+          runSpacing: Gaps.chipRun,
           children: [
             for (final (mode, label, icon) in [
               (ThemeMode.system, context.l10n.themeModeSystem, Icons.brightness_auto_rounded),
               (ThemeMode.light, context.l10n.themeModeLight, Icons.wb_sunny_rounded),
               (ThemeMode.dark, context.l10n.themeModeDark, Icons.nightlight_round),
             ])
-              ChoiceChip(
+              ClayChip(
                 key: ValueKey('mode-${mode.name}'),
-                label: Text(label),
+                label: label,
                 avatar: Icon(icon, size: 18),
                 selected: controller.mode == mode,
-                onSelected: (_) => controller.selectMode(mode),
+                onTap: () => controller.selectMode(mode),
               ),
           ],
         ),
@@ -67,7 +68,7 @@ class SettingsPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: Gaps.xs),
           onTap: () => Get.to<void>(() => const GlossaryPage()),
           child: ListTile(
-            leading: ClayCircle(color: context.colors.secondaryContainer, icon: Icons.menu_book_rounded, size: 40),
+            leading: const ClayInsetIcon(icon: Icons.menu_book_rounded),
             title: Text(context.l10n.glossaryTitle),
             trailing: const Icon(Icons.chevron_right_rounded),
           ),
@@ -102,7 +103,8 @@ class _DebugToolsState extends State<_DebugTools> {
           Text(context.l10n.debugDays(clock.offsetDays)),
           const SizedBox(height: Gaps.xs),
           Wrap(
-            spacing: Gaps.s,
+            spacing: Gaps.chip,
+            runSpacing: Gaps.chipRun,
             children: [
               for (final days in [1, 3, 7])
                 OutlinedButton(
@@ -119,12 +121,12 @@ class _DebugToolsState extends State<_DebugTools> {
           ),
         ],
         GetBuilder<SubscriptionController>(
-          builder: (subscription) => SwitchListTile(
+          builder: (subscription) => ListTile(
             key: const ValueKey('debug-diario'),
             contentPadding: EdgeInsets.zero,
             title: Text(context.l10n.debugDiario),
-            value: subscription.diarioActive,
-            onChanged: subscription.setSimulated,
+            trailing: ClaySwitch(value: subscription.diarioActive, onChanged: subscription.setSimulated),
+            onTap: () => subscription.setSimulated(!subscription.diarioActive),
           ),
         ),
         TextButton.icon(

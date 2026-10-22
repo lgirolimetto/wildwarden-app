@@ -86,9 +86,6 @@ class SottoboscoLivery extends Livery {
         Color(0xFF3F7A5E),
         Color(0xFFC9963E),
       ],
-      // Nessun velo: sulle foto sfocate dava un viraggio grigiastro.
-      mysteryVeil: Colors.transparent,
-      mysteryBlur: 7,
       hint: scheme.onSurfaceVariant,
       warning: light ? const Color(0xFF8A5A10) : const Color(0xFFE6C26E),
       backgroundGradient: light

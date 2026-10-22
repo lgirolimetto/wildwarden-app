@@ -1,6 +1,6 @@
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
-import 'package:druid_app/user_interface/common_widgets/mystery_image.dart';
+import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/pages/erbario/hint_text.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
@@ -20,9 +20,10 @@ class UnknownSpeciesTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) => _TileFrame(
     aspect: tileAspect(species),
+    color: context.druid.neu ? context.colors.surfaceBright : null,
     image: species.images.isEmpty
         ? const SizedBox.shrink()
-        : MysteryImage(species.images.first.url, borderRadius: _photoRadius(context)),
+        : MysteryCover(species: species, borderRadius: _photoRadius(context)),
     children: [
       Text(context.l10n.unknownSpecies, style: context.texts.titleMedium),
       const SizedBox(height: Gaps.xs),
@@ -52,6 +53,9 @@ class EncounteredSpeciesTile extends StatelessWidget {
   Widget build(BuildContext context) => _TileFrame(
     aspect: tileAspect(species),
     image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
+    // Nelle livree neumorfiche le tessere hanno colori propri: incontrate le più chiare (`surfaceContainerLowest`),
+    // da trovare un tono sotto (`surfaceBright`).
+    color: context.druid.neu ? context.colors.surfaceContainerLowest : null,
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
       const SizedBox(height: Gaps.xs),
@@ -77,10 +81,14 @@ class _TileFrame extends StatelessWidget {
   final double aspect;
   final List<Widget> children;
 
-  const _TileFrame({required this.image, required this.aspect, required this.children});
+  /// Colore della tessera (`null`: quello delle schede).
+  final Color? color;
+
+  const _TileFrame({required this.image, required this.aspect, required this.children, this.color});
 
   @override
   Widget build(BuildContext context) => ClayCard(
+    color: color,
     padding: const EdgeInsets.all(Gaps.s),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
