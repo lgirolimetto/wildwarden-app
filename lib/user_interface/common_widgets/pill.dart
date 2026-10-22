@@ -15,11 +15,19 @@ class Pill extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = context.colors.onSurface;
     final emoji = context.druid.clay ? leadingEmoji(text) : null;
+    const radius = BorderRadius.all(Radius.circular(999));
+    // Nelle livree neumorfiche la pillola è scavata nella scheda.
+    Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => context.druid.neu
+        ? NeuInset(
+            radius: radius,
+            child: Padding(padding: padding, child: child),
+          )
+        : Container(padding: padding, decoration: flat, child: child);
     if (emoji != null) {
-      return Container(
-        padding: const EdgeInsets.fromLTRB(Gaps.xs, Gaps.xs, Gaps.m, Gaps.xs),
-        decoration: BoxDecoration(color: color.withValues(alpha: 0.10), borderRadius: BorderRadius.circular(999)),
-        child: Row(
+      return frame(
+        // Nell'incavo la sfera si stacca dal bordo sinistro, che è in ombra.
+        EdgeInsets.fromLTRB(context.druid.neu ? Gaps.s : Gaps.xs, Gaps.xs, Gaps.m, Gaps.xs),
+        Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
@@ -27,16 +35,17 @@ class Pill extends StatelessWidget {
             Text(text.substring(emoji.length).trim(), style: context.texts.labelLarge?.copyWith(color: color)),
           ],
         ),
+        BoxDecoration(color: color.withValues(alpha: 0.10), borderRadius: radius),
       );
     }
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: Gaps.m, vertical: Gaps.xs),
-      decoration: BoxDecoration(
+    return frame(
+      const EdgeInsets.symmetric(horizontal: Gaps.m, vertical: Gaps.xs + 2),
+      Text(text, style: context.texts.labelLarge?.copyWith(color: color)),
+      BoxDecoration(
         color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: radius,
         border: Border.all(color: color.withValues(alpha: 0.35)),
       ),
-      child: Text(text, style: context.texts.labelLarge?.copyWith(color: color)),
     );
   }
 }

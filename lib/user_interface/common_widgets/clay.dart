@@ -432,6 +432,14 @@ class ClayNavBar extends StatelessWidget {
                           duration: const Duration(milliseconds: 160),
                           child: i == selectedIndex
                               ? ClayCircle(color: colors.primary, icon: icon, iconColor: colors.onPrimary, size: 40)
+                              // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
+                              : context.druid.neu
+                              ? ClayCircle(
+                                  color: colors.surface,
+                                  icon: icon,
+                                  iconColor: colors.onSurfaceVariant,
+                                  size: 40,
+                                )
                               : SizedBox(width: 40, height: 40, child: Icon(icon, color: colors.onSurfaceVariant)),
                         ),
                         const SizedBox(height: 2),
@@ -479,3 +487,161 @@ ButtonStyle clayButtonStyle({required Color color, required Color foreground, re
     child: child,
   ),
 );
+
+/// Superficie "scavata" (neumorfismo incassato): un'ombra scura lungo il bordo in alto a sinistra e una luce lungo
+/// quello in basso a destra, all'interno della forma. Flutter non ha ombre interne: si disegnano qui.
+class NeuInset extends StatelessWidget {
+  final Widget child;
+  final BorderRadius radius;
+  final Color? color;
+  final double depth;
+
+  const NeuInset({super.key, required this.child, required this.radius, this.color, this.depth = 3});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    return CustomPaint(
+      painter: _InsetPainter(
+        radius: radius,
+        fill: color,
+        dark: tokens.clayShadow,
+        light: tokens.neuLight,
+        depth: depth,
+      ),
+      child: child,
+    );
+  }
+}
+
+class _InsetPainter extends CustomPainter {
+  final BorderRadius radius;
+  final Color? fill;
+  final Color dark;
+  final Color light;
+  final double depth;
+
+  const _InsetPainter({
+    required this.radius,
+    required this.fill,
+    required this.dark,
+    required this.light,
+    required this.depth,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (size.isEmpty || !size.isFinite) return;
+    final rrect = radius.toRRect(Offset.zero & size);
+    canvas.save();
+    canvas.clipRRect(rrect);
+    if (fill != null) canvas.drawRRect(rrect, Paint()..color = fill!);
+    // Un anello attorno alla forma, spostato e sfocato: la parte che cade dentro la forma è l'ombra interna.
+    final ring = Path()
+      ..fillType = PathFillType.evenOdd
+      ..addRect((Offset.zero & size).inflate(depth * 6))
+      ..addRRect(rrect);
+    final blur = MaskFilter.blur(BlurStyle.normal, depth * 1.2);
+    canvas.drawPath(
+      ring.shift(Offset(depth, depth)),
+      Paint()
+        ..color = dark
+        ..maskFilter = blur,
+    );
+    canvas.drawPath(
+      ring.shift(Offset(-depth, -depth)),
+      Paint()
+        ..color = light
+        ..maskFilter = blur,
+    );
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_InsetPainter old) =>
+      old.radius != radius || old.fill != fill || old.dark != dark || old.light != light || old.depth != depth;
+}
+
+/// Chip di scelta. Nelle livree neumorfiche: in rilievo se non scelta, scavata (premuta) se scelta, con testo e icona
+/// del colore delle azioni. Altrimenti una `ChoiceChip` (o, senza [selected], una `ActionChip`) Material.
+class ClayChip extends StatelessWidget {
+  final String label;
+  final Widget? avatar;
+
+  /// `null`: chip d'azione (si tocca, non resta scelta).
+  final bool? selected;
+  final VoidCallback? onTap;
+
+  const ClayChip({super.key, required this.label, this.avatar, this.selected, this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    if (!context.druid.neu) {
+      return selected == null
+          ? ActionChip(avatar: avatar, label: Text(label), onPressed: onTap)
+          : ChoiceChip(
+              avatar: avatar,
+              label: Text(label),
+              selected: selected!,
+              onSelected: onTap == null ? null : (_) => onTap!(),
+            );
+    }
+    final colors = context.colors;
+    final on = selected ?? false;
+    final foreground = on ? colors.primary : colors.onSurface;
+    final content = Padding(
+      padding: EdgeInsets.fromLTRB(avatar == null ? Gaps.m : Gaps.s, Gaps.s, Gaps.m, Gaps.s),
+      child: IconTheme.merge(
+        data: IconThemeData(color: foreground, size: 18),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (avatar != null) ...[avatar!, const SizedBox(width: Gaps.s)],
+            Text(
+              label,
+              style: context.texts.labelLarge?.copyWith(color: foreground, fontWeight: on ? FontWeight.w700 : null),
+            ),
+          ],
+        ),
+      ),
+    );
+    const radius = BorderRadius.all(Radius.circular(999));
+    return Semantics(
+      button: true,
+      selected: on,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: on
+            ? NeuInset(radius: radius, child: content)
+            : DecoratedBox(
+                decoration: clayDecoration(context, color: colors.surface, radius: 999),
+                child: content,
+              ),
+      ),
+    );
+  }
+}
+
+/// Icona in un incavo tondo (neumorfismo scavato); fuori dalle livree neumorfiche, una [ClayCircle].
+class ClayInsetIcon extends StatelessWidget {
+  final IconData icon;
+  final double size;
+  final Color? color;
+
+  const ClayInsetIcon({super.key, required this.icon, this.size = 40, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    if (!context.druid.neu) {
+      return ClayCircle(color: color ?? context.colors.secondaryContainer, icon: icon, size: size);
+    }
+    return SizedBox.square(
+      dimension: size,
+      child: NeuInset(
+        radius: BorderRadius.circular(size / 2),
+        child: Icon(icon, size: size * 0.5, color: context.colors.onSurfaceVariant),
+      ),
+    );
+  }
+}

@@ -45,8 +45,10 @@ Color _tint(Species species) {
 
 /// Colore del tassello: di sera marrone caldo; di giorno verde bosco, che lega con la livrea e non aggiunge un
 /// altro tono caldo accanto alle tessere sabbia.
-Color mysteryTileColor(BuildContext context) =>
-    Theme.of(context).brightness == Brightness.light ? const Color(0xFF2F5D4E) : const Color(0xFF94592C);
+/// Nelle livree neumorfiche è sempre verde bosco.
+Color mysteryTileColor(BuildContext context) => context.druid.neu || Theme.of(context).brightness == Brightness.light
+    ? const Color(0xFF2F5D4E)
+    : const Color(0xFF94592C);
 
 /// Tassello di plastilina con il "?".
 class _QuestionTile extends StatelessWidget {
@@ -61,7 +63,23 @@ class _QuestionTile extends StatelessWidget {
         height: size,
         alignment: Alignment.center,
         // Nelle livree neumorfiche resta l'alone chiaro della luce attorno al tassello: dà l'effetto in rilievo.
-        decoration: clayDecoration(context, color: mysteryTileColor(context), radius: size * 0.3),
+        decoration: context.druid.neu
+            // Sulla tinta chiara della copertina la luce della pagina non si vedrebbe: qui è quasi bianca.
+            ? BoxDecoration(
+                color: mysteryTileColor(context),
+                borderRadius: BorderRadius.circular(size * 0.3),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withValues(
+                      alpha: Theme.of(context).brightness == Brightness.light ? 0.75 : 0.32,
+                    ),
+                    blurRadius: 14,
+                    offset: const Offset(-5, -5),
+                  ),
+                  BoxShadow(color: Colors.black.withValues(alpha: 0.35), blurRadius: 14, offset: const Offset(5, 5)),
+                ],
+              )
+            : clayDecoration(context, color: mysteryTileColor(context), radius: size * 0.3),
         child: Text(
           '?',
           style: context.texts.headlineMedium?.copyWith(

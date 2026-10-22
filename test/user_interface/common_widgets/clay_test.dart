@@ -4,6 +4,7 @@ import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/user_interface/theme/app_theme.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/erbario_livery.dart';
+import 'package:druid_app/user_interface/theme/liveries/feltro_livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/sottobosco_livery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -101,6 +102,30 @@ void main() {
       await tester.pumpAndSettle();
       expect(selected, 1);
       expect(find.descendant(of: find.byType(ClayNavBar), matching: find.byType(ClayCircle)), findsOneWidget);
+    });
+
+    testWidgets('nel neumorfismo la chip scelta è scavata (premuta), le altre in rilievo', (tester) async {
+      var taps = 0;
+      await _pump(
+        tester,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ClayChip(label: 'Uno', selected: false, onTap: () => taps++),
+            const ClayChip(label: 'Due', selected: true),
+          ],
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.ancestor(of: find.text('Uno'), matching: find.byType(NeuInset)), findsNothing);
+      expect(find.ancestor(of: find.text('Due'), matching: find.byType(NeuInset)), findsOneWidget);
+      await tester.tap(find.text('Uno'));
+      expect(taps, 1);
+    });
+
+    testWidgets('senza neumorfismo la chip resta una ChoiceChip', (tester) async {
+      await _pump(tester, const ClayChip(label: 'Uno', selected: false));
+      expect(find.byType(ChoiceChip), findsOneWidget);
     });
 
     test('emoji iniziale dei tratti', () {

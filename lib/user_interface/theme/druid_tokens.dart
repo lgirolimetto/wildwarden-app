@@ -144,4 +144,8 @@ abstract final class Gaps {
   static const m = 12.0;
   static const l = 16.0;
   static const xl = 24.0;
+
+  /// Distanza tra le chip in fila e tra le righe di chip: abbastanza perché le ombre del rilievo non si sovrappongano.
+  static const chip = 12.0;
+  static const chipRun = 18.0;
 }

@@ -114,7 +114,8 @@ class _IngredientRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Wrap(
-            spacing: Gaps.s,
+            spacing: Gaps.chip,
+            runSpacing: Gaps.chipRun,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text('${ingredient.quantity} × $name', style: context.texts.bodyLarge),

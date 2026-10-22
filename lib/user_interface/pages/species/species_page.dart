@@ -638,19 +638,15 @@ class _MasterySectionState extends State<_MasterySection> {
           if (Get.find<AppConfig>().showDebugTools) ...[
             const SizedBox(height: Gaps.s),
             Wrap(
-              spacing: Gaps.xs,
-              runSpacing: Gaps.xs,
+              spacing: Gaps.chip,
+              runSpacing: Gaps.chipRun,
               children: [
-                ChoiceChip(
-                  label: Text(l10n.noTrait),
-                  selected: _trait == null,
-                  onSelected: (_) => setState(() => _trait = null),
-                ),
+                ClayChip(label: l10n.noTrait, selected: _trait == null, onTap: () => setState(() => _trait = null)),
                 for (final trait in Trait.values)
-                  ChoiceChip(
-                    label: Text(context.game.trait(trait)),
+                  ClayChip(
+                    label: context.game.trait(trait),
                     selected: _trait == trait,
-                    onSelected: (_) => setState(() => _trait = trait),
+                    onTap: () => setState(() => _trait = trait),
                   ),
               ],
             ),

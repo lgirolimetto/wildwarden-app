@@ -69,8 +69,8 @@ class FeltroLivery extends Livery {
             surface: _sageDark,
             onSurface: const Color(0xFFE6E0D6),
             onSurfaceVariant: const Color(0xFFB4BDB9),
-            surfaceContainerLowest: const Color(0xFF34403C),
-            surfaceBright: _sageDark,
+            surfaceContainerLowest: const Color(0xFF46544F),
+            surfaceBright: const Color(0xFF3A4743),
             surfaceContainerLow: _sageDark,
             surfaceContainer: const Color(0xFF313B37),
             surfaceContainerHigh: const Color(0xFF37423E),
@@ -102,7 +102,8 @@ class FeltroLivery extends Livery {
       cardRadius: 22,
       clay: true,
       neu: true,
-      neuLight: light ? const Color(0xE6FBF6EE) : const Color(0x14FFFFFF),
+      // Di sera la luce dev'essere ben visibile, altrimenti il rilievo sparisce e resta solo un'ombra normale.
+      neuLight: light ? const Color(0xE6FBF6EE) : const Color(0x24FFFFFF),
       clayShadow: light ? const Color(0xB3B3A086) : const Color(0xB3121816),
     );
   }
