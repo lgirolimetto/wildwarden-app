@@ -87,7 +87,12 @@ ThemeData buildTheme(Livery livery, Brightness brightness) {
     dividerTheme: tokens.clay ? DividerThemeData(color: scheme.onSurface.withValues(alpha: 0.08)) : null,
     filledButtonTheme: FilledButtonThemeData(
       style: tokens.clay
-          ? clayButtonStyle(color: scheme.primary, foreground: scheme.onPrimary, disabled: scheme.surfaceContainerHigh)
+          ? clayButtonStyle(
+              color: scheme.primary,
+              foreground: scheme.onPrimary,
+              disabled: scheme.surfaceContainerHigh,
+              concave: true,
+            )
           : FilledButton.styleFrom(shape: const StadiumBorder()),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(

@@ -12,8 +12,16 @@ Color _lighten(Color c, double amount) => Color.lerp(c, Colors.white, amount)!;
 
 Color _darken(Color c, double amount) => Color.lerp(c, Colors.black, amount)!;
 
-/// Decorazione in plastilina per un rettangolo arrotondato.
-BoxDecoration clayDecoration(BuildContext context, {required Color color, double? radius, bool pressed = false}) {
+/// Decorazione in plastilina per un rettangolo arrotondato. [concave]: nelle livree neumorfiche la faccia ha una
+/// leggera conca (più scura in alto a sinistra, più chiara in basso a destra), come un tasto che accoglie il
+/// polpastrello: per i pulsanti colorati, che pieni sembrerebbero piatti.
+BoxDecoration clayDecoration(
+  BuildContext context, {
+  required Color color,
+  double? radius,
+  bool pressed = false,
+  bool concave = false,
+}) {
   final tokens = context.druid;
   final r = BorderRadius.circular(radius ?? tokens.cardRadius);
   if (!tokens.clay) {
@@ -23,7 +31,7 @@ BoxDecoration clayDecoration(BuildContext context, {required Color color, double
       border: Border.all(color: context.colors.outlineVariant),
     );
   }
-  if (tokens.neu) return _neuDecoration(tokens, color: color, radius: r, pressed: pressed);
+  if (tokens.neu) return _neuDecoration(tokens, color: color, radius: r, pressed: pressed, concave: concave);
   return BoxDecoration(
     borderRadius: r,
     gradient: LinearGradient(
@@ -54,10 +62,19 @@ BoxDecoration _neuDecoration(
   bool pressed = false,
   BoxShape shape = BoxShape.rectangle,
   double distance = 7,
+  bool concave = false,
 }) {
   final d = pressed ? distance * 0.3 : distance;
   return BoxDecoration(
-    color: color,
+    color: concave ? null : color,
+    gradient: concave
+        ? LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            // Sui colori chiari (pesca) la stessa conca si vedrebbe appena: più chiaro il colore, più scuro l'angolo.
+            colors: [_darken(color, 0.03 + 0.22 * color.computeLuminance()), color, _lighten(color, 0.08)],
+          )
+        : null,
     shape: shape,
     borderRadius: shape == BoxShape.circle ? null : radius,
     boxShadow: [
@@ -152,7 +169,19 @@ class ClayCircle extends StatelessWidget {
   final Color? iconColor;
   final Widget? child;
 
-  const ClayCircle({super.key, required this.color, this.size = 44, this.icon, this.emoji, this.iconColor, this.child});
+  /// Faccia con una leggera conca (vedi [clayDecoration]), per le sfere che fanno da pulsante.
+  final bool concave;
+
+  const ClayCircle({
+    super.key,
+    required this.color,
+    this.size = 44,
+    this.icon,
+    this.emoji,
+    this.iconColor,
+    this.child,
+    this.concave = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +194,13 @@ class ClayCircle extends StatelessWidget {
       height: size,
       alignment: Alignment.center,
       decoration: tokens.neu
-          ? _neuDecoration(tokens, color: color, shape: BoxShape.circle, distance: (size * 0.09).clamp(2, 6))
+          ? _neuDecoration(
+              tokens,
+              color: color,
+              shape: BoxShape.circle,
+              distance: (size * 0.09).clamp(2, 6),
+              concave: concave,
+            )
           : BoxDecoration(
               shape: BoxShape.circle,
               color: tokens.clay ? null : color,
@@ -250,7 +285,7 @@ class _ClayButtonState extends State<ClayButton> {
           opacity: enabled ? 1 : 0.5,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: Gaps.xl, vertical: Gaps.m),
-            decoration: clayDecoration(context, color: color, radius: 999, pressed: _pressed),
+            decoration: clayDecoration(context, color: color, radius: 999, pressed: _pressed, concave: true),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -432,7 +467,13 @@ class ClayNavBar extends StatelessWidget {
                           scale: i == selectedIndex ? 1 : 0.82,
                           duration: const Duration(milliseconds: 160),
                           child: i == selectedIndex
-                              ? ClayCircle(color: colors.primary, icon: icon, iconColor: colors.onPrimary, size: 40)
+                              ? ClayCircle(
+                                  color: colors.primary,
+                                  icon: icon,
+                                  iconColor: colors.onPrimary,
+                                  size: 40,
+                                  concave: true,
+                                )
                               // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
                               : context.druid.neu
                               ? ClayCircle(
@@ -467,7 +508,12 @@ class ClayNavBar extends StatelessWidget {
 
 /// Stile in plastilina per i pulsanti Material (usato dal tema delle livree `clay`): pillola con sfumatura, riflesso
 /// e ombra morbida che si abbassa quando lo premi. Disattivato, il pulsante si spegne verso il colore della pagina.
-ButtonStyle clayButtonStyle({required Color color, required Color foreground, required Color disabled}) => ButtonStyle(
+ButtonStyle clayButtonStyle({
+  required Color color,
+  required Color foreground,
+  required Color disabled,
+  bool concave = false,
+}) => ButtonStyle(
   backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
   foregroundColor: WidgetStateProperty.resolveWith(
     (states) => states.contains(WidgetState.disabled) ? foreground.withValues(alpha: 0.45) : foreground,
@@ -484,6 +530,7 @@ ButtonStyle clayButtonStyle({required Color color, required Color foreground, re
       color: states.contains(WidgetState.disabled) ? disabled : color,
       radius: 999,
       pressed: states.contains(WidgetState.pressed) || states.contains(WidgetState.disabled),
+      concave: concave && !states.contains(WidgetState.disabled),
     ),
     child: child,
   ),
