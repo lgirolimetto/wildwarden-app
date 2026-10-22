@@ -31,7 +31,16 @@ BoxDecoration clayDecoration(
       border: Border.all(color: context.colors.outlineVariant),
     );
   }
-  if (tokens.neu) return _neuDecoration(tokens, color: color, radius: r, pressed: pressed, concave: concave);
+  if (tokens.neu) {
+    return _neuDecoration(
+      tokens,
+      color: color,
+      radius: r,
+      pressed: pressed,
+      concave: concave,
+      concaveStrength: _concaveStrength(context),
+    );
+  }
   return BoxDecoration(
     borderRadius: r,
     gradient: LinearGradient(
@@ -53,6 +62,10 @@ BoxDecoration clayDecoration(
   );
 }
 
+/// Intensità della conca dei pulsanti colorati: di sera più marcata, perché sui colori chiari (pesca) la stessa
+/// variazione si vedrebbe appena.
+double _concaveStrength(BuildContext context) => Theme.of(context).brightness == Brightness.dark ? 1.8 : 1;
+
 /// Neumorfismo: colore pieno, una luce in alto a sinistra e un'ombra in basso a destra. Premuto, il rilievo quasi
 /// sparisce (la superficie torna a filo della pagina).
 BoxDecoration _neuDecoration(
@@ -63,6 +76,7 @@ BoxDecoration _neuDecoration(
   BoxShape shape = BoxShape.rectangle,
   double distance = 7,
   bool concave = false,
+  double concaveStrength = 1,
 }) {
   final d = pressed ? distance * 0.3 : distance;
   return BoxDecoration(
@@ -72,7 +86,11 @@ BoxDecoration _neuDecoration(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             // Sui colori chiari (pesca) la stessa conca si vedrebbe appena: più chiaro il colore, più scuro l'angolo.
-            colors: [_darken(color, 0.03 + 0.22 * color.computeLuminance()), color, _lighten(color, 0.08)],
+            colors: [
+              _darken(color, (0.03 + 0.22 * color.computeLuminance()) * concaveStrength),
+              color,
+              _lighten(color, 0.08 * concaveStrength),
+            ],
           )
         : null,
     shape: shape,
@@ -200,6 +218,7 @@ class ClayCircle extends StatelessWidget {
               shape: BoxShape.circle,
               distance: (size * 0.09).clamp(2, 6),
               concave: concave,
+              concaveStrength: _concaveStrength(context),
             )
           : BoxDecoration(
               shape: BoxShape.circle,
@@ -728,6 +747,69 @@ class ClayInsetIcon extends StatelessWidget {
       child: NeuInset(
         radius: BorderRadius.circular(size / 2),
         child: Icon(icon, size: size * 0.5, color: context.colors.onSurfaceVariant),
+      ),
+    );
+  }
+}
+
+/// Interruttore on/off. Nelle livree neumorfiche: un binario a chip scavato con dentro una sfera in rilievo, color
+/// pagina da spento e del colore delle azioni (con la leggera conca dei pulsanti) da acceso. Altrimenti uno `Switch`
+/// adattivo Material/Cupertino.
+class ClaySwitch extends StatelessWidget {
+  static const _width = 58.0, _height = 32.0, _knob = 24.0;
+
+  final bool value;
+  final ValueChanged<bool>? onChanged;
+
+  const ClaySwitch({super.key, required this.value, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    if (!tokens.neu) return Switch.adaptive(value: value, onChanged: onChanged);
+    final colors = context.colors;
+    const inset = (_height - _knob) / 2;
+    return Semantics(
+      toggled: value,
+      enabled: onChanged != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onChanged == null ? null : () => onChanged!(!value),
+        child: SizedBox(
+          width: _width,
+          height: _height,
+          child: NeuInset(
+            radius: const BorderRadius.all(Radius.circular(_height / 2)),
+            depth: 2,
+            child: AnimatedAlign(
+              duration: const Duration(milliseconds: 160),
+              curve: Curves.easeOut,
+              alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(inset),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 160),
+                  width: _knob,
+                  height: _knob,
+                  // La sfera ha sempre la conca "per il polpastrello", più marcata che sui pulsanti grandi perché è
+                  // piccola. Di sera il colore acceso è smorzato: pieno, sul binario scuro, abbaglierebbe.
+                  decoration: _neuDecoration(
+                    tokens,
+                    color: value
+                        ? (Theme.of(context).brightness == Brightness.dark
+                              ? Color.lerp(colors.primary, colors.surface, 0.3)!
+                              : colors.primary)
+                        : colors.surface,
+                    shape: BoxShape.circle,
+                    distance: 2.5,
+                    concave: true,
+                    concaveStrength: 1.8,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

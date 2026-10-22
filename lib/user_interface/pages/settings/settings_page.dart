@@ -121,12 +121,12 @@ class _DebugToolsState extends State<_DebugTools> {
           ),
         ],
         GetBuilder<SubscriptionController>(
-          builder: (subscription) => SwitchListTile(
+          builder: (subscription) => ListTile(
             key: const ValueKey('debug-diario'),
             contentPadding: EdgeInsets.zero,
             title: Text(context.l10n.debugDiario),
-            value: subscription.diarioActive,
-            onChanged: subscription.setSimulated,
+            trailing: ClaySwitch(value: subscription.diarioActive, onChanged: subscription.setSimulated),
+            onTap: () => subscription.setSimulated(!subscription.diarioActive),
           ),
         ),
         TextButton.icon(

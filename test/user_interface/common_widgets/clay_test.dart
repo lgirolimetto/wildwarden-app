@@ -128,6 +128,27 @@ void main() {
       expect(find.byType(ChoiceChip), findsOneWidget);
     });
 
+    testWidgets('interruttore neumorfico: tocco cambia valore, sfera a destra se acceso', (tester) async {
+      var value = false;
+      await _pump(
+        tester,
+        StatefulBuilder(
+          builder: (context, setState) => ClaySwitch(value: value, onChanged: (v) => setState(() => value = v)),
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.byType(NeuInset), findsOneWidget);
+      await tester.tap(find.byType(ClaySwitch));
+      await tester.pumpAndSettle();
+      expect(value, isTrue);
+      expect(tester.widget<AnimatedAlign>(find.byType(AnimatedAlign)).alignment, Alignment.centerRight);
+    });
+
+    testWidgets('fuori dal neumorfismo l\'interruttore è uno Switch', (tester) async {
+      await _pump(tester, ClaySwitch(value: true, onChanged: (_) {}));
+      expect(find.byType(Switch), findsOneWidget);
+    });
+
     test('emoji iniziale dei tratti', () {
       expect(leadingEmoji('🌕 Lunare'), '🌕');
       expect(leadingEmoji('❄️ Gelo'), '❄️');
