@@ -14,18 +14,11 @@ class AccentCard {
       AccentCard(Color.lerp(a.background, b.background, t)!, Color.lerp(a.foreground, b.foreground, t)!);
 }
 
-/// Token di gioco che Material non prevede: colori dei livelli di studio, velo delle specie
-/// non ancora trovate, sfumature e texture di sfondo, schede colorate, raggi. Si leggono con `context.druid`.
+/// Token di gioco che Material non prevede: colori dei livelli di studio, sfumature e texture di sfondo, schede colorate, raggi. Si leggono con `context.druid`.
 @immutable
 class DruidTokens extends ThemeExtension<DruidTokens> {
   /// Un colore per ogni livello di studio, da 0 (trovata) a 4 (maestria).
   final List<Color> levelColors;
-
-  /// Velo leggero sopra la foto sfocata delle specie non ancora trovate: i colori devono intravedersi.
-  final Color mysteryVeil;
-
-  /// Sfocatura delle specie non ancora trovate (sigma): abbastanza da non riconoscerle, non da spegnerle.
-  final double mysteryBlur;
 
   /// Colore del testo degli indizi.
   final Color hint;
@@ -58,8 +51,6 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
 
   const DruidTokens({
     required this.levelColors,
-    required this.mysteryVeil,
-    required this.mysteryBlur,
     required this.hint,
     required this.warning,
     required this.backgroundGradient,
@@ -81,8 +72,6 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   @override
   DruidTokens copyWith({
     List<Color>? levelColors,
-    Color? mysteryVeil,
-    double? mysteryBlur,
     Color? hint,
     Color? warning,
     List<Color>? backgroundGradient,
@@ -96,8 +85,6 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     Color? clayShadow,
   }) => DruidTokens(
     levelColors: levelColors ?? this.levelColors,
-    mysteryVeil: mysteryVeil ?? this.mysteryVeil,
-    mysteryBlur: mysteryBlur ?? this.mysteryBlur,
     hint: hint ?? this.hint,
     warning: warning ?? this.warning,
     backgroundGradient: backgroundGradient ?? this.backgroundGradient,
@@ -122,8 +109,6 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
         : (t < 0.5 ? accentCards : other.accentCards);
     return DruidTokens(
       levelColors: lerpList(levelColors, other.levelColors),
-      mysteryVeil: Color.lerp(mysteryVeil, other.mysteryVeil, t)!,
-      mysteryBlur: lerpDouble(mysteryBlur, other.mysteryBlur, t)!,
       hint: Color.lerp(hint, other.hint, t)!,
       warning: Color.lerp(warning, other.warning, t)!,
       backgroundGradient: lerpList(backgroundGradient, other.backgroundGradient),

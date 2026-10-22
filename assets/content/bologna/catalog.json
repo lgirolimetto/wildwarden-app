@@ -71,7 +71,8 @@
      "gbifOccurrence": 6162851081,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D2E28D"
   },
   {
    "sci": "Anemone hortensis",
@@ -135,7 +136,8 @@
      "gbifOccurrence": 6185461569,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D786EA"
   },
   {
    "sci": "Orchis purpurea",
@@ -198,7 +200,8 @@
      "gbifOccurrence": 6320109527,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#E28D9B"
   },
   {
    "sci": "Euphorbia helioscopia",
@@ -262,7 +265,8 @@
      "gbifOccurrence": 6171243528,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#C3E689"
   },
   {
    "sci": "Prunus spinosa",
@@ -325,7 +329,8 @@
      "gbifOccurrence": 6185271789,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#CBE28D"
   },
   {
    "sci": "Paliurus spina-christi",
@@ -396,7 +401,8 @@
      "gbifOccurrence": 4067652491,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#EBE684"
   },
   {
    "sci": "Alliaria petiolata",
@@ -460,7 +466,8 @@
      "gbifOccurrence": 6185013791,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B3E28D"
   },
   {
    "sci": "Euonymus europaeus",
@@ -524,7 +531,8 @@
      "gbifOccurrence": 6479223316,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#E28D9E"
   },
   {
    "sci": "Clematis vitalba",
@@ -592,7 +600,8 @@
      "gbifOccurrence": 4153518374,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B7E28D"
   },
   {
    "sci": "Ruscus aculeatus",
@@ -656,7 +665,8 @@
      "gbifOccurrence": 6399554908,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B0E28D"
   },
   {
    "sci": "Cotinus coggygria",
@@ -714,7 +724,8 @@
      "gbifOccurrence": 6400259642,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#A0E28D"
   },
   {
    "sci": "Laurus nobilis",
@@ -780,7 +791,8 @@
      "gbifOccurrence": 6185986815,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D5E28D"
   },
   {
    "sci": "Cornus sanguinea",
@@ -833,7 +845,8 @@
      "gbifOccurrence": 4430874140,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D4E28D"
   },
   {
    "sci": "Viburnum lantana",
@@ -890,7 +903,8 @@
      "gbifOccurrence": 4067327510,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D4E68A"
   },
   {
    "sci": "Chelidonium majus",
@@ -954,7 +968,8 @@
      "gbifOccurrence": 2576264692,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#F4E67B"
   },
   {
    "sci": "Celtis australis",
@@ -1008,7 +1023,8 @@
      "gbifOccurrence": 4067364489,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#C8E28D"
   },
   {
    "sci": "Fraxinus ornus",
@@ -1057,7 +1073,8 @@
      "gbifOccurrence": 6579289360,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D8E28D"
   },
   {
    "sci": "Corylus avellana",
@@ -1120,7 +1137,8 @@
      "gbifOccurrence": 2294575665,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#C3E28D"
   },
   {
    "sci": "Melissa officinalis",
@@ -1188,7 +1206,8 @@
      "gbifOccurrence": 6133362685,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#94E28D"
   },
   {
    "sci": "Acer campestre",
@@ -1256,7 +1275,8 @@
      "gbifOccurrence": 6195792675,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B5E28D"
   },
   {
    "sci": "Juglans regia",
@@ -1323,7 +1343,8 @@
      "gbifOccurrence": 6252620774,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#8DAEE2"
   },
   {
    "sci": "Salvia pratensis",
@@ -1388,7 +1409,8 @@
      "gbifOccurrence": 6481466620,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#9B8DE2"
   },
   {
    "sci": "Borago officinalis",
@@ -1456,7 +1478,8 @@
      "gbifOccurrence": 2580104592,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#9D8DE3"
   },
   {
    "sci": "Cornus mas",
@@ -1521,7 +1544,8 @@
      "gbifOccurrence": 2856629349,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#C9E28D"
   },
   {
    "sci": "Melittis melissophyllum",
@@ -1584,7 +1608,8 @@
      "gbifOccurrence": 2265800758,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#ADE28D"
   },
   {
    "sci": "Helleborus viridis",
@@ -1648,7 +1673,8 @@
      "gbifOccurrence": 4080957110,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B9F17E"
   },
   {
    "sci": "Euphorbia cyparissias",
@@ -1711,7 +1737,8 @@
      "gbifOccurrence": 3090548676,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#F4EC7B"
   },
   {
    "sci": "Malva sylvestris",
@@ -1777,7 +1804,8 @@
      "gbifOccurrence": 6253078584,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#E8B287"
   },
   {
    "sci": "Prunus cerasifera",
@@ -1829,7 +1857,8 @@
      "gbifOccurrence": 6253089864,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#A9E28D"
   },
   {
    "sci": "Anacamptis pyramidalis",
@@ -1892,7 +1921,8 @@
      "gbifOccurrence": 6400149322,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#CF8DE2"
   },
   {
    "sci": "Ostrya carpinifolia",
@@ -1958,7 +1988,8 @@
      "gbifOccurrence": 6179319286,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#94E28D"
   },
   {
    "sci": "Glechoma hederacea",
@@ -2022,7 +2053,8 @@
      "gbifOccurrence": 4935704676,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#9082ED"
   },
   {
    "sci": "Linaria vulgaris",
@@ -2085,7 +2117,8 @@
      "gbifOccurrence": 4935738234,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D0E28D"
   },
   {
    "sci": "Populus alba",
@@ -2153,7 +2186,8 @@
      "gbifOccurrence": 6469712475,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#D9E28D"
   },
   {
    "sci": "Anacamptis morio",
@@ -2216,7 +2250,8 @@
      "gbifOccurrence": 4935704851,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#CE8DE2"
   },
   {
    "sci": "Senecio vulgaris",
@@ -2282,7 +2317,8 @@
      "gbifOccurrence": 6178420943,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#F4E87B"
   },
   {
    "sci": "Lunaria annua",
@@ -2340,7 +2376,8 @@
      "gbifOccurrence": 4067627688,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#E28DD7"
   },
   {
    "sci": "Eranthis hyemalis",
@@ -2404,7 +2441,8 @@
      "gbifOccurrence": 2580180930,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#F1D97E"
   },
   {
    "sci": "Convolvulus arvensis",
@@ -2470,7 +2508,8 @@
      "gbifOccurrence": 4162311726,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#BFE28D"
   },
   {
    "sci": "Ligustrum vulgare",
@@ -2528,7 +2567,8 @@
      "gbifOccurrence": 5935912633,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B5E28D"
   },
   {
    "sci": "Helleborus foetidus",
@@ -2593,7 +2633,8 @@
      "gbifOccurrence": 2576296807,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#BAE987"
   },
   {
    "sci": "Vinca major",
@@ -2657,7 +2698,8 @@
      "gbifOccurrence": 6184992676,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#BE8DE2"
   },
   {
    "sci": "Tragopogon porrifolius",
@@ -2706,7 +2748,8 @@
      "gbifOccurrence": 6400226353,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#E28D9B"
   },
   {
    "sci": "Hedera helix",
@@ -2772,7 +2815,8 @@
      "gbifOccurrence": 1453445067,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#B5E28D"
   },
   {
    "sci": "Cyclamen hederifolium",
@@ -2839,7 +2883,8 @@
      "gbifOccurrence": 5892380837,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#E2948D"
   },
   {
    "sci": "Hippocrepis emerus",
@@ -2903,7 +2948,8 @@
      "gbifOccurrence": 4080669136,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#F1E27E"
   },
   {
    "sci": "Fagus sylvatica",
@@ -2968,7 +3014,8 @@
      "gbifOccurrence": 2350352854,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#CFE28D"
   },
   {
    "sci": "Althaea cannabina",
@@ -3034,7 +3081,8 @@
      "gbifOccurrence": 3391300522,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#EC83BE"
   },
   {
    "sci": "Sambucus ebulus",
@@ -3091,7 +3139,8 @@
      "gbifOccurrence": 4067631498,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#ACE28D"
   },
   {
    "sci": "Equisetum telmateia",
@@ -3161,7 +3210,8 @@
      "gbifOccurrence": 4080938311,
      "local": true
     }
-   ]
+   ],
+   "mysteryColor": "#C3EC84"
   }
  ],
  "recipes": [

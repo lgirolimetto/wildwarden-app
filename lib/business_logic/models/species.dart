@@ -50,6 +50,10 @@ class Species {
   final Map<AltitudeBand, double> bandShare;
   final List<SpeciesImage> images;
 
+  /// Tinta pastello (0xRRGGBB) che sostituisce la foto finché la specie non è incontrata: il colore più
+  /// caratteristico della foto (fiore, bacca…), calcolato dalla pipeline dei contenuti. `null` se manca.
+  final int? mysteryColor;
+
   const Species({
     required this.sci,
     required this.name,
@@ -64,6 +68,7 @@ class Species {
     required this.elevationSamples,
     required this.bandShare,
     required this.images,
+    this.mysteryColor,
   });
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
@@ -84,5 +89,12 @@ class Species {
       (id, share) => MapEntry(AltitudeBand.fromId(id), (share as num).toDouble()),
     ),
     images: (json['images'] as List).map((i) => SpeciesImage.fromJson(i as Map<String, dynamic>)).toList(),
+    mysteryColor: _parseHexColor(json['mysteryColor'] as String?),
   );
+}
+
+/// "#RRGGBB" → 0xRRGGBB; `null` se assente o non valido.
+int? _parseHexColor(String? hex) {
+  if (hex == null || !RegExp(r'^#[0-9a-fA-F]{6}$').hasMatch(hex)) return null;
+  return int.parse(hex.substring(1), radix: 16);
 }

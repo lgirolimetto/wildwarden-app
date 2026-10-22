@@ -1,6 +1,6 @@
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
-import 'package:druid_app/user_interface/common_widgets/mystery_image.dart';
+import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/pages/erbario/hint_text.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
@@ -22,7 +22,7 @@ class UnknownSpeciesTile extends StatelessWidget {
     aspect: tileAspect(species),
     image: species.images.isEmpty
         ? const SizedBox.shrink()
-        : MysteryImage(species.images.first.url, borderRadius: _photoRadius(context)),
+        : MysteryCover(species: species, borderRadius: _photoRadius(context)),
     children: [
       Text(context.l10n.unknownSpecies, style: context.texts.titleMedium),
       const SizedBox(height: Gaps.xs),

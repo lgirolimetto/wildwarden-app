@@ -13,7 +13,7 @@ import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
-import 'package:druid_app/user_interface/common_widgets/mystery_image.dart';
+import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
@@ -65,7 +65,7 @@ class _UnknownSpecies extends StatelessWidget {
         SpeciesPhotoHeader(
           image: desired
               ? RemoteImage(species.images.first.url)
-              : MysteryImage(species.images.first.url, borderRadius: SpeciesPhotoHeader.radius),
+              : MysteryCover(species: species, borderRadius: SpeciesPhotoHeader.radius),
           title: desired ? context.game.name(species) : context.l10n.unknownSpecies,
           subtitle: context.l10n.notEncounteredYet,
           level: null,

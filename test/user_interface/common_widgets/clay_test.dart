@@ -8,13 +8,12 @@ import 'package:druid_app/user_interface/theme/liveries/sottobosco_livery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-Future<void> _pump(WidgetTester tester, Widget child, {Livery livery = const SottoboscoLivery()}) =>
-    tester.pumpWidget(
-      MaterialApp(
-        theme: buildTheme(livery, Brightness.light),
-        home: Scaffold(body: Center(child: child)),
-      ),
-    );
+Future<void> _pump(WidgetTester tester, Widget child, {Livery livery = const SottoboscoLivery()}) => tester.pumpWidget(
+  MaterialApp(
+    theme: buildTheme(livery, Brightness.light),
+    home: Scaffold(body: Center(child: child)),
+  ),
+);
 
 BoxDecoration _decorationOf(WidgetTester tester, Finder finder) =>
     tester.widget<DecoratedBox>(find.descendant(of: finder, matching: find.byType(DecoratedBox)).first).decoration
@@ -42,7 +41,11 @@ void main() {
       for (final hour in [6, 12, 19, 23]) {
         await _pump(
           tester,
-          SizedBox(width: 400, height: 300, child: Diorama(moment: DateTime(2027, month, 10, hour), fadeTo: Colors.white)),
+          SizedBox(
+            width: 400,
+            height: 300,
+            child: Diorama(moment: DateTime(2027, month, 10, hour), fadeTo: Colors.white),
+          ),
         );
         expect(tester.takeException(), isNull, reason: '$season alle $hour');
       }
@@ -58,7 +61,11 @@ void main() {
     });
 
     testWidgets('con una livrea piatta la stessa scheda resta piatta', (tester) async {
-      await _pump(tester, const ClayCard(key: ValueKey('card'), child: Text('x')), livery: const ErbarioLivery());
+      await _pump(
+        tester,
+        const ClayCard(key: ValueKey('card'), child: Text('x')),
+        livery: const ErbarioLivery(),
+      );
       final decoration = _decorationOf(tester, find.byKey(const ValueKey('card')));
       expect(decoration.gradient, isNull);
       expect(decoration.boxShadow, isNull);

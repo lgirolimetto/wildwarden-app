@@ -51,8 +51,6 @@ class ErbarioLivery extends Livery {
       levelColors: light
           ? const [Color(0xFFB4C9A8), Color(0xFF8DC07A), Color(0xFF5FA34B), Color(0xFF2F7A2A), Color(0xFFC08B1E)]
           : const [Color(0xFF4A5E45), Color(0xFF6E9E5F), Color(0xFF8FC67A), Color(0xFFB6E39F), Color(0xFFF0C766)],
-      mysteryVeil: light ? const Color(0x40EAF3E4) : const Color(0x500F1A0E),
-      mysteryBlur: 7,
       hint: scheme.onSurfaceVariant,
       warning: light ? const Color(0xFF8A6410) : const Color(0xFFE6C26E),
       backgroundGradient: light

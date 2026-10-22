@@ -42,7 +42,7 @@ BoxDecoration clayDecoration(BuildContext context, {required Color color, double
   );
 }
 
-/// Riflesso sul bordo superiore: dà l'effetto "gonfio" della plastilina. Va sovrapposto al contenuto.
+/// Riflesso sul bordo superiore: dà l'effetto "gonfio" della plastilina. Sta sotto il contenuto della scheda.
 class _ClayHighlight extends StatelessWidget {
   final BorderRadius radius;
 
@@ -85,8 +85,9 @@ class ClayCard extends StatelessWidget {
     final r = BorderRadius.circular(radius ?? context.druid.cardRadius);
     final content = Stack(
       children: [
-        Padding(padding: padding, child: child),
+        // Il riflesso sta sotto il contenuto: illumina la plastilina, non le foto e i colori appoggiati sopra.
         if (context.druid.clay) Positioned.fill(child: _ClayHighlight(radius: r)),
+        Padding(padding: padding, child: child),
       ],
     );
     return DecoratedBox(
