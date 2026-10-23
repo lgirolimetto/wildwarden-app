@@ -100,15 +100,40 @@ void main() {
       registerTestDependencies(events: [_passed('Fagus sylvatica')]);
       await pumpDruidApp(tester);
 
-      await tester.tap(find.widgetWithText(ActionChip, 'Erbario'));
-      await tester.pumpAndSettle();
+      await scrollAndTap(tester, find.widgetWithText(ActionChip, 'Erbario'));
       expect(find.textContaining('Collezione di piante'), findsOneWidget);
       await tester.tapAt(const Offset(10, 10));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const ValueKey('skip-apprenticeship')));
-      await tester.pumpAndSettle();
+      await scrollAndTap(tester, find.byKey(const ValueKey('skip-apprenticeship')));
       expect(find.byKey(const ValueKey('mission-visitErbario')), findsNothing);
+    });
+  });
+
+  group('PE virtuali', () {
+    testWidgets('i PE dello studio aspettano in Home; la prima essenza li incassa e la specie si esaurisce', (
+      tester,
+    ) async {
+      registerTestDependencies(
+        events: [
+          _met('Helleborus viridis'),
+          LevelPassed(speciesSci: 'Helleborus viridis', level: 1, xp: 20, occurredAt: _feb),
+        ],
+      );
+      await pumpDruidApp(tester);
+      expect(find.text('20 PE da incassare: si incassano alla prima essenza di ogni specie'), findsOneWidget);
+
+      await openTab(tester, 'Erbario');
+      await scrollAndTap(tester, find.byKey(const ValueKey('met-Helleborus viridis')));
+      await scrollTo(tester, find.byKey(const ValueKey('species-xp-to-cash')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('simulate-draw')));
+
+      final state = Get.find<ProgressController>().state;
+      expect(state.xpToCash, 0);
+      expect(state.xp, 20 + XpRules.essenceDrawn);
+      expect(state.vis['Helleborus viridis'], 10);
+      await scrollTo(tester, find.byKey(const ValueKey('draw-exhausted')));
+      expect(find.text('Vis immagazzinate: 10'), findsOneWidget);
     });
   });
 

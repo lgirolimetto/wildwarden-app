@@ -46,7 +46,7 @@ void main() {
     // Livello 1: aspetto, nome scientifico, forma di crescita.
     expect(study.summary!.xp, 3 * XpRules.correctFirstTry + XpRules.levelPassed);
     expect(progress.state.levelOf('Helleborus viridis'), 1);
-    expect(progress.state.xp, study.summary!.xp);
+    expect(progress.state.xpToCash, study.summary!.xp, reason: 'mai attinta: PE da incassare');
     expect(store.events.whereType<AnswerGiven>(), hasLength(3));
   });
 

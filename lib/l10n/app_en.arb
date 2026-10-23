@@ -261,5 +261,11 @@
   "factLight": "{name} likes: {light}.",
   "factMoisture": "{name} prefers {moisture} soil.",
   "sourcesTraits": "Traits: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0",
-  "sectionTraits": "What it is like and how it lives"
+  "sectionTraits": "What it is like and how it lives",
+  "xpToCash": "{xp} XP to cash in: you cash them in with the first essence of each species",
+  "speciesXpToCash": "{xp} XP to cash in: draw the first essence of this species.",
+  "summaryXpToCash": "The XP from studying this species are cashed in when you draw its first essence.",
+  "visStored": "Vis stored: {vis}",
+  "drawExhausted": "Exhausted: ready again tomorrow",
+  "drawNeedsEncounter": "Drawing needs a station: meet it first"
 }

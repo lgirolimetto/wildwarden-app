@@ -1669,6 +1669,42 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Com\'è e come vive'**
   String get sectionTraits;
+
+  /// No description provided for @xpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'{xp} PE da incassare: si incassano alla prima essenza di ogni specie'**
+  String xpToCash(int xp);
+
+  /// No description provided for @speciesXpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'{xp} PE da incassare: attingi la prima essenza di questa specie.'**
+  String speciesXpToCash(int xp);
+
+  /// No description provided for @summaryXpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.'**
+  String get summaryXpToCash;
+
+  /// No description provided for @visStored.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis immagazzinate: {vis}'**
+  String visStored(int vis);
+
+  /// No description provided for @drawExhausted.
+  ///
+  /// In it, this message translates to:
+  /// **'Esaurita: torna pronta domani'**
+  String get drawExhausted;
+
+  /// No description provided for @drawNeedsEncounter.
+  ///
+  /// In it, this message translates to:
+  /// **'Per attingere serve una stazione: prima incontrala'**
+  String get drawNeedsEncounter;
 }
 
 class _AppLocalizationsDelegate

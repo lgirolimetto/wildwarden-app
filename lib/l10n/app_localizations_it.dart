@@ -961,4 +961,30 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sectionTraits => 'Com\'è e come vive';
+
+  @override
+  String xpToCash(int xp) {
+    return '$xp PE da incassare: si incassano alla prima essenza di ogni specie';
+  }
+
+  @override
+  String speciesXpToCash(int xp) {
+    return '$xp PE da incassare: attingi la prima essenza di questa specie.';
+  }
+
+  @override
+  String get summaryXpToCash =>
+      'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.';
+
+  @override
+  String visStored(int vis) {
+    return 'Vis immagazzinate: $vis';
+  }
+
+  @override
+  String get drawExhausted => 'Esaurita: torna pronta domani';
+
+  @override
+  String get drawNeedsEncounter =>
+      'Per attingere serve una stazione: prima incontrala';
 }

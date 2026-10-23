@@ -887,5 +887,32 @@
     }
   },
   "sourcesTraits": "Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0",
-  "sectionTraits": "Com'è e come vive"
+  "sectionTraits": "Com'è e come vive",
+  "xpToCash": "{xp} PE da incassare: si incassano alla prima essenza di ogni specie",
+  "@xpToCash": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "speciesXpToCash": "{xp} PE da incassare: attingi la prima essenza di questa specie.",
+  "@speciesXpToCash": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryXpToCash": "I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.",
+  "visStored": "Vis immagazzinate: {vis}",
+  "@visStored": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "drawExhausted": "Esaurita: torna pronta domani",
+  "drawNeedsEncounter": "Per attingere serve una stazione: prima incontrala"
 }

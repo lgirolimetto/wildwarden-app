@@ -13,6 +13,9 @@ abstract final class XpRules {
   static const mastery = 50;
   static const desiderataFulfilled = 15;
 
+  /// Ogni raccolta vale PE (decisione 🟢 "economia dei PE"): sono reali da subito, perché vengono dal campo.
+  static const essenceDrawn = 10;
+
   /// PE di una risposta durante lo studio di un livello.
   static int learning({
     required bool correct,
@@ -26,7 +29,7 @@ abstract final class XpRules {
   static int review({required bool correct}) => correct ? reviewRemembered : 0;
 }
 
-/// Titoli del giocatore in base ai PE totali.
+/// Titoli del giocatore in base ai PE di carriera (incassati: i PE virtuali non contano).
 enum Rank {
   apprentice(0),
   wanderer(100),

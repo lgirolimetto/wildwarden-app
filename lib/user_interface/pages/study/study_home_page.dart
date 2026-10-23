@@ -41,7 +41,7 @@ class StudyHomePage extends StatelessWidget {
       return ListView(
         padding: const EdgeInsets.only(bottom: homeBottomInset),
         children: [
-          _DioramaHeader(now: now, xp: state.xp),
+          _DioramaHeader(now: now, xp: state.xp, xpToCash: state.xpToCash),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Gaps.l),
             child: Column(
@@ -78,8 +78,9 @@ class _DioramaHeader extends StatelessWidget {
   static const dioramaHeight = 300.0;
   final DateTime now;
   final int xp;
+  final int xpToCash;
 
-  const _DioramaHeader({required this.now, required this.xp});
+  const _DioramaHeader({required this.now, required this.xp, required this.xpToCash});
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,7 @@ class _DioramaHeader extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: dioramaHeight - 120),
-              _RankCard(xp: xp),
+              _RankCard(xp: xp, xpToCash: xpToCash),
             ],
           ),
         ),
@@ -140,10 +141,12 @@ class _DioramaHeader extends StatelessWidget {
   static String _capitalize(String s) => s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
 }
 
+/// Rango e PE di carriera; sotto, ben visibili, i PE virtuali ancora da incassare.
 class _RankCard extends StatelessWidget {
   final int xp;
+  final int xpToCash;
 
-  const _RankCard({required this.xp});
+  const _RankCard({required this.xp, required this.xpToCash});
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +195,22 @@ class _RankCard extends StatelessWidget {
               next == null ? context.l10n.maxRankReached : context.l10n.nextRank(context.game.rank(next), next.minXp),
               style: context.texts.bodySmall?.copyWith(color: onHero.withValues(alpha: 0.85)),
             ),
+            if (xpToCash > 0) ...[
+              const SizedBox(height: Gaps.s),
+              Row(
+                key: const ValueKey('xp-to-cash'),
+                children: [
+                  Icon(Icons.hourglass_top_rounded, size: 18, color: onHero),
+                  const SizedBox(width: Gaps.xs),
+                  Expanded(
+                    child: Text(
+                      context.l10n.xpToCash(xpToCash),
+                      style: context.texts.bodyMedium?.copyWith(color: onHero, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ],
         ),
       ),

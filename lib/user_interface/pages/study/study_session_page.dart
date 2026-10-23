@@ -334,6 +334,8 @@ class _Summary extends StatelessWidget {
         const SizedBox(height: Gaps.s),
         Text(l10n.summaryAnswers(summary.correct, summary.answers)),
         Text(l10n.xpGained(summary.xp), style: context.texts.titleLarge),
+        if (species != null && !Get.find<ProgressController>().state.hasDrawn(species.sci))
+          Text(l10n.summaryXpToCash, key: const ValueKey('summary-xp-to-cash'), style: context.texts.bodySmall),
         if (summary.masteryReached) ...[const SizedBox(height: Gaps.s), Text(l10n.summaryMastery)],
         for (final recipe in unlocked) ...[
           const SizedBox(height: Gaps.s),

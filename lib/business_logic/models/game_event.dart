@@ -67,6 +67,9 @@ sealed class GameEvent {
         speciesSci: d['species'] as String,
         trait: d['trait'] as String?,
         simulated: d['simulated'] as bool,
+        // Assenti negli eventi salvati prima dello step 4 della tappa B.
+        vis: d['vis'] as int? ?? 0,
+        xp: d['xp'] as int? ?? 0,
         occurredAt: occurredAt,
       ),
       DesiderataChanged.typeId => DesiderataChanged(
@@ -166,18 +169,26 @@ class MasteryReached extends GameEvent {
   Map<String, dynamic> payload() => {'species': speciesSci, 'xp': xp};
 }
 
-/// Essenza attinta da una stazione, con il tratto delle condizioni del momento (`null` = nessuno).
-/// Nel blocco 1 è solo simulata; dal blocco 3 nasce dalle condizioni reali.
+/// Essenza attinta da una stazione, con il tratto delle condizioni del momento (`null` = nessuno) e le [vis]
+/// immagazzinate. La prima essenza di una specie incassa i PE virtuali dello studio di quella specie.
+/// Oggi è solo simulata; dal blocco 3 nasce dalle condizioni reali.
 class EssenceDrawn extends GameEvent {
   static const typeId = 'essence_drawn';
   final String speciesSci;
   final String? trait;
   final bool simulated;
 
+  /// Unità di Vis ("la linfa sottile delle piante") immagazzinate con questa raccolta.
+  final int vis;
+  @override
+  final int xp;
+
   const EssenceDrawn({
     required this.speciesSci,
     required this.trait,
     required this.simulated,
+    this.vis = 0,
+    this.xp = 0,
     required super.occurredAt,
   });
 
@@ -185,7 +196,13 @@ class EssenceDrawn extends GameEvent {
   String get type => typeId;
 
   @override
-  Map<String, dynamic> payload() => {'species': speciesSci, 'trait': trait, 'simulated': simulated};
+  Map<String, dynamic> payload() => {
+    'species': speciesSci,
+    'trait': trait,
+    'simulated': simulated,
+    'vis': vis,
+    'xp': xp,
+  };
 }
 
 /// Specie aggiunta o tolta dalle desiderata.

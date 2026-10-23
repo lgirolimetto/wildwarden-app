@@ -9,6 +9,7 @@ import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
@@ -717,6 +718,14 @@ class _MasterySectionState extends State<_MasterySection> {
         children: [
           if (widget.state.mastered.contains(widget.species.sci))
             Text(l10n.masteryReached, style: context.texts.titleMedium),
+          if ((widget.state.pendingXp[widget.species.sci] ?? 0) > 0)
+            Text(
+              l10n.speciesXpToCash(widget.state.pendingXp[widget.species.sci]!),
+              key: const ValueKey('species-xp-to-cash'),
+              style: context.texts.titleSmall,
+            ),
+          if ((widget.state.vis[widget.species.sci] ?? 0) > 0)
+            Text(l10n.visStored(widget.state.vis[widget.species.sci]!)),
           Text(l10n.masteryFacts(m.consolidatedFacts, m.totalFacts)),
           Text(l10n.masteryDraws(m.draws, masteryDraws, m.distinctTraits, masteryDistinctTraits)),
           Text(l10n.masteryOnlyField, style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
@@ -738,10 +747,16 @@ class _MasterySectionState extends State<_MasterySection> {
             const SizedBox(height: Gaps.xs),
             OutlinedButton.icon(
               key: const ValueKey('simulate-draw'),
-              onPressed: () => widget.progress.drawSimulated(widget.species.sci, trait: _trait?.name),
+              onPressed: canDraw(widget.state, widget.species.sci, widget.progress.now)
+                  ? () => widget.progress.drawSimulated(widget.species.sci, trait: _trait?.name)
+                  : null,
               icon: const Icon(Icons.bug_report_outlined),
               label: Text(l10n.simulateDraw),
             ),
+            if (!widget.state.hasEncountered(widget.species.sci))
+              Text(l10n.drawNeedsEncounter, style: context.texts.bodySmall)
+            else if (isExhausted(widget.state, widget.species.sci, widget.progress.now))
+              Text(l10n.drawExhausted, key: const ValueKey('draw-exhausted'), style: context.texts.bodySmall),
           ],
         ],
       ),
