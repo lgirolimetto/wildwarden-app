@@ -69,8 +69,8 @@ class EncounteredSpeciesTile extends StatelessWidget {
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
       const SizedBox(height: Gaps.s),
       Wrap(
-        spacing: Gaps.s,
-        runSpacing: Gaps.s,
+        spacing: Gaps.chip,
+        runSpacing: Gaps.chipRun,
         children: [
           if (encounteredAt != null)
             StampBadge(

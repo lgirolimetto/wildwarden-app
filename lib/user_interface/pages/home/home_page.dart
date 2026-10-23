@@ -2,11 +2,11 @@ import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
+import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/pages/erbario/erbario_page.dart';
 import 'package:druid_app/user_interface/pages/recipes/recipes_page.dart';
 import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
-import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,29 +32,9 @@ class HomePage extends StatelessWidget {
           IndexedStack(index: index, children: _pages),
           // Sotto la barra di stato il contenuto che scorre sfuma nello sfondo, invece di finire sotto l'orologio.
           // Non sullo Studio: lì in alto c'è il cielo del diorama.
-          if (index != HomeController.studyTab)
-            Positioned(
-              left: 0,
-              right: 0,
-              top: 0,
-              height: MediaQuery.paddingOf(context).top + Gaps.l,
-              child: IgnorePointer(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        _fadeColor(context, index),
-                        _fadeColor(context, index).withValues(alpha: 0.85),
-                        _fadeColor(context, index).withValues(alpha: 0),
-                      ],
-                      stops: const [0, 0.6, 1],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          // Sotto la barra di stato il contenuto che scorre sfuma nello sfondo, invece di finire sotto l'orologio. Nella
+          // Home lo fa la pagina stessa, solo quando il cielo del diorama è uscito dallo schermo.
+          if (index != HomeController.studyTab) StatusBarScrim(color: _fadeColor(context, index)),
         ],
       ),
     ),

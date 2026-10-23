@@ -432,9 +432,11 @@ class ClaySectionTitle extends StatelessWidget {
     this.titleColor,
   });
 
+  // Sotto il titolo c'è abbastanza spazio perché l'ombra della prima scheda non tocchi il titolo (capitolo 07,
+  // "Spazio per il rilievo ovunque").
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: Gaps.s),
+    padding: const EdgeInsets.only(bottom: Gaps.l),
     child: Row(
       children: [
         ClayCircle(color: color ?? context.colors.secondaryContainer, icon: icon, size: 36),

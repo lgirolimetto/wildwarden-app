@@ -240,7 +240,8 @@ class _Masonry extends StatelessWidget {
         }
         columns[target].add(
           Padding(
-            padding: const EdgeInsets.only(bottom: Gaps.m),
+            // Tra una tessera e l'altra più spazio in verticale che in orizzontale, per il rilievo.
+            padding: const EdgeInsets.only(bottom: Gaps.l),
             child: tile,
           ),
         );

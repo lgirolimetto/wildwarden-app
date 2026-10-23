@@ -16,6 +16,7 @@ import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
@@ -28,11 +29,36 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StudyHomePage extends StatelessWidget {
+class StudyHomePage extends StatefulWidget {
   const StudyHomePage({super.key});
 
   @override
-  Widget build(BuildContext context) => GameDataBuilder(
+  State<StudyHomePage> createState() => _StudyHomePageState();
+}
+
+class _StudyHomePageState extends State<StudyHomePage> {
+  /// Opacità del velo sotto la barra di stato: compare quando il cielo del diorama è uscito dallo schermo.
+  double _scrim = 0;
+
+  static double _scrimFor(double offset) => ((offset - _DioramaHeader.dioramaHeight * 0.6) / 60).clamp(0.0, 1.0);
+
+  @override
+  Widget build(BuildContext context) => Stack(
+    children: [
+      NotificationListener<ScrollUpdateNotification>(
+        onNotification: (n) {
+          // Si ricostruisce solo quando il velo cambia, non a ogni pixel di scorrimento.
+          final scrim = _scrimFor(n.metrics.pixels);
+          if (n.depth == 0 && n.metrics.axis == Axis.vertical && scrim != _scrim) setState(() => _scrim = scrim);
+          return false;
+        },
+        child: _content(context),
+      ),
+      StatusBarScrim(color: context.druid.backgroundGradient.first, opacity: _scrim),
+    ],
+  );
+
+  Widget _content(BuildContext context) => GameDataBuilder(
     builder: (context, catalog, state, progress) {
       // La curiosità del giorno si consegna all'apertura (l'operazione non fa nulla se è già stata data).
       WidgetsBinding.instance.addPostFrameCallback((_) => progress.revealTodayFunFact());
@@ -326,7 +352,6 @@ class _DesiderataSection extends StatelessWidget {
           color: const Color(0xFFF6D98B),
           trailing: Text(context.l10n.desiderataCount(marked.length, maxDesiderata)),
         ),
-        const SizedBox(height: Gaps.s),
         if (marked.isEmpty) Text(context.l10n.desiderataEmpty, style: TextStyle(color: context.druid.hint)),
         for (final s in marked) ...[
           _DesiderataCard(
@@ -334,7 +359,7 @@ class _DesiderataSection extends StatelessWidget {
             onRemove: () => progress.toggleDesiderata(s.sci),
             onSimulateEncounter: debug ? () => progress.encounter(s.sci, method: EncounterMethod.simulated) : null,
           ),
-          const SizedBox(height: Gaps.s),
+          const SizedBox(height: Gaps.l),
         ],
       ],
     );
@@ -367,15 +392,16 @@ class _SeasonalSection extends StatelessWidget {
           speciesInStudy(state).isEmpty ? context.l10n.seasonalFirstHint : context.l10n.seasonalHint,
           style: TextStyle(color: context.druid.hint),
         ),
-        const SizedBox(height: Gaps.s),
         SizedBox(
-          height: 250,
+          // Più margine in verticale che in orizzontale: sopra e sotto le schede c'è posto per luce e ombra.
+          height: 250 + Gaps.l + Gaps.s,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             // Le schede escono dal margine della pagina mentre scorrono, ma partono allineate al contenuto.
             clipBehavior: Clip.none,
+            padding: const EdgeInsets.only(top: Gaps.l, bottom: Gaps.s),
             itemCount: suggestions.length,
-            separatorBuilder: (_, _) => const SizedBox(width: Gaps.s),
+            separatorBuilder: (_, _) => const SizedBox(width: Gaps.m),
             itemBuilder: (context, i) {
               final species = suggestions[i];
               final marked = state.desiderata.contains(species.sci);
@@ -425,7 +451,8 @@ class _DesiderataCard extends StatelessWidget {
                 Text(context.l10n.desiderataWhere(game.band(species.topBand))),
                 Text(context.l10n.desiderataFamily(species.family), style: TextStyle(color: context.druid.hint)),
                 Wrap(
-                  spacing: Gaps.s,
+                  spacing: Gaps.chip,
+                  runSpacing: Gaps.chipRun,
                   children: [
                     TextButton(onPressed: onRemove, child: Text(context.l10n.desiderataRemove)),
                     if (onSimulateEncounter != null)
@@ -521,7 +548,7 @@ class _YourSpecies extends StatelessWidget {
         if (mine.isEmpty) Text(context.l10n.yourSpeciesEmpty, style: TextStyle(color: context.druid.hint)),
         for (final s in mine)
           Padding(
-            padding: const EdgeInsets.only(bottom: Gaps.m),
+            padding: const EdgeInsets.only(bottom: Gaps.l),
             child: ClayCard(
               key: ValueKey('my-${s.sci}'),
               padding: const EdgeInsets.symmetric(vertical: Gaps.xs),

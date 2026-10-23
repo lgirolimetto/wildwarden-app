@@ -96,7 +96,7 @@ class MissionBanner extends StatelessWidget {
               child: Text(actionLabel),
             ),
           ),
-          const SizedBox(height: Gaps.s),
+          const SizedBox(height: Gaps.chipRun),
           Wrap(
             spacing: Gaps.chip,
             runSpacing: Gaps.chipRun,
