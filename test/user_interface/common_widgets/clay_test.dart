@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/theme/app_theme.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/erbario_livery.dart';
@@ -166,6 +167,40 @@ void main() {
       expect(leadingEmoji('❄️ Gelo'), '❄️');
       expect(leadingEmoji('Base'), isNull);
       expect(leadingEmoji(''), isNull);
+    });
+  });
+
+  group('icone incise nelle livree neumorfiche', () {
+    testWidgets('una chip con l\'emoji di un tratto mostra l\'icona incisa, senza emoji', (tester) async {
+      await _pump(
+        tester,
+        ClayChip(label: '❄️ Gelo', onTap: () {}),
+        livery: const FeltroLivery(),
+      );
+      expect(find.text('Gelo'), findsOneWidget);
+      expect(find.textContaining('❄️'), findsNothing);
+      expect(find.byType(EngravedIcon), findsOneWidget);
+    });
+
+    testWidgets('fuori dal neumorfismo la chip resta com\'è', (tester) async {
+      await _pump(tester, ClayChip(label: '❄️ Gelo', onTap: () {}));
+      expect(find.text('❄️ Gelo'), findsOneWidget);
+      expect(find.byType(EngravedIcon), findsNothing);
+    });
+
+    testWidgets('una sfera con icona diventa incisa; con keepColor resta colorata', (tester) async {
+      await _pump(
+        tester,
+        const Row(
+          children: [
+            ClayCircle(color: Colors.orange, icon: Icons.flag_rounded),
+            ClayCircle(color: Colors.orange, icon: Icons.check_rounded, keepColor: true),
+          ],
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.byType(EngravedIcon), findsOneWidget);
+      expect(find.byIcon(Icons.check_rounded), findsOneWidget);
     });
   });
 }

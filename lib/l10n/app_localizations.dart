@@ -917,7 +917,7 @@ abstract class AppLocalizations {
   /// No description provided for @safetyWarning.
   ///
   /// In it, this message translates to:
-  /// **'⚠️ {text} · da verificare'**
+  /// **'{text} · da verificare'**
   String safetyWarning(String text);
 
   /// No description provided for @protectedNote.

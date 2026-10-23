@@ -14,6 +14,7 @@ import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
@@ -127,12 +128,26 @@ class _SafetyWarning extends StatelessWidget {
   Widget build(BuildContext context) {
     final safety = catalog.safety[species.sci];
     if (safety == null) return const SizedBox.shrink();
+    // Il segnale è un'icona, non un'emoji: incisa nelle livree neumorfiche, come le altre icone.
+    const icon = Icons.warning_amber_rounded;
     return Padding(
       padding: const EdgeInsets.only(bottom: Gaps.l),
-      child: Text(
-        key: const ValueKey('safety-warning'),
-        context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
-        style: TextStyle(color: context.druid.warning),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (context.druid.neu)
+            EngravedIcon(icon, color: context.druid.warning)
+          else
+            Icon(icon, size: 20, color: context.druid.warning),
+          const SizedBox(width: Gaps.s),
+          Expanded(
+            child: Text(
+              key: const ValueKey('safety-warning'),
+              context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
+              style: TextStyle(color: context.druid.warning),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -586,6 +601,8 @@ class _StudyLadder extends StatelessWidget {
                   children: [
                     ClayCircle(
                       size: 30,
+                      // Il colore dice il livello raggiunto: resta anche nelle livree neumorfiche.
+                      keepColor: true,
                       color: state.levelOf(species.sci) >= level
                           ? context.druid.levelColor(level)
                           : context.colors.surfaceContainerHigh,

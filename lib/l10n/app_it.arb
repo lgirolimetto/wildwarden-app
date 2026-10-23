@@ -485,7 +485,7 @@
       }
     }
   },
-  "safetyWarning": "⚠️ {text} · da verificare",
+  "safetyWarning": "{text} · da verificare",
   "@safetyWarning": {
     "placeholders": {
       "text": {

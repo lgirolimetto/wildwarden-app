@@ -41,7 +41,7 @@ void main() {
 
     expect(find.text('Piè di gallo'), findsWidgets);
     expect(find.textContaining('Non ancora incontrata'), findsOneWidget);
-    expect(find.text('⚠️ tossica · da verificare'), findsOneWidget);
+    expect(find.text('tossica · da verificare'), findsOneWidget);
   });
 
   testWidgets('l\'avviso di tossicità si vede anche prima del livello 2', (tester) async {
@@ -59,7 +59,7 @@ void main() {
 
     await scrollAndTap(tester, find.byKey(const ValueKey('met-Eranthis hyemalis')));
 
-    expect(find.text('⚠️ tossica · da verificare'), findsOneWidget);
+    expect(find.text('tossica · da verificare'), findsOneWidget);
   });
 
   testWidgets('"Studia" sulla tessera apre il livello, anche per una specie mai incontrata', (tester) async {

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -190,6 +191,11 @@ class ClayCircle extends StatelessWidget {
   /// Faccia con una leggera conca (vedi [clayDecoration]), per le sfere che fanno da pulsante.
   final bool concave;
 
+  /// Nelle livree neumorfiche una sfera con un'icona perde il suo colore: diventa un cerchio in rilievo del colore
+  /// della scheda con l'icona incisa (lo stile dei tratti). `true` tiene il colore, quando il colore è
+  /// un'informazione (livello di studio, voce scelta nella barra di navigazione).
+  final bool keepColor;
+
   const ClayCircle({
     super.key,
     required this.color,
@@ -199,11 +205,28 @@ class ClayCircle extends StatelessWidget {
     this.iconColor,
     this.child,
     this.concave = false,
+    this.keepColor = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
+    if (tokens.neu && icon != null && child == null && emoji == null && !keepColor) {
+      return Container(
+        width: size,
+        height: size,
+        alignment: Alignment.center,
+        decoration: _neuDecoration(
+          tokens,
+          color: context.colors.surfaceContainerLow,
+          shape: BoxShape.circle,
+          distance: (size * 0.09).clamp(2, 6),
+          concave: concave,
+          concaveStrength: _concaveStrength(context),
+        ),
+        child: EngravedIcon(icon!, size: size * 0.5),
+      );
+    }
     final foreground =
         iconColor ??
         (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : const Color(0xFF2B2118));
@@ -494,6 +517,8 @@ class ClayNavBar extends StatelessWidget {
                                   iconColor: colors.onPrimary,
                                   size: 40,
                                   concave: true,
+                                  // La voce scelta resta colorata: il colore dice dove sei.
+                                  keepColor: true,
                                 )
                               // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
                               : context.druid.neu
@@ -695,6 +720,19 @@ class ClayChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Un'etichetta che comincia con l'emoji di un tratto ("❄️ Gelo"): nelle livree neumorfiche l'emoji diventa l'icona
+    // incisa, come nelle pillole.
+    final emoji = leadingEmoji(label);
+    final traitIcon = emoji == null ? null : traitIconOf(emoji);
+    if (context.druid.neu && traitIcon != null) {
+      return ClayChip(
+        key: key,
+        label: label.substring(emoji!.length).trim(),
+        avatar: EngravedIcon(traitIcon, size: 18),
+        selected: selected,
+        onTap: onTap,
+      );
+    }
     if (!context.druid.neu) {
       return selected == null
           ? ActionChip(avatar: avatar, label: Text(label), onPressed: onTap)

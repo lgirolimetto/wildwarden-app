@@ -136,7 +136,7 @@
   "sectionLore": "Lore",
   "sectionFunFacts": "Curiosities {seen}/{total}",
   "sectionFunFactsHidden": "{count} still to discover",
-  "safetyWarning": "⚠️ {text} · to be verified",
+  "safetyWarning": "{text} · to be verified",
   "protectedNote": "Protected species ({sources}). Look at it and photograph it: don't pick it, don't trample it, don't alter its surroundings and stay on the path.",
   "masteryTitle": "Mastery",
   "masteryFacts": "Consolidated facts (remembered after 1 and 3 days): {done}/{total}",

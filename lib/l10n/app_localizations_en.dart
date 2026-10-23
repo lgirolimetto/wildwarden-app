@@ -511,7 +511,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String safetyWarning(String text) {
-    return '⚠️ $text · to be verified';
+    return '$text · to be verified';
   }
 
   @override

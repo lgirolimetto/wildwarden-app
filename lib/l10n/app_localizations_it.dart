@@ -509,7 +509,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String safetyWarning(String text) {
-    return '⚠️ $text · da verificare';
+    return '$text · da verificare';
   }
 
   @override
