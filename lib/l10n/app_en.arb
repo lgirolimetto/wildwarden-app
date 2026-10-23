@@ -304,6 +304,6 @@
   "glossBottinoTerm": "Trove of Experience",
   "glossBottinoText": "The trove you buy with XP: you choose the grade, the content is a surprise (recipes, rare curiosities, hints).",
   "glossFigurinaTerm": "Figurine",
-  "glossFigurinaText": "A recipe or a potion in the album. The ones you're missing are a \"?\" on a pastel colour.",
+  "glossFigurinaText": "A recipe or a potion in the album. The recipe album shows the ones you know; the counter says how many there are in all.",
   "recipesEmpty": "You don't know any recipes yet. Common recipes are learned by studying: pass level 1 of a species, from Home or the herbarium."
 }
