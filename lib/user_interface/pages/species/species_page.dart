@@ -339,8 +339,8 @@ class SpeciesPhotoHeader extends StatelessWidget {
     // Nelle livree neumorfiche la foto si stacca anche dal bordo in alto: si vede tutto il contorno in rilievo.
     final photoTop = tokens.neu ? statusBar + Gaps.s : 0.0;
     final photoHeight = tokens.neu ? _photoHeight : _photoHeight + statusBar;
-    // Nelle livree neumorfiche la foto è incorniciata da un bordo del colore delle schede: è la cornice a essere in
-    // rilievo, e il rilievo si legge anche quando la foto è scura.
+    // Nelle livree neumorfiche la foto è incorniciata da un bordo piatto, inciso lungo il contorno come una pillola
+    // che non si preme: si legge anche quando la foto è scura.
     final frame = tokens.neu ? Gaps.m : 0.0;
     // La foto sta sul fondo di un incavo leggero; il margine attorno si ricava dalla sfumatura dell'ombra interna,
     // così l'ombra cade sul fondo e non sulla foto, dove sparirebbe.
@@ -352,39 +352,34 @@ class SpeciesPhotoHeader extends StatelessWidget {
       height: photoTop + photoHeight,
       child: Stack(
         children: [
-          // Un'ombra leggera sotto la foto: la stacca dalla pagina senza effetto 3D marcato.
+          // Un'ombra leggera sotto la foto: la stacca dalla pagina senza effetto 3D marcato. Nelle livree neumorfiche
+          // invece la cornice è piatta, con il bordo inciso come una pillola: la foto si guarda, non si preme.
           Positioned(
             left: Gaps.l,
             right: Gaps.l,
             top: photoTop,
             height: photoHeight,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: tokens.neu ? context.colors.surfaceContainerLow : null,
-                borderRadius: radius,
-                // Nelle livree neumorfiche luce in alto a sinistra e ombra in basso a destra, come le altre superfici
-                // in rilievo.
-                boxShadow: tokens.neu
-                    ? [
-                        BoxShadow(color: tokens.neuLight, blurRadius: 18, offset: const Offset(-8, -8)),
-                        BoxShadow(color: tokens.clayShadow, blurRadius: 18, offset: const Offset(8, 8)),
-                      ]
-                    : [
+            child: tokens.neu
+                ? const GroovedPanel(radius: radius, child: SizedBox.expand())
+                : DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: radius,
+                      boxShadow: [
                         BoxShadow(
                           color: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * 0.6),
                           blurRadius: 18,
                           offset: const Offset(0, 6),
                         ),
                       ],
-              ),
-            ),
+                    ),
+                  ),
           ),
           Positioned(
             left: Gaps.l + frame,
             right: Gaps.l + frame,
             top: photoTop + frame,
             height: photoHeight - frame * 2,
-            // Nelle livree neumorfiche: cornice in rilievo, un solco sottile inciso e la foto di nuovo in rilievo.
+            // Nelle livree neumorfiche: cornice piatta con il bordo inciso, un solco sottile e la foto che risale.
             child: NeuInset(
               radius: bottomRadius,
               depth: well,
@@ -582,9 +577,11 @@ class _StudyLadder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final next = nextStudyLevel(species, catalog, state);
-    return ClayCard(
-      padding: EdgeInsets.zero,
-      child: Padding(
+    // Il riquadro non si preme (si preme solo il pulsante dentro): nelle livree neumorfiche è piatto, con il bordo
+    // inciso come una pillola; altrove una scheda.
+    return _flatPanel(
+      context,
+      Padding(
         padding: const EdgeInsets.all(Gaps.m),
         child: Row(
           children: [
@@ -847,3 +844,8 @@ class _NotesSectionState extends State<_NotesSection> {
     ),
   );
 }
+
+/// Riquadro che non si preme: nelle livree neumorfiche piatto con il bordo inciso ([GroovedPanel]), altrove una scheda.
+Widget _flatPanel(BuildContext context, Widget child) => context.druid.neu
+    ? GroovedPanel(radius: BorderRadius.circular(context.druid.cardRadius), child: child)
+    : ClayCard(padding: EdgeInsets.zero, child: child);

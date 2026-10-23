@@ -286,46 +286,62 @@ class ClayCircle extends StatelessWidget {
   }
 }
 
-/// Cerchio da guardare, non da premere (livree neumorfiche): come le pillole che non si premono, un solco inciso
-/// tutt'intorno e, appena dentro, la superficie che risale di poco; al centro [child] (un'icona o un numero incisi).
+/// Superficie da guardare, non da premere (livree neumorfiche), piatta come una pillola che non si preme: un solco
+/// inciso lungo il bordo e, appena dentro, la superficie che risale di poco. Per i riquadri e le cornici che non si
+/// toccano (regola del rilievo: in rilievo solo ciò che si preme).
+class GroovedPanel extends StatelessWidget {
+  final BorderRadius radius;
+  final Widget child;
+
+  /// Fondo su cui sta, se diverso dalla pagina: luce e ombra del solco si ricavano da lui (su un fondo scuro l'ombra
+  /// beige della livrea chiara sembrerebbe una luce).
+  final Color? surface;
+
+  const GroovedPanel({super.key, required this.radius, required this.child, this.surface});
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = surface == null ? null : _darken(surface!, 0.45).withValues(alpha: 0.8);
+    final light = surface == null ? null : _lighten(surface!, 0.3).withValues(alpha: 0.6);
+    return NeuInset(
+      radius: radius,
+      depth: 0.8,
+      strength: 0.45,
+      darkColor: dark,
+      lightColor: light,
+      child: Padding(
+        padding: const EdgeInsets.all(3),
+        child: NeuInset(
+          radius: radius,
+          depth: 0.8,
+          strength: 0.35,
+          convex: true,
+          darkColor: dark,
+          lightColor: light,
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+/// Cerchio da guardare, non da premere: un [GroovedPanel] rotondo con al centro [child] (un'icona o un numero incisi).
 class GroovedCircle extends StatelessWidget {
   final double size;
   final Widget child;
-
-  /// Fondo su cui sta il cerchio, se diverso dalla pagina: luce e ombra del solco si ricavano da lui (su un fondo
-  /// scuro l'ombra beige della livrea chiara sembrerebbe una luce).
   final Color? surface;
 
   const GroovedCircle({super.key, required this.size, required this.child, this.surface});
 
   @override
-  Widget build(BuildContext context) {
-    final radius = BorderRadius.circular(size / 2);
-    final dark = surface == null ? null : _darken(surface!, 0.45).withValues(alpha: 0.8);
-    final light = surface == null ? null : _lighten(surface!, 0.3).withValues(alpha: 0.6);
-    return SizedBox.square(
-      dimension: size,
-      child: NeuInset(
-        radius: radius,
-        depth: 0.8,
-        strength: 0.45,
-        darkColor: dark,
-        lightColor: light,
-        child: Padding(
-          padding: const EdgeInsets.all(3),
-          child: NeuInset(
-            radius: radius,
-            depth: 0.8,
-            strength: 0.35,
-            convex: true,
-            darkColor: dark,
-            lightColor: light,
-            child: Center(child: child),
-          ),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox.square(
+    dimension: size,
+    child: GroovedPanel(
+      radius: BorderRadius.circular(size / 2),
+      surface: surface,
+      child: Center(child: child),
+    ),
+  );
 }
 
 /// Il livello di studio di una specie in un cerchio: nelle livree neumorfiche il cerchio è inciso (non si preme) e il
