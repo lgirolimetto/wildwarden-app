@@ -58,6 +58,18 @@ class SpeciesPage extends StatelessWidget {
               ? StatusBarScrim(color: context.druid.backgroundGradient.first)
               : const SizedBox.shrink(),
         ),
+        // Il pulsante indietro, fisso: sempre disponibile mentre la pagina scorre. All'apertura sta sull'angolo in alto a
+        // sinistra della cornice della foto, allineato ai margini della pagina.
+        Positioned(
+          left: Gaps.l,
+          top: MediaQuery.paddingOf(context).top + Gaps.s,
+          child: ClayIconButton(
+            key: const ValueKey('clay-back'),
+            icon: Icons.arrow_back_rounded,
+            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+            onPressed: () => Navigator.of(context).maybePop(),
+          ),
+        ),
       ],
     ),
   );
@@ -420,19 +432,6 @@ class SpeciesPhotoHeader extends StatelessWidget {
                     ),
                 ],
               ),
-            ),
-          ),
-
-          // Il pulsante indietro sull'angolo in alto a sinistra della foto, allineato ai margini della pagina: scorre
-          // via con la testata.
-          Positioned(
-            left: Gaps.l,
-            top: tokens.neu ? photoTop : statusBar + Gaps.s,
-            child: ClayIconButton(
-              key: const ValueKey('clay-back'),
-              icon: Icons.arrow_back_rounded,
-              tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-              onPressed: () => Navigator.of(context).maybePop(),
             ),
           ),
         ],
