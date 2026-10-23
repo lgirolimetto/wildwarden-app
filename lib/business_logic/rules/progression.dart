@@ -2,6 +2,7 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 
 /// Regole che combinano stato di gioco e catalogo: maestria, desiderata, ricette, ripassi.
@@ -62,15 +63,31 @@ List<Fact> dueFacts(Catalog catalog, GameState state, DateTime now) => [
 
 bool canAddDesiderata(GameState state) => state.desiderata.length < maxDesiderata;
 
-/// Specie consigliate come desiderata: non ancora incontrate, in stagione questo mese, le più comuni prima.
-List<Species> desiderataSuggestions(Catalog catalog, GameState state, DateTime now, {int limit = 5}) =>
-    (catalog.species
-            .where((s) => !state.hasEncountered(s.sci) && !state.desiderata.contains(s.sci))
-            .where((s) => s.bestMonths.contains(now.month))
-            .toList()
-          ..sort((a, b) => b.observations.compareTo(a.observations)))
-        .take(limit)
-        .toList();
+/// Specie che stai studiando: incontrate, o con almeno una risposta o un livello di studio. Si studia anche ciò che
+/// non si è ancora incontrato.
+Set<String> speciesInStudy(GameState state) => {
+  ...state.firstEncounters.keys,
+  ...state.passedLevels.keys,
+  for (final id in state.facts.keys) Fact.parseId(id).speciesSci,
+};
+
+/// Quante specie si propongono al primo avvio.
+const firstStudySuggestions = 3;
+
+/// Specie "In stagione adesso" da studiare (e da segnare come desiderata), le più comuni prima.
+///
+/// Al primo avvio (nessuna specie in studio) sono [firstStudySuggestions], scelte tra quelle sicure: niente
+/// tossiche né protette. Se in stagione non ce ne sono abbastanza si completano con le più comuni fuori stagione:
+/// la sicurezza non si allenta mai. Dopo, tutte le specie in stagione non ancora in studio, fino a [limit].
+List<Species> seasonalSuggestions(Catalog catalog, GameState state, DateTime now, {int limit = 8}) {
+  final inStudy = speciesInStudy(state);
+  bool inSeason(Species s) => s.bestMonths.contains(now.month);
+  final candidates = catalog.species.where((s) => !inStudy.contains(s.sci)).toList()
+    ..sort((a, b) => b.observations.compareTo(a.observations));
+  if (inStudy.isNotEmpty) return candidates.where(inSeason).take(limit).toList();
+  final safe = candidates.where((s) => !catalog.safety.containsKey(s.sci) && !s.isProtected);
+  return [...safe.where(inSeason), ...safe.where((s) => !inSeason(s))].take(firstStudySuggestions).toList();
+}
 
 bool isRecipeUnlocked(Recipe recipe, GameState state) =>
     recipe.unlock == null || state.levelOf(recipe.unlock!.speciesSci) >= recipe.unlock!.level;

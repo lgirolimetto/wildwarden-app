@@ -415,6 +415,10 @@
   },
   "desiderataEmpty": "Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
   "desiderataSuggestions": "In stagione adesso",
+  "seasonalFirstHint": "Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.",
+  "seasonalHint": "Puoi studiarle subito o segnarle come desiderata da cercare.",
+  "seasonalStudy": "Studia",
+  "yourSpeciesMet": "incontrata",
   "desiderataAdd": "Aggiungi alle desiderata",
   "desiderataRemove": "Togli dalle desiderata",
   "desiderataFull": "Hai già 3 desiderata: completane o togline una.",
@@ -443,7 +447,7 @@
     }
   },
   "yourSpecies": "Le tue specie",
-  "yourSpeciesEmpty": "Nessuna specie incontrata ancora.",
+  "yourSpeciesEmpty": "Nessuna specie in studio: comincia da una di quelle in stagione.",
   "studyLevelButton": "Studia il livello {level}",
   "@studyLevelButton": {
     "placeholders": {
@@ -606,8 +610,8 @@
   "missionMarkDesiderataBody": "Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
   "missionFirstEncounterTitle": "Incontra una specie",
   "missionFirstEncounterBody": "Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell'erbario. Fotografa, non raccogliere.",
-  "missionFirstLevelTitle": "Studiala",
-  "missionFirstLevelBody": "Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.",
+  "missionFirstLevelTitle": "Studia la tua prima specie",
+  "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.",
   "missionFirstRecipeTitle": "La prima ricetta",
   "missionFirstRecipeBody": "Porta una specie al livello richiesto da una ricetta per sbloccarla. Le ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.",
   "missionSkip": "Salta l'apprendistato",

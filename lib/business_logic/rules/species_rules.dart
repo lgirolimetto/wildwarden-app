@@ -44,4 +44,8 @@ extension SpeciesRules on Species {
   }
 
   SpeciesHint get hint => SpeciesHint(family: family, season: dominantSeason, band: dominantBand);
+
+  /// Specie protetta. Provvisorio: il catalogo non ha ancora il dato (tappa B, step 4), quindi valgono le orchidee
+  /// spontanee, protette in molte regioni.
+  bool get isProtected => family == 'Orchidaceae';
 }

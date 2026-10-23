@@ -90,13 +90,45 @@ void main() {
       expect(canAddDesiderata(state), isFalse);
     });
 
-    test('suggerimenti: specie in stagione questo mese, non ancora incontrate', () {
-      final suggestions = desiderataSuggestions(catalog, GameState.empty, feb).map((s) => s.sci);
-      expect(suggestions, contains('Eranthis hyemalis'));
-      expect(suggestions, isNot(contains('Fagus sylvatica')));
+    test('primo avvio: solo specie sicure, prima quelle in stagione, poi le più comuni fuori stagione', () {
+      // A febbraio sono in stagione elleboro e piè di gallo, entrambi tossici: restano fuori. Malva e faggio non sono
+      // in stagione, ma sono le specie sicure più comuni.
+      final first = seasonalSuggestions(catalog, GameState.empty, feb).map((s) => s.sci);
+      expect(first, ['Malva sylvestris', 'Fagus sylvatica']);
 
-      final afterMeeting = desiderataSuggestions(catalog, play([met('Eranthis hyemalis')]), feb).map((s) => s.sci);
-      expect(afterMeeting, isNot(contains('Eranthis hyemalis')));
+      final july = seasonalSuggestions(catalog, GameState.empty, DateTime(2027, 7, 1)).map((s) => s.sci);
+      expect(july, ['Malva sylvestris', 'Fagus sylvatica']);
+    });
+
+    test('dopo il primo avvio: tutte le specie in stagione non ancora in studio', () {
+      final state = play([met('Fagus sylvatica')]);
+      expect(seasonalSuggestions(catalog, state, feb).map((s) => s.sci), ['Helleborus viridis', 'Eranthis hyemalis']);
+
+      final studying = state.apply(
+        AnswerGiven(
+          factId: Fact.idOf('Helleborus viridis', FactKind.name),
+          correct: true,
+          mode: AnswerMode.learning,
+          xp: 10,
+          occurredAt: feb,
+        ),
+      );
+      expect(seasonalSuggestions(catalog, studying, feb).map((s) => s.sci), ['Eranthis hyemalis']);
+    });
+
+    test('in studio: le incontrate e quelle con risposte o livelli, anche mai incontrate', () {
+      final state = play([
+        met('Fagus sylvatica'),
+        AnswerGiven(
+          factId: Fact.idOf('Malva sylvestris', FactKind.name),
+          correct: false,
+          mode: AnswerMode.learning,
+          xp: 2,
+          occurredAt: feb,
+        ),
+        passed('Eranthis hyemalis', 1),
+      ]);
+      expect(speciesInStudy(state), {'Fagus sylvatica', 'Malva sylvestris', 'Eranthis hyemalis'});
     });
 
     test('una desiderata compiuta esce dall\'elenco', () {
@@ -161,19 +193,19 @@ void main() {
   });
 
   group('apprendistato', () {
-    test('le missioni si completano in ordine, guardando lo stato', () {
-      expect(currentMission(GameState.empty, catalog), Mission.visitErbario);
+    test('le missioni si completano in ordine, guardando lo stato: prima lo studio, da casa', () {
+      expect(currentMission(GameState.empty, catalog), Mission.firstLevel);
 
-      var state = play([OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: feb)]);
+      var state = play([passed('Eranthis hyemalis', 1)]);
+      expect(currentMission(state, catalog), Mission.visitErbario);
+
+      state = state.apply(OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: feb));
       expect(currentMission(state, catalog), Mission.markDesiderata);
 
       state = state.apply(DesiderataChanged(speciesSci: 'Eranthis hyemalis', marked: true, occurredAt: feb));
       expect(currentMission(state, catalog), Mission.firstEncounter);
 
       state = state.apply(met('Eranthis hyemalis'));
-      expect(currentMission(state, catalog), Mission.firstLevel);
-
-      state = state.apply(passed('Eranthis hyemalis', 1));
       expect(currentMission(state, catalog), Mission.firstRecipe);
 
       state = state.apply(passed('Eranthis hyemalis', 2));
@@ -181,8 +213,8 @@ void main() {
       expect(isApprenticeshipComplete(state, catalog), isTrue);
     });
 
-    test('"Studiala" propone la prima specie incontrata che ha ancora un livello da superare', () {
-      expect(speciesToStudyFirst(GameState.empty, catalog), isNull);
+    test('"Studia la tua prima specie": prima le specie in studio, poi le proposte in stagione', () {
+      expect(speciesToStudyFirst(GameState.empty, catalog, feb), 'Malva sylvestris');
 
       final earlier = SpeciesEncountered(
         speciesSci: 'Fagus sylvatica',
@@ -190,13 +222,13 @@ void main() {
         occurredAt: feb.subtract(const Duration(days: 1)),
       );
       var state = play([met('Eranthis hyemalis'), earlier]);
-      expect(speciesToStudyFirst(state, catalog), 'Fagus sylvatica');
+      expect(speciesToStudyFirst(state, catalog, feb), 'Fagus sylvatica');
 
       // Livelli finiti: si passa alla specie successiva.
       for (var level = 1; level <= maxStudyLevel; level++) {
         state = state.apply(passed('Fagus sylvatica', level));
       }
-      expect(speciesToStudyFirst(state, catalog), 'Eranthis hyemalis');
+      expect(speciesToStudyFirst(state, catalog, feb), 'Eranthis hyemalis');
     });
 
     test('saltare l\'apprendistato lo nasconde', () {

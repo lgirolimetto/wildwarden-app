@@ -49,16 +49,20 @@ class StudyHomePage extends StatelessWidget {
               children: [
                 if (mission != null) ...[
                   const SizedBox(height: Gaps.l),
-                  MissionBanner(mission: mission, catalog: catalog, state: state),
+                  MissionBanner(mission: mission, catalog: catalog, state: state, now: now),
                 ],
-                const SizedBox(height: Gaps.l),
-                _FunFactCard(catalog: catalog, state: state, now: now),
-                const SizedBox(height: Gaps.l),
-                _ReviewsCard(catalog: catalog, state: state, now: now),
                 const SizedBox(height: Gaps.xl),
-                _DesiderataSection(catalog: catalog, state: state, now: now, progress: progress),
+                _SeasonalSection(catalog: catalog, state: state, now: now, progress: progress),
+                if (dueFacts(catalog, state, now).isNotEmpty) ...[
+                  const SizedBox(height: Gaps.l),
+                  _ReviewsCard(catalog: catalog, state: state, now: now),
+                ],
                 const SizedBox(height: Gaps.xl),
                 _YourSpecies(catalog: catalog, state: state),
+                const SizedBox(height: Gaps.xl),
+                _DesiderataSection(catalog: catalog, state: state, progress: progress),
+                const SizedBox(height: Gaps.xl),
+                _FunFactCard(catalog: catalog, state: state, now: now),
               ],
             ),
           ),
@@ -281,18 +285,18 @@ class _ReviewsCard extends StatelessWidget {
   }
 }
 
+/// Le desiderata segnate (al massimo [maxDesiderata]). Si scelgono dal carosello "In stagione adesso" o
+/// dall'erbario.
 class _DesiderataSection extends StatelessWidget {
   final Catalog catalog;
   final GameState state;
-  final DateTime now;
   final ProgressController progress;
 
-  const _DesiderataSection({required this.catalog, required this.state, required this.now, required this.progress});
+  const _DesiderataSection({required this.catalog, required this.state, required this.progress});
 
   @override
   Widget build(BuildContext context) {
     final marked = state.desiderata.map(catalog.speciesBySci).whereType<Species>().toList();
-    final suggestions = desiderataSuggestions(catalog, state, now);
     final debug = Get.find<AppConfig>().showDebugTools;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -313,21 +317,60 @@ class _DesiderataSection extends StatelessWidget {
           ),
           const SizedBox(height: Gaps.s),
         ],
-        if (suggestions.isNotEmpty && canAddDesiderata(state)) ...[
-          const SizedBox(height: Gaps.m),
-          Text(context.l10n.desiderataSuggestions, style: context.texts.titleMedium),
-          const SizedBox(height: Gaps.s),
-          SizedBox(
-            height: 210,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: suggestions.length,
-              separatorBuilder: (_, _) => const SizedBox(width: Gaps.s),
-              itemBuilder: (context, i) =>
-                  _SuggestionCard(species: suggestions[i], onAdd: () => progress.toggleDesiderata(suggestions[i].sci)),
-            ),
+      ],
+    );
+  }
+}
+
+/// "In stagione adesso": specie da cominciare a studiare, con la stellina per segnarle come desiderata. Al primo
+/// avvio sono le 3 specie proposte per iniziare subito, anche da casa.
+class _SeasonalSection extends StatelessWidget {
+  final Catalog catalog;
+  final GameState state;
+  final DateTime now;
+  final ProgressController progress;
+
+  const _SeasonalSection({required this.catalog, required this.state, required this.now, required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    final suggestions = seasonalSuggestions(catalog, state, now);
+    if (suggestions.isEmpty) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClaySectionTitle(
+          title: context.l10n.desiderataSuggestions,
+          icon: Icons.local_florist_rounded,
+          color: context.druid.levelColor(1),
+        ),
+        Text(
+          speciesInStudy(state).isEmpty ? context.l10n.seasonalFirstHint : context.l10n.seasonalHint,
+          style: TextStyle(color: context.druid.hint),
+        ),
+        const SizedBox(height: Gaps.s),
+        SizedBox(
+          height: 250,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            // Le schede escono dal margine della pagina mentre scorrono, ma partono allineate al contenuto.
+            clipBehavior: Clip.none,
+            itemCount: suggestions.length,
+            separatorBuilder: (_, _) => const SizedBox(width: Gaps.s),
+            itemBuilder: (context, i) {
+              final species = suggestions[i];
+              final marked = state.desiderata.contains(species.sci);
+              return _SuggestionCard(
+                species: species,
+                onStudy: () => startLevelStudy(catalog, species.sci, nextStudyLevel(species, catalog, state) ?? 1),
+                marked: marked,
+                onToggleDesiderata: marked || canAddDesiderata(state)
+                    ? () => progress.toggleDesiderata(species.sci)
+                    : null,
+              );
+            },
           ),
-        ],
+        ),
       ],
     );
   }
@@ -386,9 +429,18 @@ class _DesiderataCard extends StatelessWidget {
 
 class _SuggestionCard extends StatelessWidget {
   final Species species;
-  final VoidCallback onAdd;
+  final VoidCallback onStudy;
+  final bool marked;
 
-  const _SuggestionCard({required this.species, required this.onAdd});
+  /// `null` se le desiderata sono già al completo.
+  final VoidCallback? onToggleDesiderata;
+
+  const _SuggestionCard({
+    required this.species,
+    required this.onStudy,
+    required this.marked,
+    required this.onToggleDesiderata,
+  });
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -397,20 +449,33 @@ class _SuggestionCard extends StatelessWidget {
     child: SizedBox(
       width: 150,
       child: ClayCard(
+        key: ValueKey('seasonal-${species.sci}'),
         padding: EdgeInsets.zero,
+        onTap: () => Get.to<void>(() => SpeciesPage(speciesSci: species.sci)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(child: RemoteImage(species.images.first.url)),
             Padding(
-              padding: const EdgeInsets.all(Gaps.s),
+              padding: const EdgeInsets.fromLTRB(Gaps.s, Gaps.s, Gaps.s, 0),
               child: Text(context.game.name(species), maxLines: 1, overflow: TextOverflow.ellipsis),
             ),
-            TextButton.icon(
-              key: ValueKey('add-desiderata-${species.sci}'),
-              onPressed: onAdd,
-              icon: const Icon(Icons.star_outline, size: 18),
-              label: Text(context.l10n.desiderataAddShort),
+            Row(
+              children: [
+                Expanded(
+                  child: TextButton(
+                    key: ValueKey('study-suggestion-${species.sci}'),
+                    onPressed: onStudy,
+                    child: Text(context.l10n.seasonalStudy),
+                  ),
+                ),
+                IconButton(
+                  key: ValueKey('add-desiderata-${species.sci}'),
+                  tooltip: marked ? context.l10n.desiderataRemove : context.l10n.desiderataAdd,
+                  onPressed: onToggleDesiderata,
+                  icon: Icon(marked ? Icons.star_rounded : Icons.star_outline_rounded),
+                ),
+              ],
             ),
           ],
         ),
@@ -427,7 +492,8 @@ class _YourSpecies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mine = catalog.species.where((s) => state.hasEncountered(s.sci)).toList()
+    final inStudy = speciesInStudy(state);
+    final mine = catalog.species.where((s) => inStudy.contains(s.sci)).toList()
       ..sort((a, b) => state.levelOf(a.sci).compareTo(state.levelOf(b.sci)));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -451,7 +517,10 @@ class _YourSpecies extends StatelessWidget {
                   ),
                 ),
                 title: Text(context.game.name(s)),
-                subtitle: Text(levelName(context.l10n, state.levelOf(s.sci))),
+                subtitle: Text(
+                  '${levelName(context.l10n, state.levelOf(s.sci))} · '
+                  '${state.hasEncountered(s.sci) ? context.l10n.yourSpeciesMet : context.l10n.notEncounteredYet}',
+                ),
                 trailing: _StudyButton(catalog: catalog, state: state, species: s),
               ),
             ),

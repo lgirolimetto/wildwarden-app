@@ -29,8 +29,15 @@ class MissionBanner extends StatelessWidget {
   final Mission mission;
   final Catalog catalog;
   final GameState state;
+  final DateTime now;
 
-  const MissionBanner({super.key, required this.mission, required this.catalog, required this.state});
+  const MissionBanner({
+    super.key,
+    required this.mission,
+    required this.catalog,
+    required this.state,
+    required this.now,
+  });
 
   /// Testo e azione del pulsante della missione.
   (String, VoidCallback) _action(BuildContext context) {
@@ -42,7 +49,7 @@ class MissionBanner extends StatelessWidget {
       Mission.firstEncounter => (context.l10n.missionActionOpenErbario, () => openTab(HomeController.erbarioTab)),
       Mission.firstLevel => (
         context.l10n.missionActionStudy,
-        () => switch (speciesToStudyFirst(state, catalog)) {
+        () => switch (speciesToStudyFirst(state, catalog, now)) {
           final sci? => startLevelStudy(catalog, sci, nextStudyLevel(catalog.speciesBySci(sci)!, catalog, state)!),
           null => openTab(HomeController.erbarioTab),
         },

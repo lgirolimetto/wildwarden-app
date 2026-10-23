@@ -426,6 +426,20 @@ class AppLocalizationsIt extends AppLocalizations {
   String get desiderataSuggestions => 'In stagione adesso';
 
   @override
+  String get seasonalFirstHint =>
+      'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.';
+
+  @override
+  String get seasonalHint =>
+      'Puoi studiarle subito o segnarle come desiderata da cercare.';
+
+  @override
+  String get seasonalStudy => 'Studia';
+
+  @override
+  String get yourSpeciesMet => 'incontrata';
+
+  @override
   String get desiderataAdd => 'Aggiungi alle desiderata';
 
   @override
@@ -454,7 +468,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get yourSpecies => 'Le tue specie';
 
   @override
-  String get yourSpeciesEmpty => 'Nessuna specie incontrata ancora.';
+  String get yourSpeciesEmpty =>
+      'Nessuna specie in studio: comincia da una di quelle in stagione.';
 
   @override
   String studyLevelButton(int level) {
@@ -620,11 +635,11 @@ class AppLocalizationsIt extends AppLocalizations {
       'Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell\'erbario. Fotografa, non raccogliere.';
 
   @override
-  String get missionFirstLevelTitle => 'Studiala';
+  String get missionFirstLevelTitle => 'Studia la tua prima specie';
 
   @override
   String get missionFirstLevelBody =>
-      'Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.';
+      'Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.';
 
   @override
   String get missionFirstRecipeTitle => 'La prima ricetta';

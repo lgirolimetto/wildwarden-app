@@ -15,49 +15,67 @@ final _feb = DateTime(2027, 2, 1);
 SpeciesEncountered _met(String sci) =>
     SpeciesEncountered(speciesSci: sci, method: EncounterMethod.photo, occurredAt: _feb);
 
+LevelPassed _passed(String sci) => LevelPassed(speciesSci: sci, level: 1, xp: 20, occurredAt: _feb);
+
+OnboardingMarked _erbarioVisited() => OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: _feb);
+
 void main() {
   tearDown(Get.reset);
 
   group('apprendistato e desiderata', () {
-    testWidgets('le missioni avanzano usando l\'app', (tester) async {
+    testWidgets('primo avvio: si comincia studiando una delle specie proposte, anche mai incontrata', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      expect(find.byKey(const ValueKey('mission-visitErbario')), findsOneWidget);
+      expect(find.byKey(const ValueKey('mission-firstLevel')), findsOneWidget);
 
-      await openTab(tester, 'Erbario');
-      await openTab(tester, 'Studio');
+      // A febbraio le specie in stagione sono tossiche: si propongono le sicure più comuni.
+      expect(find.byKey(const ValueKey('seasonal-Malva sylvestris')), findsOneWidget);
+      expect(find.byKey(const ValueKey('seasonal-Eranthis hyemalis')), findsNothing);
+
+      await scrollAndTap(tester, find.byKey(const ValueKey('study-suggestion-Malva sylvestris')));
+      expect(find.text('Malva selvatica · livello 1'), findsOneWidget);
+      await completeSession(tester);
+      await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
+
+      expect(Get.find<ProgressController>().state.levelOf('Malva sylvestris'), 1);
+      expect(find.byKey(const ValueKey('mission-visitErbario')), findsOneWidget);
+      await scrollTo(tester, find.byKey(const ValueKey('my-Malva sylvestris')));
+      expect(find.textContaining('Non ancora incontrata'), findsOneWidget);
+    });
+
+    testWidgets('la stellina della stagione segna una desiderata', (tester) async {
+      registerTestDependencies(events: [_passed('Fagus sylvatica'), _erbarioVisited()]);
+      await pumpDruidApp(tester);
       expect(find.text('Scegli le tue desiderata'), findsOneWidget);
 
-      // Il 14 febbraio il piè di gallo è tra le specie in stagione.
-      final add = find.byKey(const ValueKey('add-desiderata-Eranthis hyemalis'));
-      await scrollTo(tester, add);
-      await tester.tap(add);
-      await tester.pumpAndSettle();
+      // Dopo il primo avvio si propongono tutte le specie in stagione, anche le tossiche.
+      await scrollAndTap(tester, find.byKey(const ValueKey('add-desiderata-Eranthis hyemalis')));
+      await scrollToTop(tester);
       expect(find.text('Incontra una specie'), findsOneWidget);
+      await scrollTo(tester, find.byKey(const ValueKey('desiderata-Eranthis hyemalis')));
       expect(find.byKey(const ValueKey('desiderata-Eranthis hyemalis')), findsOneWidget);
     });
 
     testWidgets('incontrare una desiderata la compie: PE e missione successiva', (tester) async {
       registerTestDependencies(
         events: [
-          OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: _feb),
+          _passed('Fagus sylvatica'),
+          _erbarioVisited(),
           DesiderataChanged(speciesSci: 'Eranthis hyemalis', marked: true, occurredAt: _feb),
         ],
       );
       await pumpDruidApp(tester);
+      final xpBefore = Get.find<ProgressController>().state.xp;
 
-      final simulate = find.byKey(const ValueKey('simulate-desiderata-Eranthis hyemalis'));
-      await scrollTo(tester, simulate);
-      await tester.tap(simulate);
-      await tester.pumpAndSettle();
+      await scrollAndTap(tester, find.byKey(const ValueKey('simulate-desiderata-Eranthis hyemalis')));
 
-      expect(Get.find<ProgressController>().state.xp, XpRules.desiderataFulfilled);
+      expect(Get.find<ProgressController>().state.xp - xpBefore, XpRules.desiderataFulfilled);
       await scrollToTop(tester);
-      expect(find.text('Studiala'), findsOneWidget);
+      expect(find.byKey(const ValueKey('mission-firstRecipe')), findsOneWidget);
     });
 
     testWidgets('il pulsante della missione porta all\'erbario e la compie', (tester) async {
-      registerTestDependencies();
+      registerTestDependencies(events: [_passed('Fagus sylvatica')]);
       await pumpDruidApp(tester);
 
       await tester.tap(find.byKey(const ValueKey('mission-action-visitErbario')));
@@ -68,24 +86,18 @@ void main() {
       expect(Get.find<ProgressController>().state.onboardingMarks, contains(OnboardingMark.erbarioVisited));
     });
 
-    testWidgets('il pulsante di "Studiala" apre il primo livello della specie incontrata', (tester) async {
-      registerTestDependencies(
-        events: [
-          OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: _feb),
-          DesiderataChanged(speciesSci: 'Helleborus viridis', marked: true, occurredAt: _feb),
-          _met('Helleborus viridis'),
-        ],
-      );
+    testWidgets('il pulsante della prima missione apre il livello 1 della prima specie proposta', (tester) async {
+      registerTestDependencies();
       await pumpDruidApp(tester);
 
       await tester.tap(find.byKey(const ValueKey('mission-action-firstLevel')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Elleboro verde · livello 1'), findsOneWidget);
+      expect(find.text('Malva selvatica · livello 1'), findsOneWidget);
     });
 
     testWidgets('il glossario si apre dalla missione e l\'apprendistato si può saltare', (tester) async {
-      registerTestDependencies();
+      registerTestDependencies(events: [_passed('Fagus sylvatica')]);
       await pumpDruidApp(tester);
 
       await tester.tap(find.widgetWithText(ActionChip, 'Erbario'));

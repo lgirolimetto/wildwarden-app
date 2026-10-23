@@ -782,6 +782,30 @@ abstract class AppLocalizations {
   /// **'In stagione adesso'**
   String get desiderataSuggestions;
 
+  /// No description provided for @seasonalFirstHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.'**
+  String get seasonalFirstHint;
+
+  /// No description provided for @seasonalHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Puoi studiarle subito o segnarle come desiderata da cercare.'**
+  String get seasonalHint;
+
+  /// No description provided for @seasonalStudy.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia'**
+  String get seasonalStudy;
+
+  /// No description provided for @yourSpeciesMet.
+  ///
+  /// In it, this message translates to:
+  /// **'incontrata'**
+  String get yourSpeciesMet;
+
   /// No description provided for @desiderataAdd.
   ///
   /// In it, this message translates to:
@@ -827,7 +851,7 @@ abstract class AppLocalizations {
   /// No description provided for @yourSpeciesEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Nessuna specie incontrata ancora.'**
+  /// **'Nessuna specie in studio: comincia da una di quelle in stagione.'**
   String get yourSpeciesEmpty;
 
   /// No description provided for @studyLevelButton.
@@ -1097,13 +1121,13 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstLevelTitle.
   ///
   /// In it, this message translates to:
-  /// **'Studiala'**
+  /// **'Studia la tua prima specie'**
   String get missionFirstLevelTitle;
 
   /// No description provided for @missionFirstLevelBody.
   ///
   /// In it, this message translates to:
-  /// **'Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.'**
+  /// **'Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.'**
   String get missionFirstLevelBody;
 
   /// No description provided for @missionFirstRecipeTitle.
