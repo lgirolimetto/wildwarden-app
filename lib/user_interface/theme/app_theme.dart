@@ -22,7 +22,7 @@ ThemeData? _buildTheme(Livery livery, Brightness brightness, {required bool dens
     // resta solo l'ombra e il rilievo sparisce.
     tokens = tokens.copyWith(
       backgroundGradient: [background, background],
-      neuLight: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * 3).clamp(0, 1)),
+      neuLight: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * 2).clamp(0, 1)),
     );
   }
   final radius = BorderRadius.circular(tokens.cardRadius);
