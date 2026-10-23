@@ -18,7 +18,12 @@ ThemeData? _buildTheme(Livery livery, Brightness brightness, {required bool dens
     final background = tokens.denseBackground, surface = tokens.denseSurface;
     if (background == null || surface == null) return null;
     scheme = scheme.copyWith(surface: background, surfaceContainerLow: surface);
-    tokens = tokens.copyWith(backgroundGradient: [background, background]);
+    // Sulle superfici più chiare la luce del rilievo pensata per lo sfondo scuro non si vede più: va alzata, altrimenti
+    // resta solo l'ombra e il rilievo sparisce.
+    tokens = tokens.copyWith(
+      backgroundGradient: [background, background],
+      neuLight: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * 3).clamp(0, 1)),
+    );
   }
   final radius = BorderRadius.circular(tokens.cardRadius);
 
