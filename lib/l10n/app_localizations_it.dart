@@ -653,7 +653,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get apprenticeshipComplete => 'Apprendistato completato!';
 
   @override
-  String get glossaryTitle => 'Glossario';
+  String get glossaryTitle => 'Legenda e glossario';
 
   @override
   String get glossErbarioTerm => 'Erbario';
@@ -1050,4 +1050,83 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get legendTitle => 'Legenda';
+
+  @override
+  String get glossarySection => 'Glossario';
+
+  @override
+  String get legendGrades => 'Gradi (ricette, pozioni, bottino)';
+
+  @override
+  String get legendBadges => 'Bollini';
+
+  @override
+  String get legendProtected =>
+      'Specie protetta dalla legge: si guarda e si fotografa';
+
+  @override
+  String get legendEncountered =>
+      'Specie incontrata, con la data dell\'incontro';
+
+  @override
+  String get legendXpToCash =>
+      'PE da incassare alla prima essenza della specie';
+
+  @override
+  String get legendLevels => 'Livelli di studio';
+
+  @override
+  String get legendTraits => 'Tratti delle essenze';
+
+  @override
+  String get glossProtettaTerm => 'Protetta';
+
+  @override
+  String get glossProtettaText =>
+      'Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.';
+
+  @override
+  String get glossEssenzaTerm => 'Essenza';
+
+  @override
+  String get glossEssenzaText =>
+      'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.';
+
+  @override
+  String get glossVisTerm => 'Vis';
+
+  @override
+  String get glossVisText =>
+      'La linfa sottile delle piante: l\'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.';
+
+  @override
+  String get glossPeDaIncassareTerm => 'PE da incassare';
+
+  @override
+  String get glossPeDaIncassareText =>
+      'I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.';
+
+  @override
+  String get glossGradoTerm => 'Grado';
+
+  @override
+  String get glossGradoText =>
+      'Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell\'Esperienza.';
+
+  @override
+  String get glossBottinoTerm => 'Bottino dell\'Esperienza';
+
+  @override
+  String get glossBottinoText =>
+      'Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).';
+
+  @override
+  String get glossFigurinaTerm => 'Figurina';
+
+  @override
+  String get glossFigurinaText =>
+      'Una ricetta o una pozione nell\'album. Quelle che ti mancano sono un \"?\" su un colore pastello.';
 }

@@ -655,7 +655,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get apprenticeshipComplete => 'Apprenticeship complete!';
 
   @override
-  String get glossaryTitle => 'Glossary';
+  String get glossaryTitle => 'Legend and glossary';
 
   @override
   String get glossErbarioTerm => 'Herbarium';
@@ -1051,4 +1051,81 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get legendTitle => 'Legend';
+
+  @override
+  String get glossarySection => 'Glossary';
+
+  @override
+  String get legendGrades => 'Grades (recipes, potions, trove)';
+
+  @override
+  String get legendBadges => 'Badges';
+
+  @override
+  String get legendProtected =>
+      'Species protected by law: look and photograph only';
+
+  @override
+  String get legendEncountered => 'Species met, with the date you met it';
+
+  @override
+  String get legendXpToCash => 'XP to cash in with the species\' first essence';
+
+  @override
+  String get legendLevels => 'Study levels';
+
+  @override
+  String get legendTraits => 'Essence traits';
+
+  @override
+  String get glossProtettaTerm => 'Protected';
+
+  @override
+  String get glossProtettaText =>
+      'A species protected by the Habitats Directive or a regional law. Look and photograph: don\'t pick it, don\'t trample it, stay on the path.';
+
+  @override
+  String get glossEssenzaTerm => 'Essence';
+
+  @override
+  String get glossEssenzaText =>
+      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and a trait, given by the conditions of the moment.';
+
+  @override
+  String get glossVisTerm => 'Vis';
+
+  @override
+  String get glossVisText =>
+      'The subtle sap of plants: the energy you store with each draw. Recipes ask for an amount of it for each ingredient.';
+
+  @override
+  String get glossPeDaIncassareTerm => 'XP to cash in';
+
+  @override
+  String get glossPeDaIncassareText =>
+      'The experience points from studying a species you haven\'t drawn yet. You cash them in with that species\' first essence, and from then on they count for your rank.';
+
+  @override
+  String get glossGradoTerm => 'Grade';
+
+  @override
+  String get glossGradoText =>
+      'Common, uncommon, rare, mythic: white, silver, gold, red gold. It applies to ingredients, recipes, potions and the Trove of Experience.';
+
+  @override
+  String get glossBottinoTerm => 'Trove of Experience';
+
+  @override
+  String get glossBottinoText =>
+      'The trove you buy with XP: you choose the grade, the content is a surprise (recipes, rare curiosities, hints).';
+
+  @override
+  String get glossFigurinaTerm => 'Figurine';
+
+  @override
+  String get glossFigurinaText =>
+      'A recipe or a potion in the album. The ones you\'re missing are a \"?\" on a pastel colour.';
 }

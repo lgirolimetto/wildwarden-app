@@ -596,7 +596,7 @@
   "missionActionRecipes": "Vedi le ricette",
   "missionGlossary": "Glossario",
   "apprenticeshipComplete": "Apprendistato completato!",
-  "glossaryTitle": "Glossario",
+  "glossaryTitle": "Legenda e glossario",
   "glossErbarioTerm": "Erbario",
   "glossErbarioText": "Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che incontri e studi.",
   "glossDesiderataTerm": "Desiderata",
@@ -967,5 +967,28 @@
         "format": "compact"
       }
     }
-  }
+  },
+  "legendTitle": "Legenda",
+  "glossarySection": "Glossario",
+  "legendGrades": "Gradi (ricette, pozioni, bottino)",
+  "legendBadges": "Bollini",
+  "legendProtected": "Specie protetta dalla legge: si guarda e si fotografa",
+  "legendEncountered": "Specie incontrata, con la data dell'incontro",
+  "legendXpToCash": "PE da incassare alla prima essenza della specie",
+  "legendLevels": "Livelli di studio",
+  "legendTraits": "Tratti delle essenze",
+  "glossProtettaTerm": "Protetta",
+  "glossProtettaText": "Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.",
+  "glossEssenzaTerm": "Essenza",
+  "glossEssenzaText": "Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.",
+  "glossVisTerm": "Vis",
+  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.",
+  "glossPeDaIncassareTerm": "PE da incassare",
+  "glossPeDaIncassareText": "I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.",
+  "glossGradoTerm": "Grado",
+  "glossGradoText": "Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell'Esperienza.",
+  "glossBottinoTerm": "Bottino dell'Esperienza",
+  "glossBottinoText": "Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).",
+  "glossFigurinaTerm": "Figurina",
+  "glossFigurinaText": "Una ricetta o una pozione nell'album. Quelle che ti mancano sono un \"?\" su un colore pastello."
 }

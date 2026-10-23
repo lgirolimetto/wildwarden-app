@@ -281,6 +281,21 @@ void main() {
       expect(find.text('Altro effetto di gioco di prova.'), findsNothing);
     });
 
+    testWidgets('legenda e glossario: simboli e termini del gioco', (tester) async {
+      registerTestDependencies();
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Impostazioni');
+      await scrollAndTap(tester, find.text('Legenda e glossario'));
+
+      expect(find.text('Legenda'), findsOneWidget);
+      for (final grade in ['Comune', 'Non comune', 'Rara', 'Mitica']) {
+        expect(find.text(grade), findsOneWidget);
+      }
+      expect(find.text('Specie protetta dalla legge: si guarda e si fotografa'), findsOneWidget);
+      await scrollTo(tester, find.byKey(const ValueKey('gloss-vis')));
+      expect(find.textContaining('La linfa sottile delle piante'), findsOneWidget);
+    });
+
     testWidgets('anteprima dei gradi: una scheda per grado, con il cerchietto', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);

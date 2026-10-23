@@ -1163,7 +1163,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossaryTitle.
   ///
   /// In it, this message translates to:
-  /// **'Glossario'**
+  /// **'Legenda e glossario'**
   String get glossaryTitle;
 
   /// No description provided for @glossErbarioTerm.
@@ -1789,6 +1789,144 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'{count, plural, =1{1 ingrediente} other{{count} ingredienti}}'**
   String recipeIngredientCount(num count);
+
+  /// No description provided for @legendTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Legenda'**
+  String get legendTitle;
+
+  /// No description provided for @glossarySection.
+  ///
+  /// In it, this message translates to:
+  /// **'Glossario'**
+  String get glossarySection;
+
+  /// No description provided for @legendGrades.
+  ///
+  /// In it, this message translates to:
+  /// **'Gradi (ricette, pozioni, bottino)'**
+  String get legendGrades;
+
+  /// No description provided for @legendBadges.
+  ///
+  /// In it, this message translates to:
+  /// **'Bollini'**
+  String get legendBadges;
+
+  /// No description provided for @legendProtected.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie protetta dalla legge: si guarda e si fotografa'**
+  String get legendProtected;
+
+  /// No description provided for @legendEncountered.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie incontrata, con la data dell\'incontro'**
+  String get legendEncountered;
+
+  /// No description provided for @legendXpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'PE da incassare alla prima essenza della specie'**
+  String get legendXpToCash;
+
+  /// No description provided for @legendLevels.
+  ///
+  /// In it, this message translates to:
+  /// **'Livelli di studio'**
+  String get legendLevels;
+
+  /// No description provided for @legendTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Tratti delle essenze'**
+  String get legendTraits;
+
+  /// No description provided for @glossProtettaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Protetta'**
+  String get glossProtettaTerm;
+
+  /// No description provided for @glossProtettaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.'**
+  String get glossProtettaText;
+
+  /// No description provided for @glossEssenzaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Essenza'**
+  String get glossEssenzaTerm;
+
+  /// No description provided for @glossEssenzaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.'**
+  String get glossEssenzaText;
+
+  /// No description provided for @glossVisTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis'**
+  String get glossVisTerm;
+
+  /// No description provided for @glossVisText.
+  ///
+  /// In it, this message translates to:
+  /// **'La linfa sottile delle piante: l\'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.'**
+  String get glossVisText;
+
+  /// No description provided for @glossPeDaIncassareTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'PE da incassare'**
+  String get glossPeDaIncassareTerm;
+
+  /// No description provided for @glossPeDaIncassareText.
+  ///
+  /// In it, this message translates to:
+  /// **'I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.'**
+  String get glossPeDaIncassareText;
+
+  /// No description provided for @glossGradoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Grado'**
+  String get glossGradoTerm;
+
+  /// No description provided for @glossGradoText.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell\'Esperienza.'**
+  String get glossGradoText;
+
+  /// No description provided for @glossBottinoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino dell\'Esperienza'**
+  String get glossBottinoTerm;
+
+  /// No description provided for @glossBottinoText.
+  ///
+  /// In it, this message translates to:
+  /// **'Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).'**
+  String get glossBottinoText;
+
+  /// No description provided for @glossFigurinaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Figurina'**
+  String get glossFigurinaTerm;
+
+  /// No description provided for @glossFigurinaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una ricetta o una pozione nell\'album. Quelle che ti mancano sono un \"?\" su un colore pastello.'**
+  String get glossFigurinaText;
 }
 
 class _AppLocalizationsDelegate
