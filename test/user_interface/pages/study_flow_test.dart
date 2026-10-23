@@ -263,7 +263,7 @@ void main() {
       expect(find.text('Ingredienti già incontrati 1/2'), findsOneWidget);
     });
 
-    testWidgets('anteprima dei gradi: una scheda per grado, con il solco', (tester) async {
+    testWidgets('anteprima dei gradi: una scheda per grado, con il cerchietto', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
       await openTab(tester, 'Impostazioni');

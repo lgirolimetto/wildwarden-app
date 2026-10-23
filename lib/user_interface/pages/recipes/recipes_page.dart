@@ -61,7 +61,7 @@ class _RecipeCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Pill(context.game.grade(recipe.grade)),
+              GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade)),
               const SizedBox(width: Gaps.s),
               // Lo stato va a destra e, se lo spazio non basta (cornice del grado), si accorcia invece di sbordare.
               Expanded(

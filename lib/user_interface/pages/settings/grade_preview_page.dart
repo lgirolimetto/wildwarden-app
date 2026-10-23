@@ -10,7 +10,7 @@ import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 
-/// Strumento di prova: una scheda di ricetta per grado (comune, non comune, rara, mitica), per vedere il solco del grado
+/// Strumento di prova: una scheda di ricetta per grado (comune, non comune, rara, mitica), per vedere il cerchietto del grado
 /// con la livrea e il tema chiaro/scuro correnti.
 class GradePreviewPage extends StatelessWidget {
   const GradePreviewPage({super.key});
@@ -52,7 +52,7 @@ class _SampleRecipe extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Pill(context.game.grade(grade)),
+      GradeDot(grade: grade, label: context.game.grade(grade)),
       const SizedBox(height: Gaps.s),
       Text(context.l10n.debugGradeSampleName, style: context.texts.titleLarge),
       const SizedBox(height: Gaps.s),
