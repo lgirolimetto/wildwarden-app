@@ -17,17 +17,24 @@ class GradeCard extends StatelessWidget {
 
   const GradeCard({super.key, required this.grade, required this.child, this.padding = const EdgeInsets.all(16)});
 
+  /// Di sera le schede con il grado sono un tono più chiare delle altre: si staccano dallo sfondo scuro e i colori del
+  /// grado non stanno sul verde più cupo.
+  static Color surfaceOf(BuildContext context) {
+    final base = context.colors.surfaceContainerLow;
+    return Theme.of(context).brightness == Brightness.dark ? Color.lerp(base, Colors.white, 0.08)! : base;
+  }
+
   @override
   Widget build(BuildContext context) => Stack(
     children: [
       // Il contenuto sta dentro il solco: al margine si aggiunge il rientro.
-      ClayCard(padding: padding.add(const EdgeInsets.all(grooveInset)), child: child),
+      ClayCard(color: surfaceOf(context), padding: padding.add(const EdgeInsets.all(grooveInset)), child: child),
       Positioned.fill(
         child: IgnorePointer(
           child: CustomPaint(
             painter: _GroovePainter(
               color: context.druid.gradeColor(grade.index),
-              surface: context.colors.surfaceContainerLow,
+              surface: surfaceOf(context),
               radius: context.druid.cardRadius,
               dark: Theme.of(context).brightness == Brightness.dark,
             ),

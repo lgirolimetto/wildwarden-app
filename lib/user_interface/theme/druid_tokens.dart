@@ -57,6 +57,11 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   /// Colori dei gradi: comune, non comune, rara, mitica (vedi `liveries/grade_colors.dart`).
   final List<Color> gradeColors;
 
+  /// Pagine dense (ricette, impostazioni, glossario…): sfondo e superfici più chiari, per dare contrasto dove la
+  /// livrea è molto scura. `null` = come le altre pagine. Vedi `DenseArea`.
+  final Color? denseBackground;
+  final Color? denseSurface;
+
   const DruidTokens({
     required this.levelColors,
     required this.hint,
@@ -73,6 +78,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     this.neu = false,
     this.neuLight = Colors.transparent,
     this.gradeColors = const [],
+    this.denseBackground,
+    this.denseSurface,
   }) : assert(levelColors.length == 5, 'Servono 5 colori: livelli 0-4'),
        assert(accentCards.length >= 3, 'Servono almeno 3 schede decorative');
 
@@ -100,6 +107,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     bool? neu,
     Color? neuLight,
     List<Color>? gradeColors,
+    Color? denseBackground,
+    Color? denseSurface,
   }) => DruidTokens(
     levelColors: levelColors ?? this.levelColors,
     hint: hint ?? this.hint,
@@ -116,6 +125,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     neu: neu ?? this.neu,
     neuLight: neuLight ?? this.neuLight,
     gradeColors: gradeColors ?? this.gradeColors,
+    denseBackground: denseBackground ?? this.denseBackground,
+    denseSurface: denseSurface ?? this.denseSurface,
   );
 
   @override
@@ -145,6 +156,8 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
       gradeColors: gradeColors.length == other.gradeColors.length
           ? lerpList(gradeColors, other.gradeColors)
           : (t < 0.5 ? gradeColors : other.gradeColors),
+      denseBackground: Color.lerp(denseBackground, other.denseBackground, t),
+      denseSurface: Color.lerp(denseSurface, other.denseSurface, t),
     );
   }
 }

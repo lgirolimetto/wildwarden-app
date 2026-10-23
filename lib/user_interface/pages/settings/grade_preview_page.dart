@@ -1,5 +1,6 @@
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
@@ -15,7 +16,9 @@ class GradePreviewPage extends StatelessWidget {
   const GradePreviewPage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => DenseArea(child: _page(context));
+
+  Widget _page(BuildContext context) => Scaffold(
     appBar: clayAppBar(context, title: context.l10n.debugGradePreview),
     extendBodyBehindAppBar: true,
     body: DruidBackground(

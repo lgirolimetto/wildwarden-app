@@ -3,6 +3,7 @@ import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
@@ -12,27 +13,29 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
 
-/// Ricette: nome ed effetto si vedono subito; gli ingredienti di specie non ancora incontrate restano "???"
-/// con un indizio, così si sa sempre cosa cercare.
+/// Ricette: nome, grado, ingredienti (sempre con il nome della pianta) ed effetto. Pagina densa (`DenseArea`).
 class RecipesPage extends StatelessWidget {
   const RecipesPage({super.key});
 
   @override
-  Widget build(BuildContext context) => GameDataBuilder(
-    builder: (context, catalog, state, _) => ListView(
-      padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, homeBottomInset),
-      children: [
-        ClayPageHeader(
-          title: context.l10n.recipesTitle,
-          icon: Icons.science_rounded,
-          iconColor: context.druid.levelColor(4),
-        ),
-        const SizedBox(height: Gaps.l),
-        for (final recipe in catalog.recipes) ...[
-          _RecipeCard(recipe: recipe, catalog: catalog, state: state),
-          const SizedBox(height: Gaps.m),
+  Widget build(BuildContext context) => DenseArea(
+    paintBackground: true,
+    child: GameDataBuilder(
+      builder: (context, catalog, state, _) => ListView(
+        padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, homeBottomInset),
+        children: [
+          ClayPageHeader(
+            title: context.l10n.recipesTitle,
+            icon: Icons.science_rounded,
+            iconColor: context.druid.levelColor(4),
+          ),
+          const SizedBox(height: Gaps.l),
+          for (final recipe in catalog.recipes) ...[
+            _RecipeCard(recipe: recipe, catalog: catalog, state: state),
+            const SizedBox(height: Gaps.m),
+          ],
         ],
-      ],
+      ),
     ),
   );
 }

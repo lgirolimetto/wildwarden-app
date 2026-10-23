@@ -1,4 +1,5 @@
 import 'package:druid_app/controllers/home/home_controller.dart';
+import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/pages/erbario/erbario_page.dart';
@@ -44,9 +45,9 @@ class HomePage extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        context.druid.backgroundGradient.first,
-                        context.druid.backgroundGradient.first.withValues(alpha: 0.85),
-                        context.druid.backgroundGradient.first.withValues(alpha: 0),
+                        _fadeColor(context, index),
+                        _fadeColor(context, index).withValues(alpha: 0.85),
+                        _fadeColor(context, index).withValues(alpha: 0),
                       ],
                       stops: const [0, 0.6, 1],
                     ),
@@ -68,4 +69,12 @@ class HomePage extends StatelessWidget {
       ],
     ),
   );
+
+  /// Colore in cui sfuma il contenuto sotto la barra di stato: quello dello sfondo della scheda, che nelle pagine dense
+  /// (`DenseArea`) può essere diverso.
+  static Color _fadeColor(BuildContext context, int tab) {
+    final dense = tab == HomeController.recipesTab || tab == HomeController.settingsTab;
+    final denseTheme = dense ? Get.find<ThemeController>().denseTheme(Theme.of(context).brightness) : null;
+    return denseTheme?.colorScheme.surface ?? context.druid.backgroundGradient.first;
+  }
 }

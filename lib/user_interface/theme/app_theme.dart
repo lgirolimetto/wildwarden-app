@@ -4,9 +4,22 @@ import 'package:flutter/material.dart';
 
 /// Costruisce il `ThemeData` Material 3 di una livrea. I temi dei componenti derivano tutti dalla palette
 /// e dai token: le pagine non devono mai usare colori letterali.
-ThemeData buildTheme(Livery livery, Brightness brightness) {
-  final scheme = livery.colorScheme(brightness);
-  final tokens = livery.tokens(brightness, scheme);
+///
+/// Con [dense] il tema delle pagine dense, se la livrea lo prevede (`DruidTokens.denseBackground` e `denseSurface`):
+/// sfondo e superfici (schede, chip, pulsanti) più chiari. `null` se la livrea non lo prevede.
+ThemeData buildTheme(Livery livery, Brightness brightness) => _buildTheme(livery, brightness, dense: false)!;
+
+ThemeData? buildDenseTheme(Livery livery, Brightness brightness) => _buildTheme(livery, brightness, dense: true);
+
+ThemeData? _buildTheme(Livery livery, Brightness brightness, {required bool dense}) {
+  var scheme = livery.colorScheme(brightness);
+  var tokens = livery.tokens(brightness, scheme);
+  if (dense) {
+    final background = tokens.denseBackground, surface = tokens.denseSurface;
+    if (background == null || surface == null) return null;
+    scheme = scheme.copyWith(surface: background, surfaceContainerLow: surface);
+    tokens = tokens.copyWith(backgroundGradient: [background, background]);
+  }
   final radius = BorderRadius.circular(tokens.cardRadius);
 
   final base = ThemeData(

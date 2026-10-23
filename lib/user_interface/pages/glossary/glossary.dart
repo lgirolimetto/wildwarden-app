@@ -1,4 +1,5 @@
 import 'package:druid_app/l10n/app_localizations.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -68,7 +69,9 @@ class GlossaryPage extends StatelessWidget {
   const GlossaryPage({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => DenseArea(child: _page(context));
+
+  Widget _page(BuildContext context) => Scaffold(
     appBar: clayAppBar(context, title: context.l10n.glossaryTitle),
     extendBodyBehindAppBar: true,
     body: DruidBackground(

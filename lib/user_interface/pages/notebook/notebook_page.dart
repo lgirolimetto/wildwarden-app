@@ -2,6 +2,7 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
@@ -42,7 +43,9 @@ class _NotebookPageState extends State<NotebookPage> {
   String _query = '';
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => DenseArea(child: _page(context));
+
+  Widget _page(BuildContext context) => Scaffold(
     appBar: clayAppBar(context, title: context.l10n.notebookTitle),
     extendBodyBehindAppBar: true,
     body: DruidBackground(
