@@ -558,13 +558,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitSun => '☀️ Sun';
 
   @override
-  String get traitMoon => '🌕 Moon';
+  String get traitMoon => '🌕 Full moon';
 
   @override
   String get traitDew => '💧 Dew';
 
   @override
-  String get traitDusk => '🌅 Dusk';
+  String get traitDusk => '🌅 Sunset';
 
   @override
   String get recipesTitle => 'Recipes';
@@ -1189,4 +1189,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusStudying => 'Studying';
+
+  @override
+  String get traitDawn => '🌄 Dawn';
+
+  @override
+  String get traitNight => '🌌 Night';
+
+  @override
+  String get traitAfterStorm => '⛈ After the storm';
+
+  @override
+  String get traitNewMoon => '🌑 New moon';
 }

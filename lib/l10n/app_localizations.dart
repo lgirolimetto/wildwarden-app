@@ -995,7 +995,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitMoon.
   ///
   /// In it, this message translates to:
-  /// **'🌕 Lunare'**
+  /// **'🌕 Luna piena'**
   String get traitMoon;
 
   /// No description provided for @traitDew.
@@ -1007,7 +1007,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitDusk.
   ///
   /// In it, this message translates to:
-  /// **'🌅 Crepuscolo'**
+  /// **'🌅 Tramonto'**
   String get traitDusk;
 
   /// No description provided for @recipesTitle.
@@ -2047,6 +2047,30 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'In studio'**
   String get statusStudying;
+
+  /// No description provided for @traitDawn.
+  ///
+  /// In it, this message translates to:
+  /// **'🌄 Alba'**
+  String get traitDawn;
+
+  /// No description provided for @traitNight.
+  ///
+  /// In it, this message translates to:
+  /// **'🌌 Notte'**
+  String get traitNight;
+
+  /// No description provided for @traitAfterStorm.
+  ///
+  /// In it, this message translates to:
+  /// **'⛈ Dopo il temporale'**
+  String get traitAfterStorm;
+
+  /// No description provided for @traitNewMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'🌑 Luna nuova'**
+  String get traitNewMoon;
 }
 
 class _AppLocalizationsDelegate

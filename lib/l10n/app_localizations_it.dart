@@ -556,13 +556,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitSun => '☀️ Solare';
 
   @override
-  String get traitMoon => '🌕 Lunare';
+  String get traitMoon => '🌕 Luna piena';
 
   @override
   String get traitDew => '💧 Rugiada';
 
   @override
-  String get traitDusk => '🌅 Crepuscolo';
+  String get traitDusk => '🌅 Tramonto';
 
   @override
   String get recipesTitle => 'Ricette';
@@ -1190,4 +1190,16 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get statusStudying => 'In studio';
+
+  @override
+  String get traitDawn => '🌄 Alba';
+
+  @override
+  String get traitNight => '🌌 Notte';
+
+  @override
+  String get traitAfterStorm => '⛈ Dopo il temporale';
+
+  @override
+  String get traitNewMoon => '🌑 Luna nuova';
 }

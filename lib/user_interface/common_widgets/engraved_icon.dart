@@ -47,7 +47,11 @@ IconData? traitIconOf(String emoji) => switch (emoji) {
   '💧' => Icons.water_drop_outlined,
   '🌫' => Icons.foggy,
   '☀️' || '☀' => Icons.wb_sunny_outlined,
-  '🌕' => Icons.nightlight_outlined,
+  '🌕' => Icons.circle,
+  '🌑' => Icons.circle_outlined,
   '🌅' => Icons.wb_twilight_rounded,
+  '🌄' => Icons.brightness_6_outlined,
+  '🌌' => Icons.auto_awesome_outlined,
+  '⛈' || '⛈️' => Icons.thunderstorm_outlined,
   _ => null,
 };

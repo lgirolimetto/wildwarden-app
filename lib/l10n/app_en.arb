@@ -149,9 +149,9 @@
   "traitRain": "🌧 Rain",
   "traitFog": "🌫 Fog",
   "traitSun": "☀️ Sun",
-  "traitMoon": "🌕 Moon",
+  "traitMoon": "🌕 Full moon",
   "traitDew": "💧 Dew",
-  "traitDusk": "🌅 Dusk",
+  "traitDusk": "🌅 Sunset",
   "recipesTitle": "Recipes",
   "recipeUnlocked": "Learned",
   "recipeLocked": "To learn",
@@ -324,5 +324,9 @@
   "statusMet": "Met",
   "statusToFind": "To find",
   "statusDesiderata": "Desiderata",
-  "statusStudying": "Studying"
+  "statusStudying": "Studying",
+  "traitDawn": "🌄 Dawn",
+  "traitNight": "🌌 Night",
+  "traitAfterStorm": "⛈ After the storm",
+  "traitNewMoon": "🌑 New moon"
 }

@@ -531,9 +531,9 @@
   "traitRain": "🌧 Pioggia",
   "traitFog": "🌫 Nebbia",
   "traitSun": "☀️ Solare",
-  "traitMoon": "🌕 Lunare",
+  "traitMoon": "🌕 Luna piena",
   "traitDew": "💧 Rugiada",
-  "traitDusk": "🌅 Crepuscolo",
+  "traitDusk": "🌅 Tramonto",
   "recipesTitle": "Ricette",
   "recipeUnlocked": "Imparata",
   "recipeLocked": "Da imparare",
@@ -1010,5 +1010,9 @@
   "statusMet": "Incontrate",
   "statusToFind": "Da trovare",
   "statusDesiderata": "Desiderata",
-  "statusStudying": "In studio"
+  "statusStudying": "In studio",
+  "traitDawn": "🌄 Alba",
+  "traitNight": "🌌 Notte",
+  "traitAfterStorm": "⛈ Dopo il temporale",
+  "traitNewMoon": "🌑 Luna nuova"
 }
