@@ -192,7 +192,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get qFamilyFromPhoto => 'A quale famiglia appartiene la pianta in foto?';
+  String get qFamilyFromPhoto =>
+      'A quale famiglia appartiene la pianta in foto?';
 
   @override
   String qRelativeOf(String name) {
@@ -308,7 +309,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get summaryNewFunFacts => 'Nuove curiosità in arrivo: le riceverai una al giorno.';
+  String get summaryNewFunFacts =>
+      'Nuove curiosità in arrivo: le riceverai una al giorno.';
 
   @override
   String get saveToNotebook => 'Salva nel taccuino';
@@ -330,7 +332,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notebookSearch => 'Cerca: famiglia, mese, specie, note…';
 
   @override
-  String get notebookEmpty => 'Ancora vuoto: durante lo studio usa \"Salva nel taccuino\".';
+  String get notebookEmpty =>
+      'Ancora vuoto: durante lo studio usa \"Salva nel taccuino\".';
 
   @override
   String get notebookNoResults => 'Nessun risultato.';
@@ -391,7 +394,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get reviewsNone => 'Niente da ripassare oggi. I fatti imparati tornano dopo 1, 3, 7 e 21 giorni.';
+  String get reviewsNone =>
+      'Niente da ripassare oggi. I fatti imparati tornano dopo 1, 3, 7 e 21 giorni.';
 
   @override
   String get reviewsStart => 'Ripassa';
@@ -412,10 +416,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get desiderataSuggestions => 'In stagione adesso';
 
   @override
-  String get seasonalFirstHint => 'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.';
+  String get seasonalFirstHint =>
+      'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.';
 
   @override
-  String get seasonalHint => 'Puoi studiarle subito o segnarle come desiderata da cercare.';
+  String get seasonalHint =>
+      'Puoi studiarle subito o segnarle come desiderata da cercare.';
 
   @override
   String get seasonalStudy => 'Studia';
@@ -430,7 +436,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get desiderataRemove => 'Togli dalle desiderata';
 
   @override
-  String get desiderataFull => 'Hai già 3 desiderata: completane o togline una.';
+  String get desiderataFull =>
+      'Hai già 3 desiderata: completane o togline una.';
 
   @override
   String desiderataWhere(String band) {
@@ -451,7 +458,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get yourSpecies => 'Le tue specie';
 
   @override
-  String get yourSpeciesEmpty => 'Nessuna specie in studio: comincia da una di quelle in stagione.';
+  String get yourSpeciesEmpty =>
+      'Nessuna specie in studio: comincia da una di quelle in stagione.';
 
   @override
   String studyLevelButton(int level) {
@@ -567,15 +575,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String recipeKnownIngredients(int known, int total) {
-    return 'Ingredienti noti $known/$total';
-  }
-
-  @override
-  String get recipeUnknownIngredient => '???';
-
-  @override
-  String recipeHint(String hint) {
-    return 'Indizio: $hint';
+    return 'Ingredienti già incontrati $known/$total';
   }
 
   @override
@@ -966,7 +966,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get summaryXpToCash => 'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.';
+  String get summaryXpToCash =>
+      'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.';
 
   @override
   String visStored(int vis) {
@@ -977,7 +978,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get drawExhausted => 'Esaurita: torna pronta domani';
 
   @override
-  String get drawNeedsEncounter => 'Per attingere serve una stazione: prima incontrala';
+  String get drawNeedsEncounter =>
+      'Per attingere serve una stazione: prima incontrala';
 
   @override
   String get gradeCommon => 'Comune';
@@ -1008,4 +1010,17 @@ class AppLocalizationsIt extends AppLocalizations {
   String recipeLearnByStudying(String species) {
     return 'Si impara studiando: $species';
   }
+
+  @override
+  String get debugGradePreview => 'Anteprima dei gradi';
+
+  @override
+  String get debugGradeSampleName => 'Elisir di Prova';
+
+  @override
+  String get debugGradeSampleIngredient => 'Erba d\'argento';
+
+  @override
+  String get debugGradeSampleEffect =>
+      'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).';
 }

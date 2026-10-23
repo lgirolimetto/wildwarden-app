@@ -537,7 +537,7 @@
   "recipesTitle": "Ricette",
   "recipeUnlocked": "Imparata",
   "recipeLocked": "Da imparare",
-  "recipeKnownIngredients": "Ingredienti noti {known}/{total}",
+  "recipeKnownIngredients": "Ingredienti già incontrati {known}/{total}",
   "@recipeKnownIngredients": {
     "placeholders": {
       "known": {
@@ -545,15 +545,6 @@
       },
       "total": {
         "type": "int"
-      }
-    }
-  },
-  "recipeUnknownIngredient": "???",
-  "recipeHint": "Indizio: {hint}",
-  "@recipeHint": {
-    "placeholders": {
-      "hint": {
-        "type": "String"
       }
     }
   },
@@ -950,5 +941,9 @@
         "type": "String"
       }
     }
-  }
+  },
+  "debugGradePreview": "Anteprima dei gradi",
+  "debugGradeSampleName": "Elisir di Prova",
+  "debugGradeSampleIngredient": "Erba d'argento",
+  "debugGradeSampleEffect": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco)."
 }

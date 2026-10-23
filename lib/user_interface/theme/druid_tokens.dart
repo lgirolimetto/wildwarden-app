@@ -54,6 +54,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   final bool neu;
   final Color neuLight;
 
+  /// Colori dei gradi: comune, non comune, rara, mitica (vedi `liveries/grade_colors.dart`).
+  final List<Color> gradeColors;
+
   const DruidTokens({
     required this.levelColors,
     required this.hint,
@@ -69,12 +72,16 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     this.clayShadow = const Color(0x33000000),
     this.neu = false,
     this.neuLight = Colors.transparent,
+    this.gradeColors = const [],
   }) : assert(levelColors.length == 5, 'Servono 5 colori: livelli 0-4'),
        assert(accentCards.length >= 3, 'Servono almeno 3 schede decorative');
 
   Color levelColor(int level) => levelColors[level.clamp(0, levelColors.length - 1)];
 
   AccentCard accent(int index) => accentCards[index % accentCards.length];
+
+  /// Colore del grado [index] (0 = comune … 3 = mitica); se la livrea non li ha, quelli dei livelli di studio.
+  Color gradeColor(int index) => gradeColors.length == 4 ? gradeColors[index] : levelColor(index + 1);
 
   @override
   DruidTokens copyWith({
@@ -92,6 +99,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     Color? clayShadow,
     bool? neu,
     Color? neuLight,
+    List<Color>? gradeColors,
   }) => DruidTokens(
     levelColors: levelColors ?? this.levelColors,
     hint: hint ?? this.hint,
@@ -107,6 +115,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     clayShadow: clayShadow ?? this.clayShadow,
     neu: neu ?? this.neu,
     neuLight: neuLight ?? this.neuLight,
+    gradeColors: gradeColors ?? this.gradeColors,
   );
 
   @override
@@ -133,6 +142,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
       clayShadow: Color.lerp(clayShadow, other.clayShadow, t)!,
       neu: t < 0.5 ? neu : other.neu,
       neuLight: Color.lerp(neuLight, other.neuLight, t)!,
+      gradeColors: gradeColors.length == other.gradeColors.length
+          ? lerpList(gradeColors, other.gradeColors)
+          : (t < 0.5 ? gradeColors : other.gradeColors),
     );
   }
 }

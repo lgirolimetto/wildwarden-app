@@ -62,7 +62,8 @@ import 'app_localizations_it.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,15 +84,19 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('it')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('it'),
+  ];
 
   /// No description provided for @appTitle.
   ///
@@ -1025,20 +1031,8 @@ abstract class AppLocalizations {
   /// No description provided for @recipeKnownIngredients.
   ///
   /// In it, this message translates to:
-  /// **'Ingredienti noti {known}/{total}'**
+  /// **'Ingredienti già incontrati {known}/{total}'**
   String recipeKnownIngredients(int known, int total);
-
-  /// No description provided for @recipeUnknownIngredient.
-  ///
-  /// In it, this message translates to:
-  /// **'???'**
-  String get recipeUnknownIngredient;
-
-  /// No description provided for @recipeHint.
-  ///
-  /// In it, this message translates to:
-  /// **'Indizio: {hint}'**
-  String recipeHint(String hint);
 
   /// No description provided for @recipeAnySpecies.
   ///
@@ -1747,9 +1741,34 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Si impara studiando: {species}'**
   String recipeLearnByStudying(String species);
+
+  /// No description provided for @debugGradePreview.
+  ///
+  /// In it, this message translates to:
+  /// **'Anteprima dei gradi'**
+  String get debugGradePreview;
+
+  /// No description provided for @debugGradeSampleName.
+  ///
+  /// In it, this message translates to:
+  /// **'Elisir di Prova'**
+  String get debugGradeSampleName;
+
+  /// No description provided for @debugGradeSampleIngredient.
+  ///
+  /// In it, this message translates to:
+  /// **'Erba d\'argento'**
+  String get debugGradeSampleIngredient;
+
+  /// No description provided for @debugGradeSampleEffect.
+  ///
+  /// In it, this message translates to:
+  /// **'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).'**
+  String get debugGradeSampleEffect;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1758,7 +1777,8 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'it'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

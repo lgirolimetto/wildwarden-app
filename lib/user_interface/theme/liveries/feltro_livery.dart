@@ -1,6 +1,7 @@
 import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
+import 'package:druid_app/user_interface/theme/liveries/grade_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Livrea neumorfica: pagina sabbia con grana di feltro, pannelli dello stesso colore sollevati da luce e ombra,
@@ -84,6 +85,7 @@ class FeltroLivery extends Livery {
   DruidTokens tokens(Brightness brightness, ColorScheme scheme) {
     final light = brightness == Brightness.light;
     return DruidTokens(
+      gradeColors: metalGradeColors(brightness),
       levelColors: const [Color(0xFFBFCAC5), Color(0xFFA9C2B6), Color(0xFF7FA597), Color(0xFF4F6B66), _terracotta],
       hint: scheme.onSurfaceVariant,
       warning: light ? const Color(0xFF8A4A1A) : const Color(0xFFE6C26E),

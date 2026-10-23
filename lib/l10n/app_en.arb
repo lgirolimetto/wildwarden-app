@@ -155,9 +155,7 @@
   "recipesTitle": "Recipes",
   "recipeUnlocked": "Learned",
   "recipeLocked": "To learn",
-  "recipeKnownIngredients": "Known ingredients {known}/{total}",
-  "recipeUnknownIngredient": "???",
-  "recipeHint": "Hint: {hint}",
+  "recipeKnownIngredients": "Ingredients already met {known}/{total}",
   "recipeAnySpecies": "any species",
   "recipeCurrentLevel": "now: level {level}",
   "erbarioPages": "Pages filled {done}/{total}",
@@ -275,5 +273,9 @@
   "protectionEmiliaRomagna": "Emilia-Romagna regional law 2/1977",
   "protectionHabitats": "Habitats Directive, Annex {annex}",
   "summaryRecipeLearned": "You learned a recipe: {name}",
-  "recipeLearnByStudying": "Learned by studying: {species}"
+  "recipeLearnByStudying": "Learned by studying: {species}",
+  "debugGradePreview": "Grade preview",
+  "debugGradeSampleName": "Sample Elixir",
+  "debugGradeSampleIngredient": "Honesty",
+  "debugGradeSampleEffect": "The next draw under a full moon gets an extra trait (game effect)."
 }

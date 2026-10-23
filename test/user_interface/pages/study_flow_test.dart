@@ -252,14 +252,27 @@ void main() {
       expect(level3, findsWidgets);
     });
 
-    testWidgets('ricetta bloccata: un ingrediente ignoto mostra un indizio', (tester) async {
+    testWidgets('ricette: gli ingredienti hanno sempre il nome, anche se la pianta non è incontrata', (tester) async {
       registerTestDependencies(events: [_met('Eranthis hyemalis')]);
       await pumpDruidApp(tester);
       await openTab(tester, 'Ricette');
 
       expect(find.text('Da imparare'), findsWidgets);
-      expect(find.textContaining('???'), findsWidgets);
-      expect(find.textContaining('Indizio: Una pianta della famiglia Ranunculaceae'), findsOneWidget);
+      expect(find.textContaining('???'), findsNothing);
+      expect(find.text('1 × Elleboro verde'), findsOneWidget);
+      expect(find.text('Ingredienti già incontrati 1/2'), findsOneWidget);
+    });
+
+    testWidgets('anteprima dei gradi: una scheda per grado, con il solco', (tester) async {
+      registerTestDependencies();
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Impostazioni');
+      await scrollAndTap(tester, find.byKey(const ValueKey('open-grade-preview')));
+
+      for (final key in ['preview-common', 'preview-uncommon', 'preview-rare', 'preview-mythic']) {
+        await scrollTo(tester, find.byKey(ValueKey(key)));
+        expect(find.byKey(ValueKey(key)), findsOneWidget);
+      }
     });
 
     testWidgets('curiosità del giorno: consegnata all\'apertura dello Studio', (tester) async {
