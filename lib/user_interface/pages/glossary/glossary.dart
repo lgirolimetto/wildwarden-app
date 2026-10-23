@@ -208,7 +208,7 @@ class _LegendRow extends StatelessWidget {
     child: Row(
       children: [
         SizedBox(
-          width: 84,
+          width: 100,
           child: Align(alignment: Alignment.centerLeft, child: symbol),
         ),
         const SizedBox(width: Gaps.s),
