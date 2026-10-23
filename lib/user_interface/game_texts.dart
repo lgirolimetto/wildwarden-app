@@ -4,6 +4,7 @@ import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/models/species_traits.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
@@ -93,9 +94,13 @@ class GameTexts {
       QuestionForm.oddOneOut => l10n.qOddOneOut,
       QuestionForm.bandOf => l10n.qBandOf(name(s)),
       QuestionForm.whichInBand => l10n.qWhichInBand(bandPhrase(q.band!)),
-      QuestionForm.warningOf => l10n.qWarningOf(name(s)),
-      QuestionForm.hasWarning => l10n.qHasWarning(name(s)),
       QuestionForm.commonnessOf => l10n.qCommonnessOf(name(s)),
+      QuestionForm.growthFormOf => l10n.qGrowthFormOf(name(s)),
+      QuestionForm.lifeCycleOf => l10n.qLifeCycleOf(name(s)),
+      QuestionForm.seedDispersalOf => l10n.qSeedDispersalOf(name(s)),
+      QuestionForm.originOf => l10n.qOriginOf(name(s)),
+      QuestionForm.lightOf => l10n.qLightOf(name(s)),
+      QuestionForm.moistureOf => l10n.qMoistureOf(name(s)),
     };
   }
 
@@ -106,9 +111,58 @@ class GameTexts {
     OrderOption(:final order) => order,
     BandOption(band: final b) => band(b),
     YesNoOption(:final yes) => yes ? l10n.optionYes : l10n.optionNo,
-    WarningOption(:final warning) => _capitalize(warning.resolve(language)),
     CommonnessOption(:final commonness) => this.commonness(commonness),
+    TraitOption(:final value) => plantTrait(value),
   };
+
+  /// Testo di un valore dei tratti della pianta (forma di crescita, ciclo, semi, luce, umidità).
+  String plantTrait(Enum value) => switch (value) {
+    GrowthForm.tree => l10n.growthTree,
+    GrowthForm.shrub => l10n.growthShrub,
+    GrowthForm.herb => l10n.growthHerb,
+    GrowthForm.climber => l10n.growthClimber,
+    LifeCycle.annual => l10n.cycleAnnual,
+    LifeCycle.biennial => l10n.cycleBiennial,
+    LifeCycle.perennial => l10n.cyclePerennial,
+    SeedDispersal.eatenByAnimals => l10n.seedsEatenByAnimals,
+    SeedDispersal.stuckToAnimals => l10n.seedsStuckToAnimals,
+    SeedDispersal.hoardedByAnimals => l10n.seedsHoardedByAnimals,
+    SeedDispersal.ants => l10n.seedsAnts,
+    SeedDispersal.wind => l10n.seedsWind,
+    SeedDispersal.water => l10n.seedsWater,
+    SeedDispersal.launched => l10n.seedsLaunched,
+    SeedDispersal.nearby => l10n.seedsNearby,
+    LightPreference.shade => l10n.lightShade,
+    LightPreference.halfShade => l10n.lightHalfShade,
+    LightPreference.sun => l10n.lightSun,
+    MoisturePreference.dry => l10n.moistureDry,
+    MoisturePreference.fresh => l10n.moistureFresh,
+    MoisturePreference.moist => l10n.moistureMoist,
+    _ => value.name,
+  };
+
+  /// Le cose che si sanno dei tratti di una specie, fino al livello di studio raggiunto: per la scheda.
+  List<String> traitLines(Species s, int level) {
+    final t = s.traits;
+    return [
+      if (level >= 1 && t.growthForm != null) l10n.factGrowthForm(name(s), plantTrait(t.growthForm!).toLowerCase()),
+      if (level >= 2 && t.lifeCycle != null) l10n.factLifeCycle(name(s), plantTrait(t.lifeCycle!).toLowerCase()),
+      if (level >= 2 && t.dispersal.isNotEmpty) _seeds(s),
+      if (level >= 3 && t.introducedInItaly != null)
+        t.introducedInItaly! ? l10n.factOriginIntroduced(name(s)) : l10n.factOriginNative(name(s)),
+      if (level >= 3 && lightPreferenceOf(s) != null)
+        l10n.factLight(name(s), plantTrait(lightPreferenceOf(s)!).toLowerCase()),
+      if (level >= 3 && moisturePreferenceOf(s) != null)
+        l10n.factMoisture(name(s), plantTrait(moisturePreferenceOf(s)!).toLowerCase()),
+    ];
+  }
+
+  String _seeds(Species s) => l10n.factSeedDispersal(
+    name(s),
+    (s.traits.dispersal.toList()..sort((a, b) => a.index.compareTo(b.index)))
+        .map((m) => plantTrait(m).toLowerCase())
+        .join(', '),
+  );
 
   String commonness(Commonness c) => switch (c) {
     Commonness.veryCommon => l10n.commonnessVeryCommon,
@@ -134,6 +188,13 @@ class GameTexts {
       FactKind.order => l10n.factOrder(name(s), s.order ?? '', s.family),
       FactKind.toxicity => l10n.factWarning(name(s), catalog.safety[s.sci]?.resolve(language) ?? ''),
       FactKind.commonness => l10n.factCommonness(name(s), commonness(commonnessOf(s, catalog)).toLowerCase()),
+      FactKind.growthForm => l10n.factGrowthForm(name(s), plantTrait(s.traits.growthForm!).toLowerCase()),
+      FactKind.lifeCycle => l10n.factLifeCycle(name(s), plantTrait(s.traits.lifeCycle!).toLowerCase()),
+      FactKind.seedDispersal => _seeds(s),
+      FactKind.origin =>
+        s.traits.introducedInItaly! ? l10n.factOriginIntroduced(name(s)) : l10n.factOriginNative(name(s)),
+      FactKind.light => l10n.factLight(name(s), plantTrait(lightPreferenceOf(s)!).toLowerCase()),
+      FactKind.moisture => l10n.factMoisture(name(s), plantTrait(moisturePreferenceOf(s)!).toLowerCase()),
     };
   }
 
@@ -160,8 +221,6 @@ class GameTexts {
     Mission.firstLevel => l10n.missionFirstLevelBody,
     Mission.firstRecipe => l10n.missionFirstRecipeBody,
   };
-
-  static String _capitalize(String text) => text.isEmpty ? text : text[0].toUpperCase() + text.substring(1);
 }
 
 extension GameTextsContext on BuildContext {

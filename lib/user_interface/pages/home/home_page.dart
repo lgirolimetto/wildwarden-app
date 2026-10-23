@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
       selectedIndex: index,
       onSelected: select,
       items: [
-        (Icons.school_rounded, context.l10n.navStudy),
+        (Icons.home_rounded, context.l10n.navStudy),
         (Icons.menu_book_rounded, context.l10n.navErbario),
         (Icons.science_rounded, context.l10n.navRecipes),
         (Icons.tune_rounded, context.l10n.navSettings),

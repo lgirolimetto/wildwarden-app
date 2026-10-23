@@ -100,16 +100,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get levelRecognise => 'Recognise it';
 
   @override
-  String get levelKnow => 'Its family';
+  String get levelKnow => 'Family and life';
 
   @override
-  String get levelWhereWhen => 'It and us';
+  String get levelWhereWhen => 'Its habitat';
 
   @override
   String get levelMastery => 'Mastery';
 
   @override
-  String get navStudy => 'Study';
+  String get navStudy => 'Home';
 
   @override
   String get navRecipes => 'Recipes';
@@ -783,16 +783,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String qWarningOf(String name) {
-    return 'Which warning applies to $name?';
-  }
-
-  @override
-  String qHasWarning(String name) {
-    return 'Does $name have a safety warning?';
-  }
-
-  @override
   String qCommonnessOf(String name) {
     return 'How common is $name in this area?';
   }
@@ -839,4 +829,138 @@ class AppLocalizationsEn extends AppLocalizations {
   String factCommonness(String name, String commonness) {
     return 'In this area $name is: $commonness (from GBIF observations).';
   }
+
+  @override
+  String qGrowthFormOf(String name) {
+    return 'What shape is $name?';
+  }
+
+  @override
+  String qLifeCycleOf(String name) {
+    return 'How long does $name live?';
+  }
+
+  @override
+  String qSeedDispersalOf(String name) {
+    return 'How do the seeds of $name travel?';
+  }
+
+  @override
+  String qOriginOf(String name) {
+    return 'Was $name brought to Italy by people?';
+  }
+
+  @override
+  String qLightOf(String name) {
+    return 'How much light does $name like?';
+  }
+
+  @override
+  String qMoistureOf(String name) {
+    return 'What soil does $name prefer?';
+  }
+
+  @override
+  String get growthTree => 'Tree';
+
+  @override
+  String get growthShrub => 'Shrub';
+
+  @override
+  String get growthHerb => 'Herb';
+
+  @override
+  String get growthClimber => 'Climber';
+
+  @override
+  String get cycleAnnual => 'One year (annual)';
+
+  @override
+  String get cycleBiennial => 'Two years (biennial)';
+
+  @override
+  String get cyclePerennial => 'Many years (perennial)';
+
+  @override
+  String get seedsEatenByAnimals => 'In fruits eaten by animals';
+
+  @override
+  String get seedsStuckToAnimals => 'Stuck to animal fur';
+
+  @override
+  String get seedsHoardedByAnimals => 'Hidden by animals as stores';
+
+  @override
+  String get seedsAnts => 'Carried by ants';
+
+  @override
+  String get seedsWind => 'On the wind';
+
+  @override
+  String get seedsWater => 'By water';
+
+  @override
+  String get seedsLaunched => 'Launched by the plant';
+
+  @override
+  String get seedsNearby => 'They fall nearby, unaided';
+
+  @override
+  String get lightShade => 'Shade';
+
+  @override
+  String get lightHalfShade => 'Half shade';
+
+  @override
+  String get lightSun => 'Full sun';
+
+  @override
+  String get moistureDry => 'Dry';
+
+  @override
+  String get moistureFresh => 'Fresh';
+
+  @override
+  String get moistureMoist => 'Moist';
+
+  @override
+  String factGrowthForm(String name, String form) {
+    return 'Shape of $name: $form.';
+  }
+
+  @override
+  String factLifeCycle(String name, String cycle) {
+    return '$name lives $cycle.';
+  }
+
+  @override
+  String factSeedDispersal(String name, String modes) {
+    return 'The seeds of $name: $modes.';
+  }
+
+  @override
+  String factOriginNative(String name) {
+    return '$name is native: it has always grown in Italy, without human help.';
+  }
+
+  @override
+  String factOriginIntroduced(String name) {
+    return '$name was brought to Italy by people: it is not from here.';
+  }
+
+  @override
+  String factLight(String name, String light) {
+    return '$name likes: $light.';
+  }
+
+  @override
+  String factMoisture(String name, String moisture) {
+    return '$name prefers $moisture soil.';
+  }
+
+  @override
+  String get sourcesTraits => 'Traits: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0';
+
+  @override
+  String get sectionTraits => 'What it is like and how it lives';
 }

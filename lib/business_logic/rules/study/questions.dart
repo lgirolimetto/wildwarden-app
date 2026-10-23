@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
-import 'package:druid_app/business_logic/models/localized_text.dart';
+import 'package:druid_app/business_logic/models/species_traits.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
@@ -25,9 +25,13 @@ enum QuestionForm {
   oddOneOut,
   bandOf,
   whichInBand,
-  warningOf,
-  hasWarning,
   commonnessOf,
+  growthFormOf,
+  lifeCycleOf,
+  seedDispersalOf,
+  originOf,
+  lightOf,
+  moistureOf,
 }
 
 /// Risposta possibile. È solo dato: il testo lo compone la UI nella lingua dell'utente.
@@ -87,17 +91,17 @@ class YesNoOption extends AnswerOption {
   int get hashCode => yes.hashCode;
 }
 
-/// Un avviso di sicurezza del catalogo ("tossica (bacche)", "lattice irritante"…).
-class WarningOption extends AnswerOption {
-  final LocalizedText warning;
+/// Un valore fra pochi possibili (forma di crescita, ciclo vitale, semi, luce, umidità…): l'enum dice quale.
+class TraitOption extends AnswerOption {
+  final Enum value;
 
-  const WarningOption(this.warning);
-
-  @override
-  bool operator ==(Object other) => other is WarningOption && other.warning == warning;
+  const TraitOption(this.value);
 
   @override
-  int get hashCode => warning.hashCode;
+  bool operator ==(Object other) => other is TraitOption && other.value == value;
+
+  @override
+  int get hashCode => value.hashCode;
 }
 
 class CommonnessOption extends AnswerOption {
@@ -186,12 +190,15 @@ List<QuestionForm> formsFor(Fact fact, Catalog catalog, {AnswerMode mode = Answe
       if (catalog.relativesOf(s).length >= 2 && _otherFamilies(s, catalog).isNotEmpty) QuestionForm.oddOneOut,
     ],
     FactKind.altitude => [QuestionForm.bandOf, if (_absentFromBand(s, catalog).length >= 2) QuestionForm.whichInBand],
-    FactKind.toxicity => [
-      if (_otherWarnings(s, catalog).length >= 2) QuestionForm.warningOf else QuestionForm.hasWarning,
-    ],
     FactKind.commonness => [QuestionForm.commonnessOf],
+    FactKind.growthForm => [QuestionForm.growthFormOf],
+    FactKind.lifeCycle => [QuestionForm.lifeCycleOf],
+    FactKind.seedDispersal => [QuestionForm.seedDispersalOf],
+    FactKind.origin => [QuestionForm.originOf],
+    FactKind.light => [QuestionForm.lightOf],
+    FactKind.moisture => [QuestionForm.moistureOf],
     // Ritirati: non si chiedono più.
-    FactKind.name || FactKind.season => const [],
+    FactKind.name || FactKind.season || FactKind.toxicity => const [],
   };
 }
 
@@ -286,14 +293,24 @@ Question buildQuestion(
       answer: SpeciesOption(s),
       wrong: (_absentFromBand(s, catalog)..shuffle(random)).map(SpeciesOption.new).toList(),
     ),
-    // Si chiede solo per le specie con l'avviso (vedi `factsOf`). Le risposte sbagliate sono gli avvisi delle altre
-    // specie: si impara che cosa, di questa pianta, va evitato.
-    QuestionForm.warningOf => make(
-      answer: WarningOption(catalog.safety[s.sci]!),
-      wrong: (_otherWarnings(s, catalog)..shuffle(random)).map(WarningOption.new).toList(),
+    QuestionForm.growthFormOf => _oneOf(make, s.traits.growthForm!, GrowthForm.values, random),
+    QuestionForm.lifeCycleOf => _oneOf(make, s.traits.lifeCycle!, LifeCycle.values, random),
+    // Se i semi viaggiano in più modi se ne chiede uno; le risposte sbagliate sono modi che questa specie non usa.
+    QuestionForm.seedDispersalOf => () {
+      final modes = s.traits.dispersal.toList()..sort((a, b) => a.index.compareTo(b.index));
+      return make(
+        answer: TraitOption(modes[random.nextInt(modes.length)]),
+        wrong: (SeedDispersal.values.where((m) => !modes.contains(m)).toList()..shuffle(random))
+            .map(TraitOption.new)
+            .toList(),
+      );
+    }(),
+    QuestionForm.originOf => make(
+      answer: YesNoOption(s.traits.introducedInItaly!),
+      wrong: [YesNoOption(!s.traits.introducedInItaly!)],
     ),
-    // Se gli avvisi diversi sono troppo pochi: "c'è un avviso?", e la risposta è sempre sì, che è il punto.
-    QuestionForm.hasWarning => make(answer: const YesNoOption(true), wrong: const [YesNoOption(false)]),
+    QuestionForm.lightOf => _oneOf(make, lightPreferenceOf(s)!, LightPreference.values, random),
+    QuestionForm.moistureOf => _oneOf(make, moisturePreferenceOf(s)!, MoisturePreference.values, random),
     QuestionForm.commonnessOf => make(
       answer: CommonnessOption(commonnessOf(s, catalog)),
       wrong: Commonness.values.where((c) => c != commonnessOf(s, catalog)).map(CommonnessOption.new).toList(),
@@ -360,9 +377,16 @@ double _similarity(String a, String b) {
   return 2 * x.intersection(y).length / (x.length + y.length);
 }
 
-/// Avvisi di sicurezza delle altre specie, diversi da quello di [s].
-List<LocalizedText> _otherWarnings(Species s, Catalog catalog) =>
-    catalog.safety.values.toSet().where((w) => w != catalog.safety[s.sci]).toList();
+/// Domanda con un valore giusto tra pochi possibili: le risposte sbagliate sono gli altri valori.
+Question _oneOf<T extends Enum>(
+  Question Function({required List<AnswerOption> wrong, required AnswerOption answer}) make,
+  T answer,
+  List<T> values,
+  Random random,
+) => make(
+  answer: TraitOption(answer),
+  wrong: (values.where((v) => v != answer).toList()..shuffle(random)).map(TraitOption.new).toList(),
+);
 
 List<String> _otherFamilies(Species s, Catalog catalog) =>
     catalog.species.map((o) => o.family).toSet().where((f) => f != s.family).toList();

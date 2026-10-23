@@ -149,7 +149,7 @@ void main() {
 
     expect(state.levelOf('Helleborus viridis'), 1);
     expect(state.dueFactIds(at), isEmpty);
-    expect(state.dueFactIds(at.add(const Duration(days: 1))), hasLength(2));
-    expect(state.xp, 2 * XpRules.correctFirstTry + XpRules.levelPassed);
+    expect(state.dueFactIds(at.add(const Duration(days: 1))), hasLength(3));
+    expect(state.xp, 3 * XpRules.correctFirstTry + XpRules.levelPassed);
   });
 }

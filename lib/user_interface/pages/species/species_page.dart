@@ -39,63 +39,53 @@ class SpeciesPage extends StatelessWidget {
       child: GameDataBuilder(
         builder: (context, catalog, state, progress) {
           final species = catalog.speciesBySci(speciesSci)!;
-          return state.hasEncountered(speciesSci)
-              ? _KnownSpecies(species: species, catalog: catalog, state: state, progress: progress)
-              : _UnknownSpecies(species: species, catalog: catalog, state: state, progress: progress);
+          return _SpeciesSheet(species: species, catalog: catalog, state: state, progress: progress);
         },
       ),
     ),
   );
 }
 
-class _UnknownSpecies extends StatelessWidget {
+/// Per una specie non ancora incontrata: dove e quando cercarla, la stella delle desiderata e, negli strumenti di
+/// prova, l'incontro simulato.
+class _ToFind extends StatelessWidget {
   final Species species;
-  final Catalog catalog;
   final GameState state;
   final ProgressController progress;
 
-  const _UnknownSpecies({required this.species, required this.catalog, required this.state, required this.progress});
+  const _ToFind({required this.species, required this.state, required this.progress});
 
   @override
   Widget build(BuildContext context) {
     final desired = state.desiderata.contains(species.sci);
-    return ListView(
-      padding: const EdgeInsets.only(bottom: Gaps.xl),
-      children: [
-        SpeciesPhotoHeader(
-          image: RemoteImage(species.images.first.url),
-          credit: '${species.images.first.creator} · ${species.images.first.license}',
-          title: context.game.name(species),
-          subtitle: context.l10n.notEncounteredYet,
-          level: null,
-        ),
-        _Padded(
-          children: [
-            _SafetyWarning(species: species, catalog: catalog),
-            Text(context.game.hint(species)),
-            const SizedBox(height: Gaps.l),
-            FilledButton.icon(
-              key: const ValueKey('toggle-desiderata'),
-              onPressed: desired || canAddDesiderata(state) ? () => progress.toggleDesiderata(species.sci) : null,
-              icon: Icon(desired ? Icons.star : Icons.star_outline),
-              label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
-            ),
-            if (!desired && !canAddDesiderata(state)) ...[
-              const SizedBox(height: Gaps.xs),
-              Text(context.l10n.desiderataFull, style: context.texts.bodySmall),
-            ],
-            if (Get.find<AppConfig>().showDebugTools) ...[
-              const SizedBox(height: Gaps.s),
-              OutlinedButton.icon(
-                key: const ValueKey('simulate-encounter-page'),
-                onPressed: () => progress.encounter(species.sci, method: EncounterMethod.simulated),
-                icon: const Icon(Icons.bug_report_outlined),
-                label: Text(context.l10n.simulateEncounter),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: Gaps.l),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(context.game.hint(species)),
+          const SizedBox(height: Gaps.m),
+          FilledButton.icon(
+            key: const ValueKey('toggle-desiderata'),
+            onPressed: desired || canAddDesiderata(state) ? () => progress.toggleDesiderata(species.sci) : null,
+            icon: Icon(desired ? Icons.star : Icons.star_outline),
+            label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
+          ),
+          if (!desired && !canAddDesiderata(state)) ...[
+            const SizedBox(height: Gaps.xs),
+            Text(context.l10n.desiderataFull, style: context.texts.bodySmall),
           ],
-        ),
-      ],
+          if (Get.find<AppConfig>().showDebugTools) ...[
+            const SizedBox(height: Gaps.s),
+            OutlinedButton.icon(
+              key: const ValueKey('simulate-encounter-page'),
+              onPressed: () => progress.encounter(species.sci, method: EncounterMethod.simulated),
+              icon: const Icon(Icons.bug_report_outlined),
+              label: Text(context.l10n.simulateEncounter),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }
@@ -122,13 +112,14 @@ class _SafetyWarning extends StatelessWidget {
   }
 }
 
-class _KnownSpecies extends StatelessWidget {
+/// Pagina d'erbario di una specie, incontrata o no: ciò che si sa si sblocca studiando.
+class _SpeciesSheet extends StatelessWidget {
   final Species species;
   final Catalog catalog;
   final GameState state;
   final ProgressController progress;
 
-  const _KnownSpecies({required this.species, required this.catalog, required this.state, required this.progress});
+  const _SpeciesSheet({required this.species, required this.catalog, required this.state, required this.progress});
 
   @override
   Widget build(BuildContext context) {
@@ -144,14 +135,33 @@ class _KnownSpecies extends StatelessWidget {
           image: RemoteImage(species.images.first.url),
           credit: '${species.images.first.creator} · ${species.images.first.license}',
           title: game.name(species),
-          subtitle: levelName(context.l10n, level),
+          subtitle: state.hasEncountered(species.sci)
+              ? levelName(context.l10n, level)
+              : '${context.l10n.notEncounteredYet} · ${levelName(context.l10n, level)}',
           level: level,
         ),
         _Padded(
           children: [
             _SafetyWarning(species: species, catalog: catalog),
+            if (!state.hasEncountered(species.sci)) _ToFind(species: species, state: state, progress: progress),
             _StudyLadder(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
+            _Section(
+              title: context.l10n.sectionTraits,
+              child: game.traitLines(species, level).isEmpty
+                  ? locked(1)
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final line in game.traitLines(species, level)) Text(line),
+                        const SizedBox(height: Gaps.xs),
+                        Text(
+                          context.l10n.sourcesTraits,
+                          style: context.texts.labelSmall?.copyWith(color: context.druid.hint),
+                        ),
+                      ],
+                    ),
+            ),
 
             _Section(
               title: context.l10n.sectionSci,

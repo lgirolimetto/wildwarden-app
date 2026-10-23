@@ -77,7 +77,22 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C9EBAD"
+   "mysteryColor": "#C9EBAD",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 2.8,
+     "moisture": 4.4,
+     "temperature": 4.6,
+     "nutrients": 5.8,
+     "soilReaction": 7.7
+    },
+    "dispersal": [
+     "ants"
+    ]
+   }
   },
   {
    "sci": "Malva sylvestris",
@@ -149,7 +164,22 @@
      "gbifOccurrence": 6253078584,
      "local": true
     }
-   ]
+   ],
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.8,
+     "moisture": 3.6,
+     "temperature": 4.8,
+     "nutrients": 7.8,
+     "soilReaction": 6.7
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   }
   },
   {
    "sci": "Eranthis hyemalis",
@@ -215,7 +245,22 @@
      "gbifOccurrence": 2580180930,
      "local": true
     }
-   ]
+   ],
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.3,
+     "moisture": 4.7,
+     "temperature": 5.1,
+     "nutrients": 6.1,
+     "soilReaction": 6.6
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   }
   },
   {
    "sci": "Fagus sylvatica",
@@ -282,7 +327,22 @@
      "gbifOccurrence": 2350352854,
      "local": true
     }
-   ]
+   ],
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 3.0,
+     "moisture": 4.6,
+     "temperature": 4.1,
+     "nutrients": 4.9,
+     "soilReaction": 5.9
+    },
+    "dispersal": [
+     "hoardedByAnimals"
+    ]
+   }
   }
  ],
  "recipes": [

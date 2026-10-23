@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/business_logic/models/localized_text.dart';
+import 'package:druid_app/business_logic/models/species_traits.dart';
 
 /// Foto di riferimento di una specie, sempre con licenza CC0 o CC BY 4.0 verificata sulla singola foto.
 class SpeciesImage {
@@ -61,6 +62,9 @@ class Species {
   /// caratteristico della foto (fiore, bacca…), calcolato dalla pipeline dei contenuti. `null` se manca.
   final int? mysteryColor;
 
+  /// Tratti per lo studio (forma, ciclo, ecologia, semi); vuoti se il catalogo non li ha.
+  final SpeciesTraits traits;
+
   const Species({
     required this.sci,
     required this.name,
@@ -78,6 +82,7 @@ class Species {
     required this.bandShare,
     required this.images,
     this.mysteryColor,
+    this.traits = SpeciesTraits.none,
   });
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
@@ -101,6 +106,9 @@ class Species {
     ),
     images: (json['images'] as List).map((i) => SpeciesImage.fromJson(i as Map<String, dynamic>)).toList(),
     mysteryColor: _parseHexColor(json['mysteryColor'] as String?),
+    traits: json['traits'] == null
+        ? SpeciesTraits.none
+        : SpeciesTraits.fromJson(json['traits'] as Map<String, dynamic>),
   );
 }
 

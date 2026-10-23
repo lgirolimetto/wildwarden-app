@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/species_traits.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/services/catalog/asset_catalog_repository.dart';
@@ -15,16 +17,22 @@ void main() {
   setUp(() => small = smallCatalog());
 
   group('fatti per livello', () {
-    test('elleboro: tutti i fatti attivi (ha parenti, quota netta e avviso di sicurezza)', () {
+    test('elleboro: tutti i fatti attivi (ha parenti, quota netta e tutti i tratti)', () {
       final facts = factsOf(small.speciesBySci('Helleborus viridis')!, small).map((f) => f.kind);
       expect(facts.toSet(), FactKind.values.where((k) => !k.retired).toSet());
     });
 
-    test('malva: niente parenti nel catalogo ridotto e niente avviso, quindi niente domanda sulla tossicità', () {
+    test('malva: niente parenti nel catalogo ridotto, niente ciclo vitale (WCVP incerto: biennale o perenne)', () {
       final facts = factsOf(small.speciesBySci('Malva sylvestris')!, small).map((f) => f.kind);
       expect(facts, isNot(contains(FactKind.relatives)));
+      expect(facts, isNot(contains(FactKind.lifeCycle)));
+      expect(facts, containsAll([FactKind.altitude, FactKind.growthForm, FactKind.light, FactKind.seedDispersal]));
+    });
+
+    test('la tossicità non si chiede più, nemmeno per le specie con l\'avviso', () {
+      final facts = factsOf(small.speciesBySci('Helleborus viridis')!, small).map((f) => f.kind);
+      expect(small.safety, contains('Helleborus viridis'));
       expect(facts, isNot(contains(FactKind.toxicity)));
-      expect(facts, contains(FactKind.altitude));
     });
 
     test('nome comune e stagione sono ritirati: non si chiedono più', () {
@@ -68,8 +76,13 @@ void main() {
           QuestionForm.orderOf,
           QuestionForm.relativeOf,
           QuestionForm.bandOf,
-          QuestionForm.hasWarning,
           QuestionForm.commonnessOf,
+          QuestionForm.growthFormOf,
+          QuestionForm.lifeCycleOf,
+          QuestionForm.seedDispersalOf,
+          QuestionForm.originOf,
+          QuestionForm.lightOf,
+          QuestionForm.moistureOf,
         ]),
       );
     });
@@ -157,18 +170,43 @@ void main() {
             seen.add(q.form);
             expect(q.options, contains(q.answer));
             expect(q.options.toSet(), hasLength(q.options.length), reason: 'opzioni duplicate in ${q.form}');
-            // Fasce di quota: tre; sì/no: due; per il resto, con 50 specie ci sono sempre 3 risposte sbagliate.
+            // Valori fissi: quota, ciclo, luce, umidità tre; origine due (sì/no); per il resto, con 50 specie ci sono
+            // sempre 3 risposte sbagliate.
             final expected = switch (q.form) {
-              QuestionForm.bandOf => 3,
-              QuestionForm.hasWarning => 2,
+              QuestionForm.bandOf || QuestionForm.lifeCycleOf || QuestionForm.lightOf || QuestionForm.moistureOf => 3,
+              QuestionForm.originOf => 2,
               _ => 4,
             };
             expect(q.options.length, expected, reason: '${q.form}');
           }
         }
       }
-      // Con 12 avvisi diversi a Bologna il sì/no non serve mai.
-      expect(seen, QuestionForm.values.toSet().difference({QuestionForm.hasWarning}));
+      expect(seen, QuestionForm.values.toSet());
+    });
+  });
+
+  group('tratti', () {
+    test('semi: la risposta è un modo della specie, le sbagliate modi che non usa', () {
+      final elleboro = small.speciesBySci('Helleborus viridis')!;
+      for (var seed = 0; seed < 10; seed++) {
+        final q = buildQuestion(Fact(elleboro, FactKind.seedDispersal), small, Random(seed));
+        expect(q.answer, const TraitOption(SeedDispersal.ants));
+        expect(q.options.where((o) => o != q.answer), everyElement(isNot(const TraitOption(SeedDispersal.ants))));
+      }
+    });
+
+    test('luce e umidità: soglie sugli indicatori EIVE', () {
+      expect(lightPreferenceOf(small.speciesBySci('Fagus sylvatica')!), LightPreference.shade);
+      expect(lightPreferenceOf(small.speciesBySci('Malva sylvestris')!), LightPreference.sun);
+      expect(lightPreferenceOf(small.speciesBySci('Eranthis hyemalis')!), LightPreference.shade);
+      expect(moisturePreferenceOf(small.speciesBySci('Malva sylvestris')!), MoisturePreference.fresh);
+    });
+
+    test('origine: domanda sì/no "arrivata da fuori?", la risposta segue WCVP', () {
+      final faggio = small.speciesBySci('Fagus sylvatica')!;
+      final q = buildQuestion(Fact(faggio, FactKind.origin), small, Random(1));
+      expect(q.answer, const YesNoOption(false));
+      expect(q.options, hasLength(2));
     });
   });
 }

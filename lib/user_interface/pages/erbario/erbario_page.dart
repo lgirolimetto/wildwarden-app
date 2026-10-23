@@ -1,13 +1,16 @@
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/pages/erbario/widgets/species_tile.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
+import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +47,10 @@ class _ErbarioContent extends StatelessWidget {
     // Ogni specie ha 5 pagine: l'incontro e i 4 livelli.
     final pages = encountered.fold<int>(0, (sum, s) => sum + 1 + state.levelOf(s.sci));
     void open(String sci) => Get.to<void>(() => SpeciesPage(speciesSci: sci));
+    VoidCallback? study(Species s) => switch (nextStudyLevel(s, catalog, state)) {
+      final level? => () => startLevelStudy(catalog, s.sci, level),
+      null => null,
+    };
 
     return CustomScrollView(
       slivers: [
@@ -75,14 +82,15 @@ class _ErbarioContent extends StatelessWidget {
             tiles: [
               for (final s in encountered)
                 (
-                  // Altezza stimata, in larghezze di tessera: foto + nome e livello.
-                  1 / tileAspect(s) + 0.45,
+                  // Altezza stimata, in larghezze di tessera: foto + nome e livello (+ "Studia").
+                  1 / tileAspect(s) + 0.45 + (study(s) == null ? 0 : 0.2),
                   GestureDetector(
                     onTap: () => open(s.sci),
                     child: EncounteredSpeciesTile(
                       key: ValueKey('met-${s.sci}'),
                       species: s,
                       level: state.levelOf(s.sci),
+                      onStudy: study(s),
                     ),
                   ),
                 ),
@@ -104,13 +112,15 @@ class _ErbarioContent extends StatelessWidget {
             tiles: [
               for (final s in missing)
                 (
-                  // Foto + nome.
-                  1 / tileAspect(s) + 0.3,
+                  // Foto + nome (+ "Studia").
+                  1 / tileAspect(s) + 0.3 + (study(s) == null ? 0 : 0.2),
                   GestureDetector(
                     onTap: () => open(s.sci),
                     child: UnknownSpeciesTile(
                       key: ValueKey('unknown-${s.sci}'),
                       species: s,
+                      level: state.levelOf(s.sci),
+                      onStudy: study(s),
                       onSimulateEncounter: onSimulateEncounter == null ? null : () => onSimulateEncounter!(s.sci),
                     ),
                   ),

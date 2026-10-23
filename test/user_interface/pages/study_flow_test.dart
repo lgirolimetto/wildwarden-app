@@ -145,7 +145,7 @@ void main() {
       expect(find.text('+2 PE'), findsOneWidget);
       await goToNextQuestion(tester);
       await completeSession(tester);
-      expect(Get.find<StudyController>().summary!.answers, 3);
+      expect(Get.find<StudyController>().summary!.answers, 4);
     });
 
     testWidgets('senza Diario il taccuino è bloccato e spiega cosa offre', (tester) async {
@@ -195,9 +195,9 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Giorno simulato: +1'), findsOneWidget);
 
-      await openTab(tester, 'Studio');
+      await openTab(tester, 'Home');
       await scrollToTop(tester);
-      expect(find.text('2 fatti da ripassare oggi'), findsOneWidget);
+      expect(find.text('3 fatti da ripassare oggi'), findsOneWidget);
       await scrollAndTap(tester, find.byKey(const ValueKey('start-review')));
       await answerCurrentQuestion(tester);
       expect(find.textContaining('Te lo ricordavi!'), findsOneWidget);
@@ -217,12 +217,12 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('met-Helleborus viridis')));
       await tester.pumpAndSettle();
 
-      final level2 = find.text('Si rivela al livello 2 (La sua famiglia)');
+      final level2 = find.text('Si rivela al livello 2 (Famiglia e vita)');
       await scrollTo(tester, level2);
       expect(find.text('Helleborus viridis'), findsOneWidget, reason: 'nome scientifico: rivelato al livello 1');
       expect(level2, findsOneWidget);
       expect(find.text('Ranunculaceae'), findsNothing, reason: 'famiglia: ancora chiusa');
-      final level3 = find.text('Si rivela al livello 3 (Lei e noi)');
+      final level3 = find.text('Si rivela al livello 3 (Il suo ambiente)');
       await scrollTo(tester, level3.first);
       expect(level3, findsWidgets);
     });

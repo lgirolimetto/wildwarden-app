@@ -100,16 +100,16 @@ class AppLocalizationsIt extends AppLocalizations {
   String get levelRecognise => 'Riconoscerla';
 
   @override
-  String get levelKnow => 'La sua famiglia';
+  String get levelKnow => 'Famiglia e vita';
 
   @override
-  String get levelWhereWhen => 'Lei e noi';
+  String get levelWhereWhen => 'Il suo ambiente';
 
   @override
   String get levelMastery => 'Maestria';
 
   @override
-  String get navStudy => 'Studio';
+  String get navStudy => 'Home';
 
   @override
   String get navRecipes => 'Ricette';
@@ -781,16 +781,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String qWarningOf(String name) {
-    return 'Che avviso vale per $name?';
-  }
-
-  @override
-  String qHasWarning(String name) {
-    return '$name ha un avviso di sicurezza?';
-  }
-
-  @override
   String qCommonnessOf(String name) {
     return 'Quanto è comune $name in questa zona?';
   }
@@ -837,4 +827,138 @@ class AppLocalizationsIt extends AppLocalizations {
   String factCommonness(String name, String commonness) {
     return 'In questa zona $name è: $commonness (dalle osservazioni GBIF).';
   }
+
+  @override
+  String qGrowthFormOf(String name) {
+    return 'Che forma ha $name?';
+  }
+
+  @override
+  String qLifeCycleOf(String name) {
+    return 'Quanto vive $name?';
+  }
+
+  @override
+  String qSeedDispersalOf(String name) {
+    return 'Come viaggiano i semi di $name?';
+  }
+
+  @override
+  String qOriginOf(String name) {
+    return '$name è arrivata in Italia da fuori, portata dall\'uomo?';
+  }
+
+  @override
+  String qLightOf(String name) {
+    return 'Quanta luce ama $name?';
+  }
+
+  @override
+  String qMoistureOf(String name) {
+    return 'Che terreno preferisce $name?';
+  }
+
+  @override
+  String get growthTree => 'Albero';
+
+  @override
+  String get growthShrub => 'Arbusto';
+
+  @override
+  String get growthHerb => 'Erba';
+
+  @override
+  String get growthClimber => 'Rampicante';
+
+  @override
+  String get cycleAnnual => 'Un anno (annuale)';
+
+  @override
+  String get cycleBiennial => 'Due anni (biennale)';
+
+  @override
+  String get cyclePerennial => 'Molti anni (perenne)';
+
+  @override
+  String get seedsEatenByAnimals => 'Nei frutti mangiati dagli animali';
+
+  @override
+  String get seedsStuckToAnimals => 'Attaccati al pelo degli animali';
+
+  @override
+  String get seedsHoardedByAnimals => 'Nascosti dagli animali come scorte';
+
+  @override
+  String get seedsAnts => 'Portati dalle formiche';
+
+  @override
+  String get seedsWind => 'Col vento';
+
+  @override
+  String get seedsWater => 'Con l\'acqua';
+
+  @override
+  String get seedsLaunched => 'Lanciati dalla pianta';
+
+  @override
+  String get seedsNearby => 'Cadono vicino, senza aiuti';
+
+  @override
+  String get lightShade => 'Ombra';
+
+  @override
+  String get lightHalfShade => 'Mezz\'ombra';
+
+  @override
+  String get lightSun => 'Pieno sole';
+
+  @override
+  String get moistureDry => 'Secco';
+
+  @override
+  String get moistureFresh => 'Fresco';
+
+  @override
+  String get moistureMoist => 'Umido';
+
+  @override
+  String factGrowthForm(String name, String form) {
+    return 'Forma di $name: $form.';
+  }
+
+  @override
+  String factLifeCycle(String name, String cycle) {
+    return '$name vive $cycle.';
+  }
+
+  @override
+  String factSeedDispersal(String name, String modes) {
+    return 'I semi di $name: $modes.';
+  }
+
+  @override
+  String factOriginNative(String name) {
+    return '$name è autoctona: in Italia cresce da sempre, senza l\'aiuto dell\'uomo.';
+  }
+
+  @override
+  String factOriginIntroduced(String name) {
+    return '$name è stata portata in Italia dall\'uomo: non è nata qui.';
+  }
+
+  @override
+  String factLight(String name, String light) {
+    return '$name ama: $light.';
+  }
+
+  @override
+  String factMoisture(String name, String moisture) {
+    return '$name preferisce un terreno $moisture.';
+  }
+
+  @override
+  String get sourcesTraits => 'Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0';
+
+  @override
+  String get sectionTraits => 'Com\'è e come vive';
 }

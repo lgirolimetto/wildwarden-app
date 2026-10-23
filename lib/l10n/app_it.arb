@@ -46,10 +46,10 @@
   "simulateEncounter": "Simula incontro",
   "levelToStudy": "Da studiare",
   "levelRecognise": "Riconoscerla",
-  "levelKnow": "La sua famiglia",
-  "levelWhereWhen": "Lei e noi",
+  "levelKnow": "Famiglia e vita",
+  "levelWhereWhen": "Il suo ambiente",
   "levelMastery": "Maestria",
-  "navStudy": "Studio",
+  "navStudy": "Home",
   "navRecipes": "Ricette",
   "rankApprentice": "Apprendista",
   "rankWanderer": "Viandante",
@@ -674,22 +674,6 @@
       }
     }
   },
-  "qWarningOf": "Che avviso vale per {name}?",
-  "@qWarningOf": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "qHasWarning": "{name} ha un avviso di sicurezza?",
-  "@qHasWarning": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "qCommonnessOf": "Quanto è comune {name} in questa zona?",
   "@qCommonnessOf": {
     "placeholders": {
@@ -761,5 +745,147 @@
         "type": "String"
       }
     }
-  }
+  },
+  "qGrowthFormOf": "Che forma ha {name}?",
+  "@qGrowthFormOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qLifeCycleOf": "Quanto vive {name}?",
+  "@qLifeCycleOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qSeedDispersalOf": "Come viaggiano i semi di {name}?",
+  "@qSeedDispersalOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qOriginOf": "{name} è arrivata in Italia da fuori, portata dall'uomo?",
+  "@qOriginOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qLightOf": "Quanta luce ama {name}?",
+  "@qLightOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qMoistureOf": "Che terreno preferisce {name}?",
+  "@qMoistureOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "growthTree": "Albero",
+  "growthShrub": "Arbusto",
+  "growthHerb": "Erba",
+  "growthClimber": "Rampicante",
+  "cycleAnnual": "Un anno (annuale)",
+  "cycleBiennial": "Due anni (biennale)",
+  "cyclePerennial": "Molti anni (perenne)",
+  "seedsEatenByAnimals": "Nei frutti mangiati dagli animali",
+  "seedsStuckToAnimals": "Attaccati al pelo degli animali",
+  "seedsHoardedByAnimals": "Nascosti dagli animali come scorte",
+  "seedsAnts": "Portati dalle formiche",
+  "seedsWind": "Col vento",
+  "seedsWater": "Con l'acqua",
+  "seedsLaunched": "Lanciati dalla pianta",
+  "seedsNearby": "Cadono vicino, senza aiuti",
+  "lightShade": "Ombra",
+  "lightHalfShade": "Mezz'ombra",
+  "lightSun": "Pieno sole",
+  "moistureDry": "Secco",
+  "moistureFresh": "Fresco",
+  "moistureMoist": "Umido",
+  "factGrowthForm": "Forma di {name}: {form}.",
+  "@factGrowthForm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "form": {
+        "type": "String"
+      }
+    }
+  },
+  "factLifeCycle": "{name} vive {cycle}.",
+  "@factLifeCycle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "cycle": {
+        "type": "String"
+      }
+    }
+  },
+  "factSeedDispersal": "I semi di {name}: {modes}.",
+  "@factSeedDispersal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "modes": {
+        "type": "String"
+      }
+    }
+  },
+  "factOriginNative": "{name} è autoctona: in Italia cresce da sempre, senza l'aiuto dell'uomo.",
+  "@factOriginNative": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "factOriginIntroduced": "{name} è stata portata in Italia dall'uomo: non è nata qui.",
+  "@factOriginIntroduced": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "factLight": "{name} ama: {light}.",
+  "@factLight": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "light": {
+        "type": "String"
+      }
+    }
+  },
+  "factMoisture": "{name} preferisce un terreno {moisture}.",
+  "@factMoisture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "moisture": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesTraits": "Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0",
+  "sectionTraits": "Com'è e come vive"
 }

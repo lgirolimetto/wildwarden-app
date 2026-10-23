@@ -40,7 +40,7 @@ void main() {
     await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Eranthis hyemalis')));
 
     expect(find.text('Piè di gallo'), findsWidgets);
-    expect(find.text('Non ancora incontrata'), findsOneWidget);
+    expect(find.textContaining('Non ancora incontrata'), findsOneWidget);
     expect(find.text('⚠️ tossica · da verificare'), findsOneWidget);
   });
 
@@ -60,6 +60,30 @@ void main() {
     await scrollAndTap(tester, find.byKey(const ValueKey('met-Eranthis hyemalis')));
 
     expect(find.text('⚠️ tossica · da verificare'), findsOneWidget);
+  });
+
+  testWidgets('"Studia" sulla tessera apre il livello, anche per una specie mai incontrata', (tester) async {
+    registerTestDependencies();
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    await scrollAndTap(tester, find.byKey(const ValueKey('tile-study-Fagus sylvatica')));
+
+    expect(find.text('Faggio comune'), findsWidgets);
+    expect(find.textContaining('Riconoscerla ·'), findsOneWidget);
+  });
+
+  testWidgets('studiata ma mai incontrata: la scheda mostra ciò che si è imparato', (tester) async {
+    registerTestDependencies(
+      events: [LevelPassed(speciesSci: 'Fagus sylvatica', level: 1, xp: 20, occurredAt: DateTime(2027, 2, 1))],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+    await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Fagus sylvatica')));
+
+    await scrollTo(tester, find.text('Forma di Faggio comune: albero.'));
+    expect(find.text('Forma di Faggio comune: albero.'), findsOneWidget);
+    expect(find.text('Fagus sylvatica'), findsOneWidget, reason: 'nome scientifico: rivelato al livello 1');
   });
 
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {

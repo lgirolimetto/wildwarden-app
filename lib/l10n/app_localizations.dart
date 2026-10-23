@@ -275,13 +275,13 @@ abstract class AppLocalizations {
   /// No description provided for @levelKnow.
   ///
   /// In it, this message translates to:
-  /// **'La sua famiglia'**
+  /// **'Famiglia e vita'**
   String get levelKnow;
 
   /// No description provided for @levelWhereWhen.
   ///
   /// In it, this message translates to:
-  /// **'Lei e noi'**
+  /// **'Il suo ambiente'**
   String get levelWhereWhen;
 
   /// No description provided for @levelMastery.
@@ -293,7 +293,7 @@ abstract class AppLocalizations {
   /// No description provided for @navStudy.
   ///
   /// In it, this message translates to:
-  /// **'Studio'**
+  /// **'Home'**
   String get navStudy;
 
   /// No description provided for @navRecipes.
@@ -1382,18 +1382,6 @@ abstract class AppLocalizations {
   /// **'A quale ordine appartiene {name}?'**
   String qOrderOf(String name);
 
-  /// No description provided for @qWarningOf.
-  ///
-  /// In it, this message translates to:
-  /// **'Che avviso vale per {name}?'**
-  String qWarningOf(String name);
-
-  /// No description provided for @qHasWarning.
-  ///
-  /// In it, this message translates to:
-  /// **'{name} ha un avviso di sicurezza?'**
-  String qHasWarning(String name);
-
   /// No description provided for @qCommonnessOf.
   ///
   /// In it, this message translates to:
@@ -1465,6 +1453,222 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'In questa zona {name} è: {commonness} (dalle osservazioni GBIF).'**
   String factCommonness(String name, String commonness);
+
+  /// No description provided for @qGrowthFormOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Che forma ha {name}?'**
+  String qGrowthFormOf(String name);
+
+  /// No description provided for @qLifeCycleOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Quanto vive {name}?'**
+  String qLifeCycleOf(String name);
+
+  /// No description provided for @qSeedDispersalOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Come viaggiano i semi di {name}?'**
+  String qSeedDispersalOf(String name);
+
+  /// No description provided for @qOriginOf.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} è arrivata in Italia da fuori, portata dall\'uomo?'**
+  String qOriginOf(String name);
+
+  /// No description provided for @qLightOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Quanta luce ama {name}?'**
+  String qLightOf(String name);
+
+  /// No description provided for @qMoistureOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Che terreno preferisce {name}?'**
+  String qMoistureOf(String name);
+
+  /// No description provided for @growthTree.
+  ///
+  /// In it, this message translates to:
+  /// **'Albero'**
+  String get growthTree;
+
+  /// No description provided for @growthShrub.
+  ///
+  /// In it, this message translates to:
+  /// **'Arbusto'**
+  String get growthShrub;
+
+  /// No description provided for @growthHerb.
+  ///
+  /// In it, this message translates to:
+  /// **'Erba'**
+  String get growthHerb;
+
+  /// No description provided for @growthClimber.
+  ///
+  /// In it, this message translates to:
+  /// **'Rampicante'**
+  String get growthClimber;
+
+  /// No description provided for @cycleAnnual.
+  ///
+  /// In it, this message translates to:
+  /// **'Un anno (annuale)'**
+  String get cycleAnnual;
+
+  /// No description provided for @cycleBiennial.
+  ///
+  /// In it, this message translates to:
+  /// **'Due anni (biennale)'**
+  String get cycleBiennial;
+
+  /// No description provided for @cyclePerennial.
+  ///
+  /// In it, this message translates to:
+  /// **'Molti anni (perenne)'**
+  String get cyclePerennial;
+
+  /// No description provided for @seedsEatenByAnimals.
+  ///
+  /// In it, this message translates to:
+  /// **'Nei frutti mangiati dagli animali'**
+  String get seedsEatenByAnimals;
+
+  /// No description provided for @seedsStuckToAnimals.
+  ///
+  /// In it, this message translates to:
+  /// **'Attaccati al pelo degli animali'**
+  String get seedsStuckToAnimals;
+
+  /// No description provided for @seedsHoardedByAnimals.
+  ///
+  /// In it, this message translates to:
+  /// **'Nascosti dagli animali come scorte'**
+  String get seedsHoardedByAnimals;
+
+  /// No description provided for @seedsAnts.
+  ///
+  /// In it, this message translates to:
+  /// **'Portati dalle formiche'**
+  String get seedsAnts;
+
+  /// No description provided for @seedsWind.
+  ///
+  /// In it, this message translates to:
+  /// **'Col vento'**
+  String get seedsWind;
+
+  /// No description provided for @seedsWater.
+  ///
+  /// In it, this message translates to:
+  /// **'Con l\'acqua'**
+  String get seedsWater;
+
+  /// No description provided for @seedsLaunched.
+  ///
+  /// In it, this message translates to:
+  /// **'Lanciati dalla pianta'**
+  String get seedsLaunched;
+
+  /// No description provided for @seedsNearby.
+  ///
+  /// In it, this message translates to:
+  /// **'Cadono vicino, senza aiuti'**
+  String get seedsNearby;
+
+  /// No description provided for @lightShade.
+  ///
+  /// In it, this message translates to:
+  /// **'Ombra'**
+  String get lightShade;
+
+  /// No description provided for @lightHalfShade.
+  ///
+  /// In it, this message translates to:
+  /// **'Mezz\'ombra'**
+  String get lightHalfShade;
+
+  /// No description provided for @lightSun.
+  ///
+  /// In it, this message translates to:
+  /// **'Pieno sole'**
+  String get lightSun;
+
+  /// No description provided for @moistureDry.
+  ///
+  /// In it, this message translates to:
+  /// **'Secco'**
+  String get moistureDry;
+
+  /// No description provided for @moistureFresh.
+  ///
+  /// In it, this message translates to:
+  /// **'Fresco'**
+  String get moistureFresh;
+
+  /// No description provided for @moistureMoist.
+  ///
+  /// In it, this message translates to:
+  /// **'Umido'**
+  String get moistureMoist;
+
+  /// No description provided for @factGrowthForm.
+  ///
+  /// In it, this message translates to:
+  /// **'Forma di {name}: {form}.'**
+  String factGrowthForm(String name, String form);
+
+  /// No description provided for @factLifeCycle.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} vive {cycle}.'**
+  String factLifeCycle(String name, String cycle);
+
+  /// No description provided for @factSeedDispersal.
+  ///
+  /// In it, this message translates to:
+  /// **'I semi di {name}: {modes}.'**
+  String factSeedDispersal(String name, String modes);
+
+  /// No description provided for @factOriginNative.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} è autoctona: in Italia cresce da sempre, senza l\'aiuto dell\'uomo.'**
+  String factOriginNative(String name);
+
+  /// No description provided for @factOriginIntroduced.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} è stata portata in Italia dall\'uomo: non è nata qui.'**
+  String factOriginIntroduced(String name);
+
+  /// No description provided for @factLight.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} ama: {light}.'**
+  String factLight(String name, String light);
+
+  /// No description provided for @factMoisture.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} preferisce un terreno {moisture}.'**
+  String factMoisture(String name, String moisture);
+
+  /// No description provided for @sourcesTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0'**
+  String get sourcesTraits;
+
+  /// No description provided for @sectionTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Com\'è e come vive'**
+  String get sectionTraits;
 }
 
 class _AppLocalizationsDelegate

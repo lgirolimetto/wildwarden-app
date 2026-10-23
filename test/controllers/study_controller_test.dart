@@ -43,10 +43,11 @@ void main() {
     await answerAll();
 
     expect(study.summary!.levelPassed, 1);
-    expect(study.summary!.xp, 2 * XpRules.correctFirstTry + XpRules.levelPassed);
+    // Livello 1: aspetto, nome scientifico, forma di crescita.
+    expect(study.summary!.xp, 3 * XpRules.correctFirstTry + XpRules.levelPassed);
     expect(progress.state.levelOf('Helleborus viridis'), 1);
     expect(progress.state.xp, study.summary!.xp);
-    expect(store.events.whereType<AnswerGiven>(), hasLength(2));
+    expect(store.events.whereType<AnswerGiven>(), hasLength(3));
   });
 
   test('un errore: la risposta resta visibile finché non si va avanti, e il fatto torna', () async {
@@ -63,8 +64,8 @@ void main() {
 
     await study.next();
     await answerAll();
-    expect(study.summary!.answers, 3);
-    expect(study.summary!.correct, 2);
+    expect(study.summary!.answers, 4);
+    expect(study.summary!.correct, 3);
   });
 
   test('ripassi: niente da ripassare subito, poi i fatti tornano il giorno dopo', () async {
@@ -78,7 +79,7 @@ void main() {
     expect(study.startReview(catalog), isTrue);
     expect(study.mode, AnswerMode.review);
     await answerAll();
-    expect(study.summary!.xp, 2 * XpRules.reviewRemembered);
+    expect(study.summary!.xp, 3 * XpRules.reviewRemembered);
   });
 
   test('le opzioni della domanda corrente non cambiano finché non si risponde', () async {

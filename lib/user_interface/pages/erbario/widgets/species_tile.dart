@@ -10,9 +10,13 @@ import 'package:flutter/material.dart';
 /// scopre studiando e incontrandola. [onSimulateEncounter] è presente solo con gli strumenti di debug attivi.
 class UnknownSpeciesTile extends StatelessWidget {
   final Species species;
+  final int level;
   final VoidCallback? onSimulateEncounter;
 
-  const UnknownSpeciesTile({super.key, required this.species, this.onSimulateEncounter});
+  /// `null` se la specie non ha più livelli da studiare.
+  final VoidCallback? onStudy;
+
+  const UnknownSpeciesTile({super.key, required this.species, this.level = 0, this.onSimulateEncounter, this.onStudy});
 
   @override
   Widget build(BuildContext context) => _TileFrame(
@@ -21,6 +25,8 @@ class UnknownSpeciesTile extends StatelessWidget {
     image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
+      if (level > 0) ...[const SizedBox(height: Gaps.xs), _LevelDots(level: level)],
+      if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
       if (onSimulateEncounter != null) ...[
         const SizedBox(height: Gaps.s),
         TextButton.icon(
@@ -40,7 +46,10 @@ class EncounteredSpeciesTile extends StatelessWidget {
   final Species species;
   final int level;
 
-  const EncounteredSpeciesTile({super.key, required this.species, this.level = 0});
+  /// `null` se la specie non ha più livelli da studiare.
+  final VoidCallback? onStudy;
+
+  const EncounteredSpeciesTile({super.key, required this.species, this.level = 0, this.onStudy});
 
   @override
   Widget build(BuildContext context) => _TileFrame(
@@ -55,7 +64,28 @@ class EncounteredSpeciesTile extends StatelessWidget {
       _LevelDots(level: level),
       const SizedBox(height: Gaps.xs),
       Text(levelName(context.l10n, level), style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
+      if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
     ],
+  );
+}
+
+/// "Studia" sulla tessera: apre il prossimo livello da studiare.
+class _StudyTileButton extends StatelessWidget {
+  final Species species;
+  final VoidCallback onStudy;
+
+  const _StudyTileButton({required this.species, required this.onStudy});
+
+  @override
+  Widget build(BuildContext context) => Align(
+    alignment: Alignment.centerLeft,
+    child: TextButton.icon(
+      key: ValueKey('tile-study-${species.sci}'),
+      onPressed: onStudy,
+      style: TextButton.styleFrom(visualDensity: VisualDensity.compact, padding: EdgeInsets.zero),
+      icon: const Icon(Icons.school_outlined, size: 16),
+      label: Text(context.l10n.seasonalStudy, maxLines: 1),
+    ),
   );
 }
 
