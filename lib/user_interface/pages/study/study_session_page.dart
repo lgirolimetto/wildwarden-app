@@ -10,6 +10,7 @@ import 'package:druid_app/controllers/subscription/subscription_controller.dart'
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -63,7 +64,7 @@ class StudySessionPage extends StatelessWidget {
   String _title(BuildContext context, StudyController study, Catalog? catalog) {
     if (study.mode == AnswerMode.review) return context.l10n.reviewTitle;
     final species = study.speciesSci == null ? null : catalog?.speciesBySci(study.speciesSci!);
-    return species == null ? '' : context.l10n.studyLevelTitle(context.game.name(species), study.level ?? 0);
+    return species == null ? '' : context.game.name(species);
   }
 }
 
@@ -83,7 +84,17 @@ class _QuestionView extends StatelessWidget {
       children: [
         ClayProgressBar(value: study.totalFacts == 0 ? 0 : study.completedFacts / study.totalFacts, height: 4),
         const SizedBox(height: Gaps.xs),
-        Text(context.l10n.studyProgress(study.completedFacts, study.totalFacts), style: context.texts.bodySmall),
+        // Il tema del livello sta qui, non nel titolo: il titolo resta il nome della specie, che non va tagliato.
+        Text(
+          study.mode == AnswerMode.learning
+              ? context.l10n.studyThemeProgress(
+                  levelName(context.l10n, study.level ?? 0),
+                  study.completedFacts,
+                  study.totalFacts,
+                )
+              : context.l10n.studyProgress(study.completedFacts, study.totalFacts),
+          style: context.texts.bodySmall,
+        ),
         const SizedBox(height: Gaps.l),
         Text(game.prompt(question), style: context.texts.headlineSmall),
         if (question.imageUrl != null) ...[

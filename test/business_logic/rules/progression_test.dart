@@ -106,7 +106,7 @@ void main() {
 
       final studying = state.apply(
         AnswerGiven(
-          factId: Fact.idOf('Helleborus viridis', FactKind.name),
+          factId: Fact.idOf('Helleborus viridis', FactKind.scientificName),
           correct: true,
           mode: AnswerMode.learning,
           xp: 10,
@@ -116,11 +116,25 @@ void main() {
       expect(seasonalSuggestions(catalog, studying, feb).map((s) => s.sci), ['Eranthis hyemalis']);
     });
 
+    test('i fatti ritirati (stagione, nome comune) non tornano nei ripassi', () {
+      final retired = Fact.idOf('Helleborus viridis', FactKind.season);
+      final active = Fact.idOf('Helleborus viridis', FactKind.family);
+      final state = play([
+        for (final id in [retired, active])
+          AnswerGiven(factId: id, correct: true, mode: AnswerMode.learning, xp: 10, occurredAt: feb),
+        passed('Helleborus viridis', 2),
+        passed('Helleborus viridis', 3),
+      ]);
+      final due = dueFacts(catalog, state, feb.add(const Duration(days: 2))).map((f) => f.id);
+      expect(due, contains(active));
+      expect(due, isNot(contains(retired)));
+    });
+
     test('in studio: le incontrate e quelle con risposte o livelli, anche mai incontrate', () {
       final state = play([
         met('Fagus sylvatica'),
         AnswerGiven(
-          factId: Fact.idOf('Malva sylvestris', FactKind.name),
+          factId: Fact.idOf('Malva sylvestris', FactKind.scientificName),
           correct: false,
           mode: AnswerMode.learning,
           xp: 2,

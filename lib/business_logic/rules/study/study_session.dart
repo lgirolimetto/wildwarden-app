@@ -82,7 +82,7 @@ class StudySession {
   /// Domanda corrente; ogni chiamata restituisce la stessa finché non si risponde.
   Question get current {
     final pending = _queue.first;
-    return _current ??= buildQuestion(pending.fact, _catalog, _random, avoid: pending.avoid);
+    return _current ??= buildQuestion(pending.fact, _catalog, _random, avoid: pending.avoid, mode: mode);
   }
 
   AnswerOutcome answer(AnswerOption chosen, {required GameState state, required DateTime at}) {

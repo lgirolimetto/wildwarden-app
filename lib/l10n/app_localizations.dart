@@ -269,19 +269,19 @@ abstract class AppLocalizations {
   /// No description provided for @levelRecognise.
   ///
   /// In it, this message translates to:
-  /// **'Riconoscere'**
+  /// **'Riconoscerla'**
   String get levelRecognise;
 
   /// No description provided for @levelKnow.
   ///
   /// In it, this message translates to:
-  /// **'Conoscere'**
+  /// **'La sua famiglia'**
   String get levelKnow;
 
   /// No description provided for @levelWhereWhen.
   ///
   /// In it, this message translates to:
-  /// **'Dove e quando'**
+  /// **'Lei e noi'**
   String get levelWhereWhen;
 
   /// No description provided for @levelMastery.
@@ -401,7 +401,7 @@ abstract class AppLocalizations {
   /// No description provided for @qNameToPhoto.
   ///
   /// In it, this message translates to:
-  /// **'Quale foto mostra: {name}?'**
+  /// **'Quale di queste è {name}?'**
   String qNameToPhoto(String name);
 
   /// No description provided for @qSciToCommon.
@@ -445,18 +445,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Quale NON è della stessa famiglia delle altre?'**
   String get qOddOneOut;
-
-  /// No description provided for @qSeasonOf.
-  ///
-  /// In it, this message translates to:
-  /// **'In quale stagione si fa notare di più {name}, qui?'**
-  String qSeasonOf(String name);
-
-  /// No description provided for @qBestMonthOf.
-  ///
-  /// In it, this message translates to:
-  /// **'In quale di questi mesi è più facile trovare {name}?'**
-  String qBestMonthOf(String name);
 
   /// No description provided for @qBandOf.
   ///
@@ -1381,6 +1369,102 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Feltro'**
   String get liveryFeltro;
+
+  /// No description provided for @studyThemeProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'{theme} · {done} di {total}'**
+  String studyThemeProgress(String theme, int done, int total);
+
+  /// No description provided for @qOrderOf.
+  ///
+  /// In it, this message translates to:
+  /// **'A quale ordine appartiene {name}?'**
+  String qOrderOf(String name);
+
+  /// No description provided for @qWarningOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Che avviso vale per {name}?'**
+  String qWarningOf(String name);
+
+  /// No description provided for @qHasWarning.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} ha un avviso di sicurezza?'**
+  String qHasWarning(String name);
+
+  /// No description provided for @qCommonnessOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Quanto è comune {name} in questa zona?'**
+  String qCommonnessOf(String name);
+
+  /// No description provided for @optionYes.
+  ///
+  /// In it, this message translates to:
+  /// **'Sì'**
+  String get optionYes;
+
+  /// No description provided for @optionNo.
+  ///
+  /// In it, this message translates to:
+  /// **'No'**
+  String get optionNo;
+
+  /// No description provided for @commonnessVeryCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Tra le più comuni'**
+  String get commonnessVeryCommon;
+
+  /// No description provided for @commonnessCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune'**
+  String get commonnessCommon;
+
+  /// No description provided for @commonnessUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Meno comune'**
+  String get commonnessUncommon;
+
+  /// No description provided for @commonnessRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Tra le meno osservate'**
+  String get commonnessRare;
+
+  /// No description provided for @factScientificName.
+  ///
+  /// In it, this message translates to:
+  /// **'Il nome scientifico di {name} è {sci}: la prima parola è il genere, la seconda la specie.'**
+  String factScientificName(String name, String sci);
+
+  /// No description provided for @factCongeners.
+  ///
+  /// In it, this message translates to:
+  /// **'Altre specie del genere {genus} in Italia: {names}.'**
+  String factCongeners(String genus, String names);
+
+  /// No description provided for @factOrder.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} appartiene all\'ordine {order}, di cui fa parte la famiglia {family}.'**
+  String factOrder(String name, String order, String family);
+
+  /// No description provided for @factWarning.
+  ///
+  /// In it, this message translates to:
+  /// **'{name}: {warning}. Guardala e fotografala, non assaggiarla. Avviso da verificare.'**
+  String factWarning(String name, String warning);
+
+  /// No description provided for @factCommonness.
+  ///
+  /// In it, this message translates to:
+  /// **'In questa zona {name} è: {commonness} (dalle osservazioni GBIF).'**
+  String factCommonness(String name, String commonness);
 }
 
 class _AppLocalizationsDelegate

@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
-import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -82,28 +79,6 @@ void main() {
     expect(study.mode, AnswerMode.review);
     await answerAll();
     expect(study.summary!.xp, 2 * XpRules.reviewRemembered);
-  });
-
-  test('un livello senza fatti si salta: finito il 2, la specie passa al 3 senza domande', () async {
-    // Malva modificata: né stagione né quota prevalenti ⇒ nessun fatto al livello 3.
-    final json = jsonDecode(File('test/fixtures/catalog_small.json').readAsStringSync()) as Map<String, dynamic>;
-    final malva = (json['species'] as List).cast<Map<String, dynamic>>().firstWhere(
-      (s) => s['sci'] == 'Malva sylvestris',
-    );
-    malva['bandShare'] = {'plain': 0.4, 'hill': 0.3, 'mountain': 0.3};
-    catalog = Catalog.fromJson(json);
-    expect(factsAtLevel(catalog.speciesBySci('Malva sylvestris')!, catalog, 3), isEmpty);
-
-    await progress.encounter('Malva sylvestris', method: EncounterMethod.simulated);
-    for (final level in [1, 2]) {
-      study.startLevel(catalog, 'Malva sylvestris', level);
-      await answerAll();
-    }
-
-    expect(progress.state.levelOf('Malva sylvestris'), 3);
-    final skipped = store.events.whereType<LevelPassed>().last;
-    expect(skipped.level, 3);
-    expect(skipped.xp, 0, reason: 'un livello saltato non dà PE');
   });
 
   test('le opzioni della domanda corrente non cambiano finché non si risponde', () async {

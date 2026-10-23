@@ -2,12 +2,16 @@ import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
-import 'package:druid_app/business_logic/models/enums/season.dart';
+import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/localized_text.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 
 /// Forma di una domanda. Ogni fatto ha una o più forme: chi sbaglia rivede lo stesso fatto chiesto diversamente.
+///
+/// Nello studio di un livello il nome comune della specie è nel titolo: le forme che lo chiedono ([photoToName],
+/// [sciToCommon]) valgono solo nei ripassi, che mescolano più specie.
 enum QuestionForm {
   photoToName,
   nameToPhoto,
@@ -16,12 +20,14 @@ enum QuestionForm {
   familyFromCommon,
   familyFromSci,
   familyFromPhoto,
+  orderOf,
   relativeOf,
   oddOneOut,
-  seasonOf,
-  bestMonthOf,
   bandOf,
   whichInBand,
+  warningOf,
+  hasWarning,
+  commonnessOf,
 }
 
 /// Risposta possibile. È solo dato: il testo lo compone la UI nella lingua dell'utente.
@@ -44,6 +50,68 @@ class SpeciesOption extends AnswerOption {
   int get hashCode => species.sci.hashCode;
 }
 
+/// Un nome scientifico, anche di una specie che non è nel catalogo (le specie sorelle dello stesso genere).
+class ScientificNameOption extends AnswerOption {
+  final String sci;
+
+  const ScientificNameOption(this.sci);
+
+  @override
+  bool operator ==(Object other) => other is ScientificNameOption && other.sci == sci;
+
+  @override
+  int get hashCode => sci.hashCode;
+}
+
+class OrderOption extends AnswerOption {
+  final String order;
+
+  const OrderOption(this.order);
+
+  @override
+  bool operator ==(Object other) => other is OrderOption && other.order == order;
+
+  @override
+  int get hashCode => order.hashCode;
+}
+
+class YesNoOption extends AnswerOption {
+  final bool yes;
+
+  const YesNoOption(this.yes);
+
+  @override
+  bool operator ==(Object other) => other is YesNoOption && other.yes == yes;
+
+  @override
+  int get hashCode => yes.hashCode;
+}
+
+/// Un avviso di sicurezza del catalogo ("tossica (bacche)", "lattice irritante"…).
+class WarningOption extends AnswerOption {
+  final LocalizedText warning;
+
+  const WarningOption(this.warning);
+
+  @override
+  bool operator ==(Object other) => other is WarningOption && other.warning == warning;
+
+  @override
+  int get hashCode => warning.hashCode;
+}
+
+class CommonnessOption extends AnswerOption {
+  final Commonness commonness;
+
+  const CommonnessOption(this.commonness);
+
+  @override
+  bool operator ==(Object other) => other is CommonnessOption && other.commonness == commonness;
+
+  @override
+  int get hashCode => commonness.hashCode;
+}
+
 class FamilyOption extends AnswerOption {
   final String family;
 
@@ -54,31 +122,6 @@ class FamilyOption extends AnswerOption {
 
   @override
   int get hashCode => family.hashCode;
-}
-
-class SeasonOption extends AnswerOption {
-  final Season season;
-
-  const SeasonOption(this.season);
-
-  @override
-  bool operator ==(Object other) => other is SeasonOption && other.season == season;
-
-  @override
-  int get hashCode => season.hashCode;
-}
-
-class MonthOption extends AnswerOption {
-  /// 1-12.
-  final int month;
-
-  const MonthOption(this.month);
-
-  @override
-  bool operator ==(Object other) => other is MonthOption && other.month == month;
-
-  @override
-  int get hashCode => month.hashCode;
 }
 
 class BandOption extends AnswerOption {
@@ -120,32 +163,48 @@ class Question {
 /// Numero massimo di risposte sbagliate proposte per domanda.
 const _distractorCount = 3;
 
-/// Forme disponibili per un fatto, nel suo catalogo.
-List<QuestionForm> formsFor(Fact fact, Catalog catalog) {
+/// Forme disponibili per un fatto, nel suo catalogo. Nei ripassi ([AnswerMode.review]) si aggiungono quelle che
+/// chiedono il nome comune.
+List<QuestionForm> formsFor(Fact fact, Catalog catalog, {AnswerMode mode = AnswerMode.learning}) {
   final s = fact.species;
+  final review = mode == AnswerMode.review;
+  final canShowPhotos = catalog.species.where((o) => o.sci != s.sci && o.images.isNotEmpty).length >= 2;
   return switch (fact.kind) {
     FactKind.appearance => [
-      QuestionForm.photoToName,
-      if (catalog.species.where((o) => o.sci != s.sci && o.images.isNotEmpty).length >= 2) QuestionForm.nameToPhoto,
+      if (canShowPhotos) QuestionForm.nameToPhoto,
+      if (review || !canShowPhotos) QuestionForm.photoToName,
     ],
-    FactKind.name => [QuestionForm.sciToCommon, QuestionForm.commonToSci],
+    FactKind.scientificName => [QuestionForm.commonToSci, if (review) QuestionForm.sciToCommon],
     FactKind.family => [
       QuestionForm.familyFromCommon,
       QuestionForm.familyFromSci,
       if (s.images.isNotEmpty) QuestionForm.familyFromPhoto,
     ],
+    FactKind.order => [QuestionForm.orderOf],
     FactKind.relatives => [
       QuestionForm.relativeOf,
       if (catalog.relativesOf(s).length >= 2 && _otherFamilies(s, catalog).isNotEmpty) QuestionForm.oddOneOut,
     ],
-    FactKind.season => [QuestionForm.seasonOf, if (_lowMonths(s).length >= 3) QuestionForm.bestMonthOf],
     FactKind.altitude => [QuestionForm.bandOf, if (_absentFromBand(s, catalog).length >= 2) QuestionForm.whichInBand],
+    FactKind.toxicity => [
+      if (_otherWarnings(s, catalog).length >= 2) QuestionForm.warningOf else QuestionForm.hasWarning,
+    ],
+    FactKind.commonness => [QuestionForm.commonnessOf],
+    // Ritirati: non si chiedono più.
+    FactKind.name || FactKind.season => const [],
   };
 }
 
 /// Costruisce una domanda per il fatto, in una forma diversa da [avoid] se ce n'è più di una.
-Question buildQuestion(Fact fact, Catalog catalog, Random random, {QuestionForm? avoid}) {
-  final forms = formsFor(fact, catalog);
+Question buildQuestion(
+  Fact fact,
+  Catalog catalog,
+  Random random, {
+  QuestionForm? avoid,
+  AnswerMode mode = AnswerMode.learning,
+}) {
+  final forms = formsFor(fact, catalog, mode: mode);
+  assert(forms.isNotEmpty, 'Fatto ritirato: ${fact.id}');
   final candidates = forms.length > 1 ? forms.where((f) => f != avoid).toList() : forms;
   final form = candidates[random.nextInt(candidates.length)];
   final s = fact.species;
@@ -166,25 +225,40 @@ Question buildQuestion(Fact fact, Catalog catalog, Random random, {QuestionForm?
     QuestionForm.photoToName => make(
       imageUrl: photoOf(s),
       answer: SpeciesOption(s),
-      wrong: _distractors(s, catalog, random).map(SpeciesOption.new).toList(),
+      wrong: _lookalikes(s, catalog, random).map(SpeciesOption.new).toList(),
     ),
+    // "Quale di queste è la malva?": tra specie che si somigliano, e mai con la foto di copertina dell'erbario
+    // se la specie ne ha altre (riconoscerla vuol dire riconoscerla in una foto nuova).
     QuestionForm.nameToPhoto => make(
-      answer: SpeciesOption(s, imageUrl: photoOf(s)),
-      wrong: _distractors(
+      answer: SpeciesOption(
+        s,
+        imageUrl: s.images.length > 1 ? s.images[1 + random.nextInt(s.images.length - 1)].url : s.images.first.url,
+      ),
+      wrong: _lookalikes(
         s,
         catalog,
         random,
         where: (o) => o.images.isNotEmpty,
-      ).map((o) => SpeciesOption(o, imageUrl: o.images.first.url)).toList(),
+      ).map((o) => SpeciesOption(o, imageUrl: photoOf(o))).toList(),
     ),
-    QuestionForm.sciToCommon || QuestionForm.commonToSci => make(
+    QuestionForm.sciToCommon => make(
       answer: SpeciesOption(s),
-      wrong: _distractors(s, catalog, random).map(SpeciesOption.new).toList(),
+      wrong: _lookalikes(s, catalog, random).map(SpeciesOption.new).toList(),
+    ),
+    QuestionForm.commonToSci => make(
+      answer: ScientificNameOption(s.sci),
+      wrong: similarScientificNames(s, catalog, random).map(ScientificNameOption.new).toList(),
     ),
     QuestionForm.familyFromCommon || QuestionForm.familyFromSci || QuestionForm.familyFromPhoto => make(
       imageUrl: form == QuestionForm.familyFromPhoto ? photoOf(s) : null,
       answer: FamilyOption(s.family),
       wrong: (_otherFamilies(s, catalog)..shuffle(random)).map(FamilyOption.new).toList(),
+    ),
+    QuestionForm.orderOf => make(
+      answer: OrderOption(s.order!),
+      wrong: (catalog.species.map((o) => o.order).nonNulls.toSet().where((o) => o != s.order).toList()..shuffle(random))
+          .map(OrderOption.new)
+          .toList(),
     ),
     QuestionForm.relativeOf => () {
       final relatives = catalog.relativesOf(s);
@@ -203,14 +277,6 @@ Question buildQuestion(Fact fact, Catalog catalog, Random random, {QuestionForm?
         wrong: sameFamily.map(SpeciesOption.new).toList(),
       );
     }(),
-    QuestionForm.seasonOf => make(
-      answer: SeasonOption(s.peakSeason),
-      wrong: Season.values.where((x) => x != s.peakSeason).map(SeasonOption.new).toList(),
-    ),
-    QuestionForm.bestMonthOf => make(
-      answer: MonthOption(_peakMonth(s)),
-      wrong: (_lowMonths(s)..shuffle(random)).map(MonthOption.new).toList(),
-    ),
     QuestionForm.bandOf => make(
       answer: BandOption(s.topBand),
       wrong: AltitudeBand.values.where((b) => b != s.topBand).map(BandOption.new).toList(),
@@ -220,33 +286,86 @@ Question buildQuestion(Fact fact, Catalog catalog, Random random, {QuestionForm?
       answer: SpeciesOption(s),
       wrong: (_absentFromBand(s, catalog)..shuffle(random)).map(SpeciesOption.new).toList(),
     ),
+    // Si chiede solo per le specie con l'avviso (vedi `factsOf`). Le risposte sbagliate sono gli avvisi delle altre
+    // specie: si impara che cosa, di questa pianta, va evitato.
+    QuestionForm.warningOf => make(
+      answer: WarningOption(catalog.safety[s.sci]!),
+      wrong: (_otherWarnings(s, catalog)..shuffle(random)).map(WarningOption.new).toList(),
+    ),
+    // Se gli avvisi diversi sono troppo pochi: "c'è un avviso?", e la risposta è sempre sì, che è il punto.
+    QuestionForm.hasWarning => make(answer: const YesNoOption(true), wrong: const [YesNoOption(false)]),
+    QuestionForm.commonnessOf => make(
+      answer: CommonnessOption(commonnessOf(s, catalog)),
+      wrong: Commonness.values.where((c) => c != commonnessOf(s, catalog)).map(CommonnessOption.new).toList(),
+    ),
   };
 }
 
-/// Risposte sbagliate: prima specie della stessa famiglia (più difficili da distinguere), poi le altre.
-List<Species> _distractors(Species s, Catalog catalog, Random random, {bool Function(Species)? where}) {
+/// Specie che si somigliano, per le risposte sbagliate: prima lo stesso genere, poi la stessa famiglia, poi un colore
+/// simile (quello caratteristico della foto, `mysteryColor`), poi le altre.
+List<Species> _lookalikes(Species s, Catalog catalog, Random random, {bool Function(Species)? where}) {
   bool ok(Species o) => o.sci != s.sci && (where?.call(o) ?? true);
-  final same = catalog.species.where((o) => ok(o) && o.family == s.family).toList()..shuffle(random);
-  final others = catalog.species.where((o) => ok(o) && o.family != s.family).toList()..shuffle(random);
-  return [...same, ...others].take(_distractorCount).toList();
+  int closeness(Species o) {
+    if (o.genus == s.genus) return 0;
+    if (o.family == s.family) return 1;
+    if (_hueDistance(o, s) < 30) return 2;
+    return 3;
+  }
+
+  final pool = catalog.species.where(ok).toList()..shuffle(random);
+  return (pool..sort((a, b) => closeness(a).compareTo(closeness(b)))).take(_distractorCount).toList();
 }
+
+/// Distanza tra le tinte caratteristiche di due specie, in gradi (0-180); 180 se una delle due non ce l'ha.
+double _hueDistance(Species a, Species b) {
+  if (a.mysteryColor == null || b.mysteryColor == null) return 180;
+  final d = (_hue(a.mysteryColor!) - _hue(b.mysteryColor!)).abs();
+  return min(d, 360 - d);
+}
+
+double _hue(int rgb) {
+  final r = (rgb >> 16 & 0xFF) / 255, g = (rgb >> 8 & 0xFF) / 255, b = (rgb & 0xFF) / 255;
+  final high = max(r, max(g, b)), low = min(r, min(g, b)), delta = high - low;
+  if (delta == 0) return 0;
+  final h = high == r
+      ? ((g - b) / delta) % 6
+      : high == g
+      ? (b - r) / delta + 2
+      : (r - g) / delta + 4;
+  return h * 60;
+}
+
+/// Nomi scientifici plausibili ma sbagliati: prima le specie vere dello stesso genere (anche fuori dal catalogo),
+/// poi i nomi che suonano più simili tra quelli conosciuti (catalogo e sorelle). Mai nomi inventati.
+List<String> similarScientificNames(Species s, Catalog catalog, Random random) {
+  final congeners = (s.congeners.where((n) => n != s.sci).toList()..shuffle(random)).take(_distractorCount).toList();
+  if (congeners.length >= _distractorCount) return congeners;
+  final known = {
+    for (final o in catalog.species) ...[o.sci, ...o.congeners],
+  }.difference({s.sci, ...congeners});
+  final bySound = known.toList()..sort((a, b) => _similarity(b, s.sci).compareTo(_similarity(a, s.sci)));
+  // Tra i più simili si pesca a caso, così la domanda non si ripete sempre uguale.
+  final closest = bySound.take(_distractorCount * 2).toList()..shuffle(random);
+  return [...congeners, ...closest].take(_distractorCount).toList();
+}
+
+/// Somiglianza tra due nomi (coefficiente di Dice sui trigrammi, 0-1).
+double _similarity(String a, String b) {
+  Set<String> trigrams(String text) {
+    final t = '  ${text.toLowerCase()} ';
+    return {for (var i = 0; i + 3 <= t.length; i++) t.substring(i, i + 3)};
+  }
+
+  final x = trigrams(a), y = trigrams(b);
+  return 2 * x.intersection(y).length / (x.length + y.length);
+}
+
+/// Avvisi di sicurezza delle altre specie, diversi da quello di [s].
+List<LocalizedText> _otherWarnings(Species s, Catalog catalog) =>
+    catalog.safety.values.toSet().where((w) => w != catalog.safety[s.sci]).toList();
 
 List<String> _otherFamilies(Species s, Catalog catalog) =>
     catalog.species.map((o) => o.family).toSet().where((f) => f != s.family).toList();
-
-int _peakMonth(Species s) {
-  final values = s.monthsRelative;
-  return values.indexOf(values.reduce(max)) + 1;
-}
-
-/// Mesi (1-12) in cui la specie si osserva poco: risposte sbagliate credibili ma inequivocabili.
-List<int> _lowMonths(Species s) {
-  final top = s.monthsRelative.reduce(max);
-  return [
-    for (var i = 0; i < 12; i++)
-      if (s.monthsRelative[i] <= 0.3 * top) i + 1,
-  ];
-}
 
 /// Specie che nella fascia di quota prevalente di [s] non si trovano quasi mai.
 List<Species> _absentFromBand(Species s, Catalog catalog) =>

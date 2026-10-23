@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/business_logic/models/species.dart';
@@ -45,7 +46,17 @@ extension SpeciesRules on Species {
 
   SpeciesHint get hint => SpeciesHint(family: family, season: dominantSeason, band: dominantBand);
 
-  /// Specie protetta. Provvisorio: il catalogo non ha ancora il dato (tappa B, step 4), quindi valgono le orchidee
+  /// Specie protetta. Provvisorio: il catalogo non ha ancora il dato (tappa B, step 5), quindi valgono le orchidee
   /// spontanee, protette in molte regioni.
   bool get isProtected => family == 'Orchidaceae';
+}
+
+/// Quanto è comune una specie nella zona, rispetto alle altre del catalogo (che sono già le più osservate).
+enum Commonness { veryCommon, common, uncommon, rare }
+
+/// Quartile della specie per numero di osservazioni nel catalogo: il primo quarto è "molto comune".
+Commonness commonnessOf(Species species, Catalog catalog) {
+  final ranked = catalog.species.map((s) => s.observations).toList()..sort((a, b) => b.compareTo(a));
+  final rank = ranked.indexOf(species.observations);
+  return Commonness.values[(rank * Commonness.values.length / ranked.length).floor()];
 }

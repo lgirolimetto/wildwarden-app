@@ -34,8 +34,15 @@ class Species {
   /// Nome scientifico: è la chiave stabile della specie in tutta l'app.
   final String sci;
   final LocalizedText name;
+
+  /// Ordine tassonomico (es. Malvales); `null` se il catalogo non ce l'ha.
+  final String? order;
   final String family;
   final String genus;
+
+  /// Specie vere dello stesso genere osservate in Italia, anche fuori dal catalogo: risposte plausibili alla
+  /// domanda sul nome scientifico.
+  final List<String> congeners;
   final int observations;
 
   /// Peso relativo di ogni mese (indice 0 = gennaio), già corretto per l'attività degli osservatori.
@@ -57,8 +64,10 @@ class Species {
   const Species({
     required this.sci,
     required this.name,
+    this.order,
     required this.family,
     required this.genus,
+    this.congeners = const [],
     required this.observations,
     required this.monthsRelative,
     required this.bestMonths,
@@ -74,8 +83,10 @@ class Species {
   factory Species.fromJson(Map<String, dynamic> json) => Species(
     sci: json['sci'] as String,
     name: LocalizedText.fromJson(json['name'] as Map<String, dynamic>),
+    order: json['order'] as String?,
     family: json['family'] as String,
     genus: json['genus'] as String,
+    congeners: (json['congeners'] as List?)?.cast<String>() ?? const [],
     observations: json['observations'] as int,
     monthsRelative: (json['monthsRelative'] as List).map((v) => (v as num).toDouble()).toList(),
     bestMonths: (json['bestMonths'] as List).cast<int>(),

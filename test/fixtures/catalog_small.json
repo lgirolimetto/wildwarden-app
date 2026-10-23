@@ -13,8 +13,14 @@
    "name": {
     "it": "Elleboro verde"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Helleborus",
+   "congeners": [
+    "Helleborus foetidus",
+    "Helleborus niger",
+    "Helleborus bocconei"
+   ],
    "observations": 224,
    "monthsRelative": [
     0.35,
@@ -78,8 +84,14 @@
    "name": {
     "it": "Malva selvatica"
    },
+   "order": "Malvales",
    "family": "Malvaceae",
    "genus": "Malva",
+   "congeners": [
+    "Malva neglecta",
+    "Malva alcea",
+    "Malva moschata"
+   ],
    "observations": 222,
    "monthsRelative": [
     0.031,
@@ -144,8 +156,10 @@
    "name": {
     "it": "Piè di gallo"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Eranthis",
+   "congeners": [],
    "observations": 200,
    "monthsRelative": [
     0.517,
@@ -208,8 +222,10 @@
    "name": {
     "it": "Faggio comune"
    },
+   "order": "Fagales",
    "family": "Fagaceae",
    "genus": "Fagus",
+   "congeners": [],
    "observations": 164,
    "monthsRelative": [
     0.0,

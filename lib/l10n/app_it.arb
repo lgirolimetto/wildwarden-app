@@ -45,9 +45,9 @@
   "erbarioMissingSection": "Da trovare nel bolognese",
   "simulateEncounter": "Simula incontro",
   "levelToStudy": "Da studiare",
-  "levelRecognise": "Riconoscere",
-  "levelKnow": "Conoscere",
-  "levelWhereWhen": "Dove e quando",
+  "levelRecognise": "Riconoscerla",
+  "levelKnow": "La sua famiglia",
+  "levelWhereWhen": "Lei e noi",
   "levelMastery": "Maestria",
   "navStudy": "Studio",
   "navRecipes": "Ricette",
@@ -84,7 +84,7 @@
   "bandHill": "Collina (150–600 m)",
   "bandMountain": "Montagna (oltre i 600 m)",
   "qPhotoToName": "Che pianta è questa?",
-  "qNameToPhoto": "Quale foto mostra: {name}?",
+  "qNameToPhoto": "Quale di queste è {name}?",
   "@qNameToPhoto": {
     "placeholders": {
       "name": {
@@ -134,22 +134,6 @@
     }
   },
   "qOddOneOut": "Quale NON è della stessa famiglia delle altre?",
-  "qSeasonOf": "In quale stagione si fa notare di più {name}, qui?",
-  "@qSeasonOf": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "qBestMonthOf": "In quale di questi mesi è più facile trovare {name}?",
-  "@qBestMonthOf": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "qBandOf": "Dove incontri più spesso {name}, qui?",
   "@qBandOf": {
     "placeholders": {
@@ -667,5 +651,115 @@
   "dayTimeDay": "di giorno",
   "dayTimeDusk": "al tramonto",
   "dayTimeNight": "di notte",
-  "liveryFeltro": "Feltro"
+  "liveryFeltro": "Feltro",
+  "studyThemeProgress": "{theme} · {done} di {total}",
+  "@studyThemeProgress": {
+    "placeholders": {
+      "theme": {
+        "type": "String"
+      },
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "qOrderOf": "A quale ordine appartiene {name}?",
+  "@qOrderOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qWarningOf": "Che avviso vale per {name}?",
+  "@qWarningOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qHasWarning": "{name} ha un avviso di sicurezza?",
+  "@qHasWarning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qCommonnessOf": "Quanto è comune {name} in questa zona?",
+  "@qCommonnessOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "optionYes": "Sì",
+  "optionNo": "No",
+  "commonnessVeryCommon": "Tra le più comuni",
+  "commonnessCommon": "Comune",
+  "commonnessUncommon": "Meno comune",
+  "commonnessRare": "Tra le meno osservate",
+  "factScientificName": "Il nome scientifico di {name} è {sci}: la prima parola è il genere, la seconda la specie.",
+  "@factScientificName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sci": {
+        "type": "String"
+      }
+    }
+  },
+  "factCongeners": "Altre specie del genere {genus} in Italia: {names}.",
+  "@factCongeners": {
+    "placeholders": {
+      "genus": {
+        "type": "String"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "factOrder": "{name} appartiene all'ordine {order}, di cui fa parte la famiglia {family}.",
+  "@factOrder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "order": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "factWarning": "{name}: {warning}. Guardala e fotografala, non assaggiarla. Avviso da verificare.",
+  "@factWarning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "warning": {
+        "type": "String"
+      }
+    }
+  },
+  "factCommonness": "In questa zona {name} è: {commonness} (dalle osservazioni GBIF).",
+  "@factCommonness": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "commonness": {
+        "type": "String"
+      }
+    }
+  }
 }

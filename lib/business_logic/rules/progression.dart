@@ -55,10 +55,15 @@ int? nextStudyLevel(Species species, Catalog catalog, GameState state) {
   return null;
 }
 
-/// Fatti da ripassare oggi, risolti sul catalogo (i fatti di specie sparite dal catalogo si ignorano).
+/// Fatti da ripassare oggi, risolti sul catalogo. Si ignorano i fatti di specie sparite dal catalogo e quelli
+/// ritirati (es. la stagione), che non si chiedono più.
 List<Fact> dueFacts(Catalog catalog, GameState state, DateTime now) => [
   for (final id in state.dueFactIds(now))
-    if (catalog.speciesBySci(Fact.parseId(id).speciesSci) case final species?) Fact(species, Fact.parseId(id).kind),
+    if ((catalog.speciesBySci(Fact.parseId(id).speciesSci), Fact.parseId(id).kind) case (
+      final species?,
+      final kind,
+    ) when !kind.retired)
+      Fact(species, kind),
 ];
 
 bool canAddDesiderata(GameState state) => state.desiderata.length < maxDesiderata;

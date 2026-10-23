@@ -88,21 +88,33 @@ class GameTexts {
       QuestionForm.familyFromCommon => l10n.qFamilyFromCommon(name(s)),
       QuestionForm.familyFromSci => l10n.qFamilyFromSci(s.sci),
       QuestionForm.familyFromPhoto => l10n.qFamilyFromPhoto,
+      QuestionForm.orderOf => l10n.qOrderOf(name(s)),
       QuestionForm.relativeOf => l10n.qRelativeOf(name(s)),
       QuestionForm.oddOneOut => l10n.qOddOneOut,
-      QuestionForm.seasonOf => l10n.qSeasonOf(name(s)),
-      QuestionForm.bestMonthOf => l10n.qBestMonthOf(name(s)),
       QuestionForm.bandOf => l10n.qBandOf(name(s)),
       QuestionForm.whichInBand => l10n.qWhichInBand(bandPhrase(q.band!)),
+      QuestionForm.warningOf => l10n.qWarningOf(name(s)),
+      QuestionForm.hasWarning => l10n.qHasWarning(name(s)),
+      QuestionForm.commonnessOf => l10n.qCommonnessOf(name(s)),
     };
   }
 
   String option(Question q, AnswerOption option) => switch (option) {
-    SpeciesOption(:final species) => q.form == QuestionForm.commonToSci ? species.sci : name(species),
+    SpeciesOption(:final species) => name(species),
+    ScientificNameOption(:final sci) => sci,
     FamilyOption(:final family) => family,
-    SeasonOption(season: final s) => _capitalize(season(s)),
-    MonthOption(month: final m) => _capitalize(month(m)),
+    OrderOption(:final order) => order,
     BandOption(band: final b) => band(b),
+    YesNoOption(:final yes) => yes ? l10n.optionYes : l10n.optionNo,
+    WarningOption(:final warning) => _capitalize(warning.resolve(language)),
+    CommonnessOption(:final commonness) => this.commonness(commonness),
+  };
+
+  String commonness(Commonness c) => switch (c) {
+    Commonness.veryCommon => l10n.commonnessVeryCommon,
+    Commonness.common => l10n.commonnessCommon,
+    Commonness.uncommon => l10n.commonnessUncommon,
+    Commonness.rare => l10n.commonnessRare,
   };
 
   /// Il fatto spiegato, mostrato dopo ogni risposta e salvato nel taccuino.
@@ -115,6 +127,13 @@ class GameTexts {
       FactKind.relatives => l10n.factRelatives(name(s), catalog.relativesOf(s).map(name).join(', '), s.family),
       FactKind.season => l10n.factSeason(name(s), season(s.peakSeason), months(s.topMonths())),
       FactKind.altitude => l10n.factAltitude(name(s), bandPhrase(s.topBand), s.elevationMedian?.round() ?? 0),
+      FactKind.scientificName => [
+        l10n.factScientificName(name(s), s.sci),
+        if (s.congeners.isNotEmpty) l10n.factCongeners(s.genus, s.congeners.take(4).join(', ')),
+      ].join(' '),
+      FactKind.order => l10n.factOrder(name(s), s.order ?? '', s.family),
+      FactKind.toxicity => l10n.factWarning(name(s), catalog.safety[s.sci]?.resolve(language) ?? ''),
+      FactKind.commonness => l10n.factCommonness(name(s), commonness(commonnessOf(s, catalog)).toLowerCase()),
     };
   }
 

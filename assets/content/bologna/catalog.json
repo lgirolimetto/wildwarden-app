@@ -13,8 +13,13 @@
    "name": {
     "it": "Lentaggine"
    },
+   "order": "Dipsacales",
    "family": "Viburnaceae",
    "genus": "Viburnum",
+   "congeners": [
+    "Viburnum lantana",
+    "Viburnum opulus"
+   ],
    "observations": 727,
    "monthsRelative": [
     0.226,
@@ -79,8 +84,19 @@
    "name": {
     "it": "Anemone fior di stella"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Anemone",
+   "congeners": [
+    "Anemone nemorosa",
+    "Anemone trifolia",
+    "Anemone coronaria",
+    "Anemone apennina",
+    "Anemone ranunculoides",
+    "Anemone baldensis",
+    "Anemone palmata",
+    "Anemone blanda"
+   ],
    "observations": 705,
    "monthsRelative": [
     0.04,
@@ -144,8 +160,19 @@
    "name": {
     "it": "Orchide maggiore"
    },
+   "order": "Asparagales",
    "family": "Orchidaceae",
    "genus": "Orchis",
+   "congeners": [
+    "Orchis mascula",
+    "Orchis italica",
+    "Orchis anthropophora",
+    "Orchis provincialis",
+    "Orchis pauciflora",
+    "Orchis simia",
+    "Orchis militaris",
+    "Orchis pallens"
+   ],
    "observations": 602,
    "monthsRelative": [
     0.018,
@@ -208,8 +235,19 @@
    "name": {
     "it": "Euforbia calenzuola"
    },
+   "order": "Malpighiales",
    "family": "Euphorbiaceae",
    "genus": "Euphorbia",
+   "congeners": [
+    "Euphorbia cyparissias",
+    "Euphorbia dendroides",
+    "Euphorbia characias",
+    "Euphorbia peplus",
+    "Euphorbia amygdaloides",
+    "Euphorbia spinosa",
+    "Euphorbia dulcis",
+    "Euphorbia paralias"
+   ],
    "observations": 434,
    "monthsRelative": [
     0.013,
@@ -273,8 +311,19 @@
    "name": {
     "it": "Prugnolo"
    },
+   "order": "Rosales",
    "family": "Rosaceae",
    "genus": "Prunus",
+   "congeners": [
+    "Prunus laurocerasus",
+    "Prunus cerasifera",
+    "Prunus persica",
+    "Prunus armeniaca",
+    "Prunus mahaleb",
+    "Prunus avium",
+    "Prunus padus",
+    "Prunus domestica"
+   ],
    "observations": 399,
    "monthsRelative": [
     0.025,
@@ -337,8 +386,10 @@
    "name": {
     "it": "Marruca"
    },
+   "order": "Rosales",
    "family": "Rhamnaceae",
    "genus": "Paliurus",
+   "congeners": [],
    "observations": 368,
    "monthsRelative": [
     0.093,
@@ -409,8 +460,10 @@
    "name": {
     "it": "Alliaria comune"
    },
+   "order": "Brassicales",
    "family": "Brassicaceae",
    "genus": "Alliaria",
+   "congeners": [],
    "observations": 358,
    "monthsRelative": [
     0.039,
@@ -474,8 +527,14 @@
    "name": {
     "it": "Berretto da prete"
    },
+   "order": "Celastrales",
    "family": "Celastraceae",
    "genus": "Euonymus",
+   "congeners": [
+    "Euonymus latifolius",
+    "Euonymus japonicus",
+    "Euonymus verrucosus"
+   ],
    "observations": 349,
    "monthsRelative": [
     0.052,
@@ -539,8 +598,17 @@
    "name": {
     "it": "Clematide vitalba"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Clematis",
+   "congeners": [
+    "Clematis alpina",
+    "Clematis flammula",
+    "Clematis cirrhosa",
+    "Clematis recta",
+    "Clematis viticella",
+    "Clematis tangutica"
+   ],
    "observations": 336,
    "monthsRelative": [
     0.118,
@@ -608,8 +676,13 @@
    "name": {
     "it": "Ruscolo pungitopo"
    },
+   "order": "Asparagales",
    "family": "Asparagaceae",
    "genus": "Ruscus",
+   "congeners": [
+    "Ruscus hypoglossum",
+    "Ruscus hypophyllum"
+   ],
    "observations": 332,
    "monthsRelative": [
     0.223,
@@ -673,8 +746,10 @@
    "name": {
     "it": "Sommacco selvatico"
    },
+   "order": "Sapindales",
    "family": "Anacardiaceae",
    "genus": "Cotinus",
+   "congeners": [],
    "observations": 329,
    "monthsRelative": [
     0.0,
@@ -732,8 +807,10 @@
    "name": {
     "it": "Alloro"
    },
+   "order": "Laurales",
    "family": "Lauraceae",
    "genus": "Laurus",
+   "congeners": [],
    "observations": 310,
    "monthsRelative": [
     0.112,
@@ -799,8 +876,12 @@
    "name": {
     "it": "Corniolo sanguinello"
    },
+   "order": "Cornales",
    "family": "Cornaceae",
    "genus": "Cornus",
+   "congeners": [
+    "Cornus mas"
+   ],
    "observations": 303,
    "monthsRelative": [
     0.0,
@@ -853,8 +934,13 @@
    "name": {
     "it": "Viburno lantana"
    },
+   "order": "Dipsacales",
    "family": "Viburnaceae",
    "genus": "Viburnum",
+   "congeners": [
+    "Viburnum tinus",
+    "Viburnum opulus"
+   ],
    "observations": 287,
    "monthsRelative": [
     0.0,
@@ -911,8 +997,10 @@
    "name": {
     "it": "Celidonia"
    },
+   "order": "Ranunculales",
    "family": "Papaveraceae",
    "genus": "Chelidonium",
+   "congeners": [],
    "observations": 282,
    "monthsRelative": [
     0.045,
@@ -976,8 +1064,13 @@
    "name": {
     "it": "Bagolaro"
    },
+   "order": "Rosales",
    "family": "Cannabaceae",
    "genus": "Celtis",
+   "congeners": [
+    "Celtis occidentalis",
+    "Celtis tournefortii"
+   ],
    "observations": 277,
    "monthsRelative": [
     0.0,
@@ -1031,8 +1124,13 @@
    "name": {
     "it": "Frassino da manna"
    },
+   "order": "Lamiales",
    "family": "Oleaceae",
    "genus": "Fraxinus",
+   "congeners": [
+    "Fraxinus excelsior",
+    "Fraxinus angustifolia"
+   ],
    "observations": 275,
    "monthsRelative": [
     0.032,
@@ -1081,8 +1179,10 @@
    "name": {
     "it": "Nocciolo comune"
    },
+   "order": "Fagales",
    "family": "Betulaceae",
    "genus": "Corylus",
+   "congeners": [],
    "observations": 265,
    "monthsRelative": [
     0.112,
@@ -1145,8 +1245,10 @@
    "name": {
     "it": "Melissa vera"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Melissa",
+   "congeners": [],
    "observations": 248,
    "monthsRelative": [
     0.0,
@@ -1214,8 +1316,19 @@
    "name": {
     "it": "Acero oppio"
    },
+   "order": "Sapindales",
    "family": "Sapindaceae",
    "genus": "Acer",
+   "congeners": [
+    "Acer pseudoplatanus",
+    "Acer negundo",
+    "Acer opalus",
+    "Acer monspessulanum",
+    "Acer platanoides",
+    "Acer lobelii",
+    "Acer obtusatum",
+    "Acer saccharinum"
+   ],
    "observations": 240,
    "monthsRelative": [
     0.044,
@@ -1283,8 +1396,12 @@
    "name": {
     "it": "Noce comune"
    },
+   "order": "Fagales",
    "family": "Juglandaceae",
    "genus": "Juglans",
+   "congeners": [
+    "Juglans nigra"
+   ],
    "observations": 231,
    "monthsRelative": [
     0.0,
@@ -1351,8 +1468,19 @@
    "name": {
     "it": "Salvia comune"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Salvia",
+   "congeners": [
+    "Salvia glutinosa",
+    "Salvia verbenaca",
+    "Salvia officinalis",
+    "Salvia rosmarinus",
+    "Salvia sclarea",
+    "Salvia clandestina",
+    "Salvia verticillata",
+    "Salvia argentea"
+   ],
    "observations": 230,
    "monthsRelative": [
     0.0,
@@ -1417,8 +1545,12 @@
    "name": {
     "it": "Borragine comune"
    },
+   "order": "Boraginales",
    "family": "Boraginaceae",
    "genus": "Borago",
+   "congeners": [
+    "Borago pygmaea"
+   ],
    "observations": 226,
    "monthsRelative": [
     0.158,
@@ -1486,8 +1618,12 @@
    "name": {
     "it": "Corniolo maschio"
    },
+   "order": "Cornales",
    "family": "Cornaceae",
    "genus": "Cornus",
+   "congeners": [
+    "Cornus sanguinea"
+   ],
    "observations": 226,
    "monthsRelative": [
     0.0,
@@ -1552,8 +1688,10 @@
    "name": {
     "it": "Erba limona comune"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Melittis",
+   "congeners": [],
    "observations": 225,
    "monthsRelative": [
     0.0,
@@ -1616,8 +1754,17 @@
    "name": {
     "it": "Elleboro verde"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Helleborus",
+   "congeners": [
+    "Helleborus foetidus",
+    "Helleborus niger",
+    "Helleborus bocconei",
+    "Helleborus argutifolius",
+    "Helleborus multifidus",
+    "Helleborus dumetorum"
+   ],
    "observations": 224,
    "monthsRelative": [
     0.35,
@@ -1681,8 +1828,19 @@
    "name": {
     "it": "Euforbia cipressina"
    },
+   "order": "Malpighiales",
    "family": "Euphorbiaceae",
    "genus": "Euphorbia",
+   "congeners": [
+    "Euphorbia helioscopia",
+    "Euphorbia dendroides",
+    "Euphorbia characias",
+    "Euphorbia peplus",
+    "Euphorbia amygdaloides",
+    "Euphorbia spinosa",
+    "Euphorbia dulcis",
+    "Euphorbia paralias"
+   ],
    "observations": 223,
    "monthsRelative": [
     0.0,
@@ -1745,8 +1903,19 @@
    "name": {
     "it": "Malva selvatica"
    },
+   "order": "Malvales",
    "family": "Malvaceae",
    "genus": "Malva",
+   "congeners": [
+    "Malva neglecta",
+    "Malva arborea",
+    "Malva multiflora",
+    "Malva alcea",
+    "Malva moschata",
+    "Malva punctata",
+    "Malva trimestris",
+    "Malva parviflora"
+   ],
    "observations": 222,
    "monthsRelative": [
     0.031,
@@ -1812,8 +1981,19 @@
    "name": {
     "it": "Mirabolano"
    },
+   "order": "Rosales",
    "family": "Rosaceae",
    "genus": "Prunus",
+   "congeners": [
+    "Prunus spinosa",
+    "Prunus laurocerasus",
+    "Prunus persica",
+    "Prunus armeniaca",
+    "Prunus mahaleb",
+    "Prunus avium",
+    "Prunus padus",
+    "Prunus domestica"
+   ],
    "observations": 219,
    "monthsRelative": [
     0.0,
@@ -1865,8 +2045,18 @@
    "name": {
     "it": "Orchide piramidale"
    },
+   "order": "Asparagales",
    "family": "Orchidaceae",
    "genus": "Anacamptis",
+   "congeners": [
+    "Anacamptis morio",
+    "Anacamptis papilionacea",
+    "Anacamptis coriophora",
+    "Anacamptis laxiflora",
+    "Anacamptis collina",
+    "Anacamptis palustris",
+    "Anacamptis gennarii"
+   ],
    "observations": 219,
    "monthsRelative": [
     0.0,
@@ -1929,8 +2119,10 @@
    "name": {
     "it": "Carpino nero"
    },
+   "order": "Fagales",
    "family": "Betulaceae",
    "genus": "Ostrya",
+   "congeners": [],
    "observations": 210,
    "monthsRelative": [
     0.073,
@@ -1996,8 +2188,13 @@
    "name": {
     "it": "Edera terrestre"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Glechoma",
+   "congeners": [
+    "Glechoma hirsuta",
+    "Glechoma sardoa"
+   ],
    "observations": 212,
    "monthsRelative": [
     0.029,
@@ -2061,8 +2258,19 @@
    "name": {
     "it": "Linaiola comune"
    },
+   "order": "Lamiales",
    "family": "Plantaginaceae",
    "genus": "Linaria",
+   "congeners": [
+    "Linaria alpina",
+    "Linaria purpurea",
+    "Linaria reflexa",
+    "Linaria pelisseriana",
+    "Linaria angustissima",
+    "Linaria triphylla",
+    "Linaria capraria",
+    "Linaria simplex"
+   ],
    "observations": 211,
    "monthsRelative": [
     0.0,
@@ -2125,8 +2333,16 @@
    "name": {
     "it": "Pioppo bianco"
    },
+   "order": "Malpighiales",
    "family": "Salicaceae",
    "genus": "Populus",
+   "congeners": [
+    "Populus tremula",
+    "Populus nigra",
+    "Populus canescens",
+    "Populus canadensis",
+    "Populus deltoides"
+   ],
    "observations": 204,
    "monthsRelative": [
     0.027,
@@ -2194,8 +2410,18 @@
    "name": {
     "it": "Orchide minore"
    },
+   "order": "Asparagales",
    "family": "Orchidaceae",
    "genus": "Anacamptis",
+   "congeners": [
+    "Anacamptis pyramidalis",
+    "Anacamptis papilionacea",
+    "Anacamptis coriophora",
+    "Anacamptis laxiflora",
+    "Anacamptis collina",
+    "Anacamptis palustris",
+    "Anacamptis gennarii"
+   ],
    "observations": 205,
    "monthsRelative": [
     0.046,
@@ -2258,8 +2484,19 @@
    "name": {
     "it": "Senecione comune"
    },
+   "order": "Asterales",
    "family": "Asteraceae",
    "genus": "Senecio",
+   "congeners": [
+    "Senecio inaequidens",
+    "Senecio angulatus",
+    "Senecio ovatus",
+    "Senecio doronicum",
+    "Senecio squalidus",
+    "Senecio rupestris",
+    "Senecio leucanthemifolius",
+    "Senecio scopolii"
+   ],
    "observations": 197,
    "monthsRelative": [
     0.25,
@@ -2325,8 +2562,12 @@
    "name": {
     "it": "Erba d'argento"
    },
+   "order": "Brassicales",
    "family": "Brassicaceae",
    "genus": "Lunaria",
+   "congeners": [
+    "Lunaria rediviva"
+   ],
    "observations": 201,
    "monthsRelative": [
     0.149,
@@ -2384,8 +2625,10 @@
    "name": {
     "it": "Piè di gallo"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Eranthis",
+   "congeners": [],
    "observations": 200,
    "monthsRelative": [
     0.517,
@@ -2449,8 +2692,19 @@
    "name": {
     "it": "Vilucchio comune"
    },
+   "order": "Solanales",
    "family": "Convolvulaceae",
    "genus": "Convolvulus",
+   "congeners": [
+    "Convolvulus althaeoides",
+    "Convolvulus cantabrica",
+    "Convolvulus tricolor",
+    "Convolvulus elegantissimus",
+    "Convolvulus cneorum",
+    "Convolvulus sabatius",
+    "Convolvulus siculus",
+    "Convolvulus pentapetaloides"
+   ],
    "observations": 194,
    "monthsRelative": [
     0.0,
@@ -2516,8 +2770,14 @@
    "name": {
     "it": "Ligustro comune"
    },
+   "order": "Lamiales",
    "family": "Oleaceae",
    "genus": "Ligustrum",
+   "congeners": [
+    "Ligustrum sinense",
+    "Ligustrum lucidum",
+    "Ligustrum ovalifolium"
+   ],
    "observations": 197,
    "monthsRelative": [
     0.122,
@@ -2575,8 +2835,17 @@
    "name": {
     "it": "Elleboro puzzolente"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Helleborus",
+   "congeners": [
+    "Helleborus niger",
+    "Helleborus viridis",
+    "Helleborus bocconei",
+    "Helleborus argutifolius",
+    "Helleborus multifidus",
+    "Helleborus dumetorum"
+   ],
    "observations": 197,
    "monthsRelative": [
     0.292,
@@ -2641,8 +2910,13 @@
    "name": {
     "it": "Pervinca maggiore"
    },
+   "order": "Gentianales",
    "family": "Apocynaceae",
    "genus": "Vinca",
+   "congeners": [
+    "Vinca minor",
+    "Vinca difformis"
+   ],
    "observations": 196,
    "monthsRelative": [
     0.079,
@@ -2706,8 +2980,17 @@
    "name": {
     "it": "Barba di Becco violetta"
    },
+   "order": "Asterales",
    "family": "Asteraceae",
    "genus": "Tragopogon",
+   "congeners": [
+    "Tragopogon pratensis",
+    "Tragopogon dubius",
+    "Tragopogon orientalis",
+    "Tragopogon crocifolius",
+    "Tragopogon samaritani",
+    "Tragopogon tommasinii"
+   ],
    "observations": 191,
    "monthsRelative": [
     0.0,
@@ -2756,8 +3039,10 @@
    "name": {
     "it": "Edera"
    },
+   "order": "Apiales",
    "family": "Araliaceae",
    "genus": "Hedera",
+   "congeners": [],
    "observations": 192,
    "monthsRelative": [
     0.136,
@@ -2823,8 +3108,13 @@
    "name": {
     "it": "Ciclamino napoletano"
    },
+   "order": "Ericales",
    "family": "Primulaceae",
    "genus": "Cyclamen",
+   "congeners": [
+    "Cyclamen repandum",
+    "Cyclamen purpurascens"
+   ],
    "observations": 189,
    "monthsRelative": [
     0.134,
@@ -2891,8 +3181,17 @@
    "name": {
     "it": "Erba cornetta"
    },
+   "order": "Fabales",
    "family": "Fabaceae",
    "genus": "Hippocrepis",
+   "congeners": [
+    "Hippocrepis comosa",
+    "Hippocrepis biflora",
+    "Hippocrepis unisiliquosa",
+    "Hippocrepis ciliata",
+    "Hippocrepis glauca",
+    "Hippocrepis multisiliquosa"
+   ],
    "observations": 185,
    "monthsRelative": [
     0.076,
@@ -2956,8 +3255,10 @@
    "name": {
     "it": "Faggio comune"
    },
+   "order": "Fagales",
    "family": "Fagaceae",
    "genus": "Fagus",
+   "congeners": [],
    "observations": 164,
    "monthsRelative": [
     0.0,
@@ -3022,8 +3323,14 @@
    "name": {
     "it": "Altea canapina"
    },
+   "order": "Malvales",
    "family": "Malvaceae",
    "genus": "Althaea",
+   "congeners": [
+    "Althaea officinalis",
+    "Althaea hirsuta",
+    "Althaea taurinensis"
+   ],
    "observations": 172,
    "monthsRelative": [
     0.028,
@@ -3089,8 +3396,13 @@
    "name": {
     "it": "Sambuco lebbio"
    },
+   "order": "Dipsacales",
    "family": "Viburnaceae",
    "genus": "Sambucus",
+   "congeners": [
+    "Sambucus nigra",
+    "Sambucus racemosa"
+   ],
    "observations": 174,
    "monthsRelative": [
     0.0,
@@ -3147,8 +3459,19 @@
    "name": {
     "it": "Equiseto massimo"
    },
+   "order": "Equisetales",
    "family": "Equisetaceae",
    "genus": "Equisetum",
+   "congeners": [
+    "Equisetum arvense",
+    "Equisetum ramosissimum",
+    "Equisetum palustre",
+    "Equisetum sylvaticum",
+    "Equisetum hyemale",
+    "Equisetum variegatum",
+    "Equisetum fluviatile",
+    "Equisetum pratense"
+   ],
    "observations": 75,
    "monthsRelative": [
     0.0,

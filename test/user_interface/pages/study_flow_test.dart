@@ -33,7 +33,7 @@ void main() {
       expect(find.byKey(const ValueKey('seasonal-Eranthis hyemalis')), findsNothing);
 
       await scrollAndTap(tester, find.byKey(const ValueKey('study-suggestion-Malva sylvestris')));
-      expect(find.text('Malva selvatica · livello 1'), findsOneWidget);
+      expect(find.textContaining('Riconoscerla ·'), findsOneWidget);
       await completeSession(tester);
       await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
 
@@ -93,7 +93,7 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('mission-action-firstLevel')));
       await tester.pumpAndSettle();
 
-      expect(find.text('Malva selvatica · livello 1'), findsOneWidget);
+      expect(find.textContaining('Riconoscerla ·'), findsOneWidget);
     });
 
     testWidgets('il glossario si apre dalla missione e l\'apprendistato si può saltare', (tester) async {
@@ -121,7 +121,7 @@ void main() {
       await scrollTo(tester, study);
       await tester.tap(study);
       await tester.pumpAndSettle();
-      expect(find.text('Elleboro verde · livello 1'), findsOneWidget);
+      expect(find.textContaining('Riconoscerla ·'), findsOneWidget);
 
       await completeSession(tester);
 
@@ -217,12 +217,12 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('met-Helleborus viridis')));
       await tester.pumpAndSettle();
 
-      final level2 = find.text('Si rivela al livello 2 (Conoscere)');
+      final level2 = find.text('Si rivela al livello 2 (La sua famiglia)');
       await scrollTo(tester, level2);
       expect(find.text('Helleborus viridis'), findsOneWidget, reason: 'nome scientifico: rivelato al livello 1');
       expect(level2, findsOneWidget);
       expect(find.text('Ranunculaceae'), findsNothing, reason: 'famiglia: ancora chiusa');
-      final level3 = find.text('Si rivela al livello 3 (Dove e quando)');
+      final level3 = find.text('Si rivela al livello 3 (Lei e noi)');
       await scrollTo(tester, level3.first);
       expect(level3, findsWidgets);
     });

@@ -97,13 +97,13 @@ class AppLocalizationsIt extends AppLocalizations {
   String get levelToStudy => 'Da studiare';
 
   @override
-  String get levelRecognise => 'Riconoscere';
+  String get levelRecognise => 'Riconoscerla';
 
   @override
-  String get levelKnow => 'Conoscere';
+  String get levelKnow => 'La sua famiglia';
 
   @override
-  String get levelWhereWhen => 'Dove e quando';
+  String get levelWhereWhen => 'Lei e noi';
 
   @override
   String get levelMastery => 'Maestria';
@@ -168,7 +168,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String qNameToPhoto(String name) {
-    return 'Quale foto mostra: $name?';
+    return 'Quale di queste è $name?';
   }
 
   @override
@@ -202,16 +202,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get qOddOneOut => 'Quale NON è della stessa famiglia delle altre?';
-
-  @override
-  String qSeasonOf(String name) {
-    return 'In quale stagione si fa notare di più $name, qui?';
-  }
-
-  @override
-  String qBestMonthOf(String name) {
-    return 'In quale di questi mesi è più facile trovare $name?';
-  }
 
   @override
   String qBandOf(String name) {
@@ -779,4 +769,72 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get liveryFeltro => 'Feltro';
+
+  @override
+  String studyThemeProgress(String theme, int done, int total) {
+    return '$theme · $done di $total';
+  }
+
+  @override
+  String qOrderOf(String name) {
+    return 'A quale ordine appartiene $name?';
+  }
+
+  @override
+  String qWarningOf(String name) {
+    return 'Che avviso vale per $name?';
+  }
+
+  @override
+  String qHasWarning(String name) {
+    return '$name ha un avviso di sicurezza?';
+  }
+
+  @override
+  String qCommonnessOf(String name) {
+    return 'Quanto è comune $name in questa zona?';
+  }
+
+  @override
+  String get optionYes => 'Sì';
+
+  @override
+  String get optionNo => 'No';
+
+  @override
+  String get commonnessVeryCommon => 'Tra le più comuni';
+
+  @override
+  String get commonnessCommon => 'Comune';
+
+  @override
+  String get commonnessUncommon => 'Meno comune';
+
+  @override
+  String get commonnessRare => 'Tra le meno osservate';
+
+  @override
+  String factScientificName(String name, String sci) {
+    return 'Il nome scientifico di $name è $sci: la prima parola è il genere, la seconda la specie.';
+  }
+
+  @override
+  String factCongeners(String genus, String names) {
+    return 'Altre specie del genere $genus in Italia: $names.';
+  }
+
+  @override
+  String factOrder(String name, String order, String family) {
+    return '$name appartiene all\'ordine $order, di cui fa parte la famiglia $family.';
+  }
+
+  @override
+  String factWarning(String name, String warning) {
+    return '$name: $warning. Guardala e fotografala, non assaggiarla. Avviso da verificare.';
+  }
+
+  @override
+  String factCommonness(String name, String commonness) {
+    return 'In questa zona $name è: $commonness (dalle osservazioni GBIF).';
+  }
 }

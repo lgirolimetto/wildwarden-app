@@ -94,7 +94,7 @@ void main() {
 
   group('ripassi', () {
     test('nel ripasso ricordare vale +15 e niente torna in coda', () {
-      final fact = Fact(catalog.speciesBySci('Helleborus viridis')!, FactKind.name);
+      final fact = Fact(catalog.speciesBySci('Helleborus viridis')!, FactKind.scientificName);
       final session = StudySession.review(dueFacts: [fact], catalog: catalog, random: Random(1));
 
       final outcome = session.answer(wrongOf(session.current), state: GameState.empty, at: at);
