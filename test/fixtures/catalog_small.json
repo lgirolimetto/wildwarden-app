@@ -1,5 +1,5 @@
 {
- "formatVersion": 1,
+ "formatVersion": 2,
  "region": {
   "id": "bologna",
   "name": {
@@ -13,8 +13,14 @@
    "name": {
     "it": "Elleboro verde"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Helleborus",
+   "congeners": [
+    "Helleborus foetidus",
+    "Helleborus niger",
+    "Helleborus bocconei"
+   ],
    "observations": 224,
    "monthsRelative": [
     0.35,
@@ -71,15 +77,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C9EBAD"
+   "mysteryColor": "#C9EBAD",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 2.8,
+     "moisture": 4.4,
+     "temperature": 4.6,
+     "nutrients": 5.8,
+     "soilReaction": 7.7
+    },
+    "dispersal": [
+     "ants"
+    ]
+   }
   },
   {
    "sci": "Malva sylvestris",
    "name": {
     "it": "Malva selvatica"
    },
+   "order": "Malvales",
    "family": "Malvaceae",
    "genus": "Malva",
+   "congeners": [
+    "Malva neglecta",
+    "Malva alcea",
+    "Malva moschata"
+   ],
    "observations": 222,
    "monthsRelative": [
     0.031,
@@ -137,15 +164,32 @@
      "gbifOccurrence": 6253078584,
      "local": true
     }
-   ]
+   ],
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.8,
+     "moisture": 3.6,
+     "temperature": 4.8,
+     "nutrients": 7.8,
+     "soilReaction": 6.7
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   }
   },
   {
    "sci": "Eranthis hyemalis",
    "name": {
     "it": "Piè di gallo"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Eranthis",
+   "congeners": [],
    "observations": 200,
    "monthsRelative": [
     0.517,
@@ -201,15 +245,32 @@
      "gbifOccurrence": 2580180930,
      "local": true
     }
-   ]
+   ],
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.3,
+     "moisture": 4.7,
+     "temperature": 5.1,
+     "nutrients": 6.1,
+     "soilReaction": 6.6
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   }
   },
   {
    "sci": "Fagus sylvatica",
    "name": {
     "it": "Faggio comune"
    },
+   "order": "Fagales",
    "family": "Fagaceae",
    "genus": "Fagus",
+   "congeners": [],
    "observations": 164,
    "monthsRelative": [
     0.0,
@@ -266,15 +327,31 @@
      "gbifOccurrence": 2350352854,
      "local": true
     }
-   ]
+   ],
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 3.0,
+     "moisture": 4.6,
+     "temperature": 4.1,
+     "nutrients": 4.9,
+     "soilReaction": 5.9
+    },
+    "dispersal": [
+     "hoardedByAnimals"
+    ]
+   }
   }
  ],
  "recipes": [
   {
+   "id": "tintura-lanterna-inverno",
    "name": {
     "it": "Tintura della Lanterna d'Inverno"
    },
-   "tier": "Intermedia",
+   "grade": "uncommon",
    "unlock": {
     "species": "Eranthis hyemalis",
     "level": 2
@@ -283,7 +360,7 @@
     {
      "qty": 2,
      "species": "Eranthis hyemalis",
-     "trait": "❄️ Gelo",
+     "trait": "frost",
      "note": {
       "it": "Data plausibile: gen–feb (dai dati GBIF)"
      }
@@ -302,10 +379,11 @@
    }
   },
   {
+   "id": "distillato-quota-silenziosa",
    "name": {
     "it": "Distillato della Quota Silenziosa"
    },
-   "tier": "Rara",
+   "grade": "rare",
    "unlock": {
     "species": "Fagus sylvatica",
     "level": 3
@@ -314,7 +392,7 @@
     {
      "qty": 2,
      "species": "Fagus sylvatica",
-     "trait": "🌫 Nebbia",
+     "trait": "fog",
      "note": {
       "it": "Plausibile solo in montagna: quota mediana ~930 m"
      }
@@ -330,7 +408,7 @@
     {
      "qty": 1,
      "species": null,
-     "trait": "🌕 Lunare",
+     "trait": "moon",
      "note": {
       "it": "Qualunque specie raccolta nella fase di luna piena"
      }
@@ -338,6 +416,56 @@
    ],
    "effect": {
     "it": "Aumenta la purezza delle essenze raccolte nei campi oltre i 600 m (effetto di gioco)."
+   }
+  },
+  {
+   "id": "pozione-prova-comune",
+   "name": {
+    "it": "Pozione di Prova del Prato"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Malva sylvestris",
+     "trait": null,
+     "note": {
+      "it": "Bordi delle strade"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Fagus sylvatica",
+     "trait": null,
+     "note": {
+      "it": "Boschi di montagna"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Effetto di gioco di prova."
+   }
+  },
+  {
+   "id": "infuso-prova-faggio",
+   "name": {
+    "it": "Infuso di Prova del Faggio"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Fagus sylvatica",
+     "trait": null,
+     "note": {
+      "it": "Boschi di montagna"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Altro effetto di gioco di prova."
    }
   }
  ],

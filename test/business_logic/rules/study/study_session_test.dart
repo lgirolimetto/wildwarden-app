@@ -94,7 +94,7 @@ void main() {
 
   group('ripassi', () {
     test('nel ripasso ricordare vale +15 e niente torna in coda', () {
-      final fact = Fact(catalog.speciesBySci('Helleborus viridis')!, FactKind.name);
+      final fact = Fact(catalog.speciesBySci('Helleborus viridis')!, FactKind.scientificName);
       final session = StudySession.review(dueFacts: [fact], catalog: catalog, random: Random(1));
 
       final outcome = session.answer(wrongOf(session.current), state: GameState.empty, at: at);
@@ -149,7 +149,9 @@ void main() {
 
     expect(state.levelOf('Helleborus viridis'), 1);
     expect(state.dueFactIds(at), isEmpty);
-    expect(state.dueFactIds(at.add(const Duration(days: 1))), hasLength(2));
-    expect(state.xp, 2 * XpRules.correctFirstTry + XpRules.levelPassed);
+    expect(state.dueFactIds(at.add(const Duration(days: 1))), hasLength(3));
+    // Specie mai attinta: i PE dello studio sono virtuali.
+    expect(state.pendingXp['Helleborus viridis'], 3 * XpRules.correctFirstTry + XpRules.levelPassed);
+    expect(state.xp, 0);
   });
 }

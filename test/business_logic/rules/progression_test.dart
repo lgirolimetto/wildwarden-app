@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -90,13 +94,69 @@ void main() {
       expect(canAddDesiderata(state), isFalse);
     });
 
-    test('suggerimenti: specie in stagione questo mese, non ancora incontrate', () {
-      final suggestions = desiderataSuggestions(catalog, GameState.empty, feb).map((s) => s.sci);
-      expect(suggestions, contains('Eranthis hyemalis'));
-      expect(suggestions, isNot(contains('Fagus sylvatica')));
+    test('primo avvio: solo specie sicure, prima quelle in stagione, poi le più comuni fuori stagione', () {
+      // A febbraio sono in stagione elleboro e piè di gallo, entrambi tossici: restano fuori. Malva e faggio non sono
+      // in stagione, ma sono le specie sicure più comuni.
+      final first = seasonalSuggestions(catalog, GameState.empty, feb).map((s) => s.sci);
+      expect(first, ['Malva sylvestris', 'Fagus sylvatica']);
 
-      final afterMeeting = desiderataSuggestions(catalog, play([met('Eranthis hyemalis')]), feb).map((s) => s.sci);
-      expect(afterMeeting, isNot(contains('Eranthis hyemalis')));
+      final july = seasonalSuggestions(catalog, GameState.empty, DateTime(2027, 7, 1)).map((s) => s.sci);
+      expect(july, ['Malva sylvestris', 'Fagus sylvatica']);
+    });
+
+    test('primo avvio: le specie protette non si propongono', () {
+      final protectedMalva = smallCatalog(
+        protection: {
+          'Malva sylvestris': ['regional-emilia-romagna'],
+        },
+      );
+      expect(protectedMalva.speciesBySci('Malva sylvestris')!.isProtected, isTrue);
+      expect(seasonalSuggestions(protectedMalva, GameState.empty, feb).map((s) => s.sci), ['Fagus sylvatica']);
+    });
+
+    test('dopo il primo avvio: tutte le specie in stagione non ancora in studio', () {
+      final state = play([met('Fagus sylvatica')]);
+      expect(seasonalSuggestions(catalog, state, feb).map((s) => s.sci), ['Helleborus viridis', 'Eranthis hyemalis']);
+
+      final studying = state.apply(
+        AnswerGiven(
+          factId: Fact.idOf('Helleborus viridis', FactKind.scientificName),
+          correct: true,
+          mode: AnswerMode.learning,
+          xp: 10,
+          occurredAt: feb,
+        ),
+      );
+      expect(seasonalSuggestions(catalog, studying, feb).map((s) => s.sci), ['Eranthis hyemalis']);
+    });
+
+    test('i fatti ritirati (stagione, nome comune) non tornano nei ripassi', () {
+      final retired = Fact.idOf('Helleborus viridis', FactKind.season);
+      final active = Fact.idOf('Helleborus viridis', FactKind.family);
+      final state = play([
+        for (final id in [retired, active])
+          AnswerGiven(factId: id, correct: true, mode: AnswerMode.learning, xp: 10, occurredAt: feb),
+        passed('Helleborus viridis', 2),
+        passed('Helleborus viridis', 3),
+      ]);
+      final due = dueFacts(catalog, state, feb.add(const Duration(days: 2))).map((f) => f.id);
+      expect(due, contains(active));
+      expect(due, isNot(contains(retired)));
+    });
+
+    test('in studio: le incontrate e quelle con risposte o livelli, anche mai incontrate', () {
+      final state = play([
+        met('Fagus sylvatica'),
+        AnswerGiven(
+          factId: Fact.idOf('Malva sylvestris', FactKind.scientificName),
+          correct: false,
+          mode: AnswerMode.learning,
+          xp: 2,
+          occurredAt: feb,
+        ),
+        passed('Eranthis hyemalis', 1),
+      ]);
+      expect(speciesInStudy(state), {'Fagus sylvatica', 'Malva sylvestris', 'Eranthis hyemalis'});
     });
 
     test('una desiderata compiuta esce dall\'elenco', () {
@@ -161,19 +221,19 @@ void main() {
   });
 
   group('apprendistato', () {
-    test('le missioni si completano in ordine, guardando lo stato', () {
-      expect(currentMission(GameState.empty, catalog), Mission.visitErbario);
+    test('le missioni si completano in ordine, guardando lo stato: prima lo studio, da casa', () {
+      expect(currentMission(GameState.empty, catalog), Mission.firstLevel);
 
-      var state = play([OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: feb)]);
+      var state = play([passed('Eranthis hyemalis', 1)]);
+      expect(currentMission(state, catalog), Mission.visitErbario);
+
+      state = state.apply(OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: feb));
       expect(currentMission(state, catalog), Mission.markDesiderata);
 
       state = state.apply(DesiderataChanged(speciesSci: 'Eranthis hyemalis', marked: true, occurredAt: feb));
       expect(currentMission(state, catalog), Mission.firstEncounter);
 
       state = state.apply(met('Eranthis hyemalis'));
-      expect(currentMission(state, catalog), Mission.firstLevel);
-
-      state = state.apply(passed('Eranthis hyemalis', 1));
       expect(currentMission(state, catalog), Mission.firstRecipe);
 
       state = state.apply(passed('Eranthis hyemalis', 2));
@@ -181,10 +241,59 @@ void main() {
       expect(isApprenticeshipComplete(state, catalog), isTrue);
     });
 
+    test('"Studia la tua prima specie": prima le specie in studio, poi le proposte in stagione', () {
+      expect(speciesToStudyFirst(GameState.empty, catalog, feb), 'Malva sylvestris');
+
+      final earlier = SpeciesEncountered(
+        speciesSci: 'Fagus sylvatica',
+        method: EncounterMethod.simulated,
+        occurredAt: feb.subtract(const Duration(days: 1)),
+      );
+      var state = play([met('Eranthis hyemalis'), earlier]);
+      expect(speciesToStudyFirst(state, catalog, feb), 'Fagus sylvatica');
+
+      // Livelli finiti: si passa alla specie successiva.
+      for (var level = 1; level <= maxStudyLevel; level++) {
+        state = state.apply(passed('Fagus sylvatica', level));
+      }
+      expect(speciesToStudyFirst(state, catalog, feb), 'Eranthis hyemalis');
+    });
+
     test('saltare l\'apprendistato lo nasconde', () {
       final state = play([OnboardingMarked(mark: OnboardingMark.skipped, occurredAt: feb)]);
       expect(currentMission(state, catalog), isNull);
       expect(isApprenticeshipComplete(state, catalog), isFalse);
+    });
+  });
+
+  group('ricette comuni imparate studiando', () {
+    test('si impara una ricetta comune che ha la specie tra gli ingredienti, mai una già imparata', () {
+      final first = recipeToLearn('Fagus sylvatica', catalog, GameState.empty, Random(1))!;
+      expect(first.grade, Grade.common);
+      expect(first.ingredients.map((i) => i.speciesSci), contains('Fagus sylvatica'));
+
+      final state = play([RecipeLearned(recipeId: first.id, origin: RecipeOrigin.study, occurredAt: feb)]);
+      final second = recipeToLearn('Fagus sylvatica', catalog, state, Random(1))!;
+      expect(second.id, isNot(first.id));
+
+      final both = state.apply(RecipeLearned(recipeId: second.id, origin: RecipeOrigin.study, occurredAt: feb));
+      expect(recipeToLearn('Fagus sylvatica', catalog, both, Random(1)), isNull);
+    });
+
+    test('nessuna ricetta comune con quella specie: niente da imparare', () {
+      expect(recipeToLearn('Eranthis hyemalis', catalog, GameState.empty, Random(1)), isNull);
+    });
+
+    test('una comune si sa fare solo se imparata; le altre ancora con il livello', () {
+      final common = catalog.recipes.firstWhere((r) => r.grade == Grade.common);
+      expect(isRecipeUnlocked(common, GameState.empty), isFalse);
+      expect(
+        isRecipeUnlocked(
+          common,
+          play([RecipeLearned(recipeId: common.id, origin: RecipeOrigin.study, occurredAt: feb)]),
+        ),
+        isTrue,
+      );
     });
   });
 }

@@ -269,19 +269,19 @@ abstract class AppLocalizations {
   /// No description provided for @levelRecognise.
   ///
   /// In it, this message translates to:
-  /// **'Riconoscere'**
+  /// **'Riconoscerla'**
   String get levelRecognise;
 
   /// No description provided for @levelKnow.
   ///
   /// In it, this message translates to:
-  /// **'Conoscere'**
+  /// **'Famiglia e vita'**
   String get levelKnow;
 
   /// No description provided for @levelWhereWhen.
   ///
   /// In it, this message translates to:
-  /// **'Dove e quando'**
+  /// **'Il suo ambiente'**
   String get levelWhereWhen;
 
   /// No description provided for @levelMastery.
@@ -293,7 +293,7 @@ abstract class AppLocalizations {
   /// No description provided for @navStudy.
   ///
   /// In it, this message translates to:
-  /// **'Studio'**
+  /// **'Home'**
   String get navStudy;
 
   /// No description provided for @navRecipes.
@@ -401,7 +401,7 @@ abstract class AppLocalizations {
   /// No description provided for @qNameToPhoto.
   ///
   /// In it, this message translates to:
-  /// **'Quale foto mostra: {name}?'**
+  /// **'Quale di queste è {name}?'**
   String qNameToPhoto(String name);
 
   /// No description provided for @qSciToCommon.
@@ -445,18 +445,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Quale NON è della stessa famiglia delle altre?'**
   String get qOddOneOut;
-
-  /// No description provided for @qSeasonOf.
-  ///
-  /// In it, this message translates to:
-  /// **'In quale stagione si fa notare di più {name}, qui?'**
-  String qSeasonOf(String name);
-
-  /// No description provided for @qBestMonthOf.
-  ///
-  /// In it, this message translates to:
-  /// **'In quale di questi mesi è più facile trovare {name}?'**
-  String qBestMonthOf(String name);
 
   /// No description provided for @qBandOf.
   ///
@@ -782,6 +770,30 @@ abstract class AppLocalizations {
   /// **'In stagione adesso'**
   String get desiderataSuggestions;
 
+  /// No description provided for @seasonalFirstHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.'**
+  String get seasonalFirstHint;
+
+  /// No description provided for @seasonalHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Puoi studiarle subito o segnarle come desiderata da cercare.'**
+  String get seasonalHint;
+
+  /// No description provided for @seasonalStudy.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia'**
+  String get seasonalStudy;
+
+  /// No description provided for @yourSpeciesMet.
+  ///
+  /// In it, this message translates to:
+  /// **'incontrata'**
+  String get yourSpeciesMet;
+
   /// No description provided for @desiderataAdd.
   ///
   /// In it, this message translates to:
@@ -827,7 +839,7 @@ abstract class AppLocalizations {
   /// No description provided for @yourSpeciesEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Nessuna specie incontrata ancora.'**
+  /// **'Nessuna specie in studio: comincia da una di quelle in stagione.'**
   String get yourSpeciesEmpty;
 
   /// No description provided for @studyLevelButton.
@@ -905,14 +917,14 @@ abstract class AppLocalizations {
   /// No description provided for @safetyWarning.
   ///
   /// In it, this message translates to:
-  /// **'⚠️ {text} · da verificare'**
+  /// **'{text} · da verificare'**
   String safetyWarning(String text);
 
   /// No description provided for @protectedNote.
   ///
   /// In it, this message translates to:
-  /// **'Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.'**
-  String get protectedNote;
+  /// **'Specie protetta ({sources}). Guardala e fotografala: non raccoglierla, non calpestarla, non alterare l\'ambiente e resta sul sentiero.'**
+  String protectedNote(String sources);
 
   /// No description provided for @masteryTitle.
   ///
@@ -983,7 +995,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitMoon.
   ///
   /// In it, this message translates to:
-  /// **'🌕 Lunare'**
+  /// **'🌕 Luna piena'**
   String get traitMoon;
 
   /// No description provided for @traitDew.
@@ -995,7 +1007,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitDusk.
   ///
   /// In it, this message translates to:
-  /// **'🌅 Crepuscolo'**
+  /// **'🌅 Tramonto'**
   String get traitDusk;
 
   /// No description provided for @recipesTitle.
@@ -1007,32 +1019,20 @@ abstract class AppLocalizations {
   /// No description provided for @recipeUnlocked.
   ///
   /// In it, this message translates to:
-  /// **'Sbloccata'**
+  /// **'Imparata'**
   String get recipeUnlocked;
 
   /// No description provided for @recipeLocked.
   ///
   /// In it, this message translates to:
-  /// **'Bloccata'**
+  /// **'Da imparare'**
   String get recipeLocked;
 
   /// No description provided for @recipeKnownIngredients.
   ///
   /// In it, this message translates to:
-  /// **'Ingredienti noti {known}/{total}'**
+  /// **'Ingredienti già incontrati {known}/{total}'**
   String recipeKnownIngredients(int known, int total);
-
-  /// No description provided for @recipeUnknownIngredient.
-  ///
-  /// In it, this message translates to:
-  /// **'???'**
-  String get recipeUnknownIngredient;
-
-  /// No description provided for @recipeHint.
-  ///
-  /// In it, this message translates to:
-  /// **'Indizio: {hint}'**
-  String recipeHint(String hint);
 
   /// No description provided for @recipeAnySpecies.
   ///
@@ -1067,7 +1067,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionVisitErbarioBody.
   ///
   /// In it, this message translates to:
-  /// **'L\'erbario raccoglie le specie della zona. Quelle che non hai ancora incontrato sono velate: sotto ognuna c\'è un indizio.'**
+  /// **'L\'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.'**
   String get missionVisitErbarioBody;
 
   /// No description provided for @missionMarkDesiderataTitle.
@@ -1097,13 +1097,13 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstLevelTitle.
   ///
   /// In it, this message translates to:
-  /// **'Studiala'**
+  /// **'Studia la tua prima specie'**
   String get missionFirstLevelTitle;
 
   /// No description provided for @missionFirstLevelBody.
   ///
   /// In it, this message translates to:
-  /// **'Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.'**
+  /// **'Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.'**
   String get missionFirstLevelBody;
 
   /// No description provided for @missionFirstRecipeTitle.
@@ -1124,6 +1124,30 @@ abstract class AppLocalizations {
   /// **'Salta l\'apprendistato'**
   String get missionSkip;
 
+  /// No description provided for @missionActionOpenErbario.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri l\'erbario'**
+  String get missionActionOpenErbario;
+
+  /// No description provided for @missionActionChooseDesiderata.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli nell\'erbario'**
+  String get missionActionChooseDesiderata;
+
+  /// No description provided for @missionActionStudy.
+  ///
+  /// In it, this message translates to:
+  /// **'Inizia a studiare'**
+  String get missionActionStudy;
+
+  /// No description provided for @missionActionRecipes.
+  ///
+  /// In it, this message translates to:
+  /// **'Vedi le ricette'**
+  String get missionActionRecipes;
+
   /// No description provided for @missionGlossary.
   ///
   /// In it, this message translates to:
@@ -1139,7 +1163,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossaryTitle.
   ///
   /// In it, this message translates to:
-  /// **'Glossario'**
+  /// **'Legenda e glossario'**
   String get glossaryTitle;
 
   /// No description provided for @glossErbarioTerm.
@@ -1333,6 +1357,720 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Feltro'**
   String get liveryFeltro;
+
+  /// No description provided for @studyThemeProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'{theme} · {done} di {total}'**
+  String studyThemeProgress(String theme, int done, int total);
+
+  /// No description provided for @qOrderOf.
+  ///
+  /// In it, this message translates to:
+  /// **'A quale ordine appartiene {name}?'**
+  String qOrderOf(String name);
+
+  /// No description provided for @qCommonnessOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Quanto è comune {name} in questa zona?'**
+  String qCommonnessOf(String name);
+
+  /// No description provided for @optionYes.
+  ///
+  /// In it, this message translates to:
+  /// **'Sì'**
+  String get optionYes;
+
+  /// No description provided for @optionNo.
+  ///
+  /// In it, this message translates to:
+  /// **'No'**
+  String get optionNo;
+
+  /// No description provided for @commonnessVeryCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Tra le più comuni'**
+  String get commonnessVeryCommon;
+
+  /// No description provided for @commonnessCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune'**
+  String get commonnessCommon;
+
+  /// No description provided for @commonnessUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Meno comune'**
+  String get commonnessUncommon;
+
+  /// No description provided for @commonnessRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Tra le meno osservate'**
+  String get commonnessRare;
+
+  /// No description provided for @factScientificName.
+  ///
+  /// In it, this message translates to:
+  /// **'Il nome scientifico di {name} è {sci}: la prima parola è il genere, la seconda la specie.'**
+  String factScientificName(String name, String sci);
+
+  /// No description provided for @factCongeners.
+  ///
+  /// In it, this message translates to:
+  /// **'Altre specie del genere {genus} in Italia: {names}.'**
+  String factCongeners(String genus, String names);
+
+  /// No description provided for @factOrder.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} appartiene all\'ordine {order}, di cui fa parte la famiglia {family}.'**
+  String factOrder(String name, String order, String family);
+
+  /// No description provided for @factWarning.
+  ///
+  /// In it, this message translates to:
+  /// **'{name}: {warning}. Guardala e fotografala, non assaggiarla. Avviso da verificare.'**
+  String factWarning(String name, String warning);
+
+  /// No description provided for @factCommonness.
+  ///
+  /// In it, this message translates to:
+  /// **'In questa zona {name} è: {commonness} (dalle osservazioni GBIF).'**
+  String factCommonness(String name, String commonness);
+
+  /// No description provided for @qGrowthFormOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Che forma ha {name}?'**
+  String qGrowthFormOf(String name);
+
+  /// No description provided for @qLifeCycleOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Quanto vive {name}?'**
+  String qLifeCycleOf(String name);
+
+  /// No description provided for @qSeedDispersalOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Come viaggiano i semi di {name}?'**
+  String qSeedDispersalOf(String name);
+
+  /// No description provided for @qOriginOf.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} è arrivata in Italia da fuori, portata dall\'uomo?'**
+  String qOriginOf(String name);
+
+  /// No description provided for @qLightOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Quanta luce ama {name}?'**
+  String qLightOf(String name);
+
+  /// No description provided for @qMoistureOf.
+  ///
+  /// In it, this message translates to:
+  /// **'Che terreno preferisce {name}?'**
+  String qMoistureOf(String name);
+
+  /// No description provided for @growthTree.
+  ///
+  /// In it, this message translates to:
+  /// **'Albero'**
+  String get growthTree;
+
+  /// No description provided for @growthShrub.
+  ///
+  /// In it, this message translates to:
+  /// **'Arbusto'**
+  String get growthShrub;
+
+  /// No description provided for @growthHerb.
+  ///
+  /// In it, this message translates to:
+  /// **'Erba'**
+  String get growthHerb;
+
+  /// No description provided for @growthClimber.
+  ///
+  /// In it, this message translates to:
+  /// **'Rampicante'**
+  String get growthClimber;
+
+  /// No description provided for @cycleAnnual.
+  ///
+  /// In it, this message translates to:
+  /// **'Un anno (annuale)'**
+  String get cycleAnnual;
+
+  /// No description provided for @cycleBiennial.
+  ///
+  /// In it, this message translates to:
+  /// **'Due anni (biennale)'**
+  String get cycleBiennial;
+
+  /// No description provided for @cyclePerennial.
+  ///
+  /// In it, this message translates to:
+  /// **'Molti anni (perenne)'**
+  String get cyclePerennial;
+
+  /// No description provided for @seedsEatenByAnimals.
+  ///
+  /// In it, this message translates to:
+  /// **'Nei frutti mangiati dagli animali'**
+  String get seedsEatenByAnimals;
+
+  /// No description provided for @seedsStuckToAnimals.
+  ///
+  /// In it, this message translates to:
+  /// **'Attaccati al pelo degli animali'**
+  String get seedsStuckToAnimals;
+
+  /// No description provided for @seedsHoardedByAnimals.
+  ///
+  /// In it, this message translates to:
+  /// **'Nascosti dagli animali come scorte'**
+  String get seedsHoardedByAnimals;
+
+  /// No description provided for @seedsAnts.
+  ///
+  /// In it, this message translates to:
+  /// **'Portati dalle formiche'**
+  String get seedsAnts;
+
+  /// No description provided for @seedsWind.
+  ///
+  /// In it, this message translates to:
+  /// **'Col vento'**
+  String get seedsWind;
+
+  /// No description provided for @seedsWater.
+  ///
+  /// In it, this message translates to:
+  /// **'Con l\'acqua'**
+  String get seedsWater;
+
+  /// No description provided for @seedsLaunched.
+  ///
+  /// In it, this message translates to:
+  /// **'Lanciati dalla pianta'**
+  String get seedsLaunched;
+
+  /// No description provided for @seedsNearby.
+  ///
+  /// In it, this message translates to:
+  /// **'Cadono vicino, senza aiuti'**
+  String get seedsNearby;
+
+  /// No description provided for @lightShade.
+  ///
+  /// In it, this message translates to:
+  /// **'Ombra'**
+  String get lightShade;
+
+  /// No description provided for @lightHalfShade.
+  ///
+  /// In it, this message translates to:
+  /// **'Mezz\'ombra'**
+  String get lightHalfShade;
+
+  /// No description provided for @lightSun.
+  ///
+  /// In it, this message translates to:
+  /// **'Pieno sole'**
+  String get lightSun;
+
+  /// No description provided for @moistureDry.
+  ///
+  /// In it, this message translates to:
+  /// **'Secco'**
+  String get moistureDry;
+
+  /// No description provided for @moistureFresh.
+  ///
+  /// In it, this message translates to:
+  /// **'Fresco'**
+  String get moistureFresh;
+
+  /// No description provided for @moistureMoist.
+  ///
+  /// In it, this message translates to:
+  /// **'Umido'**
+  String get moistureMoist;
+
+  /// No description provided for @factGrowthForm.
+  ///
+  /// In it, this message translates to:
+  /// **'Forma di {name}: {form}.'**
+  String factGrowthForm(String name, String form);
+
+  /// No description provided for @factLifeCycle.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} vive {cycle}.'**
+  String factLifeCycle(String name, String cycle);
+
+  /// No description provided for @factSeedDispersal.
+  ///
+  /// In it, this message translates to:
+  /// **'I semi di {name}: {modes}.'**
+  String factSeedDispersal(String name, String modes);
+
+  /// No description provided for @factOriginNative.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} è autoctona: in Italia cresce da sempre, senza l\'aiuto dell\'uomo.'**
+  String factOriginNative(String name);
+
+  /// No description provided for @factOriginIntroduced.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} è stata portata in Italia dall\'uomo: non è nata qui.'**
+  String factOriginIntroduced(String name);
+
+  /// No description provided for @factLight.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} ama: {light}.'**
+  String factLight(String name, String light);
+
+  /// No description provided for @factMoisture.
+  ///
+  /// In it, this message translates to:
+  /// **'{name} preferisce un terreno {moisture}.'**
+  String factMoisture(String name, String moisture);
+
+  /// No description provided for @sourcesTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0'**
+  String get sourcesTraits;
+
+  /// No description provided for @sectionTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Com\'è e come vive'**
+  String get sectionTraits;
+
+  /// No description provided for @xpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'{xp} PE da incassare: si incassano alla prima essenza di ogni specie'**
+  String xpToCash(int xp);
+
+  /// No description provided for @speciesXpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'{xp} PE da incassare: attingi la prima essenza di questa specie.'**
+  String speciesXpToCash(int xp);
+
+  /// No description provided for @summaryXpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.'**
+  String get summaryXpToCash;
+
+  /// No description provided for @visStored.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis immagazzinate: {vis}'**
+  String visStored(int vis);
+
+  /// No description provided for @drawExhausted.
+  ///
+  /// In it, this message translates to:
+  /// **'Esaurita: torna pronta domani'**
+  String get drawExhausted;
+
+  /// No description provided for @drawNeedsEncounter.
+  ///
+  /// In it, this message translates to:
+  /// **'Per attingere serve una stazione: prima incontrala'**
+  String get drawNeedsEncounter;
+
+  /// No description provided for @gradeCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune'**
+  String get gradeCommon;
+
+  /// No description provided for @gradeUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Non comune'**
+  String get gradeUncommon;
+
+  /// No description provided for @gradeRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Rara'**
+  String get gradeRare;
+
+  /// No description provided for @gradeMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'Mitica'**
+  String get gradeMythic;
+
+  /// No description provided for @protectionEmiliaRomagna.
+  ///
+  /// In it, this message translates to:
+  /// **'L.R. Emilia-Romagna 2/1977'**
+  String get protectionEmiliaRomagna;
+
+  /// No description provided for @protectionHabitats.
+  ///
+  /// In it, this message translates to:
+  /// **'Direttiva Habitat, allegato {annex}'**
+  String protectionHabitats(String annex);
+
+  /// No description provided for @summaryRecipeLearned.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai imparato una ricetta: {name}'**
+  String summaryRecipeLearned(String name);
+
+  /// No description provided for @recipeLearnByStudying.
+  ///
+  /// In it, this message translates to:
+  /// **'Si impara studiando: {species}'**
+  String recipeLearnByStudying(String species);
+
+  /// No description provided for @debugGradePreview.
+  ///
+  /// In it, this message translates to:
+  /// **'Anteprima dei gradi'**
+  String get debugGradePreview;
+
+  /// No description provided for @debugGradeSampleName.
+  ///
+  /// In it, this message translates to:
+  /// **'Elisir di Prova'**
+  String get debugGradeSampleName;
+
+  /// No description provided for @debugGradeSampleIngredient.
+  ///
+  /// In it, this message translates to:
+  /// **'Erba d\'argento'**
+  String get debugGradeSampleIngredient;
+
+  /// No description provided for @debugGradeSampleEffect.
+  ///
+  /// In it, this message translates to:
+  /// **'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).'**
+  String get debugGradeSampleEffect;
+
+  /// No description provided for @badgeEncountered.
+  ///
+  /// In it, this message translates to:
+  /// **'Incontrata il'**
+  String get badgeEncountered;
+
+  /// No description provided for @badgeProtected.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie protetta'**
+  String get badgeProtected;
+
+  /// No description provided for @recipesCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{learned} di {total}'**
+  String recipesCount(int learned, int total);
+
+  /// No description provided for @recipeIngredientCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 ingrediente} other{{count} ingredienti}}'**
+  String recipeIngredientCount(num count);
+
+  /// No description provided for @legendTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Legenda'**
+  String get legendTitle;
+
+  /// No description provided for @glossarySection.
+  ///
+  /// In it, this message translates to:
+  /// **'Glossario'**
+  String get glossarySection;
+
+  /// No description provided for @legendGrades.
+  ///
+  /// In it, this message translates to:
+  /// **'Gradi (ricette, pozioni, bottino)'**
+  String get legendGrades;
+
+  /// No description provided for @legendBadges.
+  ///
+  /// In it, this message translates to:
+  /// **'Bollini'**
+  String get legendBadges;
+
+  /// No description provided for @legendProtected.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie protetta dalla legge: si guarda e si fotografa'**
+  String get legendProtected;
+
+  /// No description provided for @legendEncountered.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie incontrata, con la data dell\'incontro'**
+  String get legendEncountered;
+
+  /// No description provided for @legendXpToCash.
+  ///
+  /// In it, this message translates to:
+  /// **'PE da incassare alla prima essenza della specie'**
+  String get legendXpToCash;
+
+  /// No description provided for @legendLevels.
+  ///
+  /// In it, this message translates to:
+  /// **'Livelli di studio'**
+  String get legendLevels;
+
+  /// No description provided for @legendTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Tratti delle essenze'**
+  String get legendTraits;
+
+  /// No description provided for @glossProtettaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Protetta'**
+  String get glossProtettaTerm;
+
+  /// No description provided for @glossProtettaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.'**
+  String get glossProtettaText;
+
+  /// No description provided for @glossEssenzaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Essenza'**
+  String get glossEssenzaTerm;
+
+  /// No description provided for @glossEssenzaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.'**
+  String get glossEssenzaText;
+
+  /// No description provided for @glossVisTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis'**
+  String get glossVisTerm;
+
+  /// No description provided for @glossVisText.
+  ///
+  /// In it, this message translates to:
+  /// **'La linfa sottile delle piante: l\'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.'**
+  String get glossVisText;
+
+  /// No description provided for @glossPeDaIncassareTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'PE da incassare'**
+  String get glossPeDaIncassareTerm;
+
+  /// No description provided for @glossPeDaIncassareText.
+  ///
+  /// In it, this message translates to:
+  /// **'I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.'**
+  String get glossPeDaIncassareText;
+
+  /// No description provided for @glossGradoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Grado'**
+  String get glossGradoTerm;
+
+  /// No description provided for @glossGradoText.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell\'Esperienza.'**
+  String get glossGradoText;
+
+  /// No description provided for @glossBottinoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino dell\'Esperienza'**
+  String get glossBottinoTerm;
+
+  /// No description provided for @glossBottinoText.
+  ///
+  /// In it, this message translates to:
+  /// **'Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).'**
+  String get glossBottinoText;
+
+  /// No description provided for @glossFigurinaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Figurina'**
+  String get glossFigurinaTerm;
+
+  /// No description provided for @glossFigurinaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una ricetta o una pozione nell\'album. L\'album delle ricette mostra quelle che conosci; il contatore dice quante sono in tutto.'**
+  String get glossFigurinaText;
+
+  /// No description provided for @recipesEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall\'erbario.'**
+  String get recipesEmpty;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutte'**
+  String get viewAll;
+
+  /// No description provided for @viewInSeason.
+  ///
+  /// In it, this message translates to:
+  /// **'In stagione adesso'**
+  String get viewInSeason;
+
+  /// No description provided for @viewDesiderata.
+  ///
+  /// In it, this message translates to:
+  /// **'Le mie desiderata'**
+  String get viewDesiderata;
+
+  /// No description provided for @viewProtected.
+  ///
+  /// In it, this message translates to:
+  /// **'Protette'**
+  String get viewProtected;
+
+  /// No description provided for @viewNew.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuova vista'**
+  String get viewNew;
+
+  /// No description provided for @viewName.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome della vista'**
+  String get viewName;
+
+  /// No description provided for @viewStatus.
+  ///
+  /// In it, this message translates to:
+  /// **'Stato'**
+  String get viewStatus;
+
+  /// No description provided for @viewWhen.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando e come'**
+  String get viewWhen;
+
+  /// No description provided for @viewProtectedOnly.
+  ///
+  /// In it, this message translates to:
+  /// **'Solo protette'**
+  String get viewProtectedOnly;
+
+  /// No description provided for @viewBand.
+  ///
+  /// In it, this message translates to:
+  /// **'Quota'**
+  String get viewBand;
+
+  /// No description provided for @viewForm.
+  ///
+  /// In it, this message translates to:
+  /// **'Forma'**
+  String get viewForm;
+
+  /// No description provided for @viewFamily.
+  ///
+  /// In it, this message translates to:
+  /// **'Famiglia'**
+  String get viewFamily;
+
+  /// No description provided for @viewSave.
+  ///
+  /// In it, this message translates to:
+  /// **'Salva la vista'**
+  String get viewSave;
+
+  /// No description provided for @viewRemove.
+  ///
+  /// In it, this message translates to:
+  /// **'Elimina la vista'**
+  String get viewRemove;
+
+  /// No description provided for @viewEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessuna specie in questa vista.'**
+  String get viewEmpty;
+
+  /// No description provided for @statusMet.
+  ///
+  /// In it, this message translates to:
+  /// **'Incontrate'**
+  String get statusMet;
+
+  /// No description provided for @statusToFind.
+  ///
+  /// In it, this message translates to:
+  /// **'Da trovare'**
+  String get statusToFind;
+
+  /// No description provided for @statusDesiderata.
+  ///
+  /// In it, this message translates to:
+  /// **'Desiderata'**
+  String get statusDesiderata;
+
+  /// No description provided for @statusStudying.
+  ///
+  /// In it, this message translates to:
+  /// **'In studio'**
+  String get statusStudying;
+
+  /// No description provided for @traitDawn.
+  ///
+  /// In it, this message translates to:
+  /// **'🌄 Alba'**
+  String get traitDawn;
+
+  /// No description provided for @traitNight.
+  ///
+  /// In it, this message translates to:
+  /// **'🌌 Notte'**
+  String get traitNight;
+
+  /// No description provided for @traitAfterStorm.
+  ///
+  /// In it, this message translates to:
+  /// **'⛈ Dopo il temporale'**
+  String get traitAfterStorm;
+
+  /// No description provided for @traitNewMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'🌑 Luna nuova'**
+  String get traitNewMoon;
 }
 
 class _AppLocalizationsDelegate

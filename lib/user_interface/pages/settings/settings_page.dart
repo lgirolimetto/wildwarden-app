@@ -3,7 +3,9 @@ import 'package:druid_app/business_logic/services/clock/offset_clock.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
+import 'package:druid_app/user_interface/pages/settings/grade_preview_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/livery_registry.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -15,7 +17,9 @@ class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context) => GetBuilder<ThemeController>(
+  Widget build(BuildContext context) => DenseArea(paintBackground: true, child: _page(context));
+
+  Widget _page(BuildContext context) => GetBuilder<ThemeController>(
     builder: (controller) => ListView(
       padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, homeBottomInset),
       children: [
@@ -120,6 +124,12 @@ class _DebugToolsState extends State<_DebugTools> {
             ],
           ),
         ],
+        const SizedBox(height: Gaps.s),
+        OutlinedButton(
+          key: const ValueKey('open-grade-preview'),
+          onPressed: () => Get.to<void>(() => const GradePreviewPage()),
+          child: Text(context.l10n.debugGradePreview),
+        ),
         GetBuilder<SubscriptionController>(
           builder: (subscription) => ListTile(
             key: const ValueKey('debug-diario'),

@@ -1,6 +1,7 @@
 import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
+import 'package:druid_app/user_interface/theme/liveries/grade_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Livrea alternativa: indaco e argento lunare. Esiste anche per dimostrare che il cambio di livrea
@@ -21,6 +22,7 @@ class NotturnaLivery extends Livery {
   DruidTokens tokens(Brightness brightness, ColorScheme scheme) {
     final light = brightness == Brightness.light;
     return DruidTokens(
+      gradeColors: metalGradeColors(brightness),
       levelColors: light
           ? const [Color(0xFFC3C7D9), Color(0xFF9AA3CC), Color(0xFF6C7AB8), Color(0xFF3D4C8C), Color(0xFF9A8A4A)]
           : const [Color(0xFF3B4058), Color(0xFF55608F), Color(0xFF7C88C2), Color(0xFFA9B4EC), Color(0xFFD9CC8A)],

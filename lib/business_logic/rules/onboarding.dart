@@ -6,12 +6,13 @@ import 'package:druid_app/business_logic/rules/progression.dart';
 /// Missioni dell'apprendistato (onboarding). Ogni missione si completa quando lo stato di gioco lo dice:
 /// niente codice sparso nelle pagine.
 ///
-/// Nel blocco 1 ci sono i passi che non richiedono il campo; stazione e ritorno arrivano nei blocchi 2-3.
+/// Si comincia da casa, studiando; poi l'erbario, le desiderata e il campo. Stazione e ritorno arrivano nei
+/// blocchi 2-3.
 enum Mission {
+  firstLevel,
   visitErbario,
   markDesiderata,
   firstEncounter,
-  firstLevel,
   firstRecipe;
 
   bool isDone(GameState state, Catalog catalog) => switch (this) {
@@ -34,3 +35,18 @@ Mission? currentMission(GameState state, Catalog catalog) {
 
 bool isApprenticeshipComplete(GameState state, Catalog catalog) =>
     Mission.values.every((m) => m.isDone(state, catalog));
+
+/// Specie da studiare per la missione "Studia la tua prima specie": una già in studio con un livello da superare
+/// (prima le incontrate, in ordine di incontro), altrimenti la prima proposta in stagione.
+String? speciesToStudyFirst(GameState state, Catalog catalog, DateTime now) {
+  final byEncounter = state.firstEncounters.entries.toList()..sort((a, b) => a.value.compareTo(b.value));
+  final inStudy = [
+    for (final entry in byEncounter) entry.key,
+    ...speciesInStudy(state).difference(state.firstEncounters.keys.toSet()).toList()..sort(),
+  ];
+  for (final sci in inStudy) {
+    final species = catalog.speciesBySci(sci);
+    if (species != null && nextStudyLevel(species, catalog, state) != null) return species.sci;
+  }
+  return seasonalSuggestions(catalog, state, now).firstOrNull?.sci;
+}

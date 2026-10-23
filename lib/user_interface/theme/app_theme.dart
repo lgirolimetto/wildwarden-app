@@ -4,9 +4,27 @@ import 'package:flutter/material.dart';
 
 /// Costruisce il `ThemeData` Material 3 di una livrea. I temi dei componenti derivano tutti dalla palette
 /// e dai token: le pagine non devono mai usare colori letterali.
-ThemeData buildTheme(Livery livery, Brightness brightness) {
-  final scheme = livery.colorScheme(brightness);
-  final tokens = livery.tokens(brightness, scheme);
+///
+/// Con [dense] il tema delle pagine dense, se la livrea lo prevede (`DruidTokens.denseBackground` e `denseSurface`):
+/// sfondo e superfici (schede, chip, pulsanti) più chiari. `null` se la livrea non lo prevede.
+ThemeData buildTheme(Livery livery, Brightness brightness) => _buildTheme(livery, brightness, dense: false)!;
+
+ThemeData? buildDenseTheme(Livery livery, Brightness brightness) => _buildTheme(livery, brightness, dense: true);
+
+ThemeData? _buildTheme(Livery livery, Brightness brightness, {required bool dense}) {
+  var scheme = livery.colorScheme(brightness);
+  var tokens = livery.tokens(brightness, scheme);
+  if (dense) {
+    final background = tokens.denseBackground, surface = tokens.denseSurface;
+    if (background == null || surface == null) return null;
+    scheme = scheme.copyWith(surface: background, surfaceContainerLow: surface);
+    // Sulle superfici più chiare la luce del rilievo pensata per lo sfondo scuro non si vede più: va alzata, altrimenti
+    // resta solo l'ombra e il rilievo sparisce.
+    tokens = tokens.copyWith(
+      backgroundGradient: [background, background],
+      neuLight: tokens.neuLight.withValues(alpha: (tokens.neuLight.a * 2).clamp(0, 1)),
+    );
+  }
   final radius = BorderRadius.circular(tokens.cardRadius);
 
   final base = ThemeData(

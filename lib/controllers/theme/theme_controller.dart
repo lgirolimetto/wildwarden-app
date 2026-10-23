@@ -19,6 +19,12 @@ class ThemeController extends GetxController {
   late ThemeData lightTheme;
   late ThemeData darkTheme;
 
+  /// Temi delle pagine dense; `null` se la livrea non li prevede.
+  ThemeData? lightDenseTheme;
+  ThemeData? darkDenseTheme;
+
+  ThemeData? denseTheme(Brightness brightness) => brightness == Brightness.light ? lightDenseTheme : darkDenseTheme;
+
   @override
   void onInit() {
     super.onInit();
@@ -43,5 +49,7 @@ class ThemeController extends GetxController {
   void _rebuild() {
     lightTheme = buildTheme(livery, Brightness.light);
     darkTheme = buildTheme(livery, Brightness.dark);
+    lightDenseTheme = buildDenseTheme(livery, Brightness.light);
+    darkDenseTheme = buildDenseTheme(livery, Brightness.dark);
   }
 }

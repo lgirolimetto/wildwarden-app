@@ -97,19 +97,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get levelToStudy => 'Da studiare';
 
   @override
-  String get levelRecognise => 'Riconoscere';
+  String get levelRecognise => 'Riconoscerla';
 
   @override
-  String get levelKnow => 'Conoscere';
+  String get levelKnow => 'Famiglia e vita';
 
   @override
-  String get levelWhereWhen => 'Dove e quando';
+  String get levelWhereWhen => 'Il suo ambiente';
 
   @override
   String get levelMastery => 'Maestria';
 
   @override
-  String get navStudy => 'Studio';
+  String get navStudy => 'Home';
 
   @override
   String get navRecipes => 'Ricette';
@@ -168,7 +168,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String qNameToPhoto(String name) {
-    return 'Quale foto mostra: $name?';
+    return 'Quale di queste è $name?';
   }
 
   @override
@@ -202,16 +202,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get qOddOneOut => 'Quale NON è della stessa famiglia delle altre?';
-
-  @override
-  String qSeasonOf(String name) {
-    return 'In quale stagione si fa notare di più $name, qui?';
-  }
-
-  @override
-  String qBestMonthOf(String name) {
-    return 'In quale di questi mesi è più facile trovare $name?';
-  }
 
   @override
   String qBandOf(String name) {
@@ -426,6 +416,20 @@ class AppLocalizationsIt extends AppLocalizations {
   String get desiderataSuggestions => 'In stagione adesso';
 
   @override
+  String get seasonalFirstHint =>
+      'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.';
+
+  @override
+  String get seasonalHint =>
+      'Puoi studiarle subito o segnarle come desiderata da cercare.';
+
+  @override
+  String get seasonalStudy => 'Studia';
+
+  @override
+  String get yourSpeciesMet => 'incontrata';
+
+  @override
   String get desiderataAdd => 'Aggiungi alle desiderata';
 
   @override
@@ -454,7 +458,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get yourSpecies => 'Le tue specie';
 
   @override
-  String get yourSpeciesEmpty => 'Nessuna specie incontrata ancora.';
+  String get yourSpeciesEmpty =>
+      'Nessuna specie in studio: comincia da una di quelle in stagione.';
 
   @override
   String studyLevelButton(int level) {
@@ -504,12 +509,13 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String safetyWarning(String text) {
-    return '⚠️ $text · da verificare';
+    return '$text · da verificare';
   }
 
   @override
-  String get protectedNote =>
-      'Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.';
+  String protectedNote(String sources) {
+    return 'Specie protetta ($sources). Guardala e fotografala: non raccoglierla, non calpestarla, non alterare l\'ambiente e resta sul sentiero.';
+  }
 
   @override
   String get masteryTitle => 'Maestria';
@@ -550,34 +556,26 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitSun => '☀️ Solare';
 
   @override
-  String get traitMoon => '🌕 Lunare';
+  String get traitMoon => '🌕 Luna piena';
 
   @override
   String get traitDew => '💧 Rugiada';
 
   @override
-  String get traitDusk => '🌅 Crepuscolo';
+  String get traitDusk => '🌅 Tramonto';
 
   @override
   String get recipesTitle => 'Ricette';
 
   @override
-  String get recipeUnlocked => 'Sbloccata';
+  String get recipeUnlocked => 'Imparata';
 
   @override
-  String get recipeLocked => 'Bloccata';
+  String get recipeLocked => 'Da imparare';
 
   @override
   String recipeKnownIngredients(int known, int total) {
-    return 'Ingredienti noti $known/$total';
-  }
-
-  @override
-  String get recipeUnknownIngredient => '???';
-
-  @override
-  String recipeHint(String hint) {
-    return 'Indizio: $hint';
+    return 'Ingredienti già incontrati $known/$total';
   }
 
   @override
@@ -603,7 +601,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionVisitErbarioBody =>
-      'L\'erbario raccoglie le specie della zona. Quelle che non hai ancora incontrato sono velate: sotto ognuna c\'è un indizio.';
+      'L\'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.';
 
   @override
   String get missionMarkDesiderataTitle => 'Scegli le tue desiderata';
@@ -620,11 +618,11 @@ class AppLocalizationsIt extends AppLocalizations {
       'Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell\'erbario. Fotografa, non raccogliere.';
 
   @override
-  String get missionFirstLevelTitle => 'Studiala';
+  String get missionFirstLevelTitle => 'Studia la tua prima specie';
 
   @override
   String get missionFirstLevelBody =>
-      'Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.';
+      'Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.';
 
   @override
   String get missionFirstRecipeTitle => 'La prima ricetta';
@@ -637,13 +635,25 @@ class AppLocalizationsIt extends AppLocalizations {
   String get missionSkip => 'Salta l\'apprendistato';
 
   @override
+  String get missionActionOpenErbario => 'Apri l\'erbario';
+
+  @override
+  String get missionActionChooseDesiderata => 'Scegli nell\'erbario';
+
+  @override
+  String get missionActionStudy => 'Inizia a studiare';
+
+  @override
+  String get missionActionRecipes => 'Vedi le ricette';
+
+  @override
   String get missionGlossary => 'Glossario';
 
   @override
   String get apprenticeshipComplete => 'Apprendistato completato!';
 
   @override
-  String get glossaryTitle => 'Glossario';
+  String get glossaryTitle => 'Legenda e glossario';
 
   @override
   String get glossErbarioTerm => 'Erbario';
@@ -752,4 +762,444 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get liveryFeltro => 'Feltro';
+
+  @override
+  String studyThemeProgress(String theme, int done, int total) {
+    return '$theme · $done di $total';
+  }
+
+  @override
+  String qOrderOf(String name) {
+    return 'A quale ordine appartiene $name?';
+  }
+
+  @override
+  String qCommonnessOf(String name) {
+    return 'Quanto è comune $name in questa zona?';
+  }
+
+  @override
+  String get optionYes => 'Sì';
+
+  @override
+  String get optionNo => 'No';
+
+  @override
+  String get commonnessVeryCommon => 'Tra le più comuni';
+
+  @override
+  String get commonnessCommon => 'Comune';
+
+  @override
+  String get commonnessUncommon => 'Meno comune';
+
+  @override
+  String get commonnessRare => 'Tra le meno osservate';
+
+  @override
+  String factScientificName(String name, String sci) {
+    return 'Il nome scientifico di $name è $sci: la prima parola è il genere, la seconda la specie.';
+  }
+
+  @override
+  String factCongeners(String genus, String names) {
+    return 'Altre specie del genere $genus in Italia: $names.';
+  }
+
+  @override
+  String factOrder(String name, String order, String family) {
+    return '$name appartiene all\'ordine $order, di cui fa parte la famiglia $family.';
+  }
+
+  @override
+  String factWarning(String name, String warning) {
+    return '$name: $warning. Guardala e fotografala, non assaggiarla. Avviso da verificare.';
+  }
+
+  @override
+  String factCommonness(String name, String commonness) {
+    return 'In questa zona $name è: $commonness (dalle osservazioni GBIF).';
+  }
+
+  @override
+  String qGrowthFormOf(String name) {
+    return 'Che forma ha $name?';
+  }
+
+  @override
+  String qLifeCycleOf(String name) {
+    return 'Quanto vive $name?';
+  }
+
+  @override
+  String qSeedDispersalOf(String name) {
+    return 'Come viaggiano i semi di $name?';
+  }
+
+  @override
+  String qOriginOf(String name) {
+    return '$name è arrivata in Italia da fuori, portata dall\'uomo?';
+  }
+
+  @override
+  String qLightOf(String name) {
+    return 'Quanta luce ama $name?';
+  }
+
+  @override
+  String qMoistureOf(String name) {
+    return 'Che terreno preferisce $name?';
+  }
+
+  @override
+  String get growthTree => 'Albero';
+
+  @override
+  String get growthShrub => 'Arbusto';
+
+  @override
+  String get growthHerb => 'Erba';
+
+  @override
+  String get growthClimber => 'Rampicante';
+
+  @override
+  String get cycleAnnual => 'Un anno (annuale)';
+
+  @override
+  String get cycleBiennial => 'Due anni (biennale)';
+
+  @override
+  String get cyclePerennial => 'Molti anni (perenne)';
+
+  @override
+  String get seedsEatenByAnimals => 'Nei frutti mangiati dagli animali';
+
+  @override
+  String get seedsStuckToAnimals => 'Attaccati al pelo degli animali';
+
+  @override
+  String get seedsHoardedByAnimals => 'Nascosti dagli animali come scorte';
+
+  @override
+  String get seedsAnts => 'Portati dalle formiche';
+
+  @override
+  String get seedsWind => 'Col vento';
+
+  @override
+  String get seedsWater => 'Con l\'acqua';
+
+  @override
+  String get seedsLaunched => 'Lanciati dalla pianta';
+
+  @override
+  String get seedsNearby => 'Cadono vicino, senza aiuti';
+
+  @override
+  String get lightShade => 'Ombra';
+
+  @override
+  String get lightHalfShade => 'Mezz\'ombra';
+
+  @override
+  String get lightSun => 'Pieno sole';
+
+  @override
+  String get moistureDry => 'Secco';
+
+  @override
+  String get moistureFresh => 'Fresco';
+
+  @override
+  String get moistureMoist => 'Umido';
+
+  @override
+  String factGrowthForm(String name, String form) {
+    return 'Forma di $name: $form.';
+  }
+
+  @override
+  String factLifeCycle(String name, String cycle) {
+    return '$name vive $cycle.';
+  }
+
+  @override
+  String factSeedDispersal(String name, String modes) {
+    return 'I semi di $name: $modes.';
+  }
+
+  @override
+  String factOriginNative(String name) {
+    return '$name è autoctona: in Italia cresce da sempre, senza l\'aiuto dell\'uomo.';
+  }
+
+  @override
+  String factOriginIntroduced(String name) {
+    return '$name è stata portata in Italia dall\'uomo: non è nata qui.';
+  }
+
+  @override
+  String factLight(String name, String light) {
+    return '$name ama: $light.';
+  }
+
+  @override
+  String factMoisture(String name, String moisture) {
+    return '$name preferisce un terreno $moisture.';
+  }
+
+  @override
+  String get sourcesTraits => 'Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0';
+
+  @override
+  String get sectionTraits => 'Com\'è e come vive';
+
+  @override
+  String xpToCash(int xp) {
+    return '$xp PE da incassare: si incassano alla prima essenza di ogni specie';
+  }
+
+  @override
+  String speciesXpToCash(int xp) {
+    return '$xp PE da incassare: attingi la prima essenza di questa specie.';
+  }
+
+  @override
+  String get summaryXpToCash =>
+      'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.';
+
+  @override
+  String visStored(int vis) {
+    return 'Vis immagazzinate: $vis';
+  }
+
+  @override
+  String get drawExhausted => 'Esaurita: torna pronta domani';
+
+  @override
+  String get drawNeedsEncounter =>
+      'Per attingere serve una stazione: prima incontrala';
+
+  @override
+  String get gradeCommon => 'Comune';
+
+  @override
+  String get gradeUncommon => 'Non comune';
+
+  @override
+  String get gradeRare => 'Rara';
+
+  @override
+  String get gradeMythic => 'Mitica';
+
+  @override
+  String get protectionEmiliaRomagna => 'L.R. Emilia-Romagna 2/1977';
+
+  @override
+  String protectionHabitats(String annex) {
+    return 'Direttiva Habitat, allegato $annex';
+  }
+
+  @override
+  String summaryRecipeLearned(String name) {
+    return 'Hai imparato una ricetta: $name';
+  }
+
+  @override
+  String recipeLearnByStudying(String species) {
+    return 'Si impara studiando: $species';
+  }
+
+  @override
+  String get debugGradePreview => 'Anteprima dei gradi';
+
+  @override
+  String get debugGradeSampleName => 'Elisir di Prova';
+
+  @override
+  String get debugGradeSampleIngredient => 'Erba d\'argento';
+
+  @override
+  String get debugGradeSampleEffect =>
+      'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).';
+
+  @override
+  String get badgeEncountered => 'Incontrata il';
+
+  @override
+  String get badgeProtected => 'Specie protetta';
+
+  @override
+  String recipesCount(int learned, int total) {
+    return '$learned di $total';
+  }
+
+  @override
+  String recipeIngredientCount(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString ingredienti',
+      one: '1 ingrediente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get legendTitle => 'Legenda';
+
+  @override
+  String get glossarySection => 'Glossario';
+
+  @override
+  String get legendGrades => 'Gradi (ricette, pozioni, bottino)';
+
+  @override
+  String get legendBadges => 'Bollini';
+
+  @override
+  String get legendProtected =>
+      'Specie protetta dalla legge: si guarda e si fotografa';
+
+  @override
+  String get legendEncountered =>
+      'Specie incontrata, con la data dell\'incontro';
+
+  @override
+  String get legendXpToCash =>
+      'PE da incassare alla prima essenza della specie';
+
+  @override
+  String get legendLevels => 'Livelli di studio';
+
+  @override
+  String get legendTraits => 'Tratti delle essenze';
+
+  @override
+  String get glossProtettaTerm => 'Protetta';
+
+  @override
+  String get glossProtettaText =>
+      'Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.';
+
+  @override
+  String get glossEssenzaTerm => 'Essenza';
+
+  @override
+  String get glossEssenzaText =>
+      'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.';
+
+  @override
+  String get glossVisTerm => 'Vis';
+
+  @override
+  String get glossVisText =>
+      'La linfa sottile delle piante: l\'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.';
+
+  @override
+  String get glossPeDaIncassareTerm => 'PE da incassare';
+
+  @override
+  String get glossPeDaIncassareText =>
+      'I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.';
+
+  @override
+  String get glossGradoTerm => 'Grado';
+
+  @override
+  String get glossGradoText =>
+      'Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell\'Esperienza.';
+
+  @override
+  String get glossBottinoTerm => 'Bottino dell\'Esperienza';
+
+  @override
+  String get glossBottinoText =>
+      'Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).';
+
+  @override
+  String get glossFigurinaTerm => 'Figurina';
+
+  @override
+  String get glossFigurinaText =>
+      'Una ricetta o una pozione nell\'album. L\'album delle ricette mostra quelle che conosci; il contatore dice quante sono in tutto.';
+
+  @override
+  String get recipesEmpty =>
+      'Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall\'erbario.';
+
+  @override
+  String get viewAll => 'Tutte';
+
+  @override
+  String get viewInSeason => 'In stagione adesso';
+
+  @override
+  String get viewDesiderata => 'Le mie desiderata';
+
+  @override
+  String get viewProtected => 'Protette';
+
+  @override
+  String get viewNew => 'Nuova vista';
+
+  @override
+  String get viewName => 'Nome della vista';
+
+  @override
+  String get viewStatus => 'Stato';
+
+  @override
+  String get viewWhen => 'Quando e come';
+
+  @override
+  String get viewProtectedOnly => 'Solo protette';
+
+  @override
+  String get viewBand => 'Quota';
+
+  @override
+  String get viewForm => 'Forma';
+
+  @override
+  String get viewFamily => 'Famiglia';
+
+  @override
+  String get viewSave => 'Salva la vista';
+
+  @override
+  String get viewRemove => 'Elimina la vista';
+
+  @override
+  String get viewEmpty => 'Nessuna specie in questa vista.';
+
+  @override
+  String get statusMet => 'Incontrate';
+
+  @override
+  String get statusToFind => 'Da trovare';
+
+  @override
+  String get statusDesiderata => 'Desiderata';
+
+  @override
+  String get statusStudying => 'In studio';
+
+  @override
+  String get traitDawn => '🌄 Alba';
+
+  @override
+  String get traitNight => '🌌 Notte';
+
+  @override
+  String get traitAfterStorm => '⛈ Dopo il temporale';
+
+  @override
+  String get traitNewMoon => '🌑 Luna nuova';
 }

@@ -1,6 +1,8 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/localized_text.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,7 +17,7 @@ void main() {
     test('legge specie, ricette e contenuti', () {
       expect(catalog.regionId, 'bologna');
       expect(catalog.species, hasLength(4));
-      expect(catalog.recipes, hasLength(2));
+      expect(catalog.recipes, hasLength(4));
       expect(catalog.safety.keys, contains('Helleborus viridis'));
     });
 
@@ -39,6 +41,12 @@ void main() {
       expect(quota.unlock!.speciesSci, 'Fagus sylvatica');
       expect(quota.unlock!.level, 3);
       expect(quota.ingredients.any((i) => i.speciesSci == null && i.trait != null), isTrue);
+    });
+
+    test('ricette: grado e tratti come id (formato 2)', () {
+      final quota = catalog.recipes.firstWhere((r) => r.name.resolve('it').contains('Quota'));
+      expect(quota.grade, Grade.rare);
+      expect(quota.ingredients.map((i) => i.trait), containsAll([Trait.fog, Trait.moon]));
     });
 
     test('parenti: stessa famiglia, esclusa la specie stessa', () {

@@ -7,9 +7,11 @@ import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -24,36 +26,39 @@ class StudySessionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catalog = Get.find<CatalogController>().uiData.fold((_) => null, (c) => c);
-    return GetBuilder<StudyController>(
-      builder: (study) => Scaffold(
-        appBar: clayAppBar(
-          context,
-          title: _title(context, study, catalog),
-          leadingIcon: Icons.close_rounded,
-          leadingTooltip: context.l10n.close,
-          onLeading: () {
-            study.close();
-            Get.back<void>();
-          },
-          actions: [
-            ClayIconButton(
-              key: const ValueKey('open-notebook'),
-              icon: Icons.bookmarks_rounded,
-              tooltip: context.l10n.notebookTitle,
-              onPressed: () => openNotebook(context),
+    // Pagina densa: nelle livree che lo prevedono sfondo e superfici più chiari (vedi `DenseArea`).
+    return DenseArea(
+      child: GetBuilder<StudyController>(
+        builder: (study) => Scaffold(
+          appBar: clayAppBar(
+            context,
+            title: _title(context, study, catalog),
+            leadingIcon: Icons.close_rounded,
+            leadingTooltip: context.l10n.close,
+            onLeading: () {
+              study.close();
+              Get.back<void>();
+            },
+            actions: [
+              ClayIconButton(
+                key: const ValueKey('open-notebook'),
+                icon: Icons.bookmarks_rounded,
+                tooltip: context.l10n.notebookTitle,
+                onPressed: () => openNotebook(context),
+              ),
+            ],
+          ),
+          extendBodyBehindAppBar: true,
+          body: DruidBackground(
+            belowAppBar: true,
+            child: SafeArea(
+              child: study.summary != null
+                  ? _Summary(summary: study.summary!, catalog: catalog)
+                  // Dopo l'ultima risposta la sessione è già finita, ma l'esito va mostrato finché non si va avanti.
+                  : (study.question == null && study.lastOutcome == null) || catalog == null
+                  ? const SizedBox.shrink()
+                  : _QuestionView(study: study, catalog: catalog),
             ),
-          ],
-        ),
-        extendBodyBehindAppBar: true,
-        body: DruidBackground(
-          belowAppBar: true,
-          child: SafeArea(
-            child: study.summary != null
-                ? _Summary(summary: study.summary!, catalog: catalog)
-                // Dopo l'ultima risposta la sessione è già finita, ma l'esito va mostrato finché non si va avanti.
-                : (study.question == null && study.lastOutcome == null) || catalog == null
-                ? const SizedBox.shrink()
-                : _QuestionView(study: study, catalog: catalog),
           ),
         ),
       ),
@@ -63,7 +68,7 @@ class StudySessionPage extends StatelessWidget {
   String _title(BuildContext context, StudyController study, Catalog? catalog) {
     if (study.mode == AnswerMode.review) return context.l10n.reviewTitle;
     final species = study.speciesSci == null ? null : catalog?.speciesBySci(study.speciesSci!);
-    return species == null ? '' : context.l10n.studyLevelTitle(context.game.name(species), study.level ?? 0);
+    return species == null ? '' : context.game.name(species);
   }
 }
 
@@ -83,7 +88,17 @@ class _QuestionView extends StatelessWidget {
       children: [
         ClayProgressBar(value: study.totalFacts == 0 ? 0 : study.completedFacts / study.totalFacts, height: 4),
         const SizedBox(height: Gaps.xs),
-        Text(context.l10n.studyProgress(study.completedFacts, study.totalFacts), style: context.texts.bodySmall),
+        // Il tema del livello sta qui, non nel titolo: il titolo resta il nome della specie, che non va tagliato.
+        Text(
+          study.mode == AnswerMode.learning
+              ? context.l10n.studyThemeProgress(
+                  levelName(context.l10n, study.level ?? 0),
+                  study.completedFacts,
+                  study.totalFacts,
+                )
+              : context.l10n.studyProgress(study.completedFacts, study.totalFacts),
+          style: context.texts.bodySmall,
+        ),
         const SizedBox(height: Gaps.l),
         Text(game.prompt(question), style: context.texts.headlineSmall),
         if (question.imageUrl != null) ...[
@@ -323,7 +338,17 @@ class _Summary extends StatelessWidget {
         const SizedBox(height: Gaps.s),
         Text(l10n.summaryAnswers(summary.correct, summary.answers)),
         Text(l10n.xpGained(summary.xp), style: context.texts.titleLarge),
+        if (species != null && !Get.find<ProgressController>().state.hasDrawn(species.sci))
+          Text(l10n.summaryXpToCash, key: const ValueKey('summary-xp-to-cash'), style: context.texts.bodySmall),
         if (summary.masteryReached) ...[const SizedBox(height: Gaps.s), Text(l10n.summaryMastery)],
+        if (summary.learnedRecipe case final recipe?) ...[
+          const SizedBox(height: Gaps.m),
+          Text(
+            l10n.summaryRecipeLearned(recipe.name.resolve(context.contentLanguage)),
+            key: const ValueKey('summary-recipe-learned'),
+            style: context.texts.titleMedium,
+          ),
+        ],
         for (final recipe in unlocked) ...[
           const SizedBox(height: Gaps.s),
           Text(l10n.summaryRecipeUnlocked(recipe.name.resolve(context.contentLanguage))),

@@ -45,11 +45,11 @@
   "erbarioMissingSection": "Da trovare nel bolognese",
   "simulateEncounter": "Simula incontro",
   "levelToStudy": "Da studiare",
-  "levelRecognise": "Riconoscere",
-  "levelKnow": "Conoscere",
-  "levelWhereWhen": "Dove e quando",
+  "levelRecognise": "Riconoscerla",
+  "levelKnow": "Famiglia e vita",
+  "levelWhereWhen": "Il suo ambiente",
   "levelMastery": "Maestria",
-  "navStudy": "Studio",
+  "navStudy": "Home",
   "navRecipes": "Ricette",
   "rankApprentice": "Apprendista",
   "rankWanderer": "Viandante",
@@ -84,7 +84,7 @@
   "bandHill": "Collina (150–600 m)",
   "bandMountain": "Montagna (oltre i 600 m)",
   "qPhotoToName": "Che pianta è questa?",
-  "qNameToPhoto": "Quale foto mostra: {name}?",
+  "qNameToPhoto": "Quale di queste è {name}?",
   "@qNameToPhoto": {
     "placeholders": {
       "name": {
@@ -134,22 +134,6 @@
     }
   },
   "qOddOneOut": "Quale NON è della stessa famiglia delle altre?",
-  "qSeasonOf": "In quale stagione si fa notare di più {name}, qui?",
-  "@qSeasonOf": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
-  "qBestMonthOf": "In quale di questi mesi è più facile trovare {name}?",
-  "@qBestMonthOf": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "qBandOf": "Dove incontri più spesso {name}, qui?",
   "@qBandOf": {
     "placeholders": {
@@ -415,6 +399,10 @@
   },
   "desiderataEmpty": "Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
   "desiderataSuggestions": "In stagione adesso",
+  "seasonalFirstHint": "Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.",
+  "seasonalHint": "Puoi studiarle subito o segnarle come desiderata da cercare.",
+  "seasonalStudy": "Studia",
+  "yourSpeciesMet": "incontrata",
   "desiderataAdd": "Aggiungi alle desiderata",
   "desiderataRemove": "Togli dalle desiderata",
   "desiderataFull": "Hai già 3 desiderata: completane o togline una.",
@@ -443,7 +431,7 @@
     }
   },
   "yourSpecies": "Le tue specie",
-  "yourSpeciesEmpty": "Nessuna specie incontrata ancora.",
+  "yourSpeciesEmpty": "Nessuna specie in studio: comincia da una di quelle in stagione.",
   "studyLevelButton": "Studia il livello {level}",
   "@studyLevelButton": {
     "placeholders": {
@@ -497,7 +485,7 @@
       }
     }
   },
-  "safetyWarning": "⚠️ {text} · da verificare",
+  "safetyWarning": "{text} · da verificare",
   "@safetyWarning": {
     "placeholders": {
       "text": {
@@ -505,7 +493,7 @@
       }
     }
   },
-  "protectedNote": "Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.",
+  "protectedNote": "Specie protetta ({sources}). Guardala e fotografala: non raccoglierla, non calpestarla, non alterare l'ambiente e resta sul sentiero.",
   "masteryTitle": "Maestria",
   "masteryFacts": "Fatti consolidati (ricordati a 1 e 3 giorni): {done}/{total}",
   "@masteryFacts": {
@@ -543,13 +531,13 @@
   "traitRain": "🌧 Pioggia",
   "traitFog": "🌫 Nebbia",
   "traitSun": "☀️ Solare",
-  "traitMoon": "🌕 Lunare",
+  "traitMoon": "🌕 Luna piena",
   "traitDew": "💧 Rugiada",
-  "traitDusk": "🌅 Crepuscolo",
+  "traitDusk": "🌅 Tramonto",
   "recipesTitle": "Ricette",
-  "recipeUnlocked": "Sbloccata",
-  "recipeLocked": "Bloccata",
-  "recipeKnownIngredients": "Ingredienti noti {known}/{total}",
+  "recipeUnlocked": "Imparata",
+  "recipeLocked": "Da imparare",
+  "recipeKnownIngredients": "Ingredienti già incontrati {known}/{total}",
   "@recipeKnownIngredients": {
     "placeholders": {
       "known": {
@@ -557,15 +545,6 @@
       },
       "total": {
         "type": "int"
-      }
-    }
-  },
-  "recipeUnknownIngredient": "???",
-  "recipeHint": "Indizio: {hint}",
-  "@recipeHint": {
-    "placeholders": {
-      "hint": {
-        "type": "String"
       }
     }
   },
@@ -601,19 +580,23 @@
     }
   },
   "missionVisitErbarioTitle": "Apri l'erbario",
-  "missionVisitErbarioBody": "L'erbario raccoglie le specie della zona. Quelle che non hai ancora incontrato sono velate: sotto ognuna c'è un indizio.",
+  "missionVisitErbarioBody": "L'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.",
   "missionMarkDesiderataTitle": "Scegli le tue desiderata",
   "missionMarkDesiderataBody": "Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
   "missionFirstEncounterTitle": "Incontra una specie",
   "missionFirstEncounterBody": "Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell'erbario. Fotografa, non raccogliere.",
-  "missionFirstLevelTitle": "Studiala",
-  "missionFirstLevelBody": "Supera il primo livello di studio della specie incontrata. Anche gli errori insegnano e danno punti esperienza.",
+  "missionFirstLevelTitle": "Studia la tua prima specie",
+  "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.",
   "missionFirstRecipeTitle": "La prima ricetta",
   "missionFirstRecipeBody": "Porta una specie al livello richiesto da una ricetta per sbloccarla. Le ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.",
   "missionSkip": "Salta l'apprendistato",
+  "missionActionOpenErbario": "Apri l'erbario",
+  "missionActionChooseDesiderata": "Scegli nell'erbario",
+  "missionActionStudy": "Inizia a studiare",
+  "missionActionRecipes": "Vedi le ricette",
   "missionGlossary": "Glossario",
   "apprenticeshipComplete": "Apprendistato completato!",
-  "glossaryTitle": "Glossario",
+  "glossaryTitle": "Legenda e glossario",
   "glossErbarioTerm": "Erbario",
   "glossErbarioText": "Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che incontri e studi.",
   "glossDesiderataTerm": "Desiderata",
@@ -659,5 +642,377 @@
   "dayTimeDay": "di giorno",
   "dayTimeDusk": "al tramonto",
   "dayTimeNight": "di notte",
-  "liveryFeltro": "Feltro"
+  "liveryFeltro": "Feltro",
+  "studyThemeProgress": "{theme} · {done} di {total}",
+  "@studyThemeProgress": {
+    "placeholders": {
+      "theme": {
+        "type": "String"
+      },
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "qOrderOf": "A quale ordine appartiene {name}?",
+  "@qOrderOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qCommonnessOf": "Quanto è comune {name} in questa zona?",
+  "@qCommonnessOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "optionYes": "Sì",
+  "optionNo": "No",
+  "commonnessVeryCommon": "Tra le più comuni",
+  "commonnessCommon": "Comune",
+  "commonnessUncommon": "Meno comune",
+  "commonnessRare": "Tra le meno osservate",
+  "factScientificName": "Il nome scientifico di {name} è {sci}: la prima parola è il genere, la seconda la specie.",
+  "@factScientificName": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "sci": {
+        "type": "String"
+      }
+    }
+  },
+  "factCongeners": "Altre specie del genere {genus} in Italia: {names}.",
+  "@factCongeners": {
+    "placeholders": {
+      "genus": {
+        "type": "String"
+      },
+      "names": {
+        "type": "String"
+      }
+    }
+  },
+  "factOrder": "{name} appartiene all'ordine {order}, di cui fa parte la famiglia {family}.",
+  "@factOrder": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "order": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "factWarning": "{name}: {warning}. Guardala e fotografala, non assaggiarla. Avviso da verificare.",
+  "@factWarning": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "warning": {
+        "type": "String"
+      }
+    }
+  },
+  "factCommonness": "In questa zona {name} è: {commonness} (dalle osservazioni GBIF).",
+  "@factCommonness": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "commonness": {
+        "type": "String"
+      }
+    }
+  },
+  "qGrowthFormOf": "Che forma ha {name}?",
+  "@qGrowthFormOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qLifeCycleOf": "Quanto vive {name}?",
+  "@qLifeCycleOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qSeedDispersalOf": "Come viaggiano i semi di {name}?",
+  "@qSeedDispersalOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qOriginOf": "{name} è arrivata in Italia da fuori, portata dall'uomo?",
+  "@qOriginOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qLightOf": "Quanta luce ama {name}?",
+  "@qLightOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "qMoistureOf": "Che terreno preferisce {name}?",
+  "@qMoistureOf": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "growthTree": "Albero",
+  "growthShrub": "Arbusto",
+  "growthHerb": "Erba",
+  "growthClimber": "Rampicante",
+  "cycleAnnual": "Un anno (annuale)",
+  "cycleBiennial": "Due anni (biennale)",
+  "cyclePerennial": "Molti anni (perenne)",
+  "seedsEatenByAnimals": "Nei frutti mangiati dagli animali",
+  "seedsStuckToAnimals": "Attaccati al pelo degli animali",
+  "seedsHoardedByAnimals": "Nascosti dagli animali come scorte",
+  "seedsAnts": "Portati dalle formiche",
+  "seedsWind": "Col vento",
+  "seedsWater": "Con l'acqua",
+  "seedsLaunched": "Lanciati dalla pianta",
+  "seedsNearby": "Cadono vicino, senza aiuti",
+  "lightShade": "Ombra",
+  "lightHalfShade": "Mezz'ombra",
+  "lightSun": "Pieno sole",
+  "moistureDry": "Secco",
+  "moistureFresh": "Fresco",
+  "moistureMoist": "Umido",
+  "factGrowthForm": "Forma di {name}: {form}.",
+  "@factGrowthForm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "form": {
+        "type": "String"
+      }
+    }
+  },
+  "factLifeCycle": "{name} vive {cycle}.",
+  "@factLifeCycle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "cycle": {
+        "type": "String"
+      }
+    }
+  },
+  "factSeedDispersal": "I semi di {name}: {modes}.",
+  "@factSeedDispersal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "modes": {
+        "type": "String"
+      }
+    }
+  },
+  "factOriginNative": "{name} è autoctona: in Italia cresce da sempre, senza l'aiuto dell'uomo.",
+  "@factOriginNative": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "factOriginIntroduced": "{name} è stata portata in Italia dall'uomo: non è nata qui.",
+  "@factOriginIntroduced": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "factLight": "{name} ama: {light}.",
+  "@factLight": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "light": {
+        "type": "String"
+      }
+    }
+  },
+  "factMoisture": "{name} preferisce un terreno {moisture}.",
+  "@factMoisture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "moisture": {
+        "type": "String"
+      }
+    }
+  },
+  "sourcesTraits": "Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0",
+  "sectionTraits": "Com'è e come vive",
+  "xpToCash": "{xp} PE da incassare: si incassano alla prima essenza di ogni specie",
+  "@xpToCash": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "speciesXpToCash": "{xp} PE da incassare: attingi la prima essenza di questa specie.",
+  "@speciesXpToCash": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryXpToCash": "I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.",
+  "visStored": "Vis immagazzinate: {vis}",
+  "@visStored": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "drawExhausted": "Esaurita: torna pronta domani",
+  "drawNeedsEncounter": "Per attingere serve una stazione: prima incontrala",
+  "gradeCommon": "Comune",
+  "gradeUncommon": "Non comune",
+  "gradeRare": "Rara",
+  "gradeMythic": "Mitica",
+  "@protectedNote": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  },
+  "protectionEmiliaRomagna": "L.R. Emilia-Romagna 2/1977",
+  "protectionHabitats": "Direttiva Habitat, allegato {annex}",
+  "@protectionHabitats": {
+    "placeholders": {
+      "annex": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryRecipeLearned": "Hai imparato una ricetta: {name}",
+  "@summaryRecipeLearned": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeLearnByStudying": "Si impara studiando: {species}",
+  "@recipeLearnByStudying": {
+    "placeholders": {
+      "species": {
+        "type": "String"
+      }
+    }
+  },
+  "debugGradePreview": "Anteprima dei gradi",
+  "debugGradeSampleName": "Elisir di Prova",
+  "debugGradeSampleIngredient": "Erba d'argento",
+  "debugGradeSampleEffect": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).",
+  "badgeEncountered": "Incontrata il",
+  "badgeProtected": "Specie protetta",
+  "recipesCount": "{learned} di {total}",
+  "recipeIngredientCount": "{count, plural, =1{1 ingrediente} other{{count} ingredienti}}",
+  "@recipesCount": {
+    "placeholders": {
+      "learned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@recipeIngredientCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "legendTitle": "Legenda",
+  "glossarySection": "Glossario",
+  "legendGrades": "Gradi (ricette, pozioni, bottino)",
+  "legendBadges": "Bollini",
+  "legendProtected": "Specie protetta dalla legge: si guarda e si fotografa",
+  "legendEncountered": "Specie incontrata, con la data dell'incontro",
+  "legendXpToCash": "PE da incassare alla prima essenza della specie",
+  "legendLevels": "Livelli di studio",
+  "legendTraits": "Tratti delle essenze",
+  "glossProtettaTerm": "Protetta",
+  "glossProtettaText": "Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.",
+  "glossEssenzaTerm": "Essenza",
+  "glossEssenzaText": "Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.",
+  "glossVisTerm": "Vis",
+  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.",
+  "glossPeDaIncassareTerm": "PE da incassare",
+  "glossPeDaIncassareText": "I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.",
+  "glossGradoTerm": "Grado",
+  "glossGradoText": "Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell'Esperienza.",
+  "glossBottinoTerm": "Bottino dell'Esperienza",
+  "glossBottinoText": "Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).",
+  "glossFigurinaTerm": "Figurina",
+  "glossFigurinaText": "Una ricetta o una pozione nell'album. L'album delle ricette mostra quelle che conosci; il contatore dice quante sono in tutto.",
+  "recipesEmpty": "Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall'erbario.",
+  "viewAll": "Tutte",
+  "viewInSeason": "In stagione adesso",
+  "viewDesiderata": "Le mie desiderata",
+  "viewProtected": "Protette",
+  "viewNew": "Nuova vista",
+  "viewName": "Nome della vista",
+  "viewStatus": "Stato",
+  "viewWhen": "Quando e come",
+  "viewProtectedOnly": "Solo protette",
+  "viewBand": "Quota",
+  "viewForm": "Forma",
+  "viewFamily": "Famiglia",
+  "viewSave": "Salva la vista",
+  "viewRemove": "Elimina la vista",
+  "viewEmpty": "Nessuna specie in questa vista.",
+  "statusMet": "Incontrate",
+  "statusToFind": "Da trovare",
+  "statusDesiderata": "Desiderata",
+  "statusStudying": "In studio",
+  "traitDawn": "🌄 Alba",
+  "traitNight": "🌌 Notte",
+  "traitAfterStorm": "⛈ Dopo il temporale",
+  "traitNewMoon": "🌑 Luna nuova"
 }

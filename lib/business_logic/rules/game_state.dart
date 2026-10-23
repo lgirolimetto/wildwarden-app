@@ -7,7 +7,22 @@ import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
 class GameState {
   /// Data del primo incontro di ogni specie, per nome scientifico.
   final Map<String, DateTime> firstEncounters;
+
+  /// PE di **carriera**: incassati, non calano mai. Decidono il rango.
   final int xp;
+
+  /// PE **virtuali** dello studio, per specie: si incassano alla prima essenza attinta di quella specie (decisione 🟢
+  /// "PE virtuali"). Non scadono.
+  final Map<String, int> pendingXp;
+
+  /// PE spesi (Bottino dell'Esperienza, tappa C): il **saldo** è carriera meno spesi.
+  final int spentXp;
+
+  /// Vis immagazzinate, per specie.
+  final Map<String, int> vis;
+
+  /// Ultima raccolta di ogni specie: una al giorno.
+  final Map<String, DateTime> lastDraws;
 
   /// Livello di studio più alto superato con le domande (1-3), per specie.
   final Map<String, int> passedLevels;
@@ -27,9 +42,16 @@ class GameState {
   final Set<String> notebook;
   final Set<OnboardingMark> onboardingMarks;
 
+  /// Ricette imparate, per id.
+  final Set<String> learnedRecipes;
+
   const GameState({
     this.firstEncounters = const {},
     this.xp = 0,
+    this.pendingXp = const {},
+    this.spentXp = 0,
+    this.vis = const {},
+    this.lastDraws = const {},
     this.passedLevels = const {},
     this.mastered = const {},
     this.facts = const {},
@@ -40,6 +62,7 @@ class GameState {
     this.notes = const {},
     this.notebook = const {},
     this.onboardingMarks = const {},
+    this.learnedRecipes = const {},
   });
 
   static const empty = GameState();
@@ -50,6 +73,15 @@ class GameState {
   bool hasEncountered(String speciesSci) => firstEncounters.containsKey(speciesSci);
 
   int get encounteredCount => firstEncounters.length;
+
+  /// PE da incassare, in tutto.
+  int get xpToCash => pendingXp.values.fold(0, (sum, xp) => sum + xp);
+
+  /// PE che si possono spendere.
+  int get balance => xp - spentXp;
+
+  /// Almeno un'essenza di questa specie è stata attinta: i suoi PE sono reali.
+  bool hasDrawn(String speciesSci) => draws.containsKey(speciesSci);
 
   /// 0 = incontrata (o no) ma non studiata; 1-3 livelli superati; 4 = maestria.
   int levelOf(String speciesSci) => mastered.contains(speciesSci) ? 4 : (passedLevels[speciesSci] ?? 0);
@@ -63,7 +95,7 @@ class GameState {
   ];
 
   GameState apply(GameEvent event) {
-    final next = _withXp(event.xp);
+    final next = _withXp(event);
     return switch (event) {
       SpeciesEncountered(:final speciesSci, :final occurredAt) =>
         next.hasEncountered(speciesSci)
@@ -90,11 +122,16 @@ class GameState {
         },
       ),
       MasteryReached(:final speciesSci) => next._copy(mastered: {...mastered, speciesSci}),
-      EssenceDrawn(:final speciesSci, :final trait) => next._copy(
+      // La prima essenza di una specie incassa i suoi PE virtuali.
+      EssenceDrawn(:final speciesSci, :final trait, :final occurredAt, vis: final gained) => next._copy(
+        xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
+        pendingXp: {...next.pendingXp}..remove(speciesSci),
         draws: {
           ...draws,
           speciesSci: [...?draws[speciesSci], trait],
         },
+        vis: {...vis, speciesSci: (vis[speciesSci] ?? 0) + gained},
+        lastDraws: {...lastDraws, speciesSci: occurredAt},
       ),
       DesiderataChanged(:final speciesSci, :final marked) => next._copy(
         desiderata: marked ? {...desiderata, speciesSci} : ({...desiderata}..remove(speciesSci)),
@@ -109,14 +146,30 @@ class GameState {
       NoteSaved(:final speciesSci, :final text) => next._copy(notes: {...notes, speciesSci: text}),
       NotebookEntrySaved(:final factId) => next._copy(notebook: {...notebook, factId}),
       OnboardingMarked(:final mark) => next._copy(onboardingMarks: {...onboardingMarks, mark}),
+      RecipeLearned(:final recipeId) => next._copy(learnedRecipes: {...learnedRecipes, recipeId}),
     };
   }
 
-  GameState _withXp(int gained) => gained == 0 ? this : _copy(xp: xp + gained);
+  /// Aggiunge i PE dell'evento: virtuali se vengono dallo studio di una specie mai attinta, reali altrimenti
+  /// (raccolte, desiderata trovate, studio di specie già attinte).
+  GameState _withXp(GameEvent event) {
+    if (event.xp == 0) return this;
+    final species = switch (event) {
+      AnswerGiven(:final factId) => Fact.parseId(factId).speciesSci,
+      LevelPassed(:final speciesSci) || MasteryReached(:final speciesSci) => speciesSci,
+      _ => null,
+    };
+    if (species == null || hasDrawn(species)) return _copy(xp: xp + event.xp);
+    return _copy(pendingXp: {...pendingXp, species: (pendingXp[species] ?? 0) + event.xp});
+  }
 
   GameState _copy({
     Map<String, DateTime>? firstEncounters,
     int? xp,
+    Map<String, int>? pendingXp,
+    int? spentXp,
+    Map<String, int>? vis,
+    Map<String, DateTime>? lastDraws,
     Map<String, int>? passedLevels,
     Set<String>? mastered,
     Map<String, FactProgress>? facts,
@@ -127,9 +180,14 @@ class GameState {
     Map<String, String>? notes,
     Set<String>? notebook,
     Set<OnboardingMark>? onboardingMarks,
+    Set<String>? learnedRecipes,
   }) => GameState(
     firstEncounters: firstEncounters ?? this.firstEncounters,
     xp: xp ?? this.xp,
+    pendingXp: pendingXp ?? this.pendingXp,
+    spentXp: spentXp ?? this.spentXp,
+    vis: vis ?? this.vis,
+    lastDraws: lastDraws ?? this.lastDraws,
     passedLevels: passedLevels ?? this.passedLevels,
     mastered: mastered ?? this.mastered,
     facts: facts ?? this.facts,
@@ -140,5 +198,6 @@ class GameState {
     notes: notes ?? this.notes,
     notebook: notebook ?? this.notebook,
     onboardingMarks: onboardingMarks ?? this.onboardingMarks,
+    learnedRecipes: learnedRecipes ?? this.learnedRecipes,
   );
 }

@@ -1,4 +1,5 @@
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class Pill extends StatelessWidget {
           children: [
             // Nelle livree neumorfiche niente sfera colorata: l'icona del tratto, di un solo colore, incisa.
             if (context.druid.neu)
-              _EngravedIcon(_traitIcon(emoji), color: color)
+              EngravedIcon(traitIconOf(emoji) ?? Icons.eco_outlined, color: color)
             else
               ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
             const SizedBox(width: Gaps.s),
@@ -81,41 +82,8 @@ Color _orbColor(String emoji) => switch (emoji) {
   '🌫' => const Color(0xFFDCDDE3),
   '☀️' || '☀' => const Color(0xFFFFE3A0),
   '🌕' => const Color(0xFFE6DDF7),
-  '🌅' => const Color(0xFFF7C4A8),
+  '🌅' || '🌄' => const Color(0xFFF7C4A8),
+  '🌌' || '🌑' => const Color(0xFFD5D3E8),
+  '⛈' || '⛈️' => const Color(0xFFC9D6DE),
   _ => const Color(0xFFE8DCC6),
 };
-
-/// Icona monocromatica di un tratto, dall'emoji con cui il catalogo lo scrive.
-IconData _traitIcon(String emoji) => switch (emoji) {
-  '❄️' || '❄' => Icons.ac_unit_rounded,
-  '🌧' => Icons.umbrella_rounded,
-  '💧' => Icons.water_drop_outlined,
-  '🌫' => Icons.foggy,
-  '☀️' || '☀' => Icons.wb_sunny_outlined,
-  '🌕' => Icons.nightlight_outlined,
-  '🌅' => Icons.wb_twilight_rounded,
-  _ => Icons.eco_outlined,
-};
-
-/// Icona "incisa", come stampata a secco: un filo d'ombra in alto a sinistra e uno di luce in basso a destra
-/// sotto il segno, che così sembra scavato nella superficie.
-class _EngravedIcon extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-
-  const _EngravedIcon(this.icon, {required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = context.druid;
-    return Icon(
-      icon,
-      size: 20,
-      color: color.withValues(alpha: 0.7),
-      shadows: [
-        Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
-        Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
-      ],
-    );
-  }
-}

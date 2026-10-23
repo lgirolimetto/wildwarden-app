@@ -97,19 +97,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get levelToStudy => 'To study';
 
   @override
-  String get levelRecognise => 'Recognise';
+  String get levelRecognise => 'Recognise it';
 
   @override
-  String get levelKnow => 'Know';
+  String get levelKnow => 'Family and life';
 
   @override
-  String get levelWhereWhen => 'Where and when';
+  String get levelWhereWhen => 'Its habitat';
 
   @override
   String get levelMastery => 'Mastery';
 
   @override
-  String get navStudy => 'Study';
+  String get navStudy => 'Home';
 
   @override
   String get navRecipes => 'Recipes';
@@ -168,7 +168,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String qNameToPhoto(String name) {
-    return 'Which photo shows: $name?';
+    return 'Which of these is $name?';
   }
 
   @override
@@ -202,16 +202,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get qOddOneOut => 'Which one is NOT in the same family as the others?';
-
-  @override
-  String qSeasonOf(String name) {
-    return 'In which season is $name most noticeable here?';
-  }
-
-  @override
-  String qBestMonthOf(String name) {
-    return 'In which of these months is $name easiest to find?';
-  }
 
   @override
   String qBandOf(String name) {
@@ -428,6 +418,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get desiderataSuggestions => 'In season now';
 
   @override
+  String get seasonalFirstHint =>
+      'Three species that are easy to recognise, to start right away: you can study from home too.';
+
+  @override
+  String get seasonalHint =>
+      'Study them now or mark them as desiderata to look for.';
+
+  @override
+  String get seasonalStudy => 'Study';
+
+  @override
+  String get yourSpeciesMet => 'met';
+
+  @override
   String get desiderataAdd => 'Add to desiderata';
 
   @override
@@ -456,7 +460,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourSpecies => 'Your species';
 
   @override
-  String get yourSpeciesEmpty => 'No species met yet.';
+  String get yourSpeciesEmpty =>
+      'No species in study yet: start with one in season.';
 
   @override
   String studyLevelButton(int level) {
@@ -506,12 +511,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String safetyWarning(String text) {
-    return '⚠️ $text · to be verified';
+    return '$text · to be verified';
   }
 
   @override
-  String get protectedNote =>
-      'Wild orchid, protected in many regions: altitude bands only, never exact locations.';
+  String protectedNote(String sources) {
+    return 'Protected species ($sources). Look at it and photograph it: don\'t pick it, don\'t trample it, don\'t alter its surroundings and stay on the path.';
+  }
 
   @override
   String get masteryTitle => 'Mastery';
@@ -552,34 +558,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitSun => '☀️ Sun';
 
   @override
-  String get traitMoon => '🌕 Moon';
+  String get traitMoon => '🌕 Full moon';
 
   @override
   String get traitDew => '💧 Dew';
 
   @override
-  String get traitDusk => '🌅 Dusk';
+  String get traitDusk => '🌅 Sunset';
 
   @override
   String get recipesTitle => 'Recipes';
 
   @override
-  String get recipeUnlocked => 'Unlocked';
+  String get recipeUnlocked => 'Learned';
 
   @override
-  String get recipeLocked => 'Locked';
+  String get recipeLocked => 'To learn';
 
   @override
   String recipeKnownIngredients(int known, int total) {
-    return 'Known ingredients $known/$total';
-  }
-
-  @override
-  String get recipeUnknownIngredient => '???';
-
-  @override
-  String recipeHint(String hint) {
-    return 'Hint: $hint';
+    return 'Ingredients already met $known/$total';
   }
 
   @override
@@ -605,7 +603,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionVisitErbarioBody =>
-      'The herbarium gathers the species of the area. Those you haven\'t met yet are veiled, each with a hint.';
+      'The herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and meeting them.';
 
   @override
   String get missionMarkDesiderataTitle => 'Choose your desiderata';
@@ -622,11 +620,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Go out botanizing and photograph one of your desiderata: once recognised it will appear in the herbarium. Photograph, don\'t pick.';
 
   @override
-  String get missionFirstLevelTitle => 'Study it';
+  String get missionFirstLevelTitle => 'Study your first species';
 
   @override
   String get missionFirstLevelBody =>
-      'Pass the first study level of the species you met. Mistakes teach too, and they earn experience.';
+      'Pick a species in season and pass its first study level: you can start from home. Mistakes teach too, and they earn experience.';
 
   @override
   String get missionFirstRecipeTitle => 'Your first recipe';
@@ -639,13 +637,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get missionSkip => 'Skip the apprenticeship';
 
   @override
+  String get missionActionOpenErbario => 'Open the herbarium';
+
+  @override
+  String get missionActionChooseDesiderata => 'Choose in the herbarium';
+
+  @override
+  String get missionActionStudy => 'Start studying';
+
+  @override
+  String get missionActionRecipes => 'See the recipes';
+
+  @override
   String get missionGlossary => 'Glossary';
 
   @override
   String get apprenticeshipComplete => 'Apprenticeship complete!';
 
   @override
-  String get glossaryTitle => 'Glossary';
+  String get glossaryTitle => 'Legend and glossary';
 
   @override
   String get glossErbarioTerm => 'Herbarium';
@@ -754,4 +764,441 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get liveryFeltro => 'Felt';
+
+  @override
+  String studyThemeProgress(String theme, int done, int total) {
+    return '$theme · $done of $total';
+  }
+
+  @override
+  String qOrderOf(String name) {
+    return 'Which order does $name belong to?';
+  }
+
+  @override
+  String qCommonnessOf(String name) {
+    return 'How common is $name in this area?';
+  }
+
+  @override
+  String get optionYes => 'Yes';
+
+  @override
+  String get optionNo => 'No';
+
+  @override
+  String get commonnessVeryCommon => 'Among the most common';
+
+  @override
+  String get commonnessCommon => 'Common';
+
+  @override
+  String get commonnessUncommon => 'Less common';
+
+  @override
+  String get commonnessRare => 'Among the least observed';
+
+  @override
+  String factScientificName(String name, String sci) {
+    return 'The scientific name of $name is $sci: the first word is the genus, the second the species.';
+  }
+
+  @override
+  String factCongeners(String genus, String names) {
+    return 'Other species of the genus $genus in Italy: $names.';
+  }
+
+  @override
+  String factOrder(String name, String order, String family) {
+    return '$name belongs to the order $order, which includes the family $family.';
+  }
+
+  @override
+  String factWarning(String name, String warning) {
+    return '$name: $warning. Look at it and photograph it, don\'t taste it. Warning to be verified.';
+  }
+
+  @override
+  String factCommonness(String name, String commonness) {
+    return 'In this area $name is: $commonness (from GBIF observations).';
+  }
+
+  @override
+  String qGrowthFormOf(String name) {
+    return 'What shape is $name?';
+  }
+
+  @override
+  String qLifeCycleOf(String name) {
+    return 'How long does $name live?';
+  }
+
+  @override
+  String qSeedDispersalOf(String name) {
+    return 'How do the seeds of $name travel?';
+  }
+
+  @override
+  String qOriginOf(String name) {
+    return 'Was $name brought to Italy by people?';
+  }
+
+  @override
+  String qLightOf(String name) {
+    return 'How much light does $name like?';
+  }
+
+  @override
+  String qMoistureOf(String name) {
+    return 'What soil does $name prefer?';
+  }
+
+  @override
+  String get growthTree => 'Tree';
+
+  @override
+  String get growthShrub => 'Shrub';
+
+  @override
+  String get growthHerb => 'Herb';
+
+  @override
+  String get growthClimber => 'Climber';
+
+  @override
+  String get cycleAnnual => 'One year (annual)';
+
+  @override
+  String get cycleBiennial => 'Two years (biennial)';
+
+  @override
+  String get cyclePerennial => 'Many years (perennial)';
+
+  @override
+  String get seedsEatenByAnimals => 'In fruits eaten by animals';
+
+  @override
+  String get seedsStuckToAnimals => 'Stuck to animal fur';
+
+  @override
+  String get seedsHoardedByAnimals => 'Hidden by animals as stores';
+
+  @override
+  String get seedsAnts => 'Carried by ants';
+
+  @override
+  String get seedsWind => 'On the wind';
+
+  @override
+  String get seedsWater => 'By water';
+
+  @override
+  String get seedsLaunched => 'Launched by the plant';
+
+  @override
+  String get seedsNearby => 'They fall nearby, unaided';
+
+  @override
+  String get lightShade => 'Shade';
+
+  @override
+  String get lightHalfShade => 'Half shade';
+
+  @override
+  String get lightSun => 'Full sun';
+
+  @override
+  String get moistureDry => 'Dry';
+
+  @override
+  String get moistureFresh => 'Fresh';
+
+  @override
+  String get moistureMoist => 'Moist';
+
+  @override
+  String factGrowthForm(String name, String form) {
+    return 'Shape of $name: $form.';
+  }
+
+  @override
+  String factLifeCycle(String name, String cycle) {
+    return '$name lives $cycle.';
+  }
+
+  @override
+  String factSeedDispersal(String name, String modes) {
+    return 'The seeds of $name: $modes.';
+  }
+
+  @override
+  String factOriginNative(String name) {
+    return '$name is native: it has always grown in Italy, without human help.';
+  }
+
+  @override
+  String factOriginIntroduced(String name) {
+    return '$name was brought to Italy by people: it is not from here.';
+  }
+
+  @override
+  String factLight(String name, String light) {
+    return '$name likes: $light.';
+  }
+
+  @override
+  String factMoisture(String name, String moisture) {
+    return '$name prefers $moisture soil.';
+  }
+
+  @override
+  String get sourcesTraits => 'Traits: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0';
+
+  @override
+  String get sectionTraits => 'What it is like and how it lives';
+
+  @override
+  String xpToCash(int xp) {
+    return '$xp XP to cash in: you cash them in with the first essence of each species';
+  }
+
+  @override
+  String speciesXpToCash(int xp) {
+    return '$xp XP to cash in: draw the first essence of this species.';
+  }
+
+  @override
+  String get summaryXpToCash =>
+      'The XP from studying this species are cashed in when you draw its first essence.';
+
+  @override
+  String visStored(int vis) {
+    return 'Vis stored: $vis';
+  }
+
+  @override
+  String get drawExhausted => 'Exhausted: ready again tomorrow';
+
+  @override
+  String get drawNeedsEncounter => 'Drawing needs a station: meet it first';
+
+  @override
+  String get gradeCommon => 'Common';
+
+  @override
+  String get gradeUncommon => 'Uncommon';
+
+  @override
+  String get gradeRare => 'Rare';
+
+  @override
+  String get gradeMythic => 'Mythic';
+
+  @override
+  String get protectionEmiliaRomagna => 'Emilia-Romagna regional law 2/1977';
+
+  @override
+  String protectionHabitats(String annex) {
+    return 'Habitats Directive, Annex $annex';
+  }
+
+  @override
+  String summaryRecipeLearned(String name) {
+    return 'You learned a recipe: $name';
+  }
+
+  @override
+  String recipeLearnByStudying(String species) {
+    return 'Learned by studying: $species';
+  }
+
+  @override
+  String get debugGradePreview => 'Grade preview';
+
+  @override
+  String get debugGradeSampleName => 'Sample Elixir';
+
+  @override
+  String get debugGradeSampleIngredient => 'Honesty';
+
+  @override
+  String get debugGradeSampleEffect =>
+      'The next draw under a full moon gets an extra trait (game effect).';
+
+  @override
+  String get badgeEncountered => 'Met on';
+
+  @override
+  String get badgeProtected => 'Protected species';
+
+  @override
+  String recipesCount(int learned, int total) {
+    return '$learned of $total';
+  }
+
+  @override
+  String recipeIngredientCount(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString ingredients',
+      one: '1 ingredient',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get legendTitle => 'Legend';
+
+  @override
+  String get glossarySection => 'Glossary';
+
+  @override
+  String get legendGrades => 'Grades (recipes, potions, trove)';
+
+  @override
+  String get legendBadges => 'Badges';
+
+  @override
+  String get legendProtected =>
+      'Species protected by law: look and photograph only';
+
+  @override
+  String get legendEncountered => 'Species met, with the date you met it';
+
+  @override
+  String get legendXpToCash => 'XP to cash in with the species\' first essence';
+
+  @override
+  String get legendLevels => 'Study levels';
+
+  @override
+  String get legendTraits => 'Essence traits';
+
+  @override
+  String get glossProtettaTerm => 'Protected';
+
+  @override
+  String get glossProtettaText =>
+      'A species protected by the Habitats Directive or a regional law. Look and photograph: don\'t pick it, don\'t trample it, stay on the path.';
+
+  @override
+  String get glossEssenzaTerm => 'Essence';
+
+  @override
+  String get glossEssenzaText =>
+      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and a trait, given by the conditions of the moment.';
+
+  @override
+  String get glossVisTerm => 'Vis';
+
+  @override
+  String get glossVisText =>
+      'The subtle sap of plants: the energy you store with each draw. Recipes ask for an amount of it for each ingredient.';
+
+  @override
+  String get glossPeDaIncassareTerm => 'XP to cash in';
+
+  @override
+  String get glossPeDaIncassareText =>
+      'The experience points from studying a species you haven\'t drawn yet. You cash them in with that species\' first essence, and from then on they count for your rank.';
+
+  @override
+  String get glossGradoTerm => 'Grade';
+
+  @override
+  String get glossGradoText =>
+      'Common, uncommon, rare, mythic: white, silver, gold, red gold. It applies to ingredients, recipes, potions and the Trove of Experience.';
+
+  @override
+  String get glossBottinoTerm => 'Trove of Experience';
+
+  @override
+  String get glossBottinoText =>
+      'The trove you buy with XP: you choose the grade, the content is a surprise (recipes, rare curiosities, hints).';
+
+  @override
+  String get glossFigurinaTerm => 'Figurine';
+
+  @override
+  String get glossFigurinaText =>
+      'A recipe or a potion in the album. The recipe album shows the ones you know; the counter says how many there are in all.';
+
+  @override
+  String get recipesEmpty =>
+      'You don\'t know any recipes yet. Common recipes are learned by studying: pass level 1 of a species, from Home or the herbarium.';
+
+  @override
+  String get viewAll => 'All';
+
+  @override
+  String get viewInSeason => 'In season now';
+
+  @override
+  String get viewDesiderata => 'My desiderata';
+
+  @override
+  String get viewProtected => 'Protected';
+
+  @override
+  String get viewNew => 'New view';
+
+  @override
+  String get viewName => 'View name';
+
+  @override
+  String get viewStatus => 'Status';
+
+  @override
+  String get viewWhen => 'When and how';
+
+  @override
+  String get viewProtectedOnly => 'Protected only';
+
+  @override
+  String get viewBand => 'Altitude';
+
+  @override
+  String get viewForm => 'Shape';
+
+  @override
+  String get viewFamily => 'Family';
+
+  @override
+  String get viewSave => 'Save the view';
+
+  @override
+  String get viewRemove => 'Delete the view';
+
+  @override
+  String get viewEmpty => 'No species in this view.';
+
+  @override
+  String get statusMet => 'Met';
+
+  @override
+  String get statusToFind => 'To find';
+
+  @override
+  String get statusDesiderata => 'Desiderata';
+
+  @override
+  String get statusStudying => 'Studying';
+
+  @override
+  String get traitDawn => '🌄 Dawn';
+
+  @override
+  String get traitNight => '🌌 Night';
+
+  @override
+  String get traitAfterStorm => '⛈ After the storm';
+
+  @override
+  String get traitNewMoon => '🌑 New moon';
 }

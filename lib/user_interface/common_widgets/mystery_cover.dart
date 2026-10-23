@@ -1,26 +1,29 @@
 import 'dart:math';
 
-import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 
-/// Copertina di una specie non ancora incontrata, al posto della foto: la tinta pastello più caratteristica della
-/// foto (fiore, bacca…), una trama leggera di foglia e un tassello di plastilina col "?". Il colore è un indizio
-/// ("ha qualcosa di viola"), la specie resta da scoprire.
+/// Copertina di una figurina mancante (album delle ricette, poi pozioni): una tinta pastello, una trama leggera di
+/// foglia e un tassello di plastilina col "?". La tinta è fissa per [seed] (l'id dell'oggetto): la stessa figurina ha
+/// sempre lo stesso colore, figurine diverse colori diversi.
 ///
 /// Non scarica né sfoca immagini: costa quanto un riquadro colorato, anche in una lista lunga.
 class MysteryCover extends StatelessWidget {
-  final Species species;
+  final String seed;
+
+  /// Tinta imposta (0xRRGGBB), al posto di quella ricavata da [seed].
+  final int? tint;
   final BorderRadius borderRadius;
 
-  const MysteryCover({super.key, required this.species, this.borderRadius = BorderRadius.zero});
+  const MysteryCover({super.key, required this.seed, this.tint, this.borderRadius = BorderRadius.zero});
 
   @override
   Widget build(BuildContext context) {
     final dark = Theme.of(context).brightness == Brightness.dark;
+    final color = _tint(seed, tint);
     // Di sera la tinta si abbassa verso il colore della pagina, senza perdere la sua tonalità.
-    final base = dark ? Color.lerp(_tint(species), context.colors.surface, 0.2)! : _tint(species);
+    final base = dark ? Color.lerp(color, context.colors.surface, 0.2)! : color;
     return ClipRRect(
       borderRadius: borderRadius,
       // Colore pieno, senza sfumature: deve risaltare.
@@ -35,11 +38,10 @@ class MysteryCover extends StatelessWidget {
   }
 }
 
-/// Tinta della specie; se il catalogo non ce l'ha, un pastello stabile ricavato dal nome.
-Color _tint(Species species) {
-  final rgb = species.mysteryColor;
-  if (rgb != null) return Color(0xFF000000 | rgb);
-  final hue = (species.sci.codeUnits.fold(0, (a, b) => a * 31 + b) % 360).toDouble();
+/// Tinta imposta o, altrimenti, un pastello stabile ricavato da [seed].
+Color _tint(String seed, int? tint) {
+  if (tint != null) return Color(0xFF000000 | tint);
+  final hue = (seed.codeUnits.fold(0, (a, b) => a * 31 + b) % 360).toDouble();
   return HSLColor.fromAHSL(1, hue, 0.5, 0.8).toColor();
 }
 

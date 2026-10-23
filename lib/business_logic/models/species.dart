@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/business_logic/models/localized_text.dart';
+import 'package:druid_app/business_logic/models/species_traits.dart';
 
 /// Foto di riferimento di una specie, sempre con licenza CC0 o CC BY 4.0 verificata sulla singola foto.
 class SpeciesImage {
@@ -34,8 +35,15 @@ class Species {
   /// Nome scientifico: è la chiave stabile della specie in tutta l'app.
   final String sci;
   final LocalizedText name;
+
+  /// Ordine tassonomico (es. Malvales); `null` se il catalogo non ce l'ha.
+  final String? order;
   final String family;
   final String genus;
+
+  /// Specie vere dello stesso genere osservate in Italia, anche fuori dal catalogo: risposte plausibili alla
+  /// domanda sul nome scientifico.
+  final List<String> congeners;
   final int observations;
 
   /// Peso relativo di ogni mese (indice 0 = gennaio), già corretto per l'attività degli osservatori.
@@ -54,11 +62,20 @@ class Species {
   /// caratteristico della foto (fiore, bacca…), calcolato dalla pipeline dei contenuti. `null` se manca.
   final int? mysteryColor;
 
+  /// Tratti per lo studio (forma, ciclo, ecologia, semi); vuoti se il catalogo non li ha.
+  final SpeciesTraits traits;
+
+  /// Fonti di legge che proteggono la specie nella zona (es. `regional-emilia-romagna`, `habitats-annex-v`); vuoto se
+  /// nessuna delle liste ufficiali della pipeline la protegge.
+  final List<String> protection;
+
   const Species({
     required this.sci,
     required this.name,
+    this.order,
     required this.family,
     required this.genus,
+    this.congeners = const [],
     required this.observations,
     required this.monthsRelative,
     required this.bestMonths,
@@ -69,13 +86,17 @@ class Species {
     required this.bandShare,
     required this.images,
     this.mysteryColor,
+    this.traits = SpeciesTraits.none,
+    this.protection = const [],
   });
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
     sci: json['sci'] as String,
     name: LocalizedText.fromJson(json['name'] as Map<String, dynamic>),
+    order: json['order'] as String?,
     family: json['family'] as String,
     genus: json['genus'] as String,
+    congeners: (json['congeners'] as List?)?.cast<String>() ?? const [],
     observations: json['observations'] as int,
     monthsRelative: (json['monthsRelative'] as List).map((v) => (v as num).toDouble()).toList(),
     bestMonths: (json['bestMonths'] as List).cast<int>(),
@@ -90,6 +111,10 @@ class Species {
     ),
     images: (json['images'] as List).map((i) => SpeciesImage.fromJson(i as Map<String, dynamic>)).toList(),
     mysteryColor: _parseHexColor(json['mysteryColor'] as String?),
+    traits: json['traits'] == null
+        ? SpeciesTraits.none
+        : SpeciesTraits.fromJson(json['traits'] as Map<String, dynamic>),
+    protection: (json['protection'] as List?)?.cast<String>() ?? const [],
   );
 }
 

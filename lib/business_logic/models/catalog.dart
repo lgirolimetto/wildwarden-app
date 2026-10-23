@@ -20,7 +20,7 @@ class CuratedFunFact {
 
 /// Contenuti di gioco di una zona: specie, ricette, lore, curiosità, avvisi di sicurezza.
 class Catalog {
-  static const supportedFormatVersion = 1;
+  static const supportedFormatVersion = 2;
 
   final String regionId;
   final LocalizedText regionName;

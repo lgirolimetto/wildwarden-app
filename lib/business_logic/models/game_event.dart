@@ -15,6 +15,9 @@ enum EncounterMethod {
 /// Modalità di una risposta: apprendimento di un livello o ripasso a distanza di giorni.
 enum AnswerMode { learning, review }
 
+/// Da dove arriva una ricetta imparata: dallo studio (le comuni) o dal Bottino dell'Esperienza (tappa C).
+enum RecipeOrigin { study, trove }
+
 /// Passi dell'onboarding che non si deducono dallo stato di gioco.
 enum OnboardingMark { erbarioVisited, skipped }
 
@@ -67,6 +70,9 @@ sealed class GameEvent {
         speciesSci: d['species'] as String,
         trait: d['trait'] as String?,
         simulated: d['simulated'] as bool,
+        // Assenti negli eventi salvati prima dello step 4 della tappa B.
+        vis: d['vis'] as int? ?? 0,
+        xp: d['xp'] as int? ?? 0,
         occurredAt: occurredAt,
       ),
       DesiderataChanged.typeId => DesiderataChanged(
@@ -86,6 +92,11 @@ sealed class GameEvent {
         occurredAt: occurredAt,
       ),
       NotebookEntrySaved.typeId => NotebookEntrySaved(factId: d['fact'] as String, occurredAt: occurredAt),
+      RecipeLearned.typeId => RecipeLearned(
+        recipeId: d['recipe'] as String,
+        origin: RecipeOrigin.values.byName(d['origin'] as String),
+        occurredAt: occurredAt,
+      ),
       OnboardingMarked.typeId => OnboardingMarked(
         mark: OnboardingMark.values.byName(d['mark'] as String),
         occurredAt: occurredAt,
@@ -166,18 +177,26 @@ class MasteryReached extends GameEvent {
   Map<String, dynamic> payload() => {'species': speciesSci, 'xp': xp};
 }
 
-/// Essenza attinta da una stazione, con il tratto delle condizioni del momento (`null` = nessuno).
-/// Nel blocco 1 è solo simulata; dal blocco 3 nasce dalle condizioni reali.
+/// Essenza attinta da una stazione, con il tratto delle condizioni del momento (`null` = nessuno) e le [vis]
+/// immagazzinate. La prima essenza di una specie incassa i PE virtuali dello studio di quella specie.
+/// Oggi è solo simulata; dal blocco 3 nasce dalle condizioni reali.
 class EssenceDrawn extends GameEvent {
   static const typeId = 'essence_drawn';
   final String speciesSci;
   final String? trait;
   final bool simulated;
 
+  /// Unità di Vis ("la linfa sottile delle piante") immagazzinate con questa raccolta.
+  final int vis;
+  @override
+  final int xp;
+
   const EssenceDrawn({
     required this.speciesSci,
     required this.trait,
     required this.simulated,
+    this.vis = 0,
+    this.xp = 0,
     required super.occurredAt,
   });
 
@@ -185,7 +204,13 @@ class EssenceDrawn extends GameEvent {
   String get type => typeId;
 
   @override
-  Map<String, dynamic> payload() => {'species': speciesSci, 'trait': trait, 'simulated': simulated};
+  Map<String, dynamic> payload() => {
+    'species': speciesSci,
+    'trait': trait,
+    'simulated': simulated,
+    'vis': vis,
+    'xp': xp,
+  };
 }
 
 /// Specie aggiunta o tolta dalle desiderata.
@@ -273,4 +298,19 @@ class OnboardingMarked extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'mark': mark.name};
+}
+
+/// Ricetta imparata: si sa farla. Il caso (quale tra le ricette possibili) si salva qui, non si ricalcola.
+class RecipeLearned extends GameEvent {
+  static const typeId = 'recipe_learned';
+  final String recipeId;
+  final RecipeOrigin origin;
+
+  const RecipeLearned({required this.recipeId, required this.origin, required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'recipe': recipeId, 'origin': origin.name};
 }

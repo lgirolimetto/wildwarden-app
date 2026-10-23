@@ -40,6 +40,19 @@ void main() {
     final mid = a.lerp(b, 0.5);
     expect(mid.cardRadius, (a.cardRadius + b.cardRadius) / 2);
   });
+
+  test('tema denso: Feltro di sera schiarisce sfondo e superfici; le altre combinazioni non ne hanno', () {
+    final feltro = LiveryRegistry.byId('feltro');
+    final normal = buildTheme(feltro, Brightness.dark);
+    final dense = buildDenseTheme(feltro, Brightness.dark)!;
+    expect(dense.colorScheme.surface, isNot(normal.colorScheme.surface));
+    expect(dense.colorScheme.surfaceContainerLow, isNot(normal.colorScheme.surfaceContainerLow));
+    expect(dense.extension<DruidTokens>()!.backgroundGradient.first, dense.colorScheme.surface);
+    expect(buildDenseTheme(feltro, Brightness.light), isNull);
+    for (final livery in LiveryRegistry.all.where((l) => l.id != 'feltro')) {
+      expect(buildDenseTheme(livery, Brightness.dark), isNull, reason: livery.id);
+    }
+  });
 }
 
 double _contrast(Color a, Color b) {

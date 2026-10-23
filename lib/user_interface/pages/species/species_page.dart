@@ -9,12 +9,16 @@ import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
-import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
@@ -22,6 +26,7 @@ import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 /// Pagina d'erbario di una specie. Si compila livello per livello: ciò che non hai ancora imparato è chiuso
@@ -32,88 +37,162 @@ class SpeciesPage extends StatelessWidget {
   const SpeciesPage({super.key, required this.speciesSci});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    // I pulsanti tondi galleggiano sopra la foto: niente barra separata.
-    appBar: clayAppBar(context, overImage: true),
-    extendBodyBehindAppBar: true,
-    body: DruidBackground(
-      child: GameDataBuilder(
-        builder: (context, catalog, state, progress) {
-          final species = catalog.speciesBySci(speciesSci)!;
-          return state.hasEncountered(speciesSci)
-              ? _KnownSpecies(species: species, catalog: catalog, state: state, progress: progress)
-              : _UnknownSpecies(species: species, state: state, progress: progress);
-        },
-      ),
+  Widget build(BuildContext context) => DenseArea(child: _page(context));
+
+  Widget _page(BuildContext context) => Scaffold(
+    // Niente barra: il pulsante indietro sta nella testata, sull'angolo della foto, e scorre con lei.
+    body: Stack(
+      children: [
+        DruidBackground(
+          child: GameDataBuilder(
+            builder: (context, catalog, state, progress) {
+              final species = catalog.speciesBySci(speciesSci)!;
+              return _SpeciesSheet(species: species, catalog: catalog, state: state, progress: progress);
+            },
+          ),
+        ),
+        // Nelle livree neumorfiche la foto parte sotto la barra di stato: il contenuto che scorre sfuma sotto l'orologio.
+        // Builder: il colore va letto sotto il tema della pagina (denso).
+        Builder(
+          builder: (context) => context.druid.neu
+              ? StatusBarScrim(color: context.druid.backgroundGradient.first)
+              : const SizedBox.shrink(),
+        ),
+        // Il pulsante indietro, fisso: sempre disponibile mentre la pagina scorre. All'apertura sta sull'angolo in alto a
+        // sinistra della cornice della foto, allineato ai margini della pagina.
+        Positioned(
+          left: Gaps.l,
+          top: MediaQuery.paddingOf(context).top + Gaps.s,
+          child: ClayIconButton(
+            key: const ValueKey('clay-back'),
+            icon: Icons.arrow_back_rounded,
+            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+            onPressed: () => Navigator.of(context).maybePop(),
+          ),
+        ),
+      ],
     ),
   );
 }
 
-class _UnknownSpecies extends StatelessWidget {
+/// Per una specie non ancora incontrata: dove e quando cercarla, la stella delle desiderata e, negli strumenti di
+/// prova, l'incontro simulato.
+class _ToFind extends StatelessWidget {
   final Species species;
   final GameState state;
   final ProgressController progress;
 
-  const _UnknownSpecies({required this.species, required this.state, required this.progress});
+  const _ToFind({required this.species, required this.state, required this.progress});
 
   @override
   Widget build(BuildContext context) {
     final desired = state.desiderata.contains(species.sci);
-    return ListView(
-      padding: const EdgeInsets.only(bottom: Gaps.xl),
-      children: [
-        SpeciesPhotoHeader(
-          image: desired
-              ? RemoteImage(species.images.first.url)
-              : MysteryCover(species: species, borderRadius: SpeciesPhotoHeader.radius),
-          title: desired ? context.game.name(species) : context.l10n.unknownSpecies,
-          subtitle: context.l10n.notEncounteredYet,
-          level: null,
-        ),
-        _Padded(
-          children: [
-            Text(context.game.hint(species)),
-            const SizedBox(height: Gaps.l),
-            FilledButton.icon(
-              key: const ValueKey('toggle-desiderata'),
-              onPressed: desired || canAddDesiderata(state) ? () => progress.toggleDesiderata(species.sci) : null,
-              icon: Icon(desired ? Icons.star : Icons.star_outline),
-              label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
-            ),
-            if (!desired && !canAddDesiderata(state)) ...[
-              const SizedBox(height: Gaps.xs),
-              Text(context.l10n.desiderataFull, style: context.texts.bodySmall),
-            ],
-            if (Get.find<AppConfig>().showDebugTools) ...[
-              const SizedBox(height: Gaps.s),
-              OutlinedButton.icon(
-                key: const ValueKey('simulate-encounter-page'),
-                onPressed: () => progress.encounter(species.sci, method: EncounterMethod.simulated),
-                icon: const Icon(Icons.bug_report_outlined),
-                label: Text(context.l10n.simulateEncounter),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: Gaps.l),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(context.game.hint(species)),
+          const SizedBox(height: Gaps.m),
+          FilledButton.icon(
+            key: const ValueKey('toggle-desiderata'),
+            onPressed: desired || canAddDesiderata(state) ? () => progress.toggleDesiderata(species.sci) : null,
+            icon: Icon(desired ? Icons.star : Icons.star_outline),
+            label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
+          ),
+          if (!desired && !canAddDesiderata(state)) ...[
+            const SizedBox(height: Gaps.xs),
+            Text(context.l10n.desiderataFull, style: context.texts.bodySmall),
           ],
-        ),
-      ],
+          if (Get.find<AppConfig>().showDebugTools) ...[
+            const SizedBox(height: Gaps.s),
+            OutlinedButton.icon(
+              key: const ValueKey('simulate-encounter-page'),
+              onPressed: () => progress.encounter(species.sci, method: EncounterMethod.simulated),
+              icon: const Icon(Icons.bug_report_outlined),
+              label: Text(context.l10n.simulateEncounter),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }
 
-class _KnownSpecies extends StatelessWidget {
+/// Specie protetta: il messaggio di rispetto, con la legge che la protegge. Sempre visibile, come l'avviso di
+/// tossicità: è un safari fotografico, si guarda e non si tocca.
+class _ProtectedNote extends StatelessWidget {
+  final Species species;
+
+  const _ProtectedNote({required this.species});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: Gaps.l),
+    child: Row(
+      key: const ValueKey('protected-note'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClayCircle(color: context.colors.primaryContainer, icon: Icons.shield_outlined, size: 32),
+        const SizedBox(width: Gaps.s),
+        Expanded(
+          child: Text(context.l10n.protectedNote(species.protection.map(context.game.protectionSource).join(', '))),
+        ),
+      ],
+    ),
+  );
+}
+
+/// Avviso di tossicità, sempre visibile in cima alla scheda: la sicurezza non si sblocca studiando.
+class _SafetyWarning extends StatelessWidget {
+  final Species species;
+  final Catalog catalog;
+
+  const _SafetyWarning({required this.species, required this.catalog});
+
+  @override
+  Widget build(BuildContext context) {
+    final safety = catalog.safety[species.sci];
+    if (safety == null) return const SizedBox.shrink();
+    // Il segnale è un'icona, non un'emoji: incisa nelle livree neumorfiche, come le altre icone.
+    const icon = Icons.warning_amber_rounded;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: Gaps.l),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (context.druid.neu)
+            EngravedIcon(icon, color: context.druid.warning)
+          else
+            Icon(icon, size: 20, color: context.druid.warning),
+          const SizedBox(width: Gaps.s),
+          Expanded(
+            child: Text(
+              key: const ValueKey('safety-warning'),
+              context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
+              style: TextStyle(color: context.druid.warning),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Pagina d'erbario di una specie, incontrata o no: ciò che si sa si sblocca studiando.
+class _SpeciesSheet extends StatelessWidget {
   final Species species;
   final Catalog catalog;
   final GameState state;
   final ProgressController progress;
 
-  const _KnownSpecies({required this.species, required this.catalog, required this.state, required this.progress});
+  const _SpeciesSheet({required this.species, required this.catalog, required this.state, required this.progress});
 
   @override
   Widget build(BuildContext context) {
     final level = state.levelOf(species.sci);
     final game = context.game;
     final lore = catalog.lore[species.sci];
-    final safety = catalog.safety[species.sci];
     Widget locked(int at) => _Locked(level: at);
 
     return ListView(
@@ -123,13 +202,34 @@ class _KnownSpecies extends StatelessWidget {
           image: RemoteImage(species.images.first.url),
           credit: '${species.images.first.creator} · ${species.images.first.license}',
           title: game.name(species),
-          subtitle: levelName(context.l10n, level),
+          subtitle: state.hasEncountered(species.sci)
+              ? levelName(context.l10n, level)
+              : '${context.l10n.notEncounteredYet} · ${levelName(context.l10n, level)}',
           level: level,
         ),
         _Padded(
           children: [
+            _SafetyWarning(species: species, catalog: catalog),
+            if (species.isProtected) _ProtectedNote(species: species),
+            if (!state.hasEncountered(species.sci)) _ToFind(species: species, state: state, progress: progress),
             _StudyLadder(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
+            _Section(
+              title: context.l10n.sectionTraits,
+              child: game.traitLines(species, level).isEmpty
+                  ? locked(1)
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (final line in game.traitLines(species, level)) Text(line),
+                        const SizedBox(height: Gaps.xs),
+                        Text(
+                          context.l10n.sourcesTraits,
+                          style: context.texts.labelSmall?.copyWith(color: context.druid.hint),
+                        ),
+                      ],
+                    ),
+            ),
 
             _Section(
               title: context.l10n.sectionSci,
@@ -169,15 +269,8 @@ class _KnownSpecies extends StatelessWidget {
                         Text(species.family),
                         if (catalog.relativesOf(species).isNotEmpty)
                           Text(
-                            '${context.l10n.sectionRelatives}: ${catalog.relativesOf(species).map((r) => state.hasEncountered(r.sci) ? game.name(r) : context.l10n.unknownSpecies).join(', ')}',
+                            '${context.l10n.sectionRelatives}: ${catalog.relativesOf(species).map(game.name).join(', ')}',
                           ),
-                        if (safety != null) ...[
-                          const SizedBox(height: Gaps.xs),
-                          Text(
-                            context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
-                            style: TextStyle(color: context.druid.warning),
-                          ),
-                        ],
                       ],
                     )
                   : locked(2),
@@ -196,10 +289,6 @@ class _KnownSpecies extends StatelessWidget {
                       children: [
                         for (final band in AltitudeBand.values)
                           _BandBar(label: game.band(band), share: species.bandShare[band] ?? 0),
-                        if (species.family == 'Orchidaceae') ...[
-                          const SizedBox(height: Gaps.xs),
-                          Text(context.l10n.protectedNote, style: context.texts.bodySmall),
-                        ],
                       ],
                     )
                   : locked(3),
@@ -243,12 +332,6 @@ class SpeciesPhotoHeader extends StatelessWidget {
   static const _photoHeight = 380.0;
   static const radius = BorderRadius.all(Radius.circular(28));
 
-  /// Profondità dell'incavo della foto nelle livree neumorfiche: più leggera di quella delle chip.
-  static const _wellDepth = 2.0;
-
-  /// Larghezza del solco inciso attorno alla foto.
-  static const _grooveWidth = 5.0;
-
   final Widget image;
   final String title;
   final String subtitle;
@@ -273,117 +356,91 @@ class SpeciesPhotoHeader extends StatelessWidget {
     // Si misura la sola barra di stato: il padding della pagina include anche la barra trasparente dei pulsanti.
     final view = View.of(context);
     final statusBar = view.padding.top / view.devicePixelRatio;
-    // Nelle livree neumorfiche la foto si stacca anche dal bordo in alto: si vede tutto il contorno in rilievo.
+    // Nelle livree neumorfiche la foto si stacca anche dal bordo in alto: si vede tutto il bordo inciso.
     final photoTop = tokens.neu ? statusBar + Gaps.s : 0.0;
     final photoHeight = tokens.neu ? _photoHeight : _photoHeight + statusBar;
-    // Nelle livree neumorfiche la foto è incorniciata da un bordo del colore delle schede: è la cornice a essere in
-    // rilievo, e il rilievo si legge anche quando la foto è scura.
+    // Nelle livree neumorfiche la foto è incorniciata da un bordo piatto, inciso lungo il contorno come una pillola
+    // che non si preme: si legge anche quando la foto è scura.
     final frame = tokens.neu ? Gaps.m : 0.0;
-    // La foto sta sul fondo di un incavo leggero; il margine attorno si ricava dalla sfumatura dell'ombra interna,
-    // così l'ombra cade sul fondo e non sulla foto, dove sparirebbe.
-    final well = tokens.neu ? _wellDepth : 0.0;
-    // Solco sottile attorno alla foto, come inciso con uno stuzzicadente: subito dopo la foto risale in rilievo.
-    final wellMargin = tokens.neu ? _grooveWidth : 0.0;
     final bottomRadius = tokens.neu ? BorderRadius.circular(radius.topLeft.x - frame) : radius;
-    return SizedBox(
+    final header = SizedBox(
       height: photoTop + photoHeight,
       child: Stack(
         children: [
-          // Un'ombra leggera sotto la foto: la stacca dalla pagina senza effetto 3D marcato.
+          // Un'ombra leggera sotto la foto: la stacca dalla pagina senza effetto 3D marcato. Nelle livree neumorfiche
+          // invece la cornice è piatta, con il bordo inciso come una pillola: la foto si guarda, non si preme.
           Positioned(
             left: Gaps.l,
             right: Gaps.l,
             top: photoTop,
             height: photoHeight,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: tokens.neu ? context.colors.surfaceContainerLow : null,
-                borderRadius: radius,
-                // Nelle livree neumorfiche luce in alto a sinistra e ombra in basso a destra, come le altre superfici
-                // in rilievo.
-                boxShadow: tokens.neu
-                    ? [
-                        BoxShadow(color: tokens.neuLight, blurRadius: 18, offset: const Offset(-8, -8)),
-                        BoxShadow(color: tokens.clayShadow, blurRadius: 18, offset: const Offset(8, 8)),
-                      ]
-                    : [
+            child: tokens.neu
+                ? const GroovedPanel(radius: radius, child: SizedBox.expand())
+                : DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: radius,
+                      boxShadow: [
                         BoxShadow(
                           color: tokens.clayShadow.withValues(alpha: tokens.clayShadow.a * 0.6),
                           blurRadius: 18,
                           offset: const Offset(0, 6),
                         ),
                       ],
-              ),
-            ),
+                    ),
+                  ),
           ),
           Positioned(
             left: Gaps.l + frame,
             right: Gaps.l + frame,
             top: photoTop + frame,
             height: photoHeight - frame * 2,
-            // Nelle livree neumorfiche: cornice in rilievo, un solco sottile inciso e la foto di nuovo in rilievo.
-            child: NeuInset(
-              radius: bottomRadius,
-              depth: well,
-              overChild: false,
-              child: Padding(
-                padding: EdgeInsets.all(wellMargin),
-                child: DecoratedBox(
-                  // La foto risale dal solco: piccola luce in alto a sinistra, piccola ombra in basso a destra.
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(bottomRadius.topLeft.x - wellMargin),
-                    boxShadow: tokens.neu
-                        ? [
-                            BoxShadow(color: tokens.neuLight, blurRadius: 4, offset: const Offset(-2, -2)),
-                            BoxShadow(color: tokens.clayShadow, blurRadius: 4, offset: const Offset(2, 2)),
-                          ]
-                        : null,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(bottomRadius.topLeft.x - wellMargin),
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        image,
-                        // Velatura in alto: barra di stato, pulsante e crediti si leggono su qualunque foto.
-                        const DecoratedBox(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.center,
-                              colors: [Color(0x59000000), Color(0x00000000)],
-                            ),
-                          ),
-                        ),
-                        // Nome su vetro smerigliato dentro la foto: la foto resta un unico oggetto, come una copertina.
-                        Positioned(
-                          left: Gaps.m,
-                          right: Gaps.m,
-                          bottom: Gaps.m,
-                          child: _GlassLabel(title: title, subtitle: subtitle, level: level),
-                        ),
-                        if (credit != null)
-                          Positioned(
-                            right: Gaps.l,
-                            top: tokens.neu ? Gaps.l + Gaps.s : statusBar + 70,
-                            child: Text(
-                              credit!,
-                              style: context.texts.labelSmall?.copyWith(
-                                color: Colors.white,
-                                shadows: const [Shadow(color: Colors.black54, blurRadius: 4)],
-                              ),
-                            ),
-                          ),
-                      ],
+            // Nelle livree neumorfiche la cornice è piatta con il bordo inciso; la foto ci sta dentro, senza altri bordi.
+            child: ClipRRect(
+              borderRadius: bottomRadius,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  image,
+                  // Velatura in alto: barra di stato, pulsante e crediti si leggono su qualunque foto.
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.center,
+                        colors: [Color(0x59000000), Color(0x00000000)],
+                      ),
                     ),
                   ),
-                ),
+                  // Nome su vetro smerigliato dentro la foto: la foto resta un unico oggetto, come una copertina.
+                  Positioned(
+                    left: Gaps.m,
+                    right: Gaps.m,
+                    bottom: Gaps.m,
+                    child: _GlassLabel(title: title, subtitle: subtitle, level: level),
+                  ),
+                  if (credit != null)
+                    Positioned(
+                      right: Gaps.l,
+                      top: tokens.neu ? Gaps.l + Gaps.s : statusBar + 70,
+                      child: Text(
+                        credit!,
+                        style: context.texts.labelSmall?.copyWith(
+                          color: Colors.white,
+                          shadows: const [Shadow(color: Colors.black54, blurRadius: 4)],
+                        ),
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
         ],
       ),
     );
+    // Fuori dalle livree neumorfiche la foto passa sotto la barra di stato: icone di sistema chiare sopra la foto.
+    return tokens.neu
+        ? header
+        : AnnotatedRegion<SystemUiOverlayStyle>(value: SystemUiOverlayStyle.light, child: header);
   }
 }
 
@@ -436,14 +493,7 @@ class _GlassLabel extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: Gaps.m),
-              ClayCircle(
-                color: level == null ? context.colors.surfaceContainerHigh : tokens.levelColor(level!),
-                size: 48,
-                child: Text(
-                  level == null ? '?' : '$level',
-                  style: context.texts.titleLarge?.copyWith(fontWeight: FontWeight.w700),
-                ),
-              ),
+              LevelMark(level: level, size: 48, style: context.texts.titleLarge),
             ],
           ),
         ),
@@ -526,9 +576,11 @@ class _StudyLadder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final next = nextStudyLevel(species, catalog, state);
-    return ClayCard(
-      padding: EdgeInsets.zero,
-      child: Padding(
+    // Il riquadro non si preme (si preme solo il pulsante dentro): nelle livree neumorfiche è piatto, con il bordo
+    // inciso come una pillola; altrove una scheda.
+    return _flatPanel(
+      context,
+      Padding(
         padding: const EdgeInsets.all(Gaps.m),
         child: Row(
           children: [
@@ -538,6 +590,8 @@ class _StudyLadder extends StatelessWidget {
                   children: [
                     ClayCircle(
                       size: 30,
+                      // Il colore dice il livello raggiunto: resta anche nelle livree neumorfiche.
+                      keepColor: true,
                       color: state.levelOf(species.sci) >= level
                           ? context.druid.levelColor(level)
                           : context.colors.surfaceContainerHigh,
@@ -692,6 +746,14 @@ class _MasterySectionState extends State<_MasterySection> {
         children: [
           if (widget.state.mastered.contains(widget.species.sci))
             Text(l10n.masteryReached, style: context.texts.titleMedium),
+          if ((widget.state.pendingXp[widget.species.sci] ?? 0) > 0)
+            Text(
+              l10n.speciesXpToCash(widget.state.pendingXp[widget.species.sci]!),
+              key: const ValueKey('species-xp-to-cash'),
+              style: context.texts.titleSmall,
+            ),
+          if ((widget.state.vis[widget.species.sci] ?? 0) > 0)
+            Text(l10n.visStored(widget.state.vis[widget.species.sci]!)),
           Text(l10n.masteryFacts(m.consolidatedFacts, m.totalFacts)),
           Text(l10n.masteryDraws(m.draws, masteryDraws, m.distinctTraits, masteryDistinctTraits)),
           Text(l10n.masteryOnlyField, style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
@@ -713,10 +775,16 @@ class _MasterySectionState extends State<_MasterySection> {
             const SizedBox(height: Gaps.xs),
             OutlinedButton.icon(
               key: const ValueKey('simulate-draw'),
-              onPressed: () => widget.progress.drawSimulated(widget.species.sci, trait: _trait?.name),
+              onPressed: canDraw(widget.state, widget.species.sci, widget.progress.now)
+                  ? () => widget.progress.drawSimulated(widget.species.sci, trait: _trait?.name)
+                  : null,
               icon: const Icon(Icons.bug_report_outlined),
               label: Text(l10n.simulateDraw),
             ),
+            if (!widget.state.hasEncountered(widget.species.sci))
+              Text(l10n.drawNeedsEncounter, style: context.texts.bodySmall)
+            else if (isExhausted(widget.state, widget.species.sci, widget.progress.now))
+              Text(l10n.drawExhausted, key: const ValueKey('draw-exhausted'), style: context.texts.bodySmall),
           ],
         ],
       ),
@@ -775,3 +843,8 @@ class _NotesSectionState extends State<_NotesSection> {
     ),
   );
 }
+
+/// Riquadro che non si preme: nelle livree neumorfiche piatto con il bordo inciso ([GroovedPanel]), altrove una scheda.
+Widget _flatPanel(BuildContext context, Widget child) => context.druid.neu
+    ? GroovedPanel(radius: BorderRadius.circular(context.druid.cardRadius), child: child)
+    : ClayCard(padding: EdgeInsets.zero, child: child);

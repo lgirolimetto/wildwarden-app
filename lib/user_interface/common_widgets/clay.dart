@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -190,6 +191,19 @@ class ClayCircle extends StatelessWidget {
   /// Faccia con una leggera conca (vedi [clayDecoration]), per le sfere che fanno da pulsante.
   final bool concave;
 
+  /// Nelle livree neumorfiche una sfera con un'icona perde il suo colore: diventa un cerchio in rilievo del colore
+  /// della scheda con l'icona incisa (lo stile dei tratti). `true` tiene il colore, quando il colore è
+  /// un'informazione (livello di studio, voce scelta nella barra di navigazione).
+  final bool keepColor;
+
+  /// La sfera si preme (pulsante tondo, voce della barra): nelle livree neumorfiche resta in rilievo. Altrimenti è
+  /// un'icona da guardare e, per la regola del rilievo ("in rilievo = si può toccare"), è incisa come le pillole dei
+  /// tratti: un solco sottile tutt'intorno e dentro l'icona incisa.
+  final bool pressable;
+
+  /// Fondo su cui sta la sfera, se diverso dalla pagina (es. la scheda verde del rango): serve alla versione incisa.
+  final Color? surface;
+
   const ClayCircle({
     super.key,
     required this.color,
@@ -199,11 +213,37 @@ class ClayCircle extends StatelessWidget {
     this.iconColor,
     this.child,
     this.concave = false,
+    this.keepColor = false,
+    this.pressable = false,
+    this.surface,
   });
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
+    if (tokens.neu && icon != null && child == null && emoji == null && !keepColor && !pressable) {
+      return GroovedCircle(
+        size: size,
+        surface: surface,
+        child: EngravedIcon(icon!, size: size * 0.45, surface: surface),
+      );
+    }
+    if (tokens.neu && icon != null && child == null && emoji == null && !keepColor) {
+      return Container(
+        width: size,
+        height: size,
+        alignment: Alignment.center,
+        decoration: _neuDecoration(
+          tokens,
+          color: context.colors.surfaceContainerLow,
+          shape: BoxShape.circle,
+          distance: (size * 0.09).clamp(2, 6),
+          concave: concave,
+          concaveStrength: _concaveStrength(context),
+        ),
+        child: EngravedIcon(icon!, size: size * 0.5),
+      );
+    }
     final foreground =
         iconColor ??
         (ThemeData.estimateBrightnessForColor(color) == Brightness.dark ? Colors.white : const Color(0xFF2B2118));
@@ -246,6 +286,106 @@ class ClayCircle extends StatelessWidget {
   }
 }
 
+/// Superficie da guardare, non da premere (livree neumorfiche), piatta come una pillola che non si preme: un solco
+/// inciso lungo il bordo e, appena dentro, la superficie che risale di poco. Per i riquadri e le cornici che non si
+/// toccano (regola del rilievo: in rilievo solo ciò che si preme).
+class GroovedPanel extends StatelessWidget {
+  final BorderRadius radius;
+  final Widget child;
+
+  /// Fondo su cui sta, se diverso dalla pagina: luce e ombra del solco si ricavano da lui (su un fondo scuro l'ombra
+  /// beige della livrea chiara sembrerebbe una luce).
+  final Color? surface;
+
+  const GroovedPanel({super.key, required this.radius, required this.child, this.surface});
+
+  @override
+  Widget build(BuildContext context) {
+    final dark = surface == null ? null : _darken(surface!, 0.45).withValues(alpha: 0.8);
+    final light = surface == null ? null : _lighten(surface!, 0.3).withValues(alpha: 0.6);
+    return NeuInset(
+      radius: radius,
+      depth: 0.8,
+      strength: 0.45,
+      darkColor: dark,
+      lightColor: light,
+      child: Padding(
+        padding: const EdgeInsets.all(3),
+        child: NeuInset(
+          radius: radius,
+          depth: 0.8,
+          strength: 0.35,
+          convex: true,
+          darkColor: dark,
+          lightColor: light,
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+/// Cerchio da guardare, non da premere: un [GroovedPanel] rotondo con al centro [child] (un'icona o un numero incisi).
+class GroovedCircle extends StatelessWidget {
+  final double size;
+  final Widget child;
+  final Color? surface;
+
+  const GroovedCircle({super.key, required this.size, required this.child, this.surface});
+
+  @override
+  Widget build(BuildContext context) => SizedBox.square(
+    dimension: size,
+    child: GroovedPanel(
+      radius: BorderRadius.circular(size / 2),
+      surface: surface,
+      child: Center(child: child),
+    ),
+  );
+}
+
+/// Il livello di studio di una specie in un cerchio: nelle livree neumorfiche il cerchio è inciso (non si preme) e il
+/// numero, inciso anche lui, ha il colore del livello; nelle altre una sfera del colore del livello.
+class LevelMark extends StatelessWidget {
+  /// `null` = specie non ancora studiata né incontrata: un "?".
+  final int? level;
+  final double size;
+  final TextStyle? style;
+
+  const LevelMark({super.key, required this.level, this.size = 42, this.style});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    final text = level == null ? '?' : '$level';
+    final style = (this.style ?? context.texts.titleMedium)?.copyWith(fontWeight: FontWeight.w700);
+    if (!tokens.neu) {
+      return ClayCircle(
+        color: level == null ? context.colors.surfaceContainerHigh : tokens.levelColor(level!),
+        size: size,
+        child: Text(text, style: style),
+      );
+    }
+    // I colori dei primi livelli sono chiari: sul segno si scuriscono verso il testo, per leggersi sulla scheda.
+    final color = level == null || level == 0
+        ? context.colors.onSurfaceVariant
+        : Color.lerp(tokens.levelColor(level!), context.colors.onSurface, 0.35)!;
+    return GroovedCircle(
+      size: size,
+      child: Text(
+        text,
+        style: style?.copyWith(
+          color: color,
+          shadows: [
+            Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+            Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// Pulsante tondo in plastilina (indietro, taccuino, glossario…): sostituisce le icone delle barre classiche.
 class ClayIconButton extends StatelessWidget {
   final IconData icon;
@@ -265,6 +405,7 @@ class ClayIconButton extends StatelessWidget {
         icon: icon,
         iconColor: context.colors.onSurface,
         size: 44,
+        pressable: true,
       ),
     ),
   );
@@ -432,9 +573,11 @@ class ClaySectionTitle extends StatelessWidget {
     this.titleColor,
   });
 
+  // Sotto il titolo c'è abbastanza spazio perché l'ombra della prima scheda non tocchi il titolo (capitolo 07,
+  // "Spazio per il rilievo ovunque").
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: Gaps.s),
+    padding: const EdgeInsets.only(bottom: Gaps.l),
     child: Row(
       children: [
         ClayCircle(color: color ?? context.colors.secondaryContainer, icon: icon, size: 36),
@@ -492,6 +635,9 @@ class ClayNavBar extends StatelessWidget {
                                   iconColor: colors.onPrimary,
                                   size: 40,
                                   concave: true,
+                                  // La voce scelta resta colorata: il colore dice dove sei.
+                                  keepColor: true,
+                                  pressable: true,
                                 )
                               // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
                               : context.druid.neu
@@ -500,6 +646,7 @@ class ClayNavBar extends StatelessWidget {
                                   icon: icon,
                                   iconColor: colors.onSurfaceVariant,
                                   size: 40,
+                                  pressable: true,
                                 )
                               : SizedBox(width: 40, height: 40, child: Icon(icon, color: colors.onSurfaceVariant)),
                         ),
@@ -693,6 +840,19 @@ class ClayChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Un'etichetta che comincia con l'emoji di un tratto ("❄️ Gelo"): nelle livree neumorfiche l'emoji diventa l'icona
+    // incisa, come nelle pillole.
+    final emoji = leadingEmoji(label);
+    final traitIcon = emoji == null ? null : traitIconOf(emoji);
+    if (context.druid.neu && traitIcon != null) {
+      return ClayChip(
+        key: key,
+        label: label.substring(emoji!.length).trim(),
+        avatar: EngravedIcon(traitIcon, size: 18),
+        selected: selected,
+        onTap: onTap,
+      );
+    }
     if (!context.druid.neu) {
       return selected == null
           ? ActionChip(avatar: avatar, label: Text(label), onPressed: onTap)

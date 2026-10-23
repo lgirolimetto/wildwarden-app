@@ -1,5 +1,5 @@
 {
- "formatVersion": 1,
+ "formatVersion": 2,
  "region": {
   "id": "bologna",
   "name": {
@@ -13,8 +13,13 @@
    "name": {
     "it": "Lentaggine"
    },
+   "order": "Dipsacales",
    "family": "Viburnaceae",
    "genus": "Viburnum",
+   "congeners": [
+    "Viburnum lantana",
+    "Viburnum opulus"
+   ],
    "observations": 727,
    "monthsRelative": [
     0.226,
@@ -72,15 +77,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D2E28D"
+   "mysteryColor": "#D2E28D",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.9,
+     "moisture": 3.3,
+     "temperature": 7.0,
+     "nutrients": 3.5,
+     "soilReaction": 5.9
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Anemone hortensis",
    "name": {
     "it": "Anemone fior di stella"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Anemone",
+   "congeners": [
+    "Anemone nemorosa",
+    "Anemone trifolia",
+    "Anemone coronaria",
+    "Anemone apennina",
+    "Anemone ranunculoides",
+    "Anemone baldensis",
+    "Anemone palmata",
+    "Anemone blanda"
+   ],
    "observations": 705,
    "monthsRelative": [
     0.04,
@@ -137,15 +169,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D786EA"
+   "mysteryColor": "#D786EA",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.8,
+     "moisture": 3.1,
+     "temperature": 6.5,
+     "nutrients": 3.1,
+     "soilReaction": 5.5
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Orchis purpurea",
    "name": {
     "it": "Orchide maggiore"
    },
+   "order": "Asparagales",
    "family": "Orchidaceae",
    "genus": "Orchis",
+   "congeners": [
+    "Orchis mascula",
+    "Orchis italica",
+    "Orchis anthropophora",
+    "Orchis provincialis",
+    "Orchis pauciflora",
+    "Orchis simia",
+    "Orchis militaris",
+    "Orchis pallens"
+   ],
    "observations": 602,
    "monthsRelative": [
     0.018,
@@ -201,15 +260,44 @@
      "local": true
     }
    ],
-   "mysteryColor": "#E28D9B"
+   "mysteryColor": "#E28D9B",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.3,
+     "moisture": 3.9,
+     "temperature": 5.2,
+     "nutrients": 3.9,
+     "soilReaction": 7.7
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Euphorbia helioscopia",
    "name": {
     "it": "Euforbia calenzuola"
    },
+   "order": "Malpighiales",
    "family": "Euphorbiaceae",
    "genus": "Euphorbia",
+   "congeners": [
+    "Euphorbia cyparissias",
+    "Euphorbia dendroides",
+    "Euphorbia characias",
+    "Euphorbia peplus",
+    "Euphorbia amygdaloides",
+    "Euphorbia spinosa",
+    "Euphorbia dulcis",
+    "Euphorbia paralias"
+   ],
    "observations": 434,
    "monthsRelative": [
     0.013,
@@ -266,15 +354,43 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C3E689"
+   "mysteryColor": "#C3E689",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.3,
+     "moisture": 4.0,
+     "temperature": 4.8,
+     "nutrients": 7.4,
+     "soilReaction": 6.7
+    },
+    "dispersal": [
+     "ants",
+     "launched"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Prunus spinosa",
    "name": {
     "it": "Prugnolo"
    },
+   "order": "Rosales",
    "family": "Rosaceae",
    "genus": "Prunus",
+   "congeners": [
+    "Prunus laurocerasus",
+    "Prunus cerasifera",
+    "Prunus persica",
+    "Prunus armeniaca",
+    "Prunus mahaleb",
+    "Prunus avium",
+    "Prunus padus",
+    "Prunus domestica"
+   ],
    "observations": 399,
    "monthsRelative": [
     0.025,
@@ -330,15 +446,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#CBE28D"
+   "mysteryColor": "#CBE28D",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.1,
+     "moisture": 3.6,
+     "temperature": 4.4,
+     "nutrients": 4.5,
+     "soilReaction": 6.4
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Paliurus spina-christi",
    "name": {
     "it": "Marruca"
    },
+   "order": "Rosales",
    "family": "Rhamnaceae",
    "genus": "Paliurus",
+   "congeners": [],
    "observations": 368,
    "monthsRelative": [
     0.093,
@@ -402,15 +536,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#EBE684"
+   "mysteryColor": "#EBE684",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.8,
+     "moisture": 2.3,
+     "temperature": 6.0,
+     "nutrients": 3.3,
+     "soilReaction": 7.7
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Alliaria petiolata",
    "name": {
     "it": "Alliaria comune"
    },
+   "order": "Brassicales",
    "family": "Brassicaceae",
    "genus": "Alliaria",
+   "congeners": [],
    "observations": 358,
    "monthsRelative": [
     0.039,
@@ -467,15 +619,37 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B3E28D"
+   "mysteryColor": "#B3E28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.4,
+     "moisture": 4.6,
+     "temperature": 4.4,
+     "nutrients": 8.6,
+     "soilReaction": 6.8
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Euonymus europaeus",
    "name": {
     "it": "Berretto da prete"
    },
+   "order": "Celastrales",
    "family": "Celastraceae",
    "genus": "Euonymus",
+   "congeners": [
+    "Euonymus latifolius",
+    "Euonymus japonicus",
+    "Euonymus verrucosus"
+   ],
    "observations": 349,
    "monthsRelative": [
     0.052,
@@ -532,15 +706,40 @@
      "local": true
     }
    ],
-   "mysteryColor": "#E28D9E"
+   "mysteryColor": "#E28D9E",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.3,
+     "moisture": 4.5,
+     "temperature": 4.4,
+     "nutrients": 5.3,
+     "soilReaction": 7.4
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Clematis vitalba",
    "name": {
     "it": "Clematide vitalba"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Clematis",
+   "congeners": [
+    "Clematis alpina",
+    "Clematis flammula",
+    "Clematis cirrhosa",
+    "Clematis recta",
+    "Clematis viticella",
+    "Clematis tangutica"
+   ],
    "observations": 336,
    "monthsRelative": [
     0.118,
@@ -601,15 +800,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B7E28D"
+   "mysteryColor": "#B7E28D",
+   "traits": {
+    "growthForm": "climber",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.3,
+     "moisture": 4.4,
+     "temperature": 4.8,
+     "nutrients": 6.4,
+     "soilReaction": 7.1
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Ruscus aculeatus",
    "name": {
     "it": "Ruscolo pungitopo"
    },
+   "order": "Asparagales",
    "family": "Asparagaceae",
    "genus": "Ruscus",
+   "congeners": [
+    "Ruscus hypoglossum",
+    "Ruscus hypophyllum"
+   ],
    "observations": 332,
    "monthsRelative": [
     0.223,
@@ -666,15 +886,35 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B0E28D"
+   "mysteryColor": "#B0E28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.2,
+     "moisture": 4.0,
+     "temperature": 6.3,
+     "nutrients": 4.4,
+     "soilReaction": 6.6
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": [
+    "habitats-annex-v"
+   ]
   },
   {
    "sci": "Cotinus coggygria",
    "name": {
     "it": "Sommacco selvatico"
    },
+   "order": "Sapindales",
    "family": "Anacardiaceae",
    "genus": "Cotinus",
+   "congeners": [],
    "observations": 329,
    "monthsRelative": [
     0.0,
@@ -725,15 +965,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#A0E28D"
+   "mysteryColor": "#A0E28D",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.9,
+     "moisture": 2.9,
+     "temperature": 6.0,
+     "nutrients": 3.2,
+     "soilReaction": 7.6
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Laurus nobilis",
    "name": {
     "it": "Alloro"
    },
+   "order": "Laurales",
    "family": "Lauraceae",
    "genus": "Laurus",
+   "congeners": [],
    "observations": 310,
    "monthsRelative": [
     0.112,
@@ -792,15 +1050,35 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D5E28D"
+   "mysteryColor": "#D5E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.3,
+     "moisture": 4.3,
+     "temperature": 6.2,
+     "nutrients": 4.1,
+     "soilReaction": 5.6
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Cornus sanguinea",
    "name": {
     "it": "Corniolo sanguinello"
    },
+   "order": "Cornales",
    "family": "Cornaceae",
    "genus": "Cornus",
+   "congeners": [
+    "Cornus mas"
+   ],
    "observations": 303,
    "monthsRelative": [
     0.0,
@@ -846,15 +1124,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D4E28D"
+   "mysteryColor": "#D4E28D",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.3,
+     "moisture": 4.5,
+     "temperature": 4.3,
+     "nutrients": 5.2,
+     "soilReaction": 7.6
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Viburnum lantana",
    "name": {
     "it": "Viburno lantana"
    },
+   "order": "Dipsacales",
    "family": "Viburnaceae",
    "genus": "Viburnum",
+   "congeners": [
+    "Viburnum tinus",
+    "Viburnum opulus"
+   ],
    "observations": 287,
    "monthsRelative": [
     0.0,
@@ -904,15 +1203,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D4E68A"
+   "mysteryColor": "#D4E68A",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.3,
+     "moisture": 3.6,
+     "temperature": 4.7,
+     "nutrients": 4.0,
+     "soilReaction": 7.8
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Chelidonium majus",
    "name": {
     "it": "Celidonia"
    },
+   "order": "Ranunculales",
    "family": "Papaveraceae",
    "genus": "Chelidonium",
+   "congeners": [],
    "observations": 282,
    "monthsRelative": [
     0.045,
@@ -969,15 +1286,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#F4E67B"
+   "mysteryColor": "#F4E67B",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.9,
+     "moisture": 4.4,
+     "temperature": 4.4,
+     "nutrients": 8.4,
+     "soilReaction": 6.8
+    },
+    "dispersal": [
+     "ants"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Celtis australis",
    "name": {
     "it": "Bagolaro"
    },
+   "order": "Rosales",
    "family": "Cannabaceae",
    "genus": "Celtis",
+   "congeners": [
+    "Celtis occidentalis",
+    "Celtis tournefortii"
+   ],
    "observations": 277,
    "monthsRelative": [
     0.0,
@@ -1024,15 +1362,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C8E28D"
+   "mysteryColor": "#C8E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.9,
+     "moisture": 3.0,
+     "temperature": 6.3,
+     "nutrients": 4.7,
+     "soilReaction": 7.2
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Fraxinus ornus",
    "name": {
     "it": "Frassino da manna"
    },
+   "order": "Lamiales",
    "family": "Oleaceae",
    "genus": "Fraxinus",
+   "congeners": [
+    "Fraxinus excelsior",
+    "Fraxinus angustifolia"
+   ],
    "observations": 275,
    "monthsRelative": [
     0.032,
@@ -1074,15 +1433,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D8E28D"
+   "mysteryColor": "#D8E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.4,
+     "moisture": 3.1,
+     "temperature": 5.9,
+     "nutrients": 3.4,
+     "soilReaction": 7.9
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Corylus avellana",
    "name": {
     "it": "Nocciolo comune"
    },
+   "order": "Fagales",
    "family": "Betulaceae",
    "genus": "Corylus",
+   "congeners": [],
    "observations": 265,
    "monthsRelative": [
     0.112,
@@ -1138,15 +1515,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C3E28D"
+   "mysteryColor": "#C3E28D",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.4,
+     "moisture": 4.4,
+     "temperature": 4.3,
+     "nutrients": 5.7,
+     "soilReaction": 5.7
+    },
+    "dispersal": [
+     "hoardedByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Melissa officinalis",
    "name": {
     "it": "Melissa vera"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Melissa",
+   "congeners": [],
    "observations": 248,
    "monthsRelative": [
     0.0,
@@ -1207,15 +1602,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#94E28D"
+   "mysteryColor": "#94E28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.0,
+     "moisture": 4.2,
+     "temperature": 5.7,
+     "nutrients": 5.5,
+     "soilReaction": 7.4
+    },
+    "dispersal": [
+     "stuckToAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Acer campestre",
    "name": {
     "it": "Acero oppio"
    },
+   "order": "Sapindales",
    "family": "Sapindaceae",
    "genus": "Acer",
+   "congeners": [
+    "Acer pseudoplatanus",
+    "Acer negundo",
+    "Acer opalus",
+    "Acer monspessulanum",
+    "Acer platanoides",
+    "Acer lobelii",
+    "Acer obtusatum",
+    "Acer saccharinum"
+   ],
    "observations": 240,
    "monthsRelative": [
     0.044,
@@ -1276,15 +1698,35 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B5E28D"
+   "mysteryColor": "#B5E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.0,
+     "moisture": 4.2,
+     "temperature": 5.0,
+     "nutrients": 5.8,
+     "soilReaction": 6.8
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Juglans regia",
    "name": {
     "it": "Noce comune"
    },
+   "order": "Fagales",
    "family": "Juglandaceae",
    "genus": "Juglans",
+   "congeners": [
+    "Juglans nigra"
+   ],
    "observations": 231,
    "monthsRelative": [
     0.0,
@@ -1344,15 +1786,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#8DAEE2"
+   "mysteryColor": "#8DAEE2",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": true,
+    "ecology": {
+     "light": 6.0,
+     "moisture": 4.5,
+     "temperature": 5.7,
+     "nutrients": 6.7,
+     "soilReaction": 7.4
+    },
+    "dispersal": [
+     "hoardedByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Salvia pratensis",
    "name": {
     "it": "Salvia comune"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Salvia",
+   "congeners": [
+    "Salvia glutinosa",
+    "Salvia verbenaca",
+    "Salvia officinalis",
+    "Salvia rosmarinus",
+    "Salvia sclarea",
+    "Salvia clandestina",
+    "Salvia verticillata",
+    "Salvia argentea"
+   ],
    "observations": 230,
    "monthsRelative": [
     0.0,
@@ -1410,15 +1879,35 @@
      "local": true
     }
    ],
-   "mysteryColor": "#9B8DE2"
+   "mysteryColor": "#9B8DE2",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.8,
+     "moisture": 3.1,
+     "temperature": 4.8,
+     "nutrients": 4.1,
+     "soilReaction": 8.0
+    },
+    "dispersal": [
+     "stuckToAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Borago officinalis",
    "name": {
     "it": "Borragine comune"
    },
+   "order": "Boraginales",
    "family": "Boraginaceae",
    "genus": "Borago",
+   "congeners": [
+    "Borago pygmaea"
+   ],
    "observations": 226,
    "monthsRelative": [
     0.158,
@@ -1479,15 +1968,35 @@
      "local": true
     }
    ],
-   "mysteryColor": "#9D8DE3"
+   "mysteryColor": "#9D8DE3",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "annual",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.6,
+     "moisture": 3.7,
+     "temperature": 5.8,
+     "nutrients": 7.1,
+     "soilReaction": 6.3
+    },
+    "dispersal": [
+     "ants"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Cornus mas",
    "name": {
     "it": "Corniolo maschio"
    },
+   "order": "Cornales",
    "family": "Cornaceae",
    "genus": "Cornus",
+   "congeners": [
+    "Cornus sanguinea"
+   ],
    "observations": 226,
    "monthsRelative": [
     0.0,
@@ -1545,15 +2054,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C9E28D"
+   "mysteryColor": "#C9E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.8,
+     "moisture": 3.8,
+     "temperature": 5.4,
+     "nutrients": 4.6,
+     "soilReaction": 7.8
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Melittis melissophyllum",
    "name": {
     "it": "Erba limona comune"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Melittis",
+   "congeners": [],
    "observations": 225,
    "monthsRelative": [
     0.0,
@@ -1609,15 +2136,40 @@
      "local": true
     }
    ],
-   "mysteryColor": "#ADE28D"
+   "mysteryColor": "#ADE28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.2,
+     "moisture": 3.5,
+     "temperature": 5.2,
+     "nutrients": 3.3,
+     "soilReaction": 7.4
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Helleborus viridis",
    "name": {
     "it": "Elleboro verde"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Helleborus",
+   "congeners": [
+    "Helleborus foetidus",
+    "Helleborus niger",
+    "Helleborus bocconei",
+    "Helleborus argutifolius",
+    "Helleborus multifidus",
+    "Helleborus dumetorum"
+   ],
    "observations": 224,
    "monthsRelative": [
     0.35,
@@ -1674,15 +2226,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B9F17E"
+   "mysteryColor": "#B9F17E",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 2.8,
+     "moisture": 4.4,
+     "temperature": 4.6,
+     "nutrients": 5.8,
+     "soilReaction": 7.7
+    },
+    "dispersal": [
+     "ants"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Euphorbia cyparissias",
    "name": {
     "it": "Euforbia cipressina"
    },
+   "order": "Malpighiales",
    "family": "Euphorbiaceae",
    "genus": "Euphorbia",
+   "congeners": [
+    "Euphorbia helioscopia",
+    "Euphorbia dendroides",
+    "Euphorbia characias",
+    "Euphorbia peplus",
+    "Euphorbia amygdaloides",
+    "Euphorbia spinosa",
+    "Euphorbia dulcis",
+    "Euphorbia paralias"
+   ],
    "observations": 223,
    "monthsRelative": [
     0.0,
@@ -1738,15 +2317,43 @@
      "local": true
     }
    ],
-   "mysteryColor": "#F4EC7B"
+   "mysteryColor": "#F4EC7B",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.7,
+     "moisture": 2.9,
+     "temperature": 4.3,
+     "nutrients": 3.3,
+     "soilReaction": 6.4
+    },
+    "dispersal": [
+     "ants",
+     "launched"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Malva sylvestris",
    "name": {
     "it": "Malva selvatica"
    },
+   "order": "Malvales",
    "family": "Malvaceae",
    "genus": "Malva",
+   "congeners": [
+    "Malva neglecta",
+    "Malva arborea",
+    "Malva multiflora",
+    "Malva alcea",
+    "Malva moschata",
+    "Malva punctata",
+    "Malva trimestris",
+    "Malva parviflora"
+   ],
    "observations": 222,
    "monthsRelative": [
     0.031,
@@ -1805,15 +2412,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#E8B287"
+   "mysteryColor": "#E8B287",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.8,
+     "moisture": 3.6,
+     "temperature": 4.8,
+     "nutrients": 7.8,
+     "soilReaction": 6.7
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Prunus cerasifera",
    "name": {
     "it": "Mirabolano"
    },
+   "order": "Rosales",
    "family": "Rosaceae",
    "genus": "Prunus",
+   "congeners": [
+    "Prunus spinosa",
+    "Prunus laurocerasus",
+    "Prunus persica",
+    "Prunus armeniaca",
+    "Prunus mahaleb",
+    "Prunus avium",
+    "Prunus padus",
+    "Prunus domestica"
+   ],
    "observations": 219,
    "monthsRelative": [
     0.0,
@@ -1858,15 +2492,41 @@
      "local": true
     }
    ],
-   "mysteryColor": "#A9E28D"
+   "mysteryColor": "#A9E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": true,
+    "ecology": {
+     "light": 6.3,
+     "moisture": 3.9,
+     "temperature": 5.6,
+     "nutrients": 5.8,
+     "soilReaction": 6.3
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Anacamptis pyramidalis",
    "name": {
     "it": "Orchide piramidale"
    },
+   "order": "Asparagales",
    "family": "Orchidaceae",
    "genus": "Anacamptis",
+   "congeners": [
+    "Anacamptis morio",
+    "Anacamptis papilionacea",
+    "Anacamptis coriophora",
+    "Anacamptis laxiflora",
+    "Anacamptis collina",
+    "Anacamptis palustris",
+    "Anacamptis gennarii"
+   ],
    "observations": 219,
    "monthsRelative": [
     0.0,
@@ -1922,15 +2582,35 @@
      "local": true
     }
    ],
-   "mysteryColor": "#CF8DE2"
+   "mysteryColor": "#CF8DE2",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.8,
+     "moisture": 3.3,
+     "temperature": 5.2,
+     "nutrients": 2.3,
+     "soilReaction": 8.6
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Ostrya carpinifolia",
    "name": {
     "it": "Carpino nero"
    },
+   "order": "Fagales",
    "family": "Betulaceae",
    "genus": "Ostrya",
+   "congeners": [],
    "observations": 210,
    "monthsRelative": [
     0.073,
@@ -1989,15 +2669,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#94E28D"
+   "mysteryColor": "#94E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 3.8,
+     "moisture": 3.4,
+     "temperature": 6.1,
+     "nutrients": 5.3,
+     "soilReaction": 7.3
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Glechoma hederacea",
    "name": {
     "it": "Edera terrestre"
    },
+   "order": "Lamiales",
    "family": "Lamiaceae",
    "genus": "Glechoma",
+   "congeners": [
+    "Glechoma hirsuta",
+    "Glechoma sardoa"
+   ],
    "observations": 212,
    "monthsRelative": [
     0.029,
@@ -2054,15 +2755,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#9082ED"
+   "mysteryColor": "#9082ED",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.4,
+     "moisture": 4.9,
+     "temperature": 4.3,
+     "nutrients": 6.9,
+     "soilReaction": 6.2
+    },
+    "dispersal": [
+     "ants"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Linaria vulgaris",
    "name": {
     "it": "Linaiola comune"
    },
+   "order": "Lamiales",
    "family": "Plantaginaceae",
    "genus": "Linaria",
+   "congeners": [
+    "Linaria alpina",
+    "Linaria purpurea",
+    "Linaria reflexa",
+    "Linaria pelisseriana",
+    "Linaria angustissima",
+    "Linaria triphylla",
+    "Linaria capraria",
+    "Linaria simplex"
+   ],
    "observations": 211,
    "monthsRelative": [
     0.0,
@@ -2118,15 +2846,39 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D0E28D"
+   "mysteryColor": "#D0E28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.7,
+     "moisture": 3.4,
+     "temperature": 4.1,
+     "nutrients": 5.0,
+     "soilReaction": 6.5
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Populus alba",
    "name": {
     "it": "Pioppo bianco"
    },
+   "order": "Malpighiales",
    "family": "Salicaceae",
    "genus": "Populus",
+   "congeners": [
+    "Populus tremula",
+    "Populus nigra",
+    "Populus canescens",
+    "Populus canadensis",
+    "Populus deltoides"
+   ],
    "observations": 204,
    "monthsRelative": [
     0.027,
@@ -2187,15 +2939,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#D9E28D"
+   "mysteryColor": "#D9E28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.1,
+     "moisture": 5.1,
+     "temperature": 5.6,
+     "nutrients": 6.3,
+     "soilReaction": 7.5
+    },
+    "dispersal": [
+     "water",
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Anacamptis morio",
    "name": {
     "it": "Orchide minore"
    },
+   "order": "Asparagales",
    "family": "Orchidaceae",
    "genus": "Anacamptis",
+   "congeners": [
+    "Anacamptis pyramidalis",
+    "Anacamptis papilionacea",
+    "Anacamptis coriophora",
+    "Anacamptis laxiflora",
+    "Anacamptis collina",
+    "Anacamptis palustris",
+    "Anacamptis gennarii"
+   ],
    "observations": 205,
    "monthsRelative": [
     0.046,
@@ -2251,15 +3030,44 @@
      "local": true
     }
    ],
-   "mysteryColor": "#CE8DE2"
+   "mysteryColor": "#CE8DE2",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.2,
+     "moisture": 3.9,
+     "temperature": 4.4,
+     "nutrients": 3.1,
+     "soilReaction": 6.7
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Senecio vulgaris",
    "name": {
     "it": "Senecione comune"
    },
+   "order": "Asterales",
    "family": "Asteraceae",
    "genus": "Senecio",
+   "congeners": [
+    "Senecio inaequidens",
+    "Senecio angulatus",
+    "Senecio ovatus",
+    "Senecio doronicum",
+    "Senecio squalidus",
+    "Senecio rupestris",
+    "Senecio leucanthemifolius",
+    "Senecio scopolii"
+   ],
    "observations": 197,
    "monthsRelative": [
     0.25,
@@ -2318,15 +3126,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#F4E87B"
+   "mysteryColor": "#F4E87B",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "annual",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.2,
+     "moisture": 4.2,
+     "temperature": 4.4,
+     "nutrients": 7.8,
+     "soilReaction": 6.0
+    },
+    "dispersal": [
+     "water",
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Lunaria annua",
    "name": {
     "it": "Erba d'argento"
    },
+   "order": "Brassicales",
    "family": "Brassicaceae",
    "genus": "Lunaria",
+   "congeners": [
+    "Lunaria rediviva"
+   ],
    "observations": 201,
    "monthsRelative": [
     0.149,
@@ -2377,15 +3206,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#E28DD7"
+   "mysteryColor": "#E28DD7",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "biennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.1,
+     "moisture": 4.6,
+     "temperature": 5.4,
+     "nutrients": 6.5,
+     "soilReaction": 6.9
+    },
+    "dispersal": [
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Eranthis hyemalis",
    "name": {
     "it": "Piè di gallo"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Eranthis",
+   "congeners": [],
    "observations": 200,
    "monthsRelative": [
     0.517,
@@ -2442,15 +3289,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#F1D97E"
+   "mysteryColor": "#F1D97E",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.3,
+     "moisture": 4.7,
+     "temperature": 5.1,
+     "nutrients": 6.1,
+     "soilReaction": 6.6
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Convolvulus arvensis",
    "name": {
     "it": "Vilucchio comune"
    },
+   "order": "Solanales",
    "family": "Convolvulaceae",
    "genus": "Convolvulus",
+   "congeners": [
+    "Convolvulus althaeoides",
+    "Convolvulus cantabrica",
+    "Convolvulus tricolor",
+    "Convolvulus elegantissimus",
+    "Convolvulus cneorum",
+    "Convolvulus sabatius",
+    "Convolvulus siculus",
+    "Convolvulus pentapetaloides"
+   ],
    "observations": 194,
    "monthsRelative": [
     0.0,
@@ -2509,15 +3383,37 @@
      "local": true
     }
    ],
-   "mysteryColor": "#BFE28D"
+   "mysteryColor": "#BFE28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.1,
+     "moisture": 3.6,
+     "temperature": 4.9,
+     "nutrients": 5.2,
+     "soilReaction": 7.0
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Ligustrum vulgare",
    "name": {
     "it": "Ligustro comune"
    },
+   "order": "Lamiales",
    "family": "Oleaceae",
    "genus": "Ligustrum",
+   "congeners": [
+    "Ligustrum sinense",
+    "Ligustrum lucidum",
+    "Ligustrum ovalifolium"
+   ],
    "observations": 197,
    "monthsRelative": [
     0.122,
@@ -2568,15 +3464,40 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B5E28D"
+   "mysteryColor": "#B5E28D",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.3,
+     "moisture": 3.9,
+     "temperature": 4.9,
+     "nutrients": 4.1,
+     "soilReaction": 7.4
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Helleborus foetidus",
    "name": {
     "it": "Elleboro puzzolente"
    },
+   "order": "Ranunculales",
    "family": "Ranunculaceae",
    "genus": "Helleborus",
+   "congeners": [
+    "Helleborus niger",
+    "Helleborus viridis",
+    "Helleborus bocconei",
+    "Helleborus argutifolius",
+    "Helleborus multifidus",
+    "Helleborus dumetorum"
+   ],
    "observations": 197,
    "monthsRelative": [
     0.292,
@@ -2634,15 +3555,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#BAE987"
+   "mysteryColor": "#BAE987",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 4.8,
+     "moisture": 3.6,
+     "temperature": 4.7,
+     "nutrients": 3.5,
+     "soilReaction": 8.2
+    },
+    "dispersal": [
+     "ants"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Vinca major",
    "name": {
     "it": "Pervinca maggiore"
    },
+   "order": "Gentianales",
    "family": "Apocynaceae",
    "genus": "Vinca",
+   "congeners": [
+    "Vinca minor",
+    "Vinca difformis"
+   ],
    "observations": 196,
    "monthsRelative": [
     0.079,
@@ -2699,15 +3641,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#BE8DE2"
+   "mysteryColor": "#BE8DE2",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.5,
+     "moisture": 4.5,
+     "temperature": 6.3,
+     "nutrients": 6.0,
+     "soilReaction": 6.2
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Tragopogon porrifolius",
    "name": {
     "it": "Barba di Becco violetta"
    },
+   "order": "Asterales",
    "family": "Asteraceae",
    "genus": "Tragopogon",
+   "congeners": [
+    "Tragopogon pratensis",
+    "Tragopogon dubius",
+    "Tragopogon orientalis",
+    "Tragopogon crocifolius",
+    "Tragopogon samaritani",
+    "Tragopogon tommasinii"
+   ],
    "observations": 191,
    "monthsRelative": [
     0.0,
@@ -2749,15 +3718,34 @@
      "local": true
     }
    ],
-   "mysteryColor": "#E28D9B"
+   "mysteryColor": "#E28D9B",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "biennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 8.1,
+     "moisture": 3.2,
+     "temperature": 5.8,
+     "nutrients": 6.1,
+     "soilReaction": 6.7
+    },
+    "dispersal": [
+     "stuckToAnimals",
+     "wind"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Hedera helix",
    "name": {
     "it": "Edera"
    },
+   "order": "Apiales",
    "family": "Araliaceae",
    "genus": "Hedera",
+   "congeners": [],
    "observations": 192,
    "monthsRelative": [
     0.136,
@@ -2816,15 +3804,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#B5E28D"
+   "mysteryColor": "#B5E28D",
+   "traits": {
+    "growthForm": "climber",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 3.9,
+     "moisture": 4.5,
+     "temperature": 4.7,
+     "nutrients": 5.1,
+     "soilReaction": 6.2
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Cyclamen hederifolium",
    "name": {
     "it": "Ciclamino napoletano"
    },
+   "order": "Ericales",
    "family": "Primulaceae",
    "genus": "Cyclamen",
+   "congeners": [
+    "Cyclamen repandum",
+    "Cyclamen purpurascens"
+   ],
    "observations": 189,
    "monthsRelative": [
     0.134,
@@ -2884,15 +3893,40 @@
      "local": true
     }
    ],
-   "mysteryColor": "#E2948D"
+   "mysteryColor": "#E2948D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 3.8,
+     "moisture": 4.1,
+     "temperature": 6.5,
+     "nutrients": 4.6,
+     "soilReaction": 7.0
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Hippocrepis emerus",
    "name": {
     "it": "Erba cornetta"
    },
+   "order": "Fabales",
    "family": "Fabaceae",
    "genus": "Hippocrepis",
+   "congeners": [
+    "Hippocrepis comosa",
+    "Hippocrepis biflora",
+    "Hippocrepis unisiliquosa",
+    "Hippocrepis ciliata",
+    "Hippocrepis glauca",
+    "Hippocrepis multisiliquosa"
+   ],
    "observations": 185,
    "monthsRelative": [
     0.076,
@@ -2949,15 +3983,33 @@
      "local": true
     }
    ],
-   "mysteryColor": "#F1E27E"
+   "mysteryColor": "#F1E27E",
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 6.2,
+     "moisture": 2.9,
+     "temperature": 5.4,
+     "nutrients": 2.6,
+     "soilReaction": 8.5
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Fagus sylvatica",
    "name": {
     "it": "Faggio comune"
    },
+   "order": "Fagales",
    "family": "Fagaceae",
    "genus": "Fagus",
+   "congeners": [],
    "observations": 164,
    "monthsRelative": [
     0.0,
@@ -3015,15 +4067,37 @@
      "local": true
     }
    ],
-   "mysteryColor": "#CFE28D"
+   "mysteryColor": "#CFE28D",
+   "traits": {
+    "growthForm": "tree",
+    "lifeCycle": null,
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 3.0,
+     "moisture": 4.6,
+     "temperature": 4.1,
+     "nutrients": 4.9,
+     "soilReaction": 5.9
+    },
+    "dispersal": [
+     "hoardedByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Althaea cannabina",
    "name": {
     "it": "Altea canapina"
    },
+   "order": "Malvales",
    "family": "Malvaceae",
    "genus": "Althaea",
+   "congeners": [
+    "Althaea officinalis",
+    "Althaea hirsuta",
+    "Althaea taurinensis"
+   ],
    "observations": 172,
    "monthsRelative": [
     0.028,
@@ -3082,15 +4156,36 @@
      "local": true
     }
    ],
-   "mysteryColor": "#EC83BE"
+   "mysteryColor": "#EC83BE",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 8.3,
+     "moisture": 3.6,
+     "temperature": 5.5,
+     "nutrients": 5.0,
+     "soilReaction": 7.3
+    },
+    "dispersal": [
+     "nearby"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Sambucus ebulus",
    "name": {
     "it": "Sambuco lebbio"
    },
+   "order": "Dipsacales",
    "family": "Viburnaceae",
    "genus": "Sambucus",
+   "congeners": [
+    "Sambucus nigra",
+    "Sambucus racemosa"
+   ],
    "observations": 174,
    "monthsRelative": [
     0.0,
@@ -3140,15 +4235,42 @@
      "local": true
     }
    ],
-   "mysteryColor": "#ACE28D"
+   "mysteryColor": "#ACE28D",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 7.1,
+     "moisture": 4.5,
+     "temperature": 4.8,
+     "nutrients": 7.3,
+     "soilReaction": 7.4
+    },
+    "dispersal": [
+     "eatenByAnimals"
+    ]
+   },
+   "protection": []
   },
   {
    "sci": "Equisetum telmateia",
    "name": {
     "it": "Equiseto massimo"
    },
+   "order": "Equisetales",
    "family": "Equisetaceae",
    "genus": "Equisetum",
+   "congeners": [
+    "Equisetum arvense",
+    "Equisetum ramosissimum",
+    "Equisetum palustre",
+    "Equisetum sylvaticum",
+    "Equisetum hyemale",
+    "Equisetum variegatum",
+    "Equisetum fluviatile",
+    "Equisetum pratense"
+   ],
    "observations": 75,
    "monthsRelative": [
     0.0,
@@ -3211,15 +4333,30 @@
      "local": true
     }
    ],
-   "mysteryColor": "#C3EC84"
+   "mysteryColor": "#C3EC84",
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": {
+     "light": 5.4,
+     "moisture": 6.4,
+     "temperature": 4.5,
+     "nutrients": 5.5,
+     "soilReaction": 7.2
+    },
+    "dispersal": []
+   },
+   "protection": []
   }
  ],
  "recipes": [
   {
+   "id": "tintura-lanterna-inverno",
    "name": {
     "it": "Tintura della Lanterna d'Inverno"
    },
-   "tier": "Intermedia",
+   "grade": "uncommon",
    "unlock": {
     "species": "Eranthis hyemalis",
     "level": 2
@@ -3228,7 +4365,7 @@
     {
      "qty": 2,
      "species": "Eranthis hyemalis",
-     "trait": "❄️ Gelo",
+     "trait": "frost",
      "note": {
       "it": "Data plausibile: gen–feb (dai dati GBIF)"
      }
@@ -3247,10 +4384,11 @@
    }
   },
   {
+   "id": "distillato-quota-silenziosa",
    "name": {
     "it": "Distillato della Quota Silenziosa"
    },
-   "tier": "Rara",
+   "grade": "rare",
    "unlock": {
     "species": "Fagus sylvatica",
     "level": 3
@@ -3259,7 +4397,7 @@
     {
      "qty": 2,
      "species": "Fagus sylvatica",
-     "trait": "🌫 Nebbia",
+     "trait": "fog",
      "note": {
       "it": "Plausibile solo in montagna: quota mediana ~930 m"
      }
@@ -3275,7 +4413,7 @@
     {
      "qty": 1,
      "species": null,
-     "trait": "🌕 Lunare",
+     "trait": "moon",
      "note": {
       "it": "Qualunque specie raccolta nella fase di luna piena"
      }
@@ -3286,10 +4424,11 @@
    }
   },
   {
+   "id": "unguento-muri-vecchi",
    "name": {
     "it": "Unguento dei Muri Vecchi"
    },
-   "tier": "Base",
+   "grade": "common",
    "unlock": null,
    "ingredients": [
     {
@@ -3303,7 +4442,7 @@
     {
      "qty": 1,
      "species": "Malva sylvestris",
-     "trait": "🌧 Pioggia",
+     "trait": "rain",
      "note": {
       "it": "Maggio–ottobre, in pianura"
      }
@@ -3314,10 +4453,11 @@
    }
   },
   {
+   "id": "essenza-ultimo-fiore",
    "name": {
     "it": "Essenza dell'Ultimo Fiore"
    },
-   "tier": "Intermedia",
+   "grade": "uncommon",
    "unlock": {
     "species": "Cyclamen hederifolium",
     "level": 2
@@ -3326,7 +4466,7 @@
     {
      "qty": 2,
      "species": "Cyclamen hederifolium",
-     "trait": "🌅 Crepuscolo",
+     "trait": "dusk",
      "note": {
       "it": "Autunno, collina"
      }
@@ -3334,7 +4474,7 @@
     {
      "qty": 1,
      "species": "Melissa officinalis",
-     "trait": "💧 Rugiada",
+     "trait": "dew",
      "note": {
       "it": "Aprile–ottobre"
      }
@@ -3342,6 +4482,296 @@
    ],
    "effect": {
     "it": "Riduce lo stress di un campo sfruttato (effetto di gioco)."
+   }
+  },
+  {
+   "id": "infuso-siepe-inverno",
+   "name": {
+    "it": "Infuso della Siepe d'Inverno"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Viburnum tinus",
+     "trait": null,
+     "note": {
+      "it": "Fiorisce d'inverno, nelle siepi e nei giardini"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Laurus nobilis",
+     "trait": null,
+     "note": {
+      "it": "Sempreverde: tutto l'anno, in pianura e collina"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima raccolta d'inverno immagazzina un po' di Vis in più (effetto di gioco)."
+   }
+  },
+  {
+   "id": "balsamo-spine-gentili",
+   "name": {
+    "it": "Balsamo delle Spine Gentili"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Paliurus spina-christi",
+     "trait": null,
+     "note": {
+      "it": "Arbusto spinoso dei calanchi e delle colline assolate"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Prunus spinosa",
+     "trait": null,
+     "note": {
+      "it": "Siepi e margini dei boschi; fiori bianchi a marzo"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Per un giorno le tue stazioni di arbusti spinosi si rigenerano prima (effetto di gioco)."
+   }
+  },
+  {
+   "id": "tintura-sangue-bosco",
+   "name": {
+    "it": "Tintura del Sangue di Bosco"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Cornus sanguinea",
+     "trait": null,
+     "note": {
+      "it": "Rami rossi e bacche nere, da maggio all'autunno"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Cornus mas",
+     "trait": null,
+     "note": {
+      "it": "Fiori gialli a fine inverno, prima delle foglie"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Svela dove e quando cercare una specie della tua zona che non hai ancora incontrato (effetto di gioco)."
+   }
+  },
+  {
+   "id": "acqua-stella-febbraio",
+   "name": {
+    "it": "Acqua della Stella di Febbraio"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Anemone hortensis",
+     "trait": null,
+     "note": {
+      "it": "Fine inverno, prati e oliveti di collina"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Corylus avellana",
+     "trait": null,
+     "note": {
+      "it": "Amenti gialli a febbraio, nei boschi e nelle siepi"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima essenza attinta con il gelo è più pura (effetto di gioco)."
+   }
+  },
+  {
+   "id": "sciroppo-bagolaro-paziente",
+   "name": {
+    "it": "Sciroppo del Bagolaro Paziente"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Celtis australis",
+     "trait": null,
+     "note": {
+      "it": "Viali e colline; frutti scuri in autunno"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Acer campestre",
+     "trait": null,
+     "note": {
+      "it": "Siepi e boschi; foglie gialle in autunno"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Una stazione esaurita torna pronta qualche ora prima (effetto di gioco)."
+   }
+  },
+  {
+   "id": "pozione-malva-mite",
+   "name": {
+    "it": "Pozione della Malva Mite"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Malva sylvestris",
+     "trait": null,
+     "note": {
+      "it": "Fiori rosa-viola da maggio a ottobre, bordi delle strade"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Althaea cannabina",
+     "trait": null,
+     "note": {
+      "it": "Estate e inizio autunno, prati incolti"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Il prossimo ripasso sbagliato non fa ripartire il fatto da capo (effetto di gioco)."
+   }
+  },
+  {
+   "id": "elisir-melissa-lucente",
+   "name": {
+    "it": "Elisir della Melissa Lucente"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Melissa officinalis",
+     "trait": null,
+     "note": {
+      "it": "Da aprile all'autunno, luoghi freschi vicino alle case"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Melittis melissophyllum",
+     "trait": null,
+     "note": {
+      "it": "Maggio, nei boschi di collina"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Per un giorno le curiosità del giorno sono due (effetto di gioco)."
+   }
+  },
+  {
+   "id": "distillato-prato-azzurro",
+   "name": {
+    "it": "Distillato del Prato Azzurro"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Salvia pratensis",
+     "trait": null,
+     "note": {
+      "it": "Prati soleggiati, fiori blu-viola in primavera"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Borago officinalis",
+     "trait": null,
+     "note": {
+      "it": "Fiori azzurri a stella, quasi tutto l'anno"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima sessione di studio dà qualche PE in più (effetto di gioco)."
+   }
+  },
+  {
+   "id": "unguento-argento-lunare",
+   "name": {
+    "it": "Unguento dell'Argento Lunare"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Lunaria annua",
+     "trait": "moon",
+     "note": {
+      "it": "Fiori viola in primavera, frutti come monete d'argento"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Glechoma hederacea",
+     "trait": null,
+     "note": {
+      "it": "Marzo e aprile, al margine dei prati"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco)."
+   }
+  },
+  {
+   "id": "infuso-frassino-manna",
+   "name": {
+    "it": "Infuso del Frassino da Manna"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Fraxinus ornus",
+     "trait": null,
+     "note": {
+      "it": "Fiori bianchi piumosi ad aprile, boschi di collina"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Prunus cerasifera",
+     "trait": "dew",
+     "note": {
+      "it": "Fiorisce presto, a marzo, nelle siepi"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima raccolta da un albero immagazzina il doppio della Vis (effetto di gioco)."
    }
   }
  ],

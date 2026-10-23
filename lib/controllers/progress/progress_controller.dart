@@ -5,6 +5,7 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/base/loadable_controller.dart';
@@ -60,10 +61,23 @@ class ProgressController extends LoadableController<GameState> {
     return result.isValid;
   }
 
-  /// Essenza attinta simulata (strumento di debug finché non c'è il campo).
-  Future<void> drawSimulated(String speciesSci, {String? trait}) async {
-    await record(EssenceDrawn(speciesSci: speciesSci, trait: trait, simulated: true, occurredAt: now));
+  /// Essenza attinta simulata (strumento di debug finché non c'è il campo): immagazzina Vis, dà PE e, se è la
+  /// prima della specie, incassa i suoi PE virtuali. Restituisce `false` se oggi la specie è già stata attinta o non
+  /// è ancora incontrata.
+  Future<bool> drawSimulated(String speciesSci, {String? trait}) async {
+    if (!canDraw(state, speciesSci, now)) return false;
+    await record(
+      EssenceDrawn(
+        speciesSci: speciesSci,
+        trait: trait,
+        simulated: true,
+        vis: visPerDraw,
+        xp: XpRules.essenceDrawn,
+        occurredAt: now,
+      ),
+    );
     await checkMastery(speciesSci);
+    return true;
   }
 
   /// Registra la maestria se le condizioni sono appena state raggiunte.
