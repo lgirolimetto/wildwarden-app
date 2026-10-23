@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 /// ("ha qualcosa di viola"), la specie resta da scoprire.
 ///
 /// Non scarica né sfoca immagini: costa quanto un riquadro colorato, anche in una lista lunga.
+///
+/// ⚠️ Non si usa più per le piante (l'erbario mostra foto e nome di tutte le specie): resta come base per le
+/// figurine mancanti dell'album delle ricette (tappa B, step 6).
 class MysteryCover extends StatelessWidget {
   final Species species;
   final BorderRadius borderRadius;

@@ -13,7 +13,6 @@ import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
-import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
@@ -42,7 +41,7 @@ class SpeciesPage extends StatelessWidget {
           final species = catalog.speciesBySci(speciesSci)!;
           return state.hasEncountered(speciesSci)
               ? _KnownSpecies(species: species, catalog: catalog, state: state, progress: progress)
-              : _UnknownSpecies(species: species, state: state, progress: progress);
+              : _UnknownSpecies(species: species, catalog: catalog, state: state, progress: progress);
         },
       ),
     ),
@@ -51,10 +50,11 @@ class SpeciesPage extends StatelessWidget {
 
 class _UnknownSpecies extends StatelessWidget {
   final Species species;
+  final Catalog catalog;
   final GameState state;
   final ProgressController progress;
 
-  const _UnknownSpecies({required this.species, required this.state, required this.progress});
+  const _UnknownSpecies({required this.species, required this.catalog, required this.state, required this.progress});
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +63,15 @@ class _UnknownSpecies extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: Gaps.xl),
       children: [
         SpeciesPhotoHeader(
-          image: desired
-              ? RemoteImage(species.images.first.url)
-              : MysteryCover(species: species, borderRadius: SpeciesPhotoHeader.radius),
-          title: desired ? context.game.name(species) : context.l10n.unknownSpecies,
+          image: RemoteImage(species.images.first.url),
+          credit: '${species.images.first.creator} · ${species.images.first.license}',
+          title: context.game.name(species),
           subtitle: context.l10n.notEncounteredYet,
           level: null,
         ),
         _Padded(
           children: [
+            _SafetyWarning(species: species, catalog: catalog),
             Text(context.game.hint(species)),
             const SizedBox(height: Gaps.l),
             FilledButton.icon(
@@ -100,6 +100,28 @@ class _UnknownSpecies extends StatelessWidget {
   }
 }
 
+/// Avviso di tossicità, sempre visibile in cima alla scheda: la sicurezza non si sblocca studiando.
+class _SafetyWarning extends StatelessWidget {
+  final Species species;
+  final Catalog catalog;
+
+  const _SafetyWarning({required this.species, required this.catalog});
+
+  @override
+  Widget build(BuildContext context) {
+    final safety = catalog.safety[species.sci];
+    if (safety == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(bottom: Gaps.l),
+      child: Text(
+        key: const ValueKey('safety-warning'),
+        context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
+        style: TextStyle(color: context.druid.warning),
+      ),
+    );
+  }
+}
+
 class _KnownSpecies extends StatelessWidget {
   final Species species;
   final Catalog catalog;
@@ -113,7 +135,6 @@ class _KnownSpecies extends StatelessWidget {
     final level = state.levelOf(species.sci);
     final game = context.game;
     final lore = catalog.lore[species.sci];
-    final safety = catalog.safety[species.sci];
     Widget locked(int at) => _Locked(level: at);
 
     return ListView(
@@ -128,6 +149,7 @@ class _KnownSpecies extends StatelessWidget {
         ),
         _Padded(
           children: [
+            _SafetyWarning(species: species, catalog: catalog),
             _StudyLadder(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
 
@@ -169,15 +191,8 @@ class _KnownSpecies extends StatelessWidget {
                         Text(species.family),
                         if (catalog.relativesOf(species).isNotEmpty)
                           Text(
-                            '${context.l10n.sectionRelatives}: ${catalog.relativesOf(species).map((r) => state.hasEncountered(r.sci) ? game.name(r) : context.l10n.unknownSpecies).join(', ')}',
+                            '${context.l10n.sectionRelatives}: ${catalog.relativesOf(species).map(game.name).join(', ')}',
                           ),
-                        if (safety != null) ...[
-                          const SizedBox(height: Gaps.xs),
-                          Text(
-                            context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
-                            style: TextStyle(color: context.druid.warning),
-                          ),
-                        ],
                       ],
                     )
                   : locked(2),

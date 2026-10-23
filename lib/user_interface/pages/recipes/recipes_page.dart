@@ -71,7 +71,7 @@ class _RecipeCard extends StatelessWidget {
             Text(recipe.name.resolve(lang), style: context.texts.titleLarge),
             if (recipe.unlock != null && unlockSpecies != null)
               Text(
-                '${context.l10n.studyLevelTitle(state.hasEncountered(unlockSpecies.sci) ? context.game.name(unlockSpecies) : context.l10n.unknownSpecies, recipe.unlock!.level)} · '
+                '${context.l10n.studyLevelTitle(context.game.name(unlockSpecies), recipe.unlock!.level)} · '
                 '${context.l10n.recipeCurrentLevel(state.levelOf(unlockSpecies.sci))}',
                 style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
               ),

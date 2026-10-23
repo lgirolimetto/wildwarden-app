@@ -47,7 +47,10 @@ class StudyHomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (mission != null) ...[const SizedBox(height: Gaps.l), MissionBanner(mission: mission)],
+                if (mission != null) ...[
+                  const SizedBox(height: Gaps.l),
+                  MissionBanner(mission: mission, catalog: catalog, state: state),
+                ],
                 const SizedBox(height: Gaps.l),
                 _FunFactCard(catalog: catalog, state: state, now: now),
                 const SizedBox(height: Gaps.l),

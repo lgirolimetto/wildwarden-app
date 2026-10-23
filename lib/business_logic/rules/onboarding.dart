@@ -34,3 +34,13 @@ Mission? currentMission(GameState state, Catalog catalog) {
 
 bool isApprenticeshipComplete(GameState state, Catalog catalog) =>
     Mission.values.every((m) => m.isDone(state, catalog));
+
+/// Specie da studiare per la missione "Studiala": la prima incontrata che ha ancora un livello da superare.
+String? speciesToStudyFirst(GameState state, Catalog catalog) {
+  final byEncounter = state.firstEncounters.entries.toList()..sort((a, b) => a.value.compareTo(b.value));
+  for (final entry in byEncounter) {
+    final species = catalog.speciesBySci(entry.key);
+    if (species != null && nextStudyLevel(species, catalog, state) != null) return species.sci;
+  }
+  return null;
+}

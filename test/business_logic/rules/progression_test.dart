@@ -181,6 +181,24 @@ void main() {
       expect(isApprenticeshipComplete(state, catalog), isTrue);
     });
 
+    test('"Studiala" propone la prima specie incontrata che ha ancora un livello da superare', () {
+      expect(speciesToStudyFirst(GameState.empty, catalog), isNull);
+
+      final earlier = SpeciesEncountered(
+        speciesSci: 'Fagus sylvatica',
+        method: EncounterMethod.simulated,
+        occurredAt: feb.subtract(const Duration(days: 1)),
+      );
+      var state = play([met('Eranthis hyemalis'), earlier]);
+      expect(speciesToStudyFirst(state, catalog), 'Fagus sylvatica');
+
+      // Livelli finiti: si passa alla specie successiva.
+      for (var level = 1; level <= maxStudyLevel; level++) {
+        state = state.apply(passed('Fagus sylvatica', level));
+      }
+      expect(speciesToStudyFirst(state, catalog), 'Eranthis hyemalis');
+    });
+
     test('saltare l\'apprendistato lo nasconde', () {
       final state = play([OnboardingMarked(mark: OnboardingMark.skipped, occurredAt: feb)]);
       expect(currentMission(state, catalog), isNull);

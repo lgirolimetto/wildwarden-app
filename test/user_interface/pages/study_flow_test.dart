@@ -1,5 +1,6 @@
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
+import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
@@ -21,7 +22,7 @@ void main() {
     testWidgets('le missioni avanzano usando l\'app', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      expect(find.text('Apri l\'erbario'), findsOneWidget);
+      expect(find.byKey(const ValueKey('mission-visitErbario')), findsOneWidget);
 
       await openTab(tester, 'Erbario');
       await openTab(tester, 'Studio');
@@ -53,6 +54,34 @@ void main() {
       expect(Get.find<ProgressController>().state.xp, XpRules.desiderataFulfilled);
       await scrollToTop(tester);
       expect(find.text('Studiala'), findsOneWidget);
+    });
+
+    testWidgets('il pulsante della missione porta all\'erbario e la compie', (tester) async {
+      registerTestDependencies();
+      await pumpDruidApp(tester);
+
+      await tester.tap(find.byKey(const ValueKey('mission-action-visitErbario')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('0/4 trovate'), findsOneWidget);
+      expect(Get.find<HomeController>().tab, HomeController.erbarioTab);
+      expect(Get.find<ProgressController>().state.onboardingMarks, contains(OnboardingMark.erbarioVisited));
+    });
+
+    testWidgets('il pulsante di "Studiala" apre il primo livello della specie incontrata', (tester) async {
+      registerTestDependencies(
+        events: [
+          OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: _feb),
+          DesiderataChanged(speciesSci: 'Helleborus viridis', marked: true, occurredAt: _feb),
+          _met('Helleborus viridis'),
+        ],
+      );
+      await pumpDruidApp(tester);
+
+      await tester.tap(find.byKey(const ValueKey('mission-action-firstLevel')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Elleboro verde · livello 1'), findsOneWidget);
     });
 
     testWidgets('il glossario si apre dalla missione e l\'apprendistato si può saltare', (tester) async {

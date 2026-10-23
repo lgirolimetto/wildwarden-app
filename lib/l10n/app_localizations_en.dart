@@ -605,7 +605,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionVisitErbarioBody =>
-      'The herbarium gathers the species of the area. Those you haven\'t met yet are veiled, each with a hint.';
+      'The herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and meeting them.';
 
   @override
   String get missionMarkDesiderataTitle => 'Choose your desiderata';
@@ -637,6 +637,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionSkip => 'Skip the apprenticeship';
+
+  @override
+  String get missionActionOpenErbario => 'Open the herbarium';
+
+  @override
+  String get missionActionChooseDesiderata => 'Choose in the herbarium';
+
+  @override
+  String get missionActionStudy => 'Start studying';
+
+  @override
+  String get missionActionRecipes => 'See the recipes';
 
   @override
   String get missionGlossary => 'Glossary';

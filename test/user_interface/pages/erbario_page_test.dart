@@ -1,10 +1,8 @@
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
-import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
-import 'package:druid_app/l10n/app_localizations_en.dart';
-import 'package:druid_app/user_interface/pages/erbario/hint_text.dart';
+import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -15,18 +13,53 @@ import '../../helpers/test_app.dart';
 void main() {
   tearDown(Get.reset);
 
-  testWidgets('mostra le specie da trovare con il loro indizio', (tester) async {
+  testWidgets('mostra anche le specie da trovare con foto e nome, senza indizio', (tester) async {
     registerTestDependencies();
     await pumpDruidApp(tester);
     await openTab(tester, 'Erbario');
 
     expect(find.text('Erbario'), findsWidgets);
     expect(find.text('0/4 trovate'), findsOneWidget);
-    expect(find.text('???'), findsWidgets);
+    expect(find.text('???'), findsNothing);
+    expect(find.byType(MysteryCover), findsNothing);
     expect(
-      find.text('Una pianta della famiglia Ranunculaceae, che si fa notare soprattutto in inverno, in collina.'),
+      find.descendant(of: find.byKey(const ValueKey('unknown-Eranthis hyemalis')), matching: find.text('Piè di gallo')),
       findsOneWidget,
     );
+    expect(
+      find.text('Una pianta della famiglia Ranunculaceae, che si fa notare soprattutto in inverno, in collina.'),
+      findsNothing,
+    );
+  });
+
+  testWidgets('la scheda di una specie non incontrata mostra nome e avviso di tossicità', (tester) async {
+    registerTestDependencies();
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Eranthis hyemalis')));
+
+    expect(find.text('Piè di gallo'), findsWidgets);
+    expect(find.text('Non ancora incontrata'), findsOneWidget);
+    expect(find.text('⚠️ tossica · da verificare'), findsOneWidget);
+  });
+
+  testWidgets('l\'avviso di tossicità si vede anche prima del livello 2', (tester) async {
+    registerTestDependencies(
+      events: [
+        SpeciesEncountered(
+          speciesSci: 'Eranthis hyemalis',
+          method: EncounterMethod.photo,
+          occurredAt: DateTime(2027, 2, 1),
+        ),
+      ],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    await scrollAndTap(tester, find.byKey(const ValueKey('met-Eranthis hyemalis')));
+
+    expect(find.text('⚠️ tossica · da verificare'), findsOneWidget);
   });
 
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
@@ -89,14 +122,13 @@ void main() {
     expect(find.text('Simula incontro'), findsNothing);
   });
 
-  testWidgets('in inglese l\'indizio è tradotto', (tester) async {
+  testWidgets('in inglese i nomi delle specie sono tradotti', (tester) async {
     registerTestDependencies();
     await pumpDruidApp(tester, locale: const Locale('en'));
     await openTab(tester, 'Herbarium');
 
     expect(find.text('Herbarium'), findsWidgets);
     final malva = smallCatalog().speciesBySci('Malva sylvestris')!;
-    expect(find.text(hintText(AppLocalizationsEn(), malva.hint)), findsOneWidget);
-    expect(find.text('A plant of the Malvaceae family, in the lowlands.'), findsOneWidget);
+    expect(find.text(malva.name.resolve('en')), findsOneWidget);
   });
 }

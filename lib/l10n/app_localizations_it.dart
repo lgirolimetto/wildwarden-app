@@ -603,7 +603,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionVisitErbarioBody =>
-      'L\'erbario raccoglie le specie della zona. Quelle che non hai ancora incontrato sono velate: sotto ognuna c\'è un indizio.';
+      'L\'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.';
 
   @override
   String get missionMarkDesiderataTitle => 'Scegli le tue desiderata';
@@ -635,6 +635,18 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionSkip => 'Salta l\'apprendistato';
+
+  @override
+  String get missionActionOpenErbario => 'Apri l\'erbario';
+
+  @override
+  String get missionActionChooseDesiderata => 'Scegli nell\'erbario';
+
+  @override
+  String get missionActionStudy => 'Inizia a studiare';
+
+  @override
+  String get missionActionRecipes => 'Vedi le ricette';
 
   @override
   String get missionGlossary => 'Glossario';

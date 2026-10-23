@@ -2,12 +2,10 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
-import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
-import 'package:druid_app/user_interface/pages/erbario/hint_text.dart';
 import 'package:druid_app/user_interface/pages/erbario/widgets/species_tile.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
@@ -15,7 +13,7 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Erbario della zona: prima le specie incontrate, poi quelle da trovare con il loro indizio.
+/// Erbario della zona: tutte le specie con foto e nome, prima le incontrate e poi quelle da trovare.
 class ErbarioPage extends StatelessWidget {
   const ErbarioPage({super.key});
 
@@ -106,8 +104,8 @@ class _ErbarioContent extends StatelessWidget {
             tiles: [
               for (final s in missing)
                 (
-                  // Foto + "???" + indizio, che è lungo circa 70-110 caratteri.
-                  1 / tileAspect(s) + 0.3 + hintText(context.l10n, s.hint).length / 140,
+                  // Foto + nome.
+                  1 / tileAspect(s) + 0.3,
                   GestureDetector(
                     onTap: () => open(s.sci),
                     child: UnknownSpeciesTile(

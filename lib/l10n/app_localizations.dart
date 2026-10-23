@@ -1067,7 +1067,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionVisitErbarioBody.
   ///
   /// In it, this message translates to:
-  /// **'L\'erbario raccoglie le specie della zona. Quelle che non hai ancora incontrato sono velate: sotto ognuna c\'è un indizio.'**
+  /// **'L\'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.'**
   String get missionVisitErbarioBody;
 
   /// No description provided for @missionMarkDesiderataTitle.
@@ -1123,6 +1123,30 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Salta l\'apprendistato'**
   String get missionSkip;
+
+  /// No description provided for @missionActionOpenErbario.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri l\'erbario'**
+  String get missionActionOpenErbario;
+
+  /// No description provided for @missionActionChooseDesiderata.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli nell\'erbario'**
+  String get missionActionChooseDesiderata;
+
+  /// No description provided for @missionActionStudy.
+  ///
+  /// In it, this message translates to:
+  /// **'Inizia a studiare'**
+  String get missionActionStudy;
+
+  /// No description provided for @missionActionRecipes.
+  ///
+  /// In it, this message translates to:
+  /// **'Vedi le ricette'**
+  String get missionActionRecipes;
 
   /// No description provided for @missionGlossary.
   ///
