@@ -196,6 +196,11 @@ class ClayCircle extends StatelessWidget {
   /// un'informazione (livello di studio, voce scelta nella barra di navigazione).
   final bool keepColor;
 
+  /// La sfera si preme (pulsante tondo, voce della barra): nelle livree neumorfiche resta in rilievo. Altrimenti è
+  /// un'icona da guardare e, per la regola del rilievo ("in rilievo = si può toccare"), è incisa come le pillole dei
+  /// tratti: un solco sottile tutt'intorno e dentro l'icona incisa.
+  final bool pressable;
+
   const ClayCircle({
     super.key,
     required this.color,
@@ -206,11 +211,34 @@ class ClayCircle extends StatelessWidget {
     this.child,
     this.concave = false,
     this.keepColor = false,
+    this.pressable = false,
   });
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
+    if (tokens.neu && icon != null && child == null && emoji == null && !keepColor && !pressable) {
+      // Come le pillole che non si premono: solco inciso e, appena dentro, la superficie che risale di poco.
+      final radius = BorderRadius.circular(size / 2);
+      return SizedBox.square(
+        dimension: size,
+        child: NeuInset(
+          radius: radius,
+          depth: 0.8,
+          strength: 0.45,
+          child: Padding(
+            padding: const EdgeInsets.all(3),
+            child: NeuInset(
+              radius: radius,
+              depth: 0.8,
+              strength: 0.35,
+              convex: true,
+              child: Center(child: EngravedIcon(icon!, size: size * 0.45)),
+            ),
+          ),
+        ),
+      );
+    }
     if (tokens.neu && icon != null && child == null && emoji == null && !keepColor) {
       return Container(
         width: size,
@@ -288,6 +316,7 @@ class ClayIconButton extends StatelessWidget {
         icon: icon,
         iconColor: context.colors.onSurface,
         size: 44,
+        pressable: true,
       ),
     ),
   );
@@ -519,6 +548,7 @@ class ClayNavBar extends StatelessWidget {
                                   concave: true,
                                   // La voce scelta resta colorata: il colore dice dove sei.
                                   keepColor: true,
+                                  pressable: true,
                                 )
                               // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
                               : context.druid.neu
@@ -527,6 +557,7 @@ class ClayNavBar extends StatelessWidget {
                                   icon: icon,
                                   iconColor: colors.onSurfaceVariant,
                                   size: 40,
+                                  pressable: true,
                                 )
                               : SizedBox(width: 40, height: 40, child: Icon(icon, color: colors.onSurfaceVariant)),
                         ),

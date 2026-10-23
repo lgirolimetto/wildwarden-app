@@ -202,5 +202,22 @@ void main() {
       expect(find.byType(EngravedIcon), findsOneWidget);
       expect(find.byIcon(Icons.check_rounded), findsOneWidget);
     });
+
+    testWidgets('regola del rilievo: un\'icona da guardare è incisa (solco), una da premere resta in rilievo', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        const Row(
+          children: [
+            ClayCircle(key: ValueKey('look'), color: Colors.orange, icon: Icons.flag_rounded),
+            ClayCircle(key: ValueKey('press'), color: Colors.orange, icon: Icons.menu_book_rounded, pressable: true),
+          ],
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.descendant(of: find.byKey(const ValueKey('look')), matching: find.byType(NeuInset)), findsWidgets);
+      expect(find.descendant(of: find.byKey(const ValueKey('press')), matching: find.byType(NeuInset)), findsNothing);
+    });
   });
 }
