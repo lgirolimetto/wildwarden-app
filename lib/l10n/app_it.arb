@@ -945,5 +945,27 @@
   "debugGradePreview": "Anteprima dei gradi",
   "debugGradeSampleName": "Elisir di Prova",
   "debugGradeSampleIngredient": "Erba d'argento",
-  "debugGradeSampleEffect": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco)."
+  "debugGradeSampleEffect": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).",
+  "badgeEncountered": "Incontrata il",
+  "badgeProtected": "Specie protetta",
+  "recipesCount": "{learned} di {total}",
+  "recipeIngredientCount": "{count, plural, =1{1 ingrediente} other{{count} ingredienti}}",
+  "@recipesCount": {
+    "placeholders": {
+      "learned": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@recipeIngredientCount": {
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  }
 }

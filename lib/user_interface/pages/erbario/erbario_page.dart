@@ -4,6 +4,7 @@ import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
@@ -82,14 +83,15 @@ class _ErbarioContent extends StatelessWidget {
             tiles: [
               for (final s in encountered)
                 (
-                  // Altezza stimata, in larghezze di tessera: foto + nome e livello (+ "Studia").
-                  1 / tileAspect(s) + 0.45 + (study(s) == null ? 0 : 0.2),
+                  // Altezza stimata, in larghezze di tessera: foto + nome, timbro e livello (+ "Studia").
+                  1 / tileAspect(s) + 0.6 + (study(s) == null ? 0 : 0.2),
                   GestureDetector(
                     onTap: () => open(s.sci),
                     child: EncounteredSpeciesTile(
                       key: ValueKey('met-${s.sci}'),
                       species: s,
                       level: state.levelOf(s.sci),
+                      encounteredAt: state.firstEncounters[s.sci],
                       onStudy: study(s),
                     ),
                   ),
@@ -112,8 +114,8 @@ class _ErbarioContent extends StatelessWidget {
             tiles: [
               for (final s in missing)
                 (
-                  // Foto + nome (+ "Studia").
-                  1 / tileAspect(s) + 0.3 + (study(s) == null ? 0 : 0.2),
+                  // Foto + nome (+ bollino "protetta", + "Studia").
+                  1 / tileAspect(s) + 0.3 + (s.isProtected ? 0.2 : 0) + (study(s) == null ? 0 : 0.2),
                   GestureDetector(
                     onTap: () => open(s.sci),
                     child: UnknownSpeciesTile(

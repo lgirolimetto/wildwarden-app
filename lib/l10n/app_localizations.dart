@@ -1765,6 +1765,30 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).'**
   String get debugGradeSampleEffect;
+
+  /// No description provided for @badgeEncountered.
+  ///
+  /// In it, this message translates to:
+  /// **'Incontrata il'**
+  String get badgeEncountered;
+
+  /// No description provided for @badgeProtected.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie protetta'**
+  String get badgeProtected;
+
+  /// No description provided for @recipesCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{learned} di {total}'**
+  String recipesCount(int learned, int total);
+
+  /// No description provided for @recipeIngredientCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 ingrediente} other{{count} ingredienti}}'**
+  String recipeIngredientCount(num count);
 }
 
 class _AppLocalizationsDelegate

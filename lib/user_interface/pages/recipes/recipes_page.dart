@@ -1,145 +1,117 @@
-import 'package:druid_app/business_logic/models/catalog.dart';
-import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/recipe.dart';
-import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
-import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
+import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
+import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/recipes/recipe_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
-import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-/// Ricette: nome, grado, ingredienti (sempre con il nome della pianta) ed effetto. Pagina densa (`DenseArea`).
+/// Album delle ricette: una figurina per ricetta. Le imparate mostrano grado e nome; le mancanti un "?" su un pastello
+/// sempre uguale per quella ricetta, con il grado, così si sa che cosa manca. Un tocco apre la figurina.
 class RecipesPage extends StatelessWidget {
   const RecipesPage({super.key});
+
+  /// Proporzioni di una figurina (larghezza / altezza).
+  static const figurineAspect = 0.78;
 
   @override
   Widget build(BuildContext context) => DenseArea(
     paintBackground: true,
     child: GameDataBuilder(
-      builder: (context, catalog, state, _) => ListView(
-        padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, homeBottomInset),
-        children: [
-          ClayPageHeader(
-            title: context.l10n.recipesTitle,
-            icon: Icons.science_rounded,
-            iconColor: context.druid.levelColor(4),
-          ),
-          const SizedBox(height: Gaps.l),
-          for (final recipe in catalog.recipes) ...[
-            _RecipeCard(recipe: recipe, catalog: catalog, state: state),
-            const SizedBox(height: Gaps.m),
+      builder: (context, catalog, state, _) {
+        final learned = catalog.recipes.where((r) => isRecipeUnlocked(r, state)).length;
+        return CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, Gaps.l),
+              sliver: SliverToBoxAdapter(
+                child: ClayPageHeader(
+                  title: context.l10n.recipesTitle,
+                  icon: Icons.science_rounded,
+                  iconColor: context.druid.levelColor(4),
+                  trailing: Pill(
+                    context.l10n.recipesCount(learned, catalog.recipes.length),
+                    key: const ValueKey('recipes-count'),
+                  ),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.s, Gaps.l, homeBottomInset),
+              sliver: SliverGrid.count(
+                crossAxisCount: 2,
+                childAspectRatio: figurineAspect,
+                // Spazio perché il rilievo delle figurine non si sovrapponga.
+                crossAxisSpacing: Gaps.l,
+                mainAxisSpacing: Gaps.xl,
+                children: [
+                  for (final recipe in catalog.recipes)
+                    _Figurine(recipe: recipe, learned: isRecipeUnlocked(recipe, state)),
+                ],
+              ),
+            ),
           ],
-        ],
-      ),
+        );
+      },
     ),
   );
 }
 
-class _RecipeCard extends StatelessWidget {
+class _Figurine extends StatelessWidget {
   final Recipe recipe;
-  final Catalog catalog;
-  final GameState state;
+  final bool learned;
 
-  const _RecipeCard({required this.recipe, required this.catalog, required this.state});
+  const _Figurine({required this.recipe, required this.learned});
 
   @override
   Widget build(BuildContext context) {
-    final lang = context.contentLanguage;
-    final unlocked = isRecipeUnlocked(recipe, state);
-    final known = recipe.ingredients.where((i) => isIngredientKnown(i, state)).length;
-    final unlockSpecies = recipe.unlock == null ? null : catalog.speciesBySci(recipe.unlock!.speciesSci);
-    return GradeCard(
-      key: ValueKey('recipe-${recipe.name.resolve('it')}'),
-      grade: recipe.grade,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade)),
-              const SizedBox(width: Gaps.s),
-              // Lo stato va a destra e, se lo spazio non basta (cornice del grado), si accorcia invece di sbordare.
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+    final dot = GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade));
+    return GestureDetector(
+      key: ValueKey('figurine-${recipe.id}'),
+      onTap: () => Get.to<void>(() => RecipePage(recipeId: recipe.id)),
+      child: GradeCard(
+        grade: recipe.grade,
+        padding: const EdgeInsets.all(Gaps.s),
+        child: learned
+            ? Padding(
+                padding: const EdgeInsets.all(Gaps.s),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(unlocked ? Icons.lock_open : Icons.lock_outline, size: 18),
-                    const SizedBox(width: Gaps.xs),
-                    Flexible(
-                      child: Text(
-                        unlocked ? context.l10n.recipeUnlocked : context.l10n.recipeLocked,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    dot,
+                    const Spacer(),
+                    Text(
+                      recipe.name.resolve(context.contentLanguage),
+                      style: context.texts.titleMedium,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: Gaps.xs),
+                    Text(
+                      context.l10n.recipeIngredientCount(recipe.ingredients.length),
+                      style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
                     ),
                   ],
                 ),
+              )
+            : Stack(
+                children: [
+                  Positioned.fill(
+                    child: MysteryCover(
+                      seed: recipe.id,
+                      borderRadius: BorderRadius.circular(context.druid.cardRadius - Gaps.s),
+                    ),
+                  ),
+                  Positioned(left: Gaps.s, top: Gaps.s, child: dot),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(height: Gaps.s),
-          Text(recipe.name.resolve(lang), style: context.texts.titleLarge),
-          if (recipe.grade == Grade.common && !unlocked)
-            Text(
-              context.l10n.recipeLearnByStudying(
-                teachingSpecies(recipe).map(catalog.speciesBySci).nonNulls.map(context.game.name).join(', '),
-              ),
-              style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
-            )
-          else if (recipe.grade != Grade.common && recipe.unlock != null && unlockSpecies != null)
-            Text(
-              '${context.l10n.studyLevelTitle(context.game.name(unlockSpecies), recipe.unlock!.level)} · '
-              '${context.l10n.recipeCurrentLevel(state.levelOf(unlockSpecies.sci))}',
-              style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
-            ),
-          const SizedBox(height: Gaps.s),
-          Text(context.l10n.recipeKnownIngredients(known, recipe.ingredients.length), style: context.texts.labelMedium),
-          const SizedBox(height: Gaps.xs),
-          for (final ingredient in recipe.ingredients)
-            _IngredientRow(ingredient: ingredient, catalog: catalog, state: state),
-          const SizedBox(height: Gaps.s),
-          Text(recipe.effect.resolve(lang)),
-        ],
-      ),
-    );
-  }
-}
-
-class _IngredientRow extends StatelessWidget {
-  final Ingredient ingredient;
-  final Catalog catalog;
-  final GameState state;
-
-  const _IngredientRow({required this.ingredient, required this.catalog, required this.state});
-
-  @override
-  Widget build(BuildContext context) {
-    // Le piante hanno sempre nome e foto: gli ingredienti non si nascondono più (decisione del 2026-10-23).
-    final species = ingredient.speciesSci == null ? null : catalog.speciesBySci(ingredient.speciesSci!);
-    final name = species == null ? context.l10n.recipeAnySpecies : context.game.name(species);
-    return Padding(
-      padding: const EdgeInsets.only(bottom: Gaps.s),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Wrap(
-            spacing: Gaps.chip,
-            runSpacing: Gaps.chipRun,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              Text('${ingredient.quantity} × $name', style: context.texts.bodyLarge),
-              if (ingredient.trait != null) Pill(context.game.trait(ingredient.trait!)),
-            ],
-          ),
-          Text(
-            ingredient.note.resolve(context.contentLanguage),
-            style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
-          ),
-        ],
       ),
     );
   }

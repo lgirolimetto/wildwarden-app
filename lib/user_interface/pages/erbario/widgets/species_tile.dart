@@ -1,10 +1,13 @@
 import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
+import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 /// Scheda di una specie non ancora incontrata: foto e nome, come una pagina già stampata dell'erbario. Il resto si
 /// scopre studiando e incontrandola. [onSimulateEncounter] è presente solo con gli strumenti di debug attivi.
@@ -25,6 +28,7 @@ class UnknownSpeciesTile extends StatelessWidget {
     image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
+      if (species.isProtected) ...[const SizedBox(height: Gaps.s), _ProtectedBadge()],
       if (level > 0) ...[const SizedBox(height: Gaps.xs), _LevelDots(level: level)],
       if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
       if (onSimulateEncounter != null) ...[
@@ -46,10 +50,13 @@ class EncounteredSpeciesTile extends StatelessWidget {
   final Species species;
   final int level;
 
+  /// Data del primo incontro: il timbro sulla tessera.
+  final DateTime? encounteredAt;
+
   /// `null` se la specie non ha più livelli da studiare.
   final VoidCallback? onStudy;
 
-  const EncounteredSpeciesTile({super.key, required this.species, this.level = 0, this.onStudy});
+  const EncounteredSpeciesTile({super.key, required this.species, this.level = 0, this.encounteredAt, this.onStudy});
 
   @override
   Widget build(BuildContext context) => _TileFrame(
@@ -60,13 +67,34 @@ class EncounteredSpeciesTile extends StatelessWidget {
     color: context.druid.neu ? context.colors.surfaceContainerLowest : null,
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
-      const SizedBox(height: Gaps.xs),
+      const SizedBox(height: Gaps.s),
+      Wrap(
+        spacing: Gaps.s,
+        runSpacing: Gaps.s,
+        children: [
+          if (encounteredAt != null)
+            StampBadge(
+              key: ValueKey('stamp-${species.sci}'),
+              text: DateFormat.MMMd(context.contentLanguage).format(encounteredAt!),
+              label: context.l10n.badgeEncountered,
+            ),
+          if (species.isProtected) _ProtectedBadge(),
+        ],
+      ),
+      const SizedBox(height: Gaps.s),
       _LevelDots(level: level),
       const SizedBox(height: Gaps.xs),
       Text(levelName(context.l10n, level), style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
       if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
     ],
   );
+}
+
+/// Bollino delle specie protette.
+class _ProtectedBadge extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) =>
+      InsetBadge(icon: Icons.shield_outlined, label: context.l10n.badgeProtected, color: context.colors.primary);
 }
 
 /// "Studia" sulla tessera: apre il prossimo livello da studiare.

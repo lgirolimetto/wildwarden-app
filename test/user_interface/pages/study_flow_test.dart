@@ -252,15 +252,33 @@ void main() {
       expect(level3, findsWidgets);
     });
 
-    testWidgets('ricette: gli ingredienti hanno sempre il nome, anche se la pianta non è incontrata', (tester) async {
-      registerTestDependencies(events: [_met('Eranthis hyemalis')]);
+    testWidgets('album delle ricette: contatore, figurine imparate e mancanti', (tester) async {
+      registerTestDependencies(
+        events: [RecipeLearned(recipeId: 'pozione-prova-comune', origin: RecipeOrigin.study, occurredAt: _feb)],
+      );
       await pumpDruidApp(tester);
       await openTab(tester, 'Ricette');
 
-      expect(find.text('Da imparare'), findsWidgets);
-      expect(find.textContaining('???'), findsNothing);
-      expect(find.text('1 × Elleboro verde'), findsOneWidget);
-      expect(find.text('Ingredienti già incontrati 1/2'), findsOneWidget);
+      expect(find.text('1 di 4'), findsOneWidget);
+      expect(find.text('Pozione di Prova del Prato'), findsOneWidget);
+      expect(find.text('?'), findsNWidgets(3), reason: 'le tre figurine mancanti');
+
+      // Imparata: ingredienti con il nome della pianta, anche se non incontrata.
+      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-pozione-prova-comune')));
+      expect(find.text('2 × Malva selvatica'), findsOneWidget);
+      expect(find.text('Ingredienti già incontrati 0/2'), findsOneWidget);
+      expect(find.text('Effetto di gioco di prova.'), findsOneWidget);
+    });
+
+    testWidgets('una figurina mancante dice solo come ottenerla', (tester) async {
+      registerTestDependencies();
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Ricette');
+
+      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-infuso-prova-faggio')));
+      expect(find.text('???'), findsOneWidget);
+      expect(find.text('Si impara studiando: Faggio comune'), findsOneWidget);
+      expect(find.text('Altro effetto di gioco di prova.'), findsNothing);
     });
 
     testWidgets('anteprima dei gradi: una scheda per grado, con il cerchietto', (tester) async {

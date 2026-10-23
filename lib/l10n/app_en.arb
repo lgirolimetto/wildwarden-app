@@ -277,5 +277,9 @@
   "debugGradePreview": "Grade preview",
   "debugGradeSampleName": "Sample Elixir",
   "debugGradeSampleIngredient": "Honesty",
-  "debugGradeSampleEffect": "The next draw under a full moon gets an extra trait (game effect)."
+  "debugGradeSampleEffect": "The next draw under a full moon gets an extra trait (game effect).",
+  "badgeEncountered": "Met on",
+  "badgeProtected": "Protected species",
+  "recipesCount": "{learned} of {total}",
+  "recipeIngredientCount": "{count, plural, =1{1 ingredient} other{{count} ingredients}}"
 }

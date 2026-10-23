@@ -113,6 +113,40 @@ void main() {
     expect(find.byKey(const ValueKey('protected-note')), findsNothing);
   });
 
+  testWidgets('bollini: timbro con la data sulle incontrate, scudo sulle protette', (tester) async {
+    registerTestDependencies(
+      catalog: Valid(
+        smallCatalog(
+          protection: {
+            'Fagus sylvatica': ['regional-emilia-romagna'],
+          },
+        ),
+      ),
+      events: [
+        SpeciesEncountered(
+          speciesSci: 'Eranthis hyemalis',
+          method: EncounterMethod.photo,
+          occurredAt: DateTime(2027, 2, 3),
+        ),
+      ],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    expect(
+      find.descendant(of: find.byKey(const ValueKey('stamp-Eranthis hyemalis')), matching: find.text('3 feb')),
+      findsOneWidget,
+    );
+    await scrollTo(tester, find.byKey(const ValueKey('unknown-Fagus sylvatica')));
+    expect(
+      find.descendant(
+        of: find.byKey(const ValueKey('unknown-Fagus sylvatica')),
+        matching: find.byTooltip('Specie protetta'),
+      ),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
     final deps = registerTestDependencies(catalog: StateError('rotto').toInvalid());
     await pumpDruidApp(tester);

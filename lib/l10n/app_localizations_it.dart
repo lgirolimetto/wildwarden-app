@@ -1023,4 +1023,31 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get debugGradeSampleEffect =>
       'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).';
+
+  @override
+  String get badgeEncountered => 'Incontrata il';
+
+  @override
+  String get badgeProtected => 'Specie protetta';
+
+  @override
+  String recipesCount(int learned, int total) {
+    return '$learned di $total';
+  }
+
+  @override
+  String recipeIngredientCount(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString ingredienti',
+      one: '1 ingrediente',
+    );
+    return '$_temp0';
+  }
 }
