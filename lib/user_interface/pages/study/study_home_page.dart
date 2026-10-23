@@ -200,7 +200,13 @@ class _RankCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                ClayCircle(color: tokens.levelColor(4), icon: Icons.eco_rounded, size: 48),
+                // Sulla scheda verde del rango l'icona incisa è chiara, con luce e ombra ricavate dalla scheda.
+                ClayCircle(
+                  color: tokens.levelColor(4),
+                  icon: Icons.eco_rounded,
+                  size: 48,
+                  surface: tokens.heroGradient.first,
+                ),
                 const SizedBox(width: Gaps.m),
                 Expanded(
                   child: Text(context.game.rank(rank), style: context.texts.headlineSmall?.copyWith(color: onHero)),

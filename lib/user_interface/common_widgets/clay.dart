@@ -201,6 +201,9 @@ class ClayCircle extends StatelessWidget {
   /// tratti: un solco sottile tutt'intorno e dentro l'icona incisa.
   final bool pressable;
 
+  /// Fondo su cui sta la sfera, se diverso dalla pagina (es. la scheda verde del rango): serve alla versione incisa.
+  final Color? surface;
+
   const ClayCircle({
     super.key,
     required this.color,
@@ -212,6 +215,7 @@ class ClayCircle extends StatelessWidget {
     this.concave = false,
     this.keepColor = false,
     this.pressable = false,
+    this.surface,
   });
 
   @override
@@ -220,7 +224,8 @@ class ClayCircle extends StatelessWidget {
     if (tokens.neu && icon != null && child == null && emoji == null && !keepColor && !pressable) {
       return GroovedCircle(
         size: size,
-        child: EngravedIcon(icon!, size: size * 0.45),
+        surface: surface,
+        child: EngravedIcon(icon!, size: size * 0.45, surface: surface),
       );
     }
     if (tokens.neu && icon != null && child == null && emoji == null && !keepColor) {
@@ -287,17 +292,25 @@ class GroovedCircle extends StatelessWidget {
   final double size;
   final Widget child;
 
-  const GroovedCircle({super.key, required this.size, required this.child});
+  /// Fondo su cui sta il cerchio, se diverso dalla pagina: luce e ombra del solco si ricavano da lui (su un fondo
+  /// scuro l'ombra beige della livrea chiara sembrerebbe una luce).
+  final Color? surface;
+
+  const GroovedCircle({super.key, required this.size, required this.child, this.surface});
 
   @override
   Widget build(BuildContext context) {
     final radius = BorderRadius.circular(size / 2);
+    final dark = surface == null ? null : _darken(surface!, 0.45).withValues(alpha: 0.8);
+    final light = surface == null ? null : _lighten(surface!, 0.3).withValues(alpha: 0.6);
     return SizedBox.square(
       dimension: size,
       child: NeuInset(
         radius: radius,
         depth: 0.8,
         strength: 0.45,
+        darkColor: dark,
+        lightColor: light,
         child: Padding(
           padding: const EdgeInsets.all(3),
           child: NeuInset(
@@ -305,6 +318,8 @@ class GroovedCircle extends StatelessWidget {
             depth: 0.8,
             strength: 0.35,
             convex: true,
+            darkColor: dark,
+            lightColor: light,
             child: Center(child: child),
           ),
         ),
@@ -316,30 +331,33 @@ class GroovedCircle extends StatelessWidget {
 /// Il livello di studio di una specie in un cerchio: nelle livree neumorfiche il cerchio è inciso (non si preme) e il
 /// numero, inciso anche lui, ha il colore del livello; nelle altre una sfera del colore del livello.
 class LevelMark extends StatelessWidget {
-  final int level;
+  /// `null` = specie non ancora studiata né incontrata: un "?".
+  final int? level;
   final double size;
+  final TextStyle? style;
 
-  const LevelMark({super.key, required this.level, this.size = 42});
+  const LevelMark({super.key, required this.level, this.size = 42, this.style});
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
-    final style = context.texts.titleMedium?.copyWith(fontWeight: FontWeight.w700);
+    final text = level == null ? '?' : '$level';
+    final style = (this.style ?? context.texts.titleMedium)?.copyWith(fontWeight: FontWeight.w700);
     if (!tokens.neu) {
       return ClayCircle(
-        color: tokens.levelColor(level),
+        color: level == null ? context.colors.surfaceContainerHigh : tokens.levelColor(level!),
         size: size,
-        child: Text('$level', style: style),
+        child: Text(text, style: style),
       );
     }
     // I colori dei primi livelli sono chiari: sul segno si scuriscono verso il testo, per leggersi sulla scheda.
-    final color = level == 0
+    final color = level == null || level == 0
         ? context.colors.onSurfaceVariant
-        : Color.lerp(tokens.levelColor(level), context.colors.onSurface, 0.35)!;
+        : Color.lerp(tokens.levelColor(level!), context.colors.onSurface, 0.35)!;
     return GroovedCircle(
       size: size,
       child: Text(
-        '$level',
+        text,
         style: style?.copyWith(
           color: color,
           shadows: [

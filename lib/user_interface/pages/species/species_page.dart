@@ -499,14 +499,7 @@ class _GlassLabel extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: Gaps.m),
-              ClayCircle(
-                color: level == null ? context.colors.surfaceContainerHigh : tokens.levelColor(level!),
-                size: 48,
-                child: Text(
-                  level == null ? '?' : '$level',
-                  style: context.texts.titleLarge?.copyWith(fontWeight: FontWeight.w700),
-                ),
-              ),
+              LevelMark(level: level, size: 48, style: context.texts.titleLarge),
             ],
           ),
         ),

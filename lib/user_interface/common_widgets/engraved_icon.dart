@@ -8,22 +8,33 @@ class EngravedIcon extends StatelessWidget {
   final IconData icon;
   final double size;
 
-  /// Colore del segno; `null` = quello del testo.
+  /// Colore del segno; `null` = quello del testo (bianco su un fondo scuro).
   final Color? color;
 
-  const EngravedIcon(this.icon, {super.key, this.size = 20, this.color});
+  /// Fondo su cui sta l'icona, se diverso dalla pagina. Su un fondo scuro (es. la scheda verde del rango) il segno è
+  /// chiaro e luce e ombra si ricavano dal fondo, con il gioco invertito: le ombre della livrea sono pensate per la
+  /// pagina chiara e lì sembrerebbero luci (capitolo 07).
+  final Color? surface;
+
+  const EngravedIcon(this.icon, {super.key, this.size = 20, this.color, this.surface});
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
+    final dark = surface != null && ThemeData.estimateBrightnessForColor(surface!) == Brightness.dark;
     return Icon(
       icon,
       size: size,
-      color: (color ?? context.colors.onSurface).withValues(alpha: 0.7),
-      shadows: [
-        Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
-        Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
-      ],
+      color: (color ?? (dark ? Colors.white : context.colors.onSurface)).withValues(alpha: dark ? 0.9 : 0.7),
+      shadows: dark
+          ? [
+              Shadow(color: Color.lerp(surface, Colors.white, 0.25)!, offset: const Offset(-0.8, -0.8)),
+              Shadow(color: Color.lerp(surface, Colors.black, 0.45)!, offset: const Offset(0.9, 0.9)),
+            ]
+          : [
+              Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+              Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+            ],
     );
   }
 }
