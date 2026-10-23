@@ -554,14 +554,7 @@ class _YourSpecies extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: Gaps.xs),
               onTap: () => Get.to<void>(() => SpeciesPage(speciesSci: s.sci)),
               child: ListTile(
-                leading: ClayCircle(
-                  color: context.druid.levelColor(state.levelOf(s.sci)),
-                  size: 42,
-                  child: Text(
-                    '${state.levelOf(s.sci)}',
-                    style: context.texts.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-                  ),
-                ),
+                leading: LevelMark(level: state.levelOf(s.sci)),
                 title: Text(context.game.name(s)),
                 subtitle: Text(
                   '${levelName(context.l10n, state.levelOf(s.sci))} · '

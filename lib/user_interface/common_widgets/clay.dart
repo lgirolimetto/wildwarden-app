@@ -218,25 +218,9 @@ class ClayCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     final tokens = context.druid;
     if (tokens.neu && icon != null && child == null && emoji == null && !keepColor && !pressable) {
-      // Come le pillole che non si premono: solco inciso e, appena dentro, la superficie che risale di poco.
-      final radius = BorderRadius.circular(size / 2);
-      return SizedBox.square(
-        dimension: size,
-        child: NeuInset(
-          radius: radius,
-          depth: 0.8,
-          strength: 0.45,
-          child: Padding(
-            padding: const EdgeInsets.all(3),
-            child: NeuInset(
-              radius: radius,
-              depth: 0.8,
-              strength: 0.35,
-              convex: true,
-              child: Center(child: EngravedIcon(icon!, size: size * 0.45)),
-            ),
-          ),
-        ),
+      return GroovedCircle(
+        size: size,
+        child: EngravedIcon(icon!, size: size * 0.45),
       );
     }
     if (tokens.neu && icon != null && child == null && emoji == null && !keepColor) {
@@ -293,6 +277,77 @@ class ClayCircle extends StatelessWidget {
               : icon != null
               ? Icon(icon, size: size * 0.5, color: foreground)
               : null),
+    );
+  }
+}
+
+/// Cerchio da guardare, non da premere (livree neumorfiche): come le pillole che non si premono, un solco inciso
+/// tutt'intorno e, appena dentro, la superficie che risale di poco; al centro [child] (un'icona o un numero incisi).
+class GroovedCircle extends StatelessWidget {
+  final double size;
+  final Widget child;
+
+  const GroovedCircle({super.key, required this.size, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final radius = BorderRadius.circular(size / 2);
+    return SizedBox.square(
+      dimension: size,
+      child: NeuInset(
+        radius: radius,
+        depth: 0.8,
+        strength: 0.45,
+        child: Padding(
+          padding: const EdgeInsets.all(3),
+          child: NeuInset(
+            radius: radius,
+            depth: 0.8,
+            strength: 0.35,
+            convex: true,
+            child: Center(child: child),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Il livello di studio di una specie in un cerchio: nelle livree neumorfiche il cerchio è inciso (non si preme) e il
+/// numero, inciso anche lui, ha il colore del livello; nelle altre una sfera del colore del livello.
+class LevelMark extends StatelessWidget {
+  final int level;
+  final double size;
+
+  const LevelMark({super.key, required this.level, this.size = 42});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    final style = context.texts.titleMedium?.copyWith(fontWeight: FontWeight.w700);
+    if (!tokens.neu) {
+      return ClayCircle(
+        color: tokens.levelColor(level),
+        size: size,
+        child: Text('$level', style: style),
+      );
+    }
+    // I colori dei primi livelli sono chiari: sul segno si scuriscono verso il testo, per leggersi sulla scheda.
+    final color = level == 0
+        ? context.colors.onSurfaceVariant
+        : Color.lerp(tokens.levelColor(level), context.colors.onSurface, 0.35)!;
+    return GroovedCircle(
+      size: size,
+      child: Text(
+        '$level',
+        style: style?.copyWith(
+          color: color,
+          shadows: [
+            Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+            Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+          ],
+        ),
+      ),
     );
   }
 }
