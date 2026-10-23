@@ -13,6 +13,7 @@ import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
@@ -34,7 +35,9 @@ class SpeciesPage extends StatelessWidget {
   const SpeciesPage({super.key, required this.speciesSci});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => DenseArea(child: _page(context));
+
+  Widget _page(BuildContext context) => Scaffold(
     // I pulsanti tondi galleggiano sopra la foto: niente barra separata.
     appBar: clayAppBar(context, overImage: true),
     extendBodyBehindAppBar: true,

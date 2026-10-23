@@ -7,6 +7,7 @@ import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
@@ -25,36 +26,39 @@ class StudySessionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catalog = Get.find<CatalogController>().uiData.fold((_) => null, (c) => c);
-    return GetBuilder<StudyController>(
-      builder: (study) => Scaffold(
-        appBar: clayAppBar(
-          context,
-          title: _title(context, study, catalog),
-          leadingIcon: Icons.close_rounded,
-          leadingTooltip: context.l10n.close,
-          onLeading: () {
-            study.close();
-            Get.back<void>();
-          },
-          actions: [
-            ClayIconButton(
-              key: const ValueKey('open-notebook'),
-              icon: Icons.bookmarks_rounded,
-              tooltip: context.l10n.notebookTitle,
-              onPressed: () => openNotebook(context),
+    // Pagina densa: nelle livree che lo prevedono sfondo e superfici più chiari (vedi `DenseArea`).
+    return DenseArea(
+      child: GetBuilder<StudyController>(
+        builder: (study) => Scaffold(
+          appBar: clayAppBar(
+            context,
+            title: _title(context, study, catalog),
+            leadingIcon: Icons.close_rounded,
+            leadingTooltip: context.l10n.close,
+            onLeading: () {
+              study.close();
+              Get.back<void>();
+            },
+            actions: [
+              ClayIconButton(
+                key: const ValueKey('open-notebook'),
+                icon: Icons.bookmarks_rounded,
+                tooltip: context.l10n.notebookTitle,
+                onPressed: () => openNotebook(context),
+              ),
+            ],
+          ),
+          extendBodyBehindAppBar: true,
+          body: DruidBackground(
+            belowAppBar: true,
+            child: SafeArea(
+              child: study.summary != null
+                  ? _Summary(summary: study.summary!, catalog: catalog)
+                  // Dopo l'ultima risposta la sessione è già finita, ma l'esito va mostrato finché non si va avanti.
+                  : (study.question == null && study.lastOutcome == null) || catalog == null
+                  ? const SizedBox.shrink()
+                  : _QuestionView(study: study, catalog: catalog),
             ),
-          ],
-        ),
-        extendBodyBehindAppBar: true,
-        body: DruidBackground(
-          belowAppBar: true,
-          child: SafeArea(
-            child: study.summary != null
-                ? _Summary(summary: study.summary!, catalog: catalog)
-                // Dopo l'ultima risposta la sessione è già finita, ma l'esito va mostrato finché non si va avanti.
-                : (study.question == null && study.lastOutcome == null) || catalog == null
-                ? const SizedBox.shrink()
-                : _QuestionView(study: study, catalog: catalog),
           ),
         ),
       ),
