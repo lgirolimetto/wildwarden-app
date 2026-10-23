@@ -18,6 +18,7 @@ import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
@@ -25,6 +26,7 @@ import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 /// Pagina d'erbario di una specie. Si compila livello per livello: ciò che non hai ancora imparato è chiuso
@@ -38,16 +40,25 @@ class SpeciesPage extends StatelessWidget {
   Widget build(BuildContext context) => DenseArea(child: _page(context));
 
   Widget _page(BuildContext context) => Scaffold(
-    // I pulsanti tondi galleggiano sopra la foto: niente barra separata.
-    appBar: clayAppBar(context, overImage: true),
-    extendBodyBehindAppBar: true,
-    body: DruidBackground(
-      child: GameDataBuilder(
-        builder: (context, catalog, state, progress) {
-          final species = catalog.speciesBySci(speciesSci)!;
-          return _SpeciesSheet(species: species, catalog: catalog, state: state, progress: progress);
-        },
-      ),
+    // Niente barra: il pulsante indietro sta nella testata, sull'angolo della foto, e scorre con lei.
+    body: Stack(
+      children: [
+        DruidBackground(
+          child: GameDataBuilder(
+            builder: (context, catalog, state, progress) {
+              final species = catalog.speciesBySci(speciesSci)!;
+              return _SpeciesSheet(species: species, catalog: catalog, state: state, progress: progress);
+            },
+          ),
+        ),
+        // Nelle livree neumorfiche la foto parte sotto la barra di stato: il contenuto che scorre sfuma sotto l'orologio.
+        // Builder: il colore va letto sotto il tema della pagina (denso).
+        Builder(
+          builder: (context) => context.druid.neu
+              ? StatusBarScrim(color: context.druid.backgroundGradient.first)
+              : const SizedBox.shrink(),
+        ),
+      ],
     ),
   );
 }
@@ -340,7 +351,7 @@ class SpeciesPhotoHeader extends StatelessWidget {
     // che non si preme: si legge anche quando la foto è scura.
     final frame = tokens.neu ? Gaps.m : 0.0;
     final bottomRadius = tokens.neu ? BorderRadius.circular(radius.topLeft.x - frame) : radius;
-    return SizedBox(
+    final header = SizedBox(
       height: photoTop + photoHeight,
       child: Stack(
         children: [
@@ -411,9 +422,26 @@ class SpeciesPhotoHeader extends StatelessWidget {
               ),
             ),
           ),
+
+          // Il pulsante indietro sull'angolo in alto a sinistra della foto, allineato ai margini della pagina: scorre
+          // via con la testata.
+          Positioned(
+            left: Gaps.l,
+            top: tokens.neu ? photoTop : statusBar + Gaps.s,
+            child: ClayIconButton(
+              key: const ValueKey('clay-back'),
+              icon: Icons.arrow_back_rounded,
+              tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+              onPressed: () => Navigator.of(context).maybePop(),
+            ),
+          ),
         ],
       ),
     );
+    // Fuori dalle livree neumorfiche la foto passa sotto la barra di stato: icone di sistema chiare sopra la foto.
+    return tokens.neu
+        ? header
+        : AnnotatedRegion<SystemUiOverlayStyle>(value: SystemUiOverlayStyle.light, child: header);
   }
 }
 
