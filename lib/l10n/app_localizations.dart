@@ -1933,6 +1933,120 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall\'erbario.'**
   String get recipesEmpty;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutte'**
+  String get viewAll;
+
+  /// No description provided for @viewInSeason.
+  ///
+  /// In it, this message translates to:
+  /// **'In stagione adesso'**
+  String get viewInSeason;
+
+  /// No description provided for @viewDesiderata.
+  ///
+  /// In it, this message translates to:
+  /// **'Le mie desiderata'**
+  String get viewDesiderata;
+
+  /// No description provided for @viewProtected.
+  ///
+  /// In it, this message translates to:
+  /// **'Protette'**
+  String get viewProtected;
+
+  /// No description provided for @viewNew.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuova vista'**
+  String get viewNew;
+
+  /// No description provided for @viewName.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome della vista'**
+  String get viewName;
+
+  /// No description provided for @viewStatus.
+  ///
+  /// In it, this message translates to:
+  /// **'Stato'**
+  String get viewStatus;
+
+  /// No description provided for @viewWhen.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando e come'**
+  String get viewWhen;
+
+  /// No description provided for @viewProtectedOnly.
+  ///
+  /// In it, this message translates to:
+  /// **'Solo protette'**
+  String get viewProtectedOnly;
+
+  /// No description provided for @viewBand.
+  ///
+  /// In it, this message translates to:
+  /// **'Quota'**
+  String get viewBand;
+
+  /// No description provided for @viewForm.
+  ///
+  /// In it, this message translates to:
+  /// **'Forma'**
+  String get viewForm;
+
+  /// No description provided for @viewFamily.
+  ///
+  /// In it, this message translates to:
+  /// **'Famiglia'**
+  String get viewFamily;
+
+  /// No description provided for @viewSave.
+  ///
+  /// In it, this message translates to:
+  /// **'Salva la vista'**
+  String get viewSave;
+
+  /// No description provided for @viewRemove.
+  ///
+  /// In it, this message translates to:
+  /// **'Elimina la vista'**
+  String get viewRemove;
+
+  /// No description provided for @viewEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessuna specie in questa vista.'**
+  String get viewEmpty;
+
+  /// No description provided for @statusMet.
+  ///
+  /// In it, this message translates to:
+  /// **'Incontrate'**
+  String get statusMet;
+
+  /// No description provided for @statusToFind.
+  ///
+  /// In it, this message translates to:
+  /// **'Da trovare'**
+  String get statusToFind;
+
+  /// No description provided for @statusDesiderata.
+  ///
+  /// In it, this message translates to:
+  /// **'Desiderata'**
+  String get statusDesiderata;
+
+  /// No description provided for @statusStudying.
+  ///
+  /// In it, this message translates to:
+  /// **'In studio'**
+  String get statusStudying;
 }
 
 class _AppLocalizationsDelegate

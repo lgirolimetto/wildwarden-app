@@ -1132,4 +1132,61 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get recipesEmpty =>
       'You don\'t know any recipes yet. Common recipes are learned by studying: pass level 1 of a species, from Home or the herbarium.';
+
+  @override
+  String get viewAll => 'All';
+
+  @override
+  String get viewInSeason => 'In season now';
+
+  @override
+  String get viewDesiderata => 'My desiderata';
+
+  @override
+  String get viewProtected => 'Protected';
+
+  @override
+  String get viewNew => 'New view';
+
+  @override
+  String get viewName => 'View name';
+
+  @override
+  String get viewStatus => 'Status';
+
+  @override
+  String get viewWhen => 'When and how';
+
+  @override
+  String get viewProtectedOnly => 'Protected only';
+
+  @override
+  String get viewBand => 'Altitude';
+
+  @override
+  String get viewForm => 'Shape';
+
+  @override
+  String get viewFamily => 'Family';
+
+  @override
+  String get viewSave => 'Save the view';
+
+  @override
+  String get viewRemove => 'Delete the view';
+
+  @override
+  String get viewEmpty => 'No species in this view.';
+
+  @override
+  String get statusMet => 'Met';
+
+  @override
+  String get statusToFind => 'To find';
+
+  @override
+  String get statusDesiderata => 'Desiderata';
+
+  @override
+  String get statusStudying => 'Studying';
 }

@@ -10,6 +10,7 @@ import 'package:druid_app/business_logic/services/clock/offset_clock.dart';
 import 'package:druid_app/business_logic/services/persistence/drift_game_event_store.dart';
 import 'package:druid_app/business_logic/services/persistence/druid_database.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
+import 'package:druid_app/controllers/erbario/erbario_views_controller.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
@@ -44,6 +45,7 @@ void registerDependencies({
   Get.put<RemoteImageFactory>(imageFactory ?? const CachedRemoteImageFactory(), permanent: true);
 
   Get.put(ThemeController(Get.find()), permanent: true);
+  Get.put(ErbarioViewsController(Get.find()), permanent: true);
   final catalogController = Get.put(CatalogController(Get.find()), permanent: true);
   final progress = Get.put(
     ProgressController(

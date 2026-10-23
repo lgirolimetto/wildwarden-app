@@ -2,6 +2,7 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/rules/erbario_views.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
@@ -9,6 +10,8 @@ import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/controllers/erbario/erbario_views_controller.dart';
+import 'package:druid_app/user_interface/pages/erbario/widgets/erbario_views_bar.dart';
 import 'package:druid_app/user_interface/pages/erbario/widgets/species_tile.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
@@ -17,18 +20,23 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Erbario della zona: tutte le specie con foto e nome, prima le incontrate e poi quelle da trovare.
+/// Erbario della zona: tutte le specie con foto e nome, prima le incontrate e poi quelle da trovare, filtrate dalla
+/// vista scelta (le viste già pronte e quelle salvate dall'utente).
 class ErbarioPage extends StatelessWidget {
   const ErbarioPage({super.key});
 
   @override
   Widget build(BuildContext context) => GameDataBuilder(
-    builder: (context, catalog, state, progress) => _ErbarioContent(
-      catalog: catalog,
-      state: state,
-      onSimulateEncounter: Get.find<AppConfig>().showDebugTools
-          ? (sci) => progress.encounter(sci, method: EncounterMethod.simulated)
-          : null,
+    builder: (context, catalog, state, progress) => GetBuilder<ErbarioViewsController>(
+      builder: (views) => _ErbarioContent(
+        catalog: catalog,
+        state: state,
+        filter: views.filter,
+        now: progress.now,
+        onSimulateEncounter: Get.find<AppConfig>().showDebugTools
+            ? (sci) => progress.encounter(sci, method: EncounterMethod.simulated)
+            : null,
+      ),
     ),
   );
 }
@@ -36,17 +44,28 @@ class ErbarioPage extends StatelessWidget {
 class _ErbarioContent extends StatelessWidget {
   final Catalog catalog;
   final GameState state;
+  final ErbarioFilter filter;
+  final DateTime now;
   final void Function(String sci)? onSimulateEncounter;
 
-  const _ErbarioContent({required this.catalog, required this.state, required this.onSimulateEncounter});
+  const _ErbarioContent({
+    required this.catalog,
+    required this.state,
+    required this.filter,
+    required this.now,
+    required this.onSimulateEncounter,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final encountered = catalog.species.where((s) => state.hasEncountered(s.sci)).toList()
+    final shown = catalog.species.where((s) => filter.matches(s, state, now));
+    final encountered = shown.where((s) => state.hasEncountered(s.sci)).toList()
       ..sort((a, b) => state.firstEncounters[b.sci]!.compareTo(state.firstEncounters[a.sci]!));
-    final missing = catalog.species.where((s) => !state.hasEncountered(s.sci)).toList();
-    // Ogni specie ha 5 pagine: l'incontro e i 4 livelli.
-    final pages = encountered.fold<int>(0, (sum, s) => sum + 1 + state.levelOf(s.sci));
+    final missing = shown.where((s) => !state.hasEncountered(s.sci)).toList();
+    // Ogni specie ha 5 pagine: l'incontro e i 4 livelli. Si contano tutte, non solo quelle della vista.
+    final pages = catalog.species
+        .where((s) => state.hasEncountered(s.sci))
+        .fold<int>(0, (sum, s) => sum + 1 + state.levelOf(s.sci));
     void open(String sci) => Get.to<void>(() => SpeciesPage(speciesSci: sci));
     VoidCallback? study(Species s) => switch (nextStudyLevel(s, catalog, state)) {
       final level? => () => startLevelStudy(catalog, s.sci, level),
@@ -70,6 +89,18 @@ class _ErbarioContent extends StatelessWidget {
             ),
           ),
         ),
+        SliverToBoxAdapter(child: ErbarioViewsBar(catalog: catalog)),
+        if (encountered.isEmpty && missing.isEmpty)
+          SliverPadding(
+            padding: const EdgeInsets.all(Gaps.l),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                context.l10n.viewEmpty,
+                key: const ValueKey('view-empty'),
+                style: TextStyle(color: context.druid.hint),
+              ),
+            ),
+          ),
         if (encountered.isNotEmpty)
           _Tray(
             title: context.l10n.erbarioEncounteredSection,

@@ -6,6 +6,7 @@ import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/models/species_traits.dart';
+import 'package:druid_app/business_logic/rules/erbario_views.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
@@ -68,6 +69,20 @@ class GameTexts {
     Rank.seeker => l10n.rankSeeker,
     Rank.warden => l10n.rankWarden,
     Rank.botanomancer => l10n.rankBotanomancer,
+  };
+
+  String builtInView(BuiltInView v) => switch (v) {
+    BuiltInView.all => l10n.viewAll,
+    BuiltInView.inSeason => l10n.viewInSeason,
+    BuiltInView.desiderata => l10n.viewDesiderata,
+    BuiltInView.protectedSpecies => l10n.viewProtected,
+  };
+
+  String speciesStatus(SpeciesStatus s) => switch (s) {
+    SpeciesStatus.met => l10n.statusMet,
+    SpeciesStatus.toFind => l10n.statusToFind,
+    SpeciesStatus.desiderata => l10n.statusDesiderata,
+    SpeciesStatus.studying => l10n.statusStudying,
   };
 
   /// Nome leggibile di una fonte di protezione del catalogo.

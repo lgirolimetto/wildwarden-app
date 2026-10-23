@@ -147,6 +147,46 @@ void main() {
     );
   });
 
+  testWidgets('viste: "In stagione adesso" filtra; una vista nuova si crea, si sceglie e si elimina', (tester) async {
+    registerTestDependencies();
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    await tester.tap(find.byKey(const ValueKey('view-inSeason')));
+    await tester.pumpAndSettle();
+    // A febbraio sono in stagione solo elleboro e piè di gallo.
+    expect(find.byKey(const ValueKey('unknown-Eranthis hyemalis')), findsOneWidget);
+    expect(find.byKey(const ValueKey('unknown-Malva sylvestris')), findsNothing);
+    expect(find.byKey(const ValueKey('unknown-Fagus sylvatica')), findsNothing);
+
+    // La fila delle viste scorre in orizzontale: "Nuova vista" è in fondo.
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey('view-new')),
+      200,
+      scrollable: find
+          .ancestor(of: find.byKey(const ValueKey('view-inSeason')), matching: find.byType(Scrollable))
+          .first,
+    );
+    await tester.ensureVisible(find.byKey(const ValueKey('view-new')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('view-new')));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byKey(const ValueKey('view-name')), 'Alberi');
+    await tester.tap(find.byKey(const ValueKey('filter-tree')));
+    await tester.pumpAndSettle();
+    await scrollAndTap(tester, find.byKey(const ValueKey('view-save')));
+
+    expect(find.text('Alberi'), findsOneWidget);
+    expect(find.byKey(const ValueKey('unknown-Fagus sylvatica')), findsOneWidget);
+    expect(find.byKey(const ValueKey('unknown-Malva sylvestris')), findsNothing);
+
+    await tester.longPress(find.text('Alberi'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('view-remove')));
+    await tester.pumpAndSettle();
+    expect(find.text('Alberi'), findsNothing);
+  });
+
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
     final deps = registerTestDependencies(catalog: StateError('rotto').toInvalid());
     await pumpDruidApp(tester);
