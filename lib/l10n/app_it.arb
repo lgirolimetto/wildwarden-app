@@ -990,5 +990,6 @@
   "glossBottinoTerm": "Bottino dell'Esperienza",
   "glossBottinoText": "Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).",
   "glossFigurinaTerm": "Figurina",
-  "glossFigurinaText": "Una ricetta o una pozione nell'album. Quelle che ti mancano sono un \"?\" su un colore pastello."
+  "glossFigurinaText": "Una ricetta o una pozione nell'album. Quelle che ti mancano sono un \"?\" su un colore pastello.",
+  "recipesEmpty": "Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall'erbario."
 }

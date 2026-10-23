@@ -252,7 +252,7 @@ void main() {
       expect(level3, findsWidgets);
     });
 
-    testWidgets('album delle ricette: contatore, figurine imparate e mancanti', (tester) async {
+    testWidgets('album delle ricette: solo le ricette che conosci, con il contatore', (tester) async {
       registerTestDependencies(
         events: [RecipeLearned(recipeId: 'pozione-prova-comune', origin: RecipeOrigin.study, occurredAt: _feb)],
       );
@@ -261,7 +261,8 @@ void main() {
 
       expect(find.text('1 di 4'), findsOneWidget);
       expect(find.text('Pozione di Prova del Prato'), findsOneWidget);
-      expect(find.text('?'), findsNWidgets(3), reason: 'le tre figurine mancanti');
+      expect(find.byKey(const ValueKey('figurine-infuso-prova-faggio')), findsNothing, reason: 'niente segnaposto');
+      expect(find.text('?'), findsNothing);
 
       // Imparata: ingredienti con il nome della pianta, anche se non incontrata.
       await scrollAndTap(tester, find.byKey(const ValueKey('figurine-pozione-prova-comune')));
@@ -270,15 +271,13 @@ void main() {
       expect(find.text('Effetto di gioco di prova.'), findsOneWidget);
     });
 
-    testWidgets('una figurina mancante dice solo come ottenerla', (tester) async {
+    testWidgets('nessuna ricetta conosciuta: l\'album spiega come impararle', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
       await openTab(tester, 'Ricette');
 
-      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-infuso-prova-faggio')));
-      expect(find.text('???'), findsOneWidget);
-      expect(find.text('Si impara studiando: Faggio comune'), findsOneWidget);
-      expect(find.text('Altro effetto di gioco di prova.'), findsNothing);
+      expect(find.text('0 di 4'), findsOneWidget);
+      expect(find.byKey(const ValueKey('recipes-empty')), findsOneWidget);
     });
 
     testWidgets('legenda e glossario: simboli e termini del gioco', (tester) async {
