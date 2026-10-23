@@ -257,7 +257,7 @@ void main() {
       await pumpDruidApp(tester);
       await openTab(tester, 'Ricette');
 
-      expect(find.text('Bloccata'), findsWidgets);
+      expect(find.text('Da imparare'), findsWidgets);
       expect(find.textContaining('???'), findsWidgets);
       expect(find.textContaining('Indizio: Una pianta della famiglia Ranunculaceae'), findsOneWidget);
     });

@@ -153,8 +153,8 @@
   "traitDew": "💧 Dew",
   "traitDusk": "🌅 Dusk",
   "recipesTitle": "Recipes",
-  "recipeUnlocked": "Unlocked",
-  "recipeLocked": "Locked",
+  "recipeUnlocked": "Learned",
+  "recipeLocked": "To learn",
   "recipeKnownIngredients": "Known ingredients {known}/{total}",
   "recipeUnknownIngredient": "???",
   "recipeHint": "Hint: {hint}",
@@ -273,5 +273,7 @@
   "gradeRare": "Rare",
   "gradeMythic": "Mythic",
   "protectionEmiliaRomagna": "Emilia-Romagna regional law 2/1977",
-  "protectionHabitats": "Habitats Directive, Annex {annex}"
+  "protectionHabitats": "Habitats Directive, Annex {annex}",
+  "summaryRecipeLearned": "You learned a recipe: {name}",
+  "recipeLearnByStudying": "Learned by studying: {species}"
 }

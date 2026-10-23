@@ -4352,6 +4352,7 @@
  ],
  "recipes": [
   {
+   "id": "tintura-lanterna-inverno",
    "name": {
     "it": "Tintura della Lanterna d'Inverno"
    },
@@ -4383,6 +4384,7 @@
    }
   },
   {
+   "id": "distillato-quota-silenziosa",
    "name": {
     "it": "Distillato della Quota Silenziosa"
    },
@@ -4422,6 +4424,7 @@
    }
   },
   {
+   "id": "unguento-muri-vecchi",
    "name": {
     "it": "Unguento dei Muri Vecchi"
    },
@@ -4450,6 +4453,7 @@
    }
   },
   {
+   "id": "essenza-ultimo-fiore",
    "name": {
     "it": "Essenza dell'Ultimo Fiore"
    },
@@ -4478,6 +4482,296 @@
    ],
    "effect": {
     "it": "Riduce lo stress di un campo sfruttato (effetto di gioco)."
+   }
+  },
+  {
+   "id": "infuso-siepe-inverno",
+   "name": {
+    "it": "Infuso della Siepe d'Inverno"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Viburnum tinus",
+     "trait": null,
+     "note": {
+      "it": "Fiorisce d'inverno, nelle siepi e nei giardini"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Laurus nobilis",
+     "trait": null,
+     "note": {
+      "it": "Sempreverde: tutto l'anno, in pianura e collina"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima raccolta d'inverno immagazzina un po' di Vis in più (effetto di gioco)."
+   }
+  },
+  {
+   "id": "balsamo-spine-gentili",
+   "name": {
+    "it": "Balsamo delle Spine Gentili"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Paliurus spina-christi",
+     "trait": null,
+     "note": {
+      "it": "Arbusto spinoso dei calanchi e delle colline assolate"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Prunus spinosa",
+     "trait": null,
+     "note": {
+      "it": "Siepi e margini dei boschi; fiori bianchi a marzo"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Per un giorno le tue stazioni di arbusti spinosi si rigenerano prima (effetto di gioco)."
+   }
+  },
+  {
+   "id": "tintura-sangue-bosco",
+   "name": {
+    "it": "Tintura del Sangue di Bosco"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Cornus sanguinea",
+     "trait": null,
+     "note": {
+      "it": "Rami rossi e bacche nere, da maggio all'autunno"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Cornus mas",
+     "trait": null,
+     "note": {
+      "it": "Fiori gialli a fine inverno, prima delle foglie"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Svela dove e quando cercare una specie della tua zona che non hai ancora incontrato (effetto di gioco)."
+   }
+  },
+  {
+   "id": "acqua-stella-febbraio",
+   "name": {
+    "it": "Acqua della Stella di Febbraio"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Anemone hortensis",
+     "trait": null,
+     "note": {
+      "it": "Fine inverno, prati e oliveti di collina"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Corylus avellana",
+     "trait": null,
+     "note": {
+      "it": "Amenti gialli a febbraio, nei boschi e nelle siepi"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima essenza attinta con il gelo è più pura (effetto di gioco)."
+   }
+  },
+  {
+   "id": "sciroppo-bagolaro-paziente",
+   "name": {
+    "it": "Sciroppo del Bagolaro Paziente"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Celtis australis",
+     "trait": null,
+     "note": {
+      "it": "Viali e colline; frutti scuri in autunno"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Acer campestre",
+     "trait": null,
+     "note": {
+      "it": "Siepi e boschi; foglie gialle in autunno"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Una stazione esaurita torna pronta qualche ora prima (effetto di gioco)."
+   }
+  },
+  {
+   "id": "pozione-malva-mite",
+   "name": {
+    "it": "Pozione della Malva Mite"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Malva sylvestris",
+     "trait": null,
+     "note": {
+      "it": "Fiori rosa-viola da maggio a ottobre, bordi delle strade"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Althaea cannabina",
+     "trait": null,
+     "note": {
+      "it": "Estate e inizio autunno, prati incolti"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Il prossimo ripasso sbagliato non fa ripartire il fatto da capo (effetto di gioco)."
+   }
+  },
+  {
+   "id": "elisir-melissa-lucente",
+   "name": {
+    "it": "Elisir della Melissa Lucente"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Melissa officinalis",
+     "trait": null,
+     "note": {
+      "it": "Da aprile all'autunno, luoghi freschi vicino alle case"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Melittis melissophyllum",
+     "trait": null,
+     "note": {
+      "it": "Maggio, nei boschi di collina"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Per un giorno le curiosità del giorno sono due (effetto di gioco)."
+   }
+  },
+  {
+   "id": "distillato-prato-azzurro",
+   "name": {
+    "it": "Distillato del Prato Azzurro"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Salvia pratensis",
+     "trait": null,
+     "note": {
+      "it": "Prati soleggiati, fiori blu-viola in primavera"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Borago officinalis",
+     "trait": null,
+     "note": {
+      "it": "Fiori azzurri a stella, quasi tutto l'anno"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima sessione di studio dà qualche PE in più (effetto di gioco)."
+   }
+  },
+  {
+   "id": "unguento-argento-lunare",
+   "name": {
+    "it": "Unguento dell'Argento Lunare"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Lunaria annua",
+     "trait": "moon",
+     "note": {
+      "it": "Fiori viola in primavera, frutti come monete d'argento"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Glechoma hederacea",
+     "trait": null,
+     "note": {
+      "it": "Marzo e aprile, al margine dei prati"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco)."
+   }
+  },
+  {
+   "id": "infuso-frassino-manna",
+   "name": {
+    "it": "Infuso del Frassino da Manna"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Fraxinus ornus",
+     "trait": null,
+     "note": {
+      "it": "Fiori bianchi piumosi ad aprile, boschi di collina"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Prunus cerasifera",
+     "trait": "dew",
+     "note": {
+      "it": "Fiorisce presto, a marzo, nelle siepi"
+     }
+    }
+   ],
+   "effect": {
+    "it": "La prossima raccolta da un albero immagazzina il doppio della Vis (effetto di gioco)."
    }
   }
  ],

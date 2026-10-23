@@ -59,6 +59,15 @@ void main() {
     });
   });
 
+  test('ricetta imparata: andata e ritorno dal database e nello stato', () {
+    final event = RecipeLearned(recipeId: 'pozione-prova-comune', origin: RecipeOrigin.study, occurredAt: feb);
+    final decoded =
+        GameEvent.decode(type: event.type, payload: event.encodePayload(), occurredAt: feb) as RecipeLearned;
+    expect(decoded.recipeId, 'pozione-prova-comune');
+    expect(decoded.origin, RecipeOrigin.study);
+    expect(GameState.replay([event]).learnedRecipes, {'pozione-prova-comune'});
+  });
+
   group('PE virtuali, incasso e Vis', () {
     const elleboro = 'Helleborus viridis';
     AnswerGiven answer(int xp, DateTime at) =>

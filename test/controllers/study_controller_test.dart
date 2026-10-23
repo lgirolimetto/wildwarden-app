@@ -50,6 +50,16 @@ void main() {
     expect(store.events.whereType<AnswerGiven>(), hasLength(3));
   });
 
+  test('livello 1 superato: si impara una ricetta comune con quella specie, salvata come evento', () async {
+    study.startLevel(catalog, 'Malva sylvestris', 1);
+    await answerAll();
+
+    final learned = study.summary!.learnedRecipe!;
+    expect(learned.id, 'pozione-prova-comune');
+    expect(store.events.whereType<RecipeLearned>().single.recipeId, learned.id);
+    expect(progress.state.learnedRecipes, {learned.id});
+  });
+
   test('un errore: la risposta resta visibile finché non si va avanti, e il fatto torna', () async {
     await progress.encounter('Helleborus viridis', method: EncounterMethod.simulated);
     study.startLevel(catalog, 'Helleborus viridis', 1);

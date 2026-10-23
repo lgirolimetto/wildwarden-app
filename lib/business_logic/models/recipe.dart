@@ -35,6 +35,8 @@ class Ingredient {
 
 /// Ricetta di gioco. Gli effetti sono dichiaratamente fantasy: mai indicazioni d'uso reali.
 class Recipe {
+  /// Id stabile: lo salvano gli eventi `RecipeLearned`.
+  final String id;
   final LocalizedText name;
   final Grade grade;
   final RecipeUnlock? unlock;
@@ -42,6 +44,7 @@ class Recipe {
   final LocalizedText effect;
 
   const Recipe({
+    required this.id,
     required this.name,
     required this.grade,
     required this.unlock,
@@ -50,6 +53,7 @@ class Recipe {
   });
 
   factory Recipe.fromJson(Map<String, dynamic> json) => Recipe(
+    id: json['id'] as String,
     name: LocalizedText.fromJson(json['name'] as Map<String, dynamic>),
     grade: Grade.values.byName(json['grade'] as String),
     unlock: json['unlock'] == null ? null : RecipeUnlock.fromJson(json['unlock'] as Map<String, dynamic>),

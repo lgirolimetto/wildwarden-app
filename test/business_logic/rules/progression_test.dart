@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
@@ -260,6 +263,37 @@ void main() {
       final state = play([OnboardingMarked(mark: OnboardingMark.skipped, occurredAt: feb)]);
       expect(currentMission(state, catalog), isNull);
       expect(isApprenticeshipComplete(state, catalog), isFalse);
+    });
+  });
+
+  group('ricette comuni imparate studiando', () {
+    test('si impara una ricetta comune che ha la specie tra gli ingredienti, mai una già imparata', () {
+      final first = recipeToLearn('Fagus sylvatica', catalog, GameState.empty, Random(1))!;
+      expect(first.grade, Grade.common);
+      expect(first.ingredients.map((i) => i.speciesSci), contains('Fagus sylvatica'));
+
+      final state = play([RecipeLearned(recipeId: first.id, origin: RecipeOrigin.study, occurredAt: feb)]);
+      final second = recipeToLearn('Fagus sylvatica', catalog, state, Random(1))!;
+      expect(second.id, isNot(first.id));
+
+      final both = state.apply(RecipeLearned(recipeId: second.id, origin: RecipeOrigin.study, occurredAt: feb));
+      expect(recipeToLearn('Fagus sylvatica', catalog, both, Random(1)), isNull);
+    });
+
+    test('nessuna ricetta comune con quella specie: niente da imparare', () {
+      expect(recipeToLearn('Eranthis hyemalis', catalog, GameState.empty, Random(1)), isNull);
+    });
+
+    test('una comune si sa fare solo se imparata; le altre ancora con il livello', () {
+      final common = catalog.recipes.firstWhere((r) => r.grade == Grade.common);
+      expect(isRecipeUnlocked(common, GameState.empty), isFalse);
+      expect(
+        isRecipeUnlocked(
+          common,
+          play([RecipeLearned(recipeId: common.id, origin: RecipeOrigin.study, occurredAt: feb)]),
+        ),
+        isTrue,
+      );
     });
   });
 }

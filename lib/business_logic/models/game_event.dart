@@ -15,6 +15,9 @@ enum EncounterMethod {
 /// Modalità di una risposta: apprendimento di un livello o ripasso a distanza di giorni.
 enum AnswerMode { learning, review }
 
+/// Da dove arriva una ricetta imparata: dallo studio (le comuni) o dal Bottino dell'Esperienza (tappa C).
+enum RecipeOrigin { study, trove }
+
 /// Passi dell'onboarding che non si deducono dallo stato di gioco.
 enum OnboardingMark { erbarioVisited, skipped }
 
@@ -89,6 +92,11 @@ sealed class GameEvent {
         occurredAt: occurredAt,
       ),
       NotebookEntrySaved.typeId => NotebookEntrySaved(factId: d['fact'] as String, occurredAt: occurredAt),
+      RecipeLearned.typeId => RecipeLearned(
+        recipeId: d['recipe'] as String,
+        origin: RecipeOrigin.values.byName(d['origin'] as String),
+        occurredAt: occurredAt,
+      ),
       OnboardingMarked.typeId => OnboardingMarked(
         mark: OnboardingMark.values.byName(d['mark'] as String),
         occurredAt: occurredAt,
@@ -290,4 +298,19 @@ class OnboardingMarked extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'mark': mark.name};
+}
+
+/// Ricetta imparata: si sa farla. Il caso (quale tra le ricette possibili) si salva qui, non si ricalcola.
+class RecipeLearned extends GameEvent {
+  static const typeId = 'recipe_learned';
+  final String recipeId;
+  final RecipeOrigin origin;
+
+  const RecipeLearned({required this.recipeId, required this.origin, required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'recipe': recipeId, 'origin': origin.name};
 }

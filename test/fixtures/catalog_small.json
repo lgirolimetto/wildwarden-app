@@ -347,6 +347,7 @@
  ],
  "recipes": [
   {
+   "id": "tintura-lanterna-inverno",
    "name": {
     "it": "Tintura della Lanterna d'Inverno"
    },
@@ -378,6 +379,7 @@
    }
   },
   {
+   "id": "distillato-quota-silenziosa",
    "name": {
     "it": "Distillato della Quota Silenziosa"
    },
@@ -414,6 +416,56 @@
    ],
    "effect": {
     "it": "Aumenta la purezza delle essenze raccolte nei campi oltre i 600 m (effetto di gioco)."
+   }
+  },
+  {
+   "id": "pozione-prova-comune",
+   "name": {
+    "it": "Pozione di Prova del Prato"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Malva sylvestris",
+     "trait": null,
+     "note": {
+      "it": "Bordi delle strade"
+     }
+    },
+    {
+     "qty": 1,
+     "species": "Fagus sylvatica",
+     "trait": null,
+     "note": {
+      "it": "Boschi di montagna"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Effetto di gioco di prova."
+   }
+  },
+  {
+   "id": "infuso-prova-faggio",
+   "name": {
+    "it": "Infuso di Prova del Faggio"
+   },
+   "grade": "common",
+   "unlock": null,
+   "ingredients": [
+    {
+     "qty": 2,
+     "species": "Fagus sylvatica",
+     "trait": null,
+     "note": {
+      "it": "Boschi di montagna"
+     }
+    }
+   ],
+   "effect": {
+    "it": "Altro effetto di gioco di prova."
    }
   }
  ],

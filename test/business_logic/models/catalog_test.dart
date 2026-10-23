@@ -17,7 +17,7 @@ void main() {
     test('legge specie, ricette e contenuti', () {
       expect(catalog.regionId, 'bologna');
       expect(catalog.species, hasLength(4));
-      expect(catalog.recipes, hasLength(2));
+      expect(catalog.recipes, hasLength(4));
       expect(catalog.safety.keys, contains('Helleborus viridis'));
     });
 

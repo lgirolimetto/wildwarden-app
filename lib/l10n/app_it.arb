@@ -535,8 +535,8 @@
   "traitDew": "💧 Rugiada",
   "traitDusk": "🌅 Crepuscolo",
   "recipesTitle": "Ricette",
-  "recipeUnlocked": "Sbloccata",
-  "recipeLocked": "Bloccata",
+  "recipeUnlocked": "Imparata",
+  "recipeLocked": "Da imparare",
   "recipeKnownIngredients": "Ingredienti noti {known}/{total}",
   "@recipeKnownIngredients": {
     "placeholders": {
@@ -931,6 +931,22 @@
   "@protectionHabitats": {
     "placeholders": {
       "annex": {
+        "type": "String"
+      }
+    }
+  },
+  "summaryRecipeLearned": "Hai imparato una ricetta: {name}",
+  "@summaryRecipeLearned": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeLearnByStudying": "Si impara studiando: {species}",
+  "@recipeLearnByStudying": {
+    "placeholders": {
+      "species": {
         "type": "String"
       }
     }

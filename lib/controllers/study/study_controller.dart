@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
@@ -20,6 +21,9 @@ class SessionSummary {
   final int? levelPassed;
   final bool masteryReached;
 
+  /// Ricetta comune imparata superando il livello 1, se ce n'era una da imparare.
+  final Recipe? learnedRecipe;
+
   const SessionSummary({
     required this.mode,
     required this.answers,
@@ -28,6 +32,7 @@ class SessionSummary {
     this.speciesSci,
     this.levelPassed,
     this.masteryReached = false,
+    this.learnedRecipe,
   });
 }
 
@@ -105,6 +110,7 @@ class StudyController extends GetxController {
 
   Future<void> _finish(StudySession session) async {
     int? passed;
+    Recipe? learned;
     var mastery = false;
     if (session.mode == AnswerMode.learning) {
       passed = session.level;
@@ -118,6 +124,14 @@ class StudyController extends GetxController {
       );
       _xp += XpRules.levelPassed;
       await _skipEmptyLevels(session.speciesSci!);
+      if (passed == recipeLearningLevel) {
+        learned = recipeToLearn(session.speciesSci!, _catalog!, _progress.state, _random);
+        if (learned != null) {
+          await _progress.record(
+            RecipeLearned(recipeId: learned.id, origin: RecipeOrigin.study, occurredAt: _progress.now),
+          );
+        }
+      }
     }
     final touched = session.mode == AnswerMode.learning
         ? {session.speciesSci!}
@@ -138,6 +152,7 @@ class StudyController extends GetxController {
       speciesSci: session.speciesSci,
       levelPassed: passed,
       masteryReached: mastery,
+      learnedRecipe: learned,
     );
   }
 

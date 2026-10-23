@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
@@ -94,8 +97,31 @@ List<Species> seasonalSuggestions(Catalog catalog, GameState state, DateTime now
   return [...safe.where(inSeason), ...safe.where((s) => !inSeason(s))].take(firstStudySuggestions).toList();
 }
 
-bool isRecipeUnlocked(Recipe recipe, GameState state) =>
-    recipe.unlock == null || state.levelOf(recipe.unlock!.speciesSci) >= recipe.unlock!.level;
+/// Una ricetta si sa fare se è stata imparata (le comuni, studiando); le altre, finché non c'è il Bottino
+/// dell'Esperienza (tappa C), con il livello di studio della specie indicata.
+bool isRecipeUnlocked(Recipe recipe, GameState state) => switch (recipe.grade) {
+  Grade.common => state.learnedRecipes.contains(recipe.id),
+  _ => recipe.unlock == null || state.levelOf(recipe.unlock!.speciesSci) >= recipe.unlock!.level,
+};
+
+/// Livello di studio che insegna una ricetta comune (decisione 🔵: le prime ricette arrivano alla prima sessione).
+const recipeLearningLevel = 1;
+
+/// Ricetta comune da imparare studiando [speciesSci]: una a caso tra quelle non ancora imparate che la hanno tra gli
+/// ingredienti; `null` se non ce ne sono (decisione 🟢 "studiando una specie si impara una ricetta comune").
+Recipe? recipeToLearn(String speciesSci, Catalog catalog, GameState state, Random random) {
+  final candidates = catalog.recipes
+      .where((r) => r.grade == Grade.common && !state.learnedRecipes.contains(r.id))
+      .where((r) => r.ingredients.any((i) => i.speciesSci == speciesSci))
+      .toList();
+  return candidates.isEmpty ? null : candidates[random.nextInt(candidates.length)];
+}
+
+/// Specie che, studiate, insegnano la ricetta comune [recipe].
+List<String> teachingSpecies(Recipe recipe) => [
+  for (final i in recipe.ingredients)
+    if (i.speciesSci != null) i.speciesSci!,
+];
 
 /// Un ingrediente è noto se è "qualsiasi specie" o se la specie è già stata incontrata.
 bool isIngredientKnown(Ingredient ingredient, GameState state) =>

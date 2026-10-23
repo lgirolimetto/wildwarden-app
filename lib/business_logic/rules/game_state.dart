@@ -42,6 +42,9 @@ class GameState {
   final Set<String> notebook;
   final Set<OnboardingMark> onboardingMarks;
 
+  /// Ricette imparate, per id.
+  final Set<String> learnedRecipes;
+
   const GameState({
     this.firstEncounters = const {},
     this.xp = 0,
@@ -59,6 +62,7 @@ class GameState {
     this.notes = const {},
     this.notebook = const {},
     this.onboardingMarks = const {},
+    this.learnedRecipes = const {},
   });
 
   static const empty = GameState();
@@ -142,6 +146,7 @@ class GameState {
       NoteSaved(:final speciesSci, :final text) => next._copy(notes: {...notes, speciesSci: text}),
       NotebookEntrySaved(:final factId) => next._copy(notebook: {...notebook, factId}),
       OnboardingMarked(:final mark) => next._copy(onboardingMarks: {...onboardingMarks, mark}),
+      RecipeLearned(:final recipeId) => next._copy(learnedRecipes: {...learnedRecipes, recipeId}),
     };
   }
 
@@ -175,6 +180,7 @@ class GameState {
     Map<String, String>? notes,
     Set<String>? notebook,
     Set<OnboardingMark>? onboardingMarks,
+    Set<String>? learnedRecipes,
   }) => GameState(
     firstEncounters: firstEncounters ?? this.firstEncounters,
     xp: xp ?? this.xp,
@@ -192,5 +198,6 @@ class GameState {
     notes: notes ?? this.notes,
     notebook: notebook ?? this.notebook,
     onboardingMarks: onboardingMarks ?? this.onboardingMarks,
+    learnedRecipes: learnedRecipes ?? this.learnedRecipes,
   );
 }

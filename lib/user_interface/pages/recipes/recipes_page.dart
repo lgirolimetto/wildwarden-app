@@ -1,4 +1,5 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
@@ -69,7 +70,14 @@ class _RecipeCard extends StatelessWidget {
             ),
             const SizedBox(height: Gaps.s),
             Text(recipe.name.resolve(lang), style: context.texts.titleLarge),
-            if (recipe.unlock != null && unlockSpecies != null)
+            if (recipe.grade == Grade.common && !unlocked)
+              Text(
+                context.l10n.recipeLearnByStudying(
+                  teachingSpecies(recipe).map(catalog.speciesBySci).nonNulls.map(context.game.name).join(', '),
+                ),
+                style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
+              )
+            else if (recipe.grade != Grade.common && recipe.unlock != null && unlockSpecies != null)
               Text(
                 '${context.l10n.studyLevelTitle(context.game.name(unlockSpecies), recipe.unlock!.level)} · '
                 '${context.l10n.recipeCurrentLevel(state.levelOf(unlockSpecies.sci))}',

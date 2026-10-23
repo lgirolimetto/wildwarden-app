@@ -337,6 +337,14 @@ class _Summary extends StatelessWidget {
         if (species != null && !Get.find<ProgressController>().state.hasDrawn(species.sci))
           Text(l10n.summaryXpToCash, key: const ValueKey('summary-xp-to-cash'), style: context.texts.bodySmall),
         if (summary.masteryReached) ...[const SizedBox(height: Gaps.s), Text(l10n.summaryMastery)],
+        if (summary.learnedRecipe case final recipe?) ...[
+          const SizedBox(height: Gaps.m),
+          Text(
+            l10n.summaryRecipeLearned(recipe.name.resolve(context.contentLanguage)),
+            key: const ValueKey('summary-recipe-learned'),
+            style: context.texts.titleMedium,
+          ),
+        ],
         for (final recipe in unlocked) ...[
           const SizedBox(height: Gaps.s),
           Text(l10n.summaryRecipeUnlocked(recipe.name.resolve(context.contentLanguage))),

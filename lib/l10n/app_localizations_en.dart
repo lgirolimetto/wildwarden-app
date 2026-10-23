@@ -192,8 +192,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get qFamilyFromPhoto =>
-      'Which family does the plant in the photo belong to?';
+  String get qFamilyFromPhoto => 'Which family does the plant in the photo belong to?';
 
   @override
   String qRelativeOf(String name) {
@@ -250,8 +249,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get answerWrong => 'Not quite.';
 
   @override
-  String get answerWillReturn =>
-      'It will come back shortly, asked another way.';
+  String get answerWillReturn => 'It will come back shortly, asked another way.';
 
   @override
   String answerRemembered(int days) {
@@ -259,8 +257,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get answerForgotten =>
-      'Forgotten: it will come back in tomorrow\'s reviews.';
+  String get answerForgotten => 'Forgotten: it will come back in tomorrow\'s reviews.';
 
   @override
   String xpGained(int xp) {
@@ -311,8 +308,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get summaryNewFunFacts =>
-      'New curiosities on the way: you\'ll get one a day.';
+  String get summaryNewFunFacts => 'New curiosities on the way: you\'ll get one a day.';
 
   @override
   String get saveToNotebook => 'Save to notebook';
@@ -334,8 +330,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notebookSearch => 'Search: family, month, species, notes…';
 
   @override
-  String get notebookEmpty =>
-      'Still empty: while studying, use \"Save to notebook\".';
+  String get notebookEmpty => 'Still empty: while studying, use \"Save to notebook\".';
 
   @override
   String get notebookNoResults => 'No results.';
@@ -361,8 +356,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get funOfDayEmpty =>
-      'Meet and study a species to receive a daily curiosity about what you\'ve learned.';
+  String get funOfDayEmpty => 'Meet and study a species to receive a daily curiosity about what you\'ve learned.';
 
   @override
   String get funToVerify => 'to be verified';
@@ -396,8 +390,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get reviewsNone =>
-      'Nothing to review today. What you learn comes back after 1, 3, 7 and 21 days.';
+  String get reviewsNone => 'Nothing to review today. What you learn comes back after 1, 3, 7 and 21 days.';
 
   @override
   String get reviewsStart => 'Review';
@@ -422,8 +415,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Three species that are easy to recognise, to start right away: you can study from home too.';
 
   @override
-  String get seasonalHint =>
-      'Study them now or mark them as desiderata to look for.';
+  String get seasonalHint => 'Study them now or mark them as desiderata to look for.';
 
   @override
   String get seasonalStudy => 'Study';
@@ -438,8 +430,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get desiderataRemove => 'Remove from desiderata';
 
   @override
-  String get desiderataFull =>
-      'You already have 3 desiderata: complete or remove one.';
+  String get desiderataFull => 'You already have 3 desiderata: complete or remove one.';
 
   @override
   String desiderataWhere(String band) {
@@ -460,8 +451,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourSpecies => 'Your species';
 
   @override
-  String get yourSpeciesEmpty =>
-      'No species in study yet: start with one in season.';
+  String get yourSpeciesEmpty => 'No species in study yet: start with one in season.';
 
   @override
   String studyLevelButton(int level) {
@@ -533,8 +523,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get masteryOnlyField =>
-      'Study alone doesn\'t lead to mastery: you also need essences drawn in the field.';
+  String get masteryOnlyField => 'Study alone doesn\'t lead to mastery: you also need essences drawn in the field.';
 
   @override
   String get masteryReached => 'Mastery reached';
@@ -570,10 +559,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recipesTitle => 'Recipes';
 
   @override
-  String get recipeUnlocked => 'Unlocked';
+  String get recipeUnlocked => 'Learned';
 
   @override
-  String get recipeLocked => 'Locked';
+  String get recipeLocked => 'To learn';
 
   @override
   String recipeKnownIngredients(int known, int total) {
@@ -976,8 +965,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get summaryXpToCash =>
-      'The XP from studying this species are cashed in when you draw its first essence.';
+  String get summaryXpToCash => 'The XP from studying this species are cashed in when you draw its first essence.';
 
   @override
   String visStored(int vis) {
@@ -1008,5 +996,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String protectionHabitats(String annex) {
     return 'Habitats Directive, Annex $annex';
+  }
+
+  @override
+  String summaryRecipeLearned(String name) {
+    return 'You learned a recipe: $name';
+  }
+
+  @override
+  String recipeLearnByStudying(String species) {
+    return 'Learned by studying: $species';
   }
 }
