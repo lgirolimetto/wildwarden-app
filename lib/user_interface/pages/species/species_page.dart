@@ -11,6 +11,7 @@ import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
@@ -91,6 +92,30 @@ class _ToFind extends StatelessWidget {
   }
 }
 
+/// Specie protetta: il messaggio di rispetto, con la legge che la protegge. Sempre visibile, come l'avviso di
+/// tossicità: è un safari fotografico, si guarda e non si tocca.
+class _ProtectedNote extends StatelessWidget {
+  final Species species;
+
+  const _ProtectedNote({required this.species});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(bottom: Gaps.l),
+    child: Row(
+      key: const ValueKey('protected-note'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ClayCircle(color: context.colors.primaryContainer, icon: Icons.shield_outlined, size: 32),
+        const SizedBox(width: Gaps.s),
+        Expanded(
+          child: Text(context.l10n.protectedNote(species.protection.map(context.game.protectionSource).join(', '))),
+        ),
+      ],
+    ),
+  );
+}
+
 /// Avviso di tossicità, sempre visibile in cima alla scheda: la sicurezza non si sblocca studiando.
 class _SafetyWarning extends StatelessWidget {
   final Species species;
@@ -144,6 +169,7 @@ class _SpeciesSheet extends StatelessWidget {
         _Padded(
           children: [
             _SafetyWarning(species: species, catalog: catalog),
+            if (species.isProtected) _ProtectedNote(species: species),
             if (!state.hasEncountered(species.sci)) _ToFind(species: species, state: state, progress: progress),
             _StudyLadder(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
@@ -222,10 +248,6 @@ class _SpeciesSheet extends StatelessWidget {
                       children: [
                         for (final band in AltitudeBand.values)
                           _BandBar(label: game.band(band), share: species.bandShare[band] ?? 0),
-                        if (species.family == 'Orchidaceae') ...[
-                          const SizedBox(height: Gaps.xs),
-                          Text(context.l10n.protectedNote, style: context.texts.bodySmall),
-                        ],
                       ],
                     )
                   : locked(3),

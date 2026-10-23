@@ -513,8 +513,9 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get protectedNote =>
-      'Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.';
+  String protectedNote(String sources) {
+    return 'Specie protetta ($sources). Guardala e fotografala: non raccoglierla, non calpestarla, non alterare l\'ambiente e resta sul sentiero.';
+  }
 
   @override
   String get masteryTitle => 'Maestria';
@@ -987,4 +988,24 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get drawNeedsEncounter =>
       'Per attingere serve una stazione: prima incontrala';
+
+  @override
+  String get gradeCommon => 'Comune';
+
+  @override
+  String get gradeUncommon => 'Non comune';
+
+  @override
+  String get gradeRare => 'Rara';
+
+  @override
+  String get gradeMythic => 'Mitica';
+
+  @override
+  String get protectionEmiliaRomagna => 'L.R. Emilia-Romagna 2/1977';
+
+  @override
+  String protectionHabitats(String annex) {
+    return 'Direttiva Habitat, allegato $annex';
+  }
 }

@@ -493,7 +493,7 @@
       }
     }
   },
-  "protectedNote": "Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.",
+  "protectedNote": "Specie protetta ({sources}). Guardala e fotografala: non raccoglierla, non calpestarla, non alterare l'ambiente e resta sul sentiero.",
   "masteryTitle": "Maestria",
   "masteryFacts": "Fatti consolidati (ricordati a 1 e 3 giorni): {done}/{total}",
   "@masteryFacts": {
@@ -914,5 +914,25 @@
     }
   },
   "drawExhausted": "Esaurita: torna pronta domani",
-  "drawNeedsEncounter": "Per attingere serve una stazione: prima incontrala"
+  "drawNeedsEncounter": "Per attingere serve una stazione: prima incontrala",
+  "gradeCommon": "Comune",
+  "gradeUncommon": "Non comune",
+  "gradeRare": "Rara",
+  "gradeMythic": "Mitica",
+  "@protectedNote": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  },
+  "protectionEmiliaRomagna": "L.R. Emilia-Romagna 2/1977",
+  "protectionHabitats": "Direttiva Habitat, allegato {annex}",
+  "@protectionHabitats": {
+    "placeholders": {
+      "annex": {
+        "type": "String"
+      }
+    }
+  }
 }

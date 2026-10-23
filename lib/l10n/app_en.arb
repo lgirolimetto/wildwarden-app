@@ -137,7 +137,7 @@
   "sectionFunFacts": "Curiosities {seen}/{total}",
   "sectionFunFactsHidden": "{count} still to discover",
   "safetyWarning": "⚠️ {text} · to be verified",
-  "protectedNote": "Wild orchid, protected in many regions: altitude bands only, never exact locations.",
+  "protectedNote": "Protected species ({sources}). Look at it and photograph it: don't pick it, don't trample it, don't alter its surroundings and stay on the path.",
   "masteryTitle": "Mastery",
   "masteryFacts": "Consolidated facts (remembered after 1 and 3 days): {done}/{total}",
   "masteryDraws": "Essences drawn: {done}/{total} · different traits: {traits}/{needed}",
@@ -267,5 +267,11 @@
   "summaryXpToCash": "The XP from studying this species are cashed in when you draw its first essence.",
   "visStored": "Vis stored: {vis}",
   "drawExhausted": "Exhausted: ready again tomorrow",
-  "drawNeedsEncounter": "Drawing needs a station: meet it first"
+  "drawNeedsEncounter": "Drawing needs a station: meet it first",
+  "gradeCommon": "Common",
+  "gradeUncommon": "Uncommon",
+  "gradeRare": "Rare",
+  "gradeMythic": "Mythic",
+  "protectionEmiliaRomagna": "Emilia-Romagna regional law 2/1977",
+  "protectionHabitats": "Habitats Directive, Annex {annex}"
 }

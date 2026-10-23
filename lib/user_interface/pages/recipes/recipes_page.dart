@@ -60,7 +60,7 @@ class _RecipeCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Pill(recipe.tier),
+                Pill(context.game.grade(recipe.grade)),
                 const Spacer(),
                 Icon(unlocked ? Icons.lock_open : Icons.lock_outline, size: 18),
                 const SizedBox(width: Gaps.xs),
@@ -119,7 +119,7 @@ class _IngredientRow extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text('${ingredient.quantity} × $name', style: context.texts.bodyLarge),
-              if (ingredient.trait != null) Pill(ingredient.trait!),
+              if (ingredient.trait != null) Pill(context.game.trait(ingredient.trait!)),
             ],
           ),
           Text(

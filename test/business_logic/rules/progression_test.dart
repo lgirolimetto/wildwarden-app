@@ -4,6 +4,7 @@ import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -98,6 +99,16 @@ void main() {
 
       final july = seasonalSuggestions(catalog, GameState.empty, DateTime(2027, 7, 1)).map((s) => s.sci);
       expect(july, ['Malva sylvestris', 'Fagus sylvatica']);
+    });
+
+    test('primo avvio: le specie protette non si propongono', () {
+      final protectedMalva = smallCatalog(
+        protection: {
+          'Malva sylvestris': ['regional-emilia-romagna'],
+        },
+      );
+      expect(protectedMalva.speciesBySci('Malva sylvestris')!.isProtected, isTrue);
+      expect(seasonalSuggestions(protectedMalva, GameState.empty, feb).map((s) => s.sci), ['Fagus sylvatica']);
     });
 
     test('dopo il primo avvio: tutte le specie in stagione non ancora in studio', () {

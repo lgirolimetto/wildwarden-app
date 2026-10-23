@@ -65,6 +65,10 @@ class Species {
   /// Tratti per lo studio (forma, ciclo, ecologia, semi); vuoti se il catalogo non li ha.
   final SpeciesTraits traits;
 
+  /// Fonti di legge che proteggono la specie nella zona (es. `regional-emilia-romagna`, `habitats-annex-v`); vuoto se
+  /// nessuna delle liste ufficiali della pipeline la protegge.
+  final List<String> protection;
+
   const Species({
     required this.sci,
     required this.name,
@@ -83,6 +87,7 @@ class Species {
     required this.images,
     this.mysteryColor,
     this.traits = SpeciesTraits.none,
+    this.protection = const [],
   });
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
@@ -109,6 +114,7 @@ class Species {
     traits: json['traits'] == null
         ? SpeciesTraits.none
         : SpeciesTraits.fromJson(json['traits'] as Map<String, dynamic>),
+    protection: (json['protection'] as List?)?.cast<String>() ?? const [],
   );
 }
 

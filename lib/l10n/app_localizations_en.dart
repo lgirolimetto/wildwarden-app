@@ -515,8 +515,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get protectedNote =>
-      'Wild orchid, protected in many regions: altitude bands only, never exact locations.';
+  String protectedNote(String sources) {
+    return 'Protected species ($sources). Look at it and photograph it: don\'t pick it, don\'t trample it, don\'t alter its surroundings and stay on the path.';
+  }
 
   @override
   String get masteryTitle => 'Mastery';
@@ -988,4 +989,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get drawNeedsEncounter => 'Drawing needs a station: meet it first';
+
+  @override
+  String get gradeCommon => 'Common';
+
+  @override
+  String get gradeUncommon => 'Uncommon';
+
+  @override
+  String get gradeRare => 'Rare';
+
+  @override
+  String get gradeMythic => 'Mythic';
+
+  @override
+  String get protectionEmiliaRomagna => 'Emilia-Romagna regional law 2/1977';
+
+  @override
+  String protectionHabitats(String annex) {
+    return 'Habitats Directive, Annex $annex';
+  }
 }

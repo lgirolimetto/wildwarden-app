@@ -923,8 +923,8 @@ abstract class AppLocalizations {
   /// No description provided for @protectedNote.
   ///
   /// In it, this message translates to:
-  /// **'Orchidea spontanea, protetta in molte regioni: solo fasce di quota, mai posizioni precise.'**
-  String get protectedNote;
+  /// **'Specie protetta ({sources}). Guardala e fotografala: non raccoglierla, non calpestarla, non alterare l\'ambiente e resta sul sentiero.'**
+  String protectedNote(String sources);
 
   /// No description provided for @masteryTitle.
   ///
@@ -1705,6 +1705,42 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Per attingere serve una stazione: prima incontrala'**
   String get drawNeedsEncounter;
+
+  /// No description provided for @gradeCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Comune'**
+  String get gradeCommon;
+
+  /// No description provided for @gradeUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Non comune'**
+  String get gradeUncommon;
+
+  /// No description provided for @gradeRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Rara'**
+  String get gradeRare;
+
+  /// No description provided for @gradeMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'Mitica'**
+  String get gradeMythic;
+
+  /// No description provided for @protectionEmiliaRomagna.
+  ///
+  /// In it, this message translates to:
+  /// **'L.R. Emilia-Romagna 2/1977'**
+  String get protectionEmiliaRomagna;
+
+  /// No description provided for @protectionHabitats.
+  ///
+  /// In it, this message translates to:
+  /// **'Direttiva Habitat, allegato {annex}'**
+  String protectionHabitats(String annex);
 }
 
 class _AppLocalizationsDelegate

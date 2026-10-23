@@ -86,6 +86,33 @@ void main() {
     expect(find.text('Fagus sylvatica'), findsOneWidget, reason: 'nome scientifico: rivelato al livello 1');
   });
 
+  testWidgets('specie protetta: messaggio di rispetto con la legge che la protegge', (tester) async {
+    registerTestDependencies(
+      catalog: Valid(
+        smallCatalog(
+          protection: {
+            'Fagus sylvatica': ['regional-emilia-romagna', 'habitats-annex-v'],
+          },
+        ),
+      ),
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+    await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Fagus sylvatica')));
+
+    expect(find.byKey(const ValueKey('protected-note')), findsOneWidget);
+    expect(find.textContaining('L.R. Emilia-Romagna 2/1977, Direttiva Habitat, allegato V'), findsOneWidget);
+  });
+
+  testWidgets('specie non protetta: nessun messaggio', (tester) async {
+    registerTestDependencies();
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+    await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Fagus sylvatica')));
+
+    expect(find.byKey(const ValueKey('protected-note')), findsNothing);
+  });
+
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
     final deps = registerTestDependencies(catalog: StateError('rotto').toInvalid());
     await pumpDruidApp(tester);

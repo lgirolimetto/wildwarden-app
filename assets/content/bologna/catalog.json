@@ -1,5 +1,5 @@
 {
- "formatVersion": 1,
+ "formatVersion": 2,
  "region": {
   "id": "bologna",
   "name": {
@@ -92,7 +92,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Anemone hortensis",
@@ -183,7 +184,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Orchis purpurea",
@@ -273,7 +275,10 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Euphorbia helioscopia",
@@ -365,7 +370,8 @@
      "ants",
      "launched"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Prunus spinosa",
@@ -455,7 +461,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Paliurus spina-christi",
@@ -544,7 +551,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Alliaria petiolata",
@@ -626,7 +634,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Euonymus europaeus",
@@ -712,7 +721,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Clematis vitalba",
@@ -805,7 +815,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Ruscus aculeatus",
@@ -890,7 +901,10 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": [
+    "habitats-annex-v"
+   ]
   },
   {
    "sci": "Cotinus coggygria",
@@ -966,7 +980,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Laurus nobilis",
@@ -1050,7 +1065,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Cornus sanguinea",
@@ -1123,7 +1139,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Viburnum lantana",
@@ -1201,7 +1218,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Chelidonium majus",
@@ -1283,7 +1301,8 @@
     "dispersal": [
      "ants"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Celtis australis",
@@ -1358,7 +1377,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Fraxinus ornus",
@@ -1428,7 +1448,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Corylus avellana",
@@ -1509,7 +1530,8 @@
     "dispersal": [
      "hoardedByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Melissa officinalis",
@@ -1595,7 +1617,8 @@
     "dispersal": [
      "stuckToAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Acer campestre",
@@ -1690,7 +1713,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Juglans regia",
@@ -1777,7 +1801,8 @@
     "dispersal": [
      "hoardedByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Salvia pratensis",
@@ -1869,7 +1894,8 @@
     "dispersal": [
      "stuckToAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Borago officinalis",
@@ -1957,7 +1983,8 @@
     "dispersal": [
      "ants"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Cornus mas",
@@ -2042,7 +2069,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Melittis melissophyllum",
@@ -2123,7 +2151,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Helleborus viridis",
@@ -2212,7 +2241,8 @@
     "dispersal": [
      "ants"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Euphorbia cyparissias",
@@ -2303,7 +2333,8 @@
      "ants",
      "launched"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Malva sylvestris",
@@ -2396,7 +2427,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Prunus cerasifera",
@@ -2475,7 +2507,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Anacamptis pyramidalis",
@@ -2564,7 +2597,10 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Ostrya carpinifolia",
@@ -2648,7 +2684,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Glechoma hederacea",
@@ -2733,7 +2770,8 @@
     "dispersal": [
      "ants"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Linaria vulgaris",
@@ -2823,7 +2861,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Populus alba",
@@ -2916,7 +2955,8 @@
      "water",
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Anacamptis morio",
@@ -3005,7 +3045,10 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Senecio vulgaris",
@@ -3099,7 +3142,8 @@
      "water",
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Lunaria annua",
@@ -3177,7 +3221,8 @@
     "dispersal": [
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Eranthis hyemalis",
@@ -3259,7 +3304,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Convolvulus arvensis",
@@ -3352,7 +3398,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Ligustrum vulgare",
@@ -3432,7 +3479,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Helleborus foetidus",
@@ -3522,7 +3570,8 @@
     "dispersal": [
      "ants"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Vinca major",
@@ -3607,7 +3656,10 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": [
+    "regional-emilia-romagna"
+   ]
   },
   {
    "sci": "Tragopogon porrifolius",
@@ -3682,7 +3734,8 @@
      "stuckToAnimals",
      "wind"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Hedera helix",
@@ -3766,7 +3819,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Cyclamen hederifolium",
@@ -3854,7 +3908,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Hippocrepis emerus",
@@ -3943,7 +3998,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Fagus sylvatica",
@@ -4026,7 +4082,8 @@
     "dispersal": [
      "hoardedByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Althaea cannabina",
@@ -4114,7 +4171,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Sambucus ebulus",
@@ -4192,7 +4250,8 @@
     "dispersal": [
      "eatenByAnimals"
     ]
-   }
+   },
+   "protection": []
   },
   {
    "sci": "Equisetum telmateia",
@@ -4287,7 +4346,8 @@
      "soilReaction": 7.2
     },
     "dispersal": []
-   }
+   },
+   "protection": []
   }
  ],
  "recipes": [
@@ -4295,7 +4355,7 @@
    "name": {
     "it": "Tintura della Lanterna d'Inverno"
    },
-   "tier": "Intermedia",
+   "grade": "uncommon",
    "unlock": {
     "species": "Eranthis hyemalis",
     "level": 2
@@ -4304,7 +4364,7 @@
     {
      "qty": 2,
      "species": "Eranthis hyemalis",
-     "trait": "❄️ Gelo",
+     "trait": "frost",
      "note": {
       "it": "Data plausibile: gen–feb (dai dati GBIF)"
      }
@@ -4326,7 +4386,7 @@
    "name": {
     "it": "Distillato della Quota Silenziosa"
    },
-   "tier": "Rara",
+   "grade": "rare",
    "unlock": {
     "species": "Fagus sylvatica",
     "level": 3
@@ -4335,7 +4395,7 @@
     {
      "qty": 2,
      "species": "Fagus sylvatica",
-     "trait": "🌫 Nebbia",
+     "trait": "fog",
      "note": {
       "it": "Plausibile solo in montagna: quota mediana ~930 m"
      }
@@ -4351,7 +4411,7 @@
     {
      "qty": 1,
      "species": null,
-     "trait": "🌕 Lunare",
+     "trait": "moon",
      "note": {
       "it": "Qualunque specie raccolta nella fase di luna piena"
      }
@@ -4365,7 +4425,7 @@
    "name": {
     "it": "Unguento dei Muri Vecchi"
    },
-   "tier": "Base",
+   "grade": "common",
    "unlock": null,
    "ingredients": [
     {
@@ -4379,7 +4439,7 @@
     {
      "qty": 1,
      "species": "Malva sylvestris",
-     "trait": "🌧 Pioggia",
+     "trait": "rain",
      "note": {
       "it": "Maggio–ottobre, in pianura"
      }
@@ -4393,7 +4453,7 @@
    "name": {
     "it": "Essenza dell'Ultimo Fiore"
    },
-   "tier": "Intermedia",
+   "grade": "uncommon",
    "unlock": {
     "species": "Cyclamen hederifolium",
     "level": 2
@@ -4402,7 +4462,7 @@
     {
      "qty": 2,
      "species": "Cyclamen hederifolium",
-     "trait": "🌅 Crepuscolo",
+     "trait": "dusk",
      "note": {
       "it": "Autunno, collina"
      }
@@ -4410,7 +4470,7 @@
     {
      "qty": 1,
      "species": "Melissa officinalis",
-     "trait": "💧 Rugiada",
+     "trait": "dew",
      "note": {
       "it": "Aprile–ottobre"
      }

@@ -1,5 +1,6 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
@@ -67,6 +68,22 @@ class GameTexts {
     Rank.seeker => l10n.rankSeeker,
     Rank.warden => l10n.rankWarden,
     Rank.botanomancer => l10n.rankBotanomancer,
+  };
+
+  /// Nome leggibile di una fonte di protezione del catalogo.
+  String protectionSource(String id) => switch (id) {
+    'regional-emilia-romagna' => l10n.protectionEmiliaRomagna,
+    'habitats-annex-ii' => l10n.protectionHabitats('II'),
+    'habitats-annex-iv' => l10n.protectionHabitats('IV'),
+    'habitats-annex-v' => l10n.protectionHabitats('V'),
+    _ => id,
+  };
+
+  String grade(Grade g) => switch (g) {
+    Grade.common => l10n.gradeCommon,
+    Grade.uncommon => l10n.gradeUncommon,
+    Grade.rare => l10n.gradeRare,
+    Grade.mythic => l10n.gradeMythic,
   };
 
   String trait(Trait t) => switch (t) {
