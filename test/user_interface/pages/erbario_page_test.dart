@@ -153,6 +153,9 @@ void main() {
     await pumpDruidApp(tester);
     await openTab(tester, 'Erbario');
 
+    // Le linguette scorrono: su uno schermo stretto "In stagione adesso" è mezza fuori.
+    await tester.ensureVisible(find.byKey(const ValueKey('view-inSeason')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('view-inSeason')));
     await tester.pumpAndSettle();
     // A febbraio sono in stagione solo elleboro e piè di gallo.

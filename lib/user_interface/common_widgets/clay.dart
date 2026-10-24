@@ -1117,22 +1117,24 @@ class _ClayTabsState extends State<ClayTabs> {
   Widget build(BuildContext context) {
     final tokens = context.druid;
     final track = tokens.neu ? _neuTrack(context, tokens) : _materialTrack(context);
-    // A scorrimento: una freccina per lato, solo se da quella parte c'è altro; toccata, fa scorrere il binario.
+    // A scorrimento: una freccina per lato, accesa se da quella parte c'è altro; toccata, fa scorrere il binario.
     return Row(
       children: [
         if (widget.scrollable)
           ScrollHintArrow(
             key: const ValueKey('more-left'),
             direction: AxisDirection.left,
-            visible: _moreLeft,
+            enabled: _moreLeft,
             onTap: () => _scrollBy(-1),
           ),
+        if (widget.scrollable) const SizedBox(width: Gaps.s),
         Expanded(child: track),
+        if (widget.scrollable) const SizedBox(width: Gaps.s),
         if (widget.scrollable)
           ScrollHintArrow(
             key: const ValueKey('more-right'),
             direction: AxisDirection.right,
-            visible: _moreRight,
+            enabled: _moreRight,
             onTap: () => _scrollBy(1),
           ),
         if (widget.trailing != null) ...[const SizedBox(width: Gaps.m), widget.trailing!],
@@ -1275,38 +1277,58 @@ class _ClayTabsState extends State<ClayTabs> {
   }
 }
 
-/// Freccina accanto a una fila che scorre: compare solo se da quella parte c'è altro e, toccata, fa scorrere la fila
-/// in quella direzione. Quando non serve resta invisibile ma tiene il suo spazio, così la fila non cambia larghezza.
+/// Freccina in un tondino scavato accanto a una fila che scorre, sempre presente: **accesa** (colore delle azioni) se da
+/// quella parte c'è altro, e allora toccandola la fila scorre; **spenta** e non toccabile se non c'è più nulla.
 class ScrollHintArrow extends StatelessWidget {
-  static const width = 24.0;
+  static const size = 26.0;
 
   final AxisDirection direction;
-  final bool visible;
+  final bool enabled;
   final VoidCallback onTap;
 
-  const ScrollHintArrow({super.key, required this.direction, required this.visible, required this.onTap});
+  const ScrollHintArrow({super.key, required this.direction, required this.enabled, required this.onTap});
 
   @override
-  Widget build(BuildContext context) => IgnorePointer(
-    ignoring: !visible,
-    child: AnimatedOpacity(
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    final arrow = TweenAnimationBuilder<Color?>(
       duration: const Duration(milliseconds: 180),
-      opacity: visible ? 1 : 0,
+      tween: ColorTween(end: enabled ? colors.primary : context.druid.hint.withValues(alpha: 0.35)),
+      builder: (context, color, _) => Icon(
+        direction == AxisDirection.left ? Icons.chevron_left_rounded : Icons.chevron_right_rounded,
+        size: 20,
+        color: color,
+      ),
+    );
+    return Semantics(
+      button: true,
+      enabled: enabled,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: SizedBox(
-          width: width,
-          height: 48,
-          child: Icon(
-            direction == AxisDirection.left ? Icons.chevron_left_rounded : Icons.chevron_right_rounded,
-            size: 22,
-            color: context.colors.primary,
+        onTap: enabled ? onTap : null,
+        // Area da toccare più grande del tondino.
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 11),
+          child: SizedBox.square(
+            dimension: size,
+            child: context.druid.neu
+                ? NeuInset(
+                    radius: BorderRadius.circular(size / 2),
+                    depth: 2,
+                    child: Center(child: arrow),
+                  )
+                : DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: colors.outlineVariant),
+                    ),
+                    child: Center(child: arrow),
+                  ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// Barra di avanzamento. Nelle livree neumorfiche: un binario sottile scavato in cui la parte piena è una chip
