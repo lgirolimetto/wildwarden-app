@@ -315,6 +315,12 @@ void main() {
       final dusk = find.text('Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.');
       await scrollTo(tester, dusk);
       expect(dusk, findsOneWidget);
+
+      // Glossario nella seconda linguetta.
+      expect(find.byKey(const ValueKey('gloss-vis')), findsNothing);
+      await scrollToTop(tester);
+      await tester.tap(find.text('Glossario'));
+      await tester.pumpAndSettle();
       await scrollTo(tester, find.byKey(const ValueKey('gloss-vis')));
       expect(find.textContaining('La linfa sottile delle piante'), findsOneWidget);
     });

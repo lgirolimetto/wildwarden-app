@@ -129,6 +129,29 @@ void main() {
       expect(find.byType(ChoiceChip), findsOneWidget);
     });
 
+    testWidgets('linguette neumorfiche: binario scavato, un tocco sceglie la linguetta', (tester) async {
+      var tab = 0;
+      await _pump(
+        tester,
+        StatefulBuilder(
+          builder: (context, setState) => SizedBox(
+            width: 300,
+            child: ClayTabs(labels: const ['Uno', 'Due'], selected: tab, onChanged: (t) => setState(() => tab = t)),
+          ),
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.ancestor(of: find.text('Due'), matching: find.byType(NeuInset)), findsOneWidget);
+      await tester.tap(find.text('Due'));
+      await tester.pumpAndSettle();
+      expect(tab, 1);
+    });
+
+    testWidgets('senza neumorfismo le linguette sono un SegmentedButton', (tester) async {
+      await _pump(tester, ClayTabs(labels: const ['Uno', 'Due'], selected: 0, onChanged: (_) {}));
+      expect(find.byType(SegmentedButton<int>), findsOneWidget);
+    });
+
     testWidgets('interruttore neumorfico: tocco cambia valore, sfera a destra se acceso', (tester) async {
       var value = false;
       await _pump(

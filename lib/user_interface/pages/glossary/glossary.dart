@@ -105,8 +105,16 @@ class GlossaryChip extends StatelessWidget {
 }
 
 /// Legenda e glossario: prima i simboli dell'app (gradi, bollini, livelli, tratti), poi i termini del gioco.
-class GlossaryPage extends StatelessWidget {
+class GlossaryPage extends StatefulWidget {
   const GlossaryPage({super.key});
+
+  @override
+  State<GlossaryPage> createState() => _GlossaryPageState();
+}
+
+class _GlossaryPageState extends State<GlossaryPage> {
+  /// 0 = Legenda, 1 = Glossario: due linguette invece di due titoli, per non perdere spazio.
+  var _tab = 0;
 
   @override
   Widget build(BuildContext context) => DenseArea(child: _page(context));
@@ -119,18 +127,21 @@ class GlossaryPage extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(Gaps.l),
         children: [
-          Text(context.l10n.legendTitle, style: context.texts.titleLarge),
-          const SizedBox(height: Gaps.m),
-          const _Legend(),
-          const SizedBox(height: Gaps.xl),
-          Text(context.l10n.glossarySection, style: context.texts.titleLarge),
-          const SizedBox(height: Gaps.m),
-          for (final (i, term) in GlossaryTerm.values.indexed) ...[
-            if (i > 0) const Divider(height: Gaps.xl),
-            Text(term.term(context.l10n), key: ValueKey('gloss-${term.name}'), style: context.texts.titleMedium),
-            const SizedBox(height: Gaps.xs),
-            Text(term.text(context.l10n)),
-          ],
+          ClayTabs(
+            labels: [context.l10n.legendTitle, context.l10n.glossarySection],
+            selected: _tab,
+            onChanged: (tab) => setState(() => _tab = tab),
+          ),
+          const SizedBox(height: Gaps.l),
+          if (_tab == 0)
+            const _Legend()
+          else
+            for (final (i, term) in GlossaryTerm.values.indexed) ...[
+              if (i > 0) const Divider(height: Gaps.xl),
+              Text(term.term(context.l10n), key: ValueKey('gloss-${term.name}'), style: context.texts.titleMedium),
+              const SizedBox(height: Gaps.xs),
+              Text(term.text(context.l10n)),
+            ],
         ],
       ),
     ),

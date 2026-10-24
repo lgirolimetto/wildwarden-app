@@ -986,6 +986,94 @@ class ClaySwitch extends StatelessWidget {
   }
 }
 
+/// Linguette per dividere una pagina in parti (es. Legenda | Glossario), invece di titoli e muri di testo. Nelle
+/// livree neumorfiche: un binario a pillola scavato in cui la linguetta scelta è una pillola in rilievo color pagina
+/// che scivola, con il testo del colore delle azioni. Altrimenti un `SegmentedButton` Material.
+class ClayTabs extends StatelessWidget {
+  static const _height = 48.0, _inset = 5.0;
+
+  final List<String> labels;
+  final int selected;
+  final ValueChanged<int> onChanged;
+
+  const ClayTabs({super.key, required this.labels, required this.selected, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    if (!tokens.neu) {
+      return SizedBox(
+        width: double.infinity,
+        child: SegmentedButton<int>(
+          showSelectedIcon: false,
+          segments: [for (final (i, label) in labels.indexed) ButtonSegment(value: i, label: Text(label))],
+          selected: {selected},
+          onSelectionChanged: (s) => onChanged(s.single),
+        ),
+      );
+    }
+    final colors = context.colors;
+    return SizedBox(
+      height: _height,
+      child: NeuInset(
+        radius: const BorderRadius.all(Radius.circular(_height / 2)),
+        child: Padding(
+          padding: const EdgeInsets.all(_inset),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final width = constraints.maxWidth / labels.length;
+              return Stack(
+                children: [
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 180),
+                    curve: Curves.easeOut,
+                    left: width * selected,
+                    top: 0,
+                    bottom: 0,
+                    width: width,
+                    child: DecoratedBox(
+                      decoration: _neuDecoration(
+                        tokens,
+                        color: colors.surface,
+                        radius: const BorderRadius.all(Radius.circular(999)),
+                        distance: 3,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      for (final (i, label) in labels.indexed)
+                        Expanded(
+                          child: Semantics(
+                            button: true,
+                            selected: i == selected,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () => onChanged(i),
+                              child: Center(
+                                child: Text(
+                                  label,
+                                  style: context.texts.labelLarge?.copyWith(
+                                    color: i == selected ? colors.primary : colors.onSurfaceVariant,
+                                    fontWeight: i == selected ? FontWeight.w700 : null,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Barra di avanzamento. Nelle livree neumorfiche: un binario sottile scavato in cui la parte piena è una chip
 /// appena bombata, così il vuoto si vede scavato e il pieno in rilievo (a barra completa sembra una chip). Rilievo e
 /// incavo sono leggerissimi, la barra resta sottile. Altrove una `LinearProgressIndicator`.
