@@ -40,7 +40,7 @@ void main() {
     await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Eranthis hyemalis')));
 
     expect(find.text('Piè di gallo'), findsWidgets);
-    expect(find.textContaining('Non ancora incontrata'), findsOneWidget);
+    expect(find.textContaining('Non ancora Incontrata'), findsOneWidget);
     expect(find.text('tossica · da verificare'), findsOneWidget);
   });
 
@@ -141,7 +141,7 @@ void main() {
     expect(
       find.descendant(
         of: find.byKey(const ValueKey('unknown-Fagus sylvatica')),
-        matching: find.byTooltip('Specie protetta'),
+        matching: find.byTooltip('Specie Protetta'),
       ),
       findsOneWidget,
     );
@@ -244,7 +244,7 @@ void main() {
     await pumpDruidApp(tester);
     await openTab(tester, 'Erbario');
 
-    expect(find.text('Simula incontro'), findsNothing);
+    expect(find.text('Simula Incontro'), findsNothing);
   });
 
   testWidgets('in inglese i nomi delle specie sono tradotti', (tester) async {

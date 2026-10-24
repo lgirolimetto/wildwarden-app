@@ -4415,12 +4415,12 @@
      "species": null,
      "trait": "moon",
      "note": {
-      "it": "Qualunque specie raccolta nella fase di luna piena"
+      "it": "Qualunque specie Attinta nella fase di Luna piena"
      }
     }
    ],
    "effect": {
-    "it": "Aumenta la purezza delle essenze raccolte nei campi oltre i 600 m (effetto di gioco)."
+    "it": "Aumenta la Purezza delle Essenze Attinte nei campi oltre i 600 m (effetto di gioco)."
    }
   },
   {
@@ -4510,7 +4510,7 @@
     }
    ],
    "effect": {
-    "it": "La prossima raccolta d'inverno immagazzina un po' di Vis in più (effetto di gioco)."
+    "it": "La prossima Raccolta d'inverno immagazzina un po' di Vis in più (effetto di gioco)."
    }
   },
   {
@@ -4539,7 +4539,7 @@
     }
    ],
    "effect": {
-    "it": "Per un giorno le tue stazioni di arbusti spinosi si rigenerano prima (effetto di gioco)."
+    "it": "Per un giorno le tue Stazioni di arbusti spinosi si rigenerano prima (effetto di gioco)."
    }
   },
   {
@@ -4568,7 +4568,7 @@
     }
    ],
    "effect": {
-    "it": "Svela dove e quando cercare una specie della tua zona che non hai ancora incontrato (effetto di gioco)."
+    "it": "Svela dove e quando cercare una specie della tua zona che non hai ancora Incontrato (effetto di gioco)."
    }
   },
   {
@@ -4597,7 +4597,7 @@
     }
    ],
    "effect": {
-    "it": "La prossima essenza attinta con il gelo è più pura (effetto di gioco)."
+    "it": "La prossima Essenza Attinta con il Gelo è più pura (effetto di gioco)."
    }
   },
   {
@@ -4626,7 +4626,7 @@
     }
    ],
    "effect": {
-    "it": "Una stazione esaurita torna pronta qualche ora prima (effetto di gioco)."
+    "it": "Una Stazione Esaurita torna pronta qualche ora prima (effetto di gioco)."
    }
   },
   {
@@ -4742,7 +4742,7 @@
     }
    ],
    "effect": {
-    "it": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco)."
+    "it": "La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco)."
    }
   },
   {
@@ -4771,7 +4771,7 @@
     }
    ],
    "effect": {
-    "it": "La prossima raccolta da un albero immagazzina il doppio della Vis (effetto di gioco)."
+    "it": "La prossima Raccolta da un albero immagazzina il doppio della Vis (effetto di gioco)."
    }
   }
  ],
@@ -4780,25 +4780,25 @@
    "it": "Il Piè di gallo fiorisce quando il bosco dorme ancora: il suo oro trattiene la prima luce dell'anno. Gli erboristi lo chiamano 'la lanterna di gennaio'."
   },
   "Helleborus viridis": {
-   "it": "L'Elleboro verde non teme la neve. La sua essenza è fredda e paziente, e conserva le cose invece di trasformarle."
+   "it": "L'Elleboro verde non teme la neve. La sua Essenza è fredda e paziente, e conserva le cose invece di trasformarle."
   },
   "Fagus sylvatica": {
-   "it": "Sotto i faggi il silenzio ha un peso. L'essenza di faggio si raccoglie solo in quota, dove le voci della pianura non arrivano."
+   "it": "Sotto i faggi il silenzio ha un peso. L'Essenza di faggio si Attinge solo in quota, dove le voci della pianura non arrivano."
   },
   "Anacamptis pyramidalis": {
    "it": "L'Orchide piramidale compare a giugno, per poche settimane, nei prati che nessuno falcia. Chi la trova sa di essere arrivato al momento giusto."
   },
   "Cyclamen hederifolium": {
-   "it": "Il Ciclamino fiorisce quando gli altri si arrendono all'autunno. La sua essenza ricorda: c'è ancora tempo."
+   "it": "Il Ciclamino fiorisce quando gli altri si arrendono all'autunno. La sua Essenza ricorda: c'è ancora tempo."
   },
   "Chelidonium majus": {
    "it": "La Celidonia cresce sui muri vecchi e ai bordi delle strade, dove nessuno guarda. Gli erboristi di città la conoscono bene."
   },
   "Melissa officinalis": {
-   "it": "La Melissa profuma di limone appena la sfiori. È l'essenza più gentile del bolognese, e la prima che molti apprendisti imparano."
+   "it": "La Melissa profuma di limone appena la sfiori. È l'Essenza più gentile del bolognese, e la prima che molti Apprendisti imparano."
   },
   "Malva sylvestris": {
-   "it": "La Malva non chiede nulla: cresce nei fossi, nei cortili, lungo i binari. La sua essenza è comune, ma nessuna ricetta di base ne fa a meno."
+   "it": "La Malva non chiede nulla: cresce nei fossi, nei cortili, lungo i binari. La sua Essenza è comune, ma nessuna Ricetta di base ne fa a meno."
   }
  },
  "funFacts": {

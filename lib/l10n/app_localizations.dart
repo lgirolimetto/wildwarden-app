@@ -257,7 +257,7 @@ abstract class AppLocalizations {
   /// No description provided for @simulateEncounter.
   ///
   /// In it, this message translates to:
-  /// **'Simula incontro'**
+  /// **'Simula Incontro'**
   String get simulateEncounter;
 
   /// No description provided for @levelToStudy.
@@ -341,13 +341,13 @@ abstract class AppLocalizations {
   /// No description provided for @nextRank.
   ///
   /// In it, this message translates to:
-  /// **'Prossimo titolo: {rank} a {xp} PE'**
+  /// **'Prossimo Rango: {rank} a {xp} PE'**
   String nextRank(String rank, int xp);
 
   /// No description provided for @maxRankReached.
   ///
   /// In it, this message translates to:
-  /// **'Hai raggiunto il titolo più alto'**
+  /// **'Hai raggiunto il Rango più alto'**
   String get maxRankReached;
 
   /// No description provided for @seasonWinter.
@@ -515,13 +515,13 @@ abstract class AppLocalizations {
   /// No description provided for @answerRemembered.
   ///
   /// In it, this message translates to:
-  /// **'Te lo ricordavi! Prossimo ripasso tra {days} giorni.'**
+  /// **'Te lo ricordavi! Prossimo Ripasso tra {days} giorni.'**
   String answerRemembered(int days);
 
   /// No description provided for @answerForgotten.
   ///
   /// In it, this message translates to:
-  /// **'Dimenticato: tornerà nei ripassi di domani.'**
+  /// **'Dimenticato: tornerà nei Ripassi di domani.'**
   String get answerForgotten;
 
   /// No description provided for @xpGained.
@@ -545,7 +545,7 @@ abstract class AppLocalizations {
   /// No description provided for @studyLevelTitle.
   ///
   /// In it, this message translates to:
-  /// **'{name} · livello {level}'**
+  /// **'{name} · Livello {level}'**
   String studyLevelTitle(String name, int level);
 
   /// No description provided for @reviewTitle.
@@ -569,7 +569,7 @@ abstract class AppLocalizations {
   /// No description provided for @summaryLevelPassed.
   ///
   /// In it, this message translates to:
-  /// **'Livello {level} superato: {name} entra nei ripassi da domani.'**
+  /// **'Livello {level} superato: {name} entra nei Ripassi da domani.'**
   String summaryLevelPassed(int level, String name);
 
   /// No description provided for @summaryReviewDone.
@@ -599,25 +599,25 @@ abstract class AppLocalizations {
   /// No description provided for @summaryNewFunFacts.
   ///
   /// In it, this message translates to:
-  /// **'Nuove curiosità in arrivo: le riceverai una al giorno.'**
+  /// **'Nuove Curiosità in arrivo: le riceverai una al giorno.'**
   String get summaryNewFunFacts;
 
   /// No description provided for @saveToNotebook.
   ///
   /// In it, this message translates to:
-  /// **'Salva nel taccuino'**
+  /// **'Salva nel Taccuino'**
   String get saveToNotebook;
 
   /// No description provided for @savedToNotebook.
   ///
   /// In it, this message translates to:
-  /// **'Nel taccuino'**
+  /// **'Nel Taccuino'**
   String get savedToNotebook;
 
   /// No description provided for @notebookLocked.
   ///
   /// In it, this message translates to:
-  /// **'Salva nel taccuino'**
+  /// **'Salva nel Taccuino'**
   String get notebookLocked;
 
   /// No description provided for @diarioUpsell.
@@ -641,7 +641,7 @@ abstract class AppLocalizations {
   /// No description provided for @notebookEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Ancora vuoto: durante lo studio usa \"Salva nel taccuino\".'**
+  /// **'Ancora vuoto: durante lo studio usa \"Salva nel Taccuino\".'**
   String get notebookEmpty;
 
   /// No description provided for @notebookNoResults.
@@ -689,7 +689,7 @@ abstract class AppLocalizations {
   /// No description provided for @funOfDayEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Incontra e studia una specie per ricevere ogni giorno una curiosità su ciò che hai imparato.'**
+  /// **'Incontra e studia una specie per ricevere ogni giorno una Curiosità su ciò che hai imparato.'**
   String get funOfDayEmpty;
 
   /// No description provided for @funToVerify.
@@ -731,13 +731,13 @@ abstract class AppLocalizations {
   /// No description provided for @reviewsDue.
   ///
   /// In it, this message translates to:
-  /// **'{count} fatti da ripassare oggi'**
+  /// **'{count} Fatti da ripassare oggi'**
   String reviewsDue(int count);
 
   /// No description provided for @reviewsNone.
   ///
   /// In it, this message translates to:
-  /// **'Niente da ripassare oggi. I fatti imparati tornano dopo 1, 3, 7 e 21 giorni.'**
+  /// **'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.'**
   String get reviewsNone;
 
   /// No description provided for @reviewsStart.
@@ -779,7 +779,7 @@ abstract class AppLocalizations {
   /// No description provided for @seasonalHint.
   ///
   /// In it, this message translates to:
-  /// **'Puoi studiarle subito o segnarle come desiderata da cercare.'**
+  /// **'Puoi studiarle subito o segnarle come Desiderata da cercare.'**
   String get seasonalHint;
 
   /// No description provided for @seasonalStudy.
@@ -791,25 +791,25 @@ abstract class AppLocalizations {
   /// No description provided for @yourSpeciesMet.
   ///
   /// In it, this message translates to:
-  /// **'incontrata'**
+  /// **'Incontrata'**
   String get yourSpeciesMet;
 
   /// No description provided for @desiderataAdd.
   ///
   /// In it, this message translates to:
-  /// **'Aggiungi alle desiderata'**
+  /// **'Aggiungi alle Desiderata'**
   String get desiderataAdd;
 
   /// No description provided for @desiderataRemove.
   ///
   /// In it, this message translates to:
-  /// **'Togli dalle desiderata'**
+  /// **'Togli dalle Desiderata'**
   String get desiderataRemove;
 
   /// No description provided for @desiderataFull.
   ///
   /// In it, this message translates to:
-  /// **'Hai già 3 desiderata: completane o togline una.'**
+  /// **'Hai già 3 Desiderata: completane o togline una.'**
   String get desiderataFull;
 
   /// No description provided for @desiderataWhere.
@@ -845,7 +845,7 @@ abstract class AppLocalizations {
   /// No description provided for @studyLevelButton.
   ///
   /// In it, this message translates to:
-  /// **'Studia il livello {level}'**
+  /// **'Studia il Livello {level}'**
   String studyLevelButton(int level);
 
   /// No description provided for @studyComplete.
@@ -863,7 +863,7 @@ abstract class AppLocalizations {
   /// No description provided for @lockedSection.
   ///
   /// In it, this message translates to:
-  /// **'Si rivela al livello {level} ({name})'**
+  /// **'Si rivela al Livello {level} ({name})'**
   String lockedSection(int level, String name);
 
   /// No description provided for @sectionSci.
@@ -941,13 +941,13 @@ abstract class AppLocalizations {
   /// No description provided for @masteryDraws.
   ///
   /// In it, this message translates to:
-  /// **'Essenze attinte: {done}/{total} · tratti diversi: {traits}/{needed}'**
+  /// **'Essenze Attinte: {done}/{total} · Tratti diversi: {traits}/{needed}'**
   String masteryDraws(int done, int total, int traits, int needed);
 
   /// No description provided for @masteryOnlyField.
   ///
   /// In it, this message translates to:
-  /// **'Con il solo studio non si arriva alla maestria: servono anche le essenze attinte sul campo.'**
+  /// **'Con il solo studio non si arriva alla Maestria: servono anche le Essenze Attinte sul campo.'**
   String get masteryOnlyField;
 
   /// No description provided for @masteryReached.
@@ -959,13 +959,13 @@ abstract class AppLocalizations {
   /// No description provided for @simulateDraw.
   ///
   /// In it, this message translates to:
-  /// **'Simula attingere'**
+  /// **'Simula Attingere'**
   String get simulateDraw;
 
   /// No description provided for @noTrait.
   ///
   /// In it, this message translates to:
-  /// **'Nessun tratto'**
+  /// **'Nessun Tratto'**
   String get noTrait;
 
   /// No description provided for @traitFrost.
@@ -1031,7 +1031,7 @@ abstract class AppLocalizations {
   /// No description provided for @recipeKnownIngredients.
   ///
   /// In it, this message translates to:
-  /// **'Ingredienti già incontrati {known}/{total}'**
+  /// **'Ingredienti già Incontrati {known}/{total}'**
   String recipeKnownIngredients(int known, int total);
 
   /// No description provided for @recipeAnySpecies.
@@ -1043,7 +1043,7 @@ abstract class AppLocalizations {
   /// No description provided for @recipeCurrentLevel.
   ///
   /// In it, this message translates to:
-  /// **'ora: livello {level}'**
+  /// **'ora: Livello {level}'**
   String recipeCurrentLevel(int level);
 
   /// No description provided for @erbarioPages.
@@ -1061,19 +1061,19 @@ abstract class AppLocalizations {
   /// No description provided for @missionVisitErbarioTitle.
   ///
   /// In it, this message translates to:
-  /// **'Apri l\'erbario'**
+  /// **'Apri l\'Erbario'**
   String get missionVisitErbarioTitle;
 
   /// No description provided for @missionVisitErbarioBody.
   ///
   /// In it, this message translates to:
-  /// **'L\'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.'**
+  /// **'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.'**
   String get missionVisitErbarioBody;
 
   /// No description provided for @missionMarkDesiderataTitle.
   ///
   /// In it, this message translates to:
-  /// **'Scegli le tue desiderata'**
+  /// **'Scegli le tue Desiderata'**
   String get missionMarkDesiderataTitle;
 
   /// No description provided for @missionMarkDesiderataBody.
@@ -1091,7 +1091,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstEncounterBody.
   ///
   /// In it, this message translates to:
-  /// **'Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell\'erbario. Fotografa, non raccogliere.'**
+  /// **'Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell\'Erbario. Fotografa, non raccogliere.'**
   String get missionFirstEncounterBody;
 
   /// No description provided for @missionFirstLevelTitle.
@@ -1103,37 +1103,37 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstLevelBody.
   ///
   /// In it, this message translates to:
-  /// **'Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.'**
+  /// **'Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.'**
   String get missionFirstLevelBody;
 
   /// No description provided for @missionFirstRecipeTitle.
   ///
   /// In it, this message translates to:
-  /// **'La prima ricetta'**
+  /// **'La prima Ricetta'**
   String get missionFirstRecipeTitle;
 
   /// No description provided for @missionFirstRecipeBody.
   ///
   /// In it, this message translates to:
-  /// **'Porta una specie al livello richiesto da una ricetta per sbloccarla. Le ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.'**
+  /// **'Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.'**
   String get missionFirstRecipeBody;
 
   /// No description provided for @missionSkip.
   ///
   /// In it, this message translates to:
-  /// **'Salta l\'apprendistato'**
+  /// **'Salta l\'Apprendistato'**
   String get missionSkip;
 
   /// No description provided for @missionActionOpenErbario.
   ///
   /// In it, this message translates to:
-  /// **'Apri l\'erbario'**
+  /// **'Apri l\'Erbario'**
   String get missionActionOpenErbario;
 
   /// No description provided for @missionActionChooseDesiderata.
   ///
   /// In it, this message translates to:
-  /// **'Scegli nell\'erbario'**
+  /// **'Scegli nell\'Erbario'**
   String get missionActionChooseDesiderata;
 
   /// No description provided for @missionActionStudy.
@@ -1145,7 +1145,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionActionRecipes.
   ///
   /// In it, this message translates to:
-  /// **'Vedi le ricette'**
+  /// **'Vedi le Ricette'**
   String get missionActionRecipes;
 
   /// No description provided for @missionGlossary.
@@ -1175,7 +1175,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossErbarioText.
   ///
   /// In it, this message translates to:
-  /// **'Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che incontri e studi.'**
+  /// **'Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che Incontri e studi.'**
   String get glossErbarioText;
 
   /// No description provided for @glossDesiderataTerm.
@@ -1211,7 +1211,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossStazioneText.
   ///
   /// In it, this message translates to:
-  /// **'In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai incontrato una specie e dove potrai tornare ad attingere.'**
+  /// **'In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai Incontrato una specie e dove potrai tornare ad Attingere.'**
   String get glossStazioneText;
 
   /// No description provided for @glossTrattoTerm.
@@ -1223,7 +1223,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossTrattoText.
   ///
   /// In it, this message translates to:
-  /// **'Una condizione del momento in cui attingi un\'essenza (luna piena, pioggia, nebbia, rugiada…): un\'essenza le porta tutte. Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.'**
+  /// **'Una condizione del momento in cui Attingi un\'Essenza (Luna piena, Pioggia, Nebbia, Rugiada…): un\'Essenza le porta tutte. Le Ricette chiedono Tratti diversi: la stessa pianta in giorni diversi dà Essenze diverse.'**
   String get glossTrattoText;
 
   /// No description provided for @glossAttingereTerm.
@@ -1235,7 +1235,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossAttingereText.
   ///
   /// In it, this message translates to:
-  /// **'Trarre l\'essenza da una stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.'**
+  /// **'Trarre l\'Essenza da una Stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.'**
   String get glossAttingereText;
 
   /// No description provided for @glossMaestriaTerm.
@@ -1247,7 +1247,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossMaestriaText.
   ///
   /// In it, this message translates to:
-  /// **'L\'ultimo livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver attinto la specie sul campo in condizioni diverse.'**
+  /// **'L\'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse.'**
   String get glossMaestriaText;
 
   /// No description provided for @glossMissioneTerm.
@@ -1259,7 +1259,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossMissioneText.
   ///
   /// In it, this message translates to:
-  /// **'Un obiettivo da raggiungere nel mondo reale o nello studio: incontrare una specie, superare un livello, sbloccare una ricetta.'**
+  /// **'Un obiettivo da raggiungere nel mondo reale o nello studio: Incontrare una specie, superare un Livello, sbloccare una Ricetta.'**
   String get glossMissioneText;
 
   /// No description provided for @debugTitle.
@@ -1307,7 +1307,7 @@ abstract class AppLocalizations {
   /// No description provided for @notEncounteredYet.
   ///
   /// In it, this message translates to:
-  /// **'Non ancora incontrata'**
+  /// **'Non ancora Incontrata'**
   String get notEncounteredYet;
 
   /// No description provided for @desiderataAddShort.
@@ -1661,19 +1661,19 @@ abstract class AppLocalizations {
   /// No description provided for @xpToCash.
   ///
   /// In it, this message translates to:
-  /// **'{xp} PE da incassare: si incassano alla prima essenza di ogni specie'**
+  /// **'{xp} PE da Incassare: si Incassano alla prima Essenza di ogni specie'**
   String xpToCash(int xp);
 
   /// No description provided for @speciesXpToCash.
   ///
   /// In it, this message translates to:
-  /// **'{xp} PE da incassare: attingi la prima essenza di questa specie.'**
+  /// **'{xp} PE da Incassare: Attingi la prima Essenza di questa specie.'**
   String speciesXpToCash(int xp);
 
   /// No description provided for @summaryXpToCash.
   ///
   /// In it, this message translates to:
-  /// **'I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.'**
+  /// **'I PE dello studio di questa specie si Incassano quando ne Attingi la prima Essenza.'**
   String get summaryXpToCash;
 
   /// No description provided for @visStored.
@@ -1691,7 +1691,7 @@ abstract class AppLocalizations {
   /// No description provided for @drawNeedsEncounter.
   ///
   /// In it, this message translates to:
-  /// **'Per attingere serve una stazione: prima incontrala'**
+  /// **'Per Attingere serve una Stazione: prima Incontrala'**
   String get drawNeedsEncounter;
 
   /// No description provided for @gradeCommon.
@@ -1733,7 +1733,7 @@ abstract class AppLocalizations {
   /// No description provided for @summaryRecipeLearned.
   ///
   /// In it, this message translates to:
-  /// **'Hai imparato una ricetta: {name}'**
+  /// **'Hai imparato una Ricetta: {name}'**
   String summaryRecipeLearned(String name);
 
   /// No description provided for @recipeLearnByStudying.
@@ -1745,7 +1745,7 @@ abstract class AppLocalizations {
   /// No description provided for @debugGradePreview.
   ///
   /// In it, this message translates to:
-  /// **'Anteprima dei gradi'**
+  /// **'Anteprima dei Gradi'**
   String get debugGradePreview;
 
   /// No description provided for @debugGradeSampleName.
@@ -1763,7 +1763,7 @@ abstract class AppLocalizations {
   /// No description provided for @debugGradeSampleEffect.
   ///
   /// In it, this message translates to:
-  /// **'La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).'**
+  /// **'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).'**
   String get debugGradeSampleEffect;
 
   /// No description provided for @badgeEncountered.
@@ -1775,7 +1775,7 @@ abstract class AppLocalizations {
   /// No description provided for @badgeProtected.
   ///
   /// In it, this message translates to:
-  /// **'Specie protetta'**
+  /// **'Specie Protetta'**
   String get badgeProtected;
 
   /// No description provided for @recipesCount.
@@ -1787,7 +1787,7 @@ abstract class AppLocalizations {
   /// No description provided for @recipeIngredientCount.
   ///
   /// In it, this message translates to:
-  /// **'{count, plural, =1{1 ingrediente} other{{count} ingredienti}}'**
+  /// **'{count, plural, =1{1 Ingrediente} other{{count} Ingredienti}}'**
   String recipeIngredientCount(num count);
 
   /// No description provided for @legendTitle.
@@ -1805,7 +1805,7 @@ abstract class AppLocalizations {
   /// No description provided for @legendGrades.
   ///
   /// In it, this message translates to:
-  /// **'Gradi (ricette, pozioni, bottino)'**
+  /// **'Gradi (Ricette, Pozioni, Bottino)'**
   String get legendGrades;
 
   /// No description provided for @legendBadges.
@@ -1817,19 +1817,19 @@ abstract class AppLocalizations {
   /// No description provided for @legendProtected.
   ///
   /// In it, this message translates to:
-  /// **'Specie protetta dalla legge: si guarda e si fotografa'**
+  /// **'Specie Protetta dalla legge: si guarda e si fotografa'**
   String get legendProtected;
 
   /// No description provided for @legendEncountered.
   ///
   /// In it, this message translates to:
-  /// **'Specie incontrata, con la data dell\'incontro'**
+  /// **'Specie Incontrata, con la data dell\'Incontro'**
   String get legendEncountered;
 
   /// No description provided for @legendXpToCash.
   ///
   /// In it, this message translates to:
-  /// **'PE da incassare alla prima essenza della specie'**
+  /// **'PE da Incassare alla prima Essenza della specie'**
   String get legendXpToCash;
 
   /// No description provided for @legendLevels.
@@ -1841,7 +1841,7 @@ abstract class AppLocalizations {
   /// No description provided for @legendTraits.
   ///
   /// In it, this message translates to:
-  /// **'Tratti delle essenze'**
+  /// **'Tratti delle Essenze'**
   String get legendTraits;
 
   /// No description provided for @glossProtettaTerm.
@@ -1865,7 +1865,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossEssenzaText.
   ///
   /// In it, this message translates to:
-  /// **'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e dei tratti, dati dalle condizioni del momento.'**
+  /// **'Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.'**
   String get glossEssenzaText;
 
   /// No description provided for @glossVisTerm.
@@ -1877,19 +1877,19 @@ abstract class AppLocalizations {
   /// No description provided for @glossVisText.
   ///
   /// In it, this message translates to:
-  /// **'La linfa sottile delle piante: l\'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.'**
+  /// **'La linfa sottile delle piante: l\'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.'**
   String get glossVisText;
 
   /// No description provided for @glossPeDaIncassareTerm.
   ///
   /// In it, this message translates to:
-  /// **'PE da incassare'**
+  /// **'PE da Incassare'**
   String get glossPeDaIncassareTerm;
 
   /// No description provided for @glossPeDaIncassareText.
   ///
   /// In it, this message translates to:
-  /// **'I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.'**
+  /// **'I Punti Esperienza dello studio di una specie che non hai ancora Attinto. Si Incassano alla prima Essenza di quella specie e da lì contano per il Rango.'**
   String get glossPeDaIncassareText;
 
   /// No description provided for @glossGradoTerm.
@@ -1901,7 +1901,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossGradoText.
   ///
   /// In it, this message translates to:
-  /// **'Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell\'Esperienza.'**
+  /// **'Comune, Non comune, Rara, Mitica: bianco, argento, oro, oro rosso. Vale per Ingredienti, Ricette, Pozioni e Bottino dell\'Esperienza.'**
   String get glossGradoText;
 
   /// No description provided for @glossBottinoTerm.
@@ -1913,7 +1913,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossBottinoText.
   ///
   /// In it, this message translates to:
-  /// **'Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).'**
+  /// **'Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).'**
   String get glossBottinoText;
 
   /// No description provided for @glossFigurinaTerm.
@@ -1925,13 +1925,13 @@ abstract class AppLocalizations {
   /// No description provided for @glossFigurinaText.
   ///
   /// In it, this message translates to:
-  /// **'Una ricetta o una pozione nell\'album. L\'album delle ricette mostra quelle che conosci; il contatore dice quante sono in tutto.'**
+  /// **'Una Ricetta o una Pozione nell\'Album. L\'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.'**
   String get glossFigurinaText;
 
   /// No description provided for @recipesEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall\'erbario.'**
+  /// **'Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall\'Erbario.'**
   String get recipesEmpty;
 
   /// No description provided for @viewAll.
@@ -1949,7 +1949,7 @@ abstract class AppLocalizations {
   /// No description provided for @viewDesiderata.
   ///
   /// In it, this message translates to:
-  /// **'Le mie desiderata'**
+  /// **'Le mie Desiderata'**
   String get viewDesiderata;
 
   /// No description provided for @viewProtected.
@@ -1985,7 +1985,7 @@ abstract class AppLocalizations {
   /// No description provided for @viewProtectedOnly.
   ///
   /// In it, this message translates to:
-  /// **'Solo protette'**
+  /// **'Solo Protette'**
   String get viewProtectedOnly;
 
   /// No description provided for @viewBand.
@@ -2069,7 +2069,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitWhenRain.
   ///
   /// In it, this message translates to:
-  /// **'Mentre piove. Con il temporale la raccolta è sospesa.'**
+  /// **'Mentre piove. Con il temporale la Raccolta è sospesa.'**
   String get traitWhenRain;
 
   /// No description provided for @traitWhenFog.
