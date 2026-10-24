@@ -16,7 +16,9 @@ void main() {
         MaterialApp(
           theme: theme,
           home: const Scaffold(
-            body: Center(child: StampBadge(text: '3 feb', label: 'Incontrata il')),
+            body: Center(
+              child: StampBadge(text: '3 feb', label: 'Incontrata il'),
+            ),
           ),
         ),
       );

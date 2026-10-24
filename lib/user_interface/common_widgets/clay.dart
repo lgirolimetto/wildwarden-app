@@ -1037,9 +1037,12 @@ class _ClayTabsState extends State<ClayTabs> {
   /// Posizione e larghezza di ogni linguetta nella fila, misurate dopo il disegno: la pillola scivola fin lì.
   List<(double, double)> _rects = const [];
 
-  /// A scorrimento: c'è altro a sinistra o a destra (i bordi sfumano da quella parte).
+  /// A scorrimento: c'è altro a sinistra o a destra (le freccine si accendono da quella parte).
   final _scroll = ScrollController();
   var _moreLeft = false, _moreRight = false;
+
+  /// A scorrimento: la pillola della linguetta scelta passa sotto il bordo sinistro o destro (lì si dissolve).
+  var _pillCutLeft = false, _pillCutRight = false;
 
   @override
   void initState() {
@@ -1047,7 +1050,7 @@ class _ClayTabsState extends State<ClayTabs> {
     _syncKeys();
     _scroll.addListener(_updateEdges);
     // Anche all'apertura la linguetta scelta si porta in vista (es. una vista salvata in fondo alla fila).
-    _measureAfterLayout(reveal: true);
+    _measureAfterLayout(reveal: true, animate: false);
   }
 
   @override
@@ -1073,10 +1076,21 @@ class _ClayTabsState extends State<ClayTabs> {
     // Il margine interno del binario non conta: portata in vista una linguetta, ne restano pochi pixel da scorrere.
     const tolerance = ClayTabs._inset + 1;
     final left = p.pixels > tolerance, right = p.pixels < p.maxScrollExtent - tolerance;
-    if (left != _moreLeft || right != _moreRight) {
+    // Coordinate della fila che scorre: le linguette cominciano dopo il margine interno.
+    final selected = widget.selected;
+    var cutLeft = false, cutRight = false;
+    if (selected >= 0 && selected < _rects.length) {
+      final (x, width) = _rects[selected];
+      final start = ClayTabs._inset + x - p.pixels, end = start + width;
+      cutLeft = start < ClayTabs._inset - 0.5;
+      cutRight = end > p.viewportDimension - ClayTabs._inset + 0.5;
+    }
+    if (left != _moreLeft || right != _moreRight || cutLeft != _pillCutLeft || cutRight != _pillCutRight) {
       setState(() {
         _moreLeft = left;
         _moreRight = right;
+        _pillCutLeft = cutLeft;
+        _pillCutRight = cutRight;
       });
     }
   }
@@ -1092,26 +1106,45 @@ class _ClayTabsState extends State<ClayTabs> {
     if (_itemKeys.length != widget.tabs.length) _itemKeys = [for (final _ in widget.tabs) GlobalKey()];
   }
 
-  void _measureAfterLayout({bool reveal = false}) => WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (!mounted) return;
-    _updateEdges();
-    final row = _rowKey.currentContext?.findRenderObject() as RenderBox?;
-    if (row == null || !row.hasSize) return;
-    final rects = [
-      for (final key in _itemKeys)
-        if (key.currentContext?.findRenderObject() case final RenderBox box when box.hasSize)
-          (box.localToGlobal(Offset.zero, ancestor: row).dx, box.size.width),
-    ];
-    if (rects.length == _itemKeys.length && !listEquals(rects, _rects)) setState(() => _rects = rects);
+  /// [reveal]: porta in vista la linguetta scelta; [animate]: scorrendo (no all'apertura, dove si salta in posizione).
+  void _measureAfterLayout({bool reveal = false, bool animate = true}) =>
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _updateEdges();
+        final row = _rowKey.currentContext?.findRenderObject() as RenderBox?;
+        if (row == null || !row.hasSize) return;
+        final rects = [
+          for (final key in _itemKeys)
+            if (key.currentContext?.findRenderObject() case final RenderBox box when box.hasSize)
+              (box.localToGlobal(Offset.zero, ancestor: row).dx, box.size.width),
+        ];
+        if (rects.length == _itemKeys.length && !listEquals(rects, _rects)) {
+          _rects = rects;
+          setState(() {});
+        }
+        _updateEdges();
+        if (reveal) _reveal(rects, animate: animate);
+      });
+
+  /// Porta in vista la linguetta scelta lasciandole attorno il margine interno del binario, come nelle linguette a
+  /// parti uguali: allineata alla parete, la sua ombra si schiaccerebbe nella curva del bordo.
+  void _reveal(List<(double, double)> rects, {required bool animate}) {
     final selected = widget.selected;
-    if (reveal && widget.scrollable && selected >= 0 && selected < _itemKeys.length) {
-      final item = _itemKeys[selected].currentContext;
-      if (item != null) {
-        Scrollable.ensureVisible(item, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd);
-        Scrollable.ensureVisible(item, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
-      }
-    }
-  });
+    if (!widget.scrollable || !_scroll.hasClients || selected < 0 || selected >= rects.length) return;
+    final p = _scroll.position;
+    // Coordinate della fila che scorre: le linguette cominciano dopo il margine interno.
+    final (x, width) = rects[selected];
+    final start = ClayTabs._inset + x, end = start + width;
+    var target = p.pixels;
+    if (end > target + p.viewportDimension - ClayTabs._inset) target = end + ClayTabs._inset - p.viewportDimension;
+    // Se non sta intera, conta l'inizio.
+    if (start < target + ClayTabs._inset) target = start - ClayTabs._inset;
+    target = target.clamp(0.0, p.maxScrollExtent);
+    if (target == p.pixels) return;
+    animate
+        ? _scroll.animateTo(target, duration: const Duration(milliseconds: 250), curve: Curves.easeOut)
+        : _scroll.jumpTo(target);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1214,12 +1247,12 @@ class _ClayTabsState extends State<ClayTabs> {
           borderRadius: radius,
           child: widget.scrollable
               // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
-              // Dal lato in cui c'è altro nascosto le linguette si dissolvono dentro la curva del bordo: una linguetta
-              // che scorre sparisce nell'incavo invece di sembrarne uscire (è del colore della pagina). Dove tutto è in
-              // vista non si dissolve niente, così la linguetta scelta resta nitida.
+              // Se la pillola della linguetta scelta passa sotto il bordo, da quel lato si dissolve dentro la curva:
+              // sparisce nell'incavo invece di sembrarne uscire (è del colore della pagina). Altrimenti non si dissolve
+              // niente, così resta nitida come nelle linguette a parti uguali; le altre linguette le taglia il bordo.
               ? _TrackEnds(
-                  left: _moreLeft,
-                  right: _moreRight,
+                  left: _pillCutLeft,
+                  right: _pillCutRight,
                   child: SingleChildScrollView(
                     controller: _scroll,
                     scrollDirection: Axis.horizontal,
@@ -1294,8 +1327,8 @@ class _TrackEnds extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Sempre presente, anche quando non dissolve niente: aggiungerla e toglierla ricreerebbe la fila che scorre, che
-    // perderebbe la sua posizione.
+    // Sempre presente, anche quando non dissolve niente: aggiungerla e toglierla cambierebbe genitore alla fila che
+    // scorre, che perderebbe lo scorrimento in corso.
     return ShaderMask(
       blendMode: BlendMode.dstIn,
       shaderCallback: (rect) {

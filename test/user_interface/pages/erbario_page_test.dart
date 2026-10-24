@@ -186,7 +186,9 @@ void main() {
   });
 
   testWidgets('all\'apertura la linguetta della vista scelta è in vista, anche se è in fondo', (tester) async {
-    registerTestDependencies(preferences: {'erbario.selectedView': 'builtin:protectedSpecies', 'theme.livery': 'feltro'});
+    registerTestDependencies(
+      preferences: {'erbario.selectedView': 'builtin:protectedSpecies', 'theme.livery': 'feltro'},
+    );
     await pumpDruidApp(tester);
     await openTab(tester, 'Erbario');
 
@@ -196,6 +198,23 @@ void main() {
     expect(tab.left, greaterThanOrEqualTo(track.left));
     expect(tab.right, lessThanOrEqualTo(track.right));
   });
+
+  // "Le mie Desiderata" è più larga del binario su questo schermo: si prova con "Protette", che ci sta.
+  for (final view in ['protectedSpecies']) {
+    testWidgets('all\'apertura la pillola della vista scelta ($view) non tocca la parete del binario', (tester) async {
+      registerTestDependencies(preferences: {'erbario.selectedView': 'builtin:$view', 'theme.livery': 'feltro'});
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Erbario');
+
+      final tab = find.byKey(ValueKey('view-$view'));
+      final track = tester.getRect(find.ancestor(of: tab, matching: find.byType(NeuInset)).first);
+      final pill = tester.getRect(
+        find.descendant(of: find.byType(ClayTabs), matching: find.byType(AnimatedPositioned)),
+      );
+      expect(pill.left, greaterThanOrEqualTo(track.left + 5 - 0.5));
+      expect(pill.right, lessThanOrEqualTo(track.right - 5 + 0.5));
+    });
+  }
 
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
     final deps = registerTestDependencies(catalog: StateError('rotto').toInvalid());

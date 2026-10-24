@@ -204,10 +204,38 @@ void main() {
       final alberi = tester.getRect(find.text('Alberi'));
       expect(pill.left, lessThan(alberi.left), reason: 'la pillola è sotto "Alberi"');
       expect(pill.right, greaterThan(alberi.right));
+      // Come nelle linguette a parti uguali, la pillola non tocca la parete del binario.
+      final track = tester.getRect(find.ancestor(of: find.text('Alberi'), matching: find.byType(NeuInset)).first);
+      expect(pill.right, lessThanOrEqualTo(track.right - 5 + 0.5));
 
       await tester.longPress(find.text('Alberi'));
       expect(longPressed, 'Alberi');
     });
+
+    for (final initial in [2, 4]) {
+      testWidgets('all\'apertura la linguetta scelta ($initial) è in vista e non tocca la parete', (tester) async {
+        const labels = ['Tutte', 'In stagione adesso', 'Le mie Desiderata', 'Protette', 'Alberi'];
+        await _pump(
+          tester,
+          // Abbastanza largo perché ogni linguetta ci stia intera, ma non tutte insieme.
+          SizedBox(
+            width: 400,
+            child: ClayTabs(
+              scrollable: true,
+              tabs: [for (final label in labels) ClayTab(label: label)],
+              selected: initial,
+              onChanged: (_) {},
+            ),
+          ),
+          livery: const FeltroLivery(),
+        );
+        await tester.pumpAndSettle();
+        final pill = tester.getRect(find.byType(AnimatedPositioned));
+        final track = tester.getRect(find.ancestor(of: find.text('Tutte'), matching: find.byType(NeuInset)).first);
+        expect(pill.left, greaterThanOrEqualTo(track.left + 5 - 0.5));
+        expect(pill.right, lessThanOrEqualTo(track.right - 5 + 0.5));
+      });
+    }
 
     testWidgets('senza neumorfismo le linguette sono un SegmentedButton', (tester) async {
       await _pump(
