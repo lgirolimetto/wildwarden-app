@@ -3,6 +3,7 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
+import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -40,7 +41,7 @@ void main() {
     await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Eranthis hyemalis')));
 
     expect(find.text('Piè di gallo'), findsWidgets);
-    expect(find.textContaining('Non ancora incontrata'), findsOneWidget);
+    expect(find.textContaining('Non ancora Incontrata'), findsOneWidget);
     expect(find.text('tossica · da verificare'), findsOneWidget);
   });
 
@@ -141,7 +142,7 @@ void main() {
     expect(
       find.descendant(
         of: find.byKey(const ValueKey('unknown-Fagus sylvatica')),
-        matching: find.byTooltip('Specie protetta'),
+        matching: find.byTooltip('Specie Protetta'),
       ),
       findsOneWidget,
     );
@@ -152,6 +153,9 @@ void main() {
     await pumpDruidApp(tester);
     await openTab(tester, 'Erbario');
 
+    // Le linguette scorrono: su uno schermo stretto "In stagione adesso" è mezza fuori.
+    await tester.ensureVisible(find.byKey(const ValueKey('view-inSeason')));
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('view-inSeason')));
     await tester.pumpAndSettle();
     // A febbraio sono in stagione solo elleboro e piè di gallo.
@@ -159,16 +163,7 @@ void main() {
     expect(find.byKey(const ValueKey('unknown-Malva sylvestris')), findsNothing);
     expect(find.byKey(const ValueKey('unknown-Fagus sylvatica')), findsNothing);
 
-    // La fila delle viste scorre in orizzontale: "Nuova vista" è in fondo.
-    await tester.scrollUntilVisible(
-      find.byKey(const ValueKey('view-new')),
-      200,
-      scrollable: find
-          .ancestor(of: find.byKey(const ValueKey('view-inSeason')), matching: find.byType(Scrollable))
-          .first,
-    );
-    await tester.ensureVisible(find.byKey(const ValueKey('view-new')));
-    await tester.pumpAndSettle();
+    // "Nuova vista" è il "+" accanto alle linguette, sempre visibile anche se le viste scorrono.
     await tester.tap(find.byKey(const ValueKey('view-new')));
     await tester.pumpAndSettle();
     await tester.enterText(find.byKey(const ValueKey('view-name')), 'Alberi');
@@ -180,12 +175,46 @@ void main() {
     expect(find.byKey(const ValueKey('unknown-Fagus sylvatica')), findsOneWidget);
     expect(find.byKey(const ValueKey('unknown-Malva sylvestris')), findsNothing);
 
+    // Le linguette scorrono: la vista nuova è in fondo.
+    await tester.ensureVisible(find.text('Alberi'));
+    await tester.pumpAndSettle();
     await tester.longPress(find.text('Alberi'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('view-remove')));
     await tester.pumpAndSettle();
     expect(find.text('Alberi'), findsNothing);
   });
+
+  testWidgets('all\'apertura la linguetta della vista scelta è in vista, anche se è in fondo', (tester) async {
+    registerTestDependencies(
+      preferences: {'erbario.selectedView': 'builtin:protectedSpecies', 'theme.livery': 'feltro'},
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    final protectedTab = find.byKey(const ValueKey('view-protectedSpecies'));
+    final track = tester.getRect(find.ancestor(of: protectedTab, matching: find.byType(NeuInset)).first);
+    final tab = tester.getRect(protectedTab);
+    expect(tab.left, greaterThanOrEqualTo(track.left));
+    expect(tab.right, lessThanOrEqualTo(track.right));
+  });
+
+  // "Le mie Desiderata" è più larga del binario su questo schermo: si prova con "Protette", che ci sta.
+  for (final view in ['protectedSpecies']) {
+    testWidgets('all\'apertura la pillola della vista scelta ($view) non tocca la parete del binario', (tester) async {
+      registerTestDependencies(preferences: {'erbario.selectedView': 'builtin:$view', 'theme.livery': 'feltro'});
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Erbario');
+
+      final tab = find.byKey(ValueKey('view-$view'));
+      final track = tester.getRect(find.ancestor(of: tab, matching: find.byType(NeuInset)).first);
+      final pill = tester.getRect(
+        find.descendant(of: find.byType(ClayTabs), matching: find.byType(AnimatedPositioned)),
+      );
+      expect(pill.left, greaterThanOrEqualTo(track.left + 5 - 0.5));
+      expect(pill.right, lessThanOrEqualTo(track.right - 5 + 0.5));
+    });
+  }
 
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
     final deps = registerTestDependencies(catalog: StateError('rotto').toInvalid());
@@ -244,7 +273,7 @@ void main() {
     await pumpDruidApp(tester);
     await openTab(tester, 'Erbario');
 
-    expect(find.text('Simula incontro'), findsNothing);
+    expect(find.text('Simula Incontro'), findsNothing);
   });
 
   testWidgets('in inglese i nomi delle specie sono tradotti', (tester) async {

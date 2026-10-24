@@ -40,13 +40,13 @@ void main() {
       expect(Get.find<ProgressController>().state.levelOf('Malva sylvestris'), 1);
       expect(find.byKey(const ValueKey('mission-visitErbario')), findsOneWidget);
       await scrollTo(tester, find.byKey(const ValueKey('my-Malva sylvestris')));
-      expect(find.textContaining('Non ancora incontrata'), findsOneWidget);
+      expect(find.textContaining('Non ancora Incontrata'), findsOneWidget);
     });
 
     testWidgets('la stellina della stagione segna una desiderata', (tester) async {
       registerTestDependencies(events: [_passed('Fagus sylvatica'), _erbarioVisited()]);
       await pumpDruidApp(tester);
-      expect(find.text('Scegli le tue desiderata'), findsOneWidget);
+      expect(find.text('Scegli le tue Desiderata'), findsOneWidget);
 
       // Dopo il primo avvio si propongono tutte le specie in stagione, anche le tossiche.
       await scrollAndTap(tester, find.byKey(const ValueKey('add-desiderata-Eranthis hyemalis')));
@@ -121,7 +121,7 @@ void main() {
         ],
       );
       await pumpDruidApp(tester);
-      expect(find.text('20 PE da incassare: si incassano alla prima essenza di ogni specie'), findsOneWidget);
+      expect(find.text('20 PE da Incassare: si Incassano alla prima Essenza di ogni specie'), findsOneWidget);
 
       await openTab(tester, 'Erbario');
       await scrollAndTap(tester, find.byKey(const ValueKey('met-Helleborus viridis')));
@@ -137,7 +137,7 @@ void main() {
         ['rain', 'moon', 'dusk'],
       ]);
       // Tre tratti distinti, ma il contatore si ferma al traguardo.
-      expect(find.text('Essenze attinte: 1/3 · tratti diversi: 2/2'), findsOneWidget);
+      expect(find.text('Essenze Attinte: 1/3 · Tratti diversi: 2/2'), findsOneWidget);
       expect(state.xpToCash, 0);
       expect(state.xp, 20 + XpRules.essenceDrawn);
       expect(state.vis['Helleborus viridis'], 10);
@@ -164,7 +164,7 @@ void main() {
       expect(Get.find<ProgressController>().state.levelOf('Helleborus viridis'), 1);
 
       await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
-      expect(find.text('Studia il livello 2'), findsOneWidget);
+      expect(find.text('Studia il Livello 2'), findsOneWidget);
     });
 
     testWidgets('una risposta sbagliata mostra la soluzione e il fatto torna', (tester) async {
@@ -203,7 +203,7 @@ void main() {
       await answerCurrentQuestion(tester);
 
       await scrollAndTap(tester, find.byKey(const ValueKey('notebook-save')));
-      expect(find.text('Nel taccuino'), findsOneWidget);
+      expect(find.text('Nel Taccuino'), findsOneWidget);
 
       await tester.tap(find.byKey(const ValueKey('open-notebook')));
       await tester.pumpAndSettle();
@@ -231,7 +231,7 @@ void main() {
 
       await openTab(tester, 'Home');
       await scrollToTop(tester);
-      expect(find.text('3 fatti da ripassare oggi'), findsOneWidget);
+      expect(find.text('3 Fatti da ripassare oggi'), findsOneWidget);
       await scrollAndTap(tester, find.byKey(const ValueKey('start-review')));
       await answerCurrentQuestion(tester);
       expect(find.textContaining('Te lo ricordavi!'), findsOneWidget);
@@ -251,12 +251,12 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('met-Helleborus viridis')));
       await tester.pumpAndSettle();
 
-      final level2 = find.text('Si rivela al livello 2 (Famiglia e vita)');
+      final level2 = find.text('Si rivela al Livello 2 (Famiglia e vita)');
       await scrollTo(tester, level2);
       expect(find.text('Helleborus viridis'), findsOneWidget, reason: 'nome scientifico: rivelato al livello 1');
       expect(level2, findsOneWidget);
       expect(find.text('Ranunculaceae'), findsNothing, reason: 'famiglia: ancora chiusa');
-      final level3 = find.text('Si rivela al livello 3 (Il suo ambiente)');
+      final level3 = find.text('Si rivela al Livello 3 (Il suo ambiente)');
       await scrollTo(tester, level3.first);
       expect(level3, findsWidgets);
     });
@@ -276,7 +276,7 @@ void main() {
       // Imparata: ingredienti con il nome della pianta, anche se non incontrata.
       await scrollAndTap(tester, find.byKey(const ValueKey('figurine-pozione-prova-comune')));
       expect(find.text('2 × Malva selvatica'), findsOneWidget);
-      expect(find.text('Ingredienti già incontrati 0/2'), findsOneWidget);
+      expect(find.text('Ingredienti già Incontrati 0/2'), findsOneWidget);
       expect(find.text('Effetto di gioco di prova.'), findsOneWidget);
     });
 
@@ -310,11 +310,17 @@ void main() {
       for (final grade in ['Comune', 'Non comune', 'Rara', 'Mitica']) {
         expect(find.text(grade), findsOneWidget);
       }
-      expect(find.text('Specie protetta dalla legge: si guarda e si fotografa'), findsOneWidget);
+      expect(find.text('Specie Protetta dalla legge: si guarda e si fotografa'), findsOneWidget);
       // I tratti dicono quando valgono: sempre di giorno o tutto il giorno.
       final dusk = find.text('Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.');
       await scrollTo(tester, dusk);
       expect(dusk, findsOneWidget);
+
+      // Glossario nella seconda linguetta.
+      expect(find.byKey(const ValueKey('gloss-vis')), findsNothing);
+      await scrollToTop(tester);
+      await tester.tap(find.text('Glossario'));
+      await tester.pumpAndSettle();
       await scrollTo(tester, find.byKey(const ValueKey('gloss-vis')));
       expect(find.textContaining('La linfa sottile delle piante'), findsOneWidget);
     });

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -979,6 +980,419 @@ class ClaySwitch extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Una linguetta di [ClayTabs].
+class ClayTab {
+  final Key? key;
+  final String label;
+
+  /// Pressione lunga (es. per eliminare una vista salvata).
+  final VoidCallback? onLongPress;
+
+  const ClayTab({this.key, required this.label, this.onLongPress});
+}
+
+/// Linguette per dividere una pagina in parti (es. Legenda | Glossario) o per scegliere tra più viste (es. le viste
+/// dell'erbario), invece di titoli, muri di testo o file di pulsanti. Nelle livree neumorfiche: un binario a pillola
+/// scavato in cui la linguetta scelta è una pillola in rilievo color pagina che scivola, con il testo del colore delle
+/// azioni.
+///
+/// Normalmente le linguette dividono il binario in parti uguali. Con [scrollable] sono larghe quanto il loro testo e
+/// scorrono (per un numero variabile di scelte): la scelta si porta in vista. [trailing] (es. "+") sta fuori dal
+/// binario, sempre visibile. Fuori dal neumorfismo un `SegmentedButton`, o una fila di `ChoiceChip` se [scrollable].
+class ClayTabs extends StatefulWidget {
+  static const _height = 48.0, _inset = 5.0;
+
+  final List<ClayTab> tabs;
+
+  /// Indice della linguetta scelta (`-1`: nessuna).
+  final int selected;
+  final ValueChanged<int> onChanged;
+  final bool scrollable;
+  final Widget? trailing;
+
+  const ClayTabs({
+    super.key,
+    required this.tabs,
+    required this.selected,
+    required this.onChanged,
+    this.scrollable = false,
+    this.trailing,
+  });
+
+  @override
+  State<ClayTabs> createState() => _ClayTabsState();
+}
+
+class _ClayTabsState extends State<ClayTabs> {
+  final _rowKey = GlobalKey();
+  var _itemKeys = <GlobalKey>[];
+
+  /// Posizione e larghezza di ogni linguetta nella fila, misurate dopo il disegno: la pillola scivola fin lì.
+  List<(double, double)> _rects = const [];
+
+  /// A scorrimento: c'è altro a sinistra o a destra (le freccine si accendono da quella parte).
+  final _scroll = ScrollController();
+  var _moreLeft = false, _moreRight = false;
+
+  /// A scorrimento: la pillola della linguetta scelta passa sotto il bordo sinistro o destro (lì si dissolve).
+  var _pillCutLeft = false, _pillCutRight = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _syncKeys();
+    _scroll.addListener(_updateEdges);
+    // Anche all'apertura la linguetta scelta si porta in vista (es. una vista salvata in fondo alla fila).
+    _measureAfterLayout(reveal: true, animate: false);
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  /// Fa scorrere il binario di circa due terzi della sua larghezza verso [sign] (-1 sinistra, 1 destra).
+  void _scrollBy(int sign) {
+    if (!_scroll.hasClients) return;
+    final p = _scroll.position;
+    _scroll.animateTo(
+      (p.pixels + sign * p.viewportDimension * 0.66).clamp(0.0, p.maxScrollExtent),
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void _updateEdges() {
+    if (!_scroll.hasClients || !_scroll.position.hasContentDimensions) return;
+    final p = _scroll.position;
+    // Il margine interno del binario non conta: portata in vista una linguetta, ne restano pochi pixel da scorrere.
+    const tolerance = ClayTabs._inset + 1;
+    final left = p.pixels > tolerance, right = p.pixels < p.maxScrollExtent - tolerance;
+    // Coordinate della fila che scorre: le linguette cominciano dopo il margine interno.
+    final selected = widget.selected;
+    var cutLeft = false, cutRight = false;
+    if (selected >= 0 && selected < _rects.length) {
+      final (x, width) = _rects[selected];
+      final start = ClayTabs._inset + x - p.pixels, end = start + width;
+      cutLeft = start < ClayTabs._inset - 0.5;
+      cutRight = end > p.viewportDimension - ClayTabs._inset + 0.5;
+    }
+    if (left != _moreLeft || right != _moreRight || cutLeft != _pillCutLeft || cutRight != _pillCutRight) {
+      setState(() {
+        _moreLeft = left;
+        _moreRight = right;
+        _pillCutLeft = cutLeft;
+        _pillCutRight = cutRight;
+      });
+    }
+  }
+
+  @override
+  void didUpdateWidget(ClayTabs old) {
+    super.didUpdateWidget(old);
+    _syncKeys();
+    _measureAfterLayout(reveal: old.selected != widget.selected);
+  }
+
+  void _syncKeys() {
+    if (_itemKeys.length != widget.tabs.length) _itemKeys = [for (final _ in widget.tabs) GlobalKey()];
+  }
+
+  /// [reveal]: porta in vista la linguetta scelta; [animate]: scorrendo (no all'apertura, dove si salta in posizione).
+  void _measureAfterLayout({bool reveal = false, bool animate = true}) =>
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _updateEdges();
+        final row = _rowKey.currentContext?.findRenderObject() as RenderBox?;
+        if (row == null || !row.hasSize) return;
+        final rects = [
+          for (final key in _itemKeys)
+            if (key.currentContext?.findRenderObject() case final RenderBox box when box.hasSize)
+              (box.localToGlobal(Offset.zero, ancestor: row).dx, box.size.width),
+        ];
+        if (rects.length == _itemKeys.length && !listEquals(rects, _rects)) {
+          _rects = rects;
+          setState(() {});
+        }
+        _updateEdges();
+        if (reveal) _reveal(rects, animate: animate);
+      });
+
+  /// Porta in vista la linguetta scelta lasciandole attorno il margine interno del binario, come nelle linguette a
+  /// parti uguali: allineata alla parete, la sua ombra si schiaccerebbe nella curva del bordo.
+  void _reveal(List<(double, double)> rects, {required bool animate}) {
+    final selected = widget.selected;
+    if (!widget.scrollable || !_scroll.hasClients || selected < 0 || selected >= rects.length) return;
+    final p = _scroll.position;
+    // Coordinate della fila che scorre: le linguette cominciano dopo il margine interno.
+    final (x, width) = rects[selected];
+    final start = ClayTabs._inset + x, end = start + width;
+    var target = p.pixels;
+    if (end > target + p.viewportDimension - ClayTabs._inset) target = end + ClayTabs._inset - p.viewportDimension;
+    // Se non sta intera, conta l'inizio.
+    if (start < target + ClayTabs._inset) target = start - ClayTabs._inset;
+    target = target.clamp(0.0, p.maxScrollExtent);
+    if (target == p.pixels) return;
+    animate
+        ? _scroll.animateTo(target, duration: const Duration(milliseconds: 250), curve: Curves.easeOut)
+        : _scroll.jumpTo(target);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    final track = tokens.neu ? _neuTrack(context, tokens) : _materialTrack(context);
+    // A scorrimento: una freccina per lato, accesa se da quella parte c'è altro; toccata, fa scorrere il binario.
+    return Row(
+      children: [
+        if (widget.scrollable)
+          ScrollHintArrow(
+            key: const ValueKey('more-left'),
+            direction: AxisDirection.left,
+            enabled: _moreLeft,
+            onTap: () => _scrollBy(-1),
+          ),
+        if (widget.scrollable) const SizedBox(width: Gaps.s),
+        Expanded(child: track),
+        if (widget.scrollable) const SizedBox(width: Gaps.s),
+        if (widget.scrollable)
+          ScrollHintArrow(
+            key: const ValueKey('more-right'),
+            direction: AxisDirection.right,
+            enabled: _moreRight,
+            onTap: () => _scrollBy(1),
+          ),
+        if (widget.trailing != null) ...[const SizedBox(width: Gaps.m), widget.trailing!],
+      ],
+    );
+  }
+
+  Widget _neuTrack(BuildContext context, DruidTokens tokens) {
+    final colors = context.colors;
+    const radius = BorderRadius.all(Radius.circular(ClayTabs._height / 2));
+    final selected = widget.selected;
+    final pill = selected >= 0 && selected < _rects.length ? _rects[selected] : null;
+    Widget item(int i) {
+      final tab = widget.tabs[i];
+      final on = i == selected;
+      final child = KeyedSubtree(
+        key: _itemKeys[i],
+        child: GestureDetector(
+          key: tab.key,
+          behavior: HitTestBehavior.opaque,
+          onTap: () => widget.onChanged(i),
+          onLongPress: tab.onLongPress,
+          child: Semantics(
+            button: true,
+            selected: on,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Gaps.l),
+              child: Center(
+                widthFactor: 1,
+                child: Text(
+                  tab.label,
+                  style: context.texts.labelLarge?.copyWith(
+                    color: on ? colors.primary : colors.onSurfaceVariant,
+                    fontWeight: on ? FontWeight.w700 : null,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      return widget.scrollable ? child : Expanded(child: child);
+    }
+
+    final row = Stack(
+      children: [
+        if (pill != null)
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOut,
+            left: pill.$1,
+            width: pill.$2,
+            top: 0,
+            bottom: 0,
+            child: DecoratedBox(
+              decoration: _neuDecoration(
+                tokens,
+                color: colors.surface,
+                radius: const BorderRadius.all(Radius.circular(999)),
+                // Linguette a scorrimento: pillole più corte e più elementi attorno, la stessa ombra peserebbe di più.
+                distance: widget.scrollable ? 2 : 3,
+              ),
+            ),
+          ),
+        Row(
+          key: _rowKey,
+          mainAxisSize: widget.scrollable ? MainAxisSize.min : MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [for (var i = 0; i < widget.tabs.length; i++) item(i)],
+        ),
+      ],
+    );
+    return SizedBox(
+      height: ClayTabs._height,
+      child: NeuInset(
+        radius: radius,
+        child: ClipRRect(
+          borderRadius: radius,
+          child: widget.scrollable
+              // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
+              // Se la pillola della linguetta scelta passa sotto il bordo, da quel lato si dissolve dentro la curva:
+              // sparisce nell'incavo invece di sembrarne uscire (è del colore della pagina). Altrimenti non si dissolve
+              // niente, così resta nitida come nelle linguette a parti uguali; le altre linguette le taglia il bordo.
+              ? _TrackEnds(
+                  left: _pillCutLeft,
+                  right: _pillCutRight,
+                  child: SingleChildScrollView(
+                    controller: _scroll,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.all(ClayTabs._inset),
+                    child: row,
+                  ),
+                )
+              : Padding(padding: const EdgeInsets.all(ClayTabs._inset), child: row),
+        ),
+      ),
+    );
+  }
+
+  Widget _materialTrack(BuildContext context) {
+    if (!widget.scrollable) {
+      return SizedBox(
+        width: double.infinity,
+        child: SegmentedButton<int>(
+          showSelectedIcon: false,
+          segments: [
+            for (final (i, tab) in widget.tabs.indexed)
+              ButtonSegment(
+                value: i,
+                label: Text(tab.label, key: tab.key),
+              ),
+          ],
+          selected: {if (widget.selected >= 0) widget.selected},
+          emptySelectionAllowed: true,
+          onSelectionChanged: (s) {
+            if (s.isNotEmpty) widget.onChanged(s.single);
+          },
+        ),
+      );
+    }
+    return SizedBox(
+      height: ClayTabs._height,
+      child: SingleChildScrollView(
+        controller: _scroll,
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            for (final (i, tab) in widget.tabs.indexed)
+              Padding(
+                padding: const EdgeInsets.only(right: Gaps.chip),
+                child: GestureDetector(
+                  key: tab.key,
+                  onLongPress: tab.onLongPress,
+                  child: ChoiceChip(
+                    label: Text(tab.label),
+                    selected: i == widget.selected,
+                    onSelected: (_) => widget.onChanged(i),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Dissolve le linguette a scorrimento alle estremità del binario ([left], [right]): trasparenti fino al margine interno,
+/// piene dopo altri 12 px, cioè dentro la curva del bordo.
+class _TrackEnds extends StatelessWidget {
+  static const _ramp = 12.0;
+
+  final bool left;
+  final bool right;
+  final Widget child;
+
+  const _TrackEnds({required this.left, required this.right, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    // Sempre presente, anche quando non dissolve niente: aggiungerla e toglierla cambierebbe genitore alla fila che
+    // scorre, che perderebbe lo scorrimento in corso.
+    return ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (rect) {
+        final a = ClayTabs._inset / rect.width, b = (ClayTabs._inset + _ramp) / rect.width;
+        // Il colore del gradiente è solo una maschera (conta l'opacità), non si vede.
+        const on = Color(0xFF000000), off = Color(0x00000000);
+        return LinearGradient(
+          colors: [left ? off : on, left ? off : on, on, on, right ? off : on, right ? off : on],
+          stops: [0, a, b, 1 - b, 1 - a, 1],
+        ).createShader(rect);
+      },
+      child: child,
+    );
+  }
+}
+
+/// Freccina in un tondino scavato accanto a una fila che scorre, sempre presente: **accesa** (colore delle azioni) se da
+/// quella parte c'è altro, e allora toccandola la fila scorre; **spenta** e non toccabile se non c'è più nulla.
+class ScrollHintArrow extends StatelessWidget {
+  static const size = 26.0;
+
+  final AxisDirection direction;
+  final bool enabled;
+  final VoidCallback onTap;
+
+  const ScrollHintArrow({super.key, required this.direction, required this.enabled, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    final arrow = TweenAnimationBuilder<Color?>(
+      duration: const Duration(milliseconds: 180),
+      tween: ColorTween(end: enabled ? colors.primary : context.druid.hint.withValues(alpha: 0.35)),
+      builder: (context, color, _) => Icon(
+        direction == AxisDirection.left ? Icons.chevron_left_rounded : Icons.chevron_right_rounded,
+        size: 20,
+        color: color,
+      ),
+    );
+    return Semantics(
+      button: true,
+      enabled: enabled,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: enabled ? onTap : null,
+        // Area da toccare più grande del tondino.
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 11),
+          child: SizedBox.square(
+            dimension: size,
+            child: context.druid.neu
+                ? NeuInset(
+                    radius: BorderRadius.circular(size / 2),
+                    depth: 2,
+                    child: Center(child: arrow),
+                  )
+                : DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: colors.outlineVariant),
+                    ),
+                    child: Center(child: arrow),
+                  ),
           ),
         ),
       ),

@@ -43,7 +43,7 @@
   "retry": "Riprova",
   "erbarioEncounteredSection": "Incontrate",
   "erbarioMissingSection": "Da trovare nel bolognese",
-  "simulateEncounter": "Simula incontro",
+  "simulateEncounter": "Simula Incontro",
   "levelToStudy": "Da studiare",
   "levelRecognise": "Riconoscerla",
   "levelKnow": "Famiglia e vita",
@@ -64,7 +64,7 @@
       }
     }
   },
-  "nextRank": "Prossimo titolo: {rank} a {xp} PE",
+  "nextRank": "Prossimo Rango: {rank} a {xp} PE",
   "@nextRank": {
     "placeholders": {
       "rank": {
@@ -75,7 +75,7 @@
       }
     }
   },
-  "maxRankReached": "Hai raggiunto il titolo più alto",
+  "maxRankReached": "Hai raggiunto il Rango più alto",
   "seasonWinter": "inverno",
   "seasonSpring": "primavera",
   "seasonSummer": "estate",
@@ -228,7 +228,7 @@
   "answerRight": "Giusto!",
   "answerWrong": "Non proprio.",
   "answerWillReturn": "Tornerà tra poco, in un'altra forma.",
-  "answerRemembered": "Te lo ricordavi! Prossimo ripasso tra {days} giorni.",
+  "answerRemembered": "Te lo ricordavi! Prossimo Ripasso tra {days} giorni.",
   "@answerRemembered": {
     "placeholders": {
       "days": {
@@ -236,7 +236,7 @@
       }
     }
   },
-  "answerForgotten": "Dimenticato: tornerà nei ripassi di domani.",
+  "answerForgotten": "Dimenticato: tornerà nei Ripassi di domani.",
   "xpGained": "+{xp} PE",
   "@xpGained": {
     "placeholders": {
@@ -247,7 +247,7 @@
   },
   "next": "Avanti",
   "close": "Chiudi",
-  "studyLevelTitle": "{name} · livello {level}",
+  "studyLevelTitle": "{name} · Livello {level}",
   "@studyLevelTitle": {
     "placeholders": {
       "name": {
@@ -271,7 +271,7 @@
     }
   },
   "summaryTitle": "Fine sessione",
-  "summaryLevelPassed": "Livello {level} superato: {name} entra nei ripassi da domani.",
+  "summaryLevelPassed": "Livello {level} superato: {name} entra nei Ripassi da domani.",
   "@summaryLevelPassed": {
     "placeholders": {
       "level": {
@@ -303,14 +303,14 @@
       }
     }
   },
-  "summaryNewFunFacts": "Nuove curiosità in arrivo: le riceverai una al giorno.",
-  "saveToNotebook": "Salva nel taccuino",
-  "savedToNotebook": "Nel taccuino",
-  "notebookLocked": "Salva nel taccuino",
+  "summaryNewFunFacts": "Nuove Curiosità in arrivo: le riceverai una al giorno.",
+  "saveToNotebook": "Salva nel Taccuino",
+  "savedToNotebook": "Nel Taccuino",
+  "notebookLocked": "Salva nel Taccuino",
   "diarioUpsell": "Con il Diario dell'Erborista salvi in un tocco ciò che impari e lo ritrovi quando ti serve, anche durante lo studio. Senza Diario puoi fare lo stesso con un quaderno vero e con le note per specie, che restano gratuite.",
   "notebookTitle": "Taccuino",
   "notebookSearch": "Cerca: famiglia, mese, specie, note…",
-  "notebookEmpty": "Ancora vuoto: durante lo studio usa \"Salva nel taccuino\".",
+  "notebookEmpty": "Ancora vuoto: durante lo studio usa \"Salva nel Taccuino\".",
   "notebookNoResults": "Nessun risultato.",
   "notesTitle": "Le tue note",
   "notesHint": "Dove l'hai vista, come riconoscerla…",
@@ -328,7 +328,7 @@
       }
     }
   },
-  "funOfDayEmpty": "Incontra e studia una specie per ricevere ogni giorno una curiosità su ciò che hai imparato.",
+  "funOfDayEmpty": "Incontra e studia una specie per ricevere ogni giorno una Curiosità su ciò che hai imparato.",
   "funToVerify": "da verificare",
   "funRank": "{name} è al {rank}° posto tra le piante spontanee più osservate della zona.",
   "@funRank": {
@@ -375,7 +375,7 @@
     }
   },
   "reviewsTitle": "Ripassi",
-  "reviewsDue": "{count} fatti da ripassare oggi",
+  "reviewsDue": "{count} Fatti da ripassare oggi",
   "@reviewsDue": {
     "placeholders": {
       "count": {
@@ -383,7 +383,7 @@
       }
     }
   },
-  "reviewsNone": "Niente da ripassare oggi. I fatti imparati tornano dopo 1, 3, 7 e 21 giorni.",
+  "reviewsNone": "Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.",
   "reviewsStart": "Ripassa",
   "desiderataTitle": "Desiderata",
   "desiderataCount": "{count} su {max}",
@@ -400,12 +400,12 @@
   "desiderataEmpty": "Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
   "desiderataSuggestions": "In stagione adesso",
   "seasonalFirstHint": "Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.",
-  "seasonalHint": "Puoi studiarle subito o segnarle come desiderata da cercare.",
+  "seasonalHint": "Puoi studiarle subito o segnarle come Desiderata da cercare.",
   "seasonalStudy": "Studia",
-  "yourSpeciesMet": "incontrata",
-  "desiderataAdd": "Aggiungi alle desiderata",
-  "desiderataRemove": "Togli dalle desiderata",
-  "desiderataFull": "Hai già 3 desiderata: completane o togline una.",
+  "yourSpeciesMet": "Incontrata",
+  "desiderataAdd": "Aggiungi alle Desiderata",
+  "desiderataRemove": "Togli dalle Desiderata",
+  "desiderataFull": "Hai già 3 Desiderata: completane o togline una.",
   "desiderataWhere": "Dove: {band}",
   "@desiderataWhere": {
     "placeholders": {
@@ -432,7 +432,7 @@
   },
   "yourSpecies": "Le tue specie",
   "yourSpeciesEmpty": "Nessuna specie in studio: comincia da una di quelle in stagione.",
-  "studyLevelButton": "Studia il livello {level}",
+  "studyLevelButton": "Studia il Livello {level}",
   "@studyLevelButton": {
     "placeholders": {
       "level": {
@@ -442,7 +442,7 @@
   },
   "studyComplete": "Domande completate",
   "levelsTitle": "Livelli di studio",
-  "lockedSection": "Si rivela al livello {level} ({name})",
+  "lockedSection": "Si rivela al Livello {level} ({name})",
   "@lockedSection": {
     "placeholders": {
       "level": {
@@ -506,7 +506,7 @@
       }
     }
   },
-  "masteryDraws": "Essenze attinte: {done}/{total} · tratti diversi: {traits}/{needed}",
+  "masteryDraws": "Essenze Attinte: {done}/{total} · Tratti diversi: {traits}/{needed}",
   "@masteryDraws": {
     "placeholders": {
       "done": {
@@ -523,10 +523,10 @@
       }
     }
   },
-  "masteryOnlyField": "Con il solo studio non si arriva alla maestria: servono anche le essenze attinte sul campo.",
+  "masteryOnlyField": "Con il solo studio non si arriva alla Maestria: servono anche le Essenze Attinte sul campo.",
   "masteryReached": "Maestria raggiunta",
-  "simulateDraw": "Simula attingere",
-  "noTrait": "Nessun tratto",
+  "simulateDraw": "Simula Attingere",
+  "noTrait": "Nessun Tratto",
   "traitFrost": "❄️ Gelo",
   "traitRain": "🌧 Pioggia",
   "traitFog": "🌫 Nebbia",
@@ -537,7 +537,7 @@
   "recipesTitle": "Ricette",
   "recipeUnlocked": "Imparata",
   "recipeLocked": "Da imparare",
-  "recipeKnownIngredients": "Ingredienti già incontrati {known}/{total}",
+  "recipeKnownIngredients": "Ingredienti già Incontrati {known}/{total}",
   "@recipeKnownIngredients": {
     "placeholders": {
       "known": {
@@ -549,7 +549,7 @@
     }
   },
   "recipeAnySpecies": "qualsiasi specie",
-  "recipeCurrentLevel": "ora: livello {level}",
+  "recipeCurrentLevel": "ora: Livello {level}",
   "@recipeCurrentLevel": {
     "placeholders": {
       "level": {
@@ -579,40 +579,40 @@
       }
     }
   },
-  "missionVisitErbarioTitle": "Apri l'erbario",
-  "missionVisitErbarioBody": "L'erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e incontrandole.",
-  "missionMarkDesiderataTitle": "Scegli le tue desiderata",
+  "missionVisitErbarioTitle": "Apri l'Erbario",
+  "missionVisitErbarioBody": "L'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.",
+  "missionMarkDesiderataTitle": "Scegli le tue Desiderata",
   "missionMarkDesiderataBody": "Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
   "missionFirstEncounterTitle": "Incontra una specie",
-  "missionFirstEncounterBody": "Esci a erborizzare e fotografa una delle tue desiderata: una volta riconosciuta comparirà nell'erbario. Fotografa, non raccogliere.",
+  "missionFirstEncounterBody": "Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell'Erbario. Fotografa, non raccogliere.",
   "missionFirstLevelTitle": "Studia la tua prima specie",
-  "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno punti esperienza.",
-  "missionFirstRecipeTitle": "La prima ricetta",
-  "missionFirstRecipeBody": "Porta una specie al livello richiesto da una ricetta per sbloccarla. Le ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.",
-  "missionSkip": "Salta l'apprendistato",
-  "missionActionOpenErbario": "Apri l'erbario",
-  "missionActionChooseDesiderata": "Scegli nell'erbario",
+  "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.",
+  "missionFirstRecipeTitle": "La prima Ricetta",
+  "missionFirstRecipeBody": "Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.",
+  "missionSkip": "Salta l'Apprendistato",
+  "missionActionOpenErbario": "Apri l'Erbario",
+  "missionActionChooseDesiderata": "Scegli nell'Erbario",
   "missionActionStudy": "Inizia a studiare",
-  "missionActionRecipes": "Vedi le ricette",
+  "missionActionRecipes": "Vedi le Ricette",
   "missionGlossary": "Glossario",
   "apprenticeshipComplete": "Apprendistato completato!",
   "glossaryTitle": "Legenda e glossario",
   "glossErbarioTerm": "Erbario",
-  "glossErbarioText": "Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che incontri e studi.",
+  "glossErbarioText": "Collezione di piante, un tempo essiccate e annotate su fogli con data e luogo di raccolta. Qui si compila con le specie che Incontri e studi.",
   "glossDesiderataTerm": "Desiderata",
   "glossDesiderataText": "Negli erbari e tra i collezionisti, l'elenco degli esemplari che si desidera trovare. Qui sono le specie (al massimo 3) che hai scelto di cercare.",
   "glossErborizzareTerm": "Erborizzare",
   "glossErborizzareText": "Andare per campi e boschi a osservare e studiare le piante: è il verbo storico dei botanici in escursione.",
   "glossStazioneTerm": "Stazione",
-  "glossStazioneText": "In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai incontrato una specie e dove potrai tornare ad attingere.",
+  "glossStazioneText": "In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai Incontrato una specie e dove potrai tornare ad Attingere.",
   "glossTrattoTerm": "Tratto",
-  "glossTrattoText": "Una condizione del momento in cui attingi un'essenza (luna piena, pioggia, nebbia, rugiada…): un'essenza le porta tutte. Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.",
+  "glossTrattoText": "Una condizione del momento in cui Attingi un'Essenza (Luna piena, Pioggia, Nebbia, Rugiada…): un'Essenza le porta tutte. Le Ricette chiedono Tratti diversi: la stessa pianta in giorni diversi dà Essenze diverse.",
   "glossAttingereTerm": "Attingere",
-  "glossAttingereText": "Trarre l'essenza da una stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.",
+  "glossAttingereText": "Trarre l'Essenza da una Stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.",
   "glossMaestriaTerm": "Maestria",
-  "glossMaestriaText": "L'ultimo livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver attinto la specie sul campo in condizioni diverse.",
+  "glossMaestriaText": "L'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse.",
   "glossMissioneTerm": "Missione",
-  "glossMissioneText": "Un obiettivo da raggiungere nel mondo reale o nello studio: incontrare una specie, superare un livello, sbloccare una ricetta.",
+  "glossMissioneText": "Un obiettivo da raggiungere nel mondo reale o nello studio: Incontrare una specie, superare un Livello, sbloccare una Ricetta.",
   "debugTitle": "Strumenti di prova",
   "debugDays": "Giorno simulato: +{days}",
   "@debugDays": {
@@ -634,7 +634,7 @@
   "debugReset": "Azzera i progressi",
   "debugResetConfirm": "Tocca di nuovo per cancellare tutto",
   "debugResetDone": "Progressi azzerati",
-  "notEncounteredYet": "Non ancora incontrata",
+  "notEncounteredYet": "Non ancora Incontrata",
   "desiderataAddShort": "Aggiungi",
   "simulateShort": "Simula",
   "liverySottobosco": "Sottobosco",
@@ -879,7 +879,7 @@
   },
   "sourcesTraits": "Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0",
   "sectionTraits": "Com'è e come vive",
-  "xpToCash": "{xp} PE da incassare: si incassano alla prima essenza di ogni specie",
+  "xpToCash": "{xp} PE da Incassare: si Incassano alla prima Essenza di ogni specie",
   "@xpToCash": {
     "placeholders": {
       "xp": {
@@ -887,7 +887,7 @@
       }
     }
   },
-  "speciesXpToCash": "{xp} PE da incassare: attingi la prima essenza di questa specie.",
+  "speciesXpToCash": "{xp} PE da Incassare: Attingi la prima Essenza di questa specie.",
   "@speciesXpToCash": {
     "placeholders": {
       "xp": {
@@ -895,7 +895,7 @@
       }
     }
   },
-  "summaryXpToCash": "I PE dello studio di questa specie si incassano quando ne attingi la prima essenza.",
+  "summaryXpToCash": "I PE dello studio di questa specie si Incassano quando ne Attingi la prima Essenza.",
   "visStored": "Vis immagazzinate: {vis}",
   "@visStored": {
     "placeholders": {
@@ -905,7 +905,7 @@
     }
   },
   "drawExhausted": "Esaurita: torna pronta domani",
-  "drawNeedsEncounter": "Per attingere serve una stazione: prima incontrala",
+  "drawNeedsEncounter": "Per Attingere serve una Stazione: prima Incontrala",
   "gradeCommon": "Comune",
   "gradeUncommon": "Non comune",
   "gradeRare": "Rara",
@@ -926,7 +926,7 @@
       }
     }
   },
-  "summaryRecipeLearned": "Hai imparato una ricetta: {name}",
+  "summaryRecipeLearned": "Hai imparato una Ricetta: {name}",
   "@summaryRecipeLearned": {
     "placeholders": {
       "name": {
@@ -942,14 +942,14 @@
       }
     }
   },
-  "debugGradePreview": "Anteprima dei gradi",
+  "debugGradePreview": "Anteprima dei Gradi",
   "debugGradeSampleName": "Elisir di Prova",
   "debugGradeSampleIngredient": "Erba d'argento",
-  "debugGradeSampleEffect": "La prossima raccolta con la luna piena ha un tratto in più (effetto di gioco).",
+  "debugGradeSampleEffect": "La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).",
   "badgeEncountered": "Incontrata il",
-  "badgeProtected": "Specie protetta",
+  "badgeProtected": "Specie Protetta",
   "recipesCount": "{learned} di {total}",
-  "recipeIngredientCount": "{count, plural, =1{1 ingrediente} other{{count} ingredienti}}",
+  "recipeIngredientCount": "{count, plural, =1{1 Ingrediente} other{{count} Ingredienti}}",
   "@recipesCount": {
     "placeholders": {
       "learned": {
@@ -970,37 +970,37 @@
   },
   "legendTitle": "Legenda",
   "glossarySection": "Glossario",
-  "legendGrades": "Gradi (ricette, pozioni, bottino)",
+  "legendGrades": "Gradi (Ricette, Pozioni, Bottino)",
   "legendBadges": "Bollini",
-  "legendProtected": "Specie protetta dalla legge: si guarda e si fotografa",
-  "legendEncountered": "Specie incontrata, con la data dell'incontro",
-  "legendXpToCash": "PE da incassare alla prima essenza della specie",
+  "legendProtected": "Specie Protetta dalla legge: si guarda e si fotografa",
+  "legendEncountered": "Specie Incontrata, con la data dell'Incontro",
+  "legendXpToCash": "PE da Incassare alla prima Essenza della specie",
   "legendLevels": "Livelli di studio",
-  "legendTraits": "Tratti delle essenze",
+  "legendTraits": "Tratti delle Essenze",
   "glossProtettaTerm": "Protetta",
   "glossProtettaText": "Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.",
   "glossEssenzaTerm": "Essenza",
-  "glossEssenzaText": "Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e dei tratti, dati dalle condizioni del momento.",
+  "glossEssenzaText": "Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.",
   "glossVisTerm": "Vis",
-  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini a ogni raccolta. Le ricette ne chiedono una quantità per ingrediente.",
-  "glossPeDaIncassareTerm": "PE da incassare",
-  "glossPeDaIncassareText": "I punti esperienza dello studio di una specie che non hai ancora attinto. Si incassano alla prima essenza di quella specie e da lì contano per il rango.",
+  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.",
+  "glossPeDaIncassareTerm": "PE da Incassare",
+  "glossPeDaIncassareText": "I Punti Esperienza dello studio di una specie che non hai ancora Attinto. Si Incassano alla prima Essenza di quella specie e da lì contano per il Rango.",
   "glossGradoTerm": "Grado",
-  "glossGradoText": "Comune, non comune, rara, mitica: bianco, argento, oro, oro rosso. Vale per ingredienti, ricette, pozioni e Bottino dell'Esperienza.",
+  "glossGradoText": "Comune, Non comune, Rara, Mitica: bianco, argento, oro, oro rosso. Vale per Ingredienti, Ricette, Pozioni e Bottino dell'Esperienza.",
   "glossBottinoTerm": "Bottino dell'Esperienza",
-  "glossBottinoText": "Il bottino che si compra con i PE: scegli il grado, il contenuto è a sorpresa (ricette, curiosità rare, indizi).",
+  "glossBottinoText": "Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).",
   "glossFigurinaTerm": "Figurina",
-  "glossFigurinaText": "Una ricetta o una pozione nell'album. L'album delle ricette mostra quelle che conosci; il contatore dice quante sono in tutto.",
-  "recipesEmpty": "Non conosci ancora nessuna ricetta. Le ricette comuni si imparano studiando: supera il livello 1 di una specie, dalla Home o dall'erbario.",
+  "glossFigurinaText": "Una Ricetta o una Pozione nell'Album. L'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.",
+  "recipesEmpty": "Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall'Erbario.",
   "viewAll": "Tutte",
   "viewInSeason": "In stagione adesso",
-  "viewDesiderata": "Le mie desiderata",
+  "viewDesiderata": "Le mie Desiderata",
   "viewProtected": "Protette",
   "viewNew": "Nuova vista",
   "viewName": "Nome della vista",
   "viewStatus": "Stato",
   "viewWhen": "Quando e come",
-  "viewProtectedOnly": "Solo protette",
+  "viewProtectedOnly": "Solo Protette",
   "viewBand": "Quota",
   "viewForm": "Forma",
   "viewFamily": "Famiglia",
@@ -1014,7 +1014,7 @@
   "traitDawn": "🌄 Alba",
   "traitNewMoon": "🌑 Luna nuova",
   "traitWhenFrost": "Quando fa sotto zero: brina e ghiaccio.",
-  "traitWhenRain": "Mentre piove. Con il temporale la raccolta è sospesa.",
+  "traitWhenRain": "Mentre piove. Con il temporale la Raccolta è sospesa.",
   "traitWhenFog": "Quando c'è nebbia.",
   "traitWhenSun": "Con il sole e poche nuvole.",
   "traitWhenMoon": "Tutto il giorno della luna piena: non serve uscire di notte.",

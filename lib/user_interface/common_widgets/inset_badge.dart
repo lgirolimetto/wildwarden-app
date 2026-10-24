@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,9 @@ class InsetBadge extends StatelessWidget {
   );
 }
 
-/// Timbro dell'incontro: un incavo a pillola con la spunta e la data, come un timbro sul quaderno.
+/// Timbro dell'incontro: la spunta e la data, scritte come "Studia" sulla tessera, senza incavo (scavato vorrebbe dire
+/// "scelto", regola del rilievo). Il colore è uno di quelli dello studio: tra i livelli 1–3 quello che si legge meglio
+/// sulla tessera (di giorno il più scuro, di sera il più chiaro), perché il testo è piccolo.
 class StampBadge extends StatelessWidget {
   final String text;
   final String label;
@@ -40,29 +44,41 @@ class StampBadge extends StatelessWidget {
   const StampBadge({super.key, required this.text, required this.label});
 
   @override
-  Widget build(BuildContext context) => Tooltip(
-    message: label,
-    child: Semantics(
-      label: '$label $text',
-      excludeSemantics: true,
-      child: NeuInset(
-        radius: BorderRadius.circular(InsetBadge.size / 2),
-        depth: 2,
+  Widget build(BuildContext context) {
+    final color = _readableStudyColor(context);
+    return Tooltip(
+      message: label,
+      child: Semantics(
+        label: '$label $text',
+        excludeSemantics: true,
         child: SizedBox(
           height: InsetBadge.size,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.verified_outlined, size: 14, color: context.colors.primary),
-                const SizedBox(width: 4),
-                Text(text, style: context.texts.labelMedium?.copyWith(color: context.colors.primary)),
-              ],
-            ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.verified_outlined, size: 16, color: color),
+              const SizedBox(width: 4),
+              Text(
+                text,
+                style: context.texts.labelLarge?.copyWith(color: color, fontWeight: FontWeight.w600),
+              ),
+            ],
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
+}
+
+/// Il colore di studio (livelli 1–3) con più contrasto sul fondo delle tessere delle specie incontrate.
+Color _readableStudyColor(BuildContext context) {
+  final background = context.druid.neu ? context.colors.surfaceContainerLowest : context.colors.surface;
+  double contrast(Color c) {
+    final a = c.computeLuminance(), b = background.computeLuminance();
+    return (max(a, b) + 0.05) / (min(a, b) + 0.05);
+  }
+
+  return [
+    for (var level = 1; level <= 3; level++) context.druid.levelColor(level),
+  ].reduce((best, c) => contrast(c) > contrast(best) ? c : best);
 }

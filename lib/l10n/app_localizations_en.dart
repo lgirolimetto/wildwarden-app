@@ -91,7 +91,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get erbarioMissingSection => 'Still to find around Bologna';
 
   @override
-  String get simulateEncounter => 'Simulate encounter';
+  String get simulateEncounter => 'Simulate Encounter';
 
   @override
   String get levelToStudy => 'To study';
@@ -136,11 +136,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    return 'Next title: $rank at $xp XP';
+    return 'Next Rank: $rank at $xp XP';
   }
 
   @override
-  String get maxRankReached => 'You have reached the highest title';
+  String get maxRankReached => 'You have reached the highest Rank';
 
   @override
   String get seasonWinter => 'winter';
@@ -255,12 +255,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String answerRemembered(int days) {
-    return 'You remembered! Next review in $days days.';
+    return 'You remembered! Next Review in $days days.';
   }
 
   @override
   String get answerForgotten =>
-      'Forgotten: it will come back in tomorrow\'s reviews.';
+      'Forgotten: it will come back in tomorrow\'s Reviews.';
 
   @override
   String xpGained(int xp) {
@@ -275,7 +275,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String studyLevelTitle(String name, int level) {
-    return '$name · level $level';
+    return '$name · Level $level';
   }
 
   @override
@@ -291,7 +291,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String summaryLevelPassed(int level, String name) {
-    return 'Level $level passed: $name joins your reviews from tomorrow.';
+    return 'Level $level passed: $name joins your Reviews from tomorrow.';
   }
 
   @override
@@ -312,16 +312,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get summaryNewFunFacts =>
-      'New curiosities on the way: you\'ll get one a day.';
+      'New Curiosities on the way: you\'ll get one a day.';
 
   @override
-  String get saveToNotebook => 'Save to notebook';
+  String get saveToNotebook => 'Save to Notebook';
 
   @override
-  String get savedToNotebook => 'In your notebook';
+  String get savedToNotebook => 'In your Notebook';
 
   @override
-  String get notebookLocked => 'Save to notebook';
+  String get notebookLocked => 'Save to Notebook';
 
   @override
   String get diarioUpsell =>
@@ -335,7 +335,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notebookEmpty =>
-      'Still empty: while studying, use \"Save to notebook\".';
+      'Still empty: while studying, use \"Save to Notebook\".';
 
   @override
   String get notebookNoResults => 'No results.';
@@ -362,7 +362,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get funOfDayEmpty =>
-      'Meet and study a species to receive a daily curiosity about what you\'ve learned.';
+      'Meet and study a species to receive a daily Curiosity about what you\'ve learned.';
 
   @override
   String get funToVerify => 'to be verified';
@@ -392,7 +392,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String reviewsDue(int count) {
-    return '$count facts to review today';
+    return '$count Facts to review today';
   }
 
   @override
@@ -423,23 +423,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get seasonalHint =>
-      'Study them now or mark them as desiderata to look for.';
+      'Study them now or mark them as Desiderata to look for.';
 
   @override
   String get seasonalStudy => 'Study';
 
   @override
-  String get yourSpeciesMet => 'met';
+  String get yourSpeciesMet => 'Met';
 
   @override
-  String get desiderataAdd => 'Add to desiderata';
+  String get desiderataAdd => 'Add to Desiderata';
 
   @override
-  String get desiderataRemove => 'Remove from desiderata';
+  String get desiderataRemove => 'Remove from Desiderata';
 
   @override
   String get desiderataFull =>
-      'You already have 3 desiderata: complete or remove one.';
+      'You already have 3 Desiderata: complete or remove one.';
 
   @override
   String desiderataWhere(String band) {
@@ -465,7 +465,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String studyLevelButton(int level) {
-    return 'Study level $level';
+    return 'Study Level $level';
   }
 
   @override
@@ -476,7 +476,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String lockedSection(int level, String name) {
-    return 'Revealed at level $level ($name)';
+    return 'Revealed at Level $level ($name)';
   }
 
   @override
@@ -524,26 +524,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String masteryFacts(int done, int total) {
-    return 'Consolidated facts (remembered after 1 and 3 days): $done/$total';
+    return 'Consolidated Facts (remembered after 1 and 3 days): $done/$total';
   }
 
   @override
   String masteryDraws(int done, int total, int traits, int needed) {
-    return 'Essences drawn: $done/$total · different traits: $traits/$needed';
+    return 'Essences Drawn: $done/$total · different Traits: $traits/$needed';
   }
 
   @override
   String get masteryOnlyField =>
-      'Study alone doesn\'t lead to mastery: you also need essences drawn in the field.';
+      'Study alone doesn\'t lead to Mastery: you also need Essences Drawn in the field.';
 
   @override
   String get masteryReached => 'Mastery reached';
 
   @override
-  String get simulateDraw => 'Simulate drawing';
+  String get simulateDraw => 'Simulate Drawing';
 
   @override
-  String get noTrait => 'No trait';
+  String get noTrait => 'No Trait';
 
   @override
   String get traitFrost => '❄️ Frost';
@@ -577,7 +577,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String recipeKnownIngredients(int known, int total) {
-    return 'Ingredients already met $known/$total';
+    return 'Ingredients already Met $known/$total';
   }
 
   @override
@@ -585,7 +585,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String recipeCurrentLevel(int level) {
-    return 'now: level $level';
+    return 'now: Level $level';
   }
 
   @override
@@ -599,14 +599,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get missionVisitErbarioTitle => 'Open the herbarium';
+  String get missionVisitErbarioTitle => 'Open the Herbarium';
 
   @override
   String get missionVisitErbarioBody =>
-      'The herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and meeting them.';
+      'The Herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and Meeting them.';
 
   @override
-  String get missionMarkDesiderataTitle => 'Choose your desiderata';
+  String get missionMarkDesiderataTitle => 'Choose your Desiderata';
 
   @override
   String get missionMarkDesiderataBody =>
@@ -617,36 +617,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionFirstEncounterBody =>
-      'Go out botanizing and photograph one of your desiderata: once recognised it will appear in the herbarium. Photograph, don\'t pick.';
+      'Go out Botanizing and photograph one of your Desiderata: once recognised it will appear in the Herbarium. Photograph, don\'t pick.';
 
   @override
   String get missionFirstLevelTitle => 'Study your first species';
 
   @override
   String get missionFirstLevelBody =>
-      'Pick a species in season and pass its first study level: you can start from home. Mistakes teach too, and they earn experience.';
+      'Pick a species in season and pass its first study Level: you can start from home. Mistakes teach too, and they earn XP.';
 
   @override
-  String get missionFirstRecipeTitle => 'Your first recipe';
+  String get missionFirstRecipeTitle => 'Your first Recipe';
 
   @override
   String get missionFirstRecipeBody =>
-      'Bring a species to the level a recipe requires to unlock it. Recipes ask for different species and conditions: a reason to go out again.';
+      'Bring a species to the Level a Recipe requires to unlock it. Recipes ask for different species and conditions: a reason to go out again.';
 
   @override
-  String get missionSkip => 'Skip the apprenticeship';
+  String get missionSkip => 'Skip the Apprenticeship';
 
   @override
-  String get missionActionOpenErbario => 'Open the herbarium';
+  String get missionActionOpenErbario => 'Open the Herbarium';
 
   @override
-  String get missionActionChooseDesiderata => 'Choose in the herbarium';
+  String get missionActionChooseDesiderata => 'Choose in the Herbarium';
 
   @override
   String get missionActionStudy => 'Start studying';
 
   @override
-  String get missionActionRecipes => 'See the recipes';
+  String get missionActionRecipes => 'See the Recipes';
 
   @override
   String get missionGlossary => 'Glossary';
@@ -662,7 +662,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossErbarioText =>
-      'A collection of plants, once dried and annotated on sheets with the date and place of collection. Here it fills up with the species you meet and study.';
+      'A collection of plants, once dried and annotated on sheets with the date and place of collection. Here it fills up with the species you Meet and study.';
 
   @override
   String get glossDesiderataTerm => 'Desiderata';
@@ -679,39 +679,39 @@ class AppLocalizationsEn extends AppLocalizations {
       'Roaming fields and woods to observe and study plants: the historical word for botanists\' field trips.';
 
   @override
-  String get glossStazioneTerm => 'Stand';
+  String get glossStazioneTerm => 'Station';
 
   @override
   String get glossStazioneText =>
-      'In botany, the precise place where a population of a species grows, with its soil, exposure and altitude. Here, the spot where you met a species and where you can return to draw from it.';
+      'In botany, the precise place where a population of a species grows, with its soil, exposure and altitude. Here, the spot where you Met a species and where you can return to Draw from it.';
 
   @override
   String get glossTrattoTerm => 'Trait';
 
   @override
   String get glossTrattoText =>
-      'A condition of the moment when you draw an essence (full moon, rain, fog, dew…): an essence carries all of them. Recipes ask for different traits: the same plant on different days gives different essences.';
+      'A condition of the moment when you Draw an Essence (Full moon, Rain, Fog, Dew…): an Essence carries all of them. Recipes ask for different Traits: the same plant on different days gives different Essences.';
 
   @override
   String get glossAttingereTerm => 'Draw';
 
   @override
   String get glossAttingereText =>
-      'Drawing the essence from a stand without touching the plant: you photograph and observe, you don\'t pick.';
+      'Drawing the Essence from a Station without touching the plant: you photograph and observe, you don\'t pick.';
 
   @override
   String get glossMaestriaTerm => 'Mastery';
 
   @override
   String get glossMaestriaText =>
-      'The final level of a species: you must remember what you learned days later and have drawn the species in the field under different conditions.';
+      'The final Level of a species: you must remember what you learned days later and have Drawn the species in the field under different conditions.';
 
   @override
   String get glossMissioneTerm => 'Quest';
 
   @override
   String get glossMissioneText =>
-      'A goal to reach in the real world or in your studies: meet a species, pass a level, unlock a recipe.';
+      'A goal to reach in the real world or in your studies: Meet a species, pass a Level, unlock a Recipe.';
 
   @override
   String get debugTitle => 'Testing tools';
@@ -739,7 +739,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get debugResetDone => 'Progress reset';
 
   @override
-  String get notEncounteredYet => 'Not met yet';
+  String get notEncounteredYet => 'Not Met yet';
 
   @override
   String get desiderataAddShort => 'Add';
@@ -959,17 +959,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String xpToCash(int xp) {
-    return '$xp XP to cash in: you cash them in with the first essence of each species';
+    return '$xp XP to Cash in: you Cash them in with the first Essence of each species';
   }
 
   @override
   String speciesXpToCash(int xp) {
-    return '$xp XP to cash in: draw the first essence of this species.';
+    return '$xp XP to Cash in: Draw the first Essence of this species.';
   }
 
   @override
   String get summaryXpToCash =>
-      'The XP from studying this species are cashed in when you draw its first essence.';
+      'The XP from studying this species are Cashed in when you Draw its first Essence.';
 
   @override
   String visStored(int vis) {
@@ -980,7 +980,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get drawExhausted => 'Exhausted: ready again tomorrow';
 
   @override
-  String get drawNeedsEncounter => 'Drawing needs a station: meet it first';
+  String get drawNeedsEncounter => 'Drawing needs a Station: Meet it first';
 
   @override
   String get gradeCommon => 'Common';
@@ -1004,7 +1004,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String summaryRecipeLearned(String name) {
-    return 'You learned a recipe: $name';
+    return 'You learned a Recipe: $name';
   }
 
   @override
@@ -1023,13 +1023,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get debugGradeSampleEffect =>
-      'The next draw under a full moon gets an extra trait (game effect).';
+      'The next Draw under a Full moon gets an extra Trait (game effect).';
 
   @override
   String get badgeEncountered => 'Met on';
 
   @override
-  String get badgeProtected => 'Protected species';
+  String get badgeProtected => 'Protected Species';
 
   @override
   String recipesCount(int learned, int total) {
@@ -1046,8 +1046,8 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$countString ingredients',
-      one: '1 ingredient',
+      other: '$countString Ingredients',
+      one: '1 Ingredient',
     );
     return '$_temp0';
   }
@@ -1059,7 +1059,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get glossarySection => 'Glossary';
 
   @override
-  String get legendGrades => 'Grades (recipes, potions, trove)';
+  String get legendGrades => 'Grades (Recipes, Potions, Trove)';
 
   @override
   String get legendBadges => 'Badges';
@@ -1069,16 +1069,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Species protected by law: look and photograph only';
 
   @override
-  String get legendEncountered => 'Species met, with the date you met it';
+  String get legendEncountered => 'Species Met, with the date you Met it';
 
   @override
-  String get legendXpToCash => 'XP to cash in with the species\' first essence';
+  String get legendXpToCash => 'XP to Cash in with the species\' first Essence';
 
   @override
   String get legendLevels => 'Study levels';
 
   @override
-  String get legendTraits => 'Essence traits';
+  String get legendTraits => 'Essence Traits';
 
   @override
   String get glossProtettaTerm => 'Protected';
@@ -1092,46 +1092,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossEssenzaText =>
-      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and traits, given by the conditions of the moment.';
+      'What you Draw from a Station: it has a Purity, which grows with your knowledge of the species, and Traits, given by the conditions of the moment.';
 
   @override
   String get glossVisTerm => 'Vis';
 
   @override
   String get glossVisText =>
-      'The subtle sap of plants: the energy you store with each draw. Recipes ask for an amount of it for each ingredient.';
+      'The subtle sap of plants: the energy you store with each Draw. Recipes ask for an amount of it for each Ingredient.';
 
   @override
-  String get glossPeDaIncassareTerm => 'XP to cash in';
+  String get glossPeDaIncassareTerm => 'XP to Cash in';
 
   @override
   String get glossPeDaIncassareText =>
-      'The experience points from studying a species you haven\'t drawn yet. You cash them in with that species\' first essence, and from then on they count for your rank.';
+      'The Experience Points from studying a species you haven\'t Drawn yet. You Cash them in with that species\' first Essence, and from then on they count for your Rank.';
 
   @override
   String get glossGradoTerm => 'Grade';
 
   @override
   String get glossGradoText =>
-      'Common, uncommon, rare, mythic: white, silver, gold, red gold. It applies to ingredients, recipes, potions and the Trove of Experience.';
+      'Common, Uncommon, Rare, Mythic: white, silver, gold, red gold. It applies to Ingredients, Recipes, Potions and the Trove of Experience.';
 
   @override
   String get glossBottinoTerm => 'Trove of Experience';
 
   @override
   String get glossBottinoText =>
-      'The trove you buy with XP: you choose the grade, the content is a surprise (recipes, rare curiosities, hints).';
+      'The Trove you buy with XP: you choose the Grade, the content is a surprise (Recipes, rare Curiosities, hints).';
 
   @override
   String get glossFigurinaTerm => 'Figurine';
 
   @override
   String get glossFigurinaText =>
-      'A recipe or a potion in the album. The recipe album shows the ones you know; the counter says how many there are in all.';
+      'A Recipe or a Potion in the Album. The Recipe Album shows the ones you know; the counter says how many there are in all.';
 
   @override
   String get recipesEmpty =>
-      'You don\'t know any recipes yet. Common recipes are learned by studying: pass level 1 of a species, from Home or the herbarium.';
+      'You don\'t know any Recipes yet. Common Recipes are learned by studying: pass Level 1 of a species, from Home or the Herbarium.';
 
   @override
   String get viewAll => 'All';
@@ -1140,7 +1140,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewInSeason => 'In season now';
 
   @override
-  String get viewDesiderata => 'My desiderata';
+  String get viewDesiderata => 'My Desiderata';
 
   @override
   String get viewProtected => 'Protected';
@@ -1201,7 +1201,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get traitWhenRain =>
-      'While it rains. During a thunderstorm drawing is suspended.';
+      'While it rains. During a thunderstorm Drawing is suspended.';
 
   @override
   String get traitWhenFog => 'When there is fog.';
