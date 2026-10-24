@@ -1227,7 +1227,8 @@ class _ClayTabsState extends State<ClayTabs> {
                 tokens,
                 color: colors.surface,
                 radius: const BorderRadius.all(Radius.circular(999)),
-                distance: 3,
+                // Linguette a scorrimento: pillole più corte e più elementi attorno, la stessa ombra peserebbe di più.
+                distance: widget.scrollable ? 2 : 3,
               ),
             ),
           ),
