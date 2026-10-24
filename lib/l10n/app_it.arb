@@ -1012,5 +1012,14 @@
   "statusDesiderata": "Desiderata",
   "statusStudying": "In studio",
   "traitDawn": "🌄 Alba",
-  "traitNewMoon": "🌑 Luna nuova"
+  "traitNewMoon": "🌑 Luna nuova",
+  "traitWhenFrost": "Quando fa sotto zero: brina e ghiaccio.",
+  "traitWhenRain": "Mentre piove. Con il temporale la raccolta è sospesa.",
+  "traitWhenFog": "Quando c'è nebbia.",
+  "traitWhenSun": "Con il sole e poche nuvole.",
+  "traitWhenMoon": "Tutto il giorno della luna piena: non serve uscire di notte.",
+  "traitWhenDew": "Dall'alba a circa due ore dopo, se la notte è stata fresca e serena: l'erba è ancora bagnata.",
+  "traitWhenDusk": "Da circa un'ora prima del tramonto fino al tramonto, mai a buio fatto.",
+  "traitWhenDawn": "Dalle prime luci a circa un'ora dopo il sorgere del sole.",
+  "traitWhenNewMoon": "Tutto il giorno della luna nuova: non serve uscire di notte."
 }

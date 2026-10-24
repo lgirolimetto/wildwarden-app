@@ -1195,4 +1195,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get traitNewMoon => '🌑 New moon';
+
+  @override
+  String get traitWhenFrost => 'When it is below freezing: hoarfrost and ice.';
+
+  @override
+  String get traitWhenRain =>
+      'While it rains. During a thunderstorm drawing is suspended.';
+
+  @override
+  String get traitWhenFog => 'When there is fog.';
+
+  @override
+  String get traitWhenSun => 'With sunshine and few clouds.';
+
+  @override
+  String get traitWhenMoon =>
+      'All day long on the full moon: no need to go out at night.';
+
+  @override
+  String get traitWhenDew =>
+      'From sunrise to about two hours later, after a cool clear night: the grass is still wet.';
+
+  @override
+  String get traitWhenDusk =>
+      'From about an hour before sunset until sunset, never after dark.';
+
+  @override
+  String get traitWhenDawn =>
+      'From first light to about an hour after sunrise.';
+
+  @override
+  String get traitWhenNewMoon =>
+      'All day long on the new moon: no need to go out at night.';
 }

@@ -2059,6 +2059,60 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'🌑 Luna nuova'**
   String get traitNewMoon;
+
+  /// No description provided for @traitWhenFrost.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando fa sotto zero: brina e ghiaccio.'**
+  String get traitWhenFrost;
+
+  /// No description provided for @traitWhenRain.
+  ///
+  /// In it, this message translates to:
+  /// **'Mentre piove. Con il temporale la raccolta è sospesa.'**
+  String get traitWhenRain;
+
+  /// No description provided for @traitWhenFog.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando c\'è nebbia.'**
+  String get traitWhenFog;
+
+  /// No description provided for @traitWhenSun.
+  ///
+  /// In it, this message translates to:
+  /// **'Con il sole e poche nuvole.'**
+  String get traitWhenSun;
+
+  /// No description provided for @traitWhenMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutto il giorno della luna piena: non serve uscire di notte.'**
+  String get traitWhenMoon;
+
+  /// No description provided for @traitWhenDew.
+  ///
+  /// In it, this message translates to:
+  /// **'Dall\'alba a circa due ore dopo, se la notte è stata fresca e serena: l\'erba è ancora bagnata.'**
+  String get traitWhenDew;
+
+  /// No description provided for @traitWhenDusk.
+  ///
+  /// In it, this message translates to:
+  /// **'Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.'**
+  String get traitWhenDusk;
+
+  /// No description provided for @traitWhenDawn.
+  ///
+  /// In it, this message translates to:
+  /// **'Dalle prime luci a circa un\'ora dopo il sorgere del sole.'**
+  String get traitWhenDawn;
+
+  /// No description provided for @traitWhenNewMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutto il giorno della luna nuova: non serve uscire di notte.'**
+  String get traitWhenNewMoon;
 }
 
 class _AppLocalizationsDelegate

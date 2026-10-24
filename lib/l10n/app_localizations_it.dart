@@ -1196,4 +1196,37 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get traitNewMoon => '🌑 Luna nuova';
+
+  @override
+  String get traitWhenFrost => 'Quando fa sotto zero: brina e ghiaccio.';
+
+  @override
+  String get traitWhenRain =>
+      'Mentre piove. Con il temporale la raccolta è sospesa.';
+
+  @override
+  String get traitWhenFog => 'Quando c\'è nebbia.';
+
+  @override
+  String get traitWhenSun => 'Con il sole e poche nuvole.';
+
+  @override
+  String get traitWhenMoon =>
+      'Tutto il giorno della luna piena: non serve uscire di notte.';
+
+  @override
+  String get traitWhenDew =>
+      'Dall\'alba a circa due ore dopo, se la notte è stata fresca e serena: l\'erba è ancora bagnata.';
+
+  @override
+  String get traitWhenDusk =>
+      'Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.';
+
+  @override
+  String get traitWhenDawn =>
+      'Dalle prime luci a circa un\'ora dopo il sorgere del sole.';
+
+  @override
+  String get traitWhenNewMoon =>
+      'Tutto il giorno della luna nuova: non serve uscire di notte.';
 }
