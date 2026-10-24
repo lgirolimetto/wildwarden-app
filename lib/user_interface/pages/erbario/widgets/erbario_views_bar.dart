@@ -22,24 +22,20 @@ class ErbarioViewsBar extends StatelessWidget {
     builder: (views) => Padding(
       // Più spazio in verticale che in orizzontale: le ombre del rilievo non si tagliano.
       padding: const EdgeInsets.symmetric(horizontal: Gaps.l, vertical: Gaps.m),
-      child: ClayScrollTabs(
+      child: ClayTabs(
+        scrollable: true,
         tabs: [
           for (final view in BuiltInView.values)
-            ClayTab(
-              key: ValueKey('view-${view.name}'),
-              label: context.game.builtInView(view),
-              selected: views.selected == ErbarioViewsController.builtInKey(view),
-              onTap: () => views.select(ErbarioViewsController.builtInKey(view)),
-            ),
+            ClayTab(key: ValueKey('view-${view.name}'), label: context.game.builtInView(view)),
           for (final view in views.saved)
             ClayTab(
               key: ValueKey('view-${view.id}'),
               label: view.name,
-              selected: views.selected == view.id,
-              onTap: () => views.select(view.id),
               onLongPress: () => _confirmRemove(context, views, view),
             ),
         ],
+        selected: _ids(views).indexOf(views.selected),
+        onChanged: (i) => views.select(_ids(views)[i]),
         trailing: ClayIconButton(
           key: const ValueKey('view-new'),
           icon: Icons.add_rounded,
@@ -54,6 +50,12 @@ class ErbarioViewsBar extends StatelessWidget {
       ),
     ),
   );
+
+  /// Gli id delle viste nell'ordine delle linguette: prima quelle già pronte, poi quelle salvate.
+  List<String> _ids(ErbarioViewsController views) => [
+    for (final view in BuiltInView.values) ErbarioViewsController.builtInKey(view),
+    for (final view in views.saved) view.id,
+  ];
 
   Future<void> _confirmRemove(BuildContext context, ErbarioViewsController views, SavedView view) =>
       showModalBottomSheet<void>(

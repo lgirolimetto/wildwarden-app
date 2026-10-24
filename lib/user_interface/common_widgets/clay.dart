@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -986,194 +987,232 @@ class ClaySwitch extends StatelessWidget {
   }
 }
 
-/// Linguette per dividere una pagina in parti (es. Legenda | Glossario), invece di titoli e muri di testo. Nelle
-/// livree neumorfiche: un binario a pillola scavato in cui la linguetta scelta è una pillola in rilievo color pagina
-/// che scivola, con il testo del colore delle azioni. Altrimenti un `SegmentedButton` Material.
-class ClayTabs extends StatelessWidget {
+/// Una linguetta di [ClayTabs].
+class ClayTab {
+  final Key? key;
+  final String label;
+
+  /// Pressione lunga (es. per eliminare una vista salvata).
+  final VoidCallback? onLongPress;
+
+  const ClayTab({this.key, required this.label, this.onLongPress});
+}
+
+/// Linguette per dividere una pagina in parti (es. Legenda | Glossario) o per scegliere tra più viste (es. le viste
+/// dell'erbario), invece di titoli, muri di testo o file di pulsanti. Nelle livree neumorfiche: un binario a pillola
+/// scavato in cui la linguetta scelta è una pillola in rilievo color pagina che scivola, con il testo del colore delle
+/// azioni.
+///
+/// Normalmente le linguette dividono il binario in parti uguali. Con [scrollable] sono larghe quanto il loro testo e
+/// scorrono (per un numero variabile di scelte): la scelta si porta in vista. [trailing] (es. "+") sta fuori dal
+/// binario, sempre visibile. Fuori dal neumorfismo un `SegmentedButton`, o una fila di `ChoiceChip` se [scrollable].
+class ClayTabs extends StatefulWidget {
   static const _height = 48.0, _inset = 5.0;
 
-  final List<String> labels;
+  final List<ClayTab> tabs;
+
+  /// Indice della linguetta scelta (`-1`: nessuna).
   final int selected;
   final ValueChanged<int> onChanged;
+  final bool scrollable;
+  final Widget? trailing;
 
-  const ClayTabs({super.key, required this.labels, required this.selected, required this.onChanged});
+  const ClayTabs({
+    super.key,
+    required this.tabs,
+    required this.selected,
+    required this.onChanged,
+    this.scrollable = false,
+    this.trailing,
+  });
+
+  @override
+  State<ClayTabs> createState() => _ClayTabsState();
+}
+
+class _ClayTabsState extends State<ClayTabs> {
+  final _rowKey = GlobalKey();
+  var _itemKeys = <GlobalKey>[];
+
+  /// Posizione e larghezza di ogni linguetta nella fila, misurate dopo il disegno: la pillola scivola fin lì.
+  List<(double, double)> _rects = const [];
+
+  @override
+  void initState() {
+    super.initState();
+    _syncKeys();
+    _measureAfterLayout();
+  }
+
+  @override
+  void didUpdateWidget(ClayTabs old) {
+    super.didUpdateWidget(old);
+    _syncKeys();
+    _measureAfterLayout(reveal: old.selected != widget.selected);
+  }
+
+  void _syncKeys() {
+    if (_itemKeys.length != widget.tabs.length) _itemKeys = [for (final _ in widget.tabs) GlobalKey()];
+  }
+
+  void _measureAfterLayout({bool reveal = false}) => WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (!mounted) return;
+    final row = _rowKey.currentContext?.findRenderObject() as RenderBox?;
+    if (row == null || !row.hasSize) return;
+    final rects = [
+      for (final key in _itemKeys)
+        if (key.currentContext?.findRenderObject() case final RenderBox box when box.hasSize)
+          (box.localToGlobal(Offset.zero, ancestor: row).dx, box.size.width),
+    ];
+    if (rects.length == _itemKeys.length && !listEquals(rects, _rects)) setState(() => _rects = rects);
+    final selected = widget.selected;
+    if (reveal && widget.scrollable && selected >= 0 && selected < _itemKeys.length) {
+      final item = _itemKeys[selected].currentContext;
+      if (item != null) {
+        Scrollable.ensureVisible(item, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd);
+        Scrollable.ensureVisible(item, alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtStart);
+      }
+    }
+  });
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
-    if (!tokens.neu) {
-      return SizedBox(
-        width: double.infinity,
-        child: SegmentedButton<int>(
-          showSelectedIcon: false,
-          segments: [for (final (i, label) in labels.indexed) ButtonSegment(value: i, label: Text(label))],
-          selected: {selected},
-          onSelectionChanged: (s) => onChanged(s.single),
+    final track = tokens.neu ? _neuTrack(context, tokens) : _materialTrack(context);
+    return Row(
+      children: [
+        Expanded(child: track),
+        if (widget.trailing != null) ...[const SizedBox(width: Gaps.m), widget.trailing!],
+      ],
+    );
+  }
+
+  Widget _neuTrack(BuildContext context, DruidTokens tokens) {
+    final colors = context.colors;
+    const radius = BorderRadius.all(Radius.circular(ClayTabs._height / 2));
+    final selected = widget.selected;
+    final pill = selected >= 0 && selected < _rects.length ? _rects[selected] : null;
+    Widget item(int i) {
+      final tab = widget.tabs[i];
+      final on = i == selected;
+      final child = KeyedSubtree(
+        key: _itemKeys[i],
+        child: GestureDetector(
+          key: tab.key,
+          behavior: HitTestBehavior.opaque,
+          onTap: () => widget.onChanged(i),
+          onLongPress: tab.onLongPress,
+          child: Semantics(
+            button: true,
+            selected: on,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: Gaps.l),
+              child: Center(
+                widthFactor: 1,
+                child: Text(
+                  tab.label,
+                  style: context.texts.labelLarge?.copyWith(
+                    color: on ? colors.primary : colors.onSurfaceVariant,
+                    fontWeight: on ? FontWeight.w700 : null,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       );
+      return widget.scrollable ? child : Expanded(child: child);
     }
-    final colors = context.colors;
-    return SizedBox(
-      height: _height,
-      child: NeuInset(
-        radius: const BorderRadius.all(Radius.circular(_height / 2)),
-        child: Padding(
-          padding: const EdgeInsets.all(_inset),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.maxWidth / labels.length;
-              return Stack(
-                children: [
-                  AnimatedPositioned(
-                    duration: const Duration(milliseconds: 180),
-                    curve: Curves.easeOut,
-                    left: width * selected,
-                    top: 0,
-                    bottom: 0,
-                    width: width,
-                    child: DecoratedBox(
-                      decoration: _neuDecoration(
-                        tokens,
-                        color: colors.surface,
-                        radius: const BorderRadius.all(Radius.circular(999)),
-                        distance: 3,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      for (final (i, label) in labels.indexed)
-                        Expanded(
-                          child: Semantics(
-                            button: true,
-                            selected: i == selected,
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () => onChanged(i),
-                              child: Center(
-                                child: Text(
-                                  label,
-                                  style: context.texts.labelLarge?.copyWith(
-                                    color: i == selected ? colors.primary : colors.onSurfaceVariant,
-                                    fontWeight: i == selected ? FontWeight.w700 : null,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              );
-            },
+
+    final row = Stack(
+      children: [
+        if (pill != null)
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOut,
+            left: pill.$1,
+            width: pill.$2,
+            top: 0,
+            bottom: 0,
+            child: DecoratedBox(
+              decoration: _neuDecoration(
+                tokens,
+                color: colors.surface,
+                radius: const BorderRadius.all(Radius.circular(999)),
+                distance: 3,
+              ),
+            ),
           ),
+        Row(
+          key: _rowKey,
+          mainAxisSize: widget.scrollable ? MainAxisSize.min : MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [for (var i = 0; i < widget.tabs.length; i++) item(i)],
+        ),
+      ],
+    );
+    return SizedBox(
+      height: ClayTabs._height,
+      child: NeuInset(
+        radius: radius,
+        child: ClipRRect(
+          borderRadius: radius,
+          child: widget.scrollable
+              // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
+              ? SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.all(ClayTabs._inset),
+                  child: row,
+                )
+              : Padding(padding: const EdgeInsets.all(ClayTabs._inset), child: row),
         ),
       ),
     );
   }
-}
 
-/// Una linguetta di [ClayScrollTabs].
-class ClayTab {
-  final Key? key;
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-  final VoidCallback? onLongPress;
-
-  const ClayTab({this.key, required this.label, required this.selected, required this.onTap, this.onLongPress});
-}
-
-/// Linguette che scorrono, per un numero variabile di scelte (es. le viste dell'erbario): lo stesso binario scavato di
-/// [ClayTabs], con le linguette larghe quanto il loro testo e la scelta in rilievo. [trailing] (es. "+") sta fuori dal
-/// binario, sempre visibile. Fuori dal neumorfismo una fila di `ChoiceChip`.
-class ClayScrollTabs extends StatelessWidget {
-  static const _height = 48.0, _inset = 5.0;
-
-  final List<ClayTab> tabs;
-  final Widget? trailing;
-
-  const ClayScrollTabs({super.key, required this.tabs, this.trailing});
-
-  @override
-  Widget build(BuildContext context) {
-    final tokens = context.druid;
-    final colors = context.colors;
-    Widget item(ClayTab tab) => GestureDetector(
-      key: tab.key,
-      behavior: HitTestBehavior.opaque,
-      onTap: tab.onTap,
-      onLongPress: tab.onLongPress,
-      child: Semantics(
-        button: true,
-        selected: tab.selected,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          padding: const EdgeInsets.symmetric(horizontal: Gaps.l),
-          alignment: Alignment.center,
-          decoration: tab.selected
-              ? _neuDecoration(
-                  tokens,
-                  color: colors.surface,
-                  radius: const BorderRadius.all(Radius.circular(999)),
-                  distance: 3,
-                )
-              : const BoxDecoration(),
-          child: Text(
-            tab.label,
-            style: context.texts.labelLarge?.copyWith(
-              color: tab.selected ? colors.primary : colors.onSurfaceVariant,
-              fontWeight: tab.selected ? FontWeight.w700 : null,
-            ),
-          ),
+  Widget _materialTrack(BuildContext context) {
+    if (!widget.scrollable) {
+      return SizedBox(
+        width: double.infinity,
+        child: SegmentedButton<int>(
+          showSelectedIcon: false,
+          segments: [
+            for (final (i, tab) in widget.tabs.indexed)
+              ButtonSegment(
+                value: i,
+                label: Text(tab.label, key: tab.key),
+              ),
+          ],
+          selected: {if (widget.selected >= 0) widget.selected},
+          emptySelectionAllowed: true,
+          onSelectionChanged: (s) {
+            if (s.isNotEmpty) widget.onChanged(s.single);
+          },
         ),
-      ),
-    );
-    final track = tokens.neu
-        ? SizedBox(
-            height: _height,
-            child: NeuInset(
-              radius: const BorderRadius.all(Radius.circular(_height / 2)),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(_height / 2)),
-                // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(_inset),
-                  child: Row(children: [for (final tab in tabs) item(tab)]),
+      );
+    }
+    return SizedBox(
+      height: ClayTabs._height,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            for (final (i, tab) in widget.tabs.indexed)
+              Padding(
+                padding: const EdgeInsets.only(right: Gaps.chip),
+                child: GestureDetector(
+                  key: tab.key,
+                  onLongPress: tab.onLongPress,
+                  child: ChoiceChip(
+                    label: Text(tab.label),
+                    selected: i == widget.selected,
+                    onSelected: (_) => widget.onChanged(i),
+                  ),
                 ),
               ),
-            ),
-          )
-        : SizedBox(
-            height: _height,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  for (final tab in tabs)
-                    Padding(
-                      padding: const EdgeInsets.only(right: Gaps.chip),
-                      child: GestureDetector(
-                        key: tab.key,
-                        onLongPress: tab.onLongPress,
-                        child: ChoiceChip(
-                          label: Text(tab.label),
-                          selected: tab.selected,
-                          onSelected: (_) => tab.onTap(),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          );
-    return Row(
-      children: [
-        Expanded(child: track),
-        if (trailing != null) ...[const SizedBox(width: Gaps.m), trailing!],
-      ],
+          ],
+        ),
+      ),
     );
   }
 }

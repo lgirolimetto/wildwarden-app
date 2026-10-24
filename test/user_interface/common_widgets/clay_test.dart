@@ -129,60 +129,86 @@ void main() {
       expect(find.byType(ChoiceChip), findsOneWidget);
     });
 
-    testWidgets('linguette neumorfiche: binario scavato, un tocco sceglie la linguetta', (tester) async {
+    testWidgets('linguette neumorfiche: binario scavato, la pillola scivola sulla linguetta scelta', (tester) async {
       var tab = 0;
       await _pump(
         tester,
         StatefulBuilder(
           builder: (context, setState) => SizedBox(
             width: 300,
-            child: ClayTabs(labels: const ['Uno', 'Due'], selected: tab, onChanged: (t) => setState(() => tab = t)),
+            child: ClayTabs(
+              tabs: const [
+                ClayTab(label: 'Uno'),
+                ClayTab(label: 'Due'),
+              ],
+              selected: tab,
+              onChanged: (t) => setState(() => tab = t),
+            ),
           ),
         ),
         livery: const FeltroLivery(),
       );
+      await tester.pumpAndSettle();
       expect(find.ancestor(of: find.text('Due'), matching: find.byType(NeuInset)), findsOneWidget);
+      double pillLeft() => tester.widget<AnimatedPositioned>(find.byType(AnimatedPositioned)).left!;
+      expect(pillLeft(), 0);
+
       await tester.tap(find.text('Due'));
       await tester.pumpAndSettle();
       expect(tab, 1);
+      expect(pillLeft(), greaterThan(100), reason: 'la pillola è scivolata sulla seconda linguetta');
     });
 
-    testWidgets('linguette che scorrono: binario scavato, tocco, pressione lunga e "+" fuori dal binario', (
-      tester,
-    ) async {
-      var tapped = '', longPressed = '';
+    testWidgets('linguette che scorrono: la pillola scivola, pressione lunga, "+" fuori dal binario', (tester) async {
+      var selected = 0;
+      var longPressed = '';
+      const labels = ['Tutte', 'In stagione adesso', 'Le mie Desiderata', 'Protette', 'Alberi'];
       await _pump(
         tester,
-        SizedBox(
-          width: 320,
-          child: ClayScrollTabs(
-            tabs: [
-              for (final label in ['Tutte', 'In stagione adesso', 'Le mie Desiderata', 'Protette', 'Alberi'])
-                ClayTab(
-                  label: label,
-                  selected: label == 'Tutte',
-                  onTap: () => tapped = label,
-                  onLongPress: () => longPressed = label,
-                ),
-            ],
-            trailing: const Icon(Icons.add, key: ValueKey('plus')),
+        StatefulBuilder(
+          builder: (context, setState) => SizedBox(
+            width: 320,
+            child: ClayTabs(
+              scrollable: true,
+              tabs: [for (final label in labels) ClayTab(label: label, onLongPress: () => longPressed = label)],
+              selected: selected,
+              onChanged: (i) => setState(() => selected = i),
+              trailing: const Icon(Icons.add, key: ValueKey('plus')),
+            ),
           ),
         ),
         livery: const FeltroLivery(),
       );
+      await tester.pumpAndSettle();
       expect(find.ancestor(of: find.text('Tutte'), matching: find.byType(NeuInset)), findsOneWidget);
       expect(find.ancestor(of: find.byKey(const ValueKey('plus')), matching: find.byType(NeuInset)), findsNothing);
 
       await tester.ensureVisible(find.text('Alberi'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Alberi'));
+      await tester.pumpAndSettle();
+      expect(selected, 4);
+      final pill = tester.getRect(find.byType(AnimatedPositioned));
+      final alberi = tester.getRect(find.text('Alberi'));
+      expect(pill.left, lessThan(alberi.left), reason: 'la pillola è sotto "Alberi"');
+      expect(pill.right, greaterThan(alberi.right));
+
       await tester.longPress(find.text('Alberi'));
-      expect(tapped, 'Alberi');
       expect(longPressed, 'Alberi');
     });
 
     testWidgets('senza neumorfismo le linguette sono un SegmentedButton', (tester) async {
-      await _pump(tester, ClayTabs(labels: const ['Uno', 'Due'], selected: 0, onChanged: (_) {}));
+      await _pump(
+        tester,
+        ClayTabs(
+          tabs: const [
+            ClayTab(label: 'Uno'),
+            ClayTab(label: 'Due'),
+          ],
+          selected: 0,
+          onChanged: (_) {},
+        ),
+      );
       expect(find.byType(SegmentedButton<int>), findsOneWidget);
     });
 

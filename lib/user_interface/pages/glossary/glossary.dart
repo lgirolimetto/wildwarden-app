@@ -128,7 +128,10 @@ class _GlossaryPageState extends State<GlossaryPage> {
         padding: const EdgeInsets.all(Gaps.l),
         children: [
           ClayTabs(
-            labels: [context.l10n.legendTitle, context.l10n.glossarySection],
+            tabs: [
+              ClayTab(label: context.l10n.legendTitle),
+              ClayTab(label: context.l10n.glossarySection),
+            ],
             selected: _tab,
             onChanged: (tab) => setState(() => _tab = tab),
           ),
