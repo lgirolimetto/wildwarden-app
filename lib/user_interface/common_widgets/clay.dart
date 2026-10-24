@@ -1210,18 +1210,22 @@ class _ClayTabsState extends State<ClayTabs> {
       height: ClayTabs._height,
       child: NeuInset(
         radius: radius,
-        // A scorrimento l'ombra del bordo si disegna sopra le linguette: una linguetta che passa sotto il bordo (color
-        // pagina) sembrerebbe uscire dal binario.
-        overChild: widget.scrollable,
         child: ClipRRect(
           borderRadius: radius,
           child: widget.scrollable
               // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
-              ? SingleChildScrollView(
-                  controller: _scroll,
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(ClayTabs._inset),
-                  child: row,
+              // Dal lato in cui c'è altro nascosto le linguette si dissolvono dentro la curva del bordo: una linguetta
+              // che scorre sparisce nell'incavo invece di sembrarne uscire (è del colore della pagina). Dove tutto è in
+              // vista non si dissolve niente, così la linguetta scelta resta nitida.
+              ? _TrackEnds(
+                  left: _moreLeft,
+                  right: _moreRight,
+                  child: SingleChildScrollView(
+                    controller: _scroll,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.all(ClayTabs._inset),
+                    child: row,
+                  ),
                 )
               : Padding(padding: const EdgeInsets.all(ClayTabs._inset), child: row),
         ),
@@ -1273,6 +1277,37 @@ class _ClayTabsState extends State<ClayTabs> {
           ],
         ),
       ),
+    );
+  }
+}
+
+/// Dissolve le linguette a scorrimento alle estremità del binario ([left], [right]): trasparenti fino al margine interno,
+/// piene dopo altri 12 px, cioè dentro la curva del bordo.
+class _TrackEnds extends StatelessWidget {
+  static const _ramp = 12.0;
+
+  final bool left;
+  final bool right;
+  final Widget child;
+
+  const _TrackEnds({required this.left, required this.right, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    // Sempre presente, anche quando non dissolve niente: aggiungerla e toglierla ricreerebbe la fila che scorre, che
+    // perderebbe la sua posizione.
+    return ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (rect) {
+        final a = ClayTabs._inset / rect.width, b = (ClayTabs._inset + _ramp) / rect.width;
+        // Il colore del gradiente è solo una maschera (conta l'opacità), non si vede.
+        const on = Color(0xFF000000), off = Color(0x00000000);
+        return LinearGradient(
+          colors: [left ? off : on, left ? off : on, on, on, right ? off : on, right ? off : on],
+          stops: [0, a, b, 1 - b, 1 - a, 1],
+        ).createShader(rect);
+      },
+      child: child,
     );
   }
 }
