@@ -1037,11 +1037,34 @@ class _ClayTabsState extends State<ClayTabs> {
   /// Posizione e larghezza di ogni linguetta nella fila, misurate dopo il disegno: la pillola scivola fin lì.
   List<(double, double)> _rects = const [];
 
+  /// A scorrimento: c'è altro a sinistra o a destra (i bordi sfumano da quella parte).
+  final _scroll = ScrollController();
+  var _moreLeft = false, _moreRight = false;
+
   @override
   void initState() {
     super.initState();
     _syncKeys();
+    _scroll.addListener(_updateEdges);
     _measureAfterLayout();
+  }
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _updateEdges() {
+    if (!_scroll.hasClients || !_scroll.position.hasContentDimensions) return;
+    final p = _scroll.position;
+    final left = p.pixels > 0.5, right = p.pixels < p.maxScrollExtent - 0.5;
+    if (left != _moreLeft || right != _moreRight) {
+      setState(() {
+        _moreLeft = left;
+        _moreRight = right;
+      });
+    }
   }
 
   @override
@@ -1057,6 +1080,7 @@ class _ClayTabsState extends State<ClayTabs> {
 
   void _measureAfterLayout({bool reveal = false}) => WidgetsBinding.instance.addPostFrameCallback((_) {
     if (!mounted) return;
+    _updateEdges();
     final row = _rowKey.currentContext?.findRenderObject() as RenderBox?;
     if (row == null || !row.hasSize) return;
     final rects = [
@@ -1159,10 +1183,15 @@ class _ClayTabsState extends State<ClayTabs> {
           borderRadius: radius,
           child: widget.scrollable
               // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
-              ? SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.all(ClayTabs._inset),
-                  child: row,
+              ? EdgeFade(
+                  left: _moreLeft,
+                  right: _moreRight,
+                  child: SingleChildScrollView(
+                    controller: _scroll,
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.all(ClayTabs._inset),
+                    child: row,
+                  ),
                 )
               : Padding(padding: const EdgeInsets.all(ClayTabs._inset), child: row),
         ),
@@ -1193,26 +1222,64 @@ class _ClayTabsState extends State<ClayTabs> {
     }
     return SizedBox(
       height: ClayTabs._height,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            for (final (i, tab) in widget.tabs.indexed)
-              Padding(
-                padding: const EdgeInsets.only(right: Gaps.chip),
-                child: GestureDetector(
-                  key: tab.key,
-                  onLongPress: tab.onLongPress,
-                  child: ChoiceChip(
-                    label: Text(tab.label),
-                    selected: i == widget.selected,
-                    onSelected: (_) => widget.onChanged(i),
+      child: EdgeFade(
+        left: _moreLeft,
+        right: _moreRight,
+        child: SingleChildScrollView(
+          controller: _scroll,
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              for (final (i, tab) in widget.tabs.indexed)
+                Padding(
+                  padding: const EdgeInsets.only(right: Gaps.chip),
+                  child: GestureDetector(
+                    key: tab.key,
+                    onLongPress: tab.onLongPress,
+                    child: ChoiceChip(
+                      label: Text(tab.label),
+                      selected: i == widget.selected,
+                      onSelected: (_) => widget.onChanged(i),
+                    ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+/// Sfuma i bordi di una fila che scorre in orizzontale, solo dal lato in cui c'è ancora altro da vedere: ricorda che si
+/// può scorrere senza aggiungere frecce o puntini, e non sposta niente.
+class EdgeFade extends StatelessWidget {
+  static const width = 24.0;
+
+  final bool left;
+  final bool right;
+  final Widget child;
+
+  const EdgeFade({super.key, required this.left, required this.right, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    if (!left && !right) return child;
+    return ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (rect) {
+        final f = rect.width <= 0 ? 0.0 : (width / rect.width).clamp(0.0, 0.5);
+        return LinearGradient(
+          colors: [
+            left ? Colors.transparent : Colors.black,
+            Colors.black,
+            Colors.black,
+            right ? Colors.transparent : Colors.black,
+          ],
+          stops: [0, f, 1 - f, 1],
+        ).createShader(rect);
+      },
+      child: child,
     );
   }
 }
