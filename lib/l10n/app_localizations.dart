@@ -2054,18 +2054,6 @@ abstract class AppLocalizations {
   /// **'🌄 Alba'**
   String get traitDawn;
 
-  /// No description provided for @traitNight.
-  ///
-  /// In it, this message translates to:
-  /// **'🌌 Notte'**
-  String get traitNight;
-
-  /// No description provided for @traitAfterStorm.
-  ///
-  /// In it, this message translates to:
-  /// **'⛈ Dopo il temporale'**
-  String get traitAfterStorm;
-
   /// No description provided for @traitNewMoon.
   ///
   /// In it, this message translates to:

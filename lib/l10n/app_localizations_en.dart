@@ -1194,11 +1194,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitDawn => '🌄 Dawn';
 
   @override
-  String get traitNight => '🌌 Night';
-
-  @override
-  String get traitAfterStorm => '⛈ After the storm';
-
-  @override
   String get traitNewMoon => '🌑 New moon';
 }

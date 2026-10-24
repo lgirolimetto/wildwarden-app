@@ -110,8 +110,6 @@ class GameTexts {
     Trait.dew => l10n.traitDew,
     Trait.dusk => l10n.traitDusk,
     Trait.dawn => l10n.traitDawn,
-    Trait.night => l10n.traitNight,
-    Trait.afterStorm => l10n.traitAfterStorm,
     Trait.newMoon => l10n.traitNewMoon,
   };
 

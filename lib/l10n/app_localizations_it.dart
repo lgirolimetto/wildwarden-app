@@ -1195,11 +1195,5 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitDawn => '🌄 Alba';
 
   @override
-  String get traitNight => '🌌 Notte';
-
-  @override
-  String get traitAfterStorm => '⛈ Dopo il temporale';
-
-  @override
   String get traitNewMoon => '🌑 Luna nuova';
 }
