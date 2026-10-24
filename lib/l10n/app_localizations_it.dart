@@ -688,7 +688,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossTrattoText =>
-      'La condizione del momento in cui attingi un\'essenza (luna piena, pioggia, nebbia, rugiada…). Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.';
+      'Una condizione del momento in cui attingi un\'essenza (luna piena, pioggia, nebbia, rugiada…): un\'essenza le porta tutte. Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.';
 
   @override
   String get glossAttingereTerm => 'Attingere';
@@ -1093,7 +1093,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossEssenzaText =>
-      'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.';
+      'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e dei tratti, dati dalle condizioni del momento.';
 
   @override
   String get glossVisTerm => 'Vis';
@@ -1195,11 +1195,38 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitDawn => '🌄 Alba';
 
   @override
-  String get traitNight => '🌌 Notte';
-
-  @override
-  String get traitAfterStorm => '⛈ Dopo il temporale';
-
-  @override
   String get traitNewMoon => '🌑 Luna nuova';
+
+  @override
+  String get traitWhenFrost => 'Quando fa sotto zero: brina e ghiaccio.';
+
+  @override
+  String get traitWhenRain =>
+      'Mentre piove. Con il temporale la raccolta è sospesa.';
+
+  @override
+  String get traitWhenFog => 'Quando c\'è nebbia.';
+
+  @override
+  String get traitWhenSun => 'Con il sole e poche nuvole.';
+
+  @override
+  String get traitWhenMoon =>
+      'Tutto il giorno della luna piena: non serve uscire di notte.';
+
+  @override
+  String get traitWhenDew =>
+      'Dall\'alba a circa due ore dopo, se la notte è stata fresca e serena: l\'erba è ancora bagnata.';
+
+  @override
+  String get traitWhenDusk =>
+      'Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.';
+
+  @override
+  String get traitWhenDawn =>
+      'Dalle prime luci a circa un\'ora dopo il sorgere del sole.';
+
+  @override
+  String get traitWhenNewMoon =>
+      'Tutto il giorno della luna nuova: non serve uscire di notte.';
 }

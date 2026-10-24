@@ -55,6 +55,17 @@ void main() {
     expect(controller.state.xp, XpRules.desiderataFulfilled);
   });
 
+  test('attingere simulato salva tutti i tratti scelti', () async {
+    await controller.encounter('Helleborus viridis', method: EncounterMethod.simulated);
+
+    expect(await controller.drawSimulated('Helleborus viridis', traits: ['rain', 'dusk']), isTrue);
+
+    expect(store.events.whereType<EssenceDrawn>().single.traits, ['rain', 'dusk']);
+    expect(controller.state.draws['Helleborus viridis'], [
+      ['rain', 'dusk'],
+    ]);
+  });
+
   test('non si possono avere più di 3 desiderata', () async {
     for (final sci in ['Eranthis hyemalis', 'Helleborus viridis', 'Malva sylvestris']) {
       expect(await controller.toggleDesiderata(sci), isTrue);

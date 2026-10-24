@@ -185,11 +185,17 @@ class _Legend extends StatelessWidget {
           const SizedBox(height: Gaps.m),
           Text(l10n.legendTraits, style: context.texts.titleSmall),
           const SizedBox(height: Gaps.s),
-          Wrap(
-            spacing: Gaps.chip,
-            runSpacing: Gaps.chipRun,
-            children: [for (final trait in Trait.values) Pill(game.trait(trait))],
-          ),
+          for (final trait in Trait.values)
+            Padding(
+              padding: const EdgeInsets.only(bottom: Gaps.s),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Pill(game.trait(trait)),
+                  Text(game.traitWhen(trait), style: context.texts.bodySmall),
+                ],
+              ),
+            ),
         ],
       ),
     );

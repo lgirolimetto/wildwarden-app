@@ -690,7 +690,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossTrattoText =>
-      'The condition of the moment when you draw an essence (full moon, rain, fog, dew…). Recipes ask for different traits: the same plant on different days gives different essences.';
+      'A condition of the moment when you draw an essence (full moon, rain, fog, dew…): an essence carries all of them. Recipes ask for different traits: the same plant on different days gives different essences.';
 
   @override
   String get glossAttingereTerm => 'Draw';
@@ -1092,7 +1092,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossEssenzaText =>
-      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and a trait, given by the conditions of the moment.';
+      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and traits, given by the conditions of the moment.';
 
   @override
   String get glossVisTerm => 'Vis';
@@ -1194,11 +1194,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitDawn => '🌄 Dawn';
 
   @override
-  String get traitNight => '🌌 Night';
-
-  @override
-  String get traitAfterStorm => '⛈ After the storm';
-
-  @override
   String get traitNewMoon => '🌑 New moon';
+
+  @override
+  String get traitWhenFrost => 'When it is below freezing: hoarfrost and ice.';
+
+  @override
+  String get traitWhenRain =>
+      'While it rains. During a thunderstorm drawing is suspended.';
+
+  @override
+  String get traitWhenFog => 'When there is fog.';
+
+  @override
+  String get traitWhenSun => 'With sunshine and few clouds.';
+
+  @override
+  String get traitWhenMoon =>
+      'All day long on the full moon: no need to go out at night.';
+
+  @override
+  String get traitWhenDew =>
+      'From sunrise to about two hours later, after a cool clear night: the grass is still wet.';
+
+  @override
+  String get traitWhenDusk =>
+      'From about an hour before sunset until sunset, never after dark.';
+
+  @override
+  String get traitWhenDawn =>
+      'From first light to about an hour after sunrise.';
+
+  @override
+  String get traitWhenNewMoon =>
+      'All day long on the new moon: no need to go out at night.';
 }

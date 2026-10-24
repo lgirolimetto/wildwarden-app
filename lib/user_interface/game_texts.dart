@@ -110,9 +110,20 @@ class GameTexts {
     Trait.dew => l10n.traitDew,
     Trait.dusk => l10n.traitDusk,
     Trait.dawn => l10n.traitDawn,
-    Trait.night => l10n.traitNight,
-    Trait.afterStorm => l10n.traitAfterStorm,
     Trait.newMoon => l10n.traitNewMoon,
+  };
+
+  /// Quando vale un tratto: sempre di giorno o tutto il giorno, mai premi a uscite rischiose (capitolo 02).
+  String traitWhen(Trait t) => switch (t) {
+    Trait.frost => l10n.traitWhenFrost,
+    Trait.rain => l10n.traitWhenRain,
+    Trait.fog => l10n.traitWhenFog,
+    Trait.sun => l10n.traitWhenSun,
+    Trait.moon => l10n.traitWhenMoon,
+    Trait.dew => l10n.traitWhenDew,
+    Trait.dusk => l10n.traitWhenDusk,
+    Trait.dawn => l10n.traitWhenDawn,
+    Trait.newMoon => l10n.traitWhenNewMoon,
   };
 
   String prompt(Question q) {

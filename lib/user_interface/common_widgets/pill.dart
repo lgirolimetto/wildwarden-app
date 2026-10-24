@@ -83,7 +83,6 @@ Color _orbColor(String emoji) => switch (emoji) {
   '☀️' || '☀' => const Color(0xFFFFE3A0),
   '🌕' => const Color(0xFFE6DDF7),
   '🌅' || '🌄' => const Color(0xFFF7C4A8),
-  '🌌' || '🌑' => const Color(0xFFD5D3E8),
-  '⛈' || '⛈️' => const Color(0xFFC9D6DE),
+  '🌑' => const Color(0xFFD5D3E8),
   _ => const Color(0xFFE8DCC6),
 };

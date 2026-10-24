@@ -126,9 +126,18 @@ void main() {
       await openTab(tester, 'Erbario');
       await scrollAndTap(tester, find.byKey(const ValueKey('met-Helleborus viridis')));
       await scrollTo(tester, find.byKey(const ValueKey('species-xp-to-cash')));
+      // Un'essenza porta tutti i tratti veri in quel momento: se ne scelgono più d'uno.
+      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-rain')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-dusk')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-moon')));
       await scrollAndTap(tester, find.byKey(const ValueKey('simulate-draw')));
 
       final state = Get.find<ProgressController>().state;
+      expect(state.draws['Helleborus viridis'], [
+        ['rain', 'moon', 'dusk'],
+      ]);
+      // Tre tratti distinti, ma il contatore si ferma al traguardo.
+      expect(find.text('Essenze attinte: 1/3 · tratti diversi: 2/2'), findsOneWidget);
       expect(state.xpToCash, 0);
       expect(state.xp, 20 + XpRules.essenceDrawn);
       expect(state.vis['Helleborus viridis'], 10);
@@ -271,6 +280,17 @@ void main() {
       expect(find.text('Effetto di gioco di prova.'), findsOneWidget);
     });
 
+    testWidgets('un ingrediente con un tratto spiega quando vale', (tester) async {
+      registerTestDependencies(
+        events: [LevelPassed(speciesSci: 'Eranthis hyemalis', level: 2, xp: 20, occurredAt: _feb)],
+      );
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Ricette');
+
+      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-tintura-lanterna-inverno')));
+      expect(find.text('Quando fa sotto zero: brina e ghiaccio.'), findsOneWidget);
+    });
+
     testWidgets('nessuna ricetta conosciuta: l\'album spiega come impararle', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
@@ -291,6 +311,10 @@ void main() {
         expect(find.text(grade), findsOneWidget);
       }
       expect(find.text('Specie protetta dalla legge: si guarda e si fotografa'), findsOneWidget);
+      // I tratti dicono quando valgono: sempre di giorno o tutto il giorno.
+      final dusk = find.text('Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.');
+      await scrollTo(tester, dusk);
+      expect(dusk, findsOneWidget);
       await scrollTo(tester, find.byKey(const ValueKey('gloss-vis')));
       expect(find.textContaining('La linfa sottile delle piante'), findsOneWidget);
     });

@@ -68,7 +68,7 @@ sealed class GameEvent {
       ),
       EssenceDrawn.typeId => EssenceDrawn(
         speciesSci: d['species'] as String,
-        trait: d['trait'] as String?,
+        traits: _decodeTraits(d),
         simulated: d['simulated'] as bool,
         // Assenti negli eventi salvati prima dello step 4 della tappa B.
         vis: d['vis'] as int? ?? 0,
@@ -104,6 +104,13 @@ sealed class GameEvent {
       _ => throw FormatException('Tipo di evento sconosciuto: $type'),
     };
   }
+}
+
+/// Tratti di un `EssenceDrawn`. Prima di "più tratti per essenza" si salvava un solo `trait` (anche `null`): si
+/// rilegge come una lista di un elemento (o vuota).
+List<String> _decodeTraits(Map<String, dynamic> d) {
+  if (d['traits'] case final List<dynamic> traits) return traits.cast<String>();
+  return [?d['trait'] as String?];
 }
 
 /// Il giocatore ha incontrato una specie (la prima volta conta per l'erbario).
@@ -177,13 +184,13 @@ class MasteryReached extends GameEvent {
   Map<String, dynamic> payload() => {'species': speciesSci, 'xp': xp};
 }
 
-/// Essenza attinta da una stazione, con il tratto delle condizioni del momento (`null` = nessuno) e le [vis]
+/// Essenza attinta da una stazione, con tutti i tratti veri in quel momento (vuoto = nessuno) e le [vis]
 /// immagazzinate. La prima essenza di una specie incassa i PE virtuali dello studio di quella specie.
 /// Oggi è solo simulata; dal blocco 3 nasce dalle condizioni reali.
 class EssenceDrawn extends GameEvent {
   static const typeId = 'essence_drawn';
   final String speciesSci;
-  final String? trait;
+  final List<String> traits;
   final bool simulated;
 
   /// Unità di Vis ("la linfa sottile delle piante") immagazzinate con questa raccolta.
@@ -193,7 +200,7 @@ class EssenceDrawn extends GameEvent {
 
   const EssenceDrawn({
     required this.speciesSci,
-    required this.trait,
+    this.traits = const [],
     required this.simulated,
     this.vis = 0,
     this.xp = 0,
@@ -206,7 +213,7 @@ class EssenceDrawn extends GameEvent {
   @override
   Map<String, dynamic> payload() => {
     'species': speciesSci,
-    'trait': trait,
+    'traits': traits,
     'simulated': simulated,
     'vis': vis,
     'xp': xp,
