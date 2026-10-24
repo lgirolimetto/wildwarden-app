@@ -147,6 +147,40 @@ void main() {
       expect(tab, 1);
     });
 
+    testWidgets('linguette che scorrono: binario scavato, tocco, pressione lunga e "+" fuori dal binario', (
+      tester,
+    ) async {
+      var tapped = '', longPressed = '';
+      await _pump(
+        tester,
+        SizedBox(
+          width: 320,
+          child: ClayScrollTabs(
+            tabs: [
+              for (final label in ['Tutte', 'In stagione adesso', 'Le mie Desiderata', 'Protette', 'Alberi'])
+                ClayTab(
+                  label: label,
+                  selected: label == 'Tutte',
+                  onTap: () => tapped = label,
+                  onLongPress: () => longPressed = label,
+                ),
+            ],
+            trailing: const Icon(Icons.add, key: ValueKey('plus')),
+          ),
+        ),
+        livery: const FeltroLivery(),
+      );
+      expect(find.ancestor(of: find.text('Tutte'), matching: find.byType(NeuInset)), findsOneWidget);
+      expect(find.ancestor(of: find.byKey(const ValueKey('plus')), matching: find.byType(NeuInset)), findsNothing);
+
+      await tester.ensureVisible(find.text('Alberi'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Alberi'));
+      await tester.longPress(find.text('Alberi'));
+      expect(tapped, 'Alberi');
+      expect(longPressed, 'Alberi');
+    });
+
     testWidgets('senza neumorfismo le linguette sono un SegmentedButton', (tester) async {
       await _pump(tester, ClayTabs(labels: const ['Uno', 'Due'], selected: 0, onChanged: (_) {}));
       expect(find.byType(SegmentedButton<int>), findsOneWidget);

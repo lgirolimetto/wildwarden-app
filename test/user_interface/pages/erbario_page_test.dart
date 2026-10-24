@@ -159,16 +159,7 @@ void main() {
     expect(find.byKey(const ValueKey('unknown-Malva sylvestris')), findsNothing);
     expect(find.byKey(const ValueKey('unknown-Fagus sylvatica')), findsNothing);
 
-    // La fila delle viste scorre in orizzontale: "Nuova vista" è in fondo.
-    await tester.scrollUntilVisible(
-      find.byKey(const ValueKey('view-new')),
-      200,
-      scrollable: find
-          .ancestor(of: find.byKey(const ValueKey('view-inSeason')), matching: find.byType(Scrollable))
-          .first,
-    );
-    await tester.ensureVisible(find.byKey(const ValueKey('view-new')));
-    await tester.pumpAndSettle();
+    // "Nuova vista" è il "+" accanto alle linguette, sempre visibile anche se le viste scorrono.
     await tester.tap(find.byKey(const ValueKey('view-new')));
     await tester.pumpAndSettle();
     await tester.enterText(find.byKey(const ValueKey('view-name')), 'Alberi');
@@ -180,6 +171,9 @@ void main() {
     expect(find.byKey(const ValueKey('unknown-Fagus sylvatica')), findsOneWidget);
     expect(find.byKey(const ValueKey('unknown-Malva sylvestris')), findsNothing);
 
+    // Le linguette scorrono: la vista nuova è in fondo.
+    await tester.ensureVisible(find.text('Alberi'));
+    await tester.pumpAndSettle();
     await tester.longPress(find.text('Alberi'));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('view-remove')));

@@ -1074,6 +1074,110 @@ class ClayTabs extends StatelessWidget {
   }
 }
 
+/// Una linguetta di [ClayScrollTabs].
+class ClayTab {
+  final Key? key;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+  final VoidCallback? onLongPress;
+
+  const ClayTab({this.key, required this.label, required this.selected, required this.onTap, this.onLongPress});
+}
+
+/// Linguette che scorrono, per un numero variabile di scelte (es. le viste dell'erbario): lo stesso binario scavato di
+/// [ClayTabs], con le linguette larghe quanto il loro testo e la scelta in rilievo. [trailing] (es. "+") sta fuori dal
+/// binario, sempre visibile. Fuori dal neumorfismo una fila di `ChoiceChip`.
+class ClayScrollTabs extends StatelessWidget {
+  static const _height = 48.0, _inset = 5.0;
+
+  final List<ClayTab> tabs;
+  final Widget? trailing;
+
+  const ClayScrollTabs({super.key, required this.tabs, this.trailing});
+
+  @override
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    final colors = context.colors;
+    Widget item(ClayTab tab) => GestureDetector(
+      key: tab.key,
+      behavior: HitTestBehavior.opaque,
+      onTap: tab.onTap,
+      onLongPress: tab.onLongPress,
+      child: Semantics(
+        button: true,
+        selected: tab.selected,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          padding: const EdgeInsets.symmetric(horizontal: Gaps.l),
+          alignment: Alignment.center,
+          decoration: tab.selected
+              ? _neuDecoration(
+                  tokens,
+                  color: colors.surface,
+                  radius: const BorderRadius.all(Radius.circular(999)),
+                  distance: 3,
+                )
+              : const BoxDecoration(),
+          child: Text(
+            tab.label,
+            style: context.texts.labelLarge?.copyWith(
+              color: tab.selected ? colors.primary : colors.onSurfaceVariant,
+              fontWeight: tab.selected ? FontWeight.w700 : null,
+            ),
+          ),
+        ),
+      ),
+    );
+    final track = tokens.neu
+        ? SizedBox(
+            height: _height,
+            child: NeuInset(
+              radius: const BorderRadius.all(Radius.circular(_height / 2)),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(_height / 2)),
+                // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.all(_inset),
+                  child: Row(children: [for (final tab in tabs) item(tab)]),
+                ),
+              ),
+            ),
+          )
+        : SizedBox(
+            height: _height,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (final tab in tabs)
+                    Padding(
+                      padding: const EdgeInsets.only(right: Gaps.chip),
+                      child: GestureDetector(
+                        key: tab.key,
+                        onLongPress: tab.onLongPress,
+                        child: ChoiceChip(
+                          label: Text(tab.label),
+                          selected: tab.selected,
+                          onSelected: (_) => tab.onTap(),
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          );
+    return Row(
+      children: [
+        Expanded(child: track),
+        if (trailing != null) ...[const SizedBox(width: Gaps.m), trailing!],
+      ],
+    );
+  }
+}
+
 /// Barra di avanzamento. Nelle livree neumorfiche: un binario sottile scavato in cui la parte piena è una chip
 /// appena bombata, così il vuoto si vede scavato e il pieno in rilievo (a barra completa sembra una chip). Rilievo e
 /// incavo sono leggerissimi, la barra resta sottile. Altrove una `LinearProgressIndicator`.

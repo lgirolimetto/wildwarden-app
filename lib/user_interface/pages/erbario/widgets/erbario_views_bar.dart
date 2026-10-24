@@ -10,8 +10,8 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Le viste dell'erbario in una fila di chip: quelle già pronte, quelle salvate (pressione lunga per eliminarle) e
-/// "Nuova vista".
+/// Le viste dell'erbario come linguette che scorrono: quelle già pronte e quelle salvate (pressione lunga per
+/// eliminarle); "Nuova vista" è il "+" accanto, sempre visibile.
 class ErbarioViewsBar extends StatelessWidget {
   final Catalog catalog;
 
@@ -19,41 +19,38 @@ class ErbarioViewsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetBuilder<ErbarioViewsController>(
-    builder: (views) => SizedBox(
+    builder: (views) => Padding(
       // Più spazio in verticale che in orizzontale: le ombre del rilievo non si tagliano.
-      height: 48 + 2 * Gaps.m,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
-        padding: const EdgeInsets.symmetric(horizontal: Gaps.l, vertical: Gaps.m),
-        children: [
+      padding: const EdgeInsets.symmetric(horizontal: Gaps.l, vertical: Gaps.m),
+      child: ClayScrollTabs(
+        tabs: [
           for (final view in BuiltInView.values)
-            _ViewChip(
+            ClayTab(
               key: ValueKey('view-${view.name}'),
               label: context.game.builtInView(view),
               selected: views.selected == ErbarioViewsController.builtInKey(view),
               onTap: () => views.select(ErbarioViewsController.builtInKey(view)),
             ),
           for (final view in views.saved)
-            _ViewChip(
+            ClayTab(
               key: ValueKey('view-${view.id}'),
               label: view.name,
               selected: views.selected == view.id,
               onTap: () => views.select(view.id),
               onLongPress: () => _confirmRemove(context, views, view),
             ),
-          _ViewChip(
-            key: const ValueKey('view-new'),
-            label: context.l10n.viewNew,
-            icon: Icons.add_rounded,
-            onTap: () => showModalBottomSheet<void>(
-              context: context,
-              isScrollControlled: true,
-              showDragHandle: true,
-              builder: (_) => ErbarioViewEditor(catalog: catalog),
-            ),
-          ),
         ],
+        trailing: ClayIconButton(
+          key: const ValueKey('view-new'),
+          icon: Icons.add_rounded,
+          tooltip: context.l10n.viewNew,
+          onPressed: () => showModalBottomSheet<void>(
+            context: context,
+            isScrollControlled: true,
+            showDragHandle: true,
+            builder: (_) => ErbarioViewEditor(catalog: catalog),
+          ),
+        ),
       ),
     ),
   );
@@ -83,30 +80,6 @@ class ErbarioViewsBar extends StatelessWidget {
           ),
         ),
       );
-}
-
-class _ViewChip extends StatelessWidget {
-  final String label;
-  final bool? selected;
-  final IconData? icon;
-  final VoidCallback onTap;
-  final VoidCallback? onLongPress;
-
-  const _ViewChip({super.key, required this.label, required this.onTap, this.selected, this.icon, this.onLongPress});
-
-  @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(right: Gaps.chip),
-    child: GestureDetector(
-      onLongPress: onLongPress,
-      child: ClayChip(
-        label: label,
-        selected: selected,
-        avatar: icon == null ? null : Icon(icon, size: 18),
-        onTap: onTap,
-      ),
-    ),
-  );
 }
 
 /// Foglio per creare una vista: un nome e i criteri. Si salva solo con un nome e almeno un criterio.
