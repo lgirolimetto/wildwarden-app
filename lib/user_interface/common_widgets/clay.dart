@@ -1103,9 +1103,18 @@ class _ClayTabsState extends State<ClayTabs> {
   Widget build(BuildContext context) {
     final tokens = context.druid;
     final track = tokens.neu ? _neuTrack(context, tokens) : _materialTrack(context);
+    // A scorrimento: un pallino per lato, acceso se da quella parte c'è altro; nascosti se tutto sta nel binario (lo
+    // spazio resta, così il binario non cambia larghezza).
+    final overflows = _moreLeft || _moreRight;
+    Widget hint(bool lit, Key key) => Visibility.maintain(
+      visible: overflows,
+      child: ScrollHintDot(key: key, lit: lit),
+    );
     return Row(
       children: [
+        if (widget.scrollable) ...[hint(_moreLeft, const ValueKey('more-left')), const SizedBox(width: Gaps.s)],
         Expanded(child: track),
+        if (widget.scrollable) ...[const SizedBox(width: Gaps.s), hint(_moreRight, const ValueKey('more-right'))],
         if (widget.trailing != null) ...[const SizedBox(width: Gaps.m), widget.trailing!],
       ],
     );
@@ -1183,15 +1192,11 @@ class _ClayTabsState extends State<ClayTabs> {
           borderRadius: radius,
           child: widget.scrollable
               // Poche linguette: si costruiscono tutte (una ListView costruirebbe solo quelle vicine allo schermo).
-              ? EdgeFade(
-                  left: _moreLeft,
-                  right: _moreRight,
-                  child: SingleChildScrollView(
-                    controller: _scroll,
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.all(ClayTabs._inset),
-                    child: row,
-                  ),
+              ? SingleChildScrollView(
+                  controller: _scroll,
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.all(ClayTabs._inset),
+                  child: row,
                 )
               : Padding(padding: const EdgeInsets.all(ClayTabs._inset), child: row),
         ),
@@ -1222,64 +1227,67 @@ class _ClayTabsState extends State<ClayTabs> {
     }
     return SizedBox(
       height: ClayTabs._height,
-      child: EdgeFade(
-        left: _moreLeft,
-        right: _moreRight,
-        child: SingleChildScrollView(
-          controller: _scroll,
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              for (final (i, tab) in widget.tabs.indexed)
-                Padding(
-                  padding: const EdgeInsets.only(right: Gaps.chip),
-                  child: GestureDetector(
-                    key: tab.key,
-                    onLongPress: tab.onLongPress,
-                    child: ChoiceChip(
-                      label: Text(tab.label),
-                      selected: i == widget.selected,
-                      onSelected: (_) => widget.onChanged(i),
-                    ),
+      child: SingleChildScrollView(
+        controller: _scroll,
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            for (final (i, tab) in widget.tabs.indexed)
+              Padding(
+                padding: const EdgeInsets.only(right: Gaps.chip),
+                child: GestureDetector(
+                  key: tab.key,
+                  onLongPress: tab.onLongPress,
+                  child: ChoiceChip(
+                    label: Text(tab.label),
+                    selected: i == widget.selected,
+                    onSelected: (_) => widget.onChanged(i),
                   ),
                 ),
-            ],
-          ),
+              ),
+          ],
         ),
       ),
     );
   }
 }
 
-/// Sfuma i bordi di una fila che scorre in orizzontale, solo dal lato in cui c'è ancora altro da vedere: ricorda che si
-/// può scorrere senza aggiungere frecce o puntini, e non sposta niente.
-class EdgeFade extends StatelessWidget {
-  static const width = 24.0;
+/// Pallino accanto a una fila che scorre: acceso se da quella parte c'è ancora altro, spento (un piccolo incavo vuoto)
+/// se no. Nello stile del cerchietto del grado, ma più piccolo.
+class ScrollHintDot extends StatelessWidget {
+  static const size = 12.0;
+  static const _gem = 6.0;
 
-  final bool left;
-  final bool right;
-  final Widget child;
+  final bool lit;
 
-  const EdgeFade({super.key, required this.left, required this.right, required this.child});
+  const ScrollHintDot({super.key, required this.lit});
 
   @override
   Widget build(BuildContext context) {
-    if (!left && !right) return child;
-    return ShaderMask(
-      blendMode: BlendMode.dstIn,
-      shaderCallback: (rect) {
-        final f = rect.width <= 0 ? 0.0 : (width / rect.width).clamp(0.0, 0.5);
-        return LinearGradient(
-          colors: [
-            left ? Colors.transparent : Colors.black,
-            Colors.black,
-            Colors.black,
-            right ? Colors.transparent : Colors.black,
-          ],
-          stops: [0, f, 1 - f, 1],
-        ).createShader(rect);
-      },
-      child: child,
+    final colors = context.colors;
+    final gem = AnimatedOpacity(
+      duration: const Duration(milliseconds: 180),
+      opacity: lit ? 1 : 0,
+      child: DecoratedBox(
+        decoration: BoxDecoration(color: colors.primary, shape: BoxShape.circle),
+        child: const SizedBox.square(dimension: _gem),
+      ),
+    );
+    return SizedBox.square(
+      dimension: size,
+      child: context.druid.neu
+          ? NeuInset(
+              radius: BorderRadius.circular(size / 2),
+              depth: 1.5,
+              child: Center(child: gem),
+            )
+          : DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: colors.outlineVariant),
+              ),
+              child: Center(child: gem),
+            ),
     );
   }
 }

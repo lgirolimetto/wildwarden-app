@@ -182,16 +182,19 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.ancestor(of: find.text('Tutte'), matching: find.byType(NeuInset)), findsOneWidget);
       expect(find.ancestor(of: find.byKey(const ValueKey('plus')), matching: find.byType(NeuInset)), findsNothing);
-      // C'è altro da scorrere: all'inizio sfuma solo il bordo destro.
-      EdgeFade fade() => tester.widget<EdgeFade>(find.byType(EdgeFade));
-      expect((fade().left, fade().right), (false, true));
+      // C'è altro da scorrere: all'inizio è acceso solo il pallino destro.
+      (bool, bool) dots() => (
+        tester.widget<ScrollHintDot>(find.byKey(const ValueKey('more-left'))).lit,
+        tester.widget<ScrollHintDot>(find.byKey(const ValueKey('more-right'))).lit,
+      );
+      expect(dots(), (false, true));
 
       await tester.ensureVisible(find.text('Alberi'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Alberi'));
       await tester.pumpAndSettle();
       expect(selected, 4);
-      expect((fade().left, fade().right), (true, false), reason: 'in fondo sfuma solo il bordo sinistro');
+      expect(dots(), (true, false), reason: 'in fondo è acceso solo il pallino sinistro');
       final pill = tester.getRect(find.byType(AnimatedPositioned));
       final alberi = tester.getRect(find.text('Alberi'));
       expect(pill.left, lessThan(alberi.left), reason: 'la pillola è sotto "Alberi"');
