@@ -126,9 +126,18 @@ void main() {
       await openTab(tester, 'Erbario');
       await scrollAndTap(tester, find.byKey(const ValueKey('met-Helleborus viridis')));
       await scrollTo(tester, find.byKey(const ValueKey('species-xp-to-cash')));
+      // Un'essenza porta tutti i tratti veri in quel momento: se ne scelgono più d'uno.
+      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-rain')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-dusk')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-moon')));
       await scrollAndTap(tester, find.byKey(const ValueKey('simulate-draw')));
 
       final state = Get.find<ProgressController>().state;
+      expect(state.draws['Helleborus viridis'], [
+        ['rain', 'moon', 'dusk'],
+      ]);
+      // Tre tratti distinti, ma il contatore si ferma al traguardo.
+      expect(find.text('Essenze attinte: 1/3 · tratti diversi: 2/2'), findsOneWidget);
       expect(state.xpToCash, 0);
       expect(state.xp, 20 + XpRules.essenceDrawn);
       expect(state.vis['Helleborus viridis'], 10);

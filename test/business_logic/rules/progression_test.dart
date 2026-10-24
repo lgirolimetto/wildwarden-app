@@ -58,8 +58,12 @@ void main() {
 
     test('3 essenze con almeno 2 tratti diversi completano la maestria', () {
       var state = studiedAndConsolidated();
-      for (final trait in ['🌕 Lunare', '❄️ Gelo', null]) {
-        state = state.apply(EssenceDrawn(speciesSci: sci, trait: trait, simulated: true, occurredAt: feb));
+      for (final traits in [
+        ['moon'],
+        ['frost'],
+        <String>[],
+      ]) {
+        state = state.apply(EssenceDrawn(speciesSci: sci, traits: traits, simulated: true, occurredAt: feb));
       }
       expect(masteryProgress(catalog.speciesBySci(sci)!, catalog, state).reached, isTrue);
     });
@@ -67,9 +71,24 @@ void main() {
     test('3 essenze tutte con lo stesso tratto non bastano', () {
       var state = studiedAndConsolidated();
       for (var i = 0; i < 3; i++) {
-        state = state.apply(EssenceDrawn(speciesSci: sci, trait: '❄️ Gelo', simulated: true, occurredAt: feb));
+        state = state.apply(EssenceDrawn(speciesSci: sci, traits: ['frost'], simulated: true, occurredAt: feb));
       }
       expect(masteryProgress(catalog.speciesBySci(sci)!, catalog, state).reached, isFalse);
+    });
+
+    test('i tratti distinti si contano su tutte le essenze, anche più tratti nella stessa', () {
+      var state = studiedAndConsolidated();
+      for (final traits in [
+        ['rain', 'dusk'],
+        ['rain'],
+        <String>[],
+      ]) {
+        state = state.apply(EssenceDrawn(speciesSci: sci, traits: traits, simulated: true, occurredAt: feb));
+      }
+      final progress = masteryProgress(catalog.speciesBySci(sci)!, catalog, state);
+      expect(progress.draws, 3);
+      expect(progress.distinctTraits, 2);
+      expect(progress.reached, isTrue);
     });
   });
 

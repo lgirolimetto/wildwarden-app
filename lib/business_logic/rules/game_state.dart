@@ -31,8 +31,8 @@ class GameState {
   /// Avanzamento dei fatti, per `Fact.id`.
   final Map<String, FactProgress> facts;
 
-  /// Tratti delle essenze attinte, per specie (`null` = nessun tratto).
-  final Map<String, List<String?>> draws;
+  /// Essenze attinte, per specie: per ognuna i suoi tratti (vuoto = nessun tratto).
+  final Map<String, List<List<String>>> draws;
   final Set<String> desiderata;
   final Set<String> fulfilledDesiderata;
 
@@ -123,12 +123,12 @@ class GameState {
       ),
       MasteryReached(:final speciesSci) => next._copy(mastered: {...mastered, speciesSci}),
       // La prima essenza di una specie incassa i suoi PE virtuali.
-      EssenceDrawn(:final speciesSci, :final trait, :final occurredAt, vis: final gained) => next._copy(
+      EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, vis: final gained) => next._copy(
         xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
         pendingXp: {...next.pendingXp}..remove(speciesSci),
         draws: {
           ...draws,
-          speciesSci: [...?draws[speciesSci], trait],
+          speciesSci: [...?draws[speciesSci], traits],
         },
         vis: {...vis, speciesSci: (vis[speciesSci] ?? 0) + gained},
         lastDraws: {...lastDraws, speciesSci: occurredAt},
@@ -173,7 +173,7 @@ class GameState {
     Map<String, int>? passedLevels,
     Set<String>? mastered,
     Map<String, FactProgress>? facts,
-    Map<String, List<String?>>? draws,
+    Map<String, List<List<String>>>? draws,
     Set<String>? desiderata,
     Set<String>? fulfilledDesiderata,
     Map<String, DateTime>? revealedFunFacts,

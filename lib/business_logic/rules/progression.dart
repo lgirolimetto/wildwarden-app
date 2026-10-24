@@ -39,12 +39,13 @@ class MasteryProgress {
 
 MasteryProgress masteryProgress(Species species, Catalog catalog, GameState state) {
   final facts = factsOf(species, catalog);
-  final traits = state.draws[species.sci] ?? const [];
+  final draws = state.draws[species.sci] ?? const [];
   return MasteryProgress(
     consolidatedFacts: facts.where((f) => state.progressOf(f.id).consolidated).length,
     totalFacts: facts.length,
-    draws: traits.length,
-    distinctTraits: traits.whereType<String>().toSet().length,
+    draws: draws.length,
+    // Un'essenza porta più tratti: contano quelli distinti su tutte le essenze della specie.
+    distinctTraits: draws.expand((traits) => traits).toSet().length,
     studyComplete: state.levelOf(species.sci) >= maxStudyLevel,
   );
 }

@@ -733,7 +733,8 @@ class _MasterySection extends StatefulWidget {
 }
 
 class _MasterySectionState extends State<_MasterySection> {
-  Trait? _trait;
+  /// Tratti scelti per "Simula attingere": un'essenza porta tutti i tratti veri in quel momento.
+  final _traits = <Trait>{};
 
   @override
   Widget build(BuildContext context) {
@@ -755,7 +756,15 @@ class _MasterySectionState extends State<_MasterySection> {
           if ((widget.state.vis[widget.species.sci] ?? 0) > 0)
             Text(l10n.visStored(widget.state.vis[widget.species.sci]!)),
           Text(l10n.masteryFacts(m.consolidatedFacts, m.totalFacts)),
-          Text(l10n.masteryDraws(m.draws, masteryDraws, m.distinctTraits, masteryDistinctTraits)),
+          // Con più tratti per essenza si supera facilmente il traguardo: i contatori si fermano lì.
+          Text(
+            l10n.masteryDraws(
+              min(m.draws, masteryDraws),
+              masteryDraws,
+              min(m.distinctTraits, masteryDistinctTraits),
+              masteryDistinctTraits,
+            ),
+          ),
           Text(l10n.masteryOnlyField, style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
           if (Get.find<AppConfig>().showDebugTools) ...[
             const SizedBox(height: Gaps.s),
@@ -763,12 +772,13 @@ class _MasterySectionState extends State<_MasterySection> {
               spacing: Gaps.chip,
               runSpacing: Gaps.chipRun,
               children: [
-                ClayChip(label: l10n.noTrait, selected: _trait == null, onTap: () => setState(() => _trait = null)),
+                ClayChip(label: l10n.noTrait, selected: _traits.isEmpty, onTap: () => setState(_traits.clear)),
                 for (final trait in Trait.values)
                   ClayChip(
+                    key: ValueKey('draw-trait-${trait.name}'),
                     label: context.game.trait(trait),
-                    selected: _trait == trait,
-                    onTap: () => setState(() => _trait = trait),
+                    selected: _traits.contains(trait),
+                    onTap: () => setState(() => _traits.contains(trait) ? _traits.remove(trait) : _traits.add(trait)),
                   ),
               ],
             ),
@@ -776,7 +786,13 @@ class _MasterySectionState extends State<_MasterySection> {
             OutlinedButton.icon(
               key: const ValueKey('simulate-draw'),
               onPressed: canDraw(widget.state, widget.species.sci, widget.progress.now)
-                  ? () => widget.progress.drawSimulated(widget.species.sci, trait: _trait?.name)
+                  ? () => widget.progress.drawSimulated(
+                      widget.species.sci,
+                      traits: [
+                        for (final trait in Trait.values)
+                          if (_traits.contains(trait)) trait.name,
+                      ],
+                    )
                   : null,
               icon: const Icon(Icons.bug_report_outlined),
               label: Text(l10n.simulateDraw),

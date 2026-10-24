@@ -1223,7 +1223,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossTrattoText.
   ///
   /// In it, this message translates to:
-  /// **'La condizione del momento in cui attingi un\'essenza (luna piena, pioggia, nebbia, rugiada…). Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.'**
+  /// **'Una condizione del momento in cui attingi un\'essenza (luna piena, pioggia, nebbia, rugiada…): un\'essenza le porta tutte. Le ricette chiedono tratti diversi: la stessa pianta in giorni diversi dà essenze diverse.'**
   String get glossTrattoText;
 
   /// No description provided for @glossAttingereTerm.
@@ -1865,7 +1865,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossEssenzaText.
   ///
   /// In it, this message translates to:
-  /// **'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e un tratto, dato dalle condizioni del momento.'**
+  /// **'Ciò che attingi da una stazione: ha una purezza, che cresce con la conoscenza della specie, e dei tratti, dati dalle condizioni del momento.'**
   String get glossEssenzaText;
 
   /// No description provided for @glossVisTerm.

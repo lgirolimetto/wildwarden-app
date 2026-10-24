@@ -64,12 +64,12 @@ class ProgressController extends LoadableController<GameState> {
   /// Essenza attinta simulata (strumento di debug finché non c'è il campo): immagazzina Vis, dà PE e, se è la
   /// prima della specie, incassa i suoi PE virtuali. Restituisce `false` se oggi la specie è già stata attinta o non
   /// è ancora incontrata.
-  Future<bool> drawSimulated(String speciesSci, {String? trait}) async {
+  Future<bool> drawSimulated(String speciesSci, {List<String> traits = const []}) async {
     if (!canDraw(state, speciesSci, now)) return false;
     await record(
       EssenceDrawn(
         speciesSci: speciesSci,
-        trait: trait,
+        traits: traits,
         simulated: true,
         vis: visPerDraw,
         xp: XpRules.essenceDrawn,

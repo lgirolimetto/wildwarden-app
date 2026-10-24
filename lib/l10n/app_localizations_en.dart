@@ -690,7 +690,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossTrattoText =>
-      'The condition of the moment when you draw an essence (full moon, rain, fog, dew…). Recipes ask for different traits: the same plant on different days gives different essences.';
+      'A condition of the moment when you draw an essence (full moon, rain, fog, dew…): an essence carries all of them. Recipes ask for different traits: the same plant on different days gives different essences.';
 
   @override
   String get glossAttingereTerm => 'Draw';
@@ -1092,7 +1092,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossEssenzaText =>
-      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and a trait, given by the conditions of the moment.';
+      'What you draw from a station: it has a purity, which grows with your knowledge of the species, and traits, given by the conditions of the moment.';
 
   @override
   String get glossVisTerm => 'Vis';

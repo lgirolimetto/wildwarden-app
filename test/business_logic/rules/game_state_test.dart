@@ -73,7 +73,7 @@ void main() {
     AnswerGiven answer(int xp, DateTime at) =>
         AnswerGiven(factId: '$elleboro|family', correct: true, mode: AnswerMode.learning, xp: xp, occurredAt: at);
     EssenceDrawn draw(DateTime at, {int vis = 10, int xp = 10}) =>
-        EssenceDrawn(speciesSci: elleboro, trait: null, simulated: true, vis: vis, xp: xp, occurredAt: at);
+        EssenceDrawn(speciesSci: elleboro, simulated: true, vis: vis, xp: xp, occurredAt: at);
 
     test('lo studio di una specie mai attinta dà PE virtuali: non contano per la carriera', () {
       final state = GameState.replay([
@@ -123,6 +123,42 @@ void main() {
     });
   });
 
+  group('più tratti per essenza', () {
+    const elleboro = 'Helleborus viridis';
+    EssenceDrawn decode(String payload) =>
+        GameEvent.decode(type: EssenceDrawn.typeId, payload: payload, occurredAt: feb) as EssenceDrawn;
+
+    test('un\'essenza salva e rilegge tutti i suoi tratti', () {
+      final event = EssenceDrawn(
+        speciesSci: elleboro,
+        traits: const ['rain', 'dusk', 'moon'],
+        simulated: true,
+        occurredAt: feb,
+      );
+      expect(decode(event.encodePayload()).traits, ['rain', 'dusk', 'moon']);
+    });
+
+    test('un evento salvato con un tratto solo si rilegge come lista di un elemento', () {
+      expect(decode('{"species":"$elleboro","trait":"frost","simulated":true}').traits, ['frost']);
+    });
+
+    test('un evento salvato senza tratto si rilegge come lista vuota', () {
+      expect(decode('{"species":"$elleboro","trait":null,"simulated":true}').traits, isEmpty);
+    });
+
+    test('lo stato ricorda i tratti di ogni essenza', () {
+      final state = GameState.replay([
+        met(elleboro, feb),
+        EssenceDrawn(speciesSci: elleboro, traits: const ['rain', 'dusk'], simulated: true, occurredAt: feb),
+        EssenceDrawn(speciesSci: elleboro, simulated: true, occurredAt: mar),
+      ]);
+      expect(state.draws[elleboro], [
+        ['rain', 'dusk'],
+        <String>[],
+      ]);
+    });
+  });
+
   group('una raccolta al giorno', () {
     const elleboro = 'Helleborus viridis';
     final morning = DateTime(2027, 2, 14, 9), evening = DateTime(2027, 2, 14, 21), tomorrow = DateTime(2027, 2, 15, 8);
@@ -132,7 +168,7 @@ void main() {
       var state = GameState.replay([met(elleboro, morning)]);
       expect(canDraw(state, elleboro, morning), isTrue);
 
-      state = state.apply(EssenceDrawn(speciesSci: elleboro, trait: null, simulated: true, occurredAt: morning));
+      state = state.apply(EssenceDrawn(speciesSci: elleboro, simulated: true, occurredAt: morning));
       expect(canDraw(state, elleboro, evening), isFalse);
       expect(isExhausted(state, elleboro, evening), isTrue);
       expect(canDraw(state, elleboro, tomorrow), isTrue);
