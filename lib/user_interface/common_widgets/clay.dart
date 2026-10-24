@@ -1046,7 +1046,8 @@ class _ClayTabsState extends State<ClayTabs> {
     super.initState();
     _syncKeys();
     _scroll.addListener(_updateEdges);
-    _measureAfterLayout();
+    // Anche all'apertura la linguetta scelta si porta in vista (es. una vista salvata in fondo alla fila).
+    _measureAfterLayout(reveal: true);
   }
 
   @override
@@ -1055,10 +1056,23 @@ class _ClayTabsState extends State<ClayTabs> {
     super.dispose();
   }
 
+  /// Fa scorrere il binario di circa due terzi della sua larghezza verso [sign] (-1 sinistra, 1 destra).
+  void _scrollBy(int sign) {
+    if (!_scroll.hasClients) return;
+    final p = _scroll.position;
+    _scroll.animateTo(
+      (p.pixels + sign * p.viewportDimension * 0.66).clamp(0.0, p.maxScrollExtent),
+      duration: const Duration(milliseconds: 250),
+      curve: Curves.easeOut,
+    );
+  }
+
   void _updateEdges() {
     if (!_scroll.hasClients || !_scroll.position.hasContentDimensions) return;
     final p = _scroll.position;
-    final left = p.pixels > 0.5, right = p.pixels < p.maxScrollExtent - 0.5;
+    // Il margine interno del binario non conta: portata in vista una linguetta, ne restano pochi pixel da scorrere.
+    const tolerance = ClayTabs._inset + 1;
+    final left = p.pixels > tolerance, right = p.pixels < p.maxScrollExtent - tolerance;
     if (left != _moreLeft || right != _moreRight) {
       setState(() {
         _moreLeft = left;
@@ -1103,18 +1117,24 @@ class _ClayTabsState extends State<ClayTabs> {
   Widget build(BuildContext context) {
     final tokens = context.druid;
     final track = tokens.neu ? _neuTrack(context, tokens) : _materialTrack(context);
-    // A scorrimento: un pallino per lato, acceso se da quella parte c'è altro; nascosti se tutto sta nel binario (lo
-    // spazio resta, così il binario non cambia larghezza).
-    final overflows = _moreLeft || _moreRight;
-    Widget hint(bool lit, Key key) => Visibility.maintain(
-      visible: overflows,
-      child: ScrollHintDot(key: key, lit: lit),
-    );
+    // A scorrimento: una freccina per lato, solo se da quella parte c'è altro; toccata, fa scorrere il binario.
     return Row(
       children: [
-        if (widget.scrollable) ...[hint(_moreLeft, const ValueKey('more-left')), const SizedBox(width: Gaps.s)],
+        if (widget.scrollable)
+          ScrollHintArrow(
+            key: const ValueKey('more-left'),
+            direction: AxisDirection.left,
+            visible: _moreLeft,
+            onTap: () => _scrollBy(-1),
+          ),
         Expanded(child: track),
-        if (widget.scrollable) ...[const SizedBox(width: Gaps.s), hint(_moreRight, const ValueKey('more-right'))],
+        if (widget.scrollable)
+          ScrollHintArrow(
+            key: const ValueKey('more-right'),
+            direction: AxisDirection.right,
+            visible: _moreRight,
+            onTap: () => _scrollBy(1),
+          ),
         if (widget.trailing != null) ...[const SizedBox(width: Gaps.m), widget.trailing!],
       ],
     );
@@ -1188,6 +1208,9 @@ class _ClayTabsState extends State<ClayTabs> {
       height: ClayTabs._height,
       child: NeuInset(
         radius: radius,
+        // A scorrimento l'ombra del bordo si disegna sopra le linguette: una linguetta che passa sotto il bordo (color
+        // pagina) sembrerebbe uscire dal binario.
+        overChild: widget.scrollable,
         child: ClipRRect(
           borderRadius: radius,
           child: widget.scrollable
@@ -1252,44 +1275,38 @@ class _ClayTabsState extends State<ClayTabs> {
   }
 }
 
-/// Pallino accanto a una fila che scorre: acceso se da quella parte c'è ancora altro, spento (un piccolo incavo vuoto)
-/// se no. Nello stile del cerchietto del grado, ma più piccolo.
-class ScrollHintDot extends StatelessWidget {
-  static const size = 12.0;
-  static const _gem = 6.0;
+/// Freccina accanto a una fila che scorre: compare solo se da quella parte c'è altro e, toccata, fa scorrere la fila
+/// in quella direzione. Quando non serve resta invisibile ma tiene il suo spazio, così la fila non cambia larghezza.
+class ScrollHintArrow extends StatelessWidget {
+  static const width = 24.0;
 
-  final bool lit;
+  final AxisDirection direction;
+  final bool visible;
+  final VoidCallback onTap;
 
-  const ScrollHintDot({super.key, required this.lit});
+  const ScrollHintArrow({super.key, required this.direction, required this.visible, required this.onTap});
 
   @override
-  Widget build(BuildContext context) {
-    final colors = context.colors;
-    final gem = AnimatedOpacity(
+  Widget build(BuildContext context) => IgnorePointer(
+    ignoring: !visible,
+    child: AnimatedOpacity(
       duration: const Duration(milliseconds: 180),
-      opacity: lit ? 1 : 0,
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: colors.primary, shape: BoxShape.circle),
-        child: const SizedBox.square(dimension: _gem),
+      opacity: visible ? 1 : 0,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: SizedBox(
+          width: width,
+          height: 48,
+          child: Icon(
+            direction == AxisDirection.left ? Icons.chevron_left_rounded : Icons.chevron_right_rounded,
+            size: 22,
+            color: context.colors.primary,
+          ),
+        ),
       ),
-    );
-    return SizedBox.square(
-      dimension: size,
-      child: context.druid.neu
-          ? NeuInset(
-              radius: BorderRadius.circular(size / 2),
-              depth: 1.5,
-              child: Center(child: gem),
-            )
-          : DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: colors.outlineVariant),
-              ),
-              child: Center(child: gem),
-            ),
-    );
-  }
+    ),
+  );
 }
 
 /// Barra di avanzamento. Nelle livree neumorfiche: un binario sottile scavato in cui la parte piena è una chip

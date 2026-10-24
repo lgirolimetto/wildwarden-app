@@ -182,19 +182,24 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.ancestor(of: find.text('Tutte'), matching: find.byType(NeuInset)), findsOneWidget);
       expect(find.ancestor(of: find.byKey(const ValueKey('plus')), matching: find.byType(NeuInset)), findsNothing);
-      // C'è altro da scorrere: all'inizio è acceso solo il pallino destro.
-      (bool, bool) dots() => (
-        tester.widget<ScrollHintDot>(find.byKey(const ValueKey('more-left'))).lit,
-        tester.widget<ScrollHintDot>(find.byKey(const ValueKey('more-right'))).lit,
+      // C'è altro da scorrere: all'inizio c'è solo la freccina destra; toccata, il binario scorre.
+      (bool, bool) arrows() => (
+        tester.widget<ScrollHintArrow>(find.byKey(const ValueKey('more-left'))).visible,
+        tester.widget<ScrollHintArrow>(find.byKey(const ValueKey('more-right'))).visible,
       );
-      expect(dots(), (false, true));
+      expect(arrows(), (false, true));
+      final before = tester.getRect(find.text('Tutte')).left;
+      await tester.tap(find.byKey(const ValueKey('more-right')));
+      await tester.pumpAndSettle();
+      expect(tester.getRect(find.text('Tutte')).left, lessThan(before), reason: 'il binario è scorso a destra');
+      expect(arrows().$1, isTrue, reason: 'ora c\'è altro anche a sinistra');
 
       await tester.ensureVisible(find.text('Alberi'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Alberi'));
       await tester.pumpAndSettle();
       expect(selected, 4);
-      expect(dots(), (true, false), reason: 'in fondo è acceso solo il pallino sinistro');
+      expect(arrows(), (true, false), reason: 'in fondo resta solo la freccina sinistra');
       final pill = tester.getRect(find.byType(AnimatedPositioned));
       final alberi = tester.getRect(find.text('Alberi'));
       expect(pill.left, lessThan(alberi.left), reason: 'la pillola è sotto "Alberi"');

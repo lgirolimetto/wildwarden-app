@@ -3,6 +3,7 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
+import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -179,6 +180,18 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('view-remove')));
     await tester.pumpAndSettle();
     expect(find.text('Alberi'), findsNothing);
+  });
+
+  testWidgets('all\'apertura la linguetta della vista scelta è in vista, anche se è in fondo', (tester) async {
+    registerTestDependencies(preferences: {'erbario.selectedView': 'builtin:protectedSpecies', 'theme.livery': 'feltro'});
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    final protectedTab = find.byKey(const ValueKey('view-protectedSpecies'));
+    final track = tester.getRect(find.ancestor(of: protectedTab, matching: find.byType(NeuInset)).first);
+    final tab = tester.getRect(protectedTab);
+    expect(tab.left, greaterThanOrEqualTo(track.left));
+    expect(tab.right, lessThanOrEqualTo(track.right));
   });
 
   testWidgets('errore di caricamento: messaggio e pulsante Riprova che ricarica', (tester) async {
