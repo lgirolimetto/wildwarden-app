@@ -353,7 +353,11 @@ class LevelMark extends StatelessWidget {
   final double size;
   final TextStyle? style;
 
-  const LevelMark({super.key, required this.level, this.size = 42, this.style});
+  /// Fondo su cui sta il segno, se diverso dalla pagina (es. l'etichetta scura sulla foto): solco e numero si
+  /// ricavano da lui, come per [EngravedIcon].
+  final Color? surface;
+
+  const LevelMark({super.key, required this.level, this.size = 42, this.style, this.surface});
 
   @override
   Widget build(BuildContext context) {
@@ -367,20 +371,29 @@ class LevelMark extends StatelessWidget {
         child: Text(text, style: style),
       );
     }
+    // Su un fondo scuro il numero è chiaro e luce e ombra si ricavano dal fondo, con il gioco invertito.
+    final dark = surface != null && ThemeData.estimateBrightnessForColor(surface!) == Brightness.dark;
     // I colori dei primi livelli sono chiari: sul segno si scuriscono verso il testo, per leggersi sulla scheda.
+    final ink = dark ? Colors.white : context.colors.onSurface;
     final color = level == null || level == 0
-        ? context.colors.onSurfaceVariant
-        : Color.lerp(tokens.levelColor(level!), context.colors.onSurface, 0.35)!;
+        ? (dark ? ink.withValues(alpha: 0.85) : context.colors.onSurfaceVariant)
+        : Color.lerp(tokens.levelColor(level!), ink, 0.35)!;
     return GroovedCircle(
       size: size,
+      surface: surface,
       child: Text(
         text,
         style: style?.copyWith(
           color: color,
-          shadows: [
-            Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
-            Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
-          ],
+          shadows: dark
+              ? [
+                  Shadow(color: Color.lerp(surface, Colors.white, 0.25)!, offset: const Offset(-0.8, -0.8)),
+                  Shadow(color: Color.lerp(surface, Colors.black, 0.45)!, offset: const Offset(0.9, 0.9)),
+                ]
+              : [
+                  Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+                  Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+                ],
         ),
       ),
     );

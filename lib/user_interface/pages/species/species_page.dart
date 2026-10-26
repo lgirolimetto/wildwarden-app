@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui' show ImageFilter;
 
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -443,10 +444,9 @@ class SpeciesPhotoHeader extends StatelessWidget {
   }
 }
 
-/// Nome e livello su un velo color pagina, abbastanza pieno da tenere il testo leggibile anche su foto chiare o molto
-/// fitte; la sfera del livello resta in plastilina. Niente vetro sfocato: rifare la sfocatura a ogni frame dello
-/// scroll costava troppo sul telefono (issue #15). Nelle livree neumorfiche solo il bordo inciso, come la cornice
-/// della foto: la targhetta si guarda, non si preme.
+/// Nome e livello su vetro scuro: la foto sotto si intravede sfocata, velata con i colori della scheda "eroe" della
+/// livrea (scura in entrambi i temi), così il testo chiaro si legge su qualunque foto. Nelle livree neumorfiche il
+/// bordo è un solco ricavato dal vetro, come per il cerchietto della scheda del rango: si guarda, non si preme.
 class _PhotoLabel extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -457,6 +457,8 @@ class _PhotoLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
+    final onHero = tokens.onHero;
+    final surface = tokens.heroGradient.first;
     // Angoli concentrici a quelli della foto: raggio della foto meno il margine.
     final radius = BorderRadius.circular(SpeciesPhotoHeader.radius.topLeft.x - Gaps.m);
     final content = Padding(
@@ -468,11 +470,16 @@ class _PhotoLabel extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(title, style: context.texts.headlineSmall, maxLines: 2, overflow: TextOverflow.ellipsis),
+                Text(
+                  title,
+                  style: context.texts.headlineSmall?.copyWith(color: onHero),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
                 Text(
                   subtitle,
                   style: TextStyle(
-                    color: level == null ? tokens.hint : context.colors.onSurfaceVariant,
+                    color: onHero.withValues(alpha: level == null ? 0.7 : 0.85),
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -480,21 +487,26 @@ class _PhotoLabel extends StatelessWidget {
             ),
           ),
           const SizedBox(width: Gaps.m),
-          LevelMark(level: level, size: 48, style: context.texts.titleLarge),
+          LevelMark(level: level, size: 48, style: context.texts.titleLarge, surface: surface),
         ],
       ),
     );
-    return DecoratedBox(
+    final veil = DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: radius,
-        // Nel neumorfismo di giorno velo quasi bianco: un velo sabbia sulla foto virerebbe al grigio.
-        color: tokens.neu && Theme.of(context).brightness == Brightness.light
-            ? context.colors.surfaceContainerLowest.withValues(alpha: 0.85)
-            : context.colors.surfaceContainerLow.withValues(alpha: 0.8),
-        // Nelle livree neumorfiche il bordo è il solco inciso.
-        border: tokens.neu ? null : Border.all(color: Colors.white.withValues(alpha: 0.45), width: 1.2),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [for (final c in tokens.heroGradient) c.withValues(alpha: 0.62)],
+        ),
+        // Nelle livree neumorfiche il bordo è il solco.
+        border: tokens.neu ? null : Border.all(color: onHero.withValues(alpha: 0.3), width: 1.2),
       ),
-      child: tokens.neu ? GroovedPanel(radius: radius, child: content) : content,
+      child: tokens.neu ? GroovedPanel(radius: radius, surface: surface, child: content) : content,
+    );
+    return ClipRRect(
+      borderRadius: radius,
+      child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12), child: veil),
     );
   }
 }

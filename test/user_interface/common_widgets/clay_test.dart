@@ -294,6 +294,23 @@ void main() {
   });
 
   group('icone incise nelle livree neumorfiche', () {
+    testWidgets('il livello su un fondo scuro ha il numero chiaro, sulla pagina scuro', (tester) async {
+      await _pump(
+        tester,
+        const Column(
+          children: [
+            LevelMark(key: ValueKey('page'), level: 0),
+            LevelMark(key: ValueKey('glass'), level: 0, surface: Color(0xFF3E5651)),
+          ],
+        ),
+        livery: const FeltroLivery(),
+      );
+      Color numberOf(String key) =>
+          tester.widget<Text>(find.descendant(of: find.byKey(ValueKey(key)), matching: find.byType(Text))).style!.color!;
+      expect(ThemeData.estimateBrightnessForColor(numberOf('page')), Brightness.dark);
+      expect(ThemeData.estimateBrightnessForColor(numberOf('glass')), Brightness.light);
+    });
+
     testWidgets('una chip con l\'emoji di un tratto mostra l\'icona incisa, senza emoji', (tester) async {
       await _pump(
         tester,
