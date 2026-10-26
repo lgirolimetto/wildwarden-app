@@ -353,7 +353,11 @@ class LevelMark extends StatelessWidget {
   final double size;
   final TextStyle? style;
 
-  const LevelMark({super.key, required this.level, this.size = 42, this.style});
+  /// Fondo su cui sta il segno, se diverso dalla pagina (es. l'etichetta scura sulla foto): solco e numero si
+  /// ricavano da lui, come per [EngravedIcon].
+  final Color? surface;
+
+  const LevelMark({super.key, required this.level, this.size = 42, this.style, this.surface});
 
   @override
   Widget build(BuildContext context) {
@@ -367,20 +371,29 @@ class LevelMark extends StatelessWidget {
         child: Text(text, style: style),
       );
     }
+    // Su un fondo scuro il numero è chiaro e luce e ombra si ricavano dal fondo, con il gioco invertito.
+    final dark = surface != null && ThemeData.estimateBrightnessForColor(surface!) == Brightness.dark;
     // I colori dei primi livelli sono chiari: sul segno si scuriscono verso il testo, per leggersi sulla scheda.
+    final ink = dark ? Colors.white : context.colors.onSurface;
     final color = level == null || level == 0
-        ? context.colors.onSurfaceVariant
-        : Color.lerp(tokens.levelColor(level!), context.colors.onSurface, 0.35)!;
+        ? (dark ? ink.withValues(alpha: 0.85) : context.colors.onSurfaceVariant)
+        : Color.lerp(tokens.levelColor(level!), ink, 0.35)!;
     return GroovedCircle(
       size: size,
+      surface: surface,
       child: Text(
         text,
         style: style?.copyWith(
           color: color,
-          shadows: [
-            Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
-            Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
-          ],
+          shadows: dark
+              ? [
+                  Shadow(color: Color.lerp(surface, Colors.white, 0.25)!, offset: const Offset(-0.8, -0.8)),
+                  Shadow(color: Color.lerp(surface, Colors.black, 0.45)!, offset: const Offset(0.9, 0.9)),
+                ]
+              : [
+                  Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
+                  Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+                ],
         ),
       ),
     );
@@ -793,28 +806,32 @@ class _InsetPainter extends CustomPainter {
     canvas.save();
     canvas.clipRRect(rrect);
     if (fill != null) canvas.drawRRect(rrect, Paint()..color = fill!);
-    // Un anello attorno alla forma, spostato e sfocato: la parte che cade dentro la forma è l'ombra interna.
+    // Un anello attorno alla forma, spostato: la parte che cade dentro la forma è l'ombra interna. Scavato: ombra lungo
+    // il bordo in alto a sinistra, luce in basso a destra. Bombato: il contrario.
     final ring = Path()
       ..fillType = PathFillType.evenOdd
       ..addRect((Offset.zero & size).inflate(depth * 6))
       ..addRRect(rrect);
-    final blur = MaskFilter.blur(BlurStyle.normal, depth * 1.2);
-    // Scavato: ombra lungo il bordo in alto a sinistra, luce in basso a destra. Bombato: il contrario.
-    final topLeft = convex ? light : dark;
-    final bottomRight = convex ? dark : light;
-    canvas.drawPath(
-      ring.shift(Offset(depth, depth)),
-      Paint()
-        ..color = topLeft
-        ..maskFilter = blur,
-    );
-    canvas.drawPath(
-      ring.shift(Offset(-depth, -depth)),
-      Paint()
-        ..color = bottomRight
-        ..maskFilter = blur,
-    );
+    _softEdge(canvas, ring, convex ? light : dark, 1);
+    _softEdge(canvas, ring, convex ? dark : light, -1);
     canvas.restore();
+  }
+
+  /// Posizioni (in deviazioni standard) degli anelli che imitano la sfocatura gaussiana: quantili della normale per 8
+  /// anelli. Una sfocatura vera (MaskFilter) costava troppo a ogni frame dello scroll, una per ogni incavo della
+  /// pagina; gli anelli piatti sovrapposti danno la stessa sfumatura a una frazione del costo (issue #15).
+  static const _quantiles = [-1.534, -0.887, -0.489, -0.157, 0.157, 0.489, 0.887, 1.534];
+
+  /// Ombra (o luce) sfumata lungo il bordo verso cui [ring] è spostato: [direction] 1 = in alto a sinistra, -1 = in
+  /// basso a destra. Come la sfocatura di prima: spostamento [depth], deviazione standard `depth * 1.2`.
+  void _softEdge(Canvas canvas, Path ring, Color color, double direction) {
+    // Ogni anello ha una parte del colore: sovrapposti tutti, vicino al bordo, danno il colore pieno.
+    final layer = Paint()..color = color.withValues(alpha: 1 - pow(1 - color.a, 1 / _quantiles.length).toDouble());
+    for (final z in _quantiles) {
+      final offset = depth * (1 + 1.2 * z);
+      if (offset <= 0) continue;
+      canvas.drawPath(ring.shift(Offset(offset, offset) * direction), layer);
+    }
   }
 
   @override

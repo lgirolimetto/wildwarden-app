@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class DruidBackground extends StatelessWidget {
                         painter: _TexturePainter(
                           grain: Color.fromRGBO(0, 0, 0, tokens.grainOpacity),
                           leaf: tokens.leafPattern,
+                          pixelRatio: MediaQuery.devicePixelRatioOf(context),
                         ),
                       ),
                     ),
@@ -56,24 +58,51 @@ class DruidBackground extends StatelessWidget {
 class _TexturePainter extends CustomPainter {
   final Color grain;
   final Color leaf;
+  final double pixelRatio;
 
-  const _TexturePainter({required this.grain, required this.leaf});
+  const _TexturePainter({required this.grain, required this.leaf, required this.pixelRatio});
+
+  /// Lato della piastrella di grana, in pixel logici.
+  static const _tile = 160.0;
+
+  /// Piastrelle già disegnate, per colore e densità dello schermo: si generano una volta sola.
+  static final _tiles = <(Color, double), ui.Image>{};
+
+  /// La grana è una piastrella disegnata una volta e ripetuta: migliaia di puntini da ridisegnare a ogni frame dello
+  /// scroll costavano metà del tempo di disegno sul telefono (con Impeller nemmeno il RepaintBoundary li conserva).
+  static ui.Image _grainTile(Color grain, double pixelRatio) => _tiles.putIfAbsent((grain, pixelRatio), () {
+    final recorder = ui.PictureRecorder();
+    final canvas = Canvas(recorder)..scale(pixelRatio);
+    final random = Random(7);
+    final dark = Paint()..color = grain;
+    final light = Paint()..color = Color.fromRGBO(255, 255, 255, grain.a);
+    final count = (_tile * _tile / 90).round();
+    for (var i = 0; i < count; i++) {
+      canvas.drawRect(
+        Rect.fromLTWH(random.nextDouble() * _tile, random.nextDouble() * _tile, 1.2, 1.2),
+        i.isEven ? dark : light,
+      );
+    }
+    final side = (_tile * pixelRatio).round();
+    return recorder.endRecording().toImageSync(side, side);
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
     // Durante transizioni e misure intermedie le dimensioni possono essere vuote o infinite: niente da disegnare.
     if (size.isEmpty || !size.isFinite) return;
     if (grain.a > 0) {
-      final random = Random(7);
-      final dark = Paint()..color = grain;
-      final light = Paint()..color = Color.fromRGBO(255, 255, 255, grain.a);
-      final count = (size.width * size.height / 90).round();
-      for (var i = 0; i < count; i++) {
-        canvas.drawRect(
-          Rect.fromLTWH(random.nextDouble() * size.width, random.nextDouble() * size.height, 1.2, 1.2),
-          i.isEven ? dark : light,
-        );
-      }
+      final scale = 1 / pixelRatio;
+      canvas.drawRect(
+        Offset.zero & size,
+        Paint()
+          ..shader = ImageShader(
+            _grainTile(grain, pixelRatio),
+            TileMode.repeated,
+            TileMode.repeated,
+            Matrix4.diagonal3Values(scale, scale, 1).storage,
+          ),
+      );
     }
     if (leaf.a > 0) {
       _leaf(canvas, Offset(size.width * 1.02, size.height * 0.08), size.width * 0.9, 2.5);
@@ -106,5 +135,5 @@ class _TexturePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_TexturePainter old) => old.grain != grain || old.leaf != leaf;
+  bool shouldRepaint(_TexturePainter old) => old.grain != grain || old.leaf != leaf || old.pixelRatio != pixelRatio;
 }
