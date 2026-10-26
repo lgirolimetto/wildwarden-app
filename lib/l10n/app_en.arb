@@ -327,6 +327,11 @@
   "statusStudying": "Studying",
   "traitDawn": "🌄 Dawn",
   "traitNewMoon": "🌑 New moon",
+  "traitWaxingMoon": "🌓 Waxing moon",
+  "traitWaningMoon": "🌗 Waning moon",
+  "legendTraitsDaylight": "Daylight",
+  "legendTraitsMoon": "Moon",
+  "legendTraitsWeather": "Weather",
   "traitWhenFrost": "When it is below freezing: hoarfrost and ice.",
   "traitWhenRain": "While it rains. During a thunderstorm Drawing is suspended.",
   "traitWhenFog": "When there is fog.",
@@ -335,5 +340,7 @@
   "traitWhenDew": "From sunrise to about two hours later, after a cool clear night: the grass is still wet.",
   "traitWhenDusk": "From about an hour before sunset until sunset, never after dark.",
   "traitWhenDawn": "From first light to about an hour after sunrise.",
-  "traitWhenNewMoon": "All day long on the new moon: no need to go out at night."
+  "traitWhenNewMoon": "All day long on the new moon: no need to go out at night.",
+  "traitWhenWaxingMoon": "Every day the moon is growing, from new to full: no need to go out at night.",
+  "traitWhenWaningMoon": "Every day the moon is shrinking, from full to new: no need to go out at night."
 }

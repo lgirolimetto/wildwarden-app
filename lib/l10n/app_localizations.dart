@@ -2060,6 +2060,36 @@ abstract class AppLocalizations {
   /// **'🌑 Luna nuova'**
   String get traitNewMoon;
 
+  /// No description provided for @traitWaxingMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'🌓 Luna crescente'**
+  String get traitWaxingMoon;
+
+  /// No description provided for @traitWaningMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'🌗 Luna calante'**
+  String get traitWaningMoon;
+
+  /// No description provided for @legendTraitsDaylight.
+  ///
+  /// In it, this message translates to:
+  /// **'Luce del giorno'**
+  String get legendTraitsDaylight;
+
+  /// No description provided for @legendTraitsMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Luna'**
+  String get legendTraitsMoon;
+
+  /// No description provided for @legendTraitsWeather.
+  ///
+  /// In it, this message translates to:
+  /// **'Meteo'**
+  String get legendTraitsWeather;
+
   /// No description provided for @traitWhenFrost.
   ///
   /// In it, this message translates to:
@@ -2113,6 +2143,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Tutto il giorno della luna nuova: non serve uscire di notte.'**
   String get traitWhenNewMoon;
+
+  /// No description provided for @traitWhenWaxingMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutti i giorni in cui la luna cresce, tra la nuova e la piena: non serve uscire di notte.'**
+  String get traitWhenWaxingMoon;
+
+  /// No description provided for @traitWhenWaningMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.'**
+  String get traitWhenWaningMoon;
 }
 
 class _AppLocalizationsDelegate

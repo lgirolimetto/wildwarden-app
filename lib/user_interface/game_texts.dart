@@ -15,15 +15,16 @@ import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/pages/erbario/hint_text.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 /// Testi composti dalle regole di gioco: le regole producono dati, qui diventano frasi nella lingua dell'utente.
 class GameTexts {
   final AppLocalizations l10n;
   final String language;
+  final Brightness brightness;
 
-  const GameTexts(this.l10n, this.language);
+  const GameTexts(this.l10n, this.language, {this.brightness = Brightness.dark});
 
   String name(Species s) => s.name.resolve(language);
 
@@ -106,12 +107,21 @@ class GameTexts {
     Trait.rain => l10n.traitRain,
     Trait.fog => l10n.traitFog,
     Trait.sun => l10n.traitSun,
-    Trait.moon => l10n.traitMoon,
+    Trait.moon => _moonIcon(l10n.traitMoon),
     Trait.dew => l10n.traitDew,
     Trait.dusk => l10n.traitDusk,
     Trait.dawn => l10n.traitDawn,
-    Trait.newMoon => l10n.traitNewMoon,
+    Trait.newMoon => _moonIcon(l10n.traitNewMoon),
+    Trait.waxingMoon => _moonIcon(l10n.traitWaxingMoon),
+    Trait.waningMoon => _moonIcon(l10n.traitWaningMoon),
   };
+
+  /// Nel tema chiaro le icone delle lune si scambiano (piena con nuova, crescente con calante): sul fondo chiaro
+  /// rendono meglio al contrario (capitolo 02). Nel tema scuro restano come negli ARB.
+  String _moonIcon(String text) =>
+      brightness == Brightness.dark ? text : text.replaceAllMapped(RegExp('🌕|🌑|🌓|🌗'), (m) => _swappedMoons[m[0]]!);
+
+  static const _swappedMoons = {'🌕': '🌑', '🌑': '🌕', '🌓': '🌗', '🌗': '🌓'};
 
   /// Quando vale un tratto: sempre di giorno o tutto il giorno, mai premi a uscite rischiose (capitolo 02).
   String traitWhen(Trait t) => switch (t) {
@@ -124,6 +134,14 @@ class GameTexts {
     Trait.dusk => l10n.traitWhenDusk,
     Trait.dawn => l10n.traitWhenDawn,
     Trait.newMoon => l10n.traitWhenNewMoon,
+    Trait.waxingMoon => l10n.traitWhenWaxingMoon,
+    Trait.waningMoon => l10n.traitWhenWaningMoon,
+  };
+
+  String traitGroup(TraitGroup g) => switch (g) {
+    TraitGroup.daylight => l10n.legendTraitsDaylight,
+    TraitGroup.moon => l10n.legendTraitsMoon,
+    TraitGroup.weather => l10n.legendTraitsWeather,
   };
 
   String prompt(Question q) {
@@ -271,5 +289,9 @@ class GameTexts {
 }
 
 extension GameTextsContext on BuildContext {
-  GameTexts get game => GameTexts(AppLocalizations.of(this), Localizations.localeOf(this).languageCode);
+  GameTexts get game => GameTexts(
+    AppLocalizations.of(this),
+    Localizations.localeOf(this).languageCode,
+    brightness: Theme.of(this).brightness,
+  );
 }
