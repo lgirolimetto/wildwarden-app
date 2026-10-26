@@ -199,17 +199,24 @@ class _Legend extends StatelessWidget {
           const SizedBox(height: Gaps.m),
           Text(l10n.legendTraits, style: context.texts.titleSmall),
           const SizedBox(height: Gaps.s),
-          for (final trait in Trait.values)
+          // Per tipo: luce del giorno, luna, meteo (capitolo 02).
+          for (final group in TraitGroup.values) ...[
             Padding(
-              padding: const EdgeInsets.only(bottom: Gaps.s),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Pill(game.trait(trait)),
-                  Text(game.traitWhen(trait), style: context.texts.bodySmall),
-                ],
-              ),
+              padding: const EdgeInsets.only(top: Gaps.xs, bottom: Gaps.s),
+              child: Text(game.traitGroup(group), style: context.texts.labelLarge),
             ),
+            for (final trait in group.traits)
+              Padding(
+                padding: const EdgeInsets.only(bottom: Gaps.s),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Pill(game.trait(trait)),
+                    Text(game.traitWhen(trait), style: context.texts.bodySmall),
+                  ],
+                ),
+              ),
+          ],
         ],
       ),
     );

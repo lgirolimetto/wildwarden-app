@@ -16,26 +16,32 @@ class EngravedIcon extends StatelessWidget {
   /// pagina chiara e lì sembrerebbero luci (capitolo 07).
   final Color? surface;
 
-  const EngravedIcon(this.icon, {super.key, this.size = 20, this.color, this.surface});
+  /// Specchia il segno da destra a sinistra (vedi [traitIconMirrored]).
+  final bool mirrored;
+
+  const EngravedIcon(this.icon, {super.key, this.size = 20, this.color, this.surface, this.mirrored = false});
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
     final dark = surface != null && ThemeData.estimateBrightnessForColor(surface!) == Brightness.dark;
-    return Icon(
+    // Specchiando si specchiano anche le ombre: le si gira prima, così la luce resta in alto a sinistra.
+    final x = mirrored ? -1.0 : 1.0;
+    final glyph = Icon(
       icon,
       size: size,
       color: (color ?? (dark ? Colors.white : context.colors.onSurface)).withValues(alpha: dark ? 0.9 : 0.7),
       shadows: dark
           ? [
-              Shadow(color: Color.lerp(surface, Colors.white, 0.25)!, offset: const Offset(-0.8, -0.8)),
-              Shadow(color: Color.lerp(surface, Colors.black, 0.45)!, offset: const Offset(0.9, 0.9)),
+              Shadow(color: Color.lerp(surface, Colors.white, 0.25)!, offset: Offset(-0.8 * x, -0.8)),
+              Shadow(color: Color.lerp(surface, Colors.black, 0.45)!, offset: Offset(0.9 * x, 0.9)),
             ]
           : [
-              Shadow(color: tokens.clayShadow, offset: const Offset(-0.8, -0.8)),
-              Shadow(color: tokens.neuLight, offset: const Offset(0.9, 0.9)),
+              Shadow(color: tokens.clayShadow, offset: Offset(-0.8 * x, -0.8)),
+              Shadow(color: tokens.neuLight, offset: Offset(0.9 * x, 0.9)),
             ],
     );
+    return mirrored ? Transform.flip(flipX: true, child: glyph) : glyph;
   }
 }
 
@@ -49,7 +55,12 @@ IconData? traitIconOf(String emoji) => switch (emoji) {
   '☀️' || '☀' => Icons.wb_sunny_outlined,
   '🌕' => Icons.circle,
   '🌑' => Icons.circle_outlined,
+  '🌓' || '🌗' => Icons.contrast,
   '🌅' => Icons.wb_twilight_rounded,
   '🌄' => Icons.brightness_6_outlined,
   _ => null,
 };
+
+/// Le icone delle mezze lune sono la stessa, specchiata: [Icons.contrast] ha la metà sinistra piena come 🌗 (luna
+/// calante), 🌓 (crescente) la vuole a destra.
+bool traitIconMirrored(String emoji) => emoji == '🌓';

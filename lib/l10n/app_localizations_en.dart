@@ -1197,6 +1197,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitNewMoon => '🌑 New moon';
 
   @override
+  String get traitWaxingMoon => '🌓 Waxing moon';
+
+  @override
+  String get traitWaningMoon => '🌗 Waning moon';
+
+  @override
+  String get legendTraitsDaylight => 'Daylight';
+
+  @override
+  String get legendTraitsMoon => 'Moon';
+
+  @override
+  String get legendTraitsWeather => 'Weather';
+
+  @override
   String get traitWhenFrost => 'When it is below freezing: hoarfrost and ice.';
 
   @override
@@ -1228,4 +1243,12 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get traitWhenNewMoon =>
       'All day long on the new moon: no need to go out at night.';
+
+  @override
+  String get traitWhenWaxingMoon =>
+      'Every day the moon is growing, from new to full: no need to go out at night.';
+
+  @override
+  String get traitWhenWaningMoon =>
+      'Every day the moon is shrinking, from full to new: no need to go out at night.';
 }

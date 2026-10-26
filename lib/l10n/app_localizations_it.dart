@@ -1198,6 +1198,21 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitNewMoon => '🌑 Luna nuova';
 
   @override
+  String get traitWaxingMoon => '🌓 Luna crescente';
+
+  @override
+  String get traitWaningMoon => '🌗 Luna calante';
+
+  @override
+  String get legendTraitsDaylight => 'Luce del giorno';
+
+  @override
+  String get legendTraitsMoon => 'Luna';
+
+  @override
+  String get legendTraitsWeather => 'Meteo';
+
+  @override
   String get traitWhenFrost => 'Quando fa sotto zero: brina e ghiaccio.';
 
   @override
@@ -1229,4 +1244,12 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get traitWhenNewMoon =>
       'Tutto il giorno della luna nuova: non serve uscire di notte.';
+
+  @override
+  String get traitWhenWaxingMoon =>
+      'Tutti i giorni in cui la luna cresce, tra la nuova e la piena: non serve uscire di notte.';
+
+  @override
+  String get traitWhenWaningMoon =>
+      'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.';
 }

@@ -133,8 +133,9 @@ void main() {
       await scrollAndTap(tester, find.byKey(const ValueKey('simulate-draw')));
 
       final state = Get.find<ProgressController>().state;
+      // I tratti si salvano nell'ordine in cui si mostrano: luce, luna, meteo.
       expect(state.draws['Helleborus viridis'], [
-        ['rain', 'moon', 'dusk'],
+        ['dusk', 'moon', 'rain'],
       ]);
       // Tre tratti distinti, ma il contatore si ferma al traguardo.
       expect(find.text('Essenze Attinte: 1/3 · Tratti diversi: 2/2'), findsOneWidget);
@@ -315,6 +316,12 @@ void main() {
       final dusk = find.text('Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.');
       await scrollTo(tester, dusk);
       expect(dusk, findsOneWidget);
+      // Divisi per tipo: luce del giorno, luna (con crescente e calante), meteo.
+      for (final group in ['Luce del giorno', 'Luna', 'Meteo', 'Luna crescente', 'Luna calante']) {
+        final title = find.text(group);
+        await scrollTo(tester, title);
+        expect(title, findsOneWidget);
+      }
 
       // Glossario nella seconda linguetta.
       expect(find.byKey(const ValueKey('gloss-vis')), findsNothing);

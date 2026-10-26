@@ -849,7 +849,7 @@ class ClayChip extends StatelessWidget {
       return ClayChip(
         key: key,
         label: label.substring(emoji!.length).trim(),
-        avatar: EngravedIcon(traitIcon, size: 18),
+        avatar: EngravedIcon(traitIcon, size: 18, mirrored: traitIconMirrored(emoji)),
         selected: selected,
         onTap: onTap,
       );

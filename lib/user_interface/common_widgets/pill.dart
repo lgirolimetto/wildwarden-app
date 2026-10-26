@@ -53,7 +53,7 @@ class Pill extends StatelessWidget {
           children: [
             // Nelle livree neumorfiche niente sfera colorata: l'icona del tratto, di un solo colore, incisa.
             if (context.druid.neu)
-              EngravedIcon(traitIconOf(emoji) ?? Icons.eco_outlined, color: color)
+              EngravedIcon(traitIconOf(emoji) ?? Icons.eco_outlined, color: color, mirrored: traitIconMirrored(emoji))
             else
               ClayCircle(color: _orbColor(emoji), emoji: emoji, size: 28),
             const SizedBox(width: Gaps.s),
@@ -84,5 +84,6 @@ Color _orbColor(String emoji) => switch (emoji) {
   '🌕' => const Color(0xFFE6DDF7),
   '🌅' || '🌄' => const Color(0xFFF7C4A8),
   '🌑' => const Color(0xFFD5D3E8),
+  '🌓' || '🌗' => const Color(0xFFDDD8F0),
   _ => const Color(0xFFE8DCC6),
 };
