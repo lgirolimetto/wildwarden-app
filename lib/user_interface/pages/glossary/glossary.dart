@@ -174,7 +174,7 @@ class _Legend extends StatelessWidget {
           Text(l10n.legendBadges, style: context.texts.titleSmall),
           const SizedBox(height: Gaps.s),
           _LegendRow(
-            symbol: InsetBadge(icon: Icons.shield_outlined, label: l10n.badgeProtected, color: context.colors.primary),
+            symbol: const ProtectedShield(),
             text: l10n.legendProtected,
           ),
           _LegendRow(

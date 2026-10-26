@@ -469,6 +469,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get studyButton => 'Study';
+
+  @override
   String get studyComplete => 'Questions complete';
 
   @override

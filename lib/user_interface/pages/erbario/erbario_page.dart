@@ -5,7 +5,6 @@ import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/erbario_views.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
-import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
@@ -145,8 +144,8 @@ class _ErbarioContent extends StatelessWidget {
             tiles: [
               for (final s in missing)
                 (
-                  // Foto + nome (+ bollino "protetta", + "Studia").
-                  1 / tileAspect(s) + 0.3 + (s.isProtected ? 0.2 : 0) + (study(s) == null ? 0 : 0.2),
+                  // Foto + nome (+ "Studia"); lo scudo delle protette sta sulla foto.
+                  1 / tileAspect(s) + 0.3 + (study(s) == null ? 0 : 0.2),
                   GestureDetector(
                     onTap: () => open(s.sci),
                     child: UnknownSpeciesTile(

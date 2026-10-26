@@ -848,6 +848,12 @@ abstract class AppLocalizations {
   /// **'Studia il Livello {level}'**
   String studyLevelButton(int level);
 
+  /// No description provided for @studyButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia'**
+  String get studyButton;
+
   /// No description provided for @studyComplete.
   ///
   /// In it, this message translates to:

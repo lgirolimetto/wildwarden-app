@@ -440,6 +440,7 @@
       }
     }
   },
+  "studyButton": "Studia",
   "studyComplete": "Domande completate",
   "levelsTitle": "Livelli di studio",
   "lockedSection": "Si rivela al Livello {level} ({name})",

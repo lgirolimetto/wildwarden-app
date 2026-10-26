@@ -25,6 +25,7 @@ import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -120,27 +121,57 @@ class _ToFind extends StatelessWidget {
 }
 
 /// Specie protetta: il messaggio di rispetto, con la legge che la protegge. Sempre visibile, come l'avviso di
-/// tossicità: è un safari fotografico, si guarda e non si tocca.
+/// tossicità: è un safari fotografico, si guarda e non si tocca. Sta in una scheda terracotta come quella del rango in
+/// Home (sfumatura e ombra morbida), con lo scudo inciso come le icone dei tratti, chiaro perché il fondo è scuro
+/// (sulla foto invece lo scudo è il tondo bianco di [ProtectedShield]).
 class _ProtectedNote extends StatelessWidget {
   final Species species;
 
   const _ProtectedNote({required this.species});
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(bottom: Gaps.l),
-    child: Row(
+  Widget build(BuildContext context) {
+    final tokens = context.druid;
+    final surface = context.colors.primary;
+    final content = Padding(
+      padding: const EdgeInsets.all(Gaps.l),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClayCircle(color: context.colors.primaryContainer, icon: Icons.shield_outlined, size: 32, surface: surface),
+          const SizedBox(width: Gaps.m),
+          Expanded(
+            child: Text(
+              context.l10n.protectedNote(species.protection.map(context.game.protectionSource).join(', ')),
+              style: TextStyle(color: context.colors.onPrimary),
+            ),
+          ),
+        ],
+      ),
+    );
+    return Padding(
       key: const ValueKey('protected-note'),
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClayCircle(color: context.colors.primaryContainer, icon: Icons.shield_outlined, size: 32),
-        const SizedBox(width: Gaps.s),
-        Expanded(
-          child: Text(context.l10n.protectedNote(species.protection.map(context.game.protectionSource).join(', '))),
+      padding: const EdgeInsets.only(bottom: Gaps.l),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(tokens.cardRadius),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [surface, Color.lerp(surface, context.colors.onPrimary, 0.12)!],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: tokens.clay ? tokens.clayShadow : surface.withValues(alpha: 0.35),
+              blurRadius: 22,
+              offset: const Offset(0, 10),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+        child: content,
+      ),
+    );
+  }
 }
 
 /// Avviso di tossicità, sempre visibile in cima alla scheda: la sicurezza non si sblocca studiando.
@@ -206,6 +237,7 @@ class _SpeciesSheet extends StatelessWidget {
               ? levelName(context.l10n, level)
               : '${context.l10n.notEncounteredYet} · ${levelName(context.l10n, level)}',
           level: level,
+          protected: species.isProtected,
         ),
         _Padded(
           children: [
@@ -340,6 +372,9 @@ class SpeciesPhotoHeader extends StatelessWidget {
   /// Livello di studio, per la sfera colorata accanto al nome (`null` se la specie non è ancora incontrata).
   final int? level;
 
+  /// Specie protetta: lo scudo a sinistra del nome.
+  final bool protected;
+
   const SpeciesPhotoHeader({
     super.key,
     required this.image,
@@ -347,6 +382,7 @@ class SpeciesPhotoHeader extends StatelessWidget {
     required this.subtitle,
     required this.level,
     this.credit,
+    this.protected = false,
   });
 
   @override
@@ -416,7 +452,7 @@ class SpeciesPhotoHeader extends StatelessWidget {
                     left: Gaps.m,
                     right: Gaps.m,
                     bottom: Gaps.m,
-                    child: _PhotoLabel(title: title, subtitle: subtitle, level: level),
+                    child: _PhotoLabel(title: title, subtitle: subtitle, level: level, protected: protected),
                   ),
                   if (credit != null)
                     Positioned(
@@ -451,8 +487,9 @@ class _PhotoLabel extends StatelessWidget {
   final String title;
   final String subtitle;
   final int? level;
+  final bool protected;
 
-  const _PhotoLabel({required this.title, required this.subtitle, required this.level});
+  const _PhotoLabel({required this.title, required this.subtitle, required this.level, required this.protected});
 
   @override
   Widget build(BuildContext context) {
@@ -465,6 +502,7 @@ class _PhotoLabel extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.m, Gaps.m, Gaps.m),
       child: Row(
         children: [
+          if (protected) ...[const ProtectedShield(key: ValueKey('protected-shield')), const SizedBox(width: Gaps.m)],
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -572,50 +610,55 @@ class _StudyLadder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final next = nextStudyLevel(species, catalog, state);
+    final reached = state.levelOf(species.sci);
     // Il riquadro non si preme (si preme solo il pulsante dentro): nelle livree neumorfiche è piatto, con il bordo
-    // inciso come una pillola; altrove una scheda.
+    // inciso come una pillola; altrove una scheda. I livelli sono una lista, con i nomi a grandezza piena (sotto i
+    // cerchietti, in un quarto di riga, sul telefono erano illeggibili); il prossimo da studiare è in evidenza.
     return _flatPanel(
       context,
       Padding(
         padding: const EdgeInsets.all(Gaps.m),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text(context.l10n.levelsTitle, style: context.texts.titleSmall),
+            const SizedBox(height: Gaps.s),
             for (var level = 1; level <= 4; level++)
-              Expanded(
-                child: Column(
+              Padding(
+                key: ValueKey('level-row-$level'),
+                padding: const EdgeInsets.only(bottom: Gaps.s),
+                child: Row(
                   children: [
                     ClayCircle(
                       size: 30,
                       // Il colore dice il livello raggiunto: resta anche nelle livree neumorfiche.
                       keepColor: true,
-                      color: state.levelOf(species.sci) >= level
-                          ? context.druid.levelColor(level)
-                          : context.colors.surfaceContainerHigh,
-                      icon: state.levelOf(species.sci) >= level ? Icons.check_rounded : Icons.lock_rounded,
+                      color: reached >= level ? context.druid.levelColor(level) : context.colors.surfaceContainerHigh,
+                      icon: reached >= level ? Icons.check_rounded : Icons.lock_rounded,
                     ),
-                    const SizedBox(height: Gaps.xs),
-                    SizedBox(
-                      // Altezza fissa per due righe: le sfere restano allineate anche se un nome va a capo.
-                      height: 32,
-                      child: FittedBox(
-                        // Al massimo due righe e mai parole spezzate: se non ci stanno, il testo si rimpicciolisce.
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          levelName(context.l10n, level).replaceFirst(' ', '\n'),
-                          textAlign: TextAlign.center,
-                          style: context.texts.labelSmall,
+                    const SizedBox(width: Gaps.m),
+                    Expanded(
+                      child: Text(
+                        '$level · ${levelName(context.l10n, level)}',
+                        style: context.texts.bodyLarge?.copyWith(
+                          color: level == next
+                              ? context.colors.primary
+                              : reached >= level
+                              ? null
+                              : context.druid.hint,
+                          fontWeight: level == next ? FontWeight.w700 : null,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            const SizedBox(width: Gaps.s),
+            const SizedBox(height: Gaps.xs),
             if (next != null)
               FilledButton(
                 key: const ValueKey('study-next-level'),
                 onPressed: () => startLevelStudy(catalog, species.sci, next),
-                child: Text(context.l10n.studyLevelButton(next)),
+                child: Text(context.l10n.studyButton),
               )
             else
               Text(context.l10n.studyComplete, style: context.texts.labelMedium),
