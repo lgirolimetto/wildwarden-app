@@ -252,6 +252,14 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('met-Helleborus viridis')));
       await tester.pumpAndSettle();
 
+      // I livelli in lista, con i nomi interi; il pulsante in fondo dice solo "Studia".
+      final study = find.widgetWithText(FilledButton, 'Studia');
+      await scrollTo(tester, study);
+      for (final name in ['1 · Riconoscerla', '2 · Famiglia e vita', '3 · Il suo ambiente', '4 · Maestria']) {
+        expect(find.text(name), findsOneWidget);
+      }
+      expect(study, findsOneWidget);
+
       final level2 = find.text('Si rivela al Livello 2 (Famiglia e vita)');
       await scrollTo(tester, level2);
       expect(find.text('Helleborus viridis'), findsOneWidget, reason: 'nome scientifico: rivelato al livello 1');

@@ -103,6 +103,8 @@ void main() {
 
     expect(find.byKey(const ValueKey('protected-note')), findsOneWidget);
     expect(find.textContaining('L.R. Emilia-Romagna 2/1977, Direttiva Habitat, allegato V'), findsOneWidget);
+    // Lo scudo sta sulla foto, accanto al nome.
+    expect(find.byKey(const ValueKey('protected-shield')), findsOneWidget);
   });
 
   testWidgets('specie non protetta: nessun messaggio', (tester) async {
@@ -112,6 +114,7 @@ void main() {
     await scrollAndTap(tester, find.byKey(const ValueKey('unknown-Fagus sylvatica')));
 
     expect(find.byKey(const ValueKey('protected-note')), findsNothing);
+    expect(find.byKey(const ValueKey('protected-shield')), findsNothing);
   });
 
   testWidgets('bollini: timbro con la data sulle incontrate, scudo sulle protette', (tester) async {

@@ -125,6 +125,7 @@
   "yourSpecies": "Your species",
   "yourSpeciesEmpty": "No species in study yet: start with one in season.",
   "studyLevelButton": "Study Level {level}",
+  "studyButton": "Study",
   "studyComplete": "Questions complete",
   "levelsTitle": "Study levels",
   "lockedSection": "Revealed at Level {level} ({name})",

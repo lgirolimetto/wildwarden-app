@@ -1,37 +1,42 @@
 import 'dart:math';
 
-import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 
-/// Bollino: un piccolo incavo rotondo con un'icona (es. lo scudo delle specie protette), come il cerchietto del grado.
-/// Il significato è nel [label]: suggerimento a pressione lunga e testo per i lettori di schermo; la legenda lo spiega.
-class InsetBadge extends StatelessWidget {
-  static const size = 26.0;
+/// Altezza dei bollini di una riga (il timbro dell'incontro).
+const badgeHeight = 26.0;
 
-  final IconData icon;
-  final String label;
+/// Scudo delle specie protette: un tondo bianco con il contorno dello scudo nel colore principale, in stile normale
+/// (non neumorfico) perché sta sopra le foto e sul vetro dell'etichetta, dove un incavo non si leggerebbe; il bianco
+/// e l'ombra lo staccano da qualunque foto. Il significato è nel suggerimento a pressione lunga e nel testo per i
+/// lettori di schermo; la legenda lo spiega.
+class ProtectedShield extends StatelessWidget {
+  final double size;
 
-  /// Colore dell'icona; `null` = quello del testo.
-  final Color? color;
-
-  const InsetBadge({super.key, required this.icon, required this.label, this.color});
+  const ProtectedShield({super.key, this.size = 28});
 
   @override
-  Widget build(BuildContext context) => Tooltip(
-    message: label,
-    child: Semantics(
-      label: label,
-      child: SizedBox.square(
-        dimension: size,
-        child: NeuInset(
-          radius: BorderRadius.circular(size / 2),
-          depth: 2,
-          child: Center(child: Icon(icon, size: 15, color: color ?? context.colors.onSurface)),
+  Widget build(BuildContext context) {
+    final label = context.l10n.badgeProtected;
+    return Tooltip(
+      message: label,
+      child: Semantics(
+        label: label,
+        child: Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(color: context.colors.shadow.withValues(alpha: 0.35), blurRadius: 4, offset: const Offset(0, 1)),
+            ],
+          ),
+          child: Icon(Icons.shield_outlined, size: size * 0.6, color: context.colors.primary),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// Timbro dell'incontro: la spunta e la data, scritte come "Studia" sulla tessera, senza incavo (scavato vorrebbe dire
@@ -52,7 +57,7 @@ class StampBadge extends StatelessWidget {
         label: '$label $text',
         excludeSemantics: true,
         child: SizedBox(
-          height: InsetBadge.size,
+          height: badgeHeight,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [

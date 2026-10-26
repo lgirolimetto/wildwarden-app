@@ -26,9 +26,9 @@ class UnknownSpeciesTile extends StatelessWidget {
     aspect: tileAspect(species),
     color: context.druid.neu ? context.colors.surfaceBright : null,
     image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
+    protected: species.isProtected,
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
-      if (species.isProtected) ...[const SizedBox(height: Gaps.s), _ProtectedBadge()],
       if (level > 0) ...[const SizedBox(height: Gaps.xs), _LevelDots(level: level)],
       if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
       if (onSimulateEncounter != null) ...[
@@ -65,22 +65,17 @@ class EncounteredSpeciesTile extends StatelessWidget {
     // Nelle livree neumorfiche le tessere hanno colori propri: incontrate le più chiare (`surfaceContainerLowest`),
     // da trovare un tono sotto (`surfaceBright`).
     color: context.druid.neu ? context.colors.surfaceContainerLowest : null,
+    protected: species.isProtected,
     children: [
       Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
-      const SizedBox(height: Gaps.s),
-      Wrap(
-        spacing: Gaps.chip,
-        runSpacing: Gaps.chipRun,
-        children: [
-          if (encounteredAt != null)
-            StampBadge(
-              key: ValueKey('stamp-${species.sci}'),
-              text: DateFormat.MMMd(context.contentLanguage).format(encounteredAt!),
-              label: context.l10n.badgeEncountered,
-            ),
-          if (species.isProtected) _ProtectedBadge(),
-        ],
-      ),
+      if (encounteredAt != null) ...[
+        const SizedBox(height: Gaps.s),
+        StampBadge(
+          key: ValueKey('stamp-${species.sci}'),
+          text: DateFormat.MMMd(context.contentLanguage).format(encounteredAt!),
+          label: context.l10n.badgeEncountered,
+        ),
+      ],
       const SizedBox(height: Gaps.s),
       _LevelDots(level: level),
       const SizedBox(height: Gaps.xs),
@@ -88,13 +83,6 @@ class EncounteredSpeciesTile extends StatelessWidget {
       if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
     ],
   );
-}
-
-/// Bollino delle specie protette.
-class _ProtectedBadge extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) =>
-      InsetBadge(icon: Icons.shield_outlined, label: context.l10n.badgeProtected, color: context.colors.primary);
 }
 
 /// "Studia" sulla tessera: apre il prossimo livello da studiare.
@@ -135,7 +123,16 @@ class _TileFrame extends StatelessWidget {
   /// Colore della tessera (`null`: quello delle schede).
   final Color? color;
 
-  const _TileFrame({required this.image, required this.aspect, required this.children, this.color});
+  /// Specie protetta: lo scudo sulla foto, in alto a sinistra.
+  final bool protected;
+
+  const _TileFrame({
+    required this.image,
+    required this.aspect,
+    required this.children,
+    this.color,
+    this.protected = false,
+  });
 
   @override
   Widget build(BuildContext context) => ClayCard(
@@ -145,9 +142,14 @@ class _TileFrame extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
       children: [
-        ClipRRect(
-          borderRadius: _photoRadius(context),
-          child: AspectRatio(aspectRatio: aspect, child: image),
+        Stack(
+          children: [
+            ClipRRect(
+              borderRadius: _photoRadius(context),
+              child: AspectRatio(aspectRatio: aspect, child: image),
+            ),
+            if (protected) const Positioned(left: Gaps.s, top: Gaps.s, child: ProtectedShield()),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(Gaps.xs, Gaps.s, Gaps.xs, Gaps.xs),
