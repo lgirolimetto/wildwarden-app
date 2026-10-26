@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui' show ImageFilter;
 
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -326,8 +325,8 @@ class _Padded extends StatelessWidget {
 }
 
 /// Testata della scheda specie: la foto, attaccata in alto, con i margini laterali del contenuto e gli angoli
-/// arrotondati, ha solo un'ombra leggera e il pulsante indietro che le galleggia sopra; il nome sta su una lastra di
-/// vetro smerigliato in basso, dentro la foto.
+/// arrotondati, ha solo un'ombra leggera e il pulsante indietro che le galleggia sopra; il nome sta su un velo
+/// semitrasparente in basso, dentro la foto.
 class SpeciesPhotoHeader extends StatelessWidget {
   static const _photoHeight = 380.0;
   static const radius = BorderRadius.all(Radius.circular(28));
@@ -411,12 +410,12 @@ class SpeciesPhotoHeader extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Nome su vetro smerigliato dentro la foto: la foto resta un unico oggetto, come una copertina.
+                  // Nome su un velo dentro la foto: la foto resta un unico oggetto, come una copertina.
                   Positioned(
                     left: Gaps.m,
                     right: Gaps.m,
                     bottom: Gaps.m,
-                    child: _GlassLabel(title: title, subtitle: subtitle, level: level),
+                    child: _PhotoLabel(title: title, subtitle: subtitle, level: level),
                   ),
                   if (credit != null)
                     Positioned(
@@ -444,74 +443,59 @@ class SpeciesPhotoHeader extends StatelessWidget {
   }
 }
 
-/// Nome e livello su vetro smerigliato: la foto sotto si intravede sfocata. La velatura color pagina è abbastanza
-/// piena da tenere il testo leggibile anche su foto chiare o molto fitte; la sfera del livello resta in plastilina.
-class _GlassLabel extends StatelessWidget {
+/// Nome e livello su un velo color pagina, abbastanza pieno da tenere il testo leggibile anche su foto chiare o molto
+/// fitte; la sfera del livello resta in plastilina. Niente vetro sfocato: rifare la sfocatura a ogni frame dello
+/// scroll costava troppo sul telefono (issue #15). Nelle livree neumorfiche solo il bordo inciso, come la cornice
+/// della foto: la targhetta si guarda, non si preme.
+class _PhotoLabel extends StatelessWidget {
   final String title;
   final String subtitle;
   final int? level;
 
-  const _GlassLabel({required this.title, required this.subtitle, required this.level});
+  const _PhotoLabel({required this.title, required this.subtitle, required this.level});
 
   @override
   Widget build(BuildContext context) {
     final tokens = context.druid;
     // Angoli concentrici a quelli della foto: raggio della foto meno il margine.
     final radius = BorderRadius.circular(SpeciesPhotoHeader.radius.topLeft.x - Gaps.m);
-    final glass = ClipRRect(
-      borderRadius: radius,
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.m, Gaps.m, Gaps.m),
-          decoration: BoxDecoration(
-            borderRadius: radius,
-            // Nel neumorfismo di giorno velo quasi bianco e più coprente: la foto sfocata, mescolata a un velo sabbia,
-            // virerebbe al grigio.
-            color: tokens.neu && Theme.of(context).brightness == Brightness.light
-                ? context.colors.surfaceContainerLowest.withValues(alpha: 0.72)
-                : context.colors.surfaceContainerLow.withValues(alpha: 0.6),
-            // Nelle livree neumorfiche il bordo chiaro lo fa la luce dell'incavo.
-            border: tokens.neu ? null : Border.all(color: Colors.white.withValues(alpha: 0.45), width: 1.2),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(title, style: context.texts.headlineSmall, maxLines: 2, overflow: TextOverflow.ellipsis),
-                    Text(
-                      subtitle,
-                      style: TextStyle(
-                        color: level == null ? tokens.hint : context.colors.onSurfaceVariant,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+    final content = Padding(
+      padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.m, Gaps.m, Gaps.m),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(title, style: context.texts.headlineSmall, maxLines: 2, overflow: TextOverflow.ellipsis),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: level == null ? tokens.hint : context.colors.onSurfaceVariant,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              const SizedBox(width: Gaps.m),
-              LevelMark(level: level, size: 48, style: context.texts.titleLarge),
-            ],
+              ],
+            ),
           ),
-        ),
+          const SizedBox(width: Gaps.m),
+          LevelMark(level: level, size: 48, style: context.texts.titleLarge),
+        ],
       ),
     );
-    // Nelle livree neumorfiche la targhetta è scavata nella foto: ombra interna in alto a sinistra, luce in basso a
-    // destra, disegnate sopra il vetro.
-    return tokens.neu
-        ? NeuInset(
-            radius: radius,
-            depth: 3,
-            strength: 1.4,
-            // Di giorno luce ridotta: piena, sul vetro chiaro, sembrerebbe un riflesso lucido.
-            lightStrength: Theme.of(context).brightness == Brightness.light ? 0.5 : null,
-            overChild: true,
-            child: glass,
-          )
-        : glass;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: radius,
+        // Nel neumorfismo di giorno velo quasi bianco: un velo sabbia sulla foto virerebbe al grigio.
+        color: tokens.neu && Theme.of(context).brightness == Brightness.light
+            ? context.colors.surfaceContainerLowest.withValues(alpha: 0.85)
+            : context.colors.surfaceContainerLow.withValues(alpha: 0.8),
+        // Nelle livree neumorfiche il bordo è il solco inciso.
+        border: tokens.neu ? null : Border.all(color: Colors.white.withValues(alpha: 0.45), width: 1.2),
+      ),
+      child: tokens.neu ? GroovedPanel(radius: radius, child: content) : content,
+    );
   }
 }
 

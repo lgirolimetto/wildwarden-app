@@ -221,7 +221,8 @@ class _Tray extends StatelessWidget {
 
 /// Disposizione a mattoncini: colonne di uguale larghezza, ogni tessera alta quanto le serve. Ogni tessera va nella
 /// colonna più bassa (secondo l'altezza stimata), così le colonne finiscono quasi pari. Le specie di una zona sono
-/// poche decine: le tessere si costruiscono tutte, senza caricamento pigro.
+/// poche decine: le tessere si costruiscono tutte, senza caricamento pigro. Ognuna però ha il suo RepaintBoundary:
+/// senza, a ogni frame dello scroll si ridipingevano tutte, anche quelle fuori schermo (issue #15).
 class _Masonry extends StatelessWidget {
   final List<(double, Widget)> tiles;
 
@@ -242,7 +243,7 @@ class _Masonry extends StatelessWidget {
           Padding(
             // Tra una tessera e l'altra più spazio in verticale che in orizzontale, per il rilievo.
             padding: const EdgeInsets.only(bottom: Gaps.l),
-            child: tile,
+            child: RepaintBoundary(child: tile),
           ),
         );
         heights[target] += height;
