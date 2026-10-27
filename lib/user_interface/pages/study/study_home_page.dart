@@ -22,6 +22,7 @@ import 'package:druid_app/user_interface/pages/study/study_session_page.dart';
 import 'package:druid_app/user_interface/pages/study/widgets/mission_banner.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -424,7 +425,12 @@ class _SpeciesCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(Gaps.s, Gaps.s, Gaps.s, 0),
-              child: Text(context.game.name(species), maxLines: 1, overflow: TextOverflow.ellipsis),
+              child: Text(
+                context.game.name(species),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: speciesNameStyle(context, DefaultTextStyle.of(context).style, green: false),
+              ),
             ),
             if (subtitle != null)
               Padding(

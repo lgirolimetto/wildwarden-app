@@ -16,6 +16,7 @@ import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +34,10 @@ class StudySessionPage extends StatelessWidget {
           appBar: clayAppBar(
             context,
             title: _title(context, study, catalog),
+            // Il nome della specie in maiuscoletto; il titolo dei ripassi resta normale.
+            titleStyle: study.mode == AnswerMode.review
+                ? null
+                : speciesNameStyle(context, context.texts.headlineSmall, green: false),
             leadingIcon: Icons.close_rounded,
             leadingTooltip: context.l10n.close,
             onLeading: () {

@@ -29,6 +29,7 @@ import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/plant_pages_page.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/page_dots.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -510,7 +511,7 @@ class _PhotoLabel extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.texts.headlineSmall?.copyWith(color: onHero),
+                  style: speciesNameStyle(context, context.texts.headlineSmall?.copyWith(color: onHero), green: false),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),

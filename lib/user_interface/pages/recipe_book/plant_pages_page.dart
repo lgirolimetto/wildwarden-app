@@ -13,6 +13,7 @@ import 'package:druid_app/user_interface/pages/recipe_book/widgets/plate_face.da
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -88,7 +89,9 @@ class _PlantPageView extends StatelessWidget {
         const SizedBox(height: Gaps.m),
         Row(
           children: [
-            Expanded(child: Text(context.game.name(plant), style: context.texts.headlineSmall)),
+            Expanded(
+              child: Text(context.game.name(plant), style: speciesNameStyle(context, context.texts.headlineSmall)),
+            ),
             Pill(context.l10n.recipeBookPageCount(collected.knownCount, page.recipes.length)),
           ],
         ),

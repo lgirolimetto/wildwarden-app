@@ -11,6 +11,7 @@ import 'package:druid_app/user_interface/pages/recipe_book/plant_pages_page.dart
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/page_dots.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -162,7 +163,7 @@ class _PageRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(context.game.name(plant), style: context.texts.titleMedium),
+                Text(context.game.name(plant), style: speciesNameStyle(context, context.texts.titleMedium)),
                 const SizedBox(height: Gaps.xs),
                 PageDots(collected: collected),
               ],
