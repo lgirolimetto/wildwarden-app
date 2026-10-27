@@ -8,7 +8,9 @@ import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,7 @@ class PlantRecipePage extends StatelessWidget {
       return _RecipeCard(
         key: ValueKey('recipe-$recipeId'),
         grade: recipe.grade,
+        vessel: RecipeVessel(recipe: recipe, size: 80),
         title: recipe.name(context.contentLanguage),
         ingredients: [
           for (final i in recipe.ingredients) (speciesSci: i.speciesSci, quantity: i.quantity, traits: i.traits),
@@ -56,6 +59,11 @@ class MythicRecipePage extends StatelessWidget {
       return _RecipeCard(
         key: ValueKey('mythic-recipe-$mythicId'),
         grade: Grade.mythic,
+        vessel: PotionVessel(
+          shape: VesselShape.starred,
+          liquids: [context.druid.gradeColor(Grade.mythic.index)],
+          size: 80,
+        ),
         title: mythic.name(lang),
         subtitle:
             '${context.l10n.mythicNumber(mythic.number.toString())} · '
@@ -97,6 +105,7 @@ typedef _IngredientView = ({String? speciesSci, int quantity, List<Trait> traits
 
 class _RecipeCard extends StatelessWidget {
   final Grade grade;
+  final Widget vessel;
   final String title;
   final String? subtitle;
   final String? story;
@@ -110,6 +119,7 @@ class _RecipeCard extends StatelessWidget {
   const _RecipeCard({
     super.key,
     required this.grade,
+    required this.vessel,
     required this.title,
     this.subtitle,
     this.story,
@@ -127,7 +137,14 @@ class _RecipeCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GradeDot(grade: grade, label: context.game.grade(grade)),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              GradeDot(grade: grade, label: context.game.grade(grade)),
+              const Spacer(),
+              vessel,
+            ],
+          ),
           const SizedBox(height: Gaps.s),
           Text(title, style: context.texts.titleLarge),
           if (subtitle != null) Text(subtitle!, style: hint),

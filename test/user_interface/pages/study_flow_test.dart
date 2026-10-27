@@ -6,6 +6,7 @@ import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -292,6 +293,11 @@ void main() {
       expect(find.byKey(ValueKey('plate-${malva.recipes.first.id}')), findsOneWidget);
       expect(find.byKey(ValueKey('empty-slot-${malva.recipes[1].id}')), findsOneWidget);
       expect(find.text(malva.recipes[1].name('it')), findsNothing, reason: 'lo slot vuoto non svela il nome');
+      // Il recipiente della base in tutte e due; il liquido (colore dei tratti) solo nella Tavola che hai.
+      final vessels = tester.widgetList<PotionVessel>(find.byType(PotionVessel)).toList();
+      expect(vessels.map((v) => v.shape), contains(VesselShape.of(malva.recipes.first.base)));
+      expect(vessels.where((v) => v.liquids.isEmpty), isNotEmpty);
+      expect(vessels.where((v) => v.liquids.length == malva.recipes.first.traits.length), isNotEmpty);
 
       await scrollAndTap(tester, find.byKey(ValueKey('plate-${malva.recipes.first.id}')));
       expect(find.text(malva.recipes.first.name('it')), findsOneWidget);

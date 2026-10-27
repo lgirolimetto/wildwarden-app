@@ -6,6 +6,7 @@ import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/recipe_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
@@ -76,6 +77,11 @@ class _MythicRow extends StatelessWidget {
               ),
             ],
           ),
+        ),
+        PotionVessel(
+          shape: VesselShape.starred,
+          liquids: known ? [context.druid.gradeColor(Grade.mythic.index)] : const [],
+          size: 44,
         ),
       ],
     ),
