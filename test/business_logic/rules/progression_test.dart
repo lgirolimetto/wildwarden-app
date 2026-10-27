@@ -101,15 +101,6 @@ void main() {
   });
 
   group('desiderata', () {
-    test('al massimo 3', () {
-      var state = GameState.empty;
-      for (final sci in ['A', 'B', 'C']) {
-        expect(canAddDesiderata(state), isTrue);
-        state = state.apply(DesiderataChanged(speciesSci: sci, marked: true, occurredAt: feb));
-      }
-      expect(canAddDesiderata(state), isFalse);
-    });
-
     test('primo avvio: solo specie sicure, prima quelle in stagione, poi le più comuni fuori stagione', () {
       // A febbraio sono in stagione elleboro e piè di gallo, entrambi tossici: restano fuori. Malva e faggio non sono
       // in stagione, ma sono le specie sicure più comuni.

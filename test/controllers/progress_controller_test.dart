@@ -68,12 +68,11 @@ void main() {
     ]);
   });
 
-  test('non si possono avere più di 3 desiderata', () async {
-    for (final sci in ['Eranthis hyemalis', 'Helleborus viridis', 'Malva sylvestris']) {
+  test('le desiderata non hanno limite', () async {
+    for (final sci in ['Eranthis hyemalis', 'Helleborus viridis', 'Malva sylvestris', 'Fagus sylvatica']) {
       expect(await controller.toggleDesiderata(sci), isTrue);
     }
-    expect(await controller.toggleDesiderata('Fagus sylvatica'), isFalse);
-    expect(controller.state.desiderata, hasLength(3));
+    expect(controller.state.desiderata, hasLength(4));
   });
 
   test('curiosità del giorno: una sola per giorno', () async {

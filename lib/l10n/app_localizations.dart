@@ -62,8 +62,7 @@ import 'app_localizations_it.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,19 +82,15 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('it'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('it')];
 
   /// No description provided for @appTitle.
   ///
@@ -728,16 +722,10 @@ abstract class AppLocalizations {
   /// **'Desiderata'**
   String get desiderataTitle;
 
-  /// No description provided for @desiderataCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{count} su {max}'**
-  String desiderataCount(int count, int max);
-
   /// No description provided for @desiderataEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.'**
+  /// **'Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.'**
   String get desiderataEmpty;
 
   /// No description provided for @desiderataSuggestions.
@@ -781,12 +769,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Togli dalle Desiderata'**
   String get desiderataRemove;
-
-  /// No description provided for @desiderataFull.
-  ///
-  /// In it, this message translates to:
-  /// **'Hai già 3 Desiderata: completane o togline una.'**
-  String get desiderataFull;
 
   /// No description provided for @desiderataWhere.
   ///
@@ -1037,7 +1019,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionMarkDesiderataBody.
   ///
   /// In it, this message translates to:
-  /// **'Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.'**
+  /// **'Scegli le specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.'**
   String get missionMarkDesiderataBody;
 
   /// No description provided for @missionFirstEncounterTitle.
@@ -2937,8 +2919,7 @@ abstract class AppLocalizations {
   String get erbarioSpecies;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -2947,8 +2928,7 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'it'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

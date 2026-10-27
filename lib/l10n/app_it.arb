@@ -376,18 +376,7 @@
   "reviewsNone": "Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.",
   "reviewsStart": "Ripassa",
   "desiderataTitle": "Desiderata",
-  "desiderataCount": "{count} su {max}",
-  "@desiderataCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      },
-      "max": {
-        "type": "int"
-      }
-    }
-  },
-  "desiderataEmpty": "Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
+  "desiderataEmpty": "Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
   "desiderataSuggestions": "In stagione adesso",
   "seasonalFirstHint": "Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.",
   "seasonalHint": "Puoi studiarle subito o segnarle come Desiderata da cercare.",
@@ -395,7 +384,6 @@
   "yourSpeciesMet": "Incontrata",
   "desiderataAdd": "Aggiungi alle Desiderata",
   "desiderataRemove": "Togli dalle Desiderata",
-  "desiderataFull": "Hai già 3 Desiderata: completane o togline una.",
   "desiderataWhere": "Dove: {band}",
   "@desiderataWhere": {
     "placeholders": {
@@ -552,7 +540,7 @@
   "missionVisitErbarioTitle": "Apri l'Erbario",
   "missionVisitErbarioBody": "L'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.",
   "missionMarkDesiderataTitle": "Scegli le tue Desiderata",
-  "missionMarkDesiderataBody": "Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
+  "missionMarkDesiderataBody": "Scegli le specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
   "missionFirstEncounterTitle": "Incontra una specie",
   "missionFirstEncounterBody": "Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell'Erbario. Fotografa, non raccogliere.",
   "missionFirstLevelTitle": "Studia la tua prima specie",

@@ -100,14 +100,10 @@ class _ToFind extends StatelessWidget {
           const SizedBox(height: Gaps.m),
           FilledButton.icon(
             key: const ValueKey('toggle-desiderata'),
-            onPressed: desired || canAddDesiderata(state) ? () => progress.toggleDesiderata(species.sci) : null,
+            onPressed: () => progress.toggleDesiderata(species.sci),
             icon: Icon(desired ? Icons.star : Icons.star_outline),
             label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
           ),
-          if (!desired && !canAddDesiderata(state)) ...[
-            const SizedBox(height: Gaps.xs),
-            Text(context.l10n.desiderataFull, style: context.texts.bodySmall),
-          ],
           if (Get.find<AppConfig>().showDebugTools) ...[
             const SizedBox(height: Gaps.s),
             OutlinedButton.icon(

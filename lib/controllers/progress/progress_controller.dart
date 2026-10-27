@@ -69,10 +69,9 @@ class ProgressController extends LoadableController<GameState> {
     return record(DesiderataFulfilled(speciesSci: speciesSci, xp: XpRules.desiderataFulfilled, occurredAt: now));
   }
 
-  /// Aggiunge o toglie una specie dalle desiderata. Restituisce `false` se si è già al massimo.
+  /// Aggiunge o toglie una specie dalle desiderata (senza limite: decisione del 2026-10-27).
   Future<bool> toggleDesiderata(String speciesSci) async {
     final marked = state.desiderata.contains(speciesSci);
-    if (!marked && !canAddDesiderata(state)) return false;
     final result = await record(DesiderataChanged(speciesSci: speciesSci, marked: !marked, occurredAt: now));
     return result.isValid;
   }

@@ -8,7 +8,6 @@ import 'package:druid_app/business_logic/rules/study/facts.dart';
 
 const masteryDraws = 3;
 const masteryDistinctTraits = 2;
-const maxDesiderata = 3;
 
 class MasteryProgress {
   final int consolidatedFacts;
@@ -65,8 +64,6 @@ List<Fact> dueFacts(Catalog catalog, GameState state, DateTime now) => [
     ) when !kind.retired)
       Fact(species, kind),
 ];
-
-bool canAddDesiderata(GameState state) => state.desiderata.length < maxDesiderata;
 
 /// Specie che stai studiando: incontrate, o con almeno una risposta o un livello di studio. Si studia anche ciò che
 /// non si è ancora incontrato.

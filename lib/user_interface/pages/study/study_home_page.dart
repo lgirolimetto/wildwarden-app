@@ -338,7 +338,7 @@ class _ReviewsCard extends StatelessWidget {
   }
 }
 
-/// Le desiderata segnate (al massimo [maxDesiderata]). Si scelgono dal carosello "In stagione adesso" o
+/// Le desiderata segnate, senza limite. Si scelgono dal carosello "In stagione adesso" o
 /// dall'erbario.
 class _DesiderataSection extends StatelessWidget {
   final Catalog catalog;
@@ -358,7 +358,7 @@ class _DesiderataSection extends StatelessWidget {
           title: context.l10n.desiderataTitle,
           icon: Icons.star_rounded,
           color: const Color(0xFFF6D98B),
-          trailing: Text(context.l10n.desiderataCount(marked.length, maxDesiderata)),
+          trailing: Text('${marked.length}'),
         ),
         if (marked.isEmpty) Text(context.l10n.desiderataEmpty, style: TextStyle(color: context.druid.hint)),
         for (final s in marked) ...[
@@ -410,9 +410,7 @@ class _SeasonalSection extends StatelessWidget {
                 studyLabel: context.l10n.seasonalStudy,
                 onStudy: () => startLevelStudy(catalog, species.sci, nextStudyLevel(species, catalog, state) ?? 1),
                 marked: state.desiderata.contains(species.sci),
-                onToggleDesiderata: state.desiderata.contains(species.sci) || canAddDesiderata(state)
-                    ? () => progress.toggleDesiderata(species.sci)
-                    : null,
+                onToggleDesiderata: () => progress.toggleDesiderata(species.sci),
               ),
           ],
         ),
@@ -641,9 +639,7 @@ class _YourSpecies extends StatelessWidget {
                   // La stella solo per quelle da incontrare: le desiderata servono a trovarle.
                   showStar: !state.hasEncountered(s.sci),
                   marked: state.desiderata.contains(s.sci),
-                  onToggleDesiderata: state.desiderata.contains(s.sci) || canAddDesiderata(state)
-                      ? () => progress.toggleDesiderata(s.sci)
-                      : null,
+                  onToggleDesiderata: () => progress.toggleDesiderata(s.sci),
                 ),
             ],
           ),
