@@ -1,4 +1,5 @@
 import 'package:druid_app/business_logic/models/localized_text.dart';
+import 'package:druid_app/business_logic/models/mythic.dart';
 import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 
@@ -20,12 +21,16 @@ class CuratedFunFact {
 
 /// Contenuti di gioco di una zona: specie, ricette, lore, curiosità, avvisi di sicurezza.
 class Catalog {
-  static const supportedFormatVersion = 2;
+  /// 3: rarità della pianta, correzioni a mano e Mitiche (tappa C).
+  static const supportedFormatVersion = 3;
 
   final String regionId;
   final LocalizedText regionName;
   final List<Species> species;
   final List<Recipe> recipes;
+
+  /// Mitiche scritte a mano, in ordine di numero.
+  final List<Mythic> mythics;
   final Map<String, LocalizedText> lore;
   final Map<String, List<CuratedFunFact>> funFacts;
 
@@ -39,6 +44,7 @@ class Catalog {
     required this.regionName,
     required this.species,
     required this.recipes,
+    this.mythics = const [],
     required this.lore,
     required this.funFacts,
     required this.safety,
@@ -59,6 +65,7 @@ class Catalog {
       regionName: LocalizedText.fromJson(region['name'] as Map<String, dynamic>),
       species: (json['species'] as List).map((s) => Species.fromJson(s as Map<String, dynamic>)).toList(),
       recipes: (json['recipes'] as List).map((r) => Recipe.fromJson(r as Map<String, dynamic>)).toList(),
+      mythics: (json['mythics'] as List).map((m) => Mythic.fromJson(m as Map<String, dynamic>)).toList(),
       lore: texts('lore'),
       funFacts: (json['funFacts'] as Map<String, dynamic>).map(
         (sci, facts) =>

@@ -1,5 +1,5 @@
 {
- "formatVersion": 2,
+ "formatVersion": 3,
  "region": {
   "id": "bologna",
   "name": {
@@ -92,7 +92,8 @@
     "dispersal": [
      "ants"
     ]
-   }
+   },
+   "grade": "common"
   },
   {
    "sci": "Malva sylvestris",
@@ -179,7 +180,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "grade": "common"
   },
   {
    "sci": "Eranthis hyemalis",
@@ -260,7 +262,8 @@
     "dispersal": [
      "nearby"
     ]
-   }
+   },
+   "grade": "uncommon"
   },
   {
    "sci": "Fagus sylvatica",
@@ -342,7 +345,15 @@
     "dispersal": [
      "hoardedByAnimals"
     ]
-   }
+   },
+   "grade": "mythic",
+   "favouredTraits": [
+    "fog",
+    "moon"
+   ],
+   "vocation": [
+    "regrowth"
+   ]
   }
  ],
  "recipes": [
@@ -466,6 +477,46 @@
    ],
    "effect": {
     "it": "Altro effetto di gioco di prova."
+   }
+  }
+ ],
+ "mythics": [
+  {
+   "number": 1,
+   "id": "lanterna-santa-lucia",
+   "nameParts": [
+    {
+     "it": "La Lanterna"
+    },
+    {
+     "it": "di Santa"
+    },
+    {
+     "it": "Lucia"
+    }
+   ],
+   "story": {
+    "it": "Il giorno più corto che ci sia."
+   },
+   "ingredients": [
+    {
+     "qty": 3,
+     "species": "Helleborus viridis",
+     "trait": "dusk"
+    },
+    {
+     "qty": 3,
+     "species": "Eranthis hyemalis",
+     "trait": "frost"
+    }
+   ],
+   "effect": "regrowth",
+   "effectText": {
+    "it": "Le stazioni tornano pronte prima (effetto di gioco)."
+   },
+   "window": {
+    "from": "12-06",
+    "to": "12-20"
    }
   }
  ],

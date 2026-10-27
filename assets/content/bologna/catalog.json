@@ -1,5 +1,5 @@
 {
- "formatVersion": 2,
+ "formatVersion": 3,
  "region": {
   "id": "bologna",
   "name": {
@@ -93,7 +93,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Anemone hortensis",
@@ -185,7 +186,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Orchis purpurea",
@@ -278,7 +280,8 @@
    },
    "protection": [
     "regional-emilia-romagna"
-   ]
+   ],
+   "grade": "common"
   },
   {
    "sci": "Euphorbia helioscopia",
@@ -371,7 +374,8 @@
      "launched"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Prunus spinosa",
@@ -462,7 +466,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Paliurus spina-christi",
@@ -552,7 +557,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Alliaria petiolata",
@@ -635,7 +641,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Euonymus europaeus",
@@ -722,7 +729,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Clematis vitalba",
@@ -816,7 +824,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Ruscus aculeatus",
@@ -904,7 +913,8 @@
    },
    "protection": [
     "habitats-annex-v"
-   ]
+   ],
+   "grade": "common"
   },
   {
    "sci": "Cotinus coggygria",
@@ -981,7 +991,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Laurus nobilis",
@@ -1066,7 +1077,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Cornus sanguinea",
@@ -1140,7 +1152,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Viburnum lantana",
@@ -1219,7 +1232,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Chelidonium majus",
@@ -1302,7 +1316,8 @@
      "ants"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Celtis australis",
@@ -1378,7 +1393,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Fraxinus ornus",
@@ -1449,7 +1465,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Corylus avellana",
@@ -1531,7 +1548,8 @@
      "hoardedByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Melissa officinalis",
@@ -1618,7 +1636,8 @@
      "stuckToAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Acer campestre",
@@ -1714,7 +1733,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Juglans regia",
@@ -1802,7 +1822,8 @@
      "hoardedByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Salvia pratensis",
@@ -1895,7 +1916,8 @@
      "stuckToAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Borago officinalis",
@@ -1984,7 +2006,8 @@
      "ants"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Cornus mas",
@@ -2070,7 +2093,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Melittis melissophyllum",
@@ -2152,7 +2176,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "common"
   },
   {
    "sci": "Helleborus viridis",
@@ -2242,7 +2267,8 @@
      "ants"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Euphorbia cyparissias",
@@ -2334,7 +2360,8 @@
      "launched"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Malva sylvestris",
@@ -2428,7 +2455,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Prunus cerasifera",
@@ -2508,7 +2536,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Anacamptis pyramidalis",
@@ -2600,7 +2629,8 @@
    },
    "protection": [
     "regional-emilia-romagna"
-   ]
+   ],
+   "grade": "uncommon"
   },
   {
    "sci": "Ostrya carpinifolia",
@@ -2685,7 +2715,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Glechoma hederacea",
@@ -2771,7 +2802,8 @@
      "ants"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Linaria vulgaris",
@@ -2862,7 +2894,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Populus alba",
@@ -2956,7 +2989,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Anacamptis morio",
@@ -3048,7 +3082,8 @@
    },
    "protection": [
     "regional-emilia-romagna"
-   ]
+   ],
+   "grade": "uncommon"
   },
   {
    "sci": "Senecio vulgaris",
@@ -3143,7 +3178,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Lunaria annua",
@@ -3222,7 +3258,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Eranthis hyemalis",
@@ -3305,7 +3342,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Convolvulus arvensis",
@@ -3399,7 +3437,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Ligustrum vulgare",
@@ -3480,7 +3519,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Helleborus foetidus",
@@ -3571,7 +3611,8 @@
      "ants"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "uncommon"
   },
   {
    "sci": "Vinca major",
@@ -3659,7 +3700,8 @@
    },
    "protection": [
     "regional-emilia-romagna"
-   ]
+   ],
+   "grade": "rare"
   },
   {
    "sci": "Tragopogon porrifolius",
@@ -3735,7 +3777,8 @@
      "wind"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Hedera helix",
@@ -3820,7 +3863,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Cyclamen hederifolium",
@@ -3909,7 +3953,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Hippocrepis emerus",
@@ -3999,7 +4044,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Fagus sylvatica",
@@ -4083,7 +4129,8 @@
      "hoardedByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "mythic"
   },
   {
    "sci": "Althaea cannabina",
@@ -4172,7 +4219,8 @@
      "nearby"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Sambucus ebulus",
@@ -4251,7 +4299,8 @@
      "eatenByAnimals"
     ]
    },
-   "protection": []
+   "protection": [],
+   "grade": "rare"
   },
   {
    "sci": "Equisetum telmateia",
@@ -4347,7 +4396,8 @@
     },
     "dispersal": []
    },
-   "protection": []
+   "protection": [],
+   "grade": "mythic"
   }
  ],
  "recipes": [
@@ -4773,6 +4823,134 @@
    "effect": {
     "it": "La prossima Raccolta da un albero immagazzina il doppio della Vis (effetto di gioco)."
    }
+  }
+ ],
+ "mythics": [
+  {
+   "number": 1,
+   "id": "lanterna-santa-lucia",
+   "nameParts": [
+    {
+     "it": "La Lanterna"
+    },
+    {
+     "it": "di Santa"
+    },
+    {
+     "it": "Lucia"
+    }
+   ],
+   "story": {
+    "it": "Il 13 dicembre, \"il giorno più corto che ci sia\", sotto il portico dei Servi c'è la fiera di Santa Lucia."
+   },
+   "ingredients": [
+    {
+     "qty": 3,
+     "species": "Viburnum tinus",
+     "trait": "dusk"
+    },
+    {
+     "qty": 3,
+     "species": "Laurus nobilis",
+     "trait": "frost"
+    },
+    {
+     "qty": 3,
+     "species": "Ruscus aculeatus",
+     "trait": "newMoon"
+    }
+   ],
+   "effect": "regrowth",
+   "effectText": {
+    "it": "Le tue stazioni tornano pronte anche nei giorni più corti, per una settimana (effetto di gioco)."
+   },
+   "window": {
+    "from": "12-06",
+    "to": "12-20"
+   }
+  },
+  {
+   "number": 2,
+   "id": "acqua-san-giovanni",
+   "nameParts": [
+    {
+     "it": "L'Acqua"
+    },
+    {
+     "it": "di San"
+    },
+    {
+     "it": "Giovanni"
+    }
+   ],
+   "story": {
+    "it": "Nella notte tra il 23 e il 24 giugno le erbe si lasciano fuori a prendere la rugiada, e in Emilia si colgono le noci per il nocino."
+   },
+   "ingredients": [
+    {
+     "qty": 3,
+     "species": "Juglans regia",
+     "trait": "dusk"
+    },
+    {
+     "qty": 3,
+     "species": "Malva sylvestris",
+     "trait": "dew"
+    },
+    {
+     "qty": 3,
+     "species": "Melissa officinalis",
+     "trait": "dawn"
+    }
+   ],
+   "effect": "clarity",
+   "effectText": {
+    "it": "Le prossime 3 Essenze hanno purezza piena (effetto di gioco)."
+   },
+   "window": {
+    "from": "06-20",
+    "to": "06-26"
+   }
+  },
+  {
+   "number": 3,
+   "id": "respiro-calanchi",
+   "nameParts": [
+    {
+     "it": "Il Respiro"
+    },
+    {
+     "it": "dei"
+    },
+    {
+     "it": "Calanchi"
+    }
+   ],
+   "story": {
+    "it": "I calanchi dell'Abbadessa e di Monte Sole: argilla nuda, sole e vento."
+   },
+   "ingredients": [
+    {
+     "qty": 3,
+     "species": "Hippocrepis emerus",
+     "trait": "sun"
+    },
+    {
+     "qty": 3,
+     "species": "Euphorbia cyparissias",
+     "trait": "moon"
+    },
+    {
+     "qty": 3,
+     "species": "Anacamptis morio",
+     "trait": "moon"
+    }
+   ],
+   "effect": "omen",
+   "effectText": {
+    "it": "Per una settimana sai in anticipo quali Tratti avrà la prossima Essenza di ogni stazione (effetto di gioco)."
+   },
+   "window": null
   }
  ],
  "lore": {

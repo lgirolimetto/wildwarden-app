@@ -144,10 +144,11 @@ class _IngredientRow extends StatelessWidget {
           ),
           // Chi legge la ricetta scopre quando vale il tratto che chiede.
           if (ingredient.trait != null) Text(context.game.traitWhen(ingredient.trait!), style: context.texts.bodySmall),
-          Text(
-            ingredient.note.resolve(context.contentLanguage),
-            style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
-          ),
+          if (ingredient.note case final note?)
+            Text(
+              note.resolve(context.contentLanguage),
+              style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
+            ),
         ],
       ),
     );

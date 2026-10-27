@@ -1,5 +1,8 @@
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/localized_text.dart';
 import 'package:druid_app/business_logic/models/species_traits.dart';
 
@@ -69,6 +72,15 @@ class Species {
   /// nessuna delle liste ufficiali della pipeline la protegge.
   final List<String> protection;
 
+  /// Rarità della pianta nella Zona, dalle osservazioni: poche osservazioni = difficile da raggiungere (capitolo 02,
+  /// 2026-10-27). Decide la pagina dell'album e i compagni delle ricette.
+  final Grade grade;
+
+  /// Tratti d'elezione e vocazione corretti a mano (porta di servizio di `extras.json`); `null` = li calcola la
+  /// regola delle ricette.
+  final List<Trait>? favouredTraits;
+  final List<PotionEffect>? vocation;
+
   const Species({
     required this.sci,
     required this.name,
@@ -88,6 +100,9 @@ class Species {
     this.mysteryColor,
     this.traits = SpeciesTraits.none,
     this.protection = const [],
+    this.grade = Grade.common,
+    this.favouredTraits,
+    this.vocation,
   });
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
@@ -115,6 +130,9 @@ class Species {
         ? SpeciesTraits.none
         : SpeciesTraits.fromJson(json['traits'] as Map<String, dynamic>),
     protection: (json['protection'] as List?)?.cast<String>() ?? const [],
+    grade: Grade.values.byName(json['grade'] as String),
+    favouredTraits: (json['favouredTraits'] as List?)?.map((t) => Trait.values.byName(t as String)).toList(),
+    vocation: (json['vocation'] as List?)?.map((e) => PotionEffect.values.byName(e as String)).toList(),
   );
 }
 
