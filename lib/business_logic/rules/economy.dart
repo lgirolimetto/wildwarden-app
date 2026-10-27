@@ -73,4 +73,13 @@ abstract final class EconomyRules {
 
   /// PE in più alla prima pozione di ogni ricetta.
   static const firstBrewBonus = 30;
+
+  /// PE della prima pozione guastata con una pianta (scopri che è tossica): una volta sola per pianta (🟡).
+  static const spoiledFirstXp = 30;
+
+  /// Pozioni al giorno, al massimo (anche guastate).
+  static const brewsPerDay = 2;
+
+  /// Vis chieste per unità di quantità di un ingrediente: quantità 2 = 20 Vis.
+  static const visPerQuantity = 10;
 }

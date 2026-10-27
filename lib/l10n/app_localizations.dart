@@ -2641,6 +2641,144 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa'**
   String debugSimulatePantryDone(int count);
+
+  /// No description provided for @labTabReady.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricette pronte'**
+  String get labTabReady;
+
+  /// No description provided for @labTabShelf.
+  ///
+  /// In it, this message translates to:
+  /// **'Scaffale'**
+  String get labTabShelf;
+
+  /// No description provided for @readyCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 pronta} other{{count} pronte}}'**
+  String readyCount(int count);
+
+  /// No description provided for @shelfCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 pozione} other{{count} pozioni}}'**
+  String shelfCount(int count);
+
+  /// No description provided for @readySection.
+  ///
+  /// In it, this message translates to:
+  /// **'Pronte da preparare'**
+  String get readySection;
+
+  /// No description provided for @readyAlmost.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti manca poco'**
+  String get readyAlmost;
+
+  /// No description provided for @readyOthers.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Un\'altra ricetta chiede} other{Altre {count} ricette chiedono}} più Essenze: le trovi nel Ricettario.'**
+  String readyOthers(int count);
+
+  /// No description provided for @readyEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.'**
+  String get readyEmpty;
+
+  /// No description provided for @readyMissing.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti mancano {vis} Vis di {name}'**
+  String readyMissing(int vis, String name);
+
+  /// No description provided for @readyAnyPlant.
+  ///
+  /// In it, this message translates to:
+  /// **'una pianta a scelta'**
+  String get readyAnyPlant;
+
+  /// No description provided for @brewButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Prepara'**
+  String get brewButton;
+
+  /// No description provided for @brewDailyLimit.
+  ///
+  /// In it, this message translates to:
+  /// **'Per oggi basta: {count} pozioni al giorno.'**
+  String brewDailyLimit(int count);
+
+  /// No description provided for @brewChooseFree.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli la pianta dello slot libero'**
+  String get brewChooseFree;
+
+  /// No description provided for @brewChooseFreeHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Dà alla pozione il suo Tocco.'**
+  String get brewChooseFreeHint;
+
+  /// No description provided for @brewFreeOption.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis'**
+  String brewFreeOption(int vis);
+
+  /// No description provided for @potionTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozione'**
+  String get potionTitle;
+
+  /// No description provided for @potionPotency.
+  ///
+  /// In it, this message translates to:
+  /// **'Potenza {potency}'**
+  String potionPotency(int potency);
+
+  /// No description provided for @potionTouch.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocco: {touch}'**
+  String potionTouch(String touch);
+
+  /// No description provided for @potionFirstBonus.
+  ///
+  /// In it, this message translates to:
+  /// **'Prima pozione di questa ricetta: +{xp} PE'**
+  String potionFirstBonus(int xp);
+
+  /// No description provided for @potionSpoiledTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La pozione si è guastata'**
+  String get potionSpoiledTitle;
+
+  /// No description provided for @potionSpoiledText.
+  ///
+  /// In it, this message translates to:
+  /// **'{name}: pianta tossica. In una ricetta da bere guasta la pozione: le Vis sono perse, ma ora lo sai.'**
+  String potionSpoiledText(String name);
+
+  /// No description provided for @shelfEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Lo Scaffale è vuoto: le pozioni che prepari restano qui.'**
+  String get shelfEmpty;
+
+  /// No description provided for @recipeBestPotency.
+  ///
+  /// In it, this message translates to:
+  /// **'Potenza migliore: {potency}'**
+  String recipeBestPotency(int potency);
 }
 
 class _AppLocalizationsDelegate

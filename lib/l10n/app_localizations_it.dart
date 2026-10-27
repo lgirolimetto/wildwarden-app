@@ -1671,4 +1671,115 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0 alla Dispensa';
   }
+
+  @override
+  String get labTabReady => 'Ricette pronte';
+
+  @override
+  String get labTabShelf => 'Scaffale';
+
+  @override
+  String readyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pronte',
+      one: '1 pronta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shelfCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pozioni',
+      one: '1 pozione',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get readySection => 'Pronte da preparare';
+
+  @override
+  String get readyAlmost => 'Ti manca poco';
+
+  @override
+  String readyOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Altre $count ricette chiedono',
+      one: 'Un\'altra ricetta chiede',
+    );
+    return '$_temp0 più Essenze: le trovi nel Ricettario.';
+  }
+
+  @override
+  String get readyEmpty =>
+      'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.';
+
+  @override
+  String readyMissing(int vis, String name) {
+    return 'Ti mancano $vis Vis di $name';
+  }
+
+  @override
+  String get readyAnyPlant => 'una pianta a scelta';
+
+  @override
+  String get brewButton => 'Prepara';
+
+  @override
+  String brewDailyLimit(int count) {
+    return 'Per oggi basta: $count pozioni al giorno.';
+  }
+
+  @override
+  String get brewChooseFree => 'Scegli la pianta dello slot libero';
+
+  @override
+  String get brewChooseFreeHint => 'Dà alla pozione il suo Tocco.';
+
+  @override
+  String brewFreeOption(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get potionTitle => 'Pozione';
+
+  @override
+  String potionPotency(int potency) {
+    return 'Potenza $potency';
+  }
+
+  @override
+  String potionTouch(String touch) {
+    return 'Tocco: $touch';
+  }
+
+  @override
+  String potionFirstBonus(int xp) {
+    return 'Prima pozione di questa ricetta: +$xp PE';
+  }
+
+  @override
+  String get potionSpoiledTitle => 'La pozione si è guastata';
+
+  @override
+  String potionSpoiledText(String name) {
+    return '$name: pianta tossica. In una ricetta da bere guasta la pozione: le Vis sono perse, ma ora lo sai.';
+  }
+
+  @override
+  String get shelfEmpty =>
+      'Lo Scaffale è vuoto: le pozioni che prepari restano qui.';
+
+  @override
+  String recipeBestPotency(int potency) {
+    return 'Potenza migliore: $potency';
+  }
 }

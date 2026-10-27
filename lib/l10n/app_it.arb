@@ -1336,5 +1336,108 @@
         "type": "int"
       }
     }
+  },
+  "labTabReady": "Ricette pronte",
+  "labTabShelf": "Scaffale",
+  "readyCount": "{count, plural, =1{1 pronta} other{{count} pronte}}",
+  "@readyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shelfCount": "{count, plural, =1{1 pozione} other{{count} pozioni}}",
+  "@shelfCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "readySection": "Pronte da preparare",
+  "readyAlmost": "Ti manca poco",
+  "readyOthers": "{count, plural, =1{Un'altra ricetta chiede} other{Altre {count} ricette chiedono}} più Essenze: le trovi nel Ricettario.",
+  "@readyOthers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "readyEmpty": "Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell'Esperienza.",
+  "readyMissing": "Ti mancano {vis} Vis di {name}",
+  "@readyMissing": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "readyAnyPlant": "una pianta a scelta",
+  "brewButton": "Prepara",
+  "brewDailyLimit": "Per oggi basta: {count} pozioni al giorno.",
+  "@brewDailyLimit": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "brewChooseFree": "Scegli la pianta dello slot libero",
+  "brewChooseFreeHint": "Dà alla pozione il suo Tocco.",
+  "brewFreeOption": "{vis} Vis",
+  "@brewFreeOption": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "potionTitle": "Pozione",
+  "potionPotency": "Potenza {potency}",
+  "@potionPotency": {
+    "placeholders": {
+      "potency": {
+        "type": "int"
+      }
+    }
+  },
+  "potionTouch": "Tocco: {touch}",
+  "@potionTouch": {
+    "placeholders": {
+      "touch": {
+        "type": "String"
+      }
+    }
+  },
+  "potionFirstBonus": "Prima pozione di questa ricetta: +{xp} PE",
+  "@potionFirstBonus": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "potionSpoiledTitle": "La pozione si è guastata",
+  "potionSpoiledText": "{name}: pianta tossica. In una ricetta da bere guasta la pozione: le Vis sono perse, ma ora lo sai.",
+  "@potionSpoiledText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "shelfEmpty": "Lo Scaffale è vuoto: le pozioni che prepari restano qui.",
+  "recipeBestPotency": "Potenza migliore: {potency}",
+  "@recipeBestPotency": {
+    "placeholders": {
+      "potency": {
+        "type": "int"
+      }
+    }
   }
 }

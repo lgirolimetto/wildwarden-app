@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 
 /// Come è avvenuto l'incontro con una specie.
 enum EncounterMethod {
@@ -110,6 +111,16 @@ sealed class GameEvent {
         occurredAt: occurredAt,
       ),
       WelcomeGiftOffered.typeId => WelcomeGiftOffered(occurredAt: occurredAt),
+      PotionBrewed.typeId => PotionBrewed(
+        recipeId: d['recipe'] as String,
+        essences: (d['essences'] as Map<String, dynamic>).map((i, vis) => MapEntry(int.parse(i), vis as int)),
+        potency: d['potency'] as int,
+        touch: d['touch'] == null ? null : PotionEffect.values.byName(d['touch'] as String),
+        freeSpecies: d['freeSpecies'] as String?,
+        spoiled: d['spoiled'] as bool? ?? false,
+        xp: d['xp'] as int,
+        occurredAt: occurredAt,
+      ),
       RecipeRecycled.typeId => RecipeRecycled(
         recipeId: d['recipe'] as String,
         fromGrade: Grade.values.byName(d['fromGrade'] as String),
@@ -482,4 +493,44 @@ class RecipeRecycled extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'recipe': recipeId, 'fromGrade': fromGrade.name, 'used': used, 'vis': vis};
+}
+
+/// Pozione preparata: le Vis prese dalle Essenze (per indice), la potenza, il Tocco e i PE, calcolati al momento. Con
+/// [spoiled] la pozione si è guastata (una pianta tossica, [freeSpecies], nello slot libero di una ricetta da bere):
+/// le Vis sono perse, niente pozione, e si impara che la pianta è tossica.
+class PotionBrewed extends GameEvent {
+  static const typeId = 'potion_brewed';
+  final String recipeId;
+  final Map<int, int> essences;
+  final int potency;
+  final PotionEffect? touch;
+  final String? freeSpecies;
+  final bool spoiled;
+  @override
+  final int xp;
+
+  const PotionBrewed({
+    required this.recipeId,
+    required this.essences,
+    required this.potency,
+    this.touch,
+    this.freeSpecies,
+    this.spoiled = false,
+    required this.xp,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'recipe': recipeId,
+    'essences': {for (final MapEntry(key: i, value: vis) in essences.entries) '$i': vis},
+    'potency': potency,
+    'touch': touch?.name,
+    'freeSpecies': freeSpecies,
+    'spoiled': spoiled,
+    'xp': xp,
+  };
 }

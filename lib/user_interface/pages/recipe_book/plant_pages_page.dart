@@ -51,7 +51,8 @@ class _PlantPagesPageState extends State<PlantPagesPage> {
               key: const ValueKey('recipe-book-pager'),
               controller: _controller,
               itemCount: pages.length,
-              itemBuilder: (context, i) => _PlantPageView(collected: pages[i], showSwipeHint: pages.length > 1),
+              itemBuilder: (context, i) =>
+                  _PlantPageView(collected: pages[i], showSwipeHint: pages.length > 1, bestPotency: state.bestPotency),
             );
           },
         ),
@@ -64,7 +65,10 @@ class _PlantPageView extends StatelessWidget {
   final CollectedPage collected;
   final bool showSwipeHint;
 
-  const _PlantPageView({required this.collected, required this.showSwipeHint});
+  /// La potenza migliore di ogni ricetta preparata.
+  final Map<String, int> bestPotency;
+
+  const _PlantPageView({required this.collected, required this.showSwipeHint, required this.bestPotency});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +107,7 @@ class _PlantPageView extends StatelessWidget {
           children: [
             for (final recipe in page.recipes)
               collected.knows(recipe)
-                  ? _Plate(recipe: recipe, missing: collected.missingOf(recipe))
+                  ? _Plate(recipe: recipe, missing: collected.missingOf(recipe), bestPotency: bestPotency[recipe.id])
                   : _EmptySlot(recipe: recipe),
           ],
         ),
@@ -145,7 +149,10 @@ class _Plate extends StatelessWidget {
   final PlantRecipe recipe;
   final int missing;
 
-  const _Plate({required this.recipe, required this.missing});
+  /// La potenza migliore raggiunta, se l'hai preparata.
+  final int? bestPotency;
+
+  const _Plate({required this.recipe, required this.missing, this.bestPotency});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -153,7 +160,14 @@ class _Plate extends StatelessWidget {
     onTap: () => Get.to<void>(() => PlantRecipePage(recipeId: recipe.id)),
     child: GradeCard(
       grade: recipe.grade,
-      child: PlateFace(recipe: recipe, missing: missing),
+      child: PlateFace(
+        recipe: recipe,
+        missing: missing,
+        caption: switch (bestPotency) {
+          final int best when missing == 0 => context.l10n.recipeBestPotency(best),
+          _ => null,
+        },
+      ),
     ),
   );
 }

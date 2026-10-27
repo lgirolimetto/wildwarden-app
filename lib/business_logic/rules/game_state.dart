@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/potion.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
@@ -62,6 +63,18 @@ class GameState {
   /// Quando sono state attinte le Essenze, in ordine.
   final List<DateTime> essenceTimes;
 
+  /// Le pozioni preparate (lo Scaffale), nell'ordine.
+  final List<Potion> potions;
+
+  /// Quando si è preparato (anche le pozioni guastate): al massimo 2 al giorno.
+  final List<DateTime> brewTimes;
+
+  /// La potenza migliore raggiunta per ogni ricetta: la mostra la Tavola.
+  final Map<String, int> bestPotency;
+
+  /// Le piante che sai tossiche perché ti hanno guastato una pozione.
+  final Set<String> knownToxic;
+
   /// Momento del primo evento: quando si è cominciato a giocare.
   final DateTime? startedAt;
 
@@ -91,6 +104,10 @@ class GameState {
     this.recycled = const {},
     this.troves = const [],
     this.essenceTimes = const [],
+    this.potions = const [],
+    this.brewTimes = const [],
+    this.bestPotency = const {},
+    this.knownToxic = const {},
     this.startedAt,
     this.welcomeOfferedAt,
     this.welcomeRedeemed = false,
@@ -207,7 +224,38 @@ class GameState {
       WelcomeGiftOffered(:final occurredAt) => next._copy(welcomeOfferedAt: welcomeOfferedAt ?? occurredAt),
       XpGranted() => next,
       RecipeRecycled() => next._recycle(event),
+      PotionBrewed() => next._brew(event),
     };
+  }
+
+  GameState _brew(PotionBrewed event) {
+    final spent = [
+      for (final e in essences)
+        if (event.essences[e.index] case final int vis) e.withVis(e.vis - vis) else e,
+    ];
+    if (event.spoiled) {
+      return _copy(
+        essences: spent,
+        brewTimes: [...brewTimes, event.occurredAt],
+        knownToxic: {...knownToxic, ?event.freeSpecies},
+      );
+    }
+    final best = bestPotency[event.recipeId] ?? 0;
+    return _copy(
+      essences: spent,
+      brewTimes: [...brewTimes, event.occurredAt],
+      potions: [
+        ...potions,
+        Potion(
+          index: potions.length,
+          recipeId: event.recipeId,
+          potency: event.potency,
+          touch: event.touch,
+          brewedAt: event.occurredAt,
+        ),
+      ],
+      bestPotency: {...bestPotency, event.recipeId: event.potency > best ? event.potency : best},
+    );
   }
 
   GameState _recycle(RecipeRecycled event) {
@@ -295,6 +343,10 @@ class GameState {
     Map<Grade, int>? recycled,
     List<(Grade, DateTime)>? troves,
     List<DateTime>? essenceTimes,
+    List<Potion>? potions,
+    List<DateTime>? brewTimes,
+    Map<String, int>? bestPotency,
+    Set<String>? knownToxic,
     DateTime? startedAt,
     DateTime? welcomeOfferedAt,
     bool? welcomeRedeemed,
@@ -320,6 +372,10 @@ class GameState {
     recycled: recycled ?? this.recycled,
     troves: troves ?? this.troves,
     essenceTimes: essenceTimes ?? this.essenceTimes,
+    potions: potions ?? this.potions,
+    brewTimes: brewTimes ?? this.brewTimes,
+    bestPotency: bestPotency ?? this.bestPotency,
+    knownToxic: knownToxic ?? this.knownToxic,
     startedAt: startedAt ?? this.startedAt,
     welcomeOfferedAt: welcomeOfferedAt ?? this.welcomeOfferedAt,
     welcomeRedeemed: welcomeRedeemed ?? this.welcomeRedeemed,

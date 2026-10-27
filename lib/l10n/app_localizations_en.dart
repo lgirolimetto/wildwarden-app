@@ -1664,4 +1664,109 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0 to the Pantry';
   }
+
+  @override
+  String get labTabReady => 'Ready recipes';
+
+  @override
+  String get labTabShelf => 'Shelf';
+
+  @override
+  String readyCount(int count) {
+    return '$count ready';
+  }
+
+  @override
+  String shelfCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count potions',
+      one: '1 potion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get readySection => 'Ready to brew';
+
+  @override
+  String get readyAlmost => 'Almost there';
+
+  @override
+  String readyOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more recipes need',
+      one: 'Another recipe needs',
+    );
+    return '$_temp0 more Essences: you\'ll find them in the Recipe Book.';
+  }
+
+  @override
+  String get readyEmpty =>
+      'You don\'t know any recipes to brew yet: Commons are learned by studying, the others in the Trove of Experience.';
+
+  @override
+  String readyMissing(int vis, String name) {
+    return 'You need $vis more Vis of $name';
+  }
+
+  @override
+  String get readyAnyPlant => 'a plant of your choice';
+
+  @override
+  String get brewButton => 'Brew';
+
+  @override
+  String brewDailyLimit(int count) {
+    return 'That\'s enough for today: $count potions a day.';
+  }
+
+  @override
+  String get brewChooseFree => 'Choose the plant for the free slot';
+
+  @override
+  String get brewChooseFreeHint => 'It gives the potion its Touch.';
+
+  @override
+  String brewFreeOption(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get potionTitle => 'Potion';
+
+  @override
+  String potionPotency(int potency) {
+    return 'Potency $potency';
+  }
+
+  @override
+  String potionTouch(String touch) {
+    return 'Touch: $touch';
+  }
+
+  @override
+  String potionFirstBonus(int xp) {
+    return 'First potion of this recipe: +$xp XP';
+  }
+
+  @override
+  String get potionSpoiledTitle => 'The potion spoiled';
+
+  @override
+  String potionSpoiledText(String name) {
+    return '$name: a toxic plant. In a drinkable recipe it spoils the potion: the Vis are lost, but now you know.';
+  }
+
+  @override
+  String get shelfEmpty =>
+      'The Shelf is empty: the potions you brew stay here.';
+
+  @override
+  String recipeBestPotency(int potency) {
+    return 'Best potency: $potency';
+  }
 }

@@ -2,7 +2,6 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
-import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -13,6 +12,7 @@ import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:druid_app/user_interface/pages/trove/trove_opening_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -152,7 +152,7 @@ class _RecycleCard extends StatelessWidget {
           const SizedBox(height: Gaps.m),
           if (byRecipe.isEmpty) Text(context.l10n.recycleNothing, style: hint),
           for (final MapEntry(key: id, value: options) in byRecipe.entries) ...[
-            Text(_recipeName(context, catalog, state, id), style: context.texts.titleSmall),
+            Text(recipeNameOf(context, catalog, state, id), style: context.texts.titleSmall),
             const SizedBox(height: Gaps.s),
             for (final option in options) ...[
               if (option.visCost > vis)
@@ -186,20 +186,10 @@ class _RecycleCard extends StatelessWidget {
     final l10n = context.l10n;
     if (!await progress.recycle(option)) return;
     if (!context.mounted) return;
-    final name = _recipeName(context, catalog, progress.state, option.recipeId);
+    final name = recipeNameOf(context, catalog, progress.state, option.recipeId);
     final completed = !progress.state.missingPieces.containsKey(option.recipeId);
     messenger.showSnackBar(SnackBar(content: Text(completed ? l10n.recycleCompleted(name) : l10n.recycleDone(name))));
   }
-}
-
-/// Il nome di una Tavola o di una Mitica com'è adesso (parziale se mancano componenti).
-String _recipeName(BuildContext context, Catalog catalog, GameState state, String id) {
-  final lang = context.contentLanguage;
-  final missing = state.missingPieces[id] ?? 0;
-  for (final m in catalog.mythics) {
-    if (m.id == id) return m.name(lang, missing: missing);
-  }
-  return recipeBookOf(catalog).recipeById(id)?.name(lang, missing: missing) ?? id;
 }
 
 class _TroveCard extends StatelessWidget {

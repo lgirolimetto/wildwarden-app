@@ -12,6 +12,7 @@ import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
@@ -156,6 +157,35 @@ class ProgressController extends LoadableController<GameState> {
       ),
     );
     return result.isValid;
+  }
+
+  /// Prepara la ricetta [recipeId] con le Essenze della Dispensa ([freeSpecies]: la pianta dello slot libero, se c'è).
+  /// Restituisce l'evento salvato (con potenza, Tocco, PE e se si è guastata), o `null` se non si può (Vis che
+  /// mancano, limite del giorno, fuori dalla finestra di una Mitica).
+  Future<PotionBrewed?> brew(String recipeId, {String? freeSpecies}) async {
+    final catalog = _catalog();
+    final brewable = catalog == null ? null : brewableOf(catalog, recipeId);
+    if (catalog == null || brewable == null || brewBlock(state, brewable, now) != null) return null;
+    final plan = planBrew(brewable, state.essences, freeSpecies: freeSpecies);
+    if (!plan.ready) return null;
+    final spoiled = spoils(brewable, catalog, freeSpecies);
+    final potency = potencyOf(plan, state.essences, catalog);
+    final xp = spoiled
+        ? (state.knownToxic.contains(freeSpecies) ? 0 : EconomyRules.spoiledFirstXp)
+        : potionXpOf(brewable.grade, potency) +
+              (state.bestPotency.containsKey(recipeId) ? 0 : EconomyRules.firstBrewBonus);
+    final event = PotionBrewed(
+      recipeId: recipeId,
+      essences: plan.taken,
+      potency: potency,
+      touch: spoiled ? null : touchOf(catalog, freeSpecies),
+      freeSpecies: freeSpecies,
+      spoiled: spoiled,
+      xp: xp,
+      occurredAt: now,
+    );
+    final result = await record(event);
+    return result.isValid ? event : null;
   }
 
   /// Offre il regalo "bentornato" se è il momento (una volta sola).

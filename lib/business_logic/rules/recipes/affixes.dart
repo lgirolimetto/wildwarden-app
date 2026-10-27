@@ -116,3 +116,23 @@ String affixName({
       ? [...adjectives, plant, base.english, suffix].join(' ')
       : [base.italian, plant, ...adjectives, suffix].join(' ');
 }
+
+/// L'aggettivo del Tocco, accordato con la base: Rigoglioso, Limpido, Presago, Copioso (Lush, Clear, Prescient,
+/// Bountiful).
+String touchAdjective(PotionEffect touch, String languageCode, {bool feminine = false}) {
+  if (languageCode == 'en') {
+    return switch (touch) {
+      PotionEffect.regrowth => 'Lush',
+      PotionEffect.clarity => 'Clear',
+      PotionEffect.omen => 'Prescient',
+      PotionEffect.abundance => 'Bountiful',
+    };
+  }
+  final stem = switch (touch) {
+    PotionEffect.regrowth => 'Rigoglios',
+    PotionEffect.clarity => 'Limpid',
+    PotionEffect.omen => 'Presag',
+    PotionEffect.abundance => 'Copios',
+  };
+  return '$stem${feminine ? 'a' : 'o'}';
+}

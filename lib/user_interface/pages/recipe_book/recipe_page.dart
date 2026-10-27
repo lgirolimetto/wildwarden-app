@@ -12,6 +12,7 @@ import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -27,6 +28,7 @@ class PlantRecipePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _RecipeScaffold(
+    recipeId: recipeId,
     builder: (context, catalog, state) {
       final recipe = recipeBookOf(catalog).recipeById(recipeId)!;
       final missing = state.missingPieces[recipeId] ?? 0;
@@ -60,6 +62,7 @@ class MythicRecipePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _RecipeScaffold(
+    recipeId: mythicId,
     builder: (context, catalog, state) {
       final lang = context.contentLanguage;
       final mythic = catalog.mythics.firstWhere((m) => m.id == mythicId);
@@ -93,9 +96,10 @@ class MythicRecipePage extends StatelessWidget {
 }
 
 class _RecipeScaffold extends StatelessWidget {
+  final String recipeId;
   final Widget Function(BuildContext context, Catalog catalog, GameState state) builder;
 
-  const _RecipeScaffold({required this.builder});
+  const _RecipeScaffold({required this.recipeId, required this.builder});
 
   @override
   Widget build(BuildContext context) => DenseArea(
@@ -105,8 +109,17 @@ class _RecipeScaffold extends StatelessWidget {
       body: DruidBackground(
         belowAppBar: true,
         child: GameDataBuilder(
-          builder: (context, catalog, state, _) =>
-              ListView(padding: const EdgeInsets.all(Gaps.l), children: [builder(context, catalog, state)]),
+          builder: (context, catalog, state, progress) => ListView(
+            padding: const EdgeInsets.all(Gaps.l),
+            children: [
+              builder(context, catalog, state),
+              // Se la conosci completa: potenza migliore, cosa manca e Prepara.
+              if (BrewSection.of(catalog, state, recipeId, progress.now) case final Widget brew) ...[
+                const SizedBox(height: Gaps.m),
+                ClayCard(child: brew),
+              ],
+            ],
+          ),
         ),
       ),
     ),
