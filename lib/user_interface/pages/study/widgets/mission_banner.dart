@@ -17,7 +17,6 @@ import 'package:get/get.dart';
 /// Termini del glossario collegati a ogni missione.
 const _missionTerms = {
   Mission.visitErbario: [GlossaryTerm.erbario],
-  Mission.markDesiderata: [GlossaryTerm.desiderata, GlossaryTerm.missione],
   Mission.firstEncounter: [GlossaryTerm.erborizzare, GlossaryTerm.stazione],
   Mission.firstLevel: [GlossaryTerm.maestria],
   Mission.firstRecipe: [GlossaryTerm.tratto, GlossaryTerm.attingere],
@@ -45,7 +44,6 @@ class MissionBanner extends StatelessWidget {
     void openTab(int tab) => home.select(tab);
     return switch (mission) {
       Mission.visitErbario => (context.l10n.missionActionOpenErbario, () => openTab(HomeController.erbarioTab)),
-      Mission.markDesiderata => (context.l10n.missionActionChooseDesiderata, () => openTab(HomeController.erbarioTab)),
       Mission.firstEncounter => (context.l10n.missionActionOpenErbario, () => openTab(HomeController.erbarioTab)),
       Mission.firstLevel => (
         context.l10n.missionActionStudy,

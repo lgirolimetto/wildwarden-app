@@ -50,7 +50,7 @@ void main() {
     testWidgets('la stellina della stagione segna una desiderata', (tester) async {
       registerTestDependencies(events: [_passed('Fagus sylvatica'), _erbarioVisited()]);
       await pumpDruidApp(tester);
-      expect(find.text('Scegli le tue Desiderata'), findsOneWidget);
+      expect(find.text('Incontra una specie'), findsOneWidget);
 
       // Dopo il primo avvio si propongono tutte le specie in stagione, anche le tossiche.
       await scrollAndTap(tester, find.byKey(const ValueKey('add-desiderata-Eranthis hyemalis')));

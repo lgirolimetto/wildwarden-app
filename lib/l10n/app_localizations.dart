@@ -1016,18 +1016,6 @@ abstract class AppLocalizations {
   /// **'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.'**
   String get missionVisitErbarioBody;
 
-  /// No description provided for @missionMarkDesiderataTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli le tue Desiderata'**
-  String get missionMarkDesiderataTitle;
-
-  /// No description provided for @missionMarkDesiderataBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli le specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.'**
-  String get missionMarkDesiderataBody;
-
   /// No description provided for @missionFirstEncounterTitle.
   ///
   /// In it, this message translates to:
@@ -1075,12 +1063,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Apri l\'Erbario'**
   String get missionActionOpenErbario;
-
-  /// No description provided for @missionActionChooseDesiderata.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli nell\'Erbario'**
-  String get missionActionChooseDesiderata;
 
   /// No description provided for @missionActionStudy.
   ///

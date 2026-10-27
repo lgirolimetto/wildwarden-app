@@ -332,7 +332,6 @@ class GameTexts {
 
   String missionTitle(Mission m) => switch (m) {
     Mission.visitErbario => l10n.missionVisitErbarioTitle,
-    Mission.markDesiderata => l10n.missionMarkDesiderataTitle,
     Mission.firstEncounter => l10n.missionFirstEncounterTitle,
     Mission.firstLevel => l10n.missionFirstLevelTitle,
     Mission.firstRecipe => l10n.missionFirstRecipeTitle,
@@ -340,7 +339,6 @@ class GameTexts {
 
   String missionBody(Mission m) => switch (m) {
     Mission.visitErbario => l10n.missionVisitErbarioBody,
-    Mission.markDesiderata => l10n.missionMarkDesiderataBody,
     Mission.firstEncounter => l10n.missionFirstEncounterBody,
     Mission.firstLevel => l10n.missionFirstLevelBody,
     Mission.firstRecipe => l10n.missionFirstRecipeBody,

@@ -218,10 +218,7 @@ void main() {
       expect(currentMission(state, catalog), Mission.visitErbario);
 
       state = state.apply(OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: feb));
-      expect(currentMission(state, catalog), Mission.markDesiderata);
-
-      state = state.apply(DesiderataChanged(speciesSci: 'Eranthis hyemalis', marked: true, occurredAt: feb));
-      expect(currentMission(state, catalog), Mission.firstEncounter);
+      expect(currentMission(state, catalog), Mission.firstEncounter, reason: 'le Desiderata non sono più un passo');
 
       state = state.apply(met('Eranthis hyemalis'));
       expect(currentMission(state, catalog), Mission.firstRecipe);

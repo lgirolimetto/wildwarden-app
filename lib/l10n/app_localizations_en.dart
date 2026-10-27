@@ -575,13 +575,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'The Herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and Meeting them.';
 
   @override
-  String get missionMarkDesiderataTitle => 'Choose your Desiderata';
-
-  @override
-  String get missionMarkDesiderataBody =>
-      'Choose the species to look for: for each you\'ll see photos, season and altitude. Start with one in season now.';
-
-  @override
   String get missionFirstEncounterTitle => 'Meet a species';
 
   @override
@@ -607,9 +600,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionActionOpenErbario => 'Open the Herbarium';
-
-  @override
-  String get missionActionChooseDesiderata => 'Choose in the Herbarium';
 
   @override
   String get missionActionStudy => 'Start studying';

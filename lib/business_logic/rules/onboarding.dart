@@ -7,18 +7,17 @@ import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 /// Missioni dell'apprendistato (onboarding). Ogni missione si completa quando lo stato di gioco lo dice:
 /// niente codice sparso nelle pagine.
 ///
-/// Si comincia da casa, studiando; poi l'erbario, le desiderata e il campo; infine il Ricettario, dove c'è la Ricetta
+/// Si comincia da casa, studiando; poi l'erbario e il campo (le Desiderata non sono più un passo: decisione del
+/// 2026-10-27); infine il Ricettario, dove c'è la Ricetta
 /// Comune imparata studiando. Stazione e ritorno arrivano nei blocchi 2-3.
 enum Mission {
   firstLevel,
   visitErbario,
-  markDesiderata,
   firstEncounter,
   firstRecipe;
 
   bool isDone(GameState state, Catalog catalog) => switch (this) {
     Mission.visitErbario => state.onboardingMarks.contains(OnboardingMark.erbarioVisited),
-    Mission.markDesiderata => state.desiderata.isNotEmpty || state.fulfilledDesiderata.isNotEmpty,
     Mission.firstEncounter => state.encounteredCount > 0,
     Mission.firstLevel => state.passedLevels.isNotEmpty,
     Mission.firstRecipe =>
