@@ -1,12 +1,8 @@
-import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
-import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
-import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
-import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
@@ -60,8 +56,6 @@ class _StudyHomePageState extends State<StudyHomePage> {
 
   Widget _content(BuildContext context) => GameDataBuilder(
     builder: (context, catalog, state, progress) {
-      // La curiosità del giorno si consegna all'apertura (l'operazione non fa nulla se è già stata data).
-      WidgetsBinding.instance.addPostFrameCallback((_) => progress.revealTodayFunFact());
       final now = progress.now;
       final mission = currentMission(state, catalog);
       return ListView(
@@ -87,9 +81,7 @@ class _StudyHomePageState extends State<StudyHomePage> {
                 const SizedBox(height: Gaps.xl),
                 _YourSpecies(catalog: catalog, state: state, progress: progress),
                 const SizedBox(height: Gaps.xl),
-                _DesiderataSection(catalog: catalog, state: state, progress: progress),
-                const SizedBox(height: Gaps.xl),
-                _FunFactCard(catalog: catalog, state: state, now: now),
+                _TipCard(now: now),
               ],
             ),
           ),
@@ -252,45 +244,6 @@ class _RankCard extends StatelessWidget {
   }
 }
 
-class _FunFactCard extends StatelessWidget {
-  final Catalog catalog;
-  final GameState state;
-  final DateTime now;
-
-  const _FunFactCard({required this.catalog, required this.state, required this.now});
-
-  @override
-  Widget build(BuildContext context) {
-    final fact = funFactOfToday(catalog, state, now);
-    final total = catalog.species.fold<int>(0, (sum, s) => sum + funFactsOf(s, catalog).length);
-    return AccentCardBox(
-      index: 1,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.all(Gaps.l),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const ClayCircle(color: Color(0xFFF2D49B), icon: Icons.auto_awesome_rounded, size: 40),
-                const SizedBox(width: Gaps.m),
-                Expanded(child: Text(context.l10n.funOfDayTitle, style: context.texts.titleMedium)),
-                Text(context.l10n.funOfDayCount(state.revealedFunFacts.length, total), style: context.texts.bodySmall),
-              ],
-            ),
-            const SizedBox(height: Gaps.s),
-            Text(fact == null ? context.l10n.funOfDayEmpty : context.game.funFact(fact)),
-            if (fact is CuratedFunFactItem && !fact.verified) ...[
-              const SizedBox(height: Gaps.xs),
-              Text(context.l10n.funToVerify, style: context.texts.labelSmall),
-            ],
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _ReviewsCard extends StatelessWidget {
   final Catalog catalog;
   final GameState state;
@@ -338,42 +291,6 @@ class _ReviewsCard extends StatelessWidget {
   }
 }
 
-/// Le desiderata segnate, senza limite. Si scelgono dal carosello "In stagione adesso" o
-/// dall'erbario.
-class _DesiderataSection extends StatelessWidget {
-  final Catalog catalog;
-  final GameState state;
-  final ProgressController progress;
-
-  const _DesiderataSection({required this.catalog, required this.state, required this.progress});
-
-  @override
-  Widget build(BuildContext context) {
-    final marked = state.desiderata.map(catalog.speciesBySci).whereType<Species>().toList();
-    final debug = Get.find<AppConfig>().showDebugTools;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ClaySectionTitle(
-          title: context.l10n.desiderataTitle,
-          icon: Icons.star_rounded,
-          color: const Color(0xFFF6D98B),
-          trailing: Text('${marked.length}'),
-        ),
-        if (marked.isEmpty) Text(context.l10n.desiderataEmpty, style: TextStyle(color: context.druid.hint)),
-        for (final s in marked) ...[
-          _DesiderataCard(
-            species: s,
-            onRemove: () => progress.toggleDesiderata(s.sci),
-            onSimulateEncounter: debug ? () => progress.encounter(s.sci, method: EncounterMethod.simulated) : null,
-          ),
-          const SizedBox(height: Gaps.l),
-        ],
-      ],
-    );
-  }
-}
-
 /// "In stagione adesso": specie da cominciare a studiare, con la stellina per segnarle come desiderata. Al primo
 /// avvio sono le 3 specie proposte per iniziare subito, anche da casa.
 class _SeasonalSection extends StatelessWidget {
@@ -415,58 +332,6 @@ class _SeasonalSection extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class _DesiderataCard extends StatelessWidget {
-  final Species species;
-  final VoidCallback onRemove;
-  final VoidCallback? onSimulateEncounter;
-
-  const _DesiderataCard({required this.species, required this.onRemove, this.onSimulateEncounter});
-
-  @override
-  Widget build(BuildContext context) {
-    final game = context.game;
-    return ClayCard(
-      key: ValueKey('desiderata-${species.sci}'),
-      padding: const EdgeInsets.all(Gaps.m),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(context.druid.cardRadius / 2),
-            child: SizedBox(width: 84, height: 84, child: RemoteImage(species.images.first.url)),
-          ),
-          const SizedBox(width: Gaps.m),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(game.name(species), style: context.texts.titleMedium),
-                Text(context.l10n.desiderataWhen(game.months(species.topMonths()))),
-                Text(context.l10n.desiderataWhere(game.band(species.topBand))),
-                Text(context.l10n.desiderataFamily(species.family), style: TextStyle(color: context.druid.hint)),
-                Wrap(
-                  spacing: Gaps.chip,
-                  runSpacing: Gaps.chipRun,
-                  children: [
-                    TextButton(onPressed: onRemove, child: Text(context.l10n.desiderataRemove)),
-                    if (onSimulateEncounter != null)
-                      OutlinedButton.icon(
-                        key: ValueKey('simulate-desiderata-${species.sci}'),
-                        onPressed: onSimulateEncounter,
-                        icon: const Icon(Icons.bug_report_outlined, size: 18),
-                        label: Text(context.l10n.simulateEncounter),
-                      ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -652,4 +517,39 @@ class _YourSpecies extends StatelessWidget {
 void startLevelStudy(Catalog catalog, String speciesSci, int level) {
   Get.find<StudyController>().startLevel(catalog, speciesSci, level);
   Get.to<void>(() => const StudySessionPage());
+}
+
+/// Il consiglio del giorno: una frase su come si gioca, a rotazione (uno al giorno, uguale per tutto il giorno). Prende
+/// il posto della curiosità del giorno finché non si decide cosa mostrare delle curiosità e come (2026-10-27).
+class _TipCard extends StatelessWidget {
+  final DateTime now;
+
+  const _TipCard({required this.now});
+
+  @override
+  Widget build(BuildContext context) {
+    final tips = context.game.tips;
+    final day = DateTime.utc(now.year, now.month, now.day).millisecondsSinceEpoch ~/ Duration.millisecondsPerDay;
+    return AccentCardBox(
+      key: const ValueKey('tip-of-day'),
+      index: 1,
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(Gaps.l),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const ClayCircle(color: Color(0xFFF2D49B), icon: Icons.lightbulb_outline_rounded, size: 40),
+                const SizedBox(width: Gaps.m),
+                Expanded(child: Text(context.l10n.tipOfDayTitle, style: context.texts.titleMedium)),
+              ],
+            ),
+            const SizedBox(height: Gaps.s),
+            Text(tips[day % tips.length]),
+          ],
+        ),
+      ),
+    );
+  }
 }

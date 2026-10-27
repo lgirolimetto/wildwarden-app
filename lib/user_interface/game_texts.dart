@@ -104,6 +104,25 @@ class GameTexts {
     Grade.mythic => l10n.gradeMythic,
   };
 
+  /// I consigli del giorno, a rotazione.
+  List<String> get tips => [
+    l10n.tip01,
+    l10n.tip02,
+    l10n.tip03,
+    l10n.tip04,
+    l10n.tip05,
+    l10n.tip06,
+    l10n.tip07,
+    l10n.tip08,
+    l10n.tip09,
+    l10n.tip10,
+    l10n.tip11,
+    l10n.tip12,
+    l10n.tip13,
+    l10n.tip14,
+    l10n.tip15,
+  ];
+
   /// Il grado di un Bottino dell'Esperienza, al maschile ("Bottino dell'Esperienza · raro").
   String troveGrade(Grade g) => switch (g) {
     Grade.common => l10n.troveGradeCommon,

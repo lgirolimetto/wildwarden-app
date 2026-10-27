@@ -470,5 +470,21 @@
   "legendPotions": "Potions",
   "legendVessel": "The vessel shows the recipe's base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect.",
   "viewMet": "Met",
-  "erbarioSpecies": "Species"
+  "erbarioSpecies": "Species",
+  "tipOfDayTitle": "Tip of the day",
+  "tip01": "Studying a plant makes its Essences purer: from 40% without study to 100% with Mastery.",
+  "tip02": "The purity of your Essences decides most of a potion's Potency: the better you know the plants, the stronger it is.",
+  "tip03": "Commons are learned by studying: pass level 1 of a species and its Common is in the Recipe Book.",
+  "tip04": "In the Trove of Experience, Uncommon, Rare and Mythic Plates come out incomplete: the missing Components are found in other Trove of Experience.",
+  "tip05": "Mythics only come from the mythic Trove of Experience.",
+  "tip06": "Duplicates from the Trove of Experience become Recycled: 3 make a Component of the same grade, 9 one of the grade above.",
+  "tip07": "Recycling spends your least precious Essences first: the ones with Traits stay for recipes.",
+  "tip08": "Put any plant you like in a recipe's free slot: it gives the potion its Touch.",
+  "tip09": "Beware of toxic plants in the free slot of a drinkable recipe: the potion spoils.",
+  "tip10": "The Laboratory's Ready recipes tell you what's missing: it's the list for your next outing.",
+  "tip11": "Using a potion gives its effect for 7 days, as strong as its Potency.",
+  "tip12": "Traits tell the conditions you drew an Essence in; a recipe's name recalls them: \"Full-moon\" wants the Full moon.",
+  "tip13": "Study XP stays to Cash in until you draw the first Essence of that species.",
+  "tip14": "In the Legend (Settings → Legend and glossary) you'll find what symbols and colours mean.",
+  "tip15": "\"Collecting\" in the game means taking photos: plants stay where they are."
 }

@@ -127,7 +127,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return 'Next Rank: $rank at $xpString XP';
@@ -186,7 +188,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get qFamilyFromPhoto => 'Which family does the plant in the photo belong to?';
+  String get qFamilyFromPhoto =>
+      'Which family does the plant in the photo belong to?';
 
   @override
   String qRelativeOf(String name) {
@@ -243,7 +246,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get answerWrong => 'Not quite.';
 
   @override
-  String get answerWillReturn => 'It will come back shortly, asked another way.';
+  String get answerWillReturn =>
+      'It will come back shortly, asked another way.';
 
   @override
   String answerRemembered(int days) {
@@ -251,7 +255,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get answerForgotten => 'Forgotten: it will come back in tomorrow\'s Reviews.';
+  String get answerForgotten =>
+      'Forgotten: it will come back in tomorrow\'s Reviews.';
 
   @override
   String xpGained(int xp) {
@@ -297,7 +302,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get summaryMastery => 'Mastery reached!';
 
   @override
-  String get summaryNewFunFacts => 'New Curiosities on the way: you\'ll get one a day.';
+  String get summaryNewFunFacts =>
+      'New Curiosities on the way: you\'ll get one a day.';
 
   @override
   String get saveToNotebook => 'Save to Notebook';
@@ -319,7 +325,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notebookSearch => 'Search: family, month, species, notes…';
 
   @override
-  String get notebookEmpty => 'Still empty: while studying, use \"Save to Notebook\".';
+  String get notebookEmpty =>
+      'Still empty: while studying, use \"Save to Notebook\".';
 
   @override
   String get notebookNoResults => 'No results.';
@@ -345,7 +352,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get funOfDayEmpty => 'Meet and study a species to receive a daily Curiosity about what you\'ve learned.';
+  String get funOfDayEmpty =>
+      'Meet and study a species to receive a daily Curiosity about what you\'ve learned.';
 
   @override
   String get funToVerify => 'to be verified';
@@ -379,7 +387,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get reviewsNone => 'Nothing to review today. What you learn comes back after 1, 3, 7, 21, 60 and 180 days.';
+  String get reviewsNone =>
+      'Nothing to review today. What you learn comes back after 1, 3, 7, 21, 60 and 180 days.';
 
   @override
   String get reviewsStart => 'Review';
@@ -388,7 +397,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get desiderataTitle => 'Desiderata';
 
   @override
-  String get desiderataEmpty => 'Choose the species to look for: you\'ll see photos and where and when to find them.';
+  String get desiderataEmpty =>
+      'Choose the species to look for: you\'ll see photos and where and when to find them.';
 
   @override
   String get desiderataSuggestions => 'In season now';
@@ -398,7 +408,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Three species that are easy to recognise, to start right away: you can study from home too.';
 
   @override
-  String get seasonalHint => 'Study them now or mark them as Desiderata to look for.';
+  String get seasonalHint =>
+      'Study them now or mark them as Desiderata to look for.';
 
   @override
   String get seasonalStudy => 'Study';
@@ -431,7 +442,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yourSpecies => 'Your species';
 
   @override
-  String get yourSpeciesEmpty => 'No species in study yet: start with one in season.';
+  String get yourSpeciesEmpty =>
+      'No species in study yet: start with one in season.';
 
   @override
   String studyLevelButton(int level) {
@@ -506,7 +518,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get masteryOnlyField => 'Study alone doesn\'t lead to Mastery: you also need Essences Drawn in the field.';
+  String get masteryOnlyField =>
+      'Study alone doesn\'t lead to Mastery: you also need Essences Drawn in the field.';
 
   @override
   String get masteryReached => 'Mastery reached';
@@ -924,7 +937,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get summaryXpToCash => 'The XP from studying this species are Cashed in when you Draw its first Essence.';
+  String get summaryXpToCash =>
+      'The XP from studying this species are Cashed in when you Draw its first Essence.';
 
   @override
   String visStored(int vis) {
@@ -972,7 +986,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get debugGradeSampleIngredient => 'Honesty';
 
   @override
-  String get debugGradeSampleEffect => 'The next Draw under a Full moon gets an extra Trait (game effect).';
+  String get debugGradeSampleEffect =>
+      'The next Draw under a Full moon gets an extra Trait (game effect).';
 
   @override
   String get badgeEncountered => 'Met on';
@@ -993,7 +1008,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legendBadges => 'Badges';
 
   @override
-  String get legendProtected => 'Species protected by law: look and photograph only';
+  String get legendProtected =>
+      'Species protected by law: look and photograph only';
 
   @override
   String get legendEncountered => 'Species Met, with the date you Met it';
@@ -1135,7 +1151,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitWhenFrost => 'When it is below freezing: hoarfrost and ice.';
 
   @override
-  String get traitWhenRain => 'While it rains. During a thunderstorm Drawing is suspended.';
+  String get traitWhenRain =>
+      'While it rains. During a thunderstorm Drawing is suspended.';
 
   @override
   String get traitWhenFog => 'When there is fog.';
@@ -1144,44 +1161,66 @@ class AppLocalizationsEn extends AppLocalizations {
   String get traitWhenSun => 'With sunshine and few clouds.';
 
   @override
-  String get traitWhenMoon => 'All day long on the full moon: no need to go out at night.';
+  String get traitWhenMoon =>
+      'All day long on the full moon: no need to go out at night.';
 
   @override
-  String get traitWhenDew => 'From sunrise to about two hours later, after a cool clear night: the grass is still wet.';
+  String get traitWhenDew =>
+      'From sunrise to about two hours later, after a cool clear night: the grass is still wet.';
 
   @override
-  String get traitWhenDusk => 'From about an hour before sunset until sunset, never after dark.';
+  String get traitWhenDusk =>
+      'From about an hour before sunset until sunset, never after dark.';
 
   @override
-  String get traitWhenDawn => 'From first light to about an hour after sunrise.';
+  String get traitWhenDawn =>
+      'From first light to about an hour after sunrise.';
 
   @override
-  String get traitWhenNewMoon => 'All day long on the new moon: no need to go out at night.';
+  String get traitWhenNewMoon =>
+      'All day long on the new moon: no need to go out at night.';
 
   @override
-  String get traitWhenWaxingMoon => 'Every day the moon is growing, from new to full: no need to go out at night.';
+  String get traitWhenWaxingMoon =>
+      'Every day the moon is growing, from new to full: no need to go out at night.';
 
   @override
-  String get traitWhenWaningMoon => 'Every day the moon is shrinking, from full to new: no need to go out at night.';
+  String get traitWhenWaningMoon =>
+      'Every day the moon is shrinking, from full to new: no need to go out at night.';
 
   @override
   String get recipeBookTitle => 'Recipe Book';
 
   @override
   String recipeBookPlates(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count Plates', one: '1 Plate');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Plates',
+      one: '1 Plate',
+    );
     return '$_temp0';
   }
 
   @override
   String recipeBookPagesSummary(int pages, int total, int complete) {
-    String _temp0 = intl.Intl.pluralLogic(pages, locale: localeName, other: '$pages Pages', one: '1 Page');
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages Pages',
+      one: '1 Page',
+    );
     return '$_temp0 of $total · $complete complete';
   }
 
   @override
   String recipeBookPageCount(int known, int total) {
-    String _temp0 = intl.Intl.pluralLogic(known, locale: localeName, other: '$known Plates', one: '1 Plate');
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Plates',
+      one: '1 Plate',
+    );
     return '$_temp0 of $total';
   }
 
@@ -1199,7 +1238,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String recipeBookSpeciesLink(int known, int total) {
-    String _temp0 = intl.Intl.pluralLogic(known, locale: localeName, other: '$known Plates', one: '1 Plate');
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Plates',
+      one: '1 Plate',
+    );
     return 'Recipe Book · $_temp0 of $total';
   }
 
@@ -1207,7 +1251,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recipeMonths => 'When it can be made';
 
   @override
-  String get recipeNever => 'Never: the ingredients are not found in the same months';
+  String get recipeNever =>
+      'Never: the ingredients are not found in the same months';
 
   @override
   String get recipeEffect => 'Effect';
@@ -1225,17 +1270,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get effectAbundance => 'Abundance';
 
   @override
-  String get effectRegrowthText => 'For 7 days species are ready again sooner, down to 12 hours later (game effect).';
+  String get effectRegrowthText =>
+      'For 7 days species are ready again sooner, down to 12 hours later (game effect).';
 
   @override
-  String get effectClarityText => 'For 7 days extra purity on every Essence (game effect).';
+  String get effectClarityText =>
+      'For 7 days extra purity on every Essence (game effect).';
 
   @override
   String get effectOmenText =>
       'For 7 days an Essence without traits can take the plant\'s favoured trait (game effect).';
 
   @override
-  String get effectAbundanceText => 'For 7 days extra Vis on every Essence, up to +50% (game effect).';
+  String get effectAbundanceText =>
+      'For 7 days extra Vis on every Essence, up to +50% (game effect).';
 
   @override
   String mythicNumber(String number) {
@@ -1292,7 +1340,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String labBalanceXp(int xp) {
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return '$xpString XP to spend';
@@ -1321,10 +1371,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get troveGradeMythic => 'mythic';
 
   @override
-  String get troveContentsCommon => 'Almost always a Common, sometimes an Uncommon';
+  String get troveContentsCommon =>
+      'Almost always a Common, sometimes an Uncommon';
 
   @override
-  String get troveContentsUncommon => 'Mostly Uncommons, sometimes a Common or a Rare';
+  String get troveContentsUncommon =>
+      'Mostly Uncommons, sometimes a Common or a Rare';
 
   @override
   String get troveContentsRare => 'Mostly Rares, sometimes an Uncommon';
@@ -1334,7 +1386,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String troveSpend(int cost) {
-    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String costString = costNumberFormat.format(cost);
 
     return 'Spend $costString XP';
@@ -1342,7 +1396,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String troveNeedXp(int xp) {
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return 'You need $xpString more XP';
@@ -1350,9 +1406,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String troveCostMissing(int cost, int xp) {
-    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String costString = costNumberFormat.format(cost);
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return 'Costs $costString XP: you need $xpString more';
@@ -1380,7 +1440,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String labRecycled(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count recycled', one: '1 recycled');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recycled',
+      one: '1 recycled',
+    );
     return '$_temp0';
   }
 
@@ -1389,20 +1454,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String welcomeGiftBody(int full, int price) {
-    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String fullString = fullNumberFormat.format(full);
-    final intl.NumberFormat priceNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
     final String priceString = priceNumberFormat.format(price);
 
     return 'Your first Trove of Experience · rare at a friendly price: $priceString XP instead of $fullString.';
   }
 
   @override
-  String get welcomeGiftWaiting => 'You can redeem it after an Essence: go out and draw from a station.';
+  String get welcomeGiftWaiting =>
+      'You can redeem it after an Essence: go out and draw from a station.';
 
   @override
   String welcomeGiftRedeem(int price) {
-    final intl.NumberFormat priceNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
     final String priceString = priceNumberFormat.format(price);
 
     return 'Redeem · $priceString XP';
@@ -1457,7 +1527,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get recipeEffectUnknown => 'Still to discover: a component of the name is missing.';
+  String get recipeEffectUnknown =>
+      'Still to discover: a component of the name is missing.';
 
   @override
   String get debugGrantXp => 'Add 5,000 XP';
@@ -1485,7 +1556,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get recycleNothing => 'With the recycled you have you can\'t make a component yet.';
+  String get recycleNothing =>
+      'With the recycled you have you can\'t make a component yet.';
 
   @override
   String recycleDone(String name) {
@@ -1520,13 +1592,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String pantryEssences(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count Essences', one: '1 Essence');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences',
+      one: '1 Essence',
+    );
     return '$_temp0';
   }
 
   @override
   String pantrySpeciesSummary(int count, int vis) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count Essences', one: '1 Essence');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences',
+      one: '1 Essence',
+    );
     return '$_temp0 · $vis Vis';
   }
 
@@ -1574,7 +1656,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String shelfCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count potions', one: '1 potion');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count potions',
+      one: '1 potion',
+    );
     return '$_temp0';
   }
 
@@ -1643,7 +1730,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get shelfEmpty => 'The Shelf is empty: the potions you brew stay here.';
+  String get shelfEmpty =>
+      'The Shelf is empty: the potions you brew stay here.';
 
   @override
   String recipeBestPotency(int potency) {
@@ -1764,4 +1852,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get erbarioSpecies => 'Species';
+
+  @override
+  String get tipOfDayTitle => 'Tip of the day';
+
+  @override
+  String get tip01 =>
+      'Studying a plant makes its Essences purer: from 40% without study to 100% with Mastery.';
+
+  @override
+  String get tip02 =>
+      'The purity of your Essences decides most of a potion\'s Potency: the better you know the plants, the stronger it is.';
+
+  @override
+  String get tip03 =>
+      'Commons are learned by studying: pass level 1 of a species and its Common is in the Recipe Book.';
+
+  @override
+  String get tip04 =>
+      'In the Trove of Experience, Uncommon, Rare and Mythic Plates come out incomplete: the missing Components are found in other Trove of Experience.';
+
+  @override
+  String get tip05 => 'Mythics only come from the mythic Trove of Experience.';
+
+  @override
+  String get tip06 =>
+      'Duplicates from the Trove of Experience become Recycled: 3 make a Component of the same grade, 9 one of the grade above.';
+
+  @override
+  String get tip07 =>
+      'Recycling spends your least precious Essences first: the ones with Traits stay for recipes.';
+
+  @override
+  String get tip08 =>
+      'Put any plant you like in a recipe\'s free slot: it gives the potion its Touch.';
+
+  @override
+  String get tip09 =>
+      'Beware of toxic plants in the free slot of a drinkable recipe: the potion spoils.';
+
+  @override
+  String get tip10 =>
+      'The Laboratory\'s Ready recipes tell you what\'s missing: it\'s the list for your next outing.';
+
+  @override
+  String get tip11 =>
+      'Using a potion gives its effect for 7 days, as strong as its Potency.';
+
+  @override
+  String get tip12 =>
+      'Traits tell the conditions you drew an Essence in; a recipe\'s name recalls them: \"Full-moon\" wants the Full moon.';
+
+  @override
+  String get tip13 =>
+      'Study XP stays to Cash in until you draw the first Essence of that species.';
+
+  @override
+  String get tip14 =>
+      'In the Legend (Settings → Legend and glossary) you\'ll find what symbols and colours mean.';
+
+  @override
+  String get tip15 =>
+      '\"Collecting\" in the game means taking photos: plants stay where they are.';
 }

@@ -62,7 +62,8 @@ import 'app_localizations_it.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,15 +84,19 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('it')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('it'),
+  ];
 
   /// No description provided for @appTitle.
   ///
@@ -2917,9 +2923,106 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Specie'**
   String get erbarioSpecies;
+
+  /// No description provided for @tipOfDayTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Consiglio del giorno'**
+  String get tipOfDayTitle;
+
+  /// No description provided for @tip01.
+  ///
+  /// In it, this message translates to:
+  /// **'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.'**
+  String get tip01;
+
+  /// No description provided for @tip02.
+  ///
+  /// In it, this message translates to:
+  /// **'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.'**
+  String get tip02;
+
+  /// No description provided for @tip03.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.'**
+  String get tip03;
+
+  /// No description provided for @tip04.
+  ///
+  /// In it, this message translates to:
+  /// **'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.'**
+  String get tip04;
+
+  /// No description provided for @tip05.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.'**
+  String get tip05;
+
+  /// No description provided for @tip06.
+  ///
+  /// In it, this message translates to:
+  /// **'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.'**
+  String get tip06;
+
+  /// No description provided for @tip07.
+  ///
+  /// In it, this message translates to:
+  /// **'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.'**
+  String get tip07;
+
+  /// No description provided for @tip08.
+  ///
+  /// In it, this message translates to:
+  /// **'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.'**
+  String get tip08;
+
+  /// No description provided for @tip09.
+  ///
+  /// In it, this message translates to:
+  /// **'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.'**
+  String get tip09;
+
+  /// No description provided for @tip10.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.'**
+  String get tip10;
+
+  /// No description provided for @tip11.
+  ///
+  /// In it, this message translates to:
+  /// **'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.'**
+  String get tip11;
+
+  /// No description provided for @tip12.
+  ///
+  /// In it, this message translates to:
+  /// **'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.'**
+  String get tip12;
+
+  /// No description provided for @tip13.
+  ///
+  /// In it, this message translates to:
+  /// **'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.'**
+  String get tip13;
+
+  /// No description provided for @tip14.
+  ///
+  /// In it, this message translates to:
+  /// **'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.'**
+  String get tip14;
+
+  /// No description provided for @tip15.
+  ///
+  /// In it, this message translates to:
+  /// **'\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.'**
+  String get tip15;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -2928,7 +3031,8 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'it'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'it'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

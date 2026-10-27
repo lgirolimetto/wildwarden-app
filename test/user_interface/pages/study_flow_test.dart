@@ -56,8 +56,7 @@ void main() {
       await scrollAndTap(tester, find.byKey(const ValueKey('add-desiderata-Eranthis hyemalis')));
       await scrollToTop(tester);
       expect(find.text('Incontra una specie'), findsOneWidget);
-      await scrollTo(tester, find.byKey(const ValueKey('desiderata-Eranthis hyemalis')));
-      expect(find.byKey(const ValueKey('desiderata-Eranthis hyemalis')), findsOneWidget);
+      expect(Get.find<ProgressController>().state.desiderata, {'Eranthis hyemalis'});
     });
 
     testWidgets('incontrare una desiderata la compie: PE e missione successiva', (tester) async {
@@ -71,9 +70,11 @@ void main() {
       await pumpDruidApp(tester);
       final xpBefore = Get.find<ProgressController>().state.xp;
 
-      await scrollAndTap(tester, find.byKey(const ValueKey('simulate-desiderata-Eranthis hyemalis')));
+      await openTab(tester, 'Erbario');
+      await scrollAndTap(tester, find.byKey(const ValueKey('simulate-Eranthis hyemalis')));
 
       expect(Get.find<ProgressController>().state.xp - xpBefore, XpRules.desiderataFulfilled);
+      await openTab(tester, 'Home');
       await scrollToTop(tester);
       expect(find.byKey(const ValueKey('mission-firstRecipe')), findsOneWidget);
     });
@@ -380,13 +381,13 @@ void main() {
       }
     });
 
-    testWidgets('curiosità del giorno: consegnata all\'apertura dello Studio', (tester) async {
+    testWidgets('il consiglio del giorno al posto della curiosità (che per ora non si consegna)', (tester) async {
       registerTestDependencies(events: [_met('Eranthis hyemalis')]);
       await pumpDruidApp(tester);
-      await tester.pumpAndSettle();
+      await scrollTo(tester, find.byKey(const ValueKey('tip-of-day')));
 
-      expect(Get.find<ProgressController>().state.revealedFunFacts, hasLength(1));
-      expect(find.textContaining('posto tra le piante spontanee'), findsOneWidget);
+      expect(find.text('Consiglio del giorno'), findsOneWidget);
+      expect(Get.find<ProgressController>().state.revealedFunFacts, isEmpty);
     });
 
     testWidgets('azzerare i progressi richiede due tocchi', (tester) async {

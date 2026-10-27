@@ -127,7 +127,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return 'Prossimo Rango: $rank a $xpString PE';
@@ -186,7 +188,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get qFamilyFromPhoto => 'A quale famiglia appartiene la pianta in foto?';
+  String get qFamilyFromPhoto =>
+      'A quale famiglia appartiene la pianta in foto?';
 
   @override
   String qRelativeOf(String name) {
@@ -297,7 +300,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get summaryMastery => 'Maestria raggiunta!';
 
   @override
-  String get summaryNewFunFacts => 'Nuove Curiosità in arrivo: le riceverai una al giorno.';
+  String get summaryNewFunFacts =>
+      'Nuove Curiosità in arrivo: le riceverai una al giorno.';
 
   @override
   String get saveToNotebook => 'Salva nel Taccuino';
@@ -319,7 +323,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get notebookSearch => 'Cerca: famiglia, mese, specie, note…';
 
   @override
-  String get notebookEmpty => 'Ancora vuoto: durante lo studio usa \"Salva nel Taccuino\".';
+  String get notebookEmpty =>
+      'Ancora vuoto: durante lo studio usa \"Salva nel Taccuino\".';
 
   @override
   String get notebookNoResults => 'Nessun risultato.';
@@ -380,7 +385,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get reviewsNone => 'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.';
+  String get reviewsNone =>
+      'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.';
 
   @override
   String get reviewsStart => 'Ripassa';
@@ -389,16 +395,19 @@ class AppLocalizationsIt extends AppLocalizations {
   String get desiderataTitle => 'Desiderata';
 
   @override
-  String get desiderataEmpty => 'Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.';
+  String get desiderataEmpty =>
+      'Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.';
 
   @override
   String get desiderataSuggestions => 'In stagione adesso';
 
   @override
-  String get seasonalFirstHint => 'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.';
+  String get seasonalFirstHint =>
+      'Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.';
 
   @override
-  String get seasonalHint => 'Puoi studiarle subito o segnarle come Desiderata da cercare.';
+  String get seasonalHint =>
+      'Puoi studiarle subito o segnarle come Desiderata da cercare.';
 
   @override
   String get seasonalStudy => 'Studia';
@@ -431,7 +440,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get yourSpecies => 'Le tue specie';
 
   @override
-  String get yourSpeciesEmpty => 'Nessuna specie in studio: comincia da una di quelle in stagione.';
+  String get yourSpeciesEmpty =>
+      'Nessuna specie in studio: comincia da una di quelle in stagione.';
 
   @override
   String studyLevelButton(int level) {
@@ -925,7 +935,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get summaryXpToCash => 'I PE dello studio di questa specie si Incassano quando ne Attingi la prima Essenza.';
+  String get summaryXpToCash =>
+      'I PE dello studio di questa specie si Incassano quando ne Attingi la prima Essenza.';
 
   @override
   String visStored(int vis) {
@@ -936,7 +947,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get drawExhausted => 'Esaurita: torna pronta domani';
 
   @override
-  String get drawNeedsEncounter => 'Per Attingere serve una Stazione: prima Incontrala';
+  String get drawNeedsEncounter =>
+      'Per Attingere serve una Stazione: prima Incontrala';
 
   @override
   String get gradeCommon => 'Comune';
@@ -973,7 +985,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get debugGradeSampleIngredient => 'Erba d\'argento';
 
   @override
-  String get debugGradeSampleEffect => 'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).';
+  String get debugGradeSampleEffect =>
+      'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).';
 
   @override
   String get badgeEncountered => 'Incontrata il';
@@ -994,13 +1007,16 @@ class AppLocalizationsIt extends AppLocalizations {
   String get legendBadges => 'Bollini';
 
   @override
-  String get legendProtected => 'Specie Protetta dalla legge: si guarda e si fotografa';
+  String get legendProtected =>
+      'Specie Protetta dalla legge: si guarda e si fotografa';
 
   @override
-  String get legendEncountered => 'Specie Incontrata, con la data dell\'Incontro';
+  String get legendEncountered =>
+      'Specie Incontrata, con la data dell\'Incontro';
 
   @override
-  String get legendXpToCash => 'PE da Incassare alla prima Essenza della specie';
+  String get legendXpToCash =>
+      'PE da Incassare alla prima Essenza della specie';
 
   @override
   String get legendLevels => 'Livelli di studio';
@@ -1136,7 +1152,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitWhenFrost => 'Quando fa sotto zero: brina e ghiaccio.';
 
   @override
-  String get traitWhenRain => 'Mentre piove. Con il temporale la Raccolta è sospesa.';
+  String get traitWhenRain =>
+      'Mentre piove. Con il temporale la Raccolta è sospesa.';
 
   @override
   String get traitWhenFog => 'Quando c\'è nebbia.';
@@ -1145,20 +1162,24 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitWhenSun => 'Con il sole e poche nuvole.';
 
   @override
-  String get traitWhenMoon => 'Tutto il giorno della luna piena: non serve uscire di notte.';
+  String get traitWhenMoon =>
+      'Tutto il giorno della luna piena: non serve uscire di notte.';
 
   @override
   String get traitWhenDew =>
       'Dall\'alba a circa due ore dopo, se la notte è stata fresca e serena: l\'erba è ancora bagnata.';
 
   @override
-  String get traitWhenDusk => 'Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.';
+  String get traitWhenDusk =>
+      'Da circa un\'ora prima del tramonto fino al tramonto, mai a buio fatto.';
 
   @override
-  String get traitWhenDawn => 'Dalle prime luci a circa un\'ora dopo il sorgere del sole.';
+  String get traitWhenDawn =>
+      'Dalle prime luci a circa un\'ora dopo il sorgere del sole.';
 
   @override
-  String get traitWhenNewMoon => 'Tutto il giorno della luna nuova: non serve uscire di notte.';
+  String get traitWhenNewMoon =>
+      'Tutto il giorno della luna nuova: non serve uscire di notte.';
 
   @override
   String get traitWhenWaxingMoon =>
@@ -1173,20 +1194,40 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String recipeBookPlates(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count Tavole', one: '1 Tavola');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Tavole',
+      one: '1 Tavola',
+    );
     return '$_temp0';
   }
 
   @override
   String recipeBookPagesSummary(int pages, int total, int complete) {
-    String _temp0 = intl.Intl.pluralLogic(pages, locale: localeName, other: '$pages Pagine', one: '1 Pagina');
-    String _temp1 = intl.Intl.pluralLogic(complete, locale: localeName, other: '$complete complete', one: '1 completa');
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages Pagine',
+      one: '1 Pagina',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      complete,
+      locale: localeName,
+      other: '$complete complete',
+      one: '1 completa',
+    );
     return '$_temp0 su $total · $_temp1';
   }
 
   @override
   String recipeBookPageCount(int known, int total) {
-    String _temp0 = intl.Intl.pluralLogic(known, locale: localeName, other: '$known Tavole', one: '1 Tavola');
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Tavole',
+      one: '1 Tavola',
+    );
     return '$_temp0 su $total';
   }
 
@@ -1204,7 +1245,12 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String recipeBookSpeciesLink(int known, int total) {
-    String _temp0 = intl.Intl.pluralLogic(known, locale: localeName, other: '$known Tavole', one: '1 Tavola');
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Tavole',
+      one: '1 Tavola',
+    );
     return 'Ricettario · $_temp0 su $total';
   }
 
@@ -1212,7 +1258,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get recipeMonths => 'Quando si può fare';
 
   @override
-  String get recipeNever => 'Mai: gli ingredienti non si incontrano negli stessi mesi';
+  String get recipeNever =>
+      'Mai: gli ingredienti non si incontrano negli stessi mesi';
 
   @override
   String get recipeEffect => 'Effetto';
@@ -1234,14 +1281,16 @@ class AppLocalizationsIt extends AppLocalizations {
       'Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).';
 
   @override
-  String get effectClarityText => 'Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).';
+  String get effectClarityText =>
+      'Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).';
 
   @override
   String get effectOmenText =>
       'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).';
 
   @override
-  String get effectAbundanceText => 'Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).';
+  String get effectAbundanceText =>
+      'Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).';
 
   @override
   String mythicNumber(String number) {
@@ -1298,7 +1347,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String labBalanceXp(int xp) {
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return '$xpString PE da spendere';
@@ -1327,10 +1378,12 @@ class AppLocalizationsIt extends AppLocalizations {
   String get troveGradeMythic => 'mitico';
 
   @override
-  String get troveContentsCommon => 'Quasi sempre una Comune, a volte una Non comune';
+  String get troveContentsCommon =>
+      'Quasi sempre una Comune, a volte una Non comune';
 
   @override
-  String get troveContentsUncommon => 'Per lo più Non comuni, a volte una Comune o una Rara';
+  String get troveContentsUncommon =>
+      'Per lo più Non comuni, a volte una Comune o una Rara';
 
   @override
   String get troveContentsRare => 'Per lo più Rare, a volte una Non comune';
@@ -1340,7 +1393,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String troveSpend(int cost) {
-    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String costString = costNumberFormat.format(cost);
 
     return 'Spendi $costString PE';
@@ -1348,7 +1403,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String troveNeedXp(int xp) {
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return 'Ti mancano $xpString PE';
@@ -1356,9 +1413,13 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String troveCostMissing(int cost, int xp) {
-    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String costString = costNumberFormat.format(cost);
-    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String xpString = xpNumberFormat.format(xp);
 
     return 'Costa $costString PE: te ne mancano $xpString';
@@ -1386,7 +1447,12 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String labRecycled(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count riciclati', one: '1 riciclato');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count riciclati',
+      one: '1 riciclato',
+    );
     return '$_temp0';
   }
 
@@ -1395,20 +1461,25 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String welcomeGiftBody(int full, int price) {
-    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
     final String fullString = fullNumberFormat.format(full);
-    final intl.NumberFormat priceNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
     final String priceString = priceNumberFormat.format(price);
 
     return 'Il tuo primo Bottino dell\'Esperienza · raro a prezzo di favore: $priceString PE invece di $fullString.';
   }
 
   @override
-  String get welcomeGiftWaiting => 'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.';
+  String get welcomeGiftWaiting =>
+      'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.';
 
   @override
   String welcomeGiftRedeem(int price) {
-    final intl.NumberFormat priceNumberFormat = intl.NumberFormat.decimalPattern(localeName);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
     final String priceString = priceNumberFormat.format(price);
 
     return 'Riscatta · $priceString PE';
@@ -1463,7 +1534,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get recipeEffectUnknown => 'Da scoprire: manca un componente del nome.';
+  String get recipeEffectUnknown =>
+      'Da scoprire: manca un componente del nome.';
 
   @override
   String get debugGrantXp => 'Aggiungi 5.000 PE';
@@ -1491,7 +1563,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get recycleNothing => 'Con i riciclati che hai non completi ancora nessun componente.';
+  String get recycleNothing =>
+      'Con i riciclati che hai non completi ancora nessun componente.';
 
   @override
   String recycleDone(String name) {
@@ -1526,13 +1599,23 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String pantryEssences(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count Essenze', one: '1 Essenza');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze',
+      one: '1 Essenza',
+    );
     return '$_temp0';
   }
 
   @override
   String pantrySpeciesSummary(int count, int vis) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count Essenze', one: '1 Essenza');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze',
+      one: '1 Essenza',
+    );
     return '$_temp0 · $vis Vis';
   }
 
@@ -1575,13 +1658,23 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String readyCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count pronte', one: '1 pronta');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pronte',
+      one: '1 pronta',
+    );
     return '$_temp0';
   }
 
   @override
   String shelfCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count pozioni', one: '1 pozione');
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pozioni',
+      one: '1 pozione',
+    );
     return '$_temp0';
   }
 
@@ -1650,7 +1743,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get shelfEmpty => 'Lo Scaffale è vuoto: le pozioni che prepari restano qui.';
+  String get shelfEmpty =>
+      'Lo Scaffale è vuoto: le pozioni che prepari restano qui.';
 
   @override
   String recipeBestPotency(int potency) {
@@ -1771,4 +1865,67 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get erbarioSpecies => 'Specie';
+
+  @override
+  String get tipOfDayTitle => 'Consiglio del giorno';
+
+  @override
+  String get tip01 =>
+      'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.';
+
+  @override
+  String get tip02 =>
+      'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.';
+
+  @override
+  String get tip03 =>
+      'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.';
+
+  @override
+  String get tip04 =>
+      'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.';
+
+  @override
+  String get tip05 =>
+      'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.';
+
+  @override
+  String get tip06 =>
+      'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.';
+
+  @override
+  String get tip07 =>
+      'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.';
+
+  @override
+  String get tip08 =>
+      'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.';
+
+  @override
+  String get tip09 =>
+      'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.';
+
+  @override
+  String get tip10 =>
+      'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.';
+
+  @override
+  String get tip11 =>
+      'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.';
+
+  @override
+  String get tip12 =>
+      'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.';
+
+  @override
+  String get tip13 =>
+      'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.';
+
+  @override
+  String get tip14 =>
+      'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.';
+
+  @override
+  String get tip15 =>
+      '\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.';
 }

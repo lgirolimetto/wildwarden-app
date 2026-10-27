@@ -1463,5 +1463,21 @@
   "legendPotions": "Pozioni",
   "legendVessel": "Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L'icona in alto a destra è l'effetto.",
   "viewMet": "Incontrate",
-  "erbarioSpecies": "Specie"
+  "erbarioSpecies": "Specie",
+  "tipOfDayTitle": "Consiglio del giorno",
+  "tip01": "Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.",
+  "tip02": "La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.",
+  "tip03": "Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.",
+  "tip04": "Nel Bottino dell'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell'Esperienza.",
+  "tip05": "Le Mitiche escono solo dal Bottino dell'Esperienza mitico.",
+  "tip06": "I doppioni del Bottino dell'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.",
+  "tip07": "Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.",
+  "tip08": "Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.",
+  "tip09": "Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.",
+  "tip10": "Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.",
+  "tip11": "Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.",
+  "tip12": "I Tratti dicono in che condizioni hai attinto un'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.",
+  "tip13": "I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.",
+  "tip14": "Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.",
+  "tip15": "\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono."
 }
