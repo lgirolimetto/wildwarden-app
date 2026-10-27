@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
+import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
 
@@ -59,17 +60,19 @@ List<RecycleOption> recycleOptions(Catalog catalog, GameState state) => [
     ],
 ];
 
-/// Le Vis da spendere per [amount], prese dalle specie che ne hanno di più (a pari Vis in ordine di nome); `null` se
-/// non bastano.
+/// Le Vis da spendere per [amount], per specie: prese dalle Essenze meno preziose (vedi [compareBySpendOrder]), così
+/// quelle con i tratti restano per le ricette; `null` se non bastano.
 Map<String, int>? visToSpend(GameState state, int amount) {
-  final stocks = state.vis.entries.where((e) => e.value > 0).toList()
-    ..sort((a, b) => b.value != a.value ? b.value.compareTo(a.value) : a.key.compareTo(b.key));
+  final order = [
+    for (final e in state.essences)
+      if (e.vis > 0) e,
+  ]..sort(compareBySpendOrder);
   final taken = <String, int>{};
   var left = amount;
-  for (final MapEntry(key: sci, value: available) in stocks) {
+  for (final e in order) {
     if (left <= 0) break;
-    final take = available < left ? available : left;
-    taken[sci] = take;
+    final take = e.vis < left ? e.vis : left;
+    taken[e.speciesSci] = (taken[e.speciesSci] ?? 0) + take;
     left -= take;
   }
   return left > 0 ? null : taken;

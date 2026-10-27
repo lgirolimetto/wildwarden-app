@@ -296,12 +296,6 @@ abstract class AppLocalizations {
   /// **'Home'**
   String get navStudy;
 
-  /// No description provided for @navRecipes.
-  ///
-  /// In it, this message translates to:
-  /// **'Ricettario'**
-  String get navRecipes;
-
   /// No description provided for @rankApprentice.
   ///
   /// In it, this message translates to:
@@ -2581,6 +2575,72 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'mitici'**
   String get recycledGradeMythic;
+
+  /// No description provided for @labTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get labTitle;
+
+  /// No description provided for @navLaboratory.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get navLaboratory;
+
+  /// No description provided for @pantryTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispensa'**
+  String get pantryTitle;
+
+  /// No description provided for @pantryEssences.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Essenza} other{{count} Essenze}}'**
+  String pantryEssences(int count);
+
+  /// No description provided for @pantrySpeciesSummary.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Essenza} other{{count} Essenze}} · {vis} Vis'**
+  String pantrySpeciesSummary(int count, int vis);
+
+  /// No description provided for @pantryPurity.
+  ///
+  /// In it, this message translates to:
+  /// **'Purezza {percent} %'**
+  String pantryPurity(int percent);
+
+  /// No description provided for @pantryVis.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis'**
+  String pantryVis(int vis);
+
+  /// No description provided for @pantryNoTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessun tratto'**
+  String get pantryNoTraits;
+
+  /// No description provided for @pantryEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.'**
+  String get pantryEmpty;
+
+  /// No description provided for @debugSimulatePantry.
+  ///
+  /// In it, this message translates to:
+  /// **'Simula una Dispensa'**
+  String get debugSimulatePantry;
+
+  /// No description provided for @debugSimulatePantryDone.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa'**
+  String debugSimulatePantryDone(int count);
 }
 
 class _AppLocalizationsDelegate

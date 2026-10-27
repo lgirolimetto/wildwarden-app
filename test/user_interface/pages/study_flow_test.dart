@@ -279,7 +279,7 @@ void main() {
     ) async {
       registerTestDependencies(events: [_passed('Malva sylvestris')]);
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricettario');
+      await openTab(tester, 'Laboratorio');
 
       final malva = recipeBookOf(smallCatalog()).pageOf('Malva sylvestris')!;
       expect(find.text('1 Tavola'), findsOneWidget);
@@ -313,7 +313,7 @@ void main() {
         events: [RecipeLearned(recipeId: frosty.id, origin: RecipeOrigin.trove, occurredAt: _feb)],
       );
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricettario');
+      await openTab(tester, 'Laboratorio');
 
       await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
       await scrollAndTap(tester, find.byKey(ValueKey('plate-${frosty.id}')));
@@ -325,7 +325,7 @@ void main() {
     ) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricettario');
+      await openTab(tester, 'Laboratorio');
 
       expect(find.byKey(const ValueKey('recipe-book-empty')), findsOneWidget);
       expect(find.text('Mitiche · Provincia di Bologna'), findsOneWidget);

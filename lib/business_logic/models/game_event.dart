@@ -75,6 +75,8 @@ sealed class GameEvent {
         simulated: d['simulated'] as bool,
         // Assenti negli eventi salvati prima dello step 4 della tappa B.
         vis: d['vis'] as int? ?? 0,
+        // Assente prima della Dispensa (step 7 della tappa C): la si ricava dal livello di studio di allora.
+        purity: (d['purity'] as num?)?.toDouble(),
         xp: d['xp'] as int? ?? 0,
         occurredAt: occurredAt,
       ),
@@ -214,6 +216,10 @@ class EssenceDrawn extends GameEvent {
 
   /// Unità di Vis ("la linfa sottile delle piante") immagazzinate con questa raccolta.
   final int vis;
+
+  /// Purezza dell'Essenza, dal livello di studio della specie in quel momento; `null` negli eventi di prima della
+  /// Dispensa.
+  final double? purity;
   @override
   final int xp;
 
@@ -222,6 +228,7 @@ class EssenceDrawn extends GameEvent {
     this.traits = const [],
     required this.simulated,
     this.vis = 0,
+    this.purity,
     this.xp = 0,
     required super.occurredAt,
   });
@@ -235,6 +242,7 @@ class EssenceDrawn extends GameEvent {
     'traits': traits,
     'simulated': simulated,
     'vis': vis,
+    'purity': ?purity,
     'xp': xp,
   };
 }

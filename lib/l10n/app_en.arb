@@ -33,7 +33,6 @@
   "levelWhereWhen": "Its habitat",
   "levelMastery": "Mastery",
   "navStudy": "Home",
-  "navRecipes": "Recipe Book",
   "rankApprentice": "Apprentice",
   "rankWanderer": "Wanderer",
   "rankSeeker": "Seeker",
@@ -413,5 +412,16 @@
   "recycledGradeCommon": "common",
   "recycledGradeUncommon": "uncommon",
   "recycledGradeRare": "rare",
-  "recycledGradeMythic": "mythic"
+  "recycledGradeMythic": "mythic",
+  "labTitle": "Laboratory",
+  "navLaboratory": "Laboratory",
+  "pantryTitle": "Pantry",
+  "pantryEssences": "{count, plural, =1{1 Essence} other{{count} Essences}}",
+  "pantrySpeciesSummary": "{count, plural, =1{1 Essence} other{{count} Essences}} · {vis} Vis",
+  "pantryPurity": "Purity {percent}%",
+  "pantryVis": "{vis} Vis",
+  "pantryNoTraits": "No traits",
+  "pantryEmpty": "The Pantry is empty: the Essences you draw from stations stay here, with their traits, purity and Vis. For now you draw with \"Simulate drawing\" in the species card.",
+  "debugSimulatePantry": "Simulate a Pantry",
+  "debugSimulatePantryDone": "{count, plural, =1{1 Essence added} other{{count} Essences added}} to the Pantry"
 }

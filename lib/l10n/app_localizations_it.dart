@@ -112,9 +112,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get navStudy => 'Home';
 
   @override
-  String get navRecipes => 'Ricettario';
-
-  @override
   String get rankApprentice => 'Apprendista';
 
   @override
@@ -1612,4 +1609,66 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get recycledGradeMythic => 'mitici';
+
+  @override
+  String get labTitle => 'Laboratorio';
+
+  @override
+  String get navLaboratory => 'Laboratorio';
+
+  @override
+  String get pantryTitle => 'Dispensa';
+
+  @override
+  String pantryEssences(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze',
+      one: '1 Essenza',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pantrySpeciesSummary(int count, int vis) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze',
+      one: '1 Essenza',
+    );
+    return '$_temp0 · $vis Vis';
+  }
+
+  @override
+  String pantryPurity(int percent) {
+    return 'Purezza $percent %';
+  }
+
+  @override
+  String pantryVis(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get pantryNoTraits => 'Nessun tratto';
+
+  @override
+  String get pantryEmpty =>
+      'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.';
+
+  @override
+  String get debugSimulatePantry => 'Simula una Dispensa';
+
+  @override
+  String debugSimulatePantryDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze aggiunte',
+      one: '1 Essenza aggiunta',
+    );
+    return '$_temp0 alla Dispensa';
+  }
 }

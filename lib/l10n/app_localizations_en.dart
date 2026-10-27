@@ -112,9 +112,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navStudy => 'Home';
 
   @override
-  String get navRecipes => 'Recipe Book';
-
-  @override
   String get rankApprentice => 'Apprentice';
 
   @override
@@ -1605,4 +1602,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recycledGradeMythic => 'mythic';
+
+  @override
+  String get labTitle => 'Laboratory';
+
+  @override
+  String get navLaboratory => 'Laboratory';
+
+  @override
+  String get pantryTitle => 'Pantry';
+
+  @override
+  String pantryEssences(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences',
+      one: '1 Essence',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pantrySpeciesSummary(int count, int vis) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences',
+      one: '1 Essence',
+    );
+    return '$_temp0 · $vis Vis';
+  }
+
+  @override
+  String pantryPurity(int percent) {
+    return 'Purity $percent%';
+  }
+
+  @override
+  String pantryVis(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get pantryNoTraits => 'No traits';
+
+  @override
+  String get pantryEmpty =>
+      'The Pantry is empty: the Essences you draw from stations stay here, with their traits, purity and Vis. For now you draw with \"Simulate drawing\" in the species card.';
+
+  @override
+  String get debugSimulatePantry => 'Simulate a Pantry';
+
+  @override
+  String debugSimulatePantryDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences added',
+      one: '1 Essence added',
+    );
+    return '$_temp0 to the Pantry';
+  }
 }

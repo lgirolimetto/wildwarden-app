@@ -3,10 +3,7 @@ import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
-import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
-import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
-import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/mythics_page.dart';
@@ -17,80 +14,77 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Il Ricettario: la collezione delle Tavole (capitolo 02, "Ricettario, Tavole, Laboratorio e Zone"). In cima le
-/// Mitiche della Zona, poi le Pagine delle piante di cui conosci almeno una Tavola, dalla più recente. Si guarda e si
-/// sfoglia; si prepara nel Laboratorio.
-class RecipeBookPage extends StatelessWidget {
-  const RecipeBookPage({super.key});
+/// Il Ricettario, la prima linguetta del Laboratorio: la collezione delle Tavole (capitolo 02, "Ricettario, Tavole,
+/// Laboratorio e Zone"). In cima le Mitiche della Zona, poi le Pagine delle piante di cui conosci almeno una Tavola,
+/// dalla più recente. Si guarda e si sfoglia. [header] è la testata del Laboratorio (titolo e linguette), che scorre con
+/// la lista.
+class RecipeBookView extends StatelessWidget {
+  final Catalog catalog;
+  final GameState state;
+  final Widget header;
+
+  const RecipeBookView({super.key, required this.catalog, required this.state, required this.header});
+
+  /// Le Tavole che hai, Mitiche comprese: il numero nella testata del Laboratorio.
+  static int platesOf(Catalog catalog, GameState state) =>
+      collectedPages(catalog, state).fold(0, (sum, p) => sum + p.knownCount) + knownMythicIds(catalog, state).length;
 
   @override
-  Widget build(BuildContext context) => DenseArea(
-    paintBackground: true,
-    child: GameDataBuilder(
-      builder: (context, catalog, state, _) {
-        final pages = collectedPages(catalog, state);
-        final plates = pages.fold(0, (sum, p) => sum + p.knownCount) + knownMythicIds(catalog, state).length;
-        return CustomScrollView(
-          slivers: [
-            SliverPadding(
-              padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, Gaps.l),
-              sliver: SliverToBoxAdapter(
-                child: ClayPageHeader(
-                  title: context.l10n.recipeBookTitle,
-                  icon: Icons.collections_bookmark_rounded,
-                  iconColor: context.druid.levelColor(4),
-                  trailing: Pill(context.l10n.recipeBookPlates(plates), key: const ValueKey('recipe-book-count')),
-                ),
+  Widget build(BuildContext context) {
+    final pages = collectedPages(catalog, state);
+    return CustomScrollView(
+      key: const ValueKey('recipe-book'),
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, Gaps.l),
+          sliver: SliverToBoxAdapter(child: header),
+        ),
+        if (catalog.mythics.isNotEmpty)
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.l),
+            sliver: SliverToBoxAdapter(
+              child: _MythicsRow(catalog: catalog, state: state),
+            ),
+          ),
+        if (pages.isEmpty)
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.s, Gaps.l, homeBottomInset),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                context.l10n.recipesEmpty,
+                key: const ValueKey('recipe-book-empty'),
+                style: TextStyle(color: context.druid.hint),
               ),
             ),
-            if (catalog.mythics.isNotEmpty)
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.l),
-                sliver: SliverToBoxAdapter(
-                  child: _MythicsRow(catalog: catalog, state: state),
+          )
+        else ...[
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.m),
+            sliver: SliverToBoxAdapter(
+              child: Text(
+                context.l10n.recipeBookPagesSummary(
+                  pages.length,
+                  recipeBookOf(catalog).pages.length,
+                  pages.where((p) => p.complete).length,
                 ),
+                key: const ValueKey('recipe-book-pages-summary'),
+                style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
               ),
-            if (pages.isEmpty)
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.s, Gaps.l, homeBottomInset),
-                sliver: SliverToBoxAdapter(
-                  child: Text(
-                    context.l10n.recipesEmpty,
-                    key: const ValueKey('recipe-book-empty'),
-                    style: TextStyle(color: context.druid.hint),
-                  ),
-                ),
-              )
-            else ...[
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.m),
-                sliver: SliverToBoxAdapter(
-                  child: Text(
-                    context.l10n.recipeBookPagesSummary(
-                      pages.length,
-                      recipeBookOf(catalog).pages.length,
-                      pages.where((p) => p.complete).length,
-                    ),
-                    key: const ValueKey('recipe-book-pages-summary'),
-                    style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
-                  ),
-                ),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, homeBottomInset),
-                sliver: SliverList.separated(
-                  itemCount: pages.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: Gaps.m),
-                  // Un RepaintBoundary per riga: scorrendo non si ridipingono tutte (CLAUDE.md, prestazioni).
-                  itemBuilder: (context, i) => RepaintBoundary(child: _PageRow(collected: pages[i])),
-                ),
-              ),
-            ],
-          ],
-        );
-      },
-    ),
-  );
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, homeBottomInset),
+            sliver: SliverList.separated(
+              itemCount: pages.length,
+              separatorBuilder: (_, _) => const SizedBox(height: Gaps.m),
+              // Un RepaintBoundary per riga: scorrendo non si ridipingono tutte (CLAUDE.md, prestazioni).
+              itemBuilder: (context, i) => RepaintBoundary(child: _PageRow(collected: pages[i])),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
 }
 
 /// La riga speciale delle Mitiche della Zona: c'è sempre, anche a 0, come promessa di cosa si può trovare.

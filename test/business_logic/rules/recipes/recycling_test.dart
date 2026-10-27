@@ -46,7 +46,10 @@ void main() {
       ]),
     ]);
     final vis = visToSpend(before, 10)!;
-    expect(vis, {'Malva sylvestris': 8, 'Fagus sylvatica': 2}, reason: 'prima le specie con più Vis');
+    expect(vis, {
+      'Malva sylvestris': 8,
+      'Fagus sylvatica': 2,
+    }, reason: 'prima le Essenze meno preziose: a pari tratti e purezza, le più vecchie');
     final after = before.apply(
       RecipeRecycled(recipeId: uncommon.id, fromGrade: Grade.uncommon, used: 3, vis: vis, occurredAt: feb),
     );

@@ -104,6 +104,15 @@ void main() {
     expect(await controller.simulateRecipeBook(), 0, reason: 'le Tavole già imparate non si ripetono');
   });
 
+  test('simulare una Dispensa: Essenze di più piante nei giorni scorsi, con i tratti d\'elezione', () async {
+    final drawn = await controller.simulatePantry();
+
+    expect(controller.state.essences, hasLength(drawn));
+    expect(controller.state.vis.keys, hasLength(4), reason: 'il catalogo di prova ha 4 piante');
+    expect(controller.state.essences.every((e) => e.drawnAt.isBefore(clock.now())), isTrue);
+    expect(controller.state.essences.any((e) => e.traits.isNotEmpty), isTrue);
+  });
+
   test('azzerare cancella tutti i progressi', () async {
     await controller.encounter('Eranthis hyemalis', method: EncounterMethod.simulated);
 

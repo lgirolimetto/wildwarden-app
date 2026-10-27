@@ -50,7 +50,6 @@
   "levelWhereWhen": "Il suo ambiente",
   "levelMastery": "Maestria",
   "navStudy": "Home",
-  "navRecipes": "Ricettario",
   "rankApprentice": "Apprendista",
   "rankWanderer": "Viandante",
   "rankSeeker": "Cercatore",
@@ -1288,5 +1287,54 @@
   "recycledGradeCommon": "comuni",
   "recycledGradeUncommon": "non comuni",
   "recycledGradeRare": "rari",
-  "recycledGradeMythic": "mitici"
+  "recycledGradeMythic": "mitici",
+  "labTitle": "Laboratorio",
+  "navLaboratory": "Laboratorio",
+  "pantryTitle": "Dispensa",
+  "pantryEssences": "{count, plural, =1{1 Essenza} other{{count} Essenze}}",
+  "@pantryEssences": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pantrySpeciesSummary": "{count, plural, =1{1 Essenza} other{{count} Essenze}} · {vis} Vis",
+  "@pantrySpeciesSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "pantryPurity": "Purezza {percent} %",
+  "@pantryPurity": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "pantryVis": "{vis} Vis",
+  "@pantryVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "pantryNoTraits": "Nessun tratto",
+  "pantryEmpty": "La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.",
+  "debugSimulatePantry": "Simula una Dispensa",
+  "debugSimulatePantryDone": "{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa",
+  "@debugSimulatePantryDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

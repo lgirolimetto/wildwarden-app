@@ -101,7 +101,7 @@ void main() {
       ],
     );
     await pumpDruidApp(tester);
-    await openTab(tester, 'Ricettario');
+    await openTab(tester, 'Laboratorio');
     await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
 
     expect(find.text(rare.name('it', missing: 2)), findsOneWidget);

@@ -7,6 +7,7 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
+import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
@@ -84,6 +85,7 @@ class ProgressController extends LoadableController<GameState> {
         traits: traits,
         simulated: true,
         vis: visPerDraw,
+        purity: purityOfLevel(state.levelOf(speciesSci)),
         xp: XpRules.essence(drawnToday: drawsToday(state, now)),
         occurredAt: now,
       ),
@@ -159,6 +161,47 @@ class ProgressController extends LoadableController<GameState> {
   /// Offre il regalo "bentornato" se è il momento (una volta sola).
   Future<void> offerWelcomeGiftIfDue() async {
     if (welcomeGiftDue(state, now)) await record(WelcomeGiftOffered(occurredAt: now));
+  }
+
+  /// Strumento di prova: una Dispensa piena, per vedere le Essenze e preparare pozioni senza uscire. Per 10 piante
+  /// (prima quelle delle Pagine del Ricettario) le incontra, se serve, e attinge da 2 a 4 Essenze nei giorni scorsi,
+  /// spesso con uno o due dei tratti d'elezione della pianta. Sempre le stesse (seme fisso). Restituisce quante.
+  Future<int> simulatePantry() async {
+    final catalog = _catalog();
+    if (catalog == null) return 0;
+    final random = Random(31);
+    final book = recipeBookOf(catalog);
+    final collected = collectedPages(catalog, state).map((p) => p.page);
+    final pages = [...collected, ...book.pages.where((p) => !collected.contains(p))].take(10).toList();
+    var drawn = 0;
+    for (final (i, page) in pages.indexed) {
+      final sci = page.plant.sci;
+      if (!state.hasEncountered(sci)) {
+        await record(
+          SpeciesEncountered(
+            speciesSci: sci,
+            method: EncounterMethod.simulated,
+            occurredAt: now.subtract(Duration(days: 20 + i)),
+          ),
+        );
+      }
+      final count = 2 + random.nextInt(3);
+      for (var j = 0; j < count; j++) {
+        final traits = [...page.favouredTraits]..shuffle(random);
+        await record(
+          EssenceDrawn(
+            speciesSci: sci,
+            traits: [for (final t in traits.take(random.nextInt(3))) t.name],
+            simulated: true,
+            vis: visPerDraw,
+            purity: purityOfLevel(state.levelOf(sci)),
+            occurredAt: now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i)),
+          ),
+        );
+        drawn++;
+      }
+    }
+    return drawn;
   }
 
   /// Strumento di prova: PE da spendere nel Bottino senza giocare settimane.

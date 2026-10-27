@@ -144,6 +144,18 @@ class _DebugToolsState extends State<_DebugTools> {
           child: Text(context.l10n.debugSimulateRecipeBook),
         ),
         OutlinedButton(
+          key: const ValueKey('debug-simulate-pantry'),
+          onPressed: () async {
+            final drawn = await progress.simulatePantry();
+            if (context.mounted) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(context.l10n.debugSimulatePantryDone(drawn))));
+            }
+          },
+          child: Text(context.l10n.debugSimulatePantry),
+        ),
+        OutlinedButton(
           key: const ValueKey('debug-grant-xp'),
           onPressed: () => progress.grantDebugXp(5000),
           child: Text(context.l10n.debugGrantXp),

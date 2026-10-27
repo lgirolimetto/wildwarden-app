@@ -1,5 +1,7 @@
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
 
@@ -19,8 +21,8 @@ class GameState {
   /// PE spesi (Bottino dell'Esperienza, tappa C): il **saldo** è carriera meno spesi.
   final int spentXp;
 
-  /// Vis immagazzinate, per specie.
-  final Map<String, int> vis;
+  /// Le Essenze attinte, nell'ordine: la Dispensa. Le Vis stanno nelle Essenze (vedi [vis]).
+  final List<Essence> essences;
 
   /// Ultima raccolta di ogni specie: una al giorno.
   final Map<String, DateTime> lastDraws;
@@ -72,7 +74,7 @@ class GameState {
     this.xp = 0,
     this.pendingXp = const {},
     this.spentXp = 0,
-    this.vis = const {},
+    this.essences = const [],
     this.lastDraws = const {},
     this.passedLevels = const {},
     this.mastered = const {},
@@ -108,6 +110,15 @@ class GameState {
 
   /// PE che si possono spendere.
   int get balance => xp - spentXp;
+
+  /// Vis che restano, per specie (anche 0, se le hai spese tutte).
+  Map<String, int> get vis {
+    final total = <String, int>{};
+    for (final e in essences) {
+      total[e.speciesSci] = (total[e.speciesSci] ?? 0) + e.vis;
+    }
+    return total;
+  }
 
   /// Almeno un'essenza di questa specie è stata attinta: i suoi PE sono reali.
   bool hasDrawn(String speciesSci) => draws.containsKey(speciesSci);
@@ -153,14 +164,25 @@ class GameState {
       ),
       MasteryReached(:final speciesSci) => next._copy(mastered: {...mastered, speciesSci}),
       // La prima essenza di una specie incassa i suoi PE virtuali.
-      EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, vis: final gained) => next._copy(
+      EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, :final purity, vis: final gained) => next._copy(
         xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
         pendingXp: {...next.pendingXp}..remove(speciesSci),
         draws: {
           ...draws,
           speciesSci: [...?draws[speciesSci], traits],
         },
-        vis: {...vis, speciesSci: (vis[speciesSci] ?? 0) + gained},
+        essences: [
+          ...essences,
+          Essence(
+            index: essences.length,
+            speciesSci: speciesSci,
+            traits: traits,
+            // Gli eventi di prima della Dispensa non hanno la purezza: quella del livello di studio di allora.
+            purity: purity ?? purityOfLevel(levelOf(speciesSci)),
+            vis: gained,
+            drawnAt: occurredAt,
+          ),
+        ],
         lastDraws: {...lastDraws, speciesSci: occurredAt},
         essenceTimes: [...essenceTimes, occurredAt],
       ),
@@ -202,7 +224,7 @@ class GameState {
       missingPieces: missing,
       learnedRecipes: learned,
       recycled: {...recycled, event.fromGrade: (recycled[event.fromGrade] ?? 0) - event.used},
-      vis: {...vis, for (final MapEntry(key: sci, value: spent) in event.vis.entries) sci: (vis[sci] ?? 0) - spent},
+      essences: event.vis.entries.fold<List<Essence>>(essences, (list, e) => spendVis(list, e.key, e.value)),
     );
   }
 
@@ -256,7 +278,7 @@ class GameState {
     int? xp,
     Map<String, int>? pendingXp,
     int? spentXp,
-    Map<String, int>? vis,
+    List<Essence>? essences,
     Map<String, DateTime>? lastDraws,
     Map<String, int>? passedLevels,
     Set<String>? mastered,
@@ -281,7 +303,7 @@ class GameState {
     xp: xp ?? this.xp,
     pendingXp: pendingXp ?? this.pendingXp,
     spentXp: spentXp ?? this.spentXp,
-    vis: vis ?? this.vis,
+    essences: essences ?? this.essences,
     lastDraws: lastDraws ?? this.lastDraws,
     passedLevels: passedLevels ?? this.passedLevels,
     mastered: mastered ?? this.mastered,
