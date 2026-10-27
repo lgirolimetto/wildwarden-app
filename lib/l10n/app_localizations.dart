@@ -2288,17 +2288,17 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 Tavola aggiunta} other{{count} Tavole aggiunte}} al Ricettario'**
   String debugSimulateRecipeBookDone(int count);
 
-  /// No description provided for @labTitle.
+  /// No description provided for @troveTitle.
   ///
   /// In it, this message translates to:
-  /// **'Laboratorio'**
-  String get labTitle;
+  /// **'Bottino dell\'Esperienza'**
+  String get troveTitle;
 
-  /// No description provided for @labTroveTab.
+  /// No description provided for @navTrove.
   ///
   /// In it, this message translates to:
   /// **'Bottino'**
-  String get labTroveTab;
+  String get navTrove;
 
   /// No description provided for @labBalance.
   ///

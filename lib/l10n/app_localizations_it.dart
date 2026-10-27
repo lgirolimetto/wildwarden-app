@@ -1362,10 +1362,10 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get labTitle => 'Laboratorio';
+  String get troveTitle => 'Bottino dell\'Esperienza';
 
   @override
-  String get labTroveTab => 'Bottino';
+  String get navTrove => 'Bottino';
 
   @override
   String get labBalance => 'Saldo';

@@ -8,14 +8,14 @@ import '../../helpers/test_app.dart';
 void main() {
   tearDown(Get.reset);
 
-  Future<void> openSettings(WidgetTester tester) async {
+  Future<void> openSettingsPage(WidgetTester tester) async {
     await pumpDruidApp(tester);
-    await openTab(tester, 'Impostazioni');
+    await openSettings(tester);
   }
 
   testWidgets('scegliere una livrea cambia il tema dell\'app e la salva', (tester) async {
     final deps = registerTestDependencies();
-    await openSettings(tester);
+    await openSettingsPage(tester);
     final before = Theme.of(tester.element(find.byType(Scaffold))).colorScheme.primary;
 
     await tester.tap(find.byKey(const ValueKey('livery-notturna')));
@@ -28,7 +28,7 @@ void main() {
 
   testWidgets('scegliere "Scuro" attiva il tema scuro', (tester) async {
     registerTestDependencies();
-    await openSettings(tester);
+    await openSettingsPage(tester);
 
     await tester.tap(find.text('Scuro'));
     await tester.pumpAndSettle();

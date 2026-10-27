@@ -20,7 +20,7 @@ import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
-import 'package:druid_app/user_interface/pages/laboratory/laboratory_page.dart';
+import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_session_page.dart';
@@ -66,6 +66,7 @@ class _StudyHomePageState extends State<StudyHomePage> {
       final now = progress.now;
       final mission = currentMission(state, catalog);
       return ListView(
+        key: const ValueKey('study-home-list'),
         padding: const EdgeInsets.only(bottom: homeBottomInset),
         children: [
           _DioramaHeader(now: now, xp: state.xp, xpToCash: state.xpToCash),
@@ -142,10 +143,10 @@ class _DioramaHeader extends StatelessWidget {
                   ),
                   const Spacer(),
                   ClayIconButton(
-                    key: const ValueKey('open-laboratory'),
-                    icon: Icons.science_rounded,
-                    tooltip: context.l10n.labTitle,
-                    onPressed: () => Get.to<void>(() => const LaboratoryPage()),
+                    key: const ValueKey('open-settings'),
+                    icon: Icons.tune_rounded,
+                    tooltip: context.l10n.settingsTitle,
+                    onPressed: () => Get.to<void>(() => const SettingsPage()),
                   ),
                   const SizedBox(width: Gaps.s),
                   ClayIconButton(

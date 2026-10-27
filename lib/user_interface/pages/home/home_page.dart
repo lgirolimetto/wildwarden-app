@@ -5,8 +5,8 @@ import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/pages/erbario/erbario_page.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/recipe_book_page.dart';
-import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
+import 'package:druid_app/user_interface/pages/trove/trove_page.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static const _pages = [StudyHomePage(), ErbarioPage(), RecipeBookPage(), SettingsPage()];
+  static const _pages = [StudyHomePage(), ErbarioPage(), RecipeBookPage(), TrovePage()];
 
   @override
   Widget build(BuildContext context) =>
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
         (Icons.home_rounded, context.l10n.navStudy),
         (Icons.menu_book_rounded, context.l10n.navErbario),
         (Icons.collections_bookmark_rounded, context.l10n.navRecipes),
-        (Icons.tune_rounded, context.l10n.navSettings),
+        (Icons.auto_awesome_rounded, context.l10n.navTrove),
       ],
     ),
   );
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
   /// Colore in cui sfuma il contenuto sotto la barra di stato: quello dello sfondo della scheda, che nelle pagine dense
   /// (`DenseArea`) può essere diverso.
   static Color _fadeColor(BuildContext context, int tab) {
-    final dense = tab == HomeController.recipeBookTab || tab == HomeController.settingsTab;
+    final dense = tab == HomeController.recipeBookTab || tab == HomeController.troveTab;
     final denseTheme = dense ? Get.find<ThemeController>().denseTheme(Theme.of(context).brightness) : null;
     return denseTheme?.colorScheme.surface ?? context.druid.backgroundGradient.first;
   }

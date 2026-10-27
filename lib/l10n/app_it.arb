@@ -1084,8 +1084,8 @@
       }
     }
   },
-  "labTitle": "Laboratorio",
-  "labTroveTab": "Bottino",
+  "troveTitle": "Bottino dell'Esperienza",
+  "navTrove": "Bottino",
   "labBalance": "Saldo",
   "labBalanceXp": "{xp} PE da spendere",
   "@labBalanceXp": {

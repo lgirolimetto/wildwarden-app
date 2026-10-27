@@ -4,6 +4,7 @@ import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
+import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
 import 'package:druid_app/user_interface/pages/settings/grade_preview_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
@@ -17,18 +18,18 @@ class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
-  Widget build(BuildContext context) => DenseArea(paintBackground: true, child: _page(context));
+  Widget build(BuildContext context) => DenseArea(
+    child: Scaffold(
+      appBar: clayAppBar(context, title: context.l10n.settingsTitle),
+      extendBodyBehindAppBar: true,
+      body: DruidBackground(belowAppBar: true, child: _page(context)),
+    ),
+  );
 
   Widget _page(BuildContext context) => GetBuilder<ThemeController>(
     builder: (controller) => ListView(
-      padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, homeBottomInset),
+      padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.s, Gaps.l, Gaps.xl),
       children: [
-        ClayPageHeader(
-          title: context.l10n.settingsTitle,
-          icon: Icons.tune_rounded,
-          iconColor: context.colors.secondaryContainer,
-        ),
-        const SizedBox(height: Gaps.xl),
         Text(context.l10n.liveryLabel, style: context.texts.titleMedium),
         const SizedBox(height: Gaps.s),
         Wrap(

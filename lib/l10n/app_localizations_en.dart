@@ -1355,10 +1355,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get labTitle => 'Laboratory';
+  String get troveTitle => 'Trove of Experience';
 
   @override
-  String get labTroveTab => 'Trove';
+  String get navTrove => 'Trove';
 
   @override
   String get labBalance => 'Balance';

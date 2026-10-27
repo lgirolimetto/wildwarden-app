@@ -227,14 +227,14 @@ void main() {
       await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
       expect(find.byKey(const ValueKey('start-review')), findsNothing);
 
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       final advance = find.byKey(const ValueKey('advance-1'));
       await scrollTo(tester, advance);
       await tester.tap(advance);
       await tester.pumpAndSettle();
       expect(find.text('Giorno simulato: +1'), findsOneWidget);
 
-      await openTab(tester, 'Home');
+      await goBack(tester);
       await scrollToTop(tester);
       expect(find.text('3 Fatti da ripassare oggi'), findsOneWidget);
       await scrollAndTap(tester, find.byKey(const ValueKey('start-review')));
@@ -340,7 +340,7 @@ void main() {
     testWidgets('legenda e glossario: simboli e termini del gioco', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       await scrollAndTap(tester, find.text('Legenda e glossario'));
 
       expect(find.text('Legenda'), findsOneWidget);
@@ -371,7 +371,7 @@ void main() {
     testWidgets('anteprima dei gradi: una scheda per grado, con il cerchietto', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       await scrollAndTap(tester, find.byKey(const ValueKey('open-grade-preview')));
 
       for (final key in ['preview-common', 'preview-uncommon', 'preview-rare', 'preview-mythic']) {
@@ -392,7 +392,7 @@ void main() {
     testWidgets('azzerare i progressi richiede due tocchi', (tester) async {
       registerTestDependencies(events: [_met('Eranthis hyemalis')]);
       await pumpDruidApp(tester);
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       final reset = find.byKey(const ValueKey('debug-reset'));
       await scrollTo(tester, reset);
 

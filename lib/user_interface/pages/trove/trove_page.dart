@@ -7,47 +7,26 @@ import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/accent_card.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
-import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
-import 'package:druid_app/user_interface/pages/laboratory/trove_opening_page.dart';
+import 'package:druid_app/user_interface/pages/trove/trove_opening_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Il Laboratorio, il capanno-serra della Home: dove si lavora (capitolo 02, "Ricettario, Tavole, Laboratorio e
-/// Zone"). Oggi c'è solo il Bottino; Dispensa, Ricette pronte e Scaffale arrivano come linguette negli step successivi
-/// della tappa C (con una sola linguetta la fila non serve).
-class LaboratoryPage extends StatefulWidget {
-  const LaboratoryPage({super.key});
-
-  @override
-  State<LaboratoryPage> createState() => _LaboratoryPageState();
-}
-
-class _LaboratoryPageState extends State<LaboratoryPage> {
-  @override
-  void initState() {
-    super.initState();
-    // Il regalo "bentornato" si offre quando entri: è qui che lo trovi.
-    Get.find<ProgressController>().offerWelcomeGiftIfDue();
-  }
+/// Il Bottino dell'Esperienza, una scheda della barra in basso (decisione del 2026-10-27: è il pezzo più "cool" del
+/// gioco e si apre spesso; le Impostazioni, che si aprono di rado, passano in alto nella Home).
+class TrovePage extends StatelessWidget {
+  const TrovePage({super.key});
 
   @override
   Widget build(BuildContext context) => DenseArea(
-    child: Scaffold(
-      appBar: clayAppBar(context, title: context.l10n.labTitle),
-      extendBodyBehindAppBar: true,
-      body: DruidBackground(
-        belowAppBar: true,
-        child: GameDataBuilder(
-          builder: (context, catalog, state, progress) =>
-              _TrovePane(catalog: catalog, state: state, progress: progress),
-        ),
-      ),
+    paintBackground: true,
+    child: GameDataBuilder(
+      builder: (context, catalog, state, progress) => _TrovePane(catalog: catalog, state: state, progress: progress),
     ),
   );
 }
@@ -67,9 +46,15 @@ class _TrovePane extends StatelessWidget {
     final recycled = state.recycled.values.fold(0, (a, b) => a + b);
     final hint = context.texts.bodySmall?.copyWith(color: context.druid.hint);
     return ListView(
-      key: const ValueKey('laboratory-trove'),
-      padding: const EdgeInsets.fromLTRB(Gaps.l, Gaps.s, Gaps.l, Gaps.xl),
+      key: const ValueKey('trove-page'),
+      padding: EdgeInsets.fromLTRB(Gaps.l, MediaQuery.paddingOf(context).top + Gaps.l, Gaps.l, homeBottomInset),
       children: [
+        ClayPageHeader(
+          title: context.l10n.troveTitle,
+          icon: Icons.auto_awesome_rounded,
+          iconColor: context.druid.gradeColor(Grade.rare.index),
+        ),
+        const SizedBox(height: Gaps.xl),
         ClayCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

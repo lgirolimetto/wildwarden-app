@@ -14,17 +14,16 @@ final _feb = DateTime(2027, 2, 1, 10);
 void main() {
   tearDown(Get.reset);
 
-  Future<void> openLaboratory(WidgetTester tester) async {
+  Future<void> openTrove(WidgetTester tester) async {
     await pumpDruidApp(tester);
-    await tester.tap(find.byKey(const ValueKey('open-laboratory')));
-    await tester.pumpAndSettle();
+    await openTab(tester, 'Bottino');
   }
 
   testWidgets('senza saldo i Bottino dell\'Esperienza dicono quanti PE mancano', (tester) async {
     registerTestDependencies(
       events: [XpGranted(xp: 100, reason: 'debug', occurredAt: _feb)],
     );
-    await openLaboratory(tester);
+    await openTrove(tester);
 
     expect(find.text('100 PE da spendere'), findsOneWidget);
     expect(find.text("Bottino dell'Esperienza · comune"), findsOneWidget);
@@ -36,7 +35,7 @@ void main() {
     registerTestDependencies(
       events: [XpGranted(xp: 1000, reason: 'debug', occurredAt: _feb)],
     );
-    await openLaboratory(tester);
+    await openTrove(tester);
 
     await scrollAndTap(tester, find.byKey(const ValueKey('open-trove-uncommon')));
     expect(find.byKey(const ValueKey('trove-opening')), findsOneWidget);
@@ -75,7 +74,7 @@ void main() {
       ],
     );
     deps.clock.current = DateTime(2027, 1, 10, 10);
-    await openLaboratory(tester);
+    await openTrove(tester);
 
     expect(find.byKey(const ValueKey('welcome-gift')), findsOneWidget);
     expect(find.text("Si riscatta dopo un'Essenza: esci e attingi da una stazione."), findsOneWidget);

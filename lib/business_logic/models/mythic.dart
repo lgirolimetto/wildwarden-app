@@ -74,8 +74,6 @@ class Mythic {
   /// nei nomi ad affissi).
   String name(String languageCode, {int missing = 0}) {
     final shown = nameParts.length - missing.clamp(0, nameParts.length);
-    return [
-      for (final (i, p) in nameParts.indexed) i < shown ? p.resolve(languageCode) : '…',
-    ].join(' ');
+    return [for (final (i, p) in nameParts.indexed) i < shown ? p.resolve(languageCode) : '…'].join(' ');
   }
 }
