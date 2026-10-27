@@ -5,6 +5,7 @@ import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
@@ -14,6 +15,7 @@ import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
+import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
@@ -80,13 +82,25 @@ class ProgressController extends LoadableController<GameState> {
   /// è ancora incontrata.
   Future<bool> drawSimulated(String speciesSci, {List<String> traits = const []}) async {
     if (!canDraw(state, speciesSci, now)) return false;
+    // Gli effetti delle pozioni usate: Abbondanza (Vis), Limpidezza (purezza), Presagio (un tratto d'elezione).
+    final effects = activeEffects(state, now);
+    final omen = effects[PotionEffect.omen];
+    final favoured = _catalog() == null ? null : recipeBookOf(_catalog()!).pageOf(speciesSci)?.favouredTraits.first;
+    final withOmen = traits.isEmpty && omen != null && favoured != null && _random.nextDouble() < omenChance(omen)
+        ? [favoured.name]
+        : traits;
+    final purity = purityOfLevel(state.levelOf(speciesSci));
     await record(
       EssenceDrawn(
         speciesSci: speciesSci,
-        traits: traits,
+        traits: withOmen,
         simulated: true,
-        vis: visPerDraw,
-        purity: purityOfLevel(state.levelOf(speciesSci)),
+        vis: effects[PotionEffect.abundance] == null
+            ? visPerDraw
+            : visWithAbundance(visPerDraw, effects[PotionEffect.abundance]!),
+        purity: effects[PotionEffect.clarity] == null
+            ? purity
+            : purityWithClarity(purity, effects[PotionEffect.clarity]!),
         xp: XpRules.essence(drawnToday: drawsToday(state, now)),
         occurredAt: now,
       ),
@@ -186,6 +200,25 @@ class ProgressController extends LoadableController<GameState> {
     );
     final result = await record(event);
     return result.isValid ? event : null;
+  }
+
+  /// Usa la pozione [potionIndex] dello Scaffale: il suo effetto (e quello del Tocco) vale per 7 giorni. Restituisce
+  /// `false` se non è sullo Scaffale.
+  Future<bool> usePotion(int potionIndex) async {
+    final catalog = _catalog();
+    final potion = state.potions.where((p) => p.index == potionIndex && p.onShelf).firstOrNull;
+    final brewable = catalog == null || potion == null ? null : brewableOf(catalog, potion.recipeId);
+    if (potion == null || brewable == null) return false;
+    final result = await record(
+      PotionUsed(
+        potionIndex: potionIndex,
+        effect: brewable.effect,
+        strength: potion.potency,
+        touch: potion.touch,
+        occurredAt: now,
+      ),
+    );
+    return result.isValid;
   }
 
   /// Offre il regalo "bentornato" se è il momento (una volta sola).

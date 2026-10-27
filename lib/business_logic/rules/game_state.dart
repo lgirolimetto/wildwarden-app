@@ -3,6 +3,7 @@ import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/potion.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
+import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
 
@@ -75,6 +76,9 @@ class GameState {
   /// Le piante che sai tossiche perché ti hanno guastato una pozione.
   final Set<String> knownToxic;
 
+  /// Gli effetti delle pozioni usate, anche quelli finiti (vedi `activeEffects` in `rules/recipes/potion_effects.dart`).
+  final List<ActiveEffect> effects;
+
   /// Momento del primo evento: quando si è cominciato a giocare.
   final DateTime? startedAt;
 
@@ -108,6 +112,7 @@ class GameState {
     this.brewTimes = const [],
     this.bestPotency = const {},
     this.knownToxic = const {},
+    this.effects = const [],
     this.startedAt,
     this.welcomeOfferedAt,
     this.welcomeRedeemed = false,
@@ -225,7 +230,20 @@ class GameState {
       XpGranted() => next,
       RecipeRecycled() => next._recycle(event),
       PotionBrewed() => next._brew(event),
+      PotionUsed() => next._use(event),
     };
+  }
+
+  GameState _use(PotionUsed event) {
+    final until = event.occurredAt.add(const Duration(days: potionEffectDays));
+    return _copy(
+      potions: [for (final p in potions) p.index == event.potionIndex ? p.used(event.occurredAt) : p],
+      effects: [
+        ...effects,
+        ActiveEffect(effect: event.effect, strength: event.strength, until: until),
+        if (event.touch case final touch?) ActiveEffect(effect: touch, strength: touchStrength, until: until),
+      ],
+    );
   }
 
   GameState _brew(PotionBrewed event) {
@@ -347,6 +365,7 @@ class GameState {
     List<DateTime>? brewTimes,
     Map<String, int>? bestPotency,
     Set<String>? knownToxic,
+    List<ActiveEffect>? effects,
     DateTime? startedAt,
     DateTime? welcomeOfferedAt,
     bool? welcomeRedeemed,
@@ -376,6 +395,7 @@ class GameState {
     brewTimes: brewTimes ?? this.brewTimes,
     bestPotency: bestPotency ?? this.bestPotency,
     knownToxic: knownToxic ?? this.knownToxic,
+    effects: effects ?? this.effects,
     startedAt: startedAt ?? this.startedAt,
     welcomeOfferedAt: welcomeOfferedAt ?? this.welcomeOfferedAt,
     welcomeRedeemed: welcomeRedeemed ?? this.welcomeRedeemed,

@@ -49,7 +49,10 @@ class _LaboratoryPageState extends State<LaboratoryPage> {
                   context.l10n.readyCount(readyRecipes(catalog, state, now).where((r) => r.ready).length),
                   key: const ValueKey('ready-count'),
                 ),
-                _ => Pill(context.l10n.shelfCount(state.potions.length), key: const ValueKey('shelf-count')),
+                _ => Pill(
+                  context.l10n.shelfCount(state.potions.where((p) => p.onShelf).length),
+                  key: const ValueKey('shelf-count'),
+                ),
               },
             ),
             ClayTabs(

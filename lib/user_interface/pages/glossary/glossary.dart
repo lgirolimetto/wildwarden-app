@@ -1,11 +1,14 @@
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
@@ -31,7 +34,17 @@ enum GlossaryTerm {
   missione,
   grado,
   bottino,
-  figurina,
+  tavola,
+  laboratorio,
+  ricettario,
+  componente,
+  riciclato,
+  dispensa,
+  ricettePronte,
+  pozione,
+  tocco,
+  pozioneGuastata,
+  scaffale,
 }
 
 extension GlossaryTexts on GlossaryTerm {
@@ -50,7 +63,17 @@ extension GlossaryTexts on GlossaryTerm {
     GlossaryTerm.peDaIncassare => l10n.glossPeDaIncassareTerm,
     GlossaryTerm.grado => l10n.glossGradoTerm,
     GlossaryTerm.bottino => l10n.glossBottinoTerm,
-    GlossaryTerm.figurina => l10n.glossFigurinaTerm,
+    GlossaryTerm.tavola => l10n.glossTavolaTerm,
+    GlossaryTerm.laboratorio => l10n.glossLaboratorioTerm,
+    GlossaryTerm.ricettario => l10n.glossRicettarioTerm,
+    GlossaryTerm.componente => l10n.glossComponenteTerm,
+    GlossaryTerm.riciclato => l10n.glossRiciclatoTerm,
+    GlossaryTerm.dispensa => l10n.glossDispensaTerm,
+    GlossaryTerm.ricettePronte => l10n.glossRicettePronteTerm,
+    GlossaryTerm.pozione => l10n.glossPozioneTerm,
+    GlossaryTerm.tocco => l10n.glossToccoTerm,
+    GlossaryTerm.pozioneGuastata => l10n.glossPozioneGuastataTerm,
+    GlossaryTerm.scaffale => l10n.glossScaffaleTerm,
   };
 
   String text(AppLocalizations l10n) => switch (this) {
@@ -68,7 +91,17 @@ extension GlossaryTexts on GlossaryTerm {
     GlossaryTerm.peDaIncassare => l10n.glossPeDaIncassareText,
     GlossaryTerm.grado => l10n.glossGradoText,
     GlossaryTerm.bottino => l10n.glossBottinoText,
-    GlossaryTerm.figurina => l10n.glossFigurinaText,
+    GlossaryTerm.tavola => l10n.glossTavolaText,
+    GlossaryTerm.laboratorio => l10n.glossLaboratorioText,
+    GlossaryTerm.ricettario => l10n.glossRicettarioText,
+    GlossaryTerm.componente => l10n.glossComponenteText,
+    GlossaryTerm.riciclato => l10n.glossRiciclatoText,
+    GlossaryTerm.dispensa => l10n.glossDispensaText,
+    GlossaryTerm.ricettePronte => l10n.glossRicettePronteText,
+    GlossaryTerm.pozione => l10n.glossPozioneText,
+    GlossaryTerm.tocco => l10n.glossToccoText,
+    GlossaryTerm.pozioneGuastata => l10n.glossPozioneGuastataText,
+    GlossaryTerm.scaffale => l10n.glossScaffaleText,
   };
 }
 
@@ -173,10 +206,7 @@ class _Legend extends StatelessWidget {
           const SizedBox(height: Gaps.m),
           Text(l10n.legendBadges, style: context.texts.titleSmall),
           const SizedBox(height: Gaps.s),
-          _LegendRow(
-            symbol: const ProtectedShield(),
-            text: l10n.legendProtected,
-          ),
+          _LegendRow(symbol: const ProtectedShield(), text: l10n.legendProtected),
           _LegendRow(
             symbol: StampBadge(
               text: DateFormat.MMMd(context.contentLanguage).format(DateTime(2027, 2, 3)),
@@ -188,6 +218,22 @@ class _Legend extends StatelessWidget {
             symbol: Icon(Icons.hourglass_top_rounded, color: context.colors.onSurface),
             text: l10n.legendXpToCash,
           ),
+          const SizedBox(height: Gaps.m),
+          Text(l10n.legendPotions, style: context.texts.titleSmall),
+          const SizedBox(height: Gaps.s),
+          _LegendRow(
+            symbol: PotionVessel(
+              shape: VesselShape.flask,
+              liquids: [context.druid.traitColor(Trait.dew.index), context.druid.traitColor(Trait.dusk.index)],
+              size: 28,
+            ),
+            text: l10n.legendVessel,
+          ),
+          for (final effect in PotionEffect.values)
+            _LegendRow(
+              symbol: EngravedIcon(effectIconOf(effect), size: 20),
+              text: '${game.effect(effect)} · ${game.effectText(effect)}',
+            ),
           const SizedBox(height: Gaps.m),
           Text(l10n.legendLevels, style: context.texts.titleSmall),
           const SizedBox(height: Gaps.s),

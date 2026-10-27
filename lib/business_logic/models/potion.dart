@@ -13,11 +13,29 @@ class Potion {
   final PotionEffect? touch;
   final DateTime brewedAt;
 
+  /// Quando l'hai usata (`null` = è ancora sullo Scaffale).
+  final DateTime? usedAt;
+
   const Potion({
     required this.index,
     required this.recipeId,
     required this.potency,
     required this.touch,
     required this.brewedAt,
+    this.usedAt,
   });
+
+  bool get onShelf => usedAt == null;
+
+  Potion used(DateTime at) =>
+      Potion(index: index, recipeId: recipeId, potency: potency, touch: touch, brewedAt: brewedAt, usedAt: at);
+}
+
+/// Un effetto di pozione in corso: [strength] da 1 a 10, fino a [until].
+class ActiveEffect {
+  final PotionEffect effect;
+  final int strength;
+  final DateTime until;
+
+  const ActiveEffect({required this.effect, required this.strength, required this.until});
 }

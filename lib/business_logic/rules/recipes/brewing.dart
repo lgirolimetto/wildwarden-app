@@ -141,21 +141,26 @@ BrewPlan planBrew(Brewable brewable, List<Essence> essences, {String? freeSpecie
   return BrewPlan(taken: taken, missing: missing, freeSpecies: freeSpecies);
 }
 
-/// Le piante che possono andare nello slot libero: quelle con abbastanza Vis dopo gli altri ingredienti, dalla più
-/// fornita (a pari Vis in ordine di nome). Vuota se la ricetta non ha slot libero.
-List<String> freeSlotCandidates(Brewable brewable, List<Essence> essences) {
-  final free = brewable.freeSlot;
-  if (free == null) return const [];
+/// Le Vis di ogni specie che restano dopo gli ingredienti fissi di [brewable]: quelle che può usare lo slot libero.
+Map<String, int> freeSlotVis(Brewable brewable, List<Essence> essences) {
   final fixed = planBrew(brewable, essences, freeSpecies: '');
   final left = <String, int>{};
   for (final e in essences) {
     final rest = e.vis - (fixed.taken[e.index] ?? 0);
     if (rest > 0) left[e.speciesSci] = (left[e.speciesSci] ?? 0) + rest;
   }
+  return left;
+}
+
+/// Le piante che possono andare nello slot libero: quelle con abbastanza Vis dopo gli altri ingredienti, dalla più
+/// fornita (a pari Vis in ordine di nome). Vuota se la ricetta non ha slot libero.
+List<String> freeSlotCandidates(Brewable brewable, List<Essence> essences) {
+  final free = brewable.freeSlot;
+  if (free == null) return const [];
+  final left = freeSlotVis(brewable, essences).entries.toList()
+    ..sort((a, b) => a.value != b.value ? b.value.compareTo(a.value) : a.key.compareTo(b.key));
   return [
-    for (final MapEntry(key: sci, value: vis)
-        in left.entries.toList()
-          ..sort((a, b) => a.value != b.value ? b.value.compareTo(a.value) : a.key.compareTo(b.key)))
+    for (final MapEntry(key: sci, value: vis) in left)
       if (vis >= free.vis) sci,
   ];
 }

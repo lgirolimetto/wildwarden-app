@@ -1865,20 +1865,8 @@ abstract class AppLocalizations {
   /// No description provided for @glossBottinoText.
   ///
   /// In it, this message translates to:
-  /// **'Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).'**
+  /// **'Il Bottino che si compra con i PE: scegli il grado e spendi il saldo; dentro c\'è una Tavola a sorpresa, spesso incompleta, o un componente di una che hai. Le Mitiche escono solo dal Bottino mitico.'**
   String get glossBottinoText;
-
-  /// No description provided for @glossFigurinaTerm.
-  ///
-  /// In it, this message translates to:
-  /// **'Figurina'**
-  String get glossFigurinaTerm;
-
-  /// No description provided for @glossFigurinaText.
-  ///
-  /// In it, this message translates to:
-  /// **'Una Ricetta o una Pozione nell\'Album. L\'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.'**
-  String get glossFigurinaText;
 
   /// No description provided for @recipesEmpty.
   ///
@@ -2207,25 +2195,25 @@ abstract class AppLocalizations {
   /// No description provided for @effectRegrowthText.
   ///
   /// In it, this message translates to:
-  /// **'La Stazione dove la usi torna pronta prima (effetto di gioco).'**
+  /// **'Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).'**
   String get effectRegrowthText;
 
   /// No description provided for @effectClarityText.
   ///
   /// In it, this message translates to:
-  /// **'Purezza in più alla prossima Essenza (effetto di gioco).'**
+  /// **'Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).'**
   String get effectClarityText;
 
   /// No description provided for @effectOmenText.
   ///
   /// In it, this message translates to:
-  /// **'Un Tratto garantito alla prossima Essenza (effetto di gioco).'**
+  /// **'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).'**
   String get effectOmenText;
 
   /// No description provided for @effectAbundanceText.
   ///
   /// In it, this message translates to:
-  /// **'Vis in più alla prossima Essenza (effetto di gioco).'**
+  /// **'Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).'**
   String get effectAbundanceText;
 
   /// No description provided for @mythicNumber.
@@ -2779,6 +2767,180 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Ti mancano {vis} Vis'**
   String readyMissingVis(int vis);
+
+  /// No description provided for @shelfUse.
+  ///
+  /// In it, this message translates to:
+  /// **'Usa'**
+  String get shelfUse;
+
+  /// No description provided for @shelfHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Tienila per la collezione o usala: l\'effetto vale 7 giorni, con la forza della sua potenza; il Tocco aggiunge un piccolo effetto in più.'**
+  String get shelfHint;
+
+  /// No description provided for @shelfActive.
+  ///
+  /// In it, this message translates to:
+  /// **'Effetti in corso'**
+  String get shelfActive;
+
+  /// No description provided for @shelfActiveLine.
+  ///
+  /// In it, this message translates to:
+  /// **'{effect} · forza {strength} · fino al {date}'**
+  String shelfActiveLine(String effect, int strength, String date);
+
+  /// No description provided for @shelfUsed.
+  ///
+  /// In it, this message translates to:
+  /// **'{effect} per 7 giorni'**
+  String shelfUsed(String effect);
+
+  /// No description provided for @glossTavolaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola'**
+  String get glossTavolaTerm;
+
+  /// No description provided for @glossTavolaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una ricetta nel Ricettario, come le tavole illustrate degli erbari: \"1 Tavola su 3\". Nella Pagina di una pianta le Tavole che non hai sono slot vuoti con il cerchietto del grado.'**
+  String get glossTavolaText;
+
+  /// No description provided for @glossLaboratorioTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get glossLaboratorioTerm;
+
+  /// No description provided for @glossLaboratorioText.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.'**
+  String get glossLaboratorioText;
+
+  /// No description provided for @glossRicettarioTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricettario'**
+  String get glossRicettarioTerm;
+
+  /// No description provided for @glossRicettarioText.
+  ///
+  /// In it, this message translates to:
+  /// **'La collezione delle Tavole, una per paese: una Pagina per pianta e, in cima, le Mitiche della Zona, numerate.'**
+  String get glossRicettarioText;
+
+  /// No description provided for @glossComponenteTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Componente'**
+  String get glossComponenteTerm;
+
+  /// No description provided for @glossComponenteText.
+  ///
+  /// In it, this message translates to:
+  /// **'Un pezzo del nome di una Tavola incompleta (\"Tintura di Eranthis Brinata del…\"): le Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza con dei componenti da trovare.'**
+  String get glossComponenteText;
+
+  /// No description provided for @glossRiciclatoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Riciclato'**
+  String get glossRiciclatoTerm;
+
+  /// No description provided for @glossRiciclatoText.
+  ///
+  /// In it, this message translates to:
+  /// **'Un doppione uscito dal Bottino dell\'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po\' di Vis.'**
+  String get glossRiciclatoText;
+
+  /// No description provided for @glossDispensaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispensa'**
+  String get glossDispensaTerm;
+
+  /// No description provided for @glossDispensaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.'**
+  String get glossDispensaText;
+
+  /// No description provided for @glossRicettePronteTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricette pronte'**
+  String get glossRicettePronteTerm;
+
+  /// No description provided for @glossRicettePronteText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.'**
+  String get glossRicettePronteText;
+
+  /// No description provided for @glossPozioneTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozione'**
+  String get glossPozioneTerm;
+
+  /// No description provided for @glossPozioneText.
+  ///
+  /// In it, this message translates to:
+  /// **'Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.'**
+  String get glossPozioneText;
+
+  /// No description provided for @glossToccoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocco'**
+  String get glossToccoTerm;
+
+  /// No description provided for @glossToccoText.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'aggettivo che la pianta dello slot libero dà alla pozione (Rigogliosa, Limpida, Presaga, Copiosa): quando la usi, aggiunge un piccolo effetto.'**
+  String get glossToccoText;
+
+  /// No description provided for @glossPozioneGuastataTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozione guastata'**
+  String get glossPozioneGuastataTerm;
+
+  /// No description provided for @glossPozioneGuastataText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una pozione da bere con una pianta tossica nello slot libero: le Vis sono perse, ma impari che la pianta è tossica.'**
+  String get glossPozioneGuastataText;
+
+  /// No description provided for @glossScaffaleTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Scaffale'**
+  String get glossScaffaleTerm;
+
+  /// No description provided for @glossScaffaleText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le pozioni che hai: tienile per la collezione o usale. L\'effetto vale 7 giorni, con la forza della potenza.'**
+  String get glossScaffaleText;
+
+  /// No description provided for @legendPotions.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozioni'**
+  String get legendPotions;
+
+  /// No description provided for @legendVessel.
+  ///
+  /// In it, this message translates to:
+  /// **'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.'**
+  String get legendVessel;
 }
 
 class _AppLocalizationsDelegate

@@ -1078,14 +1078,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossBottinoText =>
-      'The Trove you buy with XP: you choose the Grade, the content is a surprise (Recipes, rare Curiosities, hints).';
-
-  @override
-  String get glossFigurinaTerm => 'Figurine';
-
-  @override
-  String get glossFigurinaText =>
-      'A Recipe or a Potion in the Album. The Recipe Album shows the ones you know; the counter says how many there are in all.';
+      'The Trove you buy with XP: choose the grade and spend your balance; inside there\'s a surprise Plate, often incomplete, or a component of one you have. Mythics only come from the mythic Trove.';
 
   @override
   String get recipesEmpty =>
@@ -1293,19 +1286,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get effectRegrowthText =>
-      'The Station where you use it is ready sooner (game effect).';
+      'For 7 days species are ready again sooner, down to 12 hours later (game effect).';
 
   @override
   String get effectClarityText =>
-      'Extra purity on your next Essence (game effect).';
+      'For 7 days extra purity on every Essence (game effect).';
 
   @override
   String get effectOmenText =>
-      'A guaranteed Trait on your next Essence (game effect).';
+      'For 7 days an Essence without traits can take the plant\'s favoured trait (game effect).';
 
   @override
   String get effectAbundanceText =>
-      'Extra Vis on your next Essence (game effect).';
+      'For 7 days extra Vis on every Essence, up to +50% (game effect).';
 
   @override
   String mythicNumber(String number) {
@@ -1769,4 +1762,108 @@ class AppLocalizationsEn extends AppLocalizations {
   String readyMissingVis(int vis) {
     return 'You need $vis more Vis';
   }
+
+  @override
+  String get shelfUse => 'Use';
+
+  @override
+  String get shelfHint =>
+      'Keep it for the collection or use it: the effect lasts 7 days, as strong as its potency; the Touch adds a small extra effect.';
+
+  @override
+  String get shelfActive => 'Effects in progress';
+
+  @override
+  String shelfActiveLine(String effect, int strength, String date) {
+    return '$effect · strength $strength · until $date';
+  }
+
+  @override
+  String shelfUsed(String effect) {
+    return '$effect for 7 days';
+  }
+
+  @override
+  String get glossTavolaTerm => 'Plate';
+
+  @override
+  String get glossTavolaText =>
+      'A recipe in the Recipe Book, like the illustrated plates of herbaria: \"1 Plate of 3\". On a plant\'s Page the Plates you don\'t have are empty slots with the grade circle.';
+
+  @override
+  String get glossLaboratorioTerm => 'Laboratory';
+
+  @override
+  String get glossLaboratorioText =>
+      'Your base, the greenhouse shed at the edge of the woods: you work inside it, with the Recipe Book, Pantry, Ready recipes and Shelf.';
+
+  @override
+  String get glossRicettarioTerm => 'Recipe Book';
+
+  @override
+  String get glossRicettarioText =>
+      'The collection of Plates, one per country: a Page for each plant and, at the top, the Mythics of the Area, numbered.';
+
+  @override
+  String get glossComponenteTerm => 'Component';
+
+  @override
+  String get glossComponenteText =>
+      'A piece of the name of an incomplete Plate (\"Frosted Eranthis Tincture of…\"): Uncommons, Rares and Mythics come out of the Trove of Experience with components still to find.';
+
+  @override
+  String get glossRiciclatoTerm => 'Recycled';
+
+  @override
+  String get glossRiciclatoText =>
+      'A duplicate from the Trove of Experience: 3 recycled of a grade make a component of the same grade, 9 one of the grade above, for a little Vis.';
+
+  @override
+  String get glossDispensaTerm => 'Pantry';
+
+  @override
+  String get glossDispensaText =>
+      'The Essences you\'ve drawn, each with its traits, purity (from the plant\'s study level when you drew it) and its Vis.';
+
+  @override
+  String get glossRicettePronteTerm => 'Ready recipes';
+
+  @override
+  String get glossRicettePronteText =>
+      'The recipes you can brew now with your Pantry, and the ones that are almost there, with what\'s missing.';
+
+  @override
+  String get glossPozioneTerm => 'Potion';
+
+  @override
+  String get glossPozioneText =>
+      'Brewed from a recipe with the Vis of your Essences. It has a potency from 1 to 10, mostly from purity: the better you know the plants, the stronger it is. You keep it on the Shelf or use it.';
+
+  @override
+  String get glossToccoTerm => 'Touch';
+
+  @override
+  String get glossToccoText =>
+      'The adjective the plant in the free slot gives the potion (Lush, Clear, Prescient, Bountiful): when you use it, it adds a small effect.';
+
+  @override
+  String get glossPozioneGuastataTerm => 'Spoiled potion';
+
+  @override
+  String get glossPozioneGuastataText =>
+      'A drinkable potion with a toxic plant in the free slot: the Vis are lost, but you learn the plant is toxic.';
+
+  @override
+  String get glossScaffaleTerm => 'Shelf';
+
+  @override
+  String get glossScaffaleText =>
+      'The potions you have: keep them for the collection or use them. The effect lasts 7 days, as strong as the potency.';
+
+  @override
+  String get legendPotions => 'Potions';
+
+  @override
+  String get legendVessel =>
+      'The vessel shows the recipe\'s base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect.';
 }

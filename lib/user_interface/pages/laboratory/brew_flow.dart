@@ -45,7 +45,8 @@ class _FreeSlotSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vis = state.vis;
+    // Le Vis che restano dopo gli altri ingredienti: quelle che lo slot libero può usare.
+    final vis = freeSlotVis(brewable, state.essences);
     return SafeArea(
       child: ListView(
         key: const ValueKey('free-slot-sheet'),

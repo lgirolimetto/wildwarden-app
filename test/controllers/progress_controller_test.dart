@@ -1,4 +1,5 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
@@ -111,6 +112,27 @@ void main() {
     expect(controller.state.vis.keys, hasLength(4), reason: 'il catalogo di prova ha 4 piante');
     expect(controller.state.essences.every((e) => e.drawnAt.isBefore(clock.now())), isTrue);
     expect(controller.state.essences.any((e) => e.traits.isNotEmpty), isTrue);
+  });
+
+  test('con Abbondanza e Limpidezza in corso le Essenze hanno più Vis e più purezza', () async {
+    await controller.encounter('Malva sylvestris', method: EncounterMethod.simulated);
+    await controller.record(
+      PotionBrewed(recipeId: 'r', essences: const {}, potency: 10, xp: 0, occurredAt: clock.now()),
+    );
+    await controller.record(
+      PotionUsed(
+        potionIndex: 0,
+        effect: PotionEffect.abundance,
+        strength: 10,
+        touch: PotionEffect.clarity,
+        occurredAt: clock.now(),
+      ),
+    );
+    await controller.drawSimulated('Malva sylvestris');
+
+    final essence = controller.state.essences.single;
+    expect(essence.vis, 15);
+    expect(essence.purity, closeTo(0.44, 1e-9));
   });
 
   test('azzerare cancella tutti i progressi', () async {

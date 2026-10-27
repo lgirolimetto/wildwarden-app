@@ -1079,14 +1079,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossBottinoText =>
-      'Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).';
-
-  @override
-  String get glossFigurinaTerm => 'Figurina';
-
-  @override
-  String get glossFigurinaText =>
-      'Una Ricetta o una Pozione nell\'Album. L\'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.';
+      'Il Bottino che si compra con i PE: scegli il grado e spendi il saldo; dentro c\'è una Tavola a sorpresa, spesso incompleta, o un componente di una che hai. Le Mitiche escono solo dal Bottino mitico.';
 
   @override
   String get recipesEmpty =>
@@ -1300,19 +1293,19 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get effectRegrowthText =>
-      'La Stazione dove la usi torna pronta prima (effetto di gioco).';
+      'Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).';
 
   @override
   String get effectClarityText =>
-      'Purezza in più alla prossima Essenza (effetto di gioco).';
+      'Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).';
 
   @override
   String get effectOmenText =>
-      'Un Tratto garantito alla prossima Essenza (effetto di gioco).';
+      'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).';
 
   @override
   String get effectAbundanceText =>
-      'Vis in più alla prossima Essenza (effetto di gioco).';
+      'Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).';
 
   @override
   String mythicNumber(String number) {
@@ -1782,4 +1775,108 @@ class AppLocalizationsIt extends AppLocalizations {
   String readyMissingVis(int vis) {
     return 'Ti mancano $vis Vis';
   }
+
+  @override
+  String get shelfUse => 'Usa';
+
+  @override
+  String get shelfHint =>
+      'Tienila per la collezione o usala: l\'effetto vale 7 giorni, con la forza della sua potenza; il Tocco aggiunge un piccolo effetto in più.';
+
+  @override
+  String get shelfActive => 'Effetti in corso';
+
+  @override
+  String shelfActiveLine(String effect, int strength, String date) {
+    return '$effect · forza $strength · fino al $date';
+  }
+
+  @override
+  String shelfUsed(String effect) {
+    return '$effect per 7 giorni';
+  }
+
+  @override
+  String get glossTavolaTerm => 'Tavola';
+
+  @override
+  String get glossTavolaText =>
+      'Una ricetta nel Ricettario, come le tavole illustrate degli erbari: \"1 Tavola su 3\". Nella Pagina di una pianta le Tavole che non hai sono slot vuoti con il cerchietto del grado.';
+
+  @override
+  String get glossLaboratorioTerm => 'Laboratorio';
+
+  @override
+  String get glossLaboratorioText =>
+      'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.';
+
+  @override
+  String get glossRicettarioTerm => 'Ricettario';
+
+  @override
+  String get glossRicettarioText =>
+      'La collezione delle Tavole, una per paese: una Pagina per pianta e, in cima, le Mitiche della Zona, numerate.';
+
+  @override
+  String get glossComponenteTerm => 'Componente';
+
+  @override
+  String get glossComponenteText =>
+      'Un pezzo del nome di una Tavola incompleta (\"Tintura di Eranthis Brinata del…\"): le Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza con dei componenti da trovare.';
+
+  @override
+  String get glossRiciclatoTerm => 'Riciclato';
+
+  @override
+  String get glossRiciclatoText =>
+      'Un doppione uscito dal Bottino dell\'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po\' di Vis.';
+
+  @override
+  String get glossDispensaTerm => 'Dispensa';
+
+  @override
+  String get glossDispensaText =>
+      'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.';
+
+  @override
+  String get glossRicettePronteTerm => 'Ricette pronte';
+
+  @override
+  String get glossRicettePronteText =>
+      'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.';
+
+  @override
+  String get glossPozioneTerm => 'Pozione';
+
+  @override
+  String get glossPozioneText =>
+      'Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.';
+
+  @override
+  String get glossToccoTerm => 'Tocco';
+
+  @override
+  String get glossToccoText =>
+      'L\'aggettivo che la pianta dello slot libero dà alla pozione (Rigogliosa, Limpida, Presaga, Copiosa): quando la usi, aggiunge un piccolo effetto.';
+
+  @override
+  String get glossPozioneGuastataTerm => 'Pozione guastata';
+
+  @override
+  String get glossPozioneGuastataText =>
+      'Una pozione da bere con una pianta tossica nello slot libero: le Vis sono perse, ma impari che la pianta è tossica.';
+
+  @override
+  String get glossScaffaleTerm => 'Scaffale';
+
+  @override
+  String get glossScaffaleText =>
+      'Le pozioni che hai: tienile per la collezione o usale. L\'effetto vale 7 giorni, con la forza della potenza.';
+
+  @override
+  String get legendPotions => 'Pozioni';
+
+  @override
+  String get legendVessel =>
+      'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.';
 }

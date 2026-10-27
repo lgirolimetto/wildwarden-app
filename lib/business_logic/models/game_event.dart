@@ -121,6 +121,13 @@ sealed class GameEvent {
         xp: d['xp'] as int,
         occurredAt: occurredAt,
       ),
+      PotionUsed.typeId => PotionUsed(
+        potionIndex: d['potion'] as int,
+        effect: PotionEffect.values.byName(d['effect'] as String),
+        strength: d['strength'] as int,
+        touch: d['touch'] == null ? null : PotionEffect.values.byName(d['touch'] as String),
+        occurredAt: occurredAt,
+      ),
       RecipeRecycled.typeId => RecipeRecycled(
         recipeId: d['recipe'] as String,
         fromGrade: Grade.values.byName(d['fromGrade'] as String),
@@ -532,5 +539,36 @@ class PotionBrewed extends GameEvent {
     'freeSpecies': freeSpecies,
     'spoiled': spoiled,
     'xp': xp,
+  };
+}
+
+/// Pozione usata: lascia lo Scaffale e il suo effetto vale per qualche giorno, con la forza della potenza; il Tocco
+/// aggiunge un piccolo effetto in più. Effetto e forza si salvano qui (la ricetta potrebbe cambiare).
+class PotionUsed extends GameEvent {
+  static const typeId = 'potion_used';
+  final int potionIndex;
+  final PotionEffect effect;
+
+  /// Da 1 a 10: la potenza della pozione.
+  final int strength;
+  final PotionEffect? touch;
+
+  const PotionUsed({
+    required this.potionIndex,
+    required this.effect,
+    required this.strength,
+    this.touch,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'potion': potionIndex,
+    'effect': effect.name,
+    'strength': strength,
+    'touch': touch?.name,
   };
 }

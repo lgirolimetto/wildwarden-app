@@ -101,6 +101,13 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('lab-tab-shelf')));
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('potion-0')), findsOneWidget);
+
+      // Usarla: lascia lo Scaffale e l'effetto è in corso.
+      await tester.tap(find.byKey(const ValueKey('use-potion-0')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('potion-0')), findsNothing);
+      expect(find.byKey(const ValueKey('active-effects')), findsOneWidget);
+      expect(Get.find<ProgressController>().state.potions.single.onShelf, isFalse);
     });
 
     testWidgets('una tossica nello slot libero guasta la pozione', (tester) async {
