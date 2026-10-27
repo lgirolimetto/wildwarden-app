@@ -85,12 +85,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Retry';
 
   @override
-  String get erbarioEncounteredSection => 'Encountered';
-
-  @override
-  String get erbarioMissingSection => 'Still to find around Bologna';
-
-  @override
   String get simulateEncounter => 'Simulate Encounter';
 
   @override
@@ -1861,4 +1855,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get legendVessel =>
       'The vessel shows the recipe\'s base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect.';
+
+  @override
+  String get viewMet => 'Met';
+
+  @override
+  String get erbarioSpecies => 'Species';
 }

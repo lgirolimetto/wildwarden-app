@@ -242,18 +242,6 @@ abstract class AppLocalizations {
   /// **'Riprova'**
   String get retry;
 
-  /// No description provided for @erbarioEncounteredSection.
-  ///
-  /// In it, this message translates to:
-  /// **'Incontrate'**
-  String get erbarioEncounteredSection;
-
-  /// No description provided for @erbarioMissingSection.
-  ///
-  /// In it, this message translates to:
-  /// **'Da trovare nel bolognese'**
-  String get erbarioMissingSection;
-
   /// No description provided for @simulateEncounter.
   ///
   /// In it, this message translates to:
@@ -2935,6 +2923,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.'**
   String get legendVessel;
+
+  /// No description provided for @viewMet.
+  ///
+  /// In it, this message translates to:
+  /// **'Incontrate'**
+  String get viewMet;
+
+  /// No description provided for @erbarioSpecies.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie'**
+  String get erbarioSpecies;
 }
 
 class _AppLocalizationsDelegate

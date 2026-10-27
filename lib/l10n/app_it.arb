@@ -41,8 +41,6 @@
   "themeModeDark": "Scuro",
   "loadingError": "Non è stato possibile caricare i dati",
   "retry": "Riprova",
-  "erbarioEncounteredSection": "Incontrate",
-  "erbarioMissingSection": "Da trovare nel bolognese",
   "simulateEncounter": "Simula Incontro",
   "levelToStudy": "Da studiare",
   "levelRecognise": "Riconoscerla",
@@ -1475,5 +1473,7 @@
   "glossScaffaleTerm": "Scaffale",
   "glossScaffaleText": "Le pozioni che hai: tienile per la collezione o usale. L'effetto vale 7 giorni, con la forza della potenza.",
   "legendPotions": "Pozioni",
-  "legendVessel": "Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L'icona in alto a destra è l'effetto."
+  "legendVessel": "Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L'icona in alto a destra è l'effetto.",
+  "viewMet": "Incontrate",
+  "erbarioSpecies": "Specie"
 }

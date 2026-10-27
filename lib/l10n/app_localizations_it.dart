@@ -85,12 +85,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get retry => 'Riprova';
 
   @override
-  String get erbarioEncounteredSection => 'Incontrate';
-
-  @override
-  String get erbarioMissingSection => 'Da trovare nel bolognese';
-
-  @override
   String get simulateEncounter => 'Simula Incontro';
 
   @override
@@ -1874,4 +1868,10 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get legendVessel =>
       'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.';
+
+  @override
+  String get viewMet => 'Incontrate';
+
+  @override
+  String get erbarioSpecies => 'Specie';
 }

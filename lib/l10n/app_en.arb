@@ -24,8 +24,6 @@
   "themeModeDark": "Dark",
   "loadingError": "The data could not be loaded",
   "retry": "Retry",
-  "erbarioEncounteredSection": "Encountered",
-  "erbarioMissingSection": "Still to find around Bologna",
   "simulateEncounter": "Simulate Encounter",
   "levelToStudy": "To study",
   "levelRecognise": "Recognise it",
@@ -472,5 +470,7 @@
   "glossScaffaleTerm": "Shelf",
   "glossScaffaleText": "The potions you have: keep them for the collection or use them. The effect lasts 7 days, as strong as the potency.",
   "legendPotions": "Potions",
-  "legendVessel": "The vessel shows the recipe's base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect."
+  "legendVessel": "The vessel shows the recipe's base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect.",
+  "viewMet": "Met",
+  "erbarioSpecies": "Species"
 }

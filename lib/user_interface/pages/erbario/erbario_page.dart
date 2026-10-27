@@ -7,7 +7,6 @@ import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
-import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/controllers/erbario/erbario_views_controller.dart';
 import 'package:druid_app/user_interface/pages/erbario/widgets/erbario_views_bar.dart';
@@ -19,8 +18,9 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Erbario della zona: tutte le specie con foto e nome, prima le incontrate e poi quelle da trovare, filtrate dalla
-/// vista scelta (le viste già pronte e quelle salvate dall'utente).
+/// Erbario della zona: tutte le specie con foto e nome, prima le incontrate e poi quelle da trovare, in un vassoio solo
+/// filtrato dalla vista scelta (le viste già pronte, tra cui "Incontrate", e quelle salvate dall'utente). Le tessere
+/// dicono già se una specie è incontrata (decisione del 2026-10-27: due vassoi ripetevano un filtro).
 class ErbarioPage extends StatelessWidget {
   const ErbarioPage({super.key});
 
@@ -100,12 +100,12 @@ class _ErbarioContent extends StatelessWidget {
               ),
             ),
           ),
-        if (encountered.isNotEmpty)
+        if (encountered.isNotEmpty || missing.isNotEmpty)
           _Tray(
-            title: context.l10n.erbarioEncounteredSection,
+            // La vista scelta è già nella linguetta: qui solo quante specie mostra.
+            title: context.l10n.erbarioSpecies,
             icon: Icons.eco_rounded,
-            // Nelle livree neumorfiche i vassoi riprendono le schede delle ricette: trovate come "Base" (la più
-            // chiara), da trovare come "Intermedia".
+            // Nelle livree neumorfiche il vassoio riprende le schede delle ricette ("Base", la più chiara).
             color: context.druid.neu
                 ? context.druid.accent(2).background
                 : Color.lerp(context.druid.levelColor(2), context.colors.surface, 0.55)!,
@@ -126,22 +126,6 @@ class _ErbarioContent extends StatelessWidget {
                     ),
                   ),
                 ),
-            ],
-          ),
-        if (missing.isNotEmpty)
-          _Tray(
-            title: context.l10n.erbarioMissingSection,
-            icon: Icons.search_rounded,
-            // Di giorno verde bosco, lo stesso del tassello "?" delle copertine, con le tessere crema; di sera verde
-            // bosco più profondo, un po' più chiaro delle tessere verde notte. Titolo crema in entrambi.
-            color: context.druid.neu
-                ? context.druid.accent(0).background
-                : Theme.of(context).brightness == Brightness.light
-                ? mysteryTileColor(context)
-                : Color.lerp(context.colors.primaryContainer, Colors.black, 0.2)!,
-            foreground: context.druid.neu ? null : context.druid.onHero,
-            orbColor: context.druid.levelColor(4),
-            tiles: [
               for (final s in missing)
                 (
                   // Foto + nome (+ "Studia"); lo scudo delle protette sta sulla foto.
@@ -172,9 +156,6 @@ class _Tray extends StatelessWidget {
   final Color color;
   final Color orbColor;
 
-  /// Colore del titolo e del conteggio, se il vassoio è scuro.
-  final Color? foreground;
-
   /// Tessere con la loro altezza stimata (in larghezze di tessera), per distribuirle nelle colonne.
   final List<(double, Widget)> tiles;
 
@@ -184,7 +165,6 @@ class _Tray extends StatelessWidget {
     required this.color,
     required this.orbColor,
     required this.tiles,
-    this.foreground,
   });
 
   @override
@@ -199,15 +179,11 @@ class _Tray extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(Gaps.xs, Gaps.xs, Gaps.xs, Gaps.s),
-              child: DefaultTextStyle.merge(
-                style: TextStyle(color: foreground),
-                child: ClaySectionTitle(
-                  title: title,
-                  titleColor: foreground,
-                  icon: icon,
-                  color: orbColor,
-                  trailing: Text('${tiles.length}', style: context.texts.titleMedium?.copyWith(color: foreground)),
-                ),
+              child: ClaySectionTitle(
+                title: title,
+                icon: icon,
+                color: orbColor,
+                trailing: Text('${tiles.length}', style: context.texts.titleMedium),
               ),
             ),
             _Masonry(tiles: tiles),
