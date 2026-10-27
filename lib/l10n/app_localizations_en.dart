@@ -1328,7 +1328,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mythicsIntro =>
-      'The Mythics of the Area: handwritten, tied to its places and feasts. They come from the Trove of Experience.';
+      'The Mythics of the Area: handwritten, tied to its places and feasts. They only come from the mythic Trove of Experience.';
 
   @override
   String recipeBookMythicsRow(String zone) {
@@ -1404,8 +1404,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Mostly Uncommons, sometimes a Common or a Rare';
 
   @override
-  String get troveContentsRare =>
-      'Mostly Rares, sometimes an Uncommon or a Mythic';
+  String get troveContentsRare => 'Mostly Rares, sometimes an Uncommon';
 
   @override
   String get troveContentsMythic => 'A Rare or a Mythic, half and half';
@@ -1451,7 +1450,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get troveRules =>
-      'Uncommon, Rare and Mythic Plates come out incomplete: the missing components are found in other Trove of Experience. With the first of each grade, a Plate of the grade above as a gift.';
+      'Uncommon, Rare and Mythic Plates come out incomplete: the missing components are found in other Trove of Experience. With the first common and the first uncommon, a Plate of the grade above as a gift. Mythics only come from the mythic Trove of Experience.';
 
   @override
   String labIncomplete(int count) {

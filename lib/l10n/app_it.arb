@@ -1055,7 +1055,7 @@
     }
   },
   "mythicAllYear": "Tutto l'anno",
-  "mythicsIntro": "Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano nel Bottino dell'Esperienza.",
+  "mythicsIntro": "Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano solo nel Bottino dell'Esperienza mitico.",
   "recipeBookMythicsRow": "Mitiche · {zone}",
   "@recipeBookMythicsRow": {
     "placeholders": {
@@ -1121,7 +1121,7 @@
   "troveGradeMythic": "mitico",
   "troveContentsCommon": "Quasi sempre una Comune, a volte una Non comune",
   "troveContentsUncommon": "Per lo più Non comuni, a volte una Comune o una Rara",
-  "troveContentsRare": "Per lo più Rare, a volte una Non comune o una Mitica",
+  "troveContentsRare": "Per lo più Rare, a volte una Non comune",
   "troveContentsMythic": "Una Rara o una Mitica, metà e metà",
   "troveSpend": "Spendi {cost} PE",
   "@troveSpend": {
@@ -1162,7 +1162,7 @@
       }
     }
   },
-  "troveRules": "Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell'Esperienza. Al primo di ogni grado, in regalo una Tavola del grado sopra.",
+  "troveRules": "Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell'Esperienza. Al primo comune e al primo non comune, in regalo una Tavola del grado sopra. Le Mitiche escono solo dal Bottino dell'Esperienza mitico.",
   "labIncomplete": "{count, plural, =1{1 Tavola incompleta} other{{count} Tavole incomplete}}",
   "@labIncomplete": {
     "placeholders": {

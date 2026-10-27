@@ -85,15 +85,29 @@ void main() {
       }
     });
 
-    test('il Bottino raro dà a volte una Mitica, con le sue 3 parole da trovare', () {
-      final state = GameState.replay([rich(), opened(Grade.rare, const [])]);
-      final mythics = [
+    test('le Mitiche escono solo dal Bottino mitico, con le loro 3 parole da trovare', () {
+      final state = GameState.replay([rich(), opened(Grade.rare, const []), opened(Grade.mythic, const [])]);
+      List<TroveFind> many(Grade grade) => [
         for (var seed = 0; seed < 200; seed++)
-          ...openTroveFinds(grade: Grade.rare, catalog: catalog, state: state, random: Random(seed)),
-      ].where((f) => f.grade == Grade.mythic);
+          ...openTroveFinds(grade: grade, catalog: catalog, state: state, random: Random(seed)),
+      ];
+      expect(many(Grade.rare).where((f) => f.grade == Grade.mythic), isEmpty);
+      final mythics = many(Grade.mythic).where((f) => f.grade == Grade.mythic);
       expect(mythics, isNotEmpty);
       expect(mythics.first.missing, 3);
       expect(mythics.first.recipeId, 'lanterna-santa-lucia');
+    });
+
+    test('il primo Bottino raro non porta l\'assaggio di una Mitica', () {
+      for (var seed = 0; seed < 20; seed++) {
+        final finds = openTroveFinds(
+          grade: Grade.rare,
+          catalog: catalog,
+          state: GameState.replay([rich()]),
+          random: Random(seed),
+        );
+        expect(finds.where((f) => f.taste || f.grade == Grade.mythic), isEmpty);
+      }
     });
 
     test('una Tavola che hai già esce come riciclato', () {

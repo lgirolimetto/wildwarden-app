@@ -24,11 +24,12 @@ abstract final class EconomyRules {
   /// Bottini dell'Esperienza al giorno, al massimo.
   static const trovesPerDay = 3;
 
-  /// Grado di ciò che esce da un Bottino, secondo il grado del Bottino (`trove.contents` del simulatore).
+  /// Grado di ciò che esce da un Bottino, secondo il grado del Bottino (`trove.contents` del simulatore). Le Mitiche
+  /// escono **solo dal Bottino mitico** (decisione del 2026-10-27): il 10 % di Mitiche del raro è passato alle Rare.
   static Map<Grade, double> troveContents(Grade grade) => switch (grade) {
     Grade.common => const {Grade.common: 0.9, Grade.uncommon: 0.1},
     Grade.uncommon => const {Grade.common: 0.3, Grade.uncommon: 0.6, Grade.rare: 0.1},
-    Grade.rare => const {Grade.uncommon: 0.3, Grade.rare: 0.6, Grade.mythic: 0.1},
+    Grade.rare => const {Grade.uncommon: 0.3, Grade.rare: 0.7},
     Grade.mythic => const {Grade.rare: 0.5, Grade.mythic: 0.5},
   };
 

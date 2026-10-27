@@ -2261,7 +2261,7 @@ abstract class AppLocalizations {
   /// No description provided for @mythicsIntro.
   ///
   /// In it, this message translates to:
-  /// **'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano nel Bottino dell\'Esperienza.'**
+  /// **'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano solo nel Bottino dell\'Esperienza mitico.'**
   String get mythicsIntro;
 
   /// No description provided for @recipeBookMythicsRow.
@@ -2363,7 +2363,7 @@ abstract class AppLocalizations {
   /// No description provided for @troveContentsRare.
   ///
   /// In it, this message translates to:
-  /// **'Per lo più Rare, a volte una Non comune o una Mitica'**
+  /// **'Per lo più Rare, a volte una Non comune'**
   String get troveContentsRare;
 
   /// No description provided for @troveContentsMythic.
@@ -2399,7 +2399,7 @@ abstract class AppLocalizations {
   /// No description provided for @troveRules.
   ///
   /// In it, this message translates to:
-  /// **'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo di ogni grado, in regalo una Tavola del grado sopra.'**
+  /// **'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo comune e al primo non comune, in regalo una Tavola del grado sopra. Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.'**
   String get troveRules;
 
   /// No description provided for @labIncomplete.

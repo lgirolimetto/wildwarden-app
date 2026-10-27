@@ -1335,7 +1335,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get mythicsIntro =>
-      'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano nel Bottino dell\'Esperienza.';
+      'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano solo nel Bottino dell\'Esperienza mitico.';
 
   @override
   String recipeBookMythicsRow(String zone) {
@@ -1411,8 +1411,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'Per lo più Non comuni, a volte una Comune o una Rara';
 
   @override
-  String get troveContentsRare =>
-      'Per lo più Rare, a volte una Non comune o una Mitica';
+  String get troveContentsRare => 'Per lo più Rare, a volte una Non comune';
 
   @override
   String get troveContentsMythic => 'Una Rara o una Mitica, metà e metà';
@@ -1458,7 +1457,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get troveRules =>
-      'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo di ogni grado, in regalo una Tavola del grado sopra.';
+      'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo comune e al primo non comune, in regalo una Tavola del grado sopra. Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.';
 
   @override
   String labIncomplete(int count) {

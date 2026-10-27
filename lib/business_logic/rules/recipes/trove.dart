@@ -52,8 +52,8 @@ Grade? recipeGrade(Catalog catalog, String recipeId) {
 }
 
 /// Apre un Bottino di [grade]: un pezzo di una Tavola incompleta (con [EconomyRules.trovePieceChance], se ce n'è una
-/// del grado del Bottino o più bassa) oppure una Tavola del grado tirato a sorte, nuova o doppione. Al primo Bottino di
-/// un grado si aggiunge l'assaggio del grado sopra, una Tavola tutta da completare.
+/// del grado del Bottino o più bassa) oppure una Tavola del grado tirato a sorte, nuova o doppione. Al primo Bottino
+/// comune e al primo non comune si aggiunge l'assaggio del grado sopra, una Tavola tutta da completare.
 List<TroveFind> openTroveFinds({
   required Grade grade,
   required Catalog catalog,
@@ -74,8 +74,9 @@ List<TroveFind> openTroveFinds({
     final id = _pickRecipe(found, catalog, state, owned, random);
     if (id != null) finds.add(_findOf(id, found, owned));
   }
+  // Niente assaggio di Mitica dal primo Bottino raro: le Mitiche escono solo dal Bottino mitico.
   final firstOfGrade = !state.troves.any((t) => t.$1 == grade);
-  if (firstOfGrade && grade != Grade.mythic) {
+  if (firstOfGrade && grade.index < Grade.rare.index) {
     final above = Grade.values[grade.index + 1];
     final taken = {for (final f in finds) f.recipeId};
     final id = _pickRecipe(above, catalog, state, owned, random, onlyNew: true, exclude: taken);
