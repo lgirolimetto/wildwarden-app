@@ -1,6 +1,6 @@
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
-import 'package:druid_app/business_logic/rules/recipes/album.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../helpers/fakes.dart';
@@ -33,10 +33,10 @@ void main() {
   test('gli id delle ricette scritte a mano di prima non contano più', () {
     final state = GameState.replay([learned('pozione-prova-comune', feb)]);
     expect(knownRecipeIds(catalog, state), isEmpty);
-    expect(albumPages(catalog, state), isEmpty);
+    expect(collectedPages(catalog, state), isEmpty);
   });
 
-  test('le pagine dell\'album: solo quelle con una figurina, dalla più recente', () {
+  test('le pagine del Ricettario: solo quelle con una Tavola, dalla più recente', () {
     final eranthis = book.pageOf('Eranthis hyemalis')!;
     final rare = eranthis.recipes.last;
     final state = GameState.replay([
@@ -44,7 +44,7 @@ void main() {
       learned(book.pageOf('Fagus sylvatica')!.recipes.first.id, feb),
       learned(rare.id, feb.add(const Duration(days: 2))),
     ]);
-    final pages = albumPages(catalog, state);
+    final pages = collectedPages(catalog, state);
     expect(pages.map((p) => p.page.plant.sci), ['Eranthis hyemalis', 'Fagus sylvatica', 'Malva sylvestris']);
 
     final first = pages.first;
@@ -53,10 +53,10 @@ void main() {
     expect(first.complete, isFalse);
   });
 
-  test('una pagina con tutte le figurine è completa', () {
+  test('una pagina con tutte le Tavole è completa', () {
     final malva = book.pageOf('Malva sylvestris')!;
     final state = GameState.replay([for (final r in malva.recipes) learned(r.id, feb)]);
-    expect(albumPages(catalog, state).single.complete, isTrue);
+    expect(collectedPages(catalog, state).single.complete, isTrue);
   });
 
   test('le Mitiche si conoscono per id', () {

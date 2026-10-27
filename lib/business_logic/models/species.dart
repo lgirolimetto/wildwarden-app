@@ -73,7 +73,7 @@ class Species {
   final List<String> protection;
 
   /// Rarità della pianta nella Zona, dalle osservazioni: poche osservazioni = difficile da raggiungere (capitolo 02,
-  /// 2026-10-27). Decide la pagina dell'album e i compagni delle ricette.
+  /// 2026-10-27). Decide la pagina del Ricettario e i compagni delle ricette.
   final Grade grade;
 
   /// Tratti d'elezione e vocazione corretti a mano (porta di servizio di `extras.json`); `null` = li calcola la

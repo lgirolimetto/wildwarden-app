@@ -11,7 +11,7 @@ void main() {
   final catalog = smallCatalog();
   final book = RecipeBook.of(catalog);
 
-  test('la pagina ha 3, 4 o 5 figurine secondo la rarità della pianta', () {
+  test('la pagina ha 3, 4 o 5 Tavole secondo la rarità della pianta', () {
     expect(book.pageOf('Malva sylvestris')!.recipes.map((r) => r.grade), [Grade.common, Grade.uncommon, Grade.rare]);
     expect(book.pageOf('Eranthis hyemalis')!.recipes.map((r) => r.grade), [
       Grade.common,
@@ -36,9 +36,9 @@ void main() {
     expect(comune.ingredients.every((i) => i.traits.isEmpty && i.quantity == 1), isTrue);
   });
 
-  test('id deterministico con la Zona, tratti in ordine fisso', () {
+  test('id deterministico con il paese, tratti in ordine fisso', () {
     final rara = book.pageOf('Fagus sylvatica')!.recipes.firstWhere((r) => r.grade == Grade.rare);
-    expect(rara.id, 'bologna/fagus-sylvatica·moon+fog·regrowth');
+    expect(rara.id, 'it/fagus-sylvatica·moon+fog·regrowth');
     expect(book.recipeById(rara.id), same(rara));
     expect(RecipeBook.of(catalog).recipeById(rara.id)!.name('it'), rara.name('it'));
   });

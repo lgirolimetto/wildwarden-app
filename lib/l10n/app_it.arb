@@ -50,7 +50,7 @@
   "levelWhereWhen": "Il suo ambiente",
   "levelMastery": "Maestria",
   "navStudy": "Home",
-  "navRecipes": "Album",
+  "navRecipes": "Ricettario",
   "rankApprentice": "Apprendista",
   "rankWanderer": "Viandante",
   "rankSeeker": "Cercatore",
@@ -561,12 +561,12 @@
   "missionFirstLevelTitle": "Studia la tua prima specie",
   "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.",
   "missionFirstRecipeTitle": "La prima Ricetta",
-  "missionFirstRecipeBody": "Studiando una specie impari la sua Ricetta Comune: la trovi nell'Album, sulla Pagina della pianta. Le altre Figurine della Pagina si trovano nel Bottino dell'Esperienza.",
+  "missionFirstRecipeBody": "Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell'Esperienza.",
   "missionSkip": "Salta l'Apprendistato",
   "missionActionOpenErbario": "Apri l'Erbario",
   "missionActionChooseDesiderata": "Scegli nell'Erbario",
   "missionActionStudy": "Inizia a studiare",
-  "missionActionRecipes": "Apri l'Album",
+  "missionActionRecipes": "Apri il Ricettario",
   "missionGlossary": "Glossario",
   "apprenticeshipComplete": "Apprendistato completato!",
   "glossaryTitle": "Legenda e glossario",
@@ -974,19 +974,17 @@
   "traitWhenNewMoon": "Tutto il giorno della luna nuova: non serve uscire di notte.",
   "traitWhenWaxingMoon": "Tutti i giorni in cui la luna cresce, tra la nuova e la piena: non serve uscire di notte.",
   "traitWhenWaningMoon": "Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.",
-  "albumTitle": "Album",
-  "albumTabPlants": "Piante",
-  "albumTabMythics": "Mitiche",
-  "albumFigurines": "{count, plural, =1{1 Figurina} other{{count} Figurine}}",
-  "@albumFigurines": {
+  "recipeBookTitle": "Ricettario",
+  "recipeBookPlates": "{count, plural, =1{1 Tavola} other{{count} Tavole}}",
+  "@recipeBookPlates": {
     "placeholders": {
       "count": {
         "type": "int"
       }
     }
   },
-  "albumPagesSummary": "{pages, plural, =1{1 Pagina} other{{pages} Pagine}} su {total} · {complete, plural, =1{1 completa} other{{complete} complete}}",
-  "@albumPagesSummary": {
+  "recipeBookPagesSummary": "{pages, plural, =1{1 Pagina} other{{pages} Pagine}} su {total} · {complete, plural, =1{1 completa} other{{complete} complete}}",
+  "@recipeBookPagesSummary": {
     "placeholders": {
       "pages": {
         "type": "int"
@@ -999,8 +997,8 @@
       }
     }
   },
-  "albumPageCount": "{known} di {total}",
-  "@albumPageCount": {
+  "recipeBookPageCount": "{known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}",
+  "@recipeBookPageCount": {
     "placeholders": {
       "known": {
         "type": "int"
@@ -1010,12 +1008,12 @@
       }
     }
   },
-  "albumFavouredTraits": "Tratti d'elezione",
-  "albumVocation": "Vocazione",
-  "albumMissingFigurine": "Figurina da trovare",
-  "albumSwipeHint": "Scorri per sfogliare le Pagine",
-  "albumSpeciesLink": "Album · {known} di {total}",
-  "@albumSpeciesLink": {
+  "recipeBookFavouredTraits": "Tratti d'elezione",
+  "recipeBookVocation": "Vocazione",
+  "recipeBookMissingPlate": "Tavola da trovare",
+  "recipeBookSwipeHint": "Scorri per sfogliare le Pagine",
+  "recipeBookSpeciesLink": "Ricettario · {known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}",
+  "@recipeBookSpeciesLink": {
     "placeholders": {
       "known": {
         "type": "int"
@@ -1036,7 +1034,7 @@
   "effectClarityText": "Purezza in più alla prossima Essenza (effetto di gioco).",
   "effectOmenText": "Un Tratto garantito alla prossima Essenza (effetto di gioco).",
   "effectAbundanceText": "Vis in più alla prossima Essenza (effetto di gioco).",
-  "mythicNumber": "N. {number}",
+  "mythicNumber": "Tavola n. {number}",
   "@mythicNumber": {
     "placeholders": {
       "number": {
@@ -1057,5 +1055,33 @@
     }
   },
   "mythicAllYear": "Tutto l'anno",
-  "mythicsIntro": "Le Mitiche d'Italia: scritte a mano, legate a luoghi e feste. Si trovano nel Bottino dell'Esperienza."
+  "mythicsIntro": "Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano nel Bottino dell'Esperienza.",
+  "recipeBookMythicsRow": "Mitiche · {zone}",
+  "@recipeBookMythicsRow": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeBookMythicsCount": "{known} su {total}",
+  "@recipeBookMythicsCount": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "debugSimulateRecipeBook": "Simula un Ricettario",
+  "debugSimulateRecipeBookDone": "{count, plural, =1{1 Tavola aggiunta} other{{count} Tavole aggiunte}} al Ricettario",
+  "@debugSimulateRecipeBookDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

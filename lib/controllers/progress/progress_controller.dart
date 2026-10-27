@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
@@ -7,6 +9,7 @@ import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/base/loadable_controller.dart';
 
@@ -108,6 +111,30 @@ class ProgressController extends LoadableController<GameState> {
 
   Future<void> markOnboarding(OnboardingMark mark) =>
       state.onboardingMarks.contains(mark) ? Future.value() : record(OnboardingMarked(mark: mark, occurredAt: now));
+
+  /// Strumento di prova: un Ricettario fitto, per vedere indice, Pagine e navigazione senza giocare settimane. Impara
+  /// le Tavole di 30 piante (tutte le Comuni, circa metà delle altre, 3 Pagine complete) e la prima Mitica, come se
+  /// venissero dal Bottino, in giorni diversi. Sempre le stesse (seme fisso). Restituisce quante Tavole ha aggiunto.
+  Future<int> simulateRecipeBook() async {
+    final catalog = _catalog();
+    if (catalog == null) return 0;
+    final random = Random(27);
+    final pages = [...recipeBookOf(catalog).pages]..shuffle(random);
+    final ids = <String>[
+      for (final (i, page) in pages.take(30).indexed)
+        for (final (j, recipe) in page.recipes.indexed)
+          if (j == 0 || i < 3 || random.nextDouble() < 0.45) recipe.id,
+      ?catalog.mythics.firstOrNull?.id,
+    ];
+    var added = 0;
+    for (final (i, id) in ids.indexed) {
+      if (state.learnedRecipes.containsKey(id)) continue;
+      final at = now.subtract(Duration(hours: ids.length - i));
+      await record(RecipeLearned(recipeId: id, origin: RecipeOrigin.trove, occurredAt: at));
+      added++;
+    }
+    return added;
+  }
 
   /// Strumento di debug: cancella tutti i progressi.
   Future<void> resetAll() async {

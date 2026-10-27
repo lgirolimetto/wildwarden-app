@@ -1,7 +1,7 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
-import 'package:druid_app/business_logic/rules/recipes/album.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
@@ -14,7 +14,7 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-/// Una figurina dell'album aperta: nome, ingredienti (sempre con il nome della pianta, il tratto quando lo chiede),
+/// Una Tavola del Ricettario aperta: nome, ingredienti (sempre con il nome della pianta, il tratto quando lo chiede),
 /// i mesi in cui si può fare e l'effetto.
 class PlantRecipePage extends StatelessWidget {
   final String recipeId;
@@ -40,7 +40,7 @@ class PlantRecipePage extends StatelessWidget {
   );
 }
 
-/// Una Mitica aperta: come una figurina, con la sua storia e la finestra di date.
+/// Una Mitica aperta: come una Tavola, con la sua storia e la finestra di date.
 class MythicRecipePage extends StatelessWidget {
   final String mythicId;
 
@@ -58,7 +58,7 @@ class MythicRecipePage extends StatelessWidget {
         grade: Grade.mythic,
         title: mythic.name(lang),
         subtitle:
-            '${context.l10n.mythicNumber(mythic.number.toString().padLeft(3, '0'))} · '
+            '${context.l10n.mythicNumber(mythic.number.toString())} · '
             '${window == null ? context.l10n.mythicAllYear : context.l10n.mythicWindow(day(window.fromMonth, window.fromDay), day(window.toMonth, window.toDay))}',
         story: mythic.story.resolve(lang),
         ingredients: [
@@ -80,7 +80,7 @@ class _RecipeScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DenseArea(
     child: Scaffold(
-      appBar: clayAppBar(context, title: context.l10n.albumTitle),
+      appBar: clayAppBar(context, title: context.l10n.recipeBookTitle),
       extendBodyBehindAppBar: true,
       body: DruidBackground(
         belowAppBar: true,

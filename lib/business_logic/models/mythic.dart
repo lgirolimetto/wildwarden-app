@@ -29,10 +29,10 @@ class DateWindow {
   }
 }
 
-/// Mitica: ricetta scritta a mano, numerata nell'album della nazione ("Mitiche d'Italia, n. 001"), legata a luoghi,
-/// feste e tradizioni. Il nome ha 3 pezzi, che si scoprono uno alla volta come i componenti mancanti.
+/// Mitica: ricetta scritta a mano, della Zona e numerata dentro la Zona ("Tavola n. 1"), legata ai suoi luoghi, feste e
+/// tradizioni. Il nome ha 3 pezzi, che si scoprono uno alla volta come i componenti mancanti.
 class Mythic {
-  /// Numero nell'album della nazione.
+  /// Numero tra le Mitiche della Zona.
   final int number;
 
   /// Id stabile: lo salveranno gli eventi.

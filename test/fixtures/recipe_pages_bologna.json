@@ -13,7 +13,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/viburnum-tinus·abundance",
+    "id": "it/viburnum-tinus·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -41,7 +41,7 @@
     ]
    },
    {
-    "id": "bologna/viburnum-tinus·fog·abundance",
+    "id": "it/viburnum-tinus·fog·abundance",
     "grade": "uncommon",
     "traits": [
      "fog"
@@ -78,7 +78,7 @@
     ]
    },
    {
-    "id": "bologna/viburnum-tinus·waningMoon+frost·regrowth",
+    "id": "it/viburnum-tinus·waningMoon+frost·regrowth",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -127,7 +127,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/anemone-hortensis·regrowth",
+    "id": "it/anemone-hortensis·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -151,7 +151,7 @@
     ]
    },
    {
-    "id": "bologna/anemone-hortensis·dawn·regrowth",
+    "id": "it/anemone-hortensis·dawn·regrowth",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -184,7 +184,7 @@
     ]
    },
    {
-    "id": "bologna/anemone-hortensis·waxingMoon+frost·regrowth",
+    "id": "it/anemone-hortensis·waxingMoon+frost·regrowth",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -233,7 +233,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/orchis-purpurea·omen",
+    "id": "it/orchis-purpurea·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -257,7 +257,7 @@
     ]
    },
    {
-    "id": "bologna/orchis-purpurea·rain·omen",
+    "id": "it/orchis-purpurea·rain·omen",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -290,7 +290,7 @@
     ]
    },
    {
-    "id": "bologna/orchis-purpurea·waxingMoon+dew·omen",
+    "id": "it/orchis-purpurea·waxingMoon+dew·omen",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -341,7 +341,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/euphorbia-helioscopia·omen",
+    "id": "it/euphorbia-helioscopia·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -365,7 +365,7 @@
     ]
    },
    {
-    "id": "bologna/euphorbia-helioscopia·dawn·omen",
+    "id": "it/euphorbia-helioscopia·dawn·omen",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -398,7 +398,7 @@
     ]
    },
    {
-    "id": "bologna/euphorbia-helioscopia·waxingMoon+newMoon·abundance",
+    "id": "it/euphorbia-helioscopia·waxingMoon+newMoon·abundance",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -449,7 +449,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/prunus-spinosa·abundance",
+    "id": "it/prunus-spinosa·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -472,7 +472,7 @@
     ]
    },
    {
-    "id": "bologna/prunus-spinosa·waxingMoon·abundance",
+    "id": "it/prunus-spinosa·waxingMoon·abundance",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -504,7 +504,7 @@
     ]
    },
    {
-    "id": "bologna/prunus-spinosa·dawn+frost·regrowth",
+    "id": "it/prunus-spinosa·dawn+frost·regrowth",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -553,7 +553,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/paliurus-spina-christi·regrowth",
+    "id": "it/paliurus-spina-christi·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -584,7 +584,7 @@
     ]
    },
    {
-    "id": "bologna/paliurus-spina-christi·sun·regrowth",
+    "id": "it/paliurus-spina-christi·sun·regrowth",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -621,7 +621,7 @@
     ]
    },
    {
-    "id": "bologna/paliurus-spina-christi·dawn+frost·regrowth",
+    "id": "it/paliurus-spina-christi·dawn+frost·regrowth",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -670,7 +670,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/alliaria-petiolata·abundance",
+    "id": "it/alliaria-petiolata·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -695,7 +695,7 @@
     ]
    },
    {
-    "id": "bologna/alliaria-petiolata·rain·abundance",
+    "id": "it/alliaria-petiolata·rain·abundance",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -728,7 +728,7 @@
     ]
    },
    {
-    "id": "bologna/alliaria-petiolata·dusk+moon·abundance",
+    "id": "it/alliaria-petiolata·dusk+moon·abundance",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -779,7 +779,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/euonymus-europaeus·omen",
+    "id": "it/euonymus-europaeus·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -803,7 +803,7 @@
     ]
    },
    {
-    "id": "bologna/euonymus-europaeus·fog·omen",
+    "id": "it/euonymus-europaeus·fog·omen",
     "grade": "uncommon",
     "traits": [
      "fog"
@@ -836,7 +836,7 @@
     ]
    },
    {
-    "id": "bologna/euonymus-europaeus·newMoon+rain·abundance",
+    "id": "it/euonymus-europaeus·newMoon+rain·abundance",
     "grade": "rare",
     "traits": [
      "newMoon",
@@ -887,7 +887,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/clematis-vitalba·omen",
+    "id": "it/clematis-vitalba·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -915,7 +915,7 @@
     ]
    },
    {
-    "id": "bologna/clematis-vitalba·newMoon·omen",
+    "id": "it/clematis-vitalba·newMoon·omen",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -949,7 +949,7 @@
     ]
    },
    {
-    "id": "bologna/clematis-vitalba·sun+dew·regrowth",
+    "id": "it/clematis-vitalba·sun+dew·regrowth",
     "grade": "rare",
     "traits": [
      "sun",
@@ -1003,7 +1003,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/ruscus-aculeatus·omen",
+    "id": "it/ruscus-aculeatus·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -1029,7 +1029,7 @@
     ]
    },
    {
-    "id": "bologna/ruscus-aculeatus·newMoon·omen",
+    "id": "it/ruscus-aculeatus·newMoon·omen",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -1064,7 +1064,7 @@
     ]
    },
    {
-    "id": "bologna/ruscus-aculeatus·dusk+frost·abundance",
+    "id": "it/ruscus-aculeatus·dusk+frost·abundance",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -1114,7 +1114,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/cotinus-coggygria·regrowth",
+    "id": "it/cotinus-coggygria·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -1142,7 +1142,7 @@
     ]
    },
    {
-    "id": "bologna/cotinus-coggygria·sun·regrowth",
+    "id": "it/cotinus-coggygria·sun·regrowth",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -1179,7 +1179,7 @@
     ]
    },
    {
-    "id": "bologna/cotinus-coggygria·dawn+waningMoon·regrowth",
+    "id": "it/cotinus-coggygria·dawn+waningMoon·regrowth",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -1232,7 +1232,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/laurus-nobilis·regrowth",
+    "id": "it/laurus-nobilis·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -1263,7 +1263,7 @@
     ]
    },
    {
-    "id": "bologna/laurus-nobilis·fog·regrowth",
+    "id": "it/laurus-nobilis·fog·regrowth",
     "grade": "uncommon",
     "traits": [
      "fog"
@@ -1300,7 +1300,7 @@
     ]
    },
    {
-    "id": "bologna/laurus-nobilis·dusk+moon·clarity",
+    "id": "it/laurus-nobilis·dusk+moon·clarity",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -1351,7 +1351,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/cornus-sanguinea·abundance",
+    "id": "it/cornus-sanguinea·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -1378,7 +1378,7 @@
     ]
    },
    {
-    "id": "bologna/cornus-sanguinea·dew·abundance",
+    "id": "it/cornus-sanguinea·dew·abundance",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -1413,7 +1413,7 @@
     ]
    },
    {
-    "id": "bologna/cornus-sanguinea·waningMoon+rain·regrowth",
+    "id": "it/cornus-sanguinea·waningMoon+rain·regrowth",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -1466,7 +1466,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/viburnum-lantana·abundance",
+    "id": "it/viburnum-lantana·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -1491,7 +1491,7 @@
     ]
    },
    {
-    "id": "bologna/viburnum-lantana·sun·abundance",
+    "id": "it/viburnum-lantana·sun·abundance",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -1523,7 +1523,7 @@
     ]
    },
    {
-    "id": "bologna/viburnum-lantana·dawn+dusk·regrowth",
+    "id": "it/viburnum-lantana·dawn+dusk·regrowth",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -1574,7 +1574,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/chelidonium-majus·omen",
+    "id": "it/chelidonium-majus·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -1600,7 +1600,7 @@
     ]
    },
    {
-    "id": "bologna/chelidonium-majus·newMoon·omen",
+    "id": "it/chelidonium-majus·newMoon·omen",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -1633,7 +1633,7 @@
     ]
    },
    {
-    "id": "bologna/chelidonium-majus·waxingMoon+rain·abundance",
+    "id": "it/chelidonium-majus·waxingMoon+rain·abundance",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -1684,7 +1684,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/celtis-australis·regrowth",
+    "id": "it/celtis-australis·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -1713,7 +1713,7 @@
     ]
    },
    {
-    "id": "bologna/celtis-australis·waningMoon·regrowth",
+    "id": "it/celtis-australis·waningMoon·regrowth",
     "grade": "uncommon",
     "traits": [
      "waningMoon"
@@ -1750,7 +1750,7 @@
     ]
    },
    {
-    "id": "bologna/celtis-australis·dawn+sun·abundance",
+    "id": "it/celtis-australis·dawn+sun·abundance",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -1800,7 +1800,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/fraxinus-ornus·regrowth",
+    "id": "it/fraxinus-ornus·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -1824,7 +1824,7 @@
     ]
    },
    {
-    "id": "bologna/fraxinus-ornus·waxingMoon·regrowth",
+    "id": "it/fraxinus-ornus·waxingMoon·regrowth",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -1857,7 +1857,7 @@
     ]
    },
    {
-    "id": "bologna/fraxinus-ornus·dusk+moon·regrowth",
+    "id": "it/fraxinus-ornus·dusk+moon·regrowth",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -1907,7 +1907,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/corylus-avellana·abundance",
+    "id": "it/corylus-avellana·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -1932,7 +1932,7 @@
     ]
    },
    {
-    "id": "bologna/corylus-avellana·frost·abundance",
+    "id": "it/corylus-avellana·frost·abundance",
     "grade": "uncommon",
     "traits": [
      "frost"
@@ -1964,7 +1964,7 @@
     ]
    },
    {
-    "id": "bologna/corylus-avellana·waningMoon+fog·regrowth",
+    "id": "it/corylus-avellana·waningMoon+fog·regrowth",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -2013,7 +2013,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/melissa-officinalis·clarity",
+    "id": "it/melissa-officinalis·clarity",
     "grade": "common",
     "traits": [],
     "effect": "clarity",
@@ -2042,7 +2042,7 @@
     ]
    },
    {
-    "id": "bologna/melissa-officinalis·dew·clarity",
+    "id": "it/melissa-officinalis·dew·clarity",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -2077,7 +2077,7 @@
     ]
    },
    {
-    "id": "bologna/melissa-officinalis·waxingMoon+rain·clarity",
+    "id": "it/melissa-officinalis·waxingMoon+rain·clarity",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -2130,7 +2130,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/acer-campestre·regrowth",
+    "id": "it/acer-campestre·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -2160,7 +2160,7 @@
     ]
    },
    {
-    "id": "bologna/acer-campestre·dew·regrowth",
+    "id": "it/acer-campestre·dew·regrowth",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -2195,7 +2195,7 @@
     ]
    },
    {
-    "id": "bologna/acer-campestre·dusk+waningMoon·regrowth",
+    "id": "it/acer-campestre·dusk+waningMoon·regrowth",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -2251,7 +2251,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/juglans-regia·regrowth",
+    "id": "it/juglans-regia·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -2280,7 +2280,7 @@
     ]
    },
    {
-    "id": "bologna/juglans-regia·sun·regrowth",
+    "id": "it/juglans-regia·sun·regrowth",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -2316,7 +2316,7 @@
     ]
    },
    {
-    "id": "bologna/juglans-regia·dusk+dew·abundance",
+    "id": "it/juglans-regia·dusk+dew·abundance",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -2367,7 +2367,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/salvia-pratensis·clarity",
+    "id": "it/salvia-pratensis·clarity",
     "grade": "common",
     "traits": [],
     "effect": "clarity",
@@ -2392,7 +2392,7 @@
     ]
    },
    {
-    "id": "bologna/salvia-pratensis·dawn·clarity",
+    "id": "it/salvia-pratensis·dawn·clarity",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -2425,7 +2425,7 @@
     ]
    },
    {
-    "id": "bologna/salvia-pratensis·waxingMoon+sun·clarity",
+    "id": "it/salvia-pratensis·waxingMoon+sun·clarity",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -2476,7 +2476,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/borago-officinalis·abundance",
+    "id": "it/borago-officinalis·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -2504,7 +2504,7 @@
     ]
    },
    {
-    "id": "bologna/borago-officinalis·dawn·abundance",
+    "id": "it/borago-officinalis·dawn·abundance",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -2537,7 +2537,7 @@
     ]
    },
    {
-    "id": "bologna/borago-officinalis·waxingMoon+fog·clarity",
+    "id": "it/borago-officinalis·waxingMoon+fog·clarity",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -2587,7 +2587,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/cornus-mas·regrowth",
+    "id": "it/cornus-mas·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -2614,7 +2614,7 @@
     ]
    },
    {
-    "id": "bologna/cornus-mas·sun·regrowth",
+    "id": "it/cornus-mas·sun·regrowth",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -2647,7 +2647,7 @@
     ]
    },
    {
-    "id": "bologna/cornus-mas·dusk+moon·abundance",
+    "id": "it/cornus-mas·dusk+moon·abundance",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -2696,7 +2696,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/melittis-melissophyllum·clarity",
+    "id": "it/melittis-melissophyllum·clarity",
     "grade": "common",
     "traits": [],
     "effect": "clarity",
@@ -2720,7 +2720,7 @@
     ]
    },
    {
-    "id": "bologna/melittis-melissophyllum·waxingMoon·clarity",
+    "id": "it/melittis-melissophyllum·waxingMoon·clarity",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -2752,7 +2752,7 @@
     ]
    },
    {
-    "id": "bologna/melittis-melissophyllum·dusk+rain·clarity",
+    "id": "it/melittis-melissophyllum·dusk+rain·clarity",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -2801,7 +2801,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/helleborus-viridis·omen",
+    "id": "it/helleborus-viridis·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -2826,7 +2826,7 @@
     ]
    },
    {
-    "id": "bologna/helleborus-viridis·dusk·omen",
+    "id": "it/helleborus-viridis·dusk·omen",
     "grade": "uncommon",
     "traits": [
      "dusk"
@@ -2859,7 +2859,7 @@
     ]
    },
    {
-    "id": "bologna/helleborus-viridis·moon·omen",
+    "id": "it/helleborus-viridis·moon·omen",
     "grade": "uncommon",
     "traits": [
      "moon"
@@ -2892,7 +2892,7 @@
     ]
    },
    {
-    "id": "bologna/helleborus-viridis·moon+newMoon·omen",
+    "id": "it/helleborus-viridis·moon+newMoon·omen",
     "grade": "rare",
     "traits": [
      "moon",
@@ -2942,7 +2942,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/euphorbia-cyparissias·omen",
+    "id": "it/euphorbia-cyparissias·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -2968,7 +2968,7 @@
     ]
    },
    {
-    "id": "bologna/euphorbia-cyparissias·dawn·omen",
+    "id": "it/euphorbia-cyparissias·dawn·omen",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -3002,7 +3002,7 @@
     ]
    },
    {
-    "id": "bologna/euphorbia-cyparissias·waxingMoon·omen",
+    "id": "it/euphorbia-cyparissias·waxingMoon·omen",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -3034,7 +3034,7 @@
     ]
    },
    {
-    "id": "bologna/euphorbia-cyparissias·waxingMoon+newMoon·omen",
+    "id": "it/euphorbia-cyparissias·waxingMoon+newMoon·omen",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -3085,7 +3085,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/malva-sylvestris·clarity",
+    "id": "it/malva-sylvestris·clarity",
     "grade": "common",
     "traits": [],
     "effect": "clarity",
@@ -3113,7 +3113,7 @@
     ]
    },
    {
-    "id": "bologna/malva-sylvestris·dawn·clarity",
+    "id": "it/malva-sylvestris·dawn·clarity",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -3150,7 +3150,7 @@
     ]
    },
    {
-    "id": "bologna/malva-sylvestris·sun·abundance",
+    "id": "it/malva-sylvestris·sun·abundance",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -3185,7 +3185,7 @@
     ]
    },
    {
-    "id": "bologna/malva-sylvestris·sun+dew·abundance",
+    "id": "it/malva-sylvestris·sun+dew·abundance",
     "grade": "rare",
     "traits": [
      "sun",
@@ -3238,7 +3238,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/prunus-cerasifera·regrowth",
+    "id": "it/prunus-cerasifera·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -3267,7 +3267,7 @@
     ]
    },
    {
-    "id": "bologna/prunus-cerasifera·waxingMoon·regrowth",
+    "id": "it/prunus-cerasifera·waxingMoon·regrowth",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -3304,7 +3304,7 @@
     ]
    },
    {
-    "id": "bologna/prunus-cerasifera·dew·abundance",
+    "id": "it/prunus-cerasifera·dew·abundance",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -3336,7 +3336,7 @@
     ]
    },
    {
-    "id": "bologna/prunus-cerasifera·sun+dew·abundance",
+    "id": "it/prunus-cerasifera·sun+dew·abundance",
     "grade": "rare",
     "traits": [
      "sun",
@@ -3385,7 +3385,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/anacamptis-pyramidalis·omen",
+    "id": "it/anacamptis-pyramidalis·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -3409,7 +3409,7 @@
     ]
    },
    {
-    "id": "bologna/anacamptis-pyramidalis·sun·omen",
+    "id": "it/anacamptis-pyramidalis·sun·omen",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -3441,7 +3441,7 @@
     ]
    },
    {
-    "id": "bologna/anacamptis-pyramidalis·dawn·omen",
+    "id": "it/anacamptis-pyramidalis·dawn·omen",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -3473,7 +3473,7 @@
     ]
    },
    {
-    "id": "bologna/anacamptis-pyramidalis·dawn+dew·omen",
+    "id": "it/anacamptis-pyramidalis·dawn+dew·omen",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -3522,7 +3522,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/ostrya-carpinifolia·regrowth",
+    "id": "it/ostrya-carpinifolia·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -3550,7 +3550,7 @@
     ]
    },
    {
-    "id": "bologna/ostrya-carpinifolia·dusk·regrowth",
+    "id": "it/ostrya-carpinifolia·dusk·regrowth",
     "grade": "uncommon",
     "traits": [
      "dusk"
@@ -3584,7 +3584,7 @@
     ]
    },
    {
-    "id": "bologna/ostrya-carpinifolia·moon·regrowth",
+    "id": "it/ostrya-carpinifolia·moon·regrowth",
     "grade": "uncommon",
     "traits": [
      "moon"
@@ -3617,7 +3617,7 @@
     ]
    },
    {
-    "id": "bologna/ostrya-carpinifolia·moon+newMoon·regrowth",
+    "id": "it/ostrya-carpinifolia·moon+newMoon·regrowth",
     "grade": "rare",
     "traits": [
      "moon",
@@ -3667,7 +3667,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/glechoma-hederacea·clarity",
+    "id": "it/glechoma-hederacea·clarity",
     "grade": "common",
     "traits": [],
     "effect": "clarity",
@@ -3691,7 +3691,7 @@
     ]
    },
    {
-    "id": "bologna/glechoma-hederacea·rain·clarity",
+    "id": "it/glechoma-hederacea·rain·clarity",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -3724,7 +3724,7 @@
     ]
    },
    {
-    "id": "bologna/glechoma-hederacea·dew·regrowth",
+    "id": "it/glechoma-hederacea·dew·regrowth",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -3756,7 +3756,7 @@
     ]
    },
    {
-    "id": "bologna/glechoma-hederacea·waxingMoon+dew·regrowth",
+    "id": "it/glechoma-hederacea·waxingMoon+dew·regrowth",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -3806,7 +3806,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/linaria-vulgaris·regrowth",
+    "id": "it/linaria-vulgaris·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -3831,7 +3831,7 @@
     ]
    },
    {
-    "id": "bologna/linaria-vulgaris·dawn·regrowth",
+    "id": "it/linaria-vulgaris·dawn·regrowth",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -3865,7 +3865,7 @@
     ]
    },
    {
-    "id": "bologna/linaria-vulgaris·waningMoon·regrowth",
+    "id": "it/linaria-vulgaris·waningMoon·regrowth",
     "grade": "uncommon",
     "traits": [
      "waningMoon"
@@ -3898,7 +3898,7 @@
     ]
    },
    {
-    "id": "bologna/linaria-vulgaris·waningMoon+dew·regrowth",
+    "id": "it/linaria-vulgaris·waningMoon+dew·regrowth",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -3949,7 +3949,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/populus-alba·regrowth",
+    "id": "it/populus-alba·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -3978,7 +3978,7 @@
     ]
    },
    {
-    "id": "bologna/populus-alba·dew·regrowth",
+    "id": "it/populus-alba·dew·regrowth",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -4016,7 +4016,7 @@
     ]
    },
    {
-    "id": "bologna/populus-alba·rain·abundance",
+    "id": "it/populus-alba·rain·abundance",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -4051,7 +4051,7 @@
     ]
    },
    {
-    "id": "bologna/populus-alba·dawn+rain·abundance",
+    "id": "it/populus-alba·dawn+rain·abundance",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -4105,7 +4105,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/anacamptis-morio·omen",
+    "id": "it/anacamptis-morio·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -4129,7 +4129,7 @@
     ]
    },
    {
-    "id": "bologna/anacamptis-morio·dew·omen",
+    "id": "it/anacamptis-morio·dew·omen",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -4161,7 +4161,7 @@
     ]
    },
    {
-    "id": "bologna/anacamptis-morio·rain·omen",
+    "id": "it/anacamptis-morio·rain·omen",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -4194,7 +4194,7 @@
     ]
    },
    {
-    "id": "bologna/anacamptis-morio·waxingMoon+rain·omen",
+    "id": "it/anacamptis-morio·waxingMoon+rain·omen",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -4243,7 +4243,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/senecio-vulgaris·abundance",
+    "id": "it/senecio-vulgaris·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -4269,7 +4269,7 @@
     ]
    },
    {
-    "id": "bologna/senecio-vulgaris·fog·abundance",
+    "id": "it/senecio-vulgaris·fog·abundance",
     "grade": "uncommon",
     "traits": [
      "fog"
@@ -4301,7 +4301,7 @@
     ]
    },
    {
-    "id": "bologna/senecio-vulgaris·frost·abundance",
+    "id": "it/senecio-vulgaris·frost·abundance",
     "grade": "uncommon",
     "traits": [
      "frost"
@@ -4333,7 +4333,7 @@
     ]
    },
    {
-    "id": "bologna/senecio-vulgaris·waningMoon+frost·abundance",
+    "id": "it/senecio-vulgaris·waningMoon+frost·abundance",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -4385,7 +4385,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/lunaria-annua·abundance",
+    "id": "it/lunaria-annua·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -4415,7 +4415,7 @@
     ]
    },
    {
-    "id": "bologna/lunaria-annua·rain·abundance",
+    "id": "it/lunaria-annua·rain·abundance",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -4448,7 +4448,7 @@
     ]
    },
    {
-    "id": "bologna/lunaria-annua·waxingMoon·abundance",
+    "id": "it/lunaria-annua·waxingMoon·abundance",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -4481,7 +4481,7 @@
     ]
    },
    {
-    "id": "bologna/lunaria-annua·dusk+waxingMoon·abundance",
+    "id": "it/lunaria-annua·dusk+waxingMoon·abundance",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -4532,7 +4532,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/eranthis-hyemalis·omen",
+    "id": "it/eranthis-hyemalis·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -4556,7 +4556,7 @@
     ]
    },
    {
-    "id": "bologna/eranthis-hyemalis·frost·omen",
+    "id": "it/eranthis-hyemalis·frost·omen",
     "grade": "uncommon",
     "traits": [
      "frost"
@@ -4589,7 +4589,7 @@
     ]
    },
    {
-    "id": "bologna/eranthis-hyemalis·newMoon·abundance",
+    "id": "it/eranthis-hyemalis·newMoon·abundance",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -4622,7 +4622,7 @@
     ]
    },
    {
-    "id": "bologna/eranthis-hyemalis·newMoon+fog·abundance",
+    "id": "it/eranthis-hyemalis·newMoon+fog·abundance",
     "grade": "rare",
     "traits": [
      "newMoon",
@@ -4672,7 +4672,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/convolvulus-arvensis·regrowth",
+    "id": "it/convolvulus-arvensis·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -4698,7 +4698,7 @@
     ]
    },
    {
-    "id": "bologna/convolvulus-arvensis·sun·regrowth",
+    "id": "it/convolvulus-arvensis·sun·regrowth",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -4733,7 +4733,7 @@
     ]
    },
    {
-    "id": "bologna/convolvulus-arvensis·dawn·regrowth",
+    "id": "it/convolvulus-arvensis·dawn·regrowth",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -4768,7 +4768,7 @@
     ]
    },
    {
-    "id": "bologna/convolvulus-arvensis·dawn+dew·regrowth",
+    "id": "it/convolvulus-arvensis·dawn+dew·regrowth",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -4804,7 +4804,7 @@
     ]
    },
    {
-    "id": "bologna/convolvulus-arvensis·sun+dew·regrowth",
+    "id": "it/convolvulus-arvensis·sun+dew·regrowth",
     "grade": "rare",
     "traits": [
      "sun",
@@ -4855,7 +4855,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/ligustrum-vulgare·omen",
+    "id": "it/ligustrum-vulgare·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -4881,7 +4881,7 @@
     ]
    },
    {
-    "id": "bologna/ligustrum-vulgare·fog·omen",
+    "id": "it/ligustrum-vulgare·fog·omen",
     "grade": "uncommon",
     "traits": [
      "fog"
@@ -4914,7 +4914,7 @@
     ]
    },
    {
-    "id": "bologna/ligustrum-vulgare·newMoon·abundance",
+    "id": "it/ligustrum-vulgare·newMoon·abundance",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -4947,7 +4947,7 @@
     ]
    },
    {
-    "id": "bologna/ligustrum-vulgare·waningMoon+newMoon·abundance",
+    "id": "it/ligustrum-vulgare·waningMoon+newMoon·abundance",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -4998,7 +4998,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/helleborus-foetidus·omen",
+    "id": "it/helleborus-foetidus·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -5024,7 +5024,7 @@
     ]
    },
    {
-    "id": "bologna/helleborus-foetidus·frost·omen",
+    "id": "it/helleborus-foetidus·frost·omen",
     "grade": "uncommon",
     "traits": [
      "frost"
@@ -5059,7 +5059,7 @@
     ]
    },
    {
-    "id": "bologna/helleborus-foetidus·newMoon·regrowth",
+    "id": "it/helleborus-foetidus·newMoon·regrowth",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -5094,7 +5094,7 @@
     ]
    },
    {
-    "id": "bologna/helleborus-foetidus·waningMoon+newMoon·regrowth",
+    "id": "it/helleborus-foetidus·waningMoon+newMoon·regrowth",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -5145,7 +5145,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/vinca-major·regrowth",
+    "id": "it/vinca-major·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -5171,7 +5171,7 @@
     ]
    },
    {
-    "id": "bologna/vinca-major·rain·regrowth",
+    "id": "it/vinca-major·rain·regrowth",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -5204,7 +5204,7 @@
     ]
    },
    {
-    "id": "bologna/vinca-major·dew·abundance",
+    "id": "it/vinca-major·dew·abundance",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -5237,7 +5237,7 @@
     ]
    },
    {
-    "id": "bologna/vinca-major·waxingMoon+dew·abundance",
+    "id": "it/vinca-major·waxingMoon+dew·abundance",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -5273,7 +5273,7 @@
     ]
    },
    {
-    "id": "bologna/vinca-major·waxingMoon+rain·regrowth",
+    "id": "it/vinca-major·waxingMoon+rain·regrowth",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -5322,7 +5322,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/tragopogon-porrifolius·abundance",
+    "id": "it/tragopogon-porrifolius·abundance",
     "grade": "common",
     "traits": [],
     "effect": "abundance",
@@ -5346,7 +5346,7 @@
     ]
    },
    {
-    "id": "bologna/tragopogon-porrifolius·dawn·abundance",
+    "id": "it/tragopogon-porrifolius·dawn·abundance",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -5379,7 +5379,7 @@
     ]
    },
    {
-    "id": "bologna/tragopogon-porrifolius·sun·abundance",
+    "id": "it/tragopogon-porrifolius·sun·abundance",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -5411,7 +5411,7 @@
     ]
    },
    {
-    "id": "bologna/tragopogon-porrifolius·waxingMoon+sun·abundance",
+    "id": "it/tragopogon-porrifolius·waxingMoon+sun·abundance",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -5447,7 +5447,7 @@
     ]
    },
    {
-    "id": "bologna/tragopogon-porrifolius·dawn+waxingMoon·abundance",
+    "id": "it/tragopogon-porrifolius·dawn+waxingMoon·abundance",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -5498,7 +5498,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/hedera-helix·omen",
+    "id": "it/hedera-helix·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -5526,7 +5526,7 @@
     ]
    },
    {
-    "id": "bologna/hedera-helix·newMoon·omen",
+    "id": "it/hedera-helix·newMoon·omen",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -5563,7 +5563,7 @@
     ]
    },
    {
-    "id": "bologna/hedera-helix·fog·abundance",
+    "id": "it/hedera-helix·fog·abundance",
     "grade": "uncommon",
     "traits": [
      "fog"
@@ -5596,7 +5596,7 @@
     ]
    },
    {
-    "id": "bologna/hedera-helix·dusk+fog·abundance",
+    "id": "it/hedera-helix·dusk+fog·abundance",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -5632,7 +5632,7 @@
     ]
    },
    {
-    "id": "bologna/hedera-helix·dusk+newMoon·omen",
+    "id": "it/hedera-helix·dusk+newMoon·omen",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -5683,7 +5683,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/cyclamen-hederifolium·regrowth",
+    "id": "it/cyclamen-hederifolium·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -5711,7 +5711,7 @@
     ]
    },
    {
-    "id": "bologna/cyclamen-hederifolium·dusk·regrowth",
+    "id": "it/cyclamen-hederifolium·dusk·regrowth",
     "grade": "uncommon",
     "traits": [
      "dusk"
@@ -5748,7 +5748,7 @@
     ]
    },
    {
-    "id": "bologna/cyclamen-hederifolium·moon·regrowth",
+    "id": "it/cyclamen-hederifolium·moon·regrowth",
     "grade": "uncommon",
     "traits": [
      "moon"
@@ -5781,7 +5781,7 @@
     ]
    },
    {
-    "id": "bologna/cyclamen-hederifolium·moon+waningMoon·regrowth",
+    "id": "it/cyclamen-hederifolium·moon+waningMoon·regrowth",
     "grade": "rare",
     "traits": [
      "moon",
@@ -5816,7 +5816,7 @@
     ]
    },
    {
-    "id": "bologna/cyclamen-hederifolium·dusk+waningMoon·regrowth",
+    "id": "it/cyclamen-hederifolium·dusk+waningMoon·regrowth",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -5865,7 +5865,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/hippocrepis-emerus·regrowth",
+    "id": "it/hippocrepis-emerus·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -5889,7 +5889,7 @@
     ]
    },
    {
-    "id": "bologna/hippocrepis-emerus·waxingMoon·regrowth",
+    "id": "it/hippocrepis-emerus·waxingMoon·regrowth",
     "grade": "uncommon",
     "traits": [
      "waxingMoon"
@@ -5921,7 +5921,7 @@
     ]
    },
    {
-    "id": "bologna/hippocrepis-emerus·dawn·regrowth",
+    "id": "it/hippocrepis-emerus·dawn·regrowth",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -5953,7 +5953,7 @@
     ]
    },
    {
-    "id": "bologna/hippocrepis-emerus·dawn+sun·regrowth",
+    "id": "it/hippocrepis-emerus·dawn+sun·regrowth",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -5988,7 +5988,7 @@
     ]
    },
    {
-    "id": "bologna/hippocrepis-emerus·waxingMoon+sun·regrowth",
+    "id": "it/hippocrepis-emerus·waxingMoon+sun·regrowth",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -6038,7 +6038,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/fagus-sylvatica·regrowth",
+    "id": "it/fagus-sylvatica·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -6066,7 +6066,7 @@
     ]
    },
    {
-    "id": "bologna/fagus-sylvatica·dusk·regrowth",
+    "id": "it/fagus-sylvatica·dusk·regrowth",
     "grade": "uncommon",
     "traits": [
      "dusk"
@@ -6102,7 +6102,7 @@
     ]
    },
    {
-    "id": "bologna/fagus-sylvatica·moon·abundance",
+    "id": "it/fagus-sylvatica·moon·abundance",
     "grade": "uncommon",
     "traits": [
      "moon"
@@ -6138,7 +6138,7 @@
     ]
    },
    {
-    "id": "bologna/fagus-sylvatica·moon+newMoon·abundance",
+    "id": "it/fagus-sylvatica·moon+newMoon·abundance",
     "grade": "rare",
     "traits": [
      "moon",
@@ -6173,7 +6173,7 @@
     ]
    },
    {
-    "id": "bologna/fagus-sylvatica·dusk+newMoon·regrowth",
+    "id": "it/fagus-sylvatica·dusk+newMoon·regrowth",
     "grade": "rare",
     "traits": [
      "dusk",
@@ -6223,7 +6223,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/althaea-cannabina·clarity",
+    "id": "it/althaea-cannabina·clarity",
     "grade": "common",
     "traits": [],
     "effect": "clarity",
@@ -6250,7 +6250,7 @@
     ]
    },
    {
-    "id": "bologna/althaea-cannabina·dawn·clarity",
+    "id": "it/althaea-cannabina·dawn·clarity",
     "grade": "uncommon",
     "traits": [
      "dawn"
@@ -6286,7 +6286,7 @@
     ]
    },
    {
-    "id": "bologna/althaea-cannabina·sun·clarity",
+    "id": "it/althaea-cannabina·sun·clarity",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -6321,7 +6321,7 @@
     ]
    },
    {
-    "id": "bologna/althaea-cannabina·waningMoon+sun·clarity",
+    "id": "it/althaea-cannabina·waningMoon+sun·clarity",
     "grade": "rare",
     "traits": [
      "waningMoon",
@@ -6357,7 +6357,7 @@
     ]
    },
    {
-    "id": "bologna/althaea-cannabina·dawn+waningMoon·clarity",
+    "id": "it/althaea-cannabina·dawn+waningMoon·clarity",
     "grade": "rare",
     "traits": [
      "dawn",
@@ -6409,7 +6409,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/sambucus-ebulus·omen",
+    "id": "it/sambucus-ebulus·omen",
     "grade": "common",
     "traits": [],
     "effect": "omen",
@@ -6434,7 +6434,7 @@
     ]
    },
    {
-    "id": "bologna/sambucus-ebulus·sun·omen",
+    "id": "it/sambucus-ebulus·sun·omen",
     "grade": "uncommon",
     "traits": [
      "sun"
@@ -6468,7 +6468,7 @@
     ]
    },
    {
-    "id": "bologna/sambucus-ebulus·newMoon·abundance",
+    "id": "it/sambucus-ebulus·newMoon·abundance",
     "grade": "uncommon",
     "traits": [
      "newMoon"
@@ -6502,7 +6502,7 @@
     ]
    },
    {
-    "id": "bologna/sambucus-ebulus·newMoon+dew·abundance",
+    "id": "it/sambucus-ebulus·newMoon+dew·abundance",
     "grade": "rare",
     "traits": [
      "newMoon",
@@ -6537,7 +6537,7 @@
     ]
    },
    {
-    "id": "bologna/sambucus-ebulus·sun+dew·omen",
+    "id": "it/sambucus-ebulus·sun+dew·omen",
     "grade": "rare",
     "traits": [
      "sun",
@@ -6588,7 +6588,7 @@
   ],
   "cards": [
    {
-    "id": "bologna/equisetum-telmateia·regrowth",
+    "id": "it/equisetum-telmateia·regrowth",
     "grade": "common",
     "traits": [],
     "effect": "regrowth",
@@ -6619,7 +6619,7 @@
     ]
    },
    {
-    "id": "bologna/equisetum-telmateia·rain·regrowth",
+    "id": "it/equisetum-telmateia·rain·regrowth",
     "grade": "uncommon",
     "traits": [
      "rain"
@@ -6656,7 +6656,7 @@
     ]
    },
    {
-    "id": "bologna/equisetum-telmateia·dew·regrowth",
+    "id": "it/equisetum-telmateia·dew·regrowth",
     "grade": "uncommon",
     "traits": [
      "dew"
@@ -6691,7 +6691,7 @@
     ]
    },
    {
-    "id": "bologna/equisetum-telmateia·waxingMoon+dew·regrowth",
+    "id": "it/equisetum-telmateia·waxingMoon+dew·regrowth",
     "grade": "rare",
     "traits": [
      "waxingMoon",
@@ -6726,7 +6726,7 @@
     ]
    },
    {
-    "id": "bologna/equisetum-telmateia·waxingMoon+rain·regrowth",
+    "id": "it/equisetum-telmateia·waxingMoon+rain·regrowth",
     "grade": "rare",
     "traits": [
      "waxingMoon",

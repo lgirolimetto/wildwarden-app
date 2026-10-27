@@ -3,8 +3,8 @@ import 'package:druid_app/business_logic/models/mythic.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/recipe_book.dart';
 
-/// L'album: una pagina per pianta con le sue figurine, più le Mitiche numerate (capitolo 02, "Ricette ad affissi e
-/// pagine per pianta"). Mostra solo le pagine di cui conosci almeno una ricetta; nella pagina le figurine che mancano
+/// Il Ricettario: una pagina per pianta con le sue Tavole, più le Mitiche numerate (capitolo 02, "Ricette ad affissi e
+/// pagine per pianta"). Mostra solo le pagine di cui conosci almeno una ricetta; nella pagina le Tavole che mancano
 /// sono slot vuoti con il solo cerchietto del grado.
 
 /// Livello di studio che insegna la Comune della pianta (decisione 🔵: le prime ricette arrivano alla prima sessione).
@@ -34,15 +34,15 @@ Set<String> knownRecipeIds(Catalog catalog, GameState state) {
   };
 }
 
-/// Una pagina dell'album: la pagina della pianta e le figurine che hai.
-class AlbumEntry {
+/// Una pagina del Ricettario: la pagina della pianta e le Tavole che hai.
+class CollectedPage {
   final PlantPage page;
   final Set<String> knownIds;
 
-  /// Quando hai imparato l'ultima figurina della pagina (`null` per le Comuni studiate prima della tappa C).
+  /// Quando hai imparato l'ultima Tavola della pagina (`null` per le Comuni studiate prima della tappa C).
   final DateTime? lastLearned;
 
-  const AlbumEntry({required this.page, required this.knownIds, required this.lastLearned});
+  const CollectedPage({required this.page, required this.knownIds, required this.lastLearned});
 
   bool knows(PlantRecipe recipe) => knownIds.contains(recipe.id);
 
@@ -51,13 +51,13 @@ class AlbumEntry {
   bool get complete => knownCount == page.recipes.length;
 }
 
-/// Le pagine con almeno una figurina, dalla più recente; a pari data in ordine di catalogo.
-List<AlbumEntry> albumPages(Catalog catalog, GameState state) {
+/// Le pagine con almeno una Tavola, dalla più recente; a pari data in ordine di catalogo.
+List<CollectedPage> collectedPages(Catalog catalog, GameState state) {
   final known = knownRecipeIds(catalog, state);
   final pages = [
     for (final page in recipeBookOf(catalog).pages)
       if (page.recipes.any((r) => known.contains(r.id)))
-        AlbumEntry(
+        CollectedPage(
           page: page,
           knownIds: {
             for (final r in page.recipes)

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
-import 'package:druid_app/business_logic/rules/recipes/album.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';

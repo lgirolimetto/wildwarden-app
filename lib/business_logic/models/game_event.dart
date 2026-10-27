@@ -18,7 +18,8 @@ enum AnswerMode { learning, review }
 /// Da dove arriva una ricetta imparata: dallo studio (la Comune di una pianta) o dal Bottino dell'Esperienza.
 enum RecipeOrigin { study, trove }
 
-/// Passi dell'onboarding che non si deducono dallo stato di gioco.
+/// Passi dell'onboarding che non si deducono dallo stato di gioco. [albumVisited] è il Ricettario aperto (si chiamava
+/// Album: il nome è salvato negli eventi e non si rinomina).
 enum OnboardingMark { erbarioVisited, albumVisited, skipped }
 
 /// Evento di gioco. Si salvano solo eventi: livelli, PE ed erbario si ricalcolano rileggendoli

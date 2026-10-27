@@ -236,7 +236,7 @@ void main() {
       state = state.apply(met('Eranthis hyemalis'));
       expect(currentMission(state, catalog), Mission.firstRecipe);
 
-      // La Comune c'è già (livello 1): si completa aprendo l'album.
+      // La Comune c'è già (livello 1): si completa aprendo il Ricettario.
       state = state.apply(OnboardingMarked(mark: OnboardingMark.albumVisited, occurredAt: feb));
       expect(currentMission(state, catalog), isNull);
       expect(isApprenticeshipComplete(state, catalog), isTrue);

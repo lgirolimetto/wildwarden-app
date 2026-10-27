@@ -112,7 +112,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get navStudy => 'Home';
 
   @override
-  String get navRecipes => 'Album';
+  String get navRecipes => 'Ricettario';
 
   @override
   String get rankApprentice => 'Apprendista';
@@ -616,7 +616,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionFirstRecipeBody =>
-      'Studiando una specie impari la sua Ricetta Comune: la trovi nell\'Album, sulla Pagina della pianta. Le altre Figurine della Pagina si trovano nel Bottino dell\'Esperienza.';
+      'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.';
 
   @override
   String get missionSkip => 'Salta l\'Apprendistato';
@@ -631,7 +631,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get missionActionStudy => 'Inizia a studiare';
 
   @override
-  String get missionActionRecipes => 'Apri l\'Album';
+  String get missionActionRecipes => 'Apri il Ricettario';
 
   @override
   String get missionGlossary => 'Glossario';
@@ -1215,27 +1215,21 @@ class AppLocalizationsIt extends AppLocalizations {
       'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.';
 
   @override
-  String get albumTitle => 'Album';
+  String get recipeBookTitle => 'Ricettario';
 
   @override
-  String get albumTabPlants => 'Piante';
-
-  @override
-  String get albumTabMythics => 'Mitiche';
-
-  @override
-  String albumFigurines(int count) {
+  String recipeBookPlates(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count Figurine',
-      one: '1 Figurina',
+      other: '$count Tavole',
+      one: '1 Tavola',
     );
     return '$_temp0';
   }
 
   @override
-  String albumPagesSummary(int pages, int total, int complete) {
+  String recipeBookPagesSummary(int pages, int total, int complete) {
     String _temp0 = intl.Intl.pluralLogic(
       pages,
       locale: localeName,
@@ -1252,25 +1246,37 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String albumPageCount(int known, int total) {
-    return '$known di $total';
+  String recipeBookPageCount(int known, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Tavole',
+      one: '1 Tavola',
+    );
+    return '$_temp0 su $total';
   }
 
   @override
-  String get albumFavouredTraits => 'Tratti d\'elezione';
+  String get recipeBookFavouredTraits => 'Tratti d\'elezione';
 
   @override
-  String get albumVocation => 'Vocazione';
+  String get recipeBookVocation => 'Vocazione';
 
   @override
-  String get albumMissingFigurine => 'Figurina da trovare';
+  String get recipeBookMissingPlate => 'Tavola da trovare';
 
   @override
-  String get albumSwipeHint => 'Scorri per sfogliare le Pagine';
+  String get recipeBookSwipeHint => 'Scorri per sfogliare le Pagine';
 
   @override
-  String albumSpeciesLink(int known, int total) {
-    return 'Album · $known di $total';
+  String recipeBookSpeciesLink(int known, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Tavole',
+      one: '1 Tavola',
+    );
+    return 'Ricettario · $_temp0 su $total';
   }
 
   @override
@@ -1313,7 +1319,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String mythicNumber(String number) {
-    return 'N. $number';
+    return 'Tavola n. $number';
   }
 
   @override
@@ -1329,5 +1335,29 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get mythicsIntro =>
-      'Le Mitiche d\'Italia: scritte a mano, legate a luoghi e feste. Si trovano nel Bottino dell\'Esperienza.';
+      'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano nel Bottino dell\'Esperienza.';
+
+  @override
+  String recipeBookMythicsRow(String zone) {
+    return 'Mitiche · $zone';
+  }
+
+  @override
+  String recipeBookMythicsCount(int known, int total) {
+    return '$known su $total';
+  }
+
+  @override
+  String get debugSimulateRecipeBook => 'Simula un Ricettario';
+
+  @override
+  String debugSimulateRecipeBookDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Tavole aggiunte',
+      one: '1 Tavola aggiunta',
+    );
+    return '$_temp0 al Ricettario';
+  }
 }

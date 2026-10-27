@@ -1,5 +1,6 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -89,6 +90,18 @@ void main() {
 
     expect(store.events.whereType<NoteSaved>(), hasLength(1));
     expect(controller.state.notes['Eranthis hyemalis'], 'sotto i noccioli');
+  });
+
+  test('simulare un Ricettario: Tavole di più piante e la prima Mitica, una volta sola', () async {
+    final added = await controller.simulateRecipeBook();
+
+    final learned = store.events.whereType<RecipeLearned>().toList();
+    expect(added, learned.length);
+    expect(learned.map((e) => e.recipeId), contains('lanterna-santa-lucia'));
+    expect(collectedPages(catalog, controller.state), hasLength(4), reason: 'il catalogo di prova ha 4 piante');
+    expect(collectedPages(catalog, controller.state).where((p) => p.complete), isNotEmpty);
+
+    expect(await controller.simulateRecipeBook(), 0, reason: 'le Tavole già imparate non si ripetono');
   });
 
   test('azzerare cancella tutti i progressi', () async {

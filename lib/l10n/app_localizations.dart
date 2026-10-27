@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @navRecipes.
   ///
   /// In it, this message translates to:
-  /// **'Album'**
+  /// **'Ricettario'**
   String get navRecipes;
 
   /// No description provided for @rankApprentice.
@@ -1091,7 +1091,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstRecipeBody.
   ///
   /// In it, this message translates to:
-  /// **'Studiando una specie impari la sua Ricetta Comune: la trovi nell\'Album, sulla Pagina della pianta. Le altre Figurine della Pagina si trovano nel Bottino dell\'Esperienza.'**
+  /// **'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.'**
   String get missionFirstRecipeBody;
 
   /// No description provided for @missionSkip.
@@ -1121,7 +1121,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionActionRecipes.
   ///
   /// In it, this message translates to:
-  /// **'Apri l\'Album'**
+  /// **'Apri il Ricettario'**
   String get missionActionRecipes;
 
   /// No description provided for @missionGlossary.
@@ -2114,71 +2114,59 @@ abstract class AppLocalizations {
   /// **'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.'**
   String get traitWhenWaningMoon;
 
-  /// No description provided for @albumTitle.
+  /// No description provided for @recipeBookTitle.
   ///
   /// In it, this message translates to:
-  /// **'Album'**
-  String get albumTitle;
+  /// **'Ricettario'**
+  String get recipeBookTitle;
 
-  /// No description provided for @albumTabPlants.
+  /// No description provided for @recipeBookPlates.
   ///
   /// In it, this message translates to:
-  /// **'Piante'**
-  String get albumTabPlants;
+  /// **'{count, plural, =1{1 Tavola} other{{count} Tavole}}'**
+  String recipeBookPlates(int count);
 
-  /// No description provided for @albumTabMythics.
-  ///
-  /// In it, this message translates to:
-  /// **'Mitiche'**
-  String get albumTabMythics;
-
-  /// No description provided for @albumFigurines.
-  ///
-  /// In it, this message translates to:
-  /// **'{count, plural, =1{1 Figurina} other{{count} Figurine}}'**
-  String albumFigurines(int count);
-
-  /// No description provided for @albumPagesSummary.
+  /// No description provided for @recipeBookPagesSummary.
   ///
   /// In it, this message translates to:
   /// **'{pages, plural, =1{1 Pagina} other{{pages} Pagine}} su {total} · {complete, plural, =1{1 completa} other{{complete} complete}}'**
-  String albumPagesSummary(int pages, int total, int complete);
+  String recipeBookPagesSummary(int pages, int total, int complete);
 
-  /// No description provided for @albumPageCount.
+  /// No description provided for @recipeBookPageCount.
   ///
   /// In it, this message translates to:
-  /// **'{known} di {total}'**
-  String albumPageCount(int known, int total);
+  /// **'{known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}'**
+  String recipeBookPageCount(int known, int total);
 
-  /// No description provided for @albumFavouredTraits.
+  /// No description provided for @recipeBookFavouredTraits.
   ///
   /// In it, this message translates to:
   /// **'Tratti d\'elezione'**
-  String get albumFavouredTraits;
+  String get recipeBookFavouredTraits;
 
-  /// No description provided for @albumVocation.
+  /// No description provided for @recipeBookVocation.
   ///
   /// In it, this message translates to:
   /// **'Vocazione'**
-  String get albumVocation;
+  String get recipeBookVocation;
 
-  /// No description provided for @albumMissingFigurine.
+  /// No description provided for @recipeBookMissingPlate.
   ///
   /// In it, this message translates to:
-  /// **'Figurina da trovare'**
-  String get albumMissingFigurine;
+  /// **'Tavola da trovare'**
+  String get recipeBookMissingPlate;
 
-  /// No description provided for @albumSwipeHint.
+  /// No description provided for @recipeBookSwipeHint.
   ///
   /// In it, this message translates to:
   /// **'Scorri per sfogliare le Pagine'**
-  String get albumSwipeHint;
+  String get recipeBookSwipeHint;
 
-  /// No description provided for @albumSpeciesLink.
+  /// No description provided for @recipeBookSpeciesLink.
   ///
   /// In it, this message translates to:
-  /// **'Album · {known} di {total}'**
-  String albumSpeciesLink(int known, int total);
+  /// **'Ricettario · {known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}'**
+  String recipeBookSpeciesLink(int known, int total);
 
   /// No description provided for @recipeMonths.
   ///
@@ -2249,7 +2237,7 @@ abstract class AppLocalizations {
   /// No description provided for @mythicNumber.
   ///
   /// In it, this message translates to:
-  /// **'N. {number}'**
+  /// **'Tavola n. {number}'**
   String mythicNumber(String number);
 
   /// No description provided for @mythicToFind.
@@ -2273,8 +2261,32 @@ abstract class AppLocalizations {
   /// No description provided for @mythicsIntro.
   ///
   /// In it, this message translates to:
-  /// **'Le Mitiche d\'Italia: scritte a mano, legate a luoghi e feste. Si trovano nel Bottino dell\'Esperienza.'**
+  /// **'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano nel Bottino dell\'Esperienza.'**
   String get mythicsIntro;
+
+  /// No description provided for @recipeBookMythicsRow.
+  ///
+  /// In it, this message translates to:
+  /// **'Mitiche · {zone}'**
+  String recipeBookMythicsRow(String zone);
+
+  /// No description provided for @recipeBookMythicsCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{known} su {total}'**
+  String recipeBookMythicsCount(int known, int total);
+
+  /// No description provided for @debugSimulateRecipeBook.
+  ///
+  /// In it, this message translates to:
+  /// **'Simula un Ricettario'**
+  String get debugSimulateRecipeBook;
+
+  /// No description provided for @debugSimulateRecipeBookDone.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Tavola aggiunta} other{{count} Tavole aggiunte}} al Ricettario'**
+  String debugSimulateRecipeBookDone(int count);
 }
 
 class _AppLocalizationsDelegate

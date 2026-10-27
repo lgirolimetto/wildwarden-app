@@ -2,6 +2,7 @@
  "formatVersion": 3,
  "region": {
   "id": "bologna",
+  "country": "it",
   "name": {
    "it": "Provincia di Bologna"
   },

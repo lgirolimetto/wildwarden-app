@@ -20,7 +20,7 @@ import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
 /// Una specie c'è nel mese se le sue osservazioni arrivano almeno al 30 % del mese migliore (come nel simulatore).
 const presenceRatio = 0.3;
 
-/// Figurine per pagina secondo la rarità della pianta: (non comuni, rare), più la Comune. Da 3 a 5.
+/// Tavole per pagina secondo la rarità della pianta: (non comuni, rare), più la Comune. Da 3 a 5.
 const _pageShape = {Grade.common: (1, 1), Grade.uncommon: (2, 1), Grade.rare: (2, 2), Grade.mythic: (2, 2)};
 
 /// Unità di Vis per ingrediente, secondo il grado della ricetta (1 unità = 10 Vis).
@@ -51,7 +51,7 @@ class RecipeIngredient {
 
 /// Una ricetta ad affissi della pagina di una pianta.
 class PlantRecipe {
-  /// `zona/pianta·tratti·effetto` (es. `bologna/celtis-australis·dawn+sun·abundance`): lo salvano gli eventi.
+  /// `paese/pianta·tratti·effetto` (es. `it/celtis-australis·dawn+sun·abundance`): lo salvano gli eventi.
   final String id;
   final Species plant;
   final Grade grade;
@@ -103,7 +103,7 @@ class PlantRecipe {
 /// Un pezzo del nome che può mancare.
 enum NamePiece { secondTrait, effect }
 
-/// La pagina di una pianta nell'album.
+/// La pagina di una pianta nel Ricettario.
 class PlantPage {
   final Species plant;
 
@@ -178,7 +178,7 @@ class _Builder {
     final rows = _ingredients(plant, grade, sorted, used);
     final withToxic = rows.any((r) => r.plant != null && toxic.contains(r.plant!.sci));
     return PlantRecipe(
-      id: recipeId(catalog.regionId, plant.sci, sorted, effect),
+      id: recipeId(catalog.countryId, plant.sci, sorted, effect),
       plant: plant,
       grade: grade,
       traits: sorted,
@@ -316,9 +316,10 @@ class _Row {
   const _Row(this.plant, this.traits);
 }
 
-/// Id deterministico di una ricetta ad affissi: la Zona e la combinazione (`bologna/celtis-australis·dawn+sun·abundance`).
-String recipeId(String regionId, String speciesSci, List<Trait> traits, PotionEffect effect) => [
-  '$regionId/${speciesSci.toLowerCase().replaceAll(' ', '-')}',
+/// Id deterministico di una ricetta ad affissi: il paese del Ricettario (nazionale) e la combinazione
+/// (`it/celtis-australis·dawn+sun·abundance`).
+String recipeId(String countryId, String speciesSci, List<Trait> traits, PotionEffect effect) => [
+  '$countryId/${speciesSci.toLowerCase().replaceAll(' ', '-')}',
   if (traits.isNotEmpty) traits.map((t) => t.name).join('+'),
   effect.name,
 ].join('·');

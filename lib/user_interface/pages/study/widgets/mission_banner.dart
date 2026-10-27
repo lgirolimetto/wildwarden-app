@@ -54,7 +54,7 @@ class MissionBanner extends StatelessWidget {
           null => openTab(HomeController.erbarioTab),
         },
       ),
-      Mission.firstRecipe => (context.l10n.missionActionRecipes, () => openTab(HomeController.albumTab)),
+      Mission.firstRecipe => (context.l10n.missionActionRecipes, () => openTab(HomeController.recipeBookTab)),
     };
   }
 

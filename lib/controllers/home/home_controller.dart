@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 /// Scheda scelta nella barra di navigazione: la cambiano sia la barra sia i pulsanti delle missioni.
 class HomeController extends GetxController {
-  static const studyTab = 0, erbarioTab = 1, albumTab = 2, settingsTab = 3;
+  static const studyTab = 0, erbarioTab = 1, recipeBookTab = 2, settingsTab = 3;
 
   final ProgressController _progress;
 
@@ -15,8 +15,8 @@ class HomeController extends GetxController {
   Future<void> select(int index) async {
     tab = index;
     update();
-    // Missioni dell'apprendistato: aprire l'erbario, poi l'album.
+    // Missioni dell'apprendistato: aprire l'erbario, poi il Ricettario.
     if (index == erbarioTab) await _progress.markOnboarding(OnboardingMark.erbarioVisited);
-    if (index == albumTab) await _progress.markOnboarding(OnboardingMark.albumVisited);
+    if (index == recipeBookTab) await _progress.markOnboarding(OnboardingMark.albumVisited);
   }
 }

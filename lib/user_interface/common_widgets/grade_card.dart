@@ -3,14 +3,21 @@ import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 
-/// Scheda di un oggetto con un grado (comune, non comune, rara, mitica): ricette oggi, poi figurine, pozioni e
+/// Scheda di un oggetto con un grado (comune, non comune, rara, mitica): ricette oggi, poi Tavole, pozioni e
 /// Bottino. Le schede sono tutte uguali, del colore della livrea: il grado lo dice il [GradeDot] nel contenuto.
 class GradeCard extends StatelessWidget {
   final Grade grade;
   final Widget child;
   final EdgeInsetsGeometry padding;
+  final VoidCallback? onTap;
 
-  const GradeCard({super.key, required this.grade, required this.child, this.padding = const EdgeInsets.all(16)});
+  const GradeCard({
+    super.key,
+    required this.grade,
+    required this.child,
+    this.padding = const EdgeInsets.all(16),
+    this.onTap,
+  });
 
   /// Di sera le schede con il grado sono un tono più chiare delle altre: si staccano dallo sfondo scuro e il colore del
   /// grado non sta sul verde più cupo.
@@ -20,12 +27,13 @@ class GradeCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => ClayCard(color: surfaceOf(context), padding: padding, child: child);
+  Widget build(BuildContext context) =>
+      ClayCard(color: surfaceOf(context), padding: padding, onTap: onTap, child: child);
 }
 
 /// Il grado in un cerchietto: un piccolo incavo, come il solco della scheda, con dentro il colore del grado. Il nome
 /// del grado resta per i lettori di schermo e come suggerimento a pressione lunga; la legenda spiega i colori.
-/// [filled] falso: l'incavo vuoto, una figurina che manca (si vede appena il colore del grado sul bordo).
+/// [filled] falso: l'incavo vuoto, una Tavola che manca (si vede appena il colore del grado sul bordo).
 class GradeDot extends StatelessWidget {
   static const size = 22.0;
   static const _gem = 12.0;

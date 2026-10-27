@@ -2,12 +2,12 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
-import 'package:druid_app/business_logic/rules/recipes/album.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 
 /// Missioni dell'apprendistato (onboarding). Ogni missione si completa quando lo stato di gioco lo dice:
 /// niente codice sparso nelle pagine.
 ///
-/// Si comincia da casa, studiando; poi l'erbario, le desiderata e il campo; infine l'album, dove c'è la Ricetta
+/// Si comincia da casa, studiando; poi l'erbario, le desiderata e il campo; infine il Ricettario, dove c'è la Ricetta
 /// Comune imparata studiando. Stazione e ritorno arrivano nei blocchi 2-3.
 enum Mission {
   firstLevel,

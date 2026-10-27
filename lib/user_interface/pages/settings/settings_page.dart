@@ -130,6 +130,18 @@ class _DebugToolsState extends State<_DebugTools> {
           onPressed: () => Get.to<void>(() => const GradePreviewPage()),
           child: Text(context.l10n.debugGradePreview),
         ),
+        OutlinedButton(
+          key: const ValueKey('debug-simulate-recipe-book'),
+          onPressed: () async {
+            final added = await progress.simulateRecipeBook();
+            if (context.mounted) {
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(context.l10n.debugSimulateRecipeBookDone(added))));
+            }
+          },
+          child: Text(context.l10n.debugSimulateRecipeBook),
+        ),
         GetBuilder<SubscriptionController>(
           builder: (subscription) => ListTile(
             key: const ValueKey('debug-diario'),

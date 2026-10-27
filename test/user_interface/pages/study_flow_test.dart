@@ -1,6 +1,6 @@
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
-import 'package:druid_app/business_logic/rules/recipes/album.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -273,23 +273,27 @@ void main() {
       expect(level3, findsWidgets);
     });
 
-    testWidgets('album: le pagine delle piante che conosci, con gli slot vuoti e la ricetta aperta', (tester) async {
+    testWidgets('Ricettario: le pagine delle piante che conosci, con gli slot vuoti e la ricetta aperta', (
+      tester,
+    ) async {
       registerTestDependencies(events: [_passed('Malva sylvestris')]);
       await pumpDruidApp(tester);
-      await openTab(tester, 'Album');
+      await openTab(tester, 'Ricettario');
 
       final malva = recipeBookOf(smallCatalog()).pageOf('Malva sylvestris')!;
-      expect(find.text('1 Figurina'), findsOneWidget);
+      expect(find.text('1 Tavola'), findsOneWidget);
       expect(find.text('1 Pagina su 4 · 0 complete'), findsOneWidget);
-      await scrollAndTap(tester, find.byKey(const ValueKey('album-page-Malva sylvestris')));
+      expect(find.text('1 Tavola su 3'), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Malva sylvestris')));
 
-      // La pagina: la Comune imparata studiando, le altre figurine come slot vuoti con il solo grado.
-      expect(find.text('1 di 3'), findsOneWidget);
-      expect(find.byKey(ValueKey('figurine-${malva.recipes.first.id}')), findsOneWidget);
+      // La pagina: la Comune imparata studiando, le altre Tavole come slot vuoti con il solo grado.
+      expect(find.text('1 Tavola su 3'), findsOneWidget);
+      expect(find.text("Tratti d'elezione"), findsOneWidget);
+      expect(find.byKey(ValueKey('plate-${malva.recipes.first.id}')), findsOneWidget);
       expect(find.byKey(ValueKey('empty-slot-${malva.recipes[1].id}')), findsOneWidget);
       expect(find.text(malva.recipes[1].name('it')), findsNothing, reason: 'lo slot vuoto non svela il nome');
 
-      await scrollAndTap(tester, find.byKey(ValueKey('figurine-${malva.recipes.first.id}')));
+      await scrollAndTap(tester, find.byKey(ValueKey('plate-${malva.recipes.first.id}')));
       expect(find.text(malva.recipes.first.name('it')), findsOneWidget);
       expect(find.text('1 × Malva selvatica'), findsOneWidget);
       expect(find.text('1 × qualsiasi specie'), findsOneWidget);
@@ -303,25 +307,26 @@ void main() {
         events: [RecipeLearned(recipeId: frosty.id, origin: RecipeOrigin.trove, occurredAt: _feb)],
       );
       await pumpDruidApp(tester);
-      await openTab(tester, 'Album');
+      await openTab(tester, 'Ricettario');
 
-      await scrollAndTap(tester, find.byKey(const ValueKey('album-page-Eranthis hyemalis')));
-      await scrollAndTap(tester, find.byKey(ValueKey('figurine-${frosty.id}')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
+      await scrollAndTap(tester, find.byKey(ValueKey('plate-${frosty.id}')));
       expect(find.text('Quando fa sotto zero: brina e ghiaccio.'), findsOneWidget);
     });
 
-    testWidgets('nessuna ricetta conosciuta: l\'album spiega come impararle; le Mitiche hanno il numero', (
+    testWidgets('nessuna ricetta conosciuta: il Ricettario spiega come impararle; le Mitiche della Zona in cima', (
       tester,
     ) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Album');
+      await openTab(tester, 'Ricettario');
 
-      expect(find.byKey(const ValueKey('album-empty')), findsOneWidget);
+      expect(find.byKey(const ValueKey('recipe-book-empty')), findsOneWidget);
+      expect(find.text('Mitiche · Provincia di Bologna'), findsOneWidget);
+      expect(find.text('0 su 1'), findsOneWidget);
 
-      await tester.tap(find.byKey(const ValueKey('album-tab-mythics')));
-      await tester.pumpAndSettle();
-      expect(find.text('N. 001'), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-mythics')));
+      expect(find.text('Tavola n. 1'), findsOneWidget);
       expect(find.text('Da trovare'), findsOneWidget);
       expect(find.text('La Lanterna di Santa Lucia'), findsNothing);
     });

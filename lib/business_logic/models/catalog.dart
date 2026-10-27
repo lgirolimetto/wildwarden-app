@@ -26,6 +26,9 @@ class Catalog {
   static const supportedFormatVersion = 3;
 
   final String regionId;
+
+  /// Il paese del Ricettario (es. `it`): il Ricettario è nazionale e gli id delle ricette cominciano da qui.
+  final String countryId;
   final LocalizedText regionName;
 
   /// Giorni al mese (indice 0 = gennaio) con ogni condizione meteo della Zona: sole, pioggia, nebbia, rugiada,
@@ -45,6 +48,7 @@ class Catalog {
 
   Catalog({
     required this.regionId,
+    required this.countryId,
     required this.regionName,
     this.climate = const {},
     required this.species,
@@ -66,6 +70,7 @@ class Catalog {
 
     return Catalog(
       regionId: region['id'] as String,
+      countryId: region['country'] as String,
       regionName: LocalizedText.fromJson(region['name'] as Map<String, dynamic>),
       climate: (json['climate'] as Map<String, dynamic>).map(
         (id, days) => MapEntry(Trait.values.byName(id), (days as List).cast<int>()),
