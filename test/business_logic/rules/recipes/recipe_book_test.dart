@@ -29,6 +29,15 @@ void main() {
     expect(faggio.recipes.where((r) => r.grade == Grade.rare).single.traits, [Trait.moon, Trait.fog]);
   });
 
+  test('il Ricettario è nazionale: stagionalità e clima della specie nel paese vincono su quelli della Zona', () {
+    final malva = catalog.speciesBySci('Malva sylvestris')!;
+    expect(malva.national, isNotNull);
+    // Nella Zona la malva non c'è d'inverno; in tutto il paese sì, e dove la si osserva gela: il gelo è plausibile.
+    expect(plausibleMonths(malva, Trait.frost, catalog.climate), contains(0));
+    final elleboro = catalog.speciesBySci('Helleborus viridis')!;
+    expect(elleboro.national, isNull, reason: 'senza dati nazionali valgono quelli della Zona');
+  });
+
   test('la Comune: la pianta e una qualsiasi specie, senza tratti', () {
     final comune = book.pageOf('Malva sylvestris')!.recipes.first;
     expect(comune.traits, isEmpty);

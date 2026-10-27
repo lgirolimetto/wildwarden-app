@@ -33,7 +33,7 @@ class Catalog {
 
   /// Giorni al mese (indice 0 = gennaio) con ogni condizione meteo della Zona: sole, pioggia, nebbia, rugiada,
   /// gelo. Gli altri tratti (luce del giorno, luna) capitano ogni mese.
-  final Map<Trait, List<int>> climate;
+  final Map<Trait, List<double>> climate;
   final List<Species> species;
 
   /// Mitiche scritte a mano, in ordine di numero.
@@ -73,7 +73,7 @@ class Catalog {
       countryId: region['country'] as String,
       regionName: LocalizedText.fromJson(region['name'] as Map<String, dynamic>),
       climate: (json['climate'] as Map<String, dynamic>).map(
-        (id, days) => MapEntry(Trait.values.byName(id), (days as List).cast<int>()),
+        (id, days) => MapEntry(Trait.values.byName(id), climateDays(days as List)),
       ),
       species: (json['species'] as List).map((s) => Species.fromJson(s as Map<String, dynamic>)).toList(),
       mythics: (json['mythics'] as List).map((m) => Mythic.fromJson(m as Map<String, dynamic>)).toList(),

@@ -139,7 +139,7 @@ class RecipeBook {
 
 class _Builder {
   final Catalog catalog;
-  final Map<Trait, List<int>> climate;
+  final Map<Trait, List<double>> climate;
   final Set<String> toxic;
   final Map<String, Map<Trait, double>> ranks;
 
@@ -324,20 +324,27 @@ String recipeId(String countryId, String speciesSci, List<Trait> traits, PotionE
   effect.name,
 ].join('·');
 
+/// La stagionalità della specie in tutto il paese (il Ricettario è nazionale); quella della Zona se manca.
+List<double> _monthsOf(Species s) => s.national?.monthsRelative ?? s.monthsRelative;
+
+/// Il clima dei posti dove la specie è osservata; quello della Zona ([zone]) se manca.
+Map<Trait, List<double>> _climateOf(Species s, Map<Trait, List<double>> zone) => s.national?.climate ?? zone;
+
 /// Peso di presenza della specie per mese: 0 sotto la soglia [presenceRatio].
 List<double> presence(Species s) {
-  final top = s.monthsRelative.reduce(max);
+  final months = _monthsOf(s);
+  final top = months.reduce(max);
   final divisor = top == 0 ? 1 : top;
   return [
-    for (final m in s.monthsRelative)
+    for (final m in months)
       if (m / divisor >= presenceRatio) m / divisor else 0.0,
   ];
 }
 
 /// Mesi (0-11) in cui la specie c'è e il tratto può capitare nella Zona. Luce del giorno e luna capitano ogni mese.
-List<int> plausibleMonths(Species s, Trait? trait, Map<Trait, List<int>> climate) {
+List<int> plausibleMonths(Species s, Trait? trait, Map<Trait, List<double>> climate) {
   final weights = presence(s);
-  final days = trait == null ? null : climate[trait];
+  final days = trait == null ? null : _climateOf(s, climate)[trait];
   return [
     for (var i = 0; i < 12; i++)
       if (weights[i] != 0 && (days == null || days[i] > 0)) i,
@@ -352,8 +359,9 @@ bool _isWoody(SpeciesTraits t) =>
     t.growthForm == GrowthForm.tree || t.growthForm == GrowthForm.shrub || t.growthForm == GrowthForm.climber;
 
 /// Punteggio di ogni tratto plausibile per la pianta: quanto è facile attingerla con quel tratto e quanto le somiglia.
-Map<Trait, double> _affinityScores(Species s, Map<Trait, List<int>> climate, bool toxic) {
+Map<Trait, double> _affinityScores(Species s, Map<Trait, List<double>> zoneClimate, bool toxic) {
   final weights = presence(s);
+  final climate = _climateOf(s, zoneClimate);
   final total = weights.fold(0.0, (a, b) => a + b);
   final divisor = total == 0 ? 1 : total;
   final lt = _light(s), mo = _moisture(s);
@@ -382,7 +390,7 @@ Map<Trait, double> _affinityScores(Species s, Map<Trait, List<int>> climate, boo
   };
   return {
     for (final MapEntry(:key, :value) in scores.entries)
-      if (plausibleMonths(s, key, climate).isNotEmpty) key: value,
+      if (plausibleMonths(s, key, zoneClimate).isNotEmpty) key: value,
   };
 }
 
