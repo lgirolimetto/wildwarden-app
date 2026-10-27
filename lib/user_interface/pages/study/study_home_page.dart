@@ -19,7 +19,6 @@ import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
-import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
 import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
@@ -101,7 +100,8 @@ class _StudyHomePageState extends State<StudyHomePage> {
 }
 
 /// Testata della pagina Studio: il diorama della stagione e del momento del giorno, con la barra integrata
-/// (stagione, glossario, taccuino) e la scheda del titolo appoggiata sul bordo inferiore.
+/// (stagione, impostazioni, taccuino; legenda e glossario si aprono dalle impostazioni) e la scheda del titolo
+/// appoggiata sul bordo inferiore.
 class _DioramaHeader extends StatelessWidget {
   static const dioramaHeight = 300.0;
   final DateTime now;
@@ -147,13 +147,6 @@ class _DioramaHeader extends StatelessWidget {
                     icon: Icons.tune_rounded,
                     tooltip: context.l10n.settingsTitle,
                     onPressed: () => Get.to<void>(() => const SettingsPage()),
-                  ),
-                  const SizedBox(width: Gaps.s),
-                  ClayIconButton(
-                    key: const ValueKey('open-glossary'),
-                    icon: Icons.menu_book_rounded,
-                    tooltip: context.l10n.glossaryTitle,
-                    onPressed: () => Get.to<void>(() => const GlossaryPage()),
                   ),
                   const SizedBox(width: Gaps.s),
                   ClayIconButton(
