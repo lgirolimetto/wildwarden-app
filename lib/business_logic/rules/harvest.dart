@@ -19,4 +19,7 @@ bool isExhausted(GameState state, String speciesSci, DateTime now) {
   return last != null && _sameDay(last, now);
 }
 
+/// Essenze attinte oggi: una al giorno per specie, quindi le specie attinte oggi.
+int drawsToday(GameState state, DateTime now) => state.lastDraws.values.where((last) => _sameDay(last, now)).length;
+
 bool _sameDay(DateTime a, DateTime b) => a.year == b.year && a.month == b.month && a.day == b.day;

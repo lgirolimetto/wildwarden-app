@@ -89,7 +89,8 @@ void main() {
     expect(study.startReview(catalog), isTrue);
     expect(study.mode, AnswerMode.review);
     await answerAll();
-    expect(study.summary!.xp, 3 * XpRules.reviewRemembered);
+    // Primo ripasso: i fatti sono nella scatola 1.
+    expect(study.summary!.xp, 3 * XpRules.review(correct: true, box: 1));
   });
 
   test('le opzioni della domanda corrente non cambiano finché non si risponde', () async {

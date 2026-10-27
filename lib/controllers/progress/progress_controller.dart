@@ -72,7 +72,7 @@ class ProgressController extends LoadableController<GameState> {
         traits: traits,
         simulated: true,
         vis: visPerDraw,
-        xp: XpRules.essenceDrawn,
+        xp: XpRules.essence(drawnToday: drawsToday(state, now)),
         occurredAt: now,
       ),
     );

@@ -136,7 +136,12 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    return 'Prossimo Rango: $rank a $xp PE';
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Prossimo Rango: $rank a $xpString PE';
   }
 
   @override
@@ -395,7 +400,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get reviewsNone =>
-      'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.';
+      'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.';
 
   @override
   String get reviewsStart => 'Ripassa';

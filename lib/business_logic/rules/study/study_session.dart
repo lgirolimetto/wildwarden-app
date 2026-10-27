@@ -95,7 +95,7 @@ class StudySession {
             wrongEarlierInSession: _wrongInSession.contains(fact.id),
             mistakeRewardedBefore: state.progressOf(fact.id).mistakeRewarded,
           )
-        : XpRules.review(correct: correct);
+        : XpRules.review(correct: correct, box: state.progressOf(fact.id).box);
 
     _queue.removeAt(0);
     _current = null;

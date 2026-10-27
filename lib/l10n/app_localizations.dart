@@ -737,7 +737,7 @@ abstract class AppLocalizations {
   /// No description provided for @reviewsNone.
   ///
   /// In it, this message translates to:
-  /// **'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.'**
+  /// **'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.'**
   String get reviewsNone;
 
   /// No description provided for @reviewsStart.

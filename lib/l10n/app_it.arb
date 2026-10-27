@@ -71,7 +71,8 @@
         "type": "String"
       },
       "xp": {
-        "type": "int"
+        "type": "int",
+        "format": "decimalPattern"
       }
     }
   },
@@ -383,7 +384,7 @@
       }
     }
   },
-  "reviewsNone": "Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.",
+  "reviewsNone": "Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.",
   "reviewsStart": "Ripassa",
   "desiderataTitle": "Desiderata",
   "desiderataCount": "{count} su {max}",

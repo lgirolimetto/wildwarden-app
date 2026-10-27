@@ -136,7 +136,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    return 'Next Rank: $rank at $xp XP';
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Next Rank: $rank at $xpString XP';
   }
 
   @override
@@ -397,7 +402,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewsNone =>
-      'Nothing to review today. What you learn comes back after 1, 3, 7 and 21 days.';
+      'Nothing to review today. What you learn comes back after 1, 3, 7, 21, 60 and 180 days.';
 
   @override
   String get reviewsStart => 'Review';

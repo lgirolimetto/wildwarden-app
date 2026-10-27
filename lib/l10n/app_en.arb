@@ -106,7 +106,7 @@
   "funPeak": "{name} is most noticeable in {month}.",
   "reviewsTitle": "Reviews",
   "reviewsDue": "{count} Facts to review today",
-  "reviewsNone": "Nothing to review today. What you learn comes back after 1, 3, 7 and 21 days.",
+  "reviewsNone": "Nothing to review today. What you learn comes back after 1, 3, 7, 21, 60 and 180 days.",
   "reviewsStart": "Review",
   "desiderataTitle": "Desiderata",
   "desiderataCount": "{count} of {max}",
