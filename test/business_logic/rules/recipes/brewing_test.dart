@@ -86,8 +86,7 @@ void main() {
     expect(state.potions.map((p) => p.potency), [4, 2]);
     expect(state.bestPotency, {malvaCommon.id: 4});
     expect(state.xp, 48);
-    expect(brewsToday(state, feb), 2);
-    expect(brewBlock(state, brewableOf(catalog, malvaCommon.id)!, feb), BrewBlock.dailyLimit);
+    expect(brewBlock(state, brewableOf(catalog, malvaCommon.id)!, feb), isNull, reason: 'nessun limite al giorno');
   });
 
   test('la pozione guastata: Vis perse, niente pozione, la pianta è nota come tossica', () {

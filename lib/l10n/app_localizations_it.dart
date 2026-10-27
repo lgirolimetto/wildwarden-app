@@ -1721,11 +1721,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get brewButton => 'Prepara';
 
   @override
-  String brewDailyLimit(int count) {
-    return 'Per oggi basta: $count pozioni al giorno.';
-  }
-
-  @override
   String get brewChooseFree => 'Scegli la pianta dello slot libero';
 
   @override

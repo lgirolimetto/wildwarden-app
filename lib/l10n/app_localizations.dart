@@ -2690,12 +2690,6 @@ abstract class AppLocalizations {
   /// **'Prepara'**
   String get brewButton;
 
-  /// No description provided for @brewDailyLimit.
-  ///
-  /// In it, this message translates to:
-  /// **'Per oggi basta: {count} pozioni al giorno.'**
-  String brewDailyLimit(int count);
-
   /// No description provided for @brewChooseFree.
   ///
   /// In it, this message translates to:

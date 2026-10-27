@@ -432,7 +432,6 @@
   "readyEmpty": "You don't know any recipes to brew yet: Commons are learned by studying, the others in the Trove of Experience.",
   "readyAnyPlant": "a plant of your choice",
   "brewButton": "Brew",
-  "brewDailyLimit": "That's enough for today: {count} potions a day.",
   "brewChooseFree": "Choose the plant for the free slot",
   "brewChooseFreeHint": "It gives the potion its Touch.",
   "brewFreeOption": "{vis} Vis",

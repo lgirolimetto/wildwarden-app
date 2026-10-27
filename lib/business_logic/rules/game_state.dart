@@ -67,9 +67,6 @@ class GameState {
   /// Le pozioni preparate (lo Scaffale), nell'ordine.
   final List<Potion> potions;
 
-  /// Quando si è preparato (anche le pozioni guastate): al massimo 2 al giorno.
-  final List<DateTime> brewTimes;
-
   /// La potenza migliore raggiunta per ogni ricetta: la mostra la Tavola.
   final Map<String, int> bestPotency;
 
@@ -109,7 +106,6 @@ class GameState {
     this.troves = const [],
     this.essenceTimes = const [],
     this.potions = const [],
-    this.brewTimes = const [],
     this.bestPotency = const {},
     this.knownToxic = const {},
     this.effects = const [],
@@ -252,16 +248,11 @@ class GameState {
         if (event.essences[e.index] case final int vis) e.withVis(e.vis - vis) else e,
     ];
     if (event.spoiled) {
-      return _copy(
-        essences: spent,
-        brewTimes: [...brewTimes, event.occurredAt],
-        knownToxic: {...knownToxic, ?event.freeSpecies},
-      );
+      return _copy(essences: spent, knownToxic: {...knownToxic, ?event.freeSpecies});
     }
     final best = bestPotency[event.recipeId] ?? 0;
     return _copy(
       essences: spent,
-      brewTimes: [...brewTimes, event.occurredAt],
       potions: [
         ...potions,
         Potion(
@@ -362,7 +353,6 @@ class GameState {
     List<(Grade, DateTime)>? troves,
     List<DateTime>? essenceTimes,
     List<Potion>? potions,
-    List<DateTime>? brewTimes,
     Map<String, int>? bestPotency,
     Set<String>? knownToxic,
     List<ActiveEffect>? effects,
@@ -392,7 +382,6 @@ class GameState {
     troves: troves ?? this.troves,
     essenceTimes: essenceTimes ?? this.essenceTimes,
     potions: potions ?? this.potions,
-    brewTimes: brewTimes ?? this.brewTimes,
     bestPotency: bestPotency ?? this.bestPotency,
     knownToxic: knownToxic ?? this.knownToxic,
     effects: effects ?? this.effects,

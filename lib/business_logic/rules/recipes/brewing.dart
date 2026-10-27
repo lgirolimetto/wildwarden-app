@@ -207,15 +207,14 @@ PotionEffect? touchOf(Catalog catalog, String? freeSpecies) {
 bool spoils(Brewable brewable, Catalog catalog, String? freeSpecies) =>
     brewable.drinkable && freeSpecies != null && catalog.safety.containsKey(freeSpecies);
 
-/// Pozioni preparate oggi (anche guastate).
-int brewsToday(GameState state, DateTime now) => state.brewTimes.where((t) => _sameDay(t, now)).length;
-
-/// Perché non si può preparare adesso; `null` se si può (le Vis le dice [BrewPlan]).
-enum BrewBlock { dailyLimit, outOfWindow }
+/// Perché non si può preparare adesso; `null` se si può (le Vis le dice [BrewPlan]). Nessun limite al giorno
+/// (decisione del 2026-10-27): chi ha raccolto per mesi può passare una giornata a preparare, se l'è guadagnato; il
+/// limite serve alla raccolta, che consuma le stazioni.
+enum BrewBlock { outOfWindow }
 
 BrewBlock? brewBlock(GameState state, Brewable brewable, DateTime now) {
-  if (brewable.window case final DateWindow window when !window.contains(now)) return BrewBlock.outOfWindow;
-  return brewsToday(state, now) >= EconomyRules.brewsPerDay ? BrewBlock.dailyLimit : null;
+  final window = brewable.window;
+  return window != null && !window.contains(now) ? BrewBlock.outOfWindow : null;
 }
 
 /// Le ricette che conosci (complete), da preparare: Tavole e Mitiche.
@@ -223,5 +222,3 @@ List<Brewable> knownBrewables(Catalog catalog, GameState state) => [
   for (final id in {...knownRecipeIds(catalog, state), ...state.learnedRecipes.keys})
     if (!state.missingPieces.containsKey(id)) ?brewableOf(catalog, id),
 ];
-
-bool _sameDay(DateTime a, DateTime b) => a.year == b.year && a.month == b.month && a.day == b.day;

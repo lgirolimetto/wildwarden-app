@@ -1366,14 +1366,6 @@
   "readyEmpty": "Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell'Esperienza.",
   "readyAnyPlant": "una pianta a scelta",
   "brewButton": "Prepara",
-  "brewDailyLimit": "Per oggi basta: {count} pozioni al giorno.",
-  "@brewDailyLimit": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "brewChooseFree": "Scegli la pianta dello slot libero",
   "brewChooseFreeHint": "Dà alla pozione il suo Tocco.",
   "brewFreeOption": "{vis} Vis",

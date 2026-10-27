@@ -1708,11 +1708,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get brewButton => 'Brew';
 
   @override
-  String brewDailyLimit(int count) {
-    return 'That\'s enough for today: $count potions a day.';
-  }
-
-  @override
   String get brewChooseFree => 'Choose the plant for the free slot';
 
   @override

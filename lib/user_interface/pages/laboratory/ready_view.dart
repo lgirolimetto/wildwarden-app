@@ -1,5 +1,4 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
-import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -253,7 +252,6 @@ class BrewSection extends StatelessWidget {
             ),
             style: hint,
           ),
-          BrewBlock.dailyLimit => Text(context.l10n.brewDailyLimit(EconomyRules.brewsPerDay), style: hint),
           _ when recipe.missing.isEmpty => ClayButton(
             key: ValueKey('brew-${brewable.id}'),
             label: context.l10n.brewButton,
