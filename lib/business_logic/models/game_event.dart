@@ -15,11 +15,11 @@ enum EncounterMethod {
 /// Modalità di una risposta: apprendimento di un livello o ripasso a distanza di giorni.
 enum AnswerMode { learning, review }
 
-/// Da dove arriva una ricetta imparata: dallo studio (le comuni) o dal Bottino dell'Esperienza (tappa C).
+/// Da dove arriva una ricetta imparata: dallo studio (la Comune di una pianta) o dal Bottino dell'Esperienza.
 enum RecipeOrigin { study, trove }
 
 /// Passi dell'onboarding che non si deducono dallo stato di gioco.
-enum OnboardingMark { erbarioVisited, skipped }
+enum OnboardingMark { erbarioVisited, albumVisited, skipped }
 
 /// Evento di gioco. Si salvano solo eventi: livelli, PE ed erbario si ricalcolano rileggendoli
 /// (vedi `GameState.replay`). È lo stesso formato che un giorno verrà inviato al server.
@@ -307,7 +307,8 @@ class OnboardingMarked extends GameEvent {
   Map<String, dynamic> payload() => {'mark': mark.name};
 }
 
-/// Ricetta imparata: si sa farla. Il caso (quale tra le ricette possibili) si salva qui, non si ricalcola.
+/// Ricetta imparata: si sa farla. Studiando, la Comune della pianta; dal Bottino, quella uscita (il caso si salva qui,
+/// non si ricalcola).
 class RecipeLearned extends GameEvent {
   static const typeId = 'recipe_learned';
   final String recipeId;

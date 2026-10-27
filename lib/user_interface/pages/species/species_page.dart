@@ -26,6 +26,9 @@ import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
+import 'package:druid_app/business_logic/rules/recipes/album.dart';
+import 'package:druid_app/user_interface/pages/album/plant_album_page.dart';
+import 'package:druid_app/user_interface/pages/album/widgets/page_dots.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -245,6 +248,7 @@ class _SpeciesSheet extends StatelessWidget {
             if (species.isProtected) _ProtectedNote(species: species),
             if (!state.hasEncountered(species.sci)) _ToFind(species: species, state: state, progress: progress),
             _StudyLadder(species: species, catalog: catalog, state: state),
+            _AlbumLink(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
             _Section(
               title: context.l10n.sectionTraits,
@@ -545,6 +549,42 @@ class _PhotoLabel extends StatelessWidget {
     return ClipRRect(
       borderRadius: radius,
       child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12), child: veil),
+    );
+  }
+}
+
+/// La riga che porta alla Pagina della pianta nell'album, se ne conosci almeno una Figurina.
+class _AlbumLink extends StatelessWidget {
+  final Species species;
+  final Catalog catalog;
+  final GameState state;
+
+  const _AlbumLink({required this.species, required this.catalog, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    final album = albumPages(catalog, state).where((p) => p.page.plant.sci == species.sci).firstOrNull;
+    if (album == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: Gaps.l),
+      child: ClayCard(
+        key: const ValueKey('species-album-link'),
+        padding: const EdgeInsets.all(Gaps.m),
+        onTap: () => Get.to<void>(() => PlantAlbumPage(initialSci: species.sci)),
+        child: Row(
+          children: [
+            const Icon(Icons.collections_bookmark_rounded),
+            const SizedBox(width: Gaps.m),
+            Expanded(
+              child: Text(
+                context.l10n.albumSpeciesLink(album.knownCount, album.page.recipes.length),
+                style: context.texts.titleMedium,
+              ),
+            ),
+            PageDots(album: album),
+          ],
+        ),
+      ),
     );
   }
 }

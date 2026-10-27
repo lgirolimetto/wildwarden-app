@@ -112,7 +112,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get navStudy => 'Home';
 
   @override
-  String get navRecipes => 'Ricette';
+  String get navRecipes => 'Album';
 
   @override
   String get rankApprentice => 'Apprendista';
@@ -307,11 +307,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get summaryMastery => 'Maestria raggiunta!';
-
-  @override
-  String summaryRecipeUnlocked(String recipe) {
-    return 'Ricetta sbloccata: $recipe';
-  }
 
   @override
   String get summaryNewFunFacts =>
@@ -576,23 +571,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get recipesTitle => 'Ricette';
 
   @override
-  String get recipeUnlocked => 'Imparata';
-
-  @override
-  String get recipeLocked => 'Da imparare';
-
-  @override
-  String recipeKnownIngredients(int known, int total) {
-    return 'Ingredienti già Incontrati $known/$total';
-  }
-
-  @override
   String get recipeAnySpecies => 'qualsiasi specie';
-
-  @override
-  String recipeCurrentLevel(int level) {
-    return 'ora: Livello $level';
-  }
 
   @override
   String erbarioPages(int done, int total) {
@@ -637,7 +616,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionFirstRecipeBody =>
-      'Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.';
+      'Studiando una specie impari la sua Ricetta Comune: la trovi nell\'Album, sulla Pagina della pianta. Le altre Figurine della Pagina si trovano nel Bottino dell\'Esperienza.';
 
   @override
   String get missionSkip => 'Salta l\'Apprendistato';
@@ -652,7 +631,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get missionActionStudy => 'Inizia a studiare';
 
   @override
-  String get missionActionRecipes => 'Vedi le Ricette';
+  String get missionActionRecipes => 'Apri l\'Album';
 
   @override
   String get missionGlossary => 'Glossario';
@@ -1015,11 +994,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String recipeLearnByStudying(String species) {
-    return 'Si impara studiando: $species';
-  }
-
-  @override
   String get debugGradePreview => 'Anteprima dei Gradi';
 
   @override
@@ -1037,27 +1011,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get badgeProtected => 'Specie Protetta';
-
-  @override
-  String recipesCount(int learned, int total) {
-    return '$learned di $total';
-  }
-
-  @override
-  String recipeIngredientCount(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString Ingredienti',
-      one: '1 Ingrediente',
-    );
-    return '$_temp0';
-  }
 
   @override
   String get legendTitle => 'Legenda';
@@ -1140,7 +1093,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get recipesEmpty =>
-      'Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall\'Erbario.';
+      'Non conosci ancora nessuna Ricetta. Ogni pianta ha la sua Ricetta Comune: la impari superando il Livello 1 della specie, dalla Home o dall\'Erbario.';
 
   @override
   String get viewAll => 'Tutte';
@@ -1260,4 +1213,121 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get traitWhenWaningMoon =>
       'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.';
+
+  @override
+  String get albumTitle => 'Album';
+
+  @override
+  String get albumTabPlants => 'Piante';
+
+  @override
+  String get albumTabMythics => 'Mitiche';
+
+  @override
+  String albumFigurines(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Figurine',
+      one: '1 Figurina',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String albumPagesSummary(int pages, int total, int complete) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages Pagine',
+      one: '1 Pagina',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      complete,
+      locale: localeName,
+      other: '$complete complete',
+      one: '1 completa',
+    );
+    return '$_temp0 su $total · $_temp1';
+  }
+
+  @override
+  String albumPageCount(int known, int total) {
+    return '$known di $total';
+  }
+
+  @override
+  String get albumFavouredTraits => 'Tratti d\'elezione';
+
+  @override
+  String get albumVocation => 'Vocazione';
+
+  @override
+  String get albumMissingFigurine => 'Figurina da trovare';
+
+  @override
+  String get albumSwipeHint => 'Scorri per sfogliare le Pagine';
+
+  @override
+  String albumSpeciesLink(int known, int total) {
+    return 'Album · $known di $total';
+  }
+
+  @override
+  String get recipeMonths => 'Quando si può fare';
+
+  @override
+  String get recipeNever =>
+      'Mai: gli ingredienti non si incontrano negli stessi mesi';
+
+  @override
+  String get recipeEffect => 'Effetto';
+
+  @override
+  String get effectRegrowth => 'Ricrescita';
+
+  @override
+  String get effectClarity => 'Limpidezza';
+
+  @override
+  String get effectOmen => 'Presagio';
+
+  @override
+  String get effectAbundance => 'Abbondanza';
+
+  @override
+  String get effectRegrowthText =>
+      'La Stazione dove la usi torna pronta prima (effetto di gioco).';
+
+  @override
+  String get effectClarityText =>
+      'Purezza in più alla prossima Essenza (effetto di gioco).';
+
+  @override
+  String get effectOmenText =>
+      'Un Tratto garantito alla prossima Essenza (effetto di gioco).';
+
+  @override
+  String get effectAbundanceText =>
+      'Vis in più alla prossima Essenza (effetto di gioco).';
+
+  @override
+  String mythicNumber(String number) {
+    return 'N. $number';
+  }
+
+  @override
+  String get mythicToFind => 'Da trovare';
+
+  @override
+  String mythicWindow(String from, String to) {
+    return 'Solo dal $from al $to';
+  }
+
+  @override
+  String get mythicAllYear => 'Tutto l\'anno';
+
+  @override
+  String get mythicsIntro =>
+      'Le Mitiche d\'Italia: scritte a mano, legate a luoghi e feste. Si trovano nel Bottino dell\'Esperienza.';
 }

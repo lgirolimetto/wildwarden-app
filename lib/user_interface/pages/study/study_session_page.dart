@@ -318,11 +318,6 @@ class _Summary extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final species = summary.speciesSci == null ? null : catalog?.speciesBySci(summary.speciesSci!);
-    final unlocked =
-        catalog?.recipes
-            .where((r) => r.unlock?.speciesSci == summary.speciesSci && r.unlock?.level == summary.levelPassed)
-            .toList() ??
-        const [];
     return ListView(
       padding: const EdgeInsets.all(Gaps.xl),
       children: [
@@ -344,14 +339,10 @@ class _Summary extends StatelessWidget {
         if (summary.learnedRecipe case final recipe?) ...[
           const SizedBox(height: Gaps.m),
           Text(
-            l10n.summaryRecipeLearned(recipe.name.resolve(context.contentLanguage)),
+            l10n.summaryRecipeLearned(recipe.name(context.contentLanguage)),
             key: const ValueKey('summary-recipe-learned'),
             style: context.texts.titleMedium,
           ),
-        ],
-        for (final recipe in unlocked) ...[
-          const SizedBox(height: Gaps.s),
-          Text(l10n.summaryRecipeUnlocked(recipe.name.resolve(context.contentLanguage))),
         ],
         if (summary.levelPassed != null) ...[const SizedBox(height: Gaps.s), Text(l10n.summaryNewFunFacts)],
         const SizedBox(height: Gaps.xl),

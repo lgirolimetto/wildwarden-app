@@ -112,7 +112,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navStudy => 'Home';
 
   @override
-  String get navRecipes => 'Recipes';
+  String get navRecipes => 'Album';
 
   @override
   String get rankApprentice => 'Apprentice';
@@ -309,11 +309,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get summaryMastery => 'Mastery reached!';
-
-  @override
-  String summaryRecipeUnlocked(String recipe) {
-    return 'Recipe unlocked: $recipe';
-  }
 
   @override
   String get summaryNewFunFacts =>
@@ -578,23 +573,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recipesTitle => 'Recipes';
 
   @override
-  String get recipeUnlocked => 'Learned';
-
-  @override
-  String get recipeLocked => 'To learn';
-
-  @override
-  String recipeKnownIngredients(int known, int total) {
-    return 'Ingredients already Met $known/$total';
-  }
-
-  @override
   String get recipeAnySpecies => 'any species';
-
-  @override
-  String recipeCurrentLevel(int level) {
-    return 'now: Level $level';
-  }
 
   @override
   String erbarioPages(int done, int total) {
@@ -639,7 +618,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionFirstRecipeBody =>
-      'Bring a species to the Level a Recipe requires to unlock it. Recipes ask for different species and conditions: a reason to go out again.';
+      'Studying a species teaches you its Common Recipe: you\'ll find it in the Album, on the plant\'s Page. The other Figurines on the Page come from the Trove of Experience.';
 
   @override
   String get missionSkip => 'Skip the Apprenticeship';
@@ -654,7 +633,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get missionActionStudy => 'Start studying';
 
   @override
-  String get missionActionRecipes => 'See the Recipes';
+  String get missionActionRecipes => 'Open the Album';
 
   @override
   String get missionGlossary => 'Glossary';
@@ -1016,11 +995,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String recipeLearnByStudying(String species) {
-    return 'Learned by studying: $species';
-  }
-
-  @override
   String get debugGradePreview => 'Grade preview';
 
   @override
@@ -1038,27 +1012,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get badgeProtected => 'Protected Species';
-
-  @override
-  String recipesCount(int learned, int total) {
-    return '$learned of $total';
-  }
-
-  @override
-  String recipeIngredientCount(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString Ingredients',
-      one: '1 Ingredient',
-    );
-    return '$_temp0';
-  }
 
   @override
   String get legendTitle => 'Legend';
@@ -1139,7 +1092,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recipesEmpty =>
-      'You don\'t know any Recipes yet. Common Recipes are learned by studying: pass Level 1 of a species, from Home or the Herbarium.';
+      'You don\'t know any Recipe yet. Every plant has its own Common Recipe: you learn it by passing Level 1 of the species, from Home or the Herbarium.';
 
   @override
   String get viewAll => 'All';
@@ -1259,4 +1212,115 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get traitWhenWaningMoon =>
       'Every day the moon is shrinking, from full to new: no need to go out at night.';
+
+  @override
+  String get albumTitle => 'Album';
+
+  @override
+  String get albumTabPlants => 'Plants';
+
+  @override
+  String get albumTabMythics => 'Mythics';
+
+  @override
+  String albumFigurines(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Figurines',
+      one: '1 Figurine',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String albumPagesSummary(int pages, int total, int complete) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages Pages',
+      one: '1 Page',
+    );
+    return '$_temp0 of $total · $complete complete';
+  }
+
+  @override
+  String albumPageCount(int known, int total) {
+    return '$known of $total';
+  }
+
+  @override
+  String get albumFavouredTraits => 'Favoured traits';
+
+  @override
+  String get albumVocation => 'Vocation';
+
+  @override
+  String get albumMissingFigurine => 'Figurine to find';
+
+  @override
+  String get albumSwipeHint => 'Swipe to leaf through the Pages';
+
+  @override
+  String albumSpeciesLink(int known, int total) {
+    return 'Album · $known of $total';
+  }
+
+  @override
+  String get recipeMonths => 'When it can be made';
+
+  @override
+  String get recipeNever =>
+      'Never: the ingredients are not found in the same months';
+
+  @override
+  String get recipeEffect => 'Effect';
+
+  @override
+  String get effectRegrowth => 'Regrowth';
+
+  @override
+  String get effectClarity => 'Clarity';
+
+  @override
+  String get effectOmen => 'Omens';
+
+  @override
+  String get effectAbundance => 'Abundance';
+
+  @override
+  String get effectRegrowthText =>
+      'The Station where you use it is ready sooner (game effect).';
+
+  @override
+  String get effectClarityText =>
+      'Extra purity on your next Essence (game effect).';
+
+  @override
+  String get effectOmenText =>
+      'A guaranteed Trait on your next Essence (game effect).';
+
+  @override
+  String get effectAbundanceText =>
+      'Extra Vis on your next Essence (game effect).';
+
+  @override
+  String mythicNumber(String number) {
+    return 'No. $number';
+  }
+
+  @override
+  String get mythicToFind => 'To find';
+
+  @override
+  String mythicWindow(String from, String to) {
+    return 'Only from $from to $to';
+  }
+
+  @override
+  String get mythicAllYear => 'All year round';
+
+  @override
+  String get mythicsIntro =>
+      'The Mythics of Italy: handwritten, tied to places and feasts. They come from the Trove of Experience.';
 }

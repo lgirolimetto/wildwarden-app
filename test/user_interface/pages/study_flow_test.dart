@@ -1,4 +1,6 @@
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/album.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
+import '../../helpers/fakes.dart';
 import '../../helpers/test_app.dart';
 
 final _feb = DateTime(2027, 2, 1);
@@ -270,43 +273,57 @@ void main() {
       expect(level3, findsWidgets);
     });
 
-    testWidgets('album delle ricette: solo le ricette che conosci, con il contatore', (tester) async {
-      registerTestDependencies(
-        events: [RecipeLearned(recipeId: 'pozione-prova-comune', origin: RecipeOrigin.study, occurredAt: _feb)],
-      );
+    testWidgets('album: le pagine delle piante che conosci, con gli slot vuoti e la ricetta aperta', (tester) async {
+      registerTestDependencies(events: [_passed('Malva sylvestris')]);
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricette');
+      await openTab(tester, 'Album');
 
-      expect(find.text('1 di 4'), findsOneWidget);
-      expect(find.text('Pozione di Prova del Prato'), findsOneWidget);
-      expect(find.byKey(const ValueKey('figurine-infuso-prova-faggio')), findsNothing, reason: 'niente segnaposto');
-      expect(find.text('?'), findsNothing);
+      final malva = recipeBookOf(smallCatalog()).pageOf('Malva sylvestris')!;
+      expect(find.text('1 Figurina'), findsOneWidget);
+      expect(find.text('1 Pagina su 4 · 0 complete'), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('album-page-Malva sylvestris')));
 
-      // Imparata: ingredienti con il nome della pianta, anche se non incontrata.
-      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-pozione-prova-comune')));
-      expect(find.text('2 × Malva selvatica'), findsOneWidget);
-      expect(find.text('Ingredienti già Incontrati 0/2'), findsOneWidget);
-      expect(find.text('Effetto di gioco di prova.'), findsOneWidget);
+      // La pagina: la Comune imparata studiando, le altre figurine come slot vuoti con il solo grado.
+      expect(find.text('1 di 3'), findsOneWidget);
+      expect(find.byKey(ValueKey('figurine-${malva.recipes.first.id}')), findsOneWidget);
+      expect(find.byKey(ValueKey('empty-slot-${malva.recipes[1].id}')), findsOneWidget);
+      expect(find.text(malva.recipes[1].name('it')), findsNothing, reason: 'lo slot vuoto non svela il nome');
+
+      await scrollAndTap(tester, find.byKey(ValueKey('figurine-${malva.recipes.first.id}')));
+      expect(find.text(malva.recipes.first.name('it')), findsOneWidget);
+      expect(find.text('1 × Malva selvatica'), findsOneWidget);
+      expect(find.text('1 × qualsiasi specie'), findsOneWidget);
+      expect(find.byKey(const ValueKey('recipe-months')), findsOneWidget);
     });
 
     testWidgets('un ingrediente con un tratto spiega quando vale', (tester) async {
+      final eranthis = recipeBookOf(smallCatalog()).pageOf('Eranthis hyemalis')!;
+      final frosty = eranthis.recipes.firstWhere((r) => r.traits.contains(Trait.frost));
       registerTestDependencies(
-        events: [LevelPassed(speciesSci: 'Eranthis hyemalis', level: 2, xp: 20, occurredAt: _feb)],
+        events: [RecipeLearned(recipeId: frosty.id, origin: RecipeOrigin.trove, occurredAt: _feb)],
       );
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricette');
+      await openTab(tester, 'Album');
 
-      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-tintura-lanterna-inverno')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('album-page-Eranthis hyemalis')));
+      await scrollAndTap(tester, find.byKey(ValueKey('figurine-${frosty.id}')));
       expect(find.text('Quando fa sotto zero: brina e ghiaccio.'), findsOneWidget);
     });
 
-    testWidgets('nessuna ricetta conosciuta: l\'album spiega come impararle', (tester) async {
+    testWidgets('nessuna ricetta conosciuta: l\'album spiega come impararle; le Mitiche hanno il numero', (
+      tester,
+    ) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricette');
+      await openTab(tester, 'Album');
 
-      expect(find.text('0 di 4'), findsOneWidget);
-      expect(find.byKey(const ValueKey('recipes-empty')), findsOneWidget);
+      expect(find.byKey(const ValueKey('album-empty')), findsOneWidget);
+
+      await tester.tap(find.byKey(const ValueKey('album-tab-mythics')));
+      await tester.pumpAndSettle();
+      expect(find.text('N. 001'), findsOneWidget);
+      expect(find.text('Da trovare'), findsOneWidget);
+      expect(find.text('La Lanterna di Santa Lucia'), findsNothing);
     });
 
     testWidgets('legenda e glossario: simboli e termini del gioco', (tester) async {

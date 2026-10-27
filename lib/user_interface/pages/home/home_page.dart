@@ -4,7 +4,7 @@ import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/pages/erbario/erbario_page.dart';
-import 'package:druid_app/user_interface/pages/recipes/recipes_page.dart';
+import 'package:druid_app/user_interface/pages/album/album_page.dart';
 import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  static const _pages = [StudyHomePage(), ErbarioPage(), RecipesPage(), SettingsPage()];
+  static const _pages = [StudyHomePage(), ErbarioPage(), AlbumPage(), SettingsPage()];
 
   @override
   Widget build(BuildContext context) =>
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
       items: [
         (Icons.home_rounded, context.l10n.navStudy),
         (Icons.menu_book_rounded, context.l10n.navErbario),
-        (Icons.science_rounded, context.l10n.navRecipes),
+        (Icons.collections_bookmark_rounded, context.l10n.navRecipes),
         (Icons.tune_rounded, context.l10n.navSettings),
       ],
     ),
@@ -53,7 +53,7 @@ class HomePage extends StatelessWidget {
   /// Colore in cui sfuma il contenuto sotto la barra di stato: quello dello sfondo della scheda, che nelle pagine dense
   /// (`DenseArea`) può essere diverso.
   static Color _fadeColor(BuildContext context, int tab) {
-    final dense = tab == HomeController.recipesTab || tab == HomeController.settingsTab;
+    final dense = tab == HomeController.albumTab || tab == HomeController.settingsTab;
     final denseTheme = dense ? Get.find<ThemeController>().denseTheme(Theme.of(context).brightness) : null;
     return denseTheme?.colorScheme.surface ?? context.druid.backgroundGradient.first;
   }

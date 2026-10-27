@@ -1,7 +1,5 @@
-import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
-import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
@@ -189,23 +187,6 @@ void main() {
     });
   });
 
-  group('ricette', () {
-    test('si sbloccano con il livello della specie richiesta', () {
-      final lanterna = catalog.recipes.firstWhere((r) => r.unlock?.speciesSci == 'Eranthis hyemalis');
-      expect(isRecipeUnlocked(lanterna, play([met('Eranthis hyemalis'), passed('Eranthis hyemalis', 1)])), isFalse);
-      expect(isRecipeUnlocked(lanterna, play([met('Eranthis hyemalis'), passed('Eranthis hyemalis', 2)])), isTrue);
-    });
-
-    test('un ingrediente è noto solo se la specie è stata incontrata; "qualsiasi specie" sempre', () {
-      final quota = catalog.recipes.firstWhere((r) => r.unlock?.speciesSci == 'Fagus sylvatica');
-      final faggio = quota.ingredients.firstWhere((i) => i.speciesSci == 'Fagus sylvatica');
-      final qualsiasi = quota.ingredients.firstWhere((i) => i.speciesSci == null);
-      expect(isIngredientKnown(faggio, GameState.empty), isFalse);
-      expect(isIngredientKnown(faggio, play([met('Fagus sylvatica')])), isTrue);
-      expect(isIngredientKnown(qualsiasi, GameState.empty), isTrue);
-    });
-  });
-
   group('curiosità del giorno', () {
     test('nessuna curiosità senza specie incontrate', () {
       expect(funFactToRevealToday(catalog, GameState.empty, feb), isNull);
@@ -255,7 +236,8 @@ void main() {
       state = state.apply(met('Eranthis hyemalis'));
       expect(currentMission(state, catalog), Mission.firstRecipe);
 
-      state = state.apply(passed('Eranthis hyemalis', 2));
+      // La Comune c'è già (livello 1): si completa aprendo l'album.
+      state = state.apply(OnboardingMarked(mark: OnboardingMark.albumVisited, occurredAt: feb));
       expect(currentMission(state, catalog), isNull);
       expect(isApprenticeshipComplete(state, catalog), isTrue);
     });
@@ -282,37 +264,6 @@ void main() {
       final state = play([OnboardingMarked(mark: OnboardingMark.skipped, occurredAt: feb)]);
       expect(currentMission(state, catalog), isNull);
       expect(isApprenticeshipComplete(state, catalog), isFalse);
-    });
-  });
-
-  group('ricette comuni imparate studiando', () {
-    test('si impara una ricetta comune che ha la specie tra gli ingredienti, mai una già imparata', () {
-      final first = recipeToLearn('Fagus sylvatica', catalog, GameState.empty, Random(1))!;
-      expect(first.grade, Grade.common);
-      expect(first.ingredients.map((i) => i.speciesSci), contains('Fagus sylvatica'));
-
-      final state = play([RecipeLearned(recipeId: first.id, origin: RecipeOrigin.study, occurredAt: feb)]);
-      final second = recipeToLearn('Fagus sylvatica', catalog, state, Random(1))!;
-      expect(second.id, isNot(first.id));
-
-      final both = state.apply(RecipeLearned(recipeId: second.id, origin: RecipeOrigin.study, occurredAt: feb));
-      expect(recipeToLearn('Fagus sylvatica', catalog, both, Random(1)), isNull);
-    });
-
-    test('nessuna ricetta comune con quella specie: niente da imparare', () {
-      expect(recipeToLearn('Eranthis hyemalis', catalog, GameState.empty, Random(1)), isNull);
-    });
-
-    test('una comune si sa fare solo se imparata; le altre ancora con il livello', () {
-      final common = catalog.recipes.firstWhere((r) => r.grade == Grade.common);
-      expect(isRecipeUnlocked(common, GameState.empty), isFalse);
-      expect(
-        isRecipeUnlocked(
-          common,
-          play([RecipeLearned(recipeId: common.id, origin: RecipeOrigin.study, occurredAt: feb)]),
-        ),
-        isTrue,
-      );
     });
   });
 }

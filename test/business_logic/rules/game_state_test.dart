@@ -65,7 +65,14 @@ void main() {
         GameEvent.decode(type: event.type, payload: event.encodePayload(), occurredAt: feb) as RecipeLearned;
     expect(decoded.recipeId, 'pozione-prova-comune');
     expect(decoded.origin, RecipeOrigin.study);
-    expect(GameState.replay([event]).learnedRecipes, {'pozione-prova-comune'});
+    expect(GameState.replay([event]).learnedRecipes, {'pozione-prova-comune': feb});
+    // Imparata di nuovo (es. un doppione): conta la prima volta.
+    final again = RecipeLearned(
+      recipeId: 'pozione-prova-comune',
+      origin: RecipeOrigin.trove,
+      occurredAt: feb.add(const Duration(days: 3)),
+    );
+    expect(GameState.replay([event, again]).learnedRecipes, {'pozione-prova-comune': feb});
   });
 
   group('PE virtuali, incasso e Vis', () {

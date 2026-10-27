@@ -42,8 +42,9 @@ class GameState {
   final Set<String> notebook;
   final Set<OnboardingMark> onboardingMarks;
 
-  /// Ricette imparate, per id.
-  final Set<String> learnedRecipes;
+  /// Ricette imparate (ricette ad affissi e Mitiche), per id, con il giorno in cui si sono imparate. Gli id delle
+  /// ricette scritte a mano prima della tappa C restano qui ma non corrispondono più a nessuna ricetta.
+  final Map<String, DateTime> learnedRecipes;
 
   const GameState({
     this.firstEncounters = const {},
@@ -146,7 +147,10 @@ class GameState {
       NoteSaved(:final speciesSci, :final text) => next._copy(notes: {...notes, speciesSci: text}),
       NotebookEntrySaved(:final factId) => next._copy(notebook: {...notebook, factId}),
       OnboardingMarked(:final mark) => next._copy(onboardingMarks: {...onboardingMarks, mark}),
-      RecipeLearned(:final recipeId) => next._copy(learnedRecipes: {...learnedRecipes, recipeId}),
+      RecipeLearned(:final recipeId, :final occurredAt) =>
+        learnedRecipes.containsKey(recipeId)
+            ? next
+            : next._copy(learnedRecipes: {...learnedRecipes, recipeId: occurredAt}),
     };
   }
 
@@ -180,7 +184,7 @@ class GameState {
     Map<String, String>? notes,
     Set<String>? notebook,
     Set<OnboardingMark>? onboardingMarks,
-    Set<String>? learnedRecipes,
+    Map<String, DateTime>? learnedRecipes,
   }) => GameState(
     firstEncounters: firstEncounters ?? this.firstEncounters,
     xp: xp ?? this.xp,

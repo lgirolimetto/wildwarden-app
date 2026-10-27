@@ -299,7 +299,7 @@ abstract class AppLocalizations {
   /// No description provided for @navRecipes.
   ///
   /// In it, this message translates to:
-  /// **'Ricette'**
+  /// **'Album'**
   String get navRecipes;
 
   /// No description provided for @rankApprentice.
@@ -589,12 +589,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Maestria raggiunta!'**
   String get summaryMastery;
-
-  /// No description provided for @summaryRecipeUnlocked.
-  ///
-  /// In it, this message translates to:
-  /// **'Ricetta sbloccata: {recipe}'**
-  String summaryRecipeUnlocked(String recipe);
 
   /// No description provided for @summaryNewFunFacts.
   ///
@@ -1022,35 +1016,11 @@ abstract class AppLocalizations {
   /// **'Ricette'**
   String get recipesTitle;
 
-  /// No description provided for @recipeUnlocked.
-  ///
-  /// In it, this message translates to:
-  /// **'Imparata'**
-  String get recipeUnlocked;
-
-  /// No description provided for @recipeLocked.
-  ///
-  /// In it, this message translates to:
-  /// **'Da imparare'**
-  String get recipeLocked;
-
-  /// No description provided for @recipeKnownIngredients.
-  ///
-  /// In it, this message translates to:
-  /// **'Ingredienti già Incontrati {known}/{total}'**
-  String recipeKnownIngredients(int known, int total);
-
   /// No description provided for @recipeAnySpecies.
   ///
   /// In it, this message translates to:
   /// **'qualsiasi specie'**
   String get recipeAnySpecies;
-
-  /// No description provided for @recipeCurrentLevel.
-  ///
-  /// In it, this message translates to:
-  /// **'ora: Livello {level}'**
-  String recipeCurrentLevel(int level);
 
   /// No description provided for @erbarioPages.
   ///
@@ -1121,7 +1091,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstRecipeBody.
   ///
   /// In it, this message translates to:
-  /// **'Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.'**
+  /// **'Studiando una specie impari la sua Ricetta Comune: la trovi nell\'Album, sulla Pagina della pianta. Le altre Figurine della Pagina si trovano nel Bottino dell\'Esperienza.'**
   String get missionFirstRecipeBody;
 
   /// No description provided for @missionSkip.
@@ -1151,7 +1121,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionActionRecipes.
   ///
   /// In it, this message translates to:
-  /// **'Vedi le Ricette'**
+  /// **'Apri l\'Album'**
   String get missionActionRecipes;
 
   /// No description provided for @missionGlossary.
@@ -1742,12 +1712,6 @@ abstract class AppLocalizations {
   /// **'Hai imparato una Ricetta: {name}'**
   String summaryRecipeLearned(String name);
 
-  /// No description provided for @recipeLearnByStudying.
-  ///
-  /// In it, this message translates to:
-  /// **'Si impara studiando: {species}'**
-  String recipeLearnByStudying(String species);
-
   /// No description provided for @debugGradePreview.
   ///
   /// In it, this message translates to:
@@ -1783,18 +1747,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Specie Protetta'**
   String get badgeProtected;
-
-  /// No description provided for @recipesCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{learned} di {total}'**
-  String recipesCount(int learned, int total);
-
-  /// No description provided for @recipeIngredientCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{count, plural, =1{1 Ingrediente} other{{count} Ingredienti}}'**
-  String recipeIngredientCount(num count);
 
   /// No description provided for @legendTitle.
   ///
@@ -1937,7 +1889,7 @@ abstract class AppLocalizations {
   /// No description provided for @recipesEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall\'Erbario.'**
+  /// **'Non conosci ancora nessuna Ricetta. Ogni pianta ha la sua Ricetta Comune: la impari superando il Livello 1 della specie, dalla Home o dall\'Erbario.'**
   String get recipesEmpty;
 
   /// No description provided for @viewAll.
@@ -2161,6 +2113,168 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.'**
   String get traitWhenWaningMoon;
+
+  /// No description provided for @albumTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Album'**
+  String get albumTitle;
+
+  /// No description provided for @albumTabPlants.
+  ///
+  /// In it, this message translates to:
+  /// **'Piante'**
+  String get albumTabPlants;
+
+  /// No description provided for @albumTabMythics.
+  ///
+  /// In it, this message translates to:
+  /// **'Mitiche'**
+  String get albumTabMythics;
+
+  /// No description provided for @albumFigurines.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Figurina} other{{count} Figurine}}'**
+  String albumFigurines(int count);
+
+  /// No description provided for @albumPagesSummary.
+  ///
+  /// In it, this message translates to:
+  /// **'{pages, plural, =1{1 Pagina} other{{pages} Pagine}} su {total} · {complete, plural, =1{1 completa} other{{complete} complete}}'**
+  String albumPagesSummary(int pages, int total, int complete);
+
+  /// No description provided for @albumPageCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{known} di {total}'**
+  String albumPageCount(int known, int total);
+
+  /// No description provided for @albumFavouredTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Tratti d\'elezione'**
+  String get albumFavouredTraits;
+
+  /// No description provided for @albumVocation.
+  ///
+  /// In it, this message translates to:
+  /// **'Vocazione'**
+  String get albumVocation;
+
+  /// No description provided for @albumMissingFigurine.
+  ///
+  /// In it, this message translates to:
+  /// **'Figurina da trovare'**
+  String get albumMissingFigurine;
+
+  /// No description provided for @albumSwipeHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Scorri per sfogliare le Pagine'**
+  String get albumSwipeHint;
+
+  /// No description provided for @albumSpeciesLink.
+  ///
+  /// In it, this message translates to:
+  /// **'Album · {known} di {total}'**
+  String albumSpeciesLink(int known, int total);
+
+  /// No description provided for @recipeMonths.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando si può fare'**
+  String get recipeMonths;
+
+  /// No description provided for @recipeNever.
+  ///
+  /// In it, this message translates to:
+  /// **'Mai: gli ingredienti non si incontrano negli stessi mesi'**
+  String get recipeNever;
+
+  /// No description provided for @recipeEffect.
+  ///
+  /// In it, this message translates to:
+  /// **'Effetto'**
+  String get recipeEffect;
+
+  /// No description provided for @effectRegrowth.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricrescita'**
+  String get effectRegrowth;
+
+  /// No description provided for @effectClarity.
+  ///
+  /// In it, this message translates to:
+  /// **'Limpidezza'**
+  String get effectClarity;
+
+  /// No description provided for @effectOmen.
+  ///
+  /// In it, this message translates to:
+  /// **'Presagio'**
+  String get effectOmen;
+
+  /// No description provided for @effectAbundance.
+  ///
+  /// In it, this message translates to:
+  /// **'Abbondanza'**
+  String get effectAbundance;
+
+  /// No description provided for @effectRegrowthText.
+  ///
+  /// In it, this message translates to:
+  /// **'La Stazione dove la usi torna pronta prima (effetto di gioco).'**
+  String get effectRegrowthText;
+
+  /// No description provided for @effectClarityText.
+  ///
+  /// In it, this message translates to:
+  /// **'Purezza in più alla prossima Essenza (effetto di gioco).'**
+  String get effectClarityText;
+
+  /// No description provided for @effectOmenText.
+  ///
+  /// In it, this message translates to:
+  /// **'Un Tratto garantito alla prossima Essenza (effetto di gioco).'**
+  String get effectOmenText;
+
+  /// No description provided for @effectAbundanceText.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis in più alla prossima Essenza (effetto di gioco).'**
+  String get effectAbundanceText;
+
+  /// No description provided for @mythicNumber.
+  ///
+  /// In it, this message translates to:
+  /// **'N. {number}'**
+  String mythicNumber(String number);
+
+  /// No description provided for @mythicToFind.
+  ///
+  /// In it, this message translates to:
+  /// **'Da trovare'**
+  String get mythicToFind;
+
+  /// No description provided for @mythicWindow.
+  ///
+  /// In it, this message translates to:
+  /// **'Solo dal {from} al {to}'**
+  String mythicWindow(String from, String to);
+
+  /// No description provided for @mythicAllYear.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutto l\'anno'**
+  String get mythicAllYear;
+
+  /// No description provided for @mythicsIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Mitiche d\'Italia: scritte a mano, legate a luoghi e feste. Si trovano nel Bottino dell\'Esperienza.'**
+  String get mythicsIntro;
 }
 
 class _AppLocalizationsDelegate

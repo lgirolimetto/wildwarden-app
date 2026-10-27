@@ -1,7 +1,6 @@
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/localized_text.dart';
 import 'package:druid_app/business_logic/models/mythic.dart';
-import 'package:druid_app/business_logic/models/recipe.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 
 /// Curiosità scritta a mano, legata a un livello di studio della specie.
@@ -20,7 +19,8 @@ class CuratedFunFact {
   );
 }
 
-/// Contenuti di gioco di una zona: specie, ricette, lore, curiosità, avvisi di sicurezza.
+/// Contenuti di gioco di una zona: specie, clima, Mitiche, lore, curiosità, avvisi di sicurezza. Le ricette ad
+/// affissi non sono nel catalogo: le calcolano le regole (`rules/recipes/`).
 class Catalog {
   /// 3: rarità della pianta, correzioni a mano, Mitiche e clima della Zona (tappa C).
   static const supportedFormatVersion = 3;
@@ -32,7 +32,6 @@ class Catalog {
   /// gelo. Gli altri tratti (luce del giorno, luna) capitano ogni mese.
   final Map<Trait, List<int>> climate;
   final List<Species> species;
-  final List<Recipe> recipes;
 
   /// Mitiche scritte a mano, in ordine di numero.
   final List<Mythic> mythics;
@@ -49,7 +48,6 @@ class Catalog {
     required this.regionName,
     this.climate = const {},
     required this.species,
-    required this.recipes,
     this.mythics = const [],
     required this.lore,
     required this.funFacts,
@@ -73,7 +71,6 @@ class Catalog {
         (id, days) => MapEntry(Trait.values.byName(id), (days as List).cast<int>()),
       ),
       species: (json['species'] as List).map((s) => Species.fromJson(s as Map<String, dynamic>)).toList(),
-      recipes: (json['recipes'] as List).map((r) => Recipe.fromJson(r as Map<String, dynamic>)).toList(),
       mythics: (json['mythics'] as List).map((m) => Mythic.fromJson(m as Map<String, dynamic>)).toList(),
       lore: texts('lore'),
       funFacts: (json['funFacts'] as Map<String, dynamic>).map(

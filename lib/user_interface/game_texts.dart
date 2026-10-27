@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
@@ -100,6 +101,20 @@ class GameTexts {
     Grade.uncommon => l10n.gradeUncommon,
     Grade.rare => l10n.gradeRare,
     Grade.mythic => l10n.gradeMythic,
+  };
+
+  String effect(PotionEffect e) => switch (e) {
+    PotionEffect.regrowth => l10n.effectRegrowth,
+    PotionEffect.clarity => l10n.effectClarity,
+    PotionEffect.omen => l10n.effectOmen,
+    PotionEffect.abundance => l10n.effectAbundance,
+  };
+
+  String effectText(PotionEffect e) => switch (e) {
+    PotionEffect.regrowth => l10n.effectRegrowthText,
+    PotionEffect.clarity => l10n.effectClarityText,
+    PotionEffect.omen => l10n.effectOmenText,
+    PotionEffect.abundance => l10n.effectAbundanceText,
   };
 
   String trait(Trait t) => switch (t) {

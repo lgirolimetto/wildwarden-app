@@ -15,10 +15,11 @@ void main() {
 
     setUp(() => catalog = smallCatalog());
 
-    test('legge specie, ricette e contenuti', () {
+    test('legge specie, Mitiche, clima e contenuti', () {
       expect(catalog.regionId, 'bologna');
       expect(catalog.species, hasLength(4));
-      expect(catalog.recipes, hasLength(4));
+      expect(catalog.mythics, hasLength(1));
+      expect(catalog.climate[Trait.frost], hasLength(12));
       expect(catalog.safety.keys, contains('Helleborus viridis'));
     });
 
@@ -35,19 +36,6 @@ void main() {
     test('tinta delle specie da trovare: letta se c\'è, assente altrimenti', () {
       expect(catalog.speciesBySci('Helleborus viridis')!.mysteryColor, 0xC9EBAD);
       expect(catalog.speciesBySci('Fagus sylvatica')!.mysteryColor, isNull);
-    });
-
-    test('ricetta con sblocco e ingrediente "qualsiasi specie"', () {
-      final quota = catalog.recipes.firstWhere((r) => r.name.resolve('it').contains('Quota'));
-      expect(quota.unlock!.speciesSci, 'Fagus sylvatica');
-      expect(quota.unlock!.level, 3);
-      expect(quota.ingredients.any((i) => i.speciesSci == null && i.trait != null), isTrue);
-    });
-
-    test('ricette: grado e tratti come id (formato 2)', () {
-      final quota = catalog.recipes.firstWhere((r) => r.name.resolve('it').contains('Quota'));
-      expect(quota.grade, Grade.rare);
-      expect(quota.ingredients.map((i) => i.trait), containsAll([Trait.fog, Trait.moon]));
     });
 
     test('rarità della pianta nella Zona e correzioni a mano (formato 3)', () {

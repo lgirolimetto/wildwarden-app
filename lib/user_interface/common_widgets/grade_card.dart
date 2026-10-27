@@ -25,6 +25,7 @@ class GradeCard extends StatelessWidget {
 
 /// Il grado in un cerchietto: un piccolo incavo, come il solco della scheda, con dentro il colore del grado. Il nome
 /// del grado resta per i lettori di schermo e come suggerimento a pressione lunga; la legenda spiega i colori.
+/// [filled] falso: l'incavo vuoto, una figurina che manca (si vede appena il colore del grado sul bordo).
 class GradeDot extends StatelessWidget {
   static const size = 22.0;
   static const _gem = 12.0;
@@ -34,7 +35,9 @@ class GradeDot extends StatelessWidget {
   /// Nome del grado, nella lingua dell'utente.
   final String label;
 
-  const GradeDot({super.key, required this.grade, required this.label});
+  final bool filled;
+
+  const GradeDot({super.key, required this.grade, required this.label, this.filled = true});
 
   @override
   Widget build(BuildContext context) => Tooltip(
@@ -49,7 +52,15 @@ class GradeDot extends StatelessWidget {
           depth: 2,
           child: Center(
             child: DecoratedBox(
-              decoration: BoxDecoration(color: context.druid.gradeColor(grade.index), shape: BoxShape.circle),
+              decoration: filled
+                  ? BoxDecoration(color: context.druid.gradeColor(grade.index), shape: BoxShape.circle)
+                  : BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: context.druid.gradeColor(grade.index).withValues(alpha: 0.6),
+                        width: 1.5,
+                      ),
+                    ),
               child: const SizedBox.square(dimension: _gem),
             ),
           ),
