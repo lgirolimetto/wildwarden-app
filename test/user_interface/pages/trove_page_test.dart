@@ -26,7 +26,7 @@ void main() {
     await openTrove(tester);
 
     expect(find.text('100 PE da spendere'), findsOneWidget);
-    expect(find.text("Bottino dell'Esperienza · comune"), findsOneWidget);
+    expect(find.text('Comune'), findsOneWidget);
     expect(find.text('Ti mancano 50 PE'), findsOneWidget);
     expect(find.byKey(const ValueKey('open-trove-common')), findsNothing);
   });

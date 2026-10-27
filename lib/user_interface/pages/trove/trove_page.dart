@@ -123,9 +123,8 @@ class _TroveCard extends StatelessWidget {
             children: [
               GradeDot(grade: grade, label: context.game.grade(grade)),
               const SizedBox(width: Gaps.m),
-              Expanded(
-                child: Text(context.l10n.troveName(context.game.troveGrade(grade)), style: context.texts.titleMedium),
-              ),
+              // Solo il grado: "Bottino dell'Esperienza" sta già nell'intestazione della pagina.
+              Expanded(child: Text(_capitalized(context.game.troveGrade(grade)), style: context.texts.titleMedium)),
               Pill(context.l10n.troveCost(cost)),
             ],
           ),
@@ -194,3 +193,5 @@ Future<void> _open(BuildContext context, ProgressController progress, Grade grad
   if (finds == null) return;
   await Get.to<void>(() => TroveOpeningPage(grade: grade, finds: finds));
 }
+
+String _capitalized(String s) => s.isEmpty ? s : s[0].toUpperCase() + s.substring(1);
