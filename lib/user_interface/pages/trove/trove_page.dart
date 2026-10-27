@@ -220,15 +220,16 @@ class _TroveCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Il cerchietto a sinistra, il grado come pillola a destra (come nelle schede delle ricette): "Bottino
+          // dell'Esperienza" sta già nell'intestazione della pagina.
           Row(
             children: [
               GradeDot(grade: grade, label: context.game.grade(grade)),
-              const SizedBox(width: Gaps.m),
-              // Solo il grado: "Bottino dell'Esperienza" sta già nell'intestazione della pagina.
-              Expanded(child: Text(_capitalized(context.game.troveGrade(grade)), style: context.texts.titleMedium)),
+              const Spacer(),
+              Pill(_capitalized(context.game.troveGrade(grade))),
             ],
           ),
-          const SizedBox(height: Gaps.xs),
+          const SizedBox(height: Gaps.s),
           Text(context.game.troveContents(grade), style: hint),
           const SizedBox(height: Gaps.m),
           switch (block) {
