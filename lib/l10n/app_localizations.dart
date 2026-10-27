@@ -3001,6 +3001,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.'**
   String get tip15;
+
+  /// No description provided for @viewToFind.
+  ///
+  /// In it, this message translates to:
+  /// **'Da trovare'**
+  String get viewToFind;
 }
 
 class _AppLocalizationsDelegate

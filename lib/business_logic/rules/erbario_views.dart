@@ -96,6 +96,7 @@ class ErbarioFilter {
 enum BuiltInView {
   all(ErbarioFilter.all),
   met(ErbarioFilter(statuses: {SpeciesStatus.met})),
+  toFind(ErbarioFilter(statuses: {SpeciesStatus.toFind})),
   inSeason(ErbarioFilter(inSeason: true)),
   desiderata(ErbarioFilter(statuses: {SpeciesStatus.desiderata})),
   protectedSpecies(ErbarioFilter(protectedOnly: true));

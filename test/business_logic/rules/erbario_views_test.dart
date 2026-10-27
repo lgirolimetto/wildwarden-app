@@ -30,6 +30,14 @@ void main() {
     expect(ErbarioFilter.all.isEmpty, isTrue);
   });
 
+  test('le viste Incontrate e Da trovare dividono l\'Erbario', () {
+    final state = GameState.replay([
+      SpeciesEncountered(speciesSci: 'Malva sylvestris', method: EncounterMethod.simulated, occurredAt: feb),
+    ]);
+    expect(shown(BuiltInView.met.filter, state), ['Malva sylvestris']);
+    expect(shown(BuiltInView.toFind.filter, state), hasLength(catalog.species.length - 1));
+  });
+
   test('in stagione: a febbraio elleboro e piè di gallo', () {
     expect(shown(BuiltInView.inSeason.filter), ['Helleborus viridis', 'Eranthis hyemalis']);
   });

@@ -76,6 +76,7 @@ class GameTexts {
   String builtInView(BuiltInView v) => switch (v) {
     BuiltInView.all => l10n.viewAll,
     BuiltInView.met => l10n.viewMet,
+    BuiltInView.toFind => l10n.viewToFind,
     BuiltInView.inSeason => l10n.viewInSeason,
     BuiltInView.desiderata => l10n.viewDesiderata,
     BuiltInView.protectedSpecies => l10n.viewProtected,

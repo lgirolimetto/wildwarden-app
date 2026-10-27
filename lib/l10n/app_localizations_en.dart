@@ -1904,4 +1904,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tip15 =>
       '\"Collecting\" in the game means taking photos: plants stay where they are.';
+
+  @override
+  String get viewToFind => 'To find';
 }
