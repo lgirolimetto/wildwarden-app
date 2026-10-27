@@ -10,6 +10,7 @@ import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
@@ -58,7 +59,10 @@ class _FreeSlotSheet extends StatelessWidget {
             ListTile(
               key: ValueKey('free-slot-$sci'),
               contentPadding: EdgeInsets.zero,
-              title: Text(catalog.speciesBySci(sci) == null ? sci : context.game.name(catalog.speciesBySci(sci)!)),
+              title: Text(
+                catalog.speciesBySci(sci) == null ? sci : context.game.name(catalog.speciesBySci(sci)!),
+                style: speciesNameStyle(context, context.texts.bodyLarge),
+              ),
               trailing: Text(context.l10n.brewFreeOption(vis[sci] ?? 0)),
               onTap: () => Navigator.of(context).pop(sci),
             ),
@@ -100,8 +104,10 @@ class PotionResultPage extends StatelessWidget {
                     children: [
                       RecipeIdVessel(catalog: catalog, recipeId: event.recipeId, size: 120, spoiled: event.spoiled),
                       const SizedBox(height: Gaps.m),
-                      Text(
-                        recipeNameOf(context, catalog, state, event.recipeId),
+                      RecipeNameText(
+                        catalog: catalog,
+                        state: state,
+                        recipeId: event.recipeId,
                         style: context.texts.titleLarge,
                         textAlign: TextAlign.center,
                       ),

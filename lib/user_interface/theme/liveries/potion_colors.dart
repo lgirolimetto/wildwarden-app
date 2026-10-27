@@ -34,3 +34,8 @@ List<Color> potionTraitColors(Brightness brightness) => brightness == Brightness
 /// Liquido delle ricette senza tratti (le Comuni): un verde d'erba, neutro.
 Color plainPotionColor(Brightness brightness) =>
     brightness == Brightness.light ? const Color(0xFFAFBF72) : const Color(0xFF8E9C58);
+
+/// Colore dei nomi delle specie (in maiuscoletto, come nei cartellini d'erbario): un verde scuro di giorno, chiaro di
+/// sera.
+Color speciesNameColor(Brightness brightness) =>
+    brightness == Brightness.light ? const Color(0xFF3E6B47) : const Color(0xFFA9CFA1);

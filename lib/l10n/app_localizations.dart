@@ -2690,12 +2690,6 @@ abstract class AppLocalizations {
   /// **'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.'**
   String get readyEmpty;
 
-  /// No description provided for @readyMissing.
-  ///
-  /// In it, this message translates to:
-  /// **'Ti mancano {vis} Vis di {name}'**
-  String readyMissing(int vis, String name);
-
   /// No description provided for @readyAnyPlant.
   ///
   /// In it, this message translates to:
@@ -2779,6 +2773,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Potenza migliore: {potency}'**
   String recipeBestPotency(int potency);
+
+  /// No description provided for @readyMissingVis.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti mancano {vis} Vis'**
+  String readyMissingVis(int vis);
 }
 
 class _AppLocalizationsDelegate

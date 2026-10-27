@@ -5,6 +5,7 @@ import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -87,7 +88,10 @@ class _SpeciesShelf extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(species == null ? speciesSci : context.game.name(species), style: context.texts.titleMedium),
+                    Text(
+                      species == null ? speciesSci : context.game.name(species),
+                      style: speciesNameStyle(context, context.texts.titleMedium),
+                    ),
                     Text(
                       context.l10n.pantrySpeciesSummary(essences.length, vis),
                       style: context.texts.bodySmall?.copyWith(color: context.druid.hint),

@@ -1722,11 +1722,6 @@ class AppLocalizationsIt extends AppLocalizations {
       'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.';
 
   @override
-  String readyMissing(int vis, String name) {
-    return 'Ti mancano $vis Vis di $name';
-  }
-
-  @override
   String get readyAnyPlant => 'una pianta a scelta';
 
   @override
@@ -1781,5 +1776,10 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String recipeBestPotency(int potency) {
     return 'Potenza migliore: $potency';
+  }
+
+  @override
+  String readyMissingVis(int vis) {
+    return 'Ti mancano $vis Vis';
   }
 }

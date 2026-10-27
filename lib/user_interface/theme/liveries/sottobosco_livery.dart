@@ -84,6 +84,7 @@ class SottoboscoLivery extends Livery {
       gradeColors: metalGradeColors(brightness),
       traitColors: potionTraitColors(brightness),
       plainPotion: plainPotionColor(brightness),
+      speciesName: speciesNameColor(brightness),
       levelColors: const [
         Color(0xFFBFAE95),
         Color(0xFF9FB58A),

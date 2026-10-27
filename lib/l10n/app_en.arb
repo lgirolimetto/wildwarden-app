@@ -432,7 +432,6 @@
   "readyAlmost": "Almost there",
   "readyOthers": "{count, plural, =1{Another recipe needs} other{{count} more recipes need}} more Essences: you'll find them in the Recipe Book.",
   "readyEmpty": "You don't know any recipes to brew yet: Commons are learned by studying, the others in the Trove of Experience.",
-  "readyMissing": "You need {vis} more Vis of {name}",
   "readyAnyPlant": "a plant of your choice",
   "brewButton": "Brew",
   "brewDailyLimit": "That's enough for today: {count} potions a day.",
@@ -446,5 +445,6 @@
   "potionSpoiledTitle": "The potion spoiled",
   "potionSpoiledText": "{name}: a toxic plant. In a drinkable recipe it spoils the potion: the Vis are lost, but now you know.",
   "shelfEmpty": "The Shelf is empty: the potions you brew stay here.",
-  "recipeBestPotency": "Best potency: {potency}"
+  "recipeBestPotency": "Best potency: {potency}",
+  "readyMissingVis": "You need {vis} more Vis"
 }

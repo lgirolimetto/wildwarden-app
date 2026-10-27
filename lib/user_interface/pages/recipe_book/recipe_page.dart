@@ -10,12 +10,14 @@ import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -39,6 +41,7 @@ class PlantRecipePage extends StatelessWidget {
         grade: recipe.grade,
         vessel: RecipeVessel(recipe: recipe, size: 80, missing: missing),
         title: recipe.name(context.contentLanguage, missing: missing),
+        titlePlant: plantWord(recipe.plant.name.resolve(context.contentLanguage)),
         subtitle: missing > 0 ? context.l10n.recipeMissingPieces(missing) : null,
         ingredients: [
           for (final i in recipe.ingredients)
@@ -133,6 +136,9 @@ class _RecipeCard extends StatelessWidget {
   final Grade grade;
   final Widget vessel;
   final String title;
+
+  /// Il nome della pianta dentro [title], nello stile delle specie (`null` per le Mitiche).
+  final String? titlePlant;
   final String? subtitle;
   final String? story;
   final List<_IngredientView> ingredients;
@@ -147,6 +153,7 @@ class _RecipeCard extends StatelessWidget {
     required this.grade,
     required this.vessel,
     required this.title,
+    this.titlePlant,
     this.subtitle,
     this.story,
     required this.ingredients,
@@ -172,7 +179,7 @@ class _RecipeCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: Gaps.s),
-          Text(title, style: context.texts.titleLarge),
+          TextWithSpecies(title, plant: titlePlant, style: context.texts.titleLarge),
           if (subtitle != null) Text(subtitle!, style: hint),
           if (story != null) ...[const SizedBox(height: Gaps.s), Text(story!)],
           const SizedBox(height: Gaps.m),
@@ -214,7 +221,18 @@ class _IngredientRow extends StatelessWidget {
             runSpacing: Gaps.chipRun,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text('${ingredient.quantity} × $name', style: context.texts.bodyLarge),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(text: '${ingredient.quantity} × '),
+                    TextSpan(
+                      text: name,
+                      style: species == null ? null : speciesNameStyle(context, context.texts.bodyLarge),
+                    ),
+                  ],
+                ),
+                style: context.texts.bodyLarge,
+              ),
               for (final t in ingredient.traits) Pill(ingredient.hidden.contains(t) ? '?' : context.game.trait(t)),
             ],
           ),

@@ -4,10 +4,12 @@ import 'package:druid_app/business_logic/rules/recipes/recipe_book.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
 import 'package:flutter/material.dart';
 
 /// Il contenuto di una Tavola che hai, nella pagina del Ricettario e all'apertura del Bottino: cerchietto, icona
@@ -44,11 +46,11 @@ class PlateFace extends StatelessWidget {
             builder: (size) => RecipeVessel(recipe: recipe, size: size, missing: missing),
           ),
         ),
-        Text(
+        TextWithSpecies(
           recipe.name(context.contentLanguage, missing: missing),
+          plant: plantWord(recipe.plant.name.resolve(context.contentLanguage)),
           style: context.texts.titleMedium,
           maxLines: 4,
-          overflow: TextOverflow.ellipsis,
         ),
         if (note != null) ...[
           const SizedBox(height: Gaps.xs),

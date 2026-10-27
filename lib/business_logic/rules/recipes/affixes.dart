@@ -84,13 +84,19 @@ const _englishEffects = {
 /// Il segno di un pezzo del nome che manca (componente non ancora trovato).
 const missingPiece = '…';
 
-/// Il nome della pianta dentro il nome della ricetta: senza "comune" e "vera" ("Bagolaro", "Melissa"), in italiano
-/// con "di" o "d'" davanti.
-String plantInRecipeName(String plantName, String languageCode) {
+/// La pianta come compare nel nome di una ricetta, senza "comune" e "vera" ("Bagolaro", "Melissa").
+String plantWord(String plantName) {
   var name = plantName;
   for (final tail in const [' comune', ' vera']) {
     if (name.endsWith(tail)) name = name.substring(0, name.length - tail.length);
   }
+  return name;
+}
+
+/// Il nome della pianta dentro il nome della ricetta: senza "comune" e "vera" ("Bagolaro", "Melissa"), in italiano
+/// con "di" o "d'" davanti.
+String plantInRecipeName(String plantName, String languageCode) {
+  final name = plantWord(plantName);
   if (languageCode == 'en') return name;
   return 'aeiou'.contains(name[0].toLowerCase()) ? "d'$name" : 'di $name';
 }

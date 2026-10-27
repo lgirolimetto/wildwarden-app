@@ -1709,11 +1709,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'You don\'t know any recipes to brew yet: Commons are learned by studying, the others in the Trove of Experience.';
 
   @override
-  String readyMissing(int vis, String name) {
-    return 'You need $vis more Vis of $name';
-  }
-
-  @override
   String get readyAnyPlant => 'a plant of your choice';
 
   @override
@@ -1768,5 +1763,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String recipeBestPotency(int potency) {
     return 'Best potency: $potency';
+  }
+
+  @override
+  String readyMissingVis(int vis) {
+    return 'You need $vis more Vis';
   }
 }

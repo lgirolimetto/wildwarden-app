@@ -3,7 +3,11 @@ import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/laboratory/brew_flow.dart';
@@ -109,14 +113,96 @@ class _ReadyCard extends StatelessWidget {
                 RecipeIdVessel(catalog: catalog, recipeId: brewable.id, size: 48),
                 const SizedBox(width: Gaps.m),
                 Expanded(
-                  child: Text(recipeNameOf(context, catalog, state, brewable.id), style: context.texts.titleSmall),
+                  child: RecipeNameText(
+                    catalog: catalog,
+                    state: state,
+                    recipeId: brewable.id,
+                    style: context.texts.titleSmall,
+                  ),
                 ),
               ],
             ),
+            const SizedBox(height: Gaps.s),
+            // L'effetto di gioco: il motivo per cui la prepari.
+            Row(
+              children: [
+                EngravedIcon(effectIconOf(brewable.effect), size: 16),
+                const SizedBox(width: Gaps.s),
+                Expanded(child: Text(_effectText(context), style: context.texts.bodySmall)),
+              ],
+            ),
+            // Le Vis che consuma (se è pronta; altrimenti BrewSection dice cosa manca).
+            if (recipe.missing.isEmpty)
+              for (final ingredient in brewable.ingredients) ...[
+                const SizedBox(height: Gaps.xs),
+                VisLine(
+                  vis: ingredient.vis,
+                  species: ingredient.speciesSci == null
+                      ? freeSlotCandidates(brewable, state.essences)
+                      : [ingredient.speciesSci!],
+                  traits: ingredient.traits,
+                  catalog: catalog,
+                ),
+              ],
             BrewSection(catalog: catalog, state: state, recipe: recipe),
           ],
         ),
       ),
+    );
+  }
+}
+
+extension on _ReadyCard {
+  String _effectText(BuildContext context) {
+    final id = recipe.brewable.id;
+    for (final m in catalog.mythics) {
+      if (m.id == id) return m.effectText.resolve(context.contentLanguage);
+    }
+    return context.game.effectText(recipe.brewable.effect);
+  }
+}
+
+/// Una riga di Vis: "10 Vis · BORRAGINE COMUNE · Rugiada"; con più piante possibili (lo slot libero) le prime 3
+/// separate da "|", poi "…". [prefix] sostituisce "10 Vis" (es. "Ti mancano 10 Vis di").
+class VisLine extends StatelessWidget {
+  final int vis;
+  final List<String> species;
+  final List<Trait> traits;
+  final Catalog catalog;
+  final String? prefix;
+
+  const VisLine({
+    super.key,
+    required this.vis,
+    required this.species,
+    required this.traits,
+    required this.catalog,
+    this.prefix,
+  });
+
+  static const _shown = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    final base = context.texts.bodySmall;
+    final names = [
+      for (final sci in species.take(_shown))
+        catalog.speciesBySci(sci) == null ? sci : context.game.name(catalog.speciesBySci(sci)!),
+    ];
+    return Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(text: '${prefix ?? context.l10n.pantryVis(vis)} · '),
+          if (names.isEmpty) TextSpan(text: context.l10n.readyAnyPlant),
+          for (final (i, name) in names.indexed) ...[
+            if (i > 0) const TextSpan(text: ' | '),
+            TextSpan(text: name, style: speciesNameStyle(context, base)),
+          ],
+          if (species.length > _shown) const TextSpan(text: ' …'),
+          for (final t in traits) TextSpan(text: ' · ${context.game.trait(t)}'),
+        ],
+      ),
+      style: base,
     );
   }
 }
@@ -150,7 +236,13 @@ class BrewSection extends StatelessWidget {
         ],
         for (final m in recipe.missing) ...[
           const SizedBox(height: Gaps.xs),
-          Text(_missingText(context, m), style: hint),
+          VisLine(
+            vis: m.vis,
+            species: [?m.ingredient.speciesSci],
+            traits: m.ingredient.traits,
+            catalog: catalog,
+            prefix: context.l10n.readyMissingVis(m.vis),
+          ),
         ],
         const SizedBox(height: Gaps.s),
         switch (recipe.block) {
@@ -172,13 +264,6 @@ class BrewSection extends StatelessWidget {
         },
       ],
     );
-  }
-
-  String _missingText(BuildContext context, BrewShortfall m) {
-    final sci = m.ingredient.speciesSci;
-    final species = sci == null ? null : catalog.speciesBySci(sci);
-    final name = sci == null ? context.l10n.readyAnyPlant : (species == null ? sci : context.game.name(species));
-    return [context.l10n.readyMissing(m.vis, name), ...m.ingredient.traits.map(context.game.trait)].join(' · ');
   }
 
   static String _day(BuildContext context, int month, int day) =>

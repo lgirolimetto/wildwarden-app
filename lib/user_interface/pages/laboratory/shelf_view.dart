@@ -44,7 +44,12 @@ class ShelfView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(recipeNameOf(context, catalog, state, potion.recipeId), style: context.texts.titleSmall),
+                        RecipeNameText(
+                          catalog: catalog,
+                          state: state,
+                          recipeId: potion.recipeId,
+                          style: context.texts.titleSmall,
+                        ),
                         Text(
                           [
                             context.l10n.potionPotency(potion.potency),

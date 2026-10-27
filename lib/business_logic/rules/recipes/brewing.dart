@@ -38,6 +38,9 @@ class Brewable {
   /// La base, per l'accordo del Tocco ("Infuso Limpido", "Tintura Limpida"); `null` per le Mitiche.
   final RecipeBase? base;
 
+  /// L'effetto di gioco della pozione.
+  final PotionEffect effect;
+
   const Brewable({
     required this.id,
     required this.grade,
@@ -45,6 +48,7 @@ class Brewable {
     required this.drinkable,
     this.window,
     this.base,
+    required this.effect,
   });
 
   BrewIngredient? get freeSlot => ingredients.where((i) => i.speciesSci == null).firstOrNull;
@@ -63,6 +67,7 @@ Brewable? brewableOf(Catalog catalog, String id) {
       ],
       drinkable: true,
       window: m.window,
+      effect: m.effect,
     );
   }
   final recipe = recipeBookOf(catalog).recipeById(id);
@@ -76,6 +81,7 @@ Brewable? brewableOf(Catalog catalog, String id) {
     ],
     drinkable: recipe.base != RecipeBase.ointment && recipe.base != RecipeBase.balm,
     base: recipe.base,
+    effect: recipe.effect,
   );
 }
 

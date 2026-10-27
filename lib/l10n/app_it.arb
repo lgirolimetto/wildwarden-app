@@ -1366,17 +1366,6 @@
     }
   },
   "readyEmpty": "Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell'Esperienza.",
-  "readyMissing": "Ti mancano {vis} Vis di {name}",
-  "@readyMissing": {
-    "placeholders": {
-      "vis": {
-        "type": "int"
-      },
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "readyAnyPlant": "una pianta a scelta",
   "brewButton": "Prepara",
   "brewDailyLimit": "Per oggi basta: {count} pozioni al giorno.",
@@ -1436,6 +1425,14 @@
   "@recipeBestPotency": {
     "placeholders": {
       "potency": {
+        "type": "int"
+      }
+    }
+  },
+  "readyMissingVis": "Ti mancano {vis} Vis",
+  "@readyMissingVis": {
+    "placeholders": {
+      "vis": {
         "type": "int"
       }
     }
