@@ -70,6 +70,12 @@ class Mythic {
     window: json['window'] == null ? null : DateWindow.fromJson(json['window'] as Map<String, dynamic>),
   );
 
-  /// Il nome intero, con i pezzi uniti.
-  String name(String languageCode) => nameParts.map((p) => p.resolve(languageCode)).join(' ');
+  /// Il nome, con i pezzi uniti; gli ultimi [missing] pezzi, ancora da trovare, diventano "…" (come `missingPiece`
+  /// nei nomi ad affissi).
+  String name(String languageCode, {int missing = 0}) {
+    final shown = nameParts.length - missing.clamp(0, nameParts.length);
+    return [
+      for (final (i, p) in nameParts.indexed) i < shown ? p.resolve(languageCode) : '…',
+    ].join(' ');
+  }
 }

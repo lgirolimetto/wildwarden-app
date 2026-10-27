@@ -34,34 +34,49 @@ Set<String> knownRecipeIds(Catalog catalog, GameState state) {
   };
 }
 
-/// Una pagina del Ricettario: la pagina della pianta e le Tavole che hai.
+/// Una pagina del Ricettario: la pagina della pianta e le Tavole che hai, complete o trovate incomplete nel Bottino.
 class CollectedPage {
   final PlantPage page;
+
+  /// Le Tavole che hai, anche incomplete.
   final Set<String> knownIds;
+
+  /// Pezzi del nome che mancano alle Tavole incomplete, per id.
+  final Map<String, int> missing;
 
   /// Quando hai imparato l'ultima Tavola della pagina (`null` per le Comuni studiate prima della tappa C).
   final DateTime? lastLearned;
 
-  const CollectedPage({required this.page, required this.knownIds, required this.lastLearned});
+  const CollectedPage({required this.page, required this.knownIds, this.missing = const {}, required this.lastLearned});
 
+  /// Hai la Tavola (anche incompleta): nella pagina c'è, non è uno slot vuoto.
   bool knows(PlantRecipe recipe) => knownIds.contains(recipe.id);
+
+  /// Pezzi del nome che mancano alla Tavola (0 = completa).
+  int missingOf(PlantRecipe recipe) => missing[recipe.id] ?? 0;
 
   int get knownCount => page.recipes.where(knows).length;
 
-  bool get complete => knownCount == page.recipes.length;
+  /// Tutte le Tavole, tutte complete.
+  bool get complete => knownCount == page.recipes.length && missing.isEmpty;
 }
 
 /// Le pagine con almeno una Tavola, dalla più recente; a pari data in ordine di catalogo.
 List<CollectedPage> collectedPages(Catalog catalog, GameState state) {
   final known = knownRecipeIds(catalog, state);
+  bool has(PlantRecipe r) => known.contains(r.id) || state.missingPieces.containsKey(r.id);
   final pages = [
     for (final page in recipeBookOf(catalog).pages)
-      if (page.recipes.any((r) => known.contains(r.id)))
+      if (page.recipes.any(has))
         CollectedPage(
           page: page,
           knownIds: {
             for (final r in page.recipes)
-              if (known.contains(r.id)) r.id,
+              if (has(r)) r.id,
+          },
+          missing: {
+            for (final r in page.recipes)
+              if (state.missingPieces[r.id] case final int m) r.id: m,
           },
           lastLearned: page.recipes
               .map((r) => state.learnedRecipes[r.id])
@@ -78,8 +93,8 @@ List<CollectedPage> collectedPages(Catalog catalog, GameState state) {
   });
 }
 
-/// Le Mitiche che conosci, per id.
+/// Le Mitiche che hai, per id: complete o trovate incomplete (con [Mythic] a pezzi, vedi `GameState.missingPieces`).
 Set<String> knownMythicIds(Catalog catalog, GameState state) => {
   for (final Mythic m in catalog.mythics)
-    if (state.learnedRecipes.containsKey(m.id)) m.id,
+    if (state.learnedRecipes.containsKey(m.id) || state.missingPieces.containsKey(m.id)) m.id,
 };

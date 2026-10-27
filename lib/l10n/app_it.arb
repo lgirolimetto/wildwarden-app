@@ -1083,5 +1083,145 @@
         "type": "int"
       }
     }
-  }
+  },
+  "labTitle": "Laboratorio",
+  "labTroveTab": "Bottino",
+  "labBalance": "Saldo",
+  "labBalanceXp": "{xp} PE da spendere",
+  "@labBalanceXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "labTrovesLeft": "{left} su {total} oggi",
+  "@labTrovesLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "troveName": "Bottino dell'Esperienza · {grade}",
+  "@troveName": {
+    "placeholders": {
+      "grade": {
+        "type": "String"
+      }
+    }
+  },
+  "troveGradeCommon": "comune",
+  "troveGradeUncommon": "non comune",
+  "troveGradeRare": "raro",
+  "troveGradeMythic": "mitico",
+  "troveCost": "{cost} PE",
+  "@troveCost": {
+    "placeholders": {
+      "cost": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "troveContentsCommon": "Quasi sempre una Comune, a volte una Non comune",
+  "troveContentsUncommon": "Per lo più Non comuni, a volte una Comune o una Rara",
+  "troveContentsRare": "Per lo più Rare, a volte una Non comune o una Mitica",
+  "troveContentsMythic": "Una Rara o una Mitica, metà e metà",
+  "troveOpen": "Apri",
+  "troveNeedXp": "Ti mancano {xp} PE",
+  "@troveNeedXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "troveDailyLimit": "Per oggi basta: {total} Bottino dell'Esperienza al giorno. Torna domani.",
+  "@troveDailyLimit": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "troveRules": "Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell'Esperienza. Al primo di ogni grado, in regalo una Tavola del grado sopra.",
+  "labIncomplete": "{count, plural, =1{1 Tavola incompleta} other{{count} Tavole incomplete}}",
+  "@labIncomplete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "labRecycled": "{count, plural, =1{1 riciclato} other{{count} riciclati}}",
+  "@labRecycled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "welcomeGiftTitle": "Ehi, c'è un regalo per te",
+  "welcomeGiftBody": "Il tuo primo Bottino dell'Esperienza · raro a prezzo di favore: {price} PE invece di {full}.",
+  "@welcomeGiftBody": {
+    "placeholders": {
+      "full": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "price": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "welcomeGiftWaiting": "Si riscatta dopo un'Essenza: esci e attingi da una stazione.",
+  "welcomeGiftRedeem": "Riscatta · {price} PE",
+  "@welcomeGiftRedeem": {
+    "placeholders": {
+      "price": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "troveTapToTurn": "Tocca le Tavole per girarle",
+  "troveFindNew": "Nuova Tavola",
+  "troveFindIncomplete": "Nuova Tavola · {count, plural, =1{manca 1 componente} other{mancano {count} componenti}}",
+  "@troveFindIncomplete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "troveFindPiece": "Un componente trovato",
+  "troveFindCompleted": "Tavola completata",
+  "troveFindRecycled": "Doppione: 1 riciclato {grade}",
+  "@troveFindRecycled": {
+    "placeholders": {
+      "grade": {
+        "type": "String"
+      }
+    }
+  },
+  "troveFindTaste": "Assaggio del grado sopra",
+  "troveNothing": "Questa volta non è uscito niente di nuovo.",
+  "troveDone": "Fatto",
+  "recipeMissingPieces": "{count, plural, =1{Manca 1 componente} other{Mancano {count} componenti}}",
+  "@recipeMissingPieces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeEffectUnknown": "Da scoprire: manca un componente del nome.",
+  "debugGrantXp": "Aggiungi 5.000 PE"
 }

@@ -4,12 +4,15 @@ import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
+import 'package:druid_app/business_logic/rules/recipes/trove.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/base/loadable_controller.dart';
 
@@ -22,7 +25,12 @@ class ProgressController extends LoadableController<GameState> {
   /// Catalogo corrente (serve per maestria e curiosità); `null` se non è ancora caricato.
   final Catalog? Function() _catalog;
 
-  ProgressController(this._store, this._clock, {required Catalog? Function() catalog}) : _catalog = catalog;
+  /// Il caso del Bottino dell'Esperienza (nei test un seme fisso).
+  final Random _random;
+
+  ProgressController(this._store, this._clock, {required Catalog? Function() catalog, Random? random})
+    : _catalog = catalog,
+      _random = random ?? Random();
 
   @override
   void onInit() {
@@ -111,6 +119,26 @@ class ProgressController extends LoadableController<GameState> {
 
   Future<void> markOnboarding(OnboardingMark mark) =>
       state.onboardingMarks.contains(mark) ? Future.value() : record(OnboardingMarked(mark: mark, occurredAt: now));
+
+  /// Compra e apre un Bottino dell'Esperienza di [grade] (con [gift] il regalo "bentornato": raro, a prezzo di
+  /// favore). Restituisce cosa è uscito, o `null` se non si può aprire (saldo, limite del giorno, regalo non pronto).
+  Future<List<TroveFind>?> openTrove(Grade grade, {bool gift = false}) async {
+    final catalog = _catalog();
+    if (catalog == null || troveBlock(state, grade, now, gift: gift) != null) return null;
+    if (gift && (grade != Grade.rare || welcomeGiftOf(state) != WelcomeGift.ready)) return null;
+    final finds = openTroveFinds(grade: grade, catalog: catalog, state: state, random: _random);
+    final price = gift ? EconomyRules.welcomeTrovePrice : EconomyRules.troveCost(grade);
+    final result = await record(TroveOpened(grade: grade, price: price, gift: gift, finds: finds, occurredAt: now));
+    return result.isValid ? finds : null;
+  }
+
+  /// Offre il regalo "bentornato" se è il momento (una volta sola).
+  Future<void> offerWelcomeGiftIfDue() async {
+    if (welcomeGiftDue(state, now)) await record(WelcomeGiftOffered(occurredAt: now));
+  }
+
+  /// Strumento di prova: PE da spendere nel Bottino senza giocare settimane.
+  Future<void> grantDebugXp(int xp) => record(XpGranted(xp: xp, reason: 'debug', occurredAt: now));
 
   /// Strumento di prova: un Ricettario fitto, per vedere indice, Pagine e navigazione senza giocare settimane. Impara
   /// le Tavole di 30 piante (tutte le Comuni, circa metà delle altre, 3 Pagine complete) e la prima Mitica, come se

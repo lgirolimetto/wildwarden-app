@@ -142,6 +142,11 @@ class _DebugToolsState extends State<_DebugTools> {
           },
           child: Text(context.l10n.debugSimulateRecipeBook),
         ),
+        OutlinedButton(
+          key: const ValueKey('debug-grant-xp'),
+          onPressed: () => progress.grantDebugXp(5000),
+          child: Text(context.l10n.debugGrantXp),
+        ),
         GetBuilder<SubscriptionController>(
           builder: (subscription) => ListTile(
             key: const ValueKey('debug-diario'),

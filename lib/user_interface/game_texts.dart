@@ -103,6 +103,22 @@ class GameTexts {
     Grade.mythic => l10n.gradeMythic,
   };
 
+  /// Il grado di un Bottino dell'Esperienza, al maschile ("Bottino dell'Esperienza · raro").
+  String troveGrade(Grade g) => switch (g) {
+    Grade.common => l10n.troveGradeCommon,
+    Grade.uncommon => l10n.troveGradeUncommon,
+    Grade.rare => l10n.troveGradeRare,
+    Grade.mythic => l10n.troveGradeMythic,
+  };
+
+  /// Che cosa esce di solito da un Bottino di quel grado.
+  String troveContents(Grade g) => switch (g) {
+    Grade.common => l10n.troveContentsCommon,
+    Grade.uncommon => l10n.troveContentsUncommon,
+    Grade.rare => l10n.troveContentsRare,
+    Grade.mythic => l10n.troveContentsMythic,
+  };
+
   String effect(PotionEffect e) => switch (e) {
     PotionEffect.regrowth => l10n.effectRegrowth,
     PotionEffect.clarity => l10n.effectClarity,

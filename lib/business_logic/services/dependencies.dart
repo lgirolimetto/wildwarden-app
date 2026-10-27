@@ -52,6 +52,7 @@ void registerDependencies({
       Get.find(),
       Get.find(),
       catalog: () => catalogController.uiData.fold((_) => null, (catalog) => catalog),
+      random: random,
     ),
     permanent: true,
   );

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:druid_app/business_logic/models/enums/grade.dart';
+
 /// Come è avvenuto l'incontro con una specie.
 enum EncounterMethod {
   /// Pulsante di debug: nessuna foto, nessuna posizione.
@@ -98,6 +100,15 @@ sealed class GameEvent {
         origin: RecipeOrigin.values.byName(d['origin'] as String),
         occurredAt: occurredAt,
       ),
+      TroveOpened.typeId => TroveOpened(
+        grade: Grade.values.byName(d['grade'] as String),
+        price: d['price'] as int,
+        gift: d['gift'] as bool? ?? false,
+        finds: [for (final f in d['finds'] as List) TroveFind.fromJson(f as Map<String, dynamic>)],
+        occurredAt: occurredAt,
+      ),
+      WelcomeGiftOffered.typeId => WelcomeGiftOffered(occurredAt: occurredAt),
+      XpGranted.typeId => XpGranted(xp: d['xp'] as int, reason: d['reason'] as String, occurredAt: occurredAt),
       OnboardingMarked.typeId => OnboardingMarked(
         mark: OnboardingMark.values.byName(d['mark'] as String),
         occurredAt: occurredAt,
@@ -322,4 +333,114 @@ class RecipeLearned extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'recipe': recipeId, 'origin': origin.name};
+}
+
+/// Che cosa è una cosa uscita da un Bottino dell'Esperienza.
+enum TroveFindKind {
+  /// Una Tavola nuova: completa (le Comuni) o con dei pezzi del nome da trovare.
+  recipe,
+
+  /// Un pezzo del nome di una Tavola incompleta che hai.
+  piece,
+
+  /// Un doppione (Tavola che hai già, anche incompleta): diventa un riciclato del suo grado.
+  recycled,
+}
+
+/// Una cosa uscita da un Bottino. Porta con sé il grado e i pezzi mancanti: lo stato del gioco non conosce il
+/// catalogo, e il caso non si ricalcola.
+class TroveFind {
+  final String recipeId;
+  final Grade grade;
+  final TroveFindKind kind;
+
+  /// Pezzi del nome che mancano alla Tavola nuova (0 = completa); per pezzi e doppioni 0.
+  final int missing;
+
+  /// L'assaggio del grado sopra: al primo Bottino di un grado, una Tavola del grado successivo.
+  final bool taste;
+
+  const TroveFind({
+    required this.recipeId,
+    required this.grade,
+    required this.kind,
+    this.missing = 0,
+    this.taste = false,
+  });
+
+  factory TroveFind.fromJson(Map<String, dynamic> json) => TroveFind(
+    recipeId: json['recipe'] as String,
+    grade: Grade.values.byName(json['grade'] as String),
+    kind: TroveFindKind.values.byName(json['kind'] as String),
+    missing: json['missing'] as int? ?? 0,
+    taste: json['taste'] as bool? ?? false,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'recipe': recipeId,
+    'grade': grade.name,
+    'kind': kind.name,
+    'missing': missing,
+    'taste': taste,
+  };
+}
+
+/// Bottino dell'Esperienza comprato e aperto: il saldo cala di [price], e quel che è uscito si salva qui.
+class TroveOpened extends GameEvent {
+  static const typeId = 'trove_opened';
+  final Grade grade;
+  final int price;
+
+  /// Comprato con il regalo "bentornato", a prezzo di favore.
+  final bool gift;
+  final List<TroveFind> finds;
+
+  const TroveOpened({
+    required this.grade,
+    required this.price,
+    this.gift = false,
+    required this.finds,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'grade': grade.name,
+    'price': price,
+    'gift': gift,
+    'finds': [for (final f in finds) f.toJson()],
+  };
+}
+
+/// "Ehi, c'è un regalo per te": il primo Bottino raro a prezzo di favore è stato offerto. Si riscatta dopo
+/// un'Essenza attinta da quel momento.
+class WelcomeGiftOffered extends GameEvent {
+  static const typeId = 'welcome_gift_offered';
+
+  const WelcomeGiftOffered({required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {};
+}
+
+/// PE dati fuori dal gioco: oggi solo dagli strumenti di prova ([reason] `debug`).
+class XpGranted extends GameEvent {
+  static const typeId = 'xp_granted';
+  @override
+  final int xp;
+  final String reason;
+
+  const XpGranted({required this.xp, required this.reason, required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'xp': xp, 'reason': reason};
 }

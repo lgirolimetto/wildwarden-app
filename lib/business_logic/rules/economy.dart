@@ -16,6 +16,38 @@ abstract final class EconomyRules {
   /// Prezzo di favore del primo Bottino raro con il regalo "bentornato": quanto un non comune.
   static const welcomeTrovePrice = 500;
 
+  /// Il regalo "bentornato" arriva dopo 4 settimane di gioco a chi non ha ancora un Bottino raro e ha attinto meno di
+  /// 15 Essenze nelle ultime 4 settimane (chi attinge tanto il raro se lo compra da solo).
+  static const welcomeAfterDays = 28;
+  static const welcomeIfEssencesBelow = 15;
+
+  /// Bottini dell'Esperienza al giorno, al massimo.
+  static const trovesPerDay = 3;
+
+  /// Grado di ciò che esce da un Bottino, secondo il grado del Bottino (`trove.contents` del simulatore).
+  static Map<Grade, double> troveContents(Grade grade) => switch (grade) {
+    Grade.common => const {Grade.common: 0.9, Grade.uncommon: 0.1},
+    Grade.uncommon => const {Grade.common: 0.3, Grade.uncommon: 0.6, Grade.rare: 0.1},
+    Grade.rare => const {Grade.uncommon: 0.3, Grade.rare: 0.6, Grade.mythic: 0.1},
+    Grade.mythic => const {Grade.rare: 0.5, Grade.mythic: 0.5},
+  };
+
+  /// Se hai Tavole incomplete di grado non più alto del Bottino, quanto spesso esce un loro pezzo.
+  static const trovePieceChance = 0.4;
+
+  /// Quota del Bottino che pesca dalle pagine delle piante che conosci (incontrate o studiate); il resto da tutta la
+  /// Zona.
+  static const troveKnownPlantsShare = 0.75;
+
+  /// Pezzi del nome che mancano a una Tavola trovata nel Bottino: la Non comune non sa l'effetto, la Rara il secondo
+  /// tratto e l'effetto, la Mitica le sue 3 parole.
+  static int missingPiecesWhenFound(Grade grade) => switch (grade) {
+    Grade.common => 0,
+    Grade.uncommon => 1,
+    Grade.rare => 2,
+    Grade.mythic => 3,
+  };
+
   /// PE di una pozione di potenza 5, secondo il grado della ricetta; si scalano con la potenza.
   static int potionXp(Grade grade) => switch (grade) {
     Grade.common => 15,

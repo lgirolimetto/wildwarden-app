@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
@@ -63,5 +64,33 @@ void main() {
     final state = GameState.replay([learned('lanterna-santa-lucia', feb)]);
     expect(knownMythicIds(catalog, state), {'lanterna-santa-lucia'});
     expect(knownMythicIds(catalog, GameState.empty), isEmpty);
+  });
+
+  test('le Tavole trovate incomplete stanno nella pagina, con i pezzi che mancano; la pagina non è completa', () {
+    final malva = book.pageOf('Malva sylvestris')!;
+    final rare = malva.recipes.last;
+    final state = GameState.replay([
+      for (final r in malva.recipes.take(malva.recipes.length - 1)) learned(r.id, feb),
+      TroveOpened(
+        grade: Grade.rare,
+        price: 0,
+        finds: [TroveFind(recipeId: rare.id, grade: Grade.rare, kind: TroveFindKind.recipe, missing: 2)],
+        occurredAt: feb,
+      ),
+      TroveOpened(
+        grade: Grade.rare,
+        price: 0,
+        finds: const [
+          TroveFind(recipeId: 'lanterna-santa-lucia', grade: Grade.mythic, kind: TroveFindKind.recipe, missing: 3),
+        ],
+        occurredAt: feb,
+      ),
+    ]);
+    final page = collectedPages(catalog, state).single;
+    expect(page.knows(rare), isTrue);
+    expect(page.missingOf(rare), 2);
+    expect(page.knownCount, malva.recipes.length);
+    expect(page.complete, isFalse);
+    expect(knownMythicIds(catalog, state), {'lanterna-santa-lucia'});
   });
 }

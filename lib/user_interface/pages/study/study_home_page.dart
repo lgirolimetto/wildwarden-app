@@ -20,6 +20,7 @@ import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
+import 'package:druid_app/user_interface/pages/laboratory/laboratory_page.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_session_page.dart';
@@ -140,6 +141,13 @@ class _DioramaHeader extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
+                  ClayIconButton(
+                    key: const ValueKey('open-laboratory'),
+                    icon: Icons.science_rounded,
+                    tooltip: context.l10n.labTitle,
+                    onPressed: () => Get.to<void>(() => const LaboratoryPage()),
+                  ),
+                  const SizedBox(width: Gaps.s),
                   ClayIconButton(
                     key: const ValueKey('open-glossary'),
                     icon: Icons.menu_book_rounded,

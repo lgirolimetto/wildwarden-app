@@ -1,7 +1,9 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
+import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
+import 'package:druid_app/business_logic/rules/recipes/recipe_book.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
@@ -25,18 +27,25 @@ class PlantRecipePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _RecipeScaffold(
-    builder: (context, catalog) {
+    builder: (context, catalog, state) {
       final recipe = recipeBookOf(catalog).recipeById(recipeId)!;
+      final missing = state.missingPieces[recipeId] ?? 0;
+      final hidden = recipe.hiddenPieces(missing);
+      final hiddenTraits = hidden.contains(NamePiece.secondTrait) ? {recipe.traits[1]} : const <Trait>{};
       return _RecipeCard(
         key: ValueKey('recipe-$recipeId'),
         grade: recipe.grade,
-        vessel: RecipeVessel(recipe: recipe, size: 80),
-        title: recipe.name(context.contentLanguage),
+        vessel: RecipeVessel(recipe: recipe, size: 80, missing: missing),
+        title: recipe.name(context.contentLanguage, missing: missing),
+        subtitle: missing > 0 ? context.l10n.recipeMissingPieces(missing) : null,
         ingredients: [
-          for (final i in recipe.ingredients) (speciesSci: i.speciesSci, quantity: i.quantity, traits: i.traits),
+          for (final i in recipe.ingredients)
+            (speciesSci: i.speciesSci, quantity: i.quantity, traits: i.traits, hidden: hiddenTraits),
         ],
         months: recipe.months,
-        effect: context.game.effectText(recipe.effect),
+        effect: hidden.contains(NamePiece.effect)
+            ? context.l10n.recipeEffectUnknown
+            : context.game.effectText(recipe.effect),
         catalog: catalog,
       );
     },
@@ -51,9 +60,10 @@ class MythicRecipePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _RecipeScaffold(
-    builder: (context, catalog) {
+    builder: (context, catalog, state) {
       final lang = context.contentLanguage;
       final mythic = catalog.mythics.firstWhere((m) => m.id == mythicId);
+      final missing = state.missingPieces[mythicId] ?? 0;
       String day(int month, int day) => DateFormat.MMMMd(lang).format(DateTime(2000, month, day));
       final window = mythic.window;
       return _RecipeCard(
@@ -64,13 +74,15 @@ class MythicRecipePage extends StatelessWidget {
           liquids: [context.druid.gradeColor(Grade.mythic.index)],
           size: 80,
         ),
-        title: mythic.name(lang),
+        title: mythic.name(lang, missing: missing),
         subtitle:
             '${context.l10n.mythicNumber(mythic.number.toString())} · '
-            '${window == null ? context.l10n.mythicAllYear : context.l10n.mythicWindow(day(window.fromMonth, window.fromDay), day(window.toMonth, window.toDay))}',
+            '${window == null ? context.l10n.mythicAllYear : context.l10n.mythicWindow(day(window.fromMonth, window.fromDay), day(window.toMonth, window.toDay))}'
+            '${missing > 0 ? ' · ${context.l10n.recipeMissingPieces(missing)}' : ''}',
         story: mythic.story.resolve(lang),
         ingredients: [
-          for (final i in mythic.ingredients) (speciesSci: i.speciesSci, quantity: i.quantity, traits: [?i.trait]),
+          for (final i in mythic.ingredients)
+            (speciesSci: i.speciesSci, quantity: i.quantity, traits: [?i.trait], hidden: const <Trait>{}),
         ],
         months: null,
         effect: mythic.effectText.resolve(lang),
@@ -81,7 +93,7 @@ class MythicRecipePage extends StatelessWidget {
 }
 
 class _RecipeScaffold extends StatelessWidget {
-  final Widget Function(BuildContext context, Catalog catalog) builder;
+  final Widget Function(BuildContext context, Catalog catalog, GameState state) builder;
 
   const _RecipeScaffold({required this.builder});
 
@@ -94,14 +106,15 @@ class _RecipeScaffold extends StatelessWidget {
         belowAppBar: true,
         child: GameDataBuilder(
           builder: (context, catalog, state, _) =>
-              ListView(padding: const EdgeInsets.all(Gaps.l), children: [builder(context, catalog)]),
+              ListView(padding: const EdgeInsets.all(Gaps.l), children: [builder(context, catalog, state)]),
         ),
       ),
     ),
   );
 }
 
-typedef _IngredientView = ({String? speciesSci, int quantity, List<Trait> traits});
+/// [hidden]: i tratti che non sai ancora (il secondo tratto di una Rara incompleta), mostrati come "?".
+typedef _IngredientView = ({String? speciesSci, int quantity, List<Trait> traits, Set<Trait> hidden});
 
 class _RecipeCard extends StatelessWidget {
   final Grade grade;
@@ -189,11 +202,12 @@ class _IngredientRow extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text('${ingredient.quantity} × $name', style: context.texts.bodyLarge),
-              for (final t in ingredient.traits) Pill(context.game.trait(t)),
+              for (final t in ingredient.traits) Pill(ingredient.hidden.contains(t) ? '?' : context.game.trait(t)),
             ],
           ),
           // Chi legge la ricetta scopre quando vale il tratto che chiede.
-          for (final t in ingredient.traits) Text(context.game.traitWhen(t), style: context.texts.bodySmall),
+          for (final t in ingredient.traits)
+            if (!ingredient.hidden.contains(t)) Text(context.game.traitWhen(t), style: context.texts.bodySmall),
         ],
       ),
     );

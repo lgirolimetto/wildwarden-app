@@ -3,14 +3,13 @@ import 'package:druid_app/business_logic/rules/recipes/recipe_book.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
-import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
-import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/recipe_page.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/plate_face.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -103,7 +102,9 @@ class _PlantPageView extends StatelessWidget {
           mainAxisSpacing: Gaps.xl,
           children: [
             for (final recipe in page.recipes)
-              collected.knows(recipe) ? _Plate(recipe: recipe) : _EmptySlot(recipe: recipe),
+              collected.knows(recipe)
+                  ? _Plate(recipe: recipe, missing: collected.missingOf(recipe))
+                  : _EmptySlot(recipe: recipe),
           ],
         ),
         if (showSwipeHint) ...[
@@ -142,8 +143,9 @@ class _PillRow extends StatelessWidget {
 /// Una Tavola che hai: grado e nome (intero o, dal Bottino, parziale). Un tocco apre la ricetta.
 class _Plate extends StatelessWidget {
   final PlantRecipe recipe;
+  final int missing;
 
-  const _Plate({required this.recipe});
+  const _Plate({required this.recipe, required this.missing});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -151,28 +153,7 @@ class _Plate extends StatelessWidget {
     onTap: () => Get.to<void>(() => PlantRecipePage(recipeId: recipe.id)),
     child: GradeCard(
       grade: recipe.grade,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade)),
-              const Spacer(),
-              Tooltip(
-                message: context.game.effect(recipe.effect),
-                child: EngravedIcon(effectIconOf(recipe.effect), size: 18),
-              ),
-            ],
-          ),
-          Expanded(child: _VesselSlot(recipe: recipe)),
-          Text(
-            recipe.name(context.contentLanguage),
-            style: context.texts.titleMedium,
-            maxLines: 4,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
-      ),
+      child: PlateFace(recipe: recipe, missing: missing),
     ),
   );
 }
@@ -194,28 +175,14 @@ class _EmptySlot extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GradeDot(grade: recipe.grade, label: context.l10n.recipeBookMissingPlate, filled: false),
-          Expanded(child: _VesselSlot(recipe: recipe, empty: true)),
+          Expanded(
+            child: VesselSlot(
+              builder: (size) => RecipeVessel(recipe: recipe, size: size, empty: true),
+            ),
+          ),
           Text(context.game.grade(recipe.grade), style: TextStyle(color: context.druid.hint)),
         ],
       ),
     ),
-  );
-}
-
-/// Il recipiente nello spazio libero della scheda, tra il cerchietto e il nome: grande quanto ci sta, fino a 88.
-class _VesselSlot extends StatelessWidget {
-  final PlantRecipe recipe;
-  final bool empty;
-
-  const _VesselSlot({required this.recipe, this.empty = false});
-
-  @override
-  Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) {
-      final size = (constraints.maxHeight - Gaps.s).clamp(0.0, 88.0);
-      return Center(
-        child: RecipeVessel(recipe: recipe, size: size, empty: empty),
-      );
-    },
   );
 }

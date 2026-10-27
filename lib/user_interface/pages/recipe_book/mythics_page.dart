@@ -39,7 +39,7 @@ class MythicsPage extends StatelessWidget {
                 Text(context.l10n.mythicsIntro, style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
                 const SizedBox(height: Gaps.l),
                 for (final m in catalog.mythics) ...[
-                  _MythicRow(mythic: m, known: known.contains(m.id)),
+                  _MythicRow(mythic: m, known: known.contains(m.id), missing: state.missingPieces[m.id] ?? 0),
                   const SizedBox(height: Gaps.m),
                 ],
               ],
@@ -55,7 +55,10 @@ class _MythicRow extends StatelessWidget {
   final Mythic mythic;
   final bool known;
 
-  const _MythicRow({required this.mythic, required this.known});
+  /// Parole del nome ancora da trovare, se l'hai trovata incompleta.
+  final int missing;
+
+  const _MythicRow({required this.mythic, required this.known, required this.missing});
 
   @override
   Widget build(BuildContext context) => GradeCard(
@@ -72,7 +75,7 @@ class _MythicRow extends StatelessWidget {
             children: [
               Text(context.l10n.mythicNumber(mythic.number.toString()), style: context.texts.labelLarge),
               Text(
-                known ? mythic.name(context.contentLanguage) : context.l10n.mythicToFind,
+                known ? mythic.name(context.contentLanguage, missing: missing) : context.l10n.mythicToFind,
                 style: known ? context.texts.titleMedium : TextStyle(color: context.druid.hint),
               ),
             ],

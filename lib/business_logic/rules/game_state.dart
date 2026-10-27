@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
@@ -46,6 +47,26 @@ class GameState {
   /// ricette scritte a mano prima della tappa C restano qui ma non corrispondono più a nessuna ricetta.
   final Map<String, DateTime> learnedRecipes;
 
+  /// Tavole trovate incomplete, per id, con i pezzi del nome che mancano ancora (sempre più di 0: completata, passa
+  /// in [learnedRecipes]).
+  final Map<String, int> missingPieces;
+
+  /// Riciclati per grado: i doppioni usciti dal Bottino (si spendono nel riciclo, step 6).
+  final Map<Grade, int> recycled;
+
+  /// Bottini dell'Esperienza aperti, con il grado e il momento.
+  final List<(Grade, DateTime)> troves;
+
+  /// Quando sono state attinte le Essenze, in ordine.
+  final List<DateTime> essenceTimes;
+
+  /// Momento del primo evento: quando si è cominciato a giocare.
+  final DateTime? startedAt;
+
+  /// Quando è stato offerto il regalo "bentornato" (`null` = mai).
+  final DateTime? welcomeOfferedAt;
+  final bool welcomeRedeemed;
+
   const GameState({
     this.firstEncounters = const {},
     this.xp = 0,
@@ -64,6 +85,13 @@ class GameState {
     this.notebook = const {},
     this.onboardingMarks = const {},
     this.learnedRecipes = const {},
+    this.missingPieces = const {},
+    this.recycled = const {},
+    this.troves = const [],
+    this.essenceTimes = const [],
+    this.startedAt,
+    this.welcomeOfferedAt,
+    this.welcomeRedeemed = false,
   });
 
   static const empty = GameState();
@@ -96,7 +124,8 @@ class GameState {
   ];
 
   GameState apply(GameEvent event) {
-    final next = _withXp(event);
+    final started = startedAt == null ? _copy(startedAt: event.occurredAt) : this;
+    final next = started._withXp(event);
     return switch (event) {
       SpeciesEncountered(:final speciesSci, :final occurredAt) =>
         next.hasEncountered(speciesSci)
@@ -133,6 +162,7 @@ class GameState {
         },
         vis: {...vis, speciesSci: (vis[speciesSci] ?? 0) + gained},
         lastDraws: {...lastDraws, speciesSci: occurredAt},
+        essenceTimes: [...essenceTimes, occurredAt],
       ),
       DesiderataChanged(:final speciesSci, :final marked) => next._copy(
         desiderata: marked ? {...desiderata, speciesSci} : ({...desiderata}..remove(speciesSci)),
@@ -151,7 +181,42 @@ class GameState {
         learnedRecipes.containsKey(recipeId)
             ? next
             : next._copy(learnedRecipes: {...learnedRecipes, recipeId: occurredAt}),
+      TroveOpened() => next._openTrove(event),
+      WelcomeGiftOffered(:final occurredAt) => next._copy(welcomeOfferedAt: welcomeOfferedAt ?? occurredAt),
+      XpGranted() => next,
     };
+  }
+
+  GameState _openTrove(TroveOpened event) {
+    final learned = {...learnedRecipes};
+    final missing = {...missingPieces};
+    final recycledNow = {...recycled};
+    for (final find in event.finds) {
+      switch (find.kind) {
+        case TroveFindKind.recipe when find.missing <= 0:
+          learned.putIfAbsent(find.recipeId, () => event.occurredAt);
+        case TroveFindKind.recipe:
+          if (!learned.containsKey(find.recipeId)) missing[find.recipeId] = find.missing;
+        case TroveFindKind.piece:
+          final left = (missing[find.recipeId] ?? 1) - 1;
+          if (left > 0) {
+            missing[find.recipeId] = left;
+          } else {
+            missing.remove(find.recipeId);
+            learned.putIfAbsent(find.recipeId, () => event.occurredAt);
+          }
+        case TroveFindKind.recycled:
+          recycledNow[find.grade] = (recycledNow[find.grade] ?? 0) + 1;
+      }
+    }
+    return _copy(
+      spentXp: spentXp + event.price,
+      learnedRecipes: learned,
+      missingPieces: missing,
+      recycled: recycledNow,
+      troves: [...troves, (event.grade, event.occurredAt)],
+      welcomeRedeemed: welcomeRedeemed || event.gift,
+    );
   }
 
   /// Aggiunge i PE dell'evento: virtuali se vengono dallo studio di una specie mai attinta, reali altrimenti
@@ -185,6 +250,13 @@ class GameState {
     Set<String>? notebook,
     Set<OnboardingMark>? onboardingMarks,
     Map<String, DateTime>? learnedRecipes,
+    Map<String, int>? missingPieces,
+    Map<Grade, int>? recycled,
+    List<(Grade, DateTime)>? troves,
+    List<DateTime>? essenceTimes,
+    DateTime? startedAt,
+    DateTime? welcomeOfferedAt,
+    bool? welcomeRedeemed,
   }) => GameState(
     firstEncounters: firstEncounters ?? this.firstEncounters,
     xp: xp ?? this.xp,
@@ -203,5 +275,12 @@ class GameState {
     notebook: notebook ?? this.notebook,
     onboardingMarks: onboardingMarks ?? this.onboardingMarks,
     learnedRecipes: learnedRecipes ?? this.learnedRecipes,
+    missingPieces: missingPieces ?? this.missingPieces,
+    recycled: recycled ?? this.recycled,
+    troves: troves ?? this.troves,
+    essenceTimes: essenceTimes ?? this.essenceTimes,
+    startedAt: startedAt ?? this.startedAt,
+    welcomeOfferedAt: welcomeOfferedAt ?? this.welcomeOfferedAt,
+    welcomeRedeemed: welcomeRedeemed ?? this.welcomeRedeemed,
   );
 }

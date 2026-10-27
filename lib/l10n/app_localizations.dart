@@ -2287,6 +2287,228 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'{count, plural, =1{1 Tavola aggiunta} other{{count} Tavole aggiunte}} al Ricettario'**
   String debugSimulateRecipeBookDone(int count);
+
+  /// No description provided for @labTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get labTitle;
+
+  /// No description provided for @labTroveTab.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino'**
+  String get labTroveTab;
+
+  /// No description provided for @labBalance.
+  ///
+  /// In it, this message translates to:
+  /// **'Saldo'**
+  String get labBalance;
+
+  /// No description provided for @labBalanceXp.
+  ///
+  /// In it, this message translates to:
+  /// **'{xp} PE da spendere'**
+  String labBalanceXp(int xp);
+
+  /// No description provided for @labTrovesLeft.
+  ///
+  /// In it, this message translates to:
+  /// **'{left} su {total} oggi'**
+  String labTrovesLeft(int left, int total);
+
+  /// No description provided for @troveName.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino dell\'Esperienza · {grade}'**
+  String troveName(String grade);
+
+  /// No description provided for @troveGradeCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'comune'**
+  String get troveGradeCommon;
+
+  /// No description provided for @troveGradeUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'non comune'**
+  String get troveGradeUncommon;
+
+  /// No description provided for @troveGradeRare.
+  ///
+  /// In it, this message translates to:
+  /// **'raro'**
+  String get troveGradeRare;
+
+  /// No description provided for @troveGradeMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'mitico'**
+  String get troveGradeMythic;
+
+  /// No description provided for @troveCost.
+  ///
+  /// In it, this message translates to:
+  /// **'{cost} PE'**
+  String troveCost(int cost);
+
+  /// No description provided for @troveContentsCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Quasi sempre una Comune, a volte una Non comune'**
+  String get troveContentsCommon;
+
+  /// No description provided for @troveContentsUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Per lo più Non comuni, a volte una Comune o una Rara'**
+  String get troveContentsUncommon;
+
+  /// No description provided for @troveContentsRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Per lo più Rare, a volte una Non comune o una Mitica'**
+  String get troveContentsRare;
+
+  /// No description provided for @troveContentsMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'Una Rara o una Mitica, metà e metà'**
+  String get troveContentsMythic;
+
+  /// No description provided for @troveOpen.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri'**
+  String get troveOpen;
+
+  /// No description provided for @troveNeedXp.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti mancano {xp} PE'**
+  String troveNeedXp(int xp);
+
+  /// No description provided for @troveDailyLimit.
+  ///
+  /// In it, this message translates to:
+  /// **'Per oggi basta: {total} Bottino dell\'Esperienza al giorno. Torna domani.'**
+  String troveDailyLimit(int total);
+
+  /// No description provided for @troveRules.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo di ogni grado, in regalo una Tavola del grado sopra.'**
+  String get troveRules;
+
+  /// No description provided for @labIncomplete.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Tavola incompleta} other{{count} Tavole incomplete}}'**
+  String labIncomplete(int count);
+
+  /// No description provided for @labRecycled.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 riciclato} other{{count} riciclati}}'**
+  String labRecycled(int count);
+
+  /// No description provided for @welcomeGiftTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Ehi, c\'è un regalo per te'**
+  String get welcomeGiftTitle;
+
+  /// No description provided for @welcomeGiftBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tuo primo Bottino dell\'Esperienza · raro a prezzo di favore: {price} PE invece di {full}.'**
+  String welcomeGiftBody(int full, int price);
+
+  /// No description provided for @welcomeGiftWaiting.
+  ///
+  /// In it, this message translates to:
+  /// **'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.'**
+  String get welcomeGiftWaiting;
+
+  /// No description provided for @welcomeGiftRedeem.
+  ///
+  /// In it, this message translates to:
+  /// **'Riscatta · {price} PE'**
+  String welcomeGiftRedeem(int price);
+
+  /// No description provided for @troveTapToTurn.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca le Tavole per girarle'**
+  String get troveTapToTurn;
+
+  /// No description provided for @troveFindNew.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuova Tavola'**
+  String get troveFindNew;
+
+  /// No description provided for @troveFindIncomplete.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuova Tavola · {count, plural, =1{manca 1 componente} other{mancano {count} componenti}}'**
+  String troveFindIncomplete(int count);
+
+  /// No description provided for @troveFindPiece.
+  ///
+  /// In it, this message translates to:
+  /// **'Un componente trovato'**
+  String get troveFindPiece;
+
+  /// No description provided for @troveFindCompleted.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola completata'**
+  String get troveFindCompleted;
+
+  /// No description provided for @troveFindRecycled.
+  ///
+  /// In it, this message translates to:
+  /// **'Doppione: 1 riciclato {grade}'**
+  String troveFindRecycled(String grade);
+
+  /// No description provided for @troveFindTaste.
+  ///
+  /// In it, this message translates to:
+  /// **'Assaggio del grado sopra'**
+  String get troveFindTaste;
+
+  /// No description provided for @troveNothing.
+  ///
+  /// In it, this message translates to:
+  /// **'Questa volta non è uscito niente di nuovo.'**
+  String get troveNothing;
+
+  /// No description provided for @troveDone.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto'**
+  String get troveDone;
+
+  /// No description provided for @recipeMissingPieces.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Manca 1 componente} other{Mancano {count} componenti}}'**
+  String recipeMissingPieces(int count);
+
+  /// No description provided for @recipeEffectUnknown.
+  ///
+  /// In it, this message translates to:
+  /// **'Da scoprire: manca un componente del nome.'**
+  String get recipeEffectUnknown;
+
+  /// No description provided for @debugGrantXp.
+  ///
+  /// In it, this message translates to:
+  /// **'Aggiungi 5.000 PE'**
+  String get debugGrantXp;
 }
 
 class _AppLocalizationsDelegate

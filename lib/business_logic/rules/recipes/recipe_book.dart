@@ -85,9 +85,13 @@ class PlantRecipe {
     Grade.rare => const [NamePiece.secondTrait, NamePiece.effect],
   };
 
+  /// Gli ultimi [missing] pezzi di [missingPieces]: quelli ancora da trovare.
+  List<NamePiece> hiddenPieces(int missing) =>
+      missingPieces.sublist(missingPieces.length - missing.clamp(0, missingPieces.length));
+
   /// Il nome, intero o con gli ultimi [missing] pezzi di [missingPieces] ancora da trovare.
   String name(String languageCode, {int missing = 0}) {
-    final hidden = missingPieces.sublist(missingPieces.length - missing.clamp(0, missingPieces.length));
+    final hidden = hiddenPieces(missing);
     return affixName(
       base: base,
       plantName: plant.name.resolve(languageCode),

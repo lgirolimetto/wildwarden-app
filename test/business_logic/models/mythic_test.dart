@@ -17,4 +17,23 @@ void main() {
     expect(window.contains(DateTime(2027, 1, 7)), isFalse);
     expect(window.contains(DateTime(2026, 12, 27)), isFalse);
   });
+
+  test('il nome di una Mitica incompleta: le parole che mancano sono "…"', () {
+    final mythic = Mythic.fromJson({
+      'number': 1,
+      'id': 'm',
+      'nameParts': [
+        {'it': 'La Lanterna'},
+        {'it': 'di Santa'},
+        {'it': 'Lucia'},
+      ],
+      'story': {'it': ''},
+      'ingredients': <Object>[],
+      'effect': 'omen',
+      'effectText': {'it': ''},
+    });
+    expect(mythic.name('it'), 'La Lanterna di Santa Lucia');
+    expect(mythic.name('it', missing: 1), 'La Lanterna di Santa …');
+    expect(mythic.name('it', missing: 3), '… … …');
+  });
 }

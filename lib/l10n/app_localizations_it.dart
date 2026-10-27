@@ -1360,4 +1360,198 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0 al Ricettario';
   }
+
+  @override
+  String get labTitle => 'Laboratorio';
+
+  @override
+  String get labTroveTab => 'Bottino';
+
+  @override
+  String get labBalance => 'Saldo';
+
+  @override
+  String labBalanceXp(int xp) {
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return '$xpString PE da spendere';
+  }
+
+  @override
+  String labTrovesLeft(int left, int total) {
+    return '$left su $total oggi';
+  }
+
+  @override
+  String troveName(String grade) {
+    return 'Bottino dell\'Esperienza · $grade';
+  }
+
+  @override
+  String get troveGradeCommon => 'comune';
+
+  @override
+  String get troveGradeUncommon => 'non comune';
+
+  @override
+  String get troveGradeRare => 'raro';
+
+  @override
+  String get troveGradeMythic => 'mitico';
+
+  @override
+  String troveCost(int cost) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+
+    return '$costString PE';
+  }
+
+  @override
+  String get troveContentsCommon =>
+      'Quasi sempre una Comune, a volte una Non comune';
+
+  @override
+  String get troveContentsUncommon =>
+      'Per lo più Non comuni, a volte una Comune o una Rara';
+
+  @override
+  String get troveContentsRare =>
+      'Per lo più Rare, a volte una Non comune o una Mitica';
+
+  @override
+  String get troveContentsMythic => 'Una Rara o una Mitica, metà e metà';
+
+  @override
+  String get troveOpen => 'Apri';
+
+  @override
+  String troveNeedXp(int xp) {
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Ti mancano $xpString PE';
+  }
+
+  @override
+  String troveDailyLimit(int total) {
+    return 'Per oggi basta: $total Bottino dell\'Esperienza al giorno. Torna domani.';
+  }
+
+  @override
+  String get troveRules =>
+      'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo di ogni grado, in regalo una Tavola del grado sopra.';
+
+  @override
+  String labIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Tavole incomplete',
+      one: '1 Tavola incompleta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String labRecycled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count riciclati',
+      one: '1 riciclato',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get welcomeGiftTitle => 'Ehi, c\'è un regalo per te';
+
+  @override
+  String welcomeGiftBody(int full, int price) {
+    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String fullString = fullNumberFormat.format(full);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String priceString = priceNumberFormat.format(price);
+
+    return 'Il tuo primo Bottino dell\'Esperienza · raro a prezzo di favore: $priceString PE invece di $fullString.';
+  }
+
+  @override
+  String get welcomeGiftWaiting =>
+      'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.';
+
+  @override
+  String welcomeGiftRedeem(int price) {
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String priceString = priceNumberFormat.format(price);
+
+    return 'Riscatta · $priceString PE';
+  }
+
+  @override
+  String get troveTapToTurn => 'Tocca le Tavole per girarle';
+
+  @override
+  String get troveFindNew => 'Nuova Tavola';
+
+  @override
+  String troveFindIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'mancano $count componenti',
+      one: 'manca 1 componente',
+    );
+    return 'Nuova Tavola · $_temp0';
+  }
+
+  @override
+  String get troveFindPiece => 'Un componente trovato';
+
+  @override
+  String get troveFindCompleted => 'Tavola completata';
+
+  @override
+  String troveFindRecycled(String grade) {
+    return 'Doppione: 1 riciclato $grade';
+  }
+
+  @override
+  String get troveFindTaste => 'Assaggio del grado sopra';
+
+  @override
+  String get troveNothing => 'Questa volta non è uscito niente di nuovo.';
+
+  @override
+  String get troveDone => 'Fatto';
+
+  @override
+  String recipeMissingPieces(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Mancano $count componenti',
+      one: 'Manca 1 componente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recipeEffectUnknown =>
+      'Da scoprire: manca un componente del nome.';
+
+  @override
+  String get debugGrantXp => 'Aggiungi 5.000 PE';
 }
