@@ -53,7 +53,7 @@ class _TrovePane extends StatelessWidget {
       children: [
         ClayPageHeader(
           title: context.l10n.troveTitle,
-          icon: Icons.inventory_2_rounded,
+          icon: Icons.filter_vintage_rounded,
           iconColor: context.druid.gradeColor(Grade.rare.index),
         ),
         const SizedBox(height: Gaps.xl),
