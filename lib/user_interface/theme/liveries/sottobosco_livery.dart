@@ -2,6 +2,7 @@ import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/grade_colors.dart';
+import 'package:druid_app/user_interface/theme/liveries/potion_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Livrea materica e calda: verde petrolio, cacao, sabbia e crema, pulsanti pesca-dorato, sfondo con grana e
@@ -81,6 +82,9 @@ class SottoboscoLivery extends Livery {
     final light = brightness == Brightness.light;
     return DruidTokens(
       gradeColors: metalGradeColors(brightness),
+      traitColors: potionTraitColors(brightness),
+      plainPotion: plainPotionColor(brightness),
+      speciesName: speciesNameColor(brightness),
       levelColors: const [
         Color(0xFFBFAE95),
         Color(0xFF9FB58A),

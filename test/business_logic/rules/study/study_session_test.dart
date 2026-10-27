@@ -93,7 +93,7 @@ void main() {
   });
 
   group('ripassi', () {
-    test('nel ripasso ricordare vale +15 e niente torna in coda', () {
+    test('nel ripasso dimenticare non dà PE e niente torna in coda', () {
       final fact = Fact(catalog.speciesBySci('Helleborus viridis')!, FactKind.scientificName);
       final session = StudySession.review(dueFacts: [fact], catalog: catalog, random: Random(1));
 
@@ -119,7 +119,7 @@ void main() {
       expect(forgotten.box, 1);
     });
 
-    test('la scatola non supera la quarta (21 giorni)', () {
+    test('la scatola non supera la sesta (180 giorni)', () {
       var p = FactProgress.initial.afterLevelPassed(at);
       for (var i = 0; i < 10; i++) {
         p = p.afterReview(correct: true, at: at);
@@ -131,9 +131,13 @@ void main() {
 
   test('titoli dai PE totali', () {
     expect(Rank.of(0), Rank.apprentice);
-    expect(Rank.of(99), Rank.apprentice);
-    expect(Rank.of(100), Rank.wanderer);
-    expect(Rank.of(5000), Rank.botanomancer);
+    expect(Rank.of(49), Rank.apprentice);
+    expect(Rank.of(50), Rank.wanderer);
+    expect(Rank.of(999), Rank.wanderer);
+    expect(Rank.of(1000), Rank.seeker);
+    expect(Rank.of(3500), Rank.warden);
+    expect(Rank.of(17999), Rank.warden);
+    expect(Rank.of(18000), Rank.botanomancer);
     expect(Rank.botanomancer.next, isNull);
   });
 

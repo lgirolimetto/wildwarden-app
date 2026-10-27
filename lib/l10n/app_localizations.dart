@@ -242,18 +242,6 @@ abstract class AppLocalizations {
   /// **'Riprova'**
   String get retry;
 
-  /// No description provided for @erbarioEncounteredSection.
-  ///
-  /// In it, this message translates to:
-  /// **'Incontrate'**
-  String get erbarioEncounteredSection;
-
-  /// No description provided for @erbarioMissingSection.
-  ///
-  /// In it, this message translates to:
-  /// **'Da trovare nel bolognese'**
-  String get erbarioMissingSection;
-
   /// No description provided for @simulateEncounter.
   ///
   /// In it, this message translates to:
@@ -295,12 +283,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Home'**
   String get navStudy;
-
-  /// No description provided for @navRecipes.
-  ///
-  /// In it, this message translates to:
-  /// **'Ricette'**
-  String get navRecipes;
 
   /// No description provided for @rankApprentice.
   ///
@@ -590,12 +572,6 @@ abstract class AppLocalizations {
   /// **'Maestria raggiunta!'**
   String get summaryMastery;
 
-  /// No description provided for @summaryRecipeUnlocked.
-  ///
-  /// In it, this message translates to:
-  /// **'Ricetta sbloccata: {recipe}'**
-  String summaryRecipeUnlocked(String recipe);
-
   /// No description provided for @summaryNewFunFacts.
   ///
   /// In it, this message translates to:
@@ -737,7 +713,7 @@ abstract class AppLocalizations {
   /// No description provided for @reviewsNone.
   ///
   /// In it, this message translates to:
-  /// **'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.'**
+  /// **'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.'**
   String get reviewsNone;
 
   /// No description provided for @reviewsStart.
@@ -752,16 +728,10 @@ abstract class AppLocalizations {
   /// **'Desiderata'**
   String get desiderataTitle;
 
-  /// No description provided for @desiderataCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{count} su {max}'**
-  String desiderataCount(int count, int max);
-
   /// No description provided for @desiderataEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.'**
+  /// **'Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.'**
   String get desiderataEmpty;
 
   /// No description provided for @desiderataSuggestions.
@@ -805,12 +775,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Togli dalle Desiderata'**
   String get desiderataRemove;
-
-  /// No description provided for @desiderataFull.
-  ///
-  /// In it, this message translates to:
-  /// **'Hai già 3 Desiderata: completane o togline una.'**
-  String get desiderataFull;
 
   /// No description provided for @desiderataWhere.
   ///
@@ -1022,35 +986,11 @@ abstract class AppLocalizations {
   /// **'Ricette'**
   String get recipesTitle;
 
-  /// No description provided for @recipeUnlocked.
-  ///
-  /// In it, this message translates to:
-  /// **'Imparata'**
-  String get recipeUnlocked;
-
-  /// No description provided for @recipeLocked.
-  ///
-  /// In it, this message translates to:
-  /// **'Da imparare'**
-  String get recipeLocked;
-
-  /// No description provided for @recipeKnownIngredients.
-  ///
-  /// In it, this message translates to:
-  /// **'Ingredienti già Incontrati {known}/{total}'**
-  String recipeKnownIngredients(int known, int total);
-
   /// No description provided for @recipeAnySpecies.
   ///
   /// In it, this message translates to:
   /// **'qualsiasi specie'**
   String get recipeAnySpecies;
-
-  /// No description provided for @recipeCurrentLevel.
-  ///
-  /// In it, this message translates to:
-  /// **'ora: Livello {level}'**
-  String recipeCurrentLevel(int level);
 
   /// No description provided for @erbarioPages.
   ///
@@ -1075,18 +1015,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.'**
   String get missionVisitErbarioBody;
-
-  /// No description provided for @missionMarkDesiderataTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli le tue Desiderata'**
-  String get missionMarkDesiderataTitle;
-
-  /// No description provided for @missionMarkDesiderataBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.'**
-  String get missionMarkDesiderataBody;
 
   /// No description provided for @missionFirstEncounterTitle.
   ///
@@ -1121,7 +1049,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstRecipeBody.
   ///
   /// In it, this message translates to:
-  /// **'Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.'**
+  /// **'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.'**
   String get missionFirstRecipeBody;
 
   /// No description provided for @missionSkip.
@@ -1136,12 +1064,6 @@ abstract class AppLocalizations {
   /// **'Apri l\'Erbario'**
   String get missionActionOpenErbario;
 
-  /// No description provided for @missionActionChooseDesiderata.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli nell\'Erbario'**
-  String get missionActionChooseDesiderata;
-
   /// No description provided for @missionActionStudy.
   ///
   /// In it, this message translates to:
@@ -1151,7 +1073,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionActionRecipes.
   ///
   /// In it, this message translates to:
-  /// **'Vedi le Ricette'**
+  /// **'Apri il Ricettario'**
   String get missionActionRecipes;
 
   /// No description provided for @missionGlossary.
@@ -1742,12 +1664,6 @@ abstract class AppLocalizations {
   /// **'Hai imparato una Ricetta: {name}'**
   String summaryRecipeLearned(String name);
 
-  /// No description provided for @recipeLearnByStudying.
-  ///
-  /// In it, this message translates to:
-  /// **'Si impara studiando: {species}'**
-  String recipeLearnByStudying(String species);
-
   /// No description provided for @debugGradePreview.
   ///
   /// In it, this message translates to:
@@ -1783,18 +1699,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Specie Protetta'**
   String get badgeProtected;
-
-  /// No description provided for @recipesCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{learned} di {total}'**
-  String recipesCount(int learned, int total);
-
-  /// No description provided for @recipeIngredientCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{count, plural, =1{1 Ingrediente} other{{count} Ingredienti}}'**
-  String recipeIngredientCount(num count);
 
   /// No description provided for @legendTitle.
   ///
@@ -1919,25 +1823,13 @@ abstract class AppLocalizations {
   /// No description provided for @glossBottinoText.
   ///
   /// In it, this message translates to:
-  /// **'Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).'**
+  /// **'Il Bottino che si compra con i PE: scegli il grado e spendi il saldo; dentro c\'è una Tavola a sorpresa, spesso incompleta, o un componente di una che hai. Le Mitiche escono solo dal Bottino mitico.'**
   String get glossBottinoText;
-
-  /// No description provided for @glossFigurinaTerm.
-  ///
-  /// In it, this message translates to:
-  /// **'Figurina'**
-  String get glossFigurinaTerm;
-
-  /// No description provided for @glossFigurinaText.
-  ///
-  /// In it, this message translates to:
-  /// **'Una Ricetta o una Pozione nell\'Album. L\'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.'**
-  String get glossFigurinaText;
 
   /// No description provided for @recipesEmpty.
   ///
   /// In it, this message translates to:
-  /// **'Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall\'Erbario.'**
+  /// **'Non conosci ancora nessuna Ricetta. Ogni pianta ha la sua Ricetta Comune: la impari superando il Livello 1 della specie, dalla Home o dall\'Erbario.'**
   String get recipesEmpty;
 
   /// No description provided for @viewAll.
@@ -2161,6 +2053,954 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.'**
   String get traitWhenWaningMoon;
+
+  /// No description provided for @recipeBookTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricettario'**
+  String get recipeBookTitle;
+
+  /// No description provided for @recipeBookPlates.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Tavola} other{{count} Tavole}}'**
+  String recipeBookPlates(int count);
+
+  /// No description provided for @recipeBookPagesSummary.
+  ///
+  /// In it, this message translates to:
+  /// **'{pages, plural, =1{1 Pagina} other{{pages} Pagine}} su {total} · {complete, plural, =1{1 completa} other{{complete} complete}}'**
+  String recipeBookPagesSummary(int pages, int total, int complete);
+
+  /// No description provided for @recipeBookPageCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}'**
+  String recipeBookPageCount(int known, int total);
+
+  /// No description provided for @recipeBookFavouredTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Tratti d\'elezione'**
+  String get recipeBookFavouredTraits;
+
+  /// No description provided for @recipeBookVocation.
+  ///
+  /// In it, this message translates to:
+  /// **'Vocazione'**
+  String get recipeBookVocation;
+
+  /// No description provided for @recipeBookMissingPlate.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola da trovare'**
+  String get recipeBookMissingPlate;
+
+  /// No description provided for @recipeBookSwipeHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Scorri per sfogliare le Pagine'**
+  String get recipeBookSwipeHint;
+
+  /// No description provided for @recipeBookSpeciesLink.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricettario · {known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}'**
+  String recipeBookSpeciesLink(int known, int total);
+
+  /// No description provided for @recipeMonths.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando si può fare'**
+  String get recipeMonths;
+
+  /// No description provided for @recipeNever.
+  ///
+  /// In it, this message translates to:
+  /// **'Mai: gli ingredienti non si incontrano negli stessi mesi'**
+  String get recipeNever;
+
+  /// No description provided for @recipeEffect.
+  ///
+  /// In it, this message translates to:
+  /// **'Effetto'**
+  String get recipeEffect;
+
+  /// No description provided for @effectRegrowth.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricrescita'**
+  String get effectRegrowth;
+
+  /// No description provided for @effectClarity.
+  ///
+  /// In it, this message translates to:
+  /// **'Limpidezza'**
+  String get effectClarity;
+
+  /// No description provided for @effectOmen.
+  ///
+  /// In it, this message translates to:
+  /// **'Presagio'**
+  String get effectOmen;
+
+  /// No description provided for @effectAbundance.
+  ///
+  /// In it, this message translates to:
+  /// **'Abbondanza'**
+  String get effectAbundance;
+
+  /// No description provided for @effectRegrowthText.
+  ///
+  /// In it, this message translates to:
+  /// **'Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).'**
+  String get effectRegrowthText;
+
+  /// No description provided for @effectClarityText.
+  ///
+  /// In it, this message translates to:
+  /// **'Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).'**
+  String get effectClarityText;
+
+  /// No description provided for @effectOmenText.
+  ///
+  /// In it, this message translates to:
+  /// **'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).'**
+  String get effectOmenText;
+
+  /// No description provided for @effectAbundanceText.
+  ///
+  /// In it, this message translates to:
+  /// **'Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).'**
+  String get effectAbundanceText;
+
+  /// No description provided for @mythicNumber.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola n. {number}'**
+  String mythicNumber(String number);
+
+  /// No description provided for @mythicToFind.
+  ///
+  /// In it, this message translates to:
+  /// **'Da trovare'**
+  String get mythicToFind;
+
+  /// No description provided for @mythicWindow.
+  ///
+  /// In it, this message translates to:
+  /// **'Solo dal {from} al {to}'**
+  String mythicWindow(String from, String to);
+
+  /// No description provided for @mythicAllYear.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutto l\'anno'**
+  String get mythicAllYear;
+
+  /// No description provided for @mythicsIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano solo nel Bottino dell\'Esperienza mitico.'**
+  String get mythicsIntro;
+
+  /// No description provided for @recipeBookMythicsRow.
+  ///
+  /// In it, this message translates to:
+  /// **'Mitiche · {zone}'**
+  String recipeBookMythicsRow(String zone);
+
+  /// No description provided for @recipeBookMythicsCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{known} su {total}'**
+  String recipeBookMythicsCount(int known, int total);
+
+  /// No description provided for @debugSimulateRecipeBook.
+  ///
+  /// In it, this message translates to:
+  /// **'Simula un Ricettario'**
+  String get debugSimulateRecipeBook;
+
+  /// No description provided for @debugSimulateRecipeBookDone.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Tavola aggiunta} other{{count} Tavole aggiunte}} al Ricettario'**
+  String debugSimulateRecipeBookDone(int count);
+
+  /// No description provided for @troveTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino dell\'Esperienza'**
+  String get troveTitle;
+
+  /// No description provided for @navTrove.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino'**
+  String get navTrove;
+
+  /// No description provided for @labBalance.
+  ///
+  /// In it, this message translates to:
+  /// **'Saldo'**
+  String get labBalance;
+
+  /// No description provided for @labBalanceXp.
+  ///
+  /// In it, this message translates to:
+  /// **'{xp} PE da spendere'**
+  String labBalanceXp(int xp);
+
+  /// No description provided for @labTrovesLeft.
+  ///
+  /// In it, this message translates to:
+  /// **'{left} su {total} oggi'**
+  String labTrovesLeft(int left, int total);
+
+  /// No description provided for @troveName.
+  ///
+  /// In it, this message translates to:
+  /// **'Bottino dell\'Esperienza · {grade}'**
+  String troveName(String grade);
+
+  /// No description provided for @troveGradeCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'comune'**
+  String get troveGradeCommon;
+
+  /// No description provided for @troveGradeUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'non comune'**
+  String get troveGradeUncommon;
+
+  /// No description provided for @troveGradeRare.
+  ///
+  /// In it, this message translates to:
+  /// **'raro'**
+  String get troveGradeRare;
+
+  /// No description provided for @troveGradeMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'mitico'**
+  String get troveGradeMythic;
+
+  /// No description provided for @troveContentsCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Quasi sempre una Comune, a volte una Non comune'**
+  String get troveContentsCommon;
+
+  /// No description provided for @troveContentsUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'Per lo più Non comuni, a volte una Comune o una Rara'**
+  String get troveContentsUncommon;
+
+  /// No description provided for @troveContentsRare.
+  ///
+  /// In it, this message translates to:
+  /// **'Per lo più Rare, a volte una Non comune'**
+  String get troveContentsRare;
+
+  /// No description provided for @troveContentsMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'Una Rara o una Mitica, metà e metà'**
+  String get troveContentsMythic;
+
+  /// No description provided for @troveSpend.
+  ///
+  /// In it, this message translates to:
+  /// **'Spendi {cost} PE'**
+  String troveSpend(int cost);
+
+  /// No description provided for @troveNeedXp.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti mancano {xp} PE'**
+  String troveNeedXp(int xp);
+
+  /// No description provided for @troveCostMissing.
+  ///
+  /// In it, this message translates to:
+  /// **'Costa {cost} PE: te ne mancano {xp}'**
+  String troveCostMissing(int cost, int xp);
+
+  /// No description provided for @troveDailyLimit.
+  ///
+  /// In it, this message translates to:
+  /// **'Per oggi basta: {total} Bottino dell\'Esperienza al giorno. Torna domani.'**
+  String troveDailyLimit(int total);
+
+  /// No description provided for @troveRules.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo comune e al primo non comune, in regalo una Tavola del grado sopra. Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.'**
+  String get troveRules;
+
+  /// No description provided for @labIncomplete.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Tavola incompleta} other{{count} Tavole incomplete}}'**
+  String labIncomplete(int count);
+
+  /// No description provided for @labRecycled.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 riciclato} other{{count} riciclati}}'**
+  String labRecycled(int count);
+
+  /// No description provided for @welcomeGiftTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Ehi, c\'è un regalo per te'**
+  String get welcomeGiftTitle;
+
+  /// No description provided for @welcomeGiftBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tuo primo Bottino dell\'Esperienza · raro a prezzo di favore: {price} PE invece di {full}.'**
+  String welcomeGiftBody(int full, int price);
+
+  /// No description provided for @welcomeGiftWaiting.
+  ///
+  /// In it, this message translates to:
+  /// **'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.'**
+  String get welcomeGiftWaiting;
+
+  /// No description provided for @welcomeGiftRedeem.
+  ///
+  /// In it, this message translates to:
+  /// **'Riscatta · {price} PE'**
+  String welcomeGiftRedeem(int price);
+
+  /// No description provided for @troveTapToTurn.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca le Tavole per girarle'**
+  String get troveTapToTurn;
+
+  /// No description provided for @troveFindNew.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuova Tavola'**
+  String get troveFindNew;
+
+  /// No description provided for @troveFindIncomplete.
+  ///
+  /// In it, this message translates to:
+  /// **'Nuova Tavola · {count, plural, =1{manca 1 componente} other{mancano {count} componenti}}'**
+  String troveFindIncomplete(int count);
+
+  /// No description provided for @troveFindPiece.
+  ///
+  /// In it, this message translates to:
+  /// **'Un componente trovato'**
+  String get troveFindPiece;
+
+  /// No description provided for @troveFindCompleted.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola completata'**
+  String get troveFindCompleted;
+
+  /// No description provided for @troveFindRecycled.
+  ///
+  /// In it, this message translates to:
+  /// **'Doppione: 1 riciclato {grade}'**
+  String troveFindRecycled(String grade);
+
+  /// No description provided for @troveFindTaste.
+  ///
+  /// In it, this message translates to:
+  /// **'Assaggio del grado sopra'**
+  String get troveFindTaste;
+
+  /// No description provided for @troveNothing.
+  ///
+  /// In it, this message translates to:
+  /// **'Questa volta non è uscito niente di nuovo.'**
+  String get troveNothing;
+
+  /// No description provided for @troveDone.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto'**
+  String get troveDone;
+
+  /// No description provided for @recipeMissingPieces.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Manca 1 componente} other{Mancano {count} componenti}}'**
+  String recipeMissingPieces(int count);
+
+  /// No description provided for @recipeEffectUnknown.
+  ///
+  /// In it, this message translates to:
+  /// **'Da scoprire: manca un componente del nome.'**
+  String get recipeEffectUnknown;
+
+  /// No description provided for @debugGrantXp.
+  ///
+  /// In it, this message translates to:
+  /// **'Aggiungi 5.000 PE'**
+  String get debugGrantXp;
+
+  /// No description provided for @recycleTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Riciclo'**
+  String get recycleTitle;
+
+  /// No description provided for @recycleIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni doppione è un riciclato del suo grado. 3 riciclati fanno un componente dello stesso grado, 9 uno del grado sopra, per una Tavola incompleta a tua scelta. Costa un po\' di Vis.'**
+  String get recycleIntro;
+
+  /// No description provided for @recycleVis.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis da spendere'**
+  String recycleVis(int vis);
+
+  /// No description provided for @recycleUse.
+  ///
+  /// In it, this message translates to:
+  /// **'{count} riciclati {grade} · {vis} Vis'**
+  String recycleUse(int count, String grade, int vis);
+
+  /// No description provided for @recycleNeedVis.
+  ///
+  /// In it, this message translates to:
+  /// **'Servono {vis} Vis'**
+  String recycleNeedVis(int vis);
+
+  /// No description provided for @recycleNothing.
+  ///
+  /// In it, this message translates to:
+  /// **'Con i riciclati che hai non completi ancora nessun componente.'**
+  String get recycleNothing;
+
+  /// No description provided for @recycleDone.
+  ///
+  /// In it, this message translates to:
+  /// **'Componente aggiunto: {name}'**
+  String recycleDone(String name);
+
+  /// No description provided for @recycleCompleted.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola completata: {name}'**
+  String recycleCompleted(String name);
+
+  /// No description provided for @recycledGradeCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'comuni'**
+  String get recycledGradeCommon;
+
+  /// No description provided for @recycledGradeUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'non comuni'**
+  String get recycledGradeUncommon;
+
+  /// No description provided for @recycledGradeRare.
+  ///
+  /// In it, this message translates to:
+  /// **'rari'**
+  String get recycledGradeRare;
+
+  /// No description provided for @recycledGradeMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'mitici'**
+  String get recycledGradeMythic;
+
+  /// No description provided for @labTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get labTitle;
+
+  /// No description provided for @navLaboratory.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get navLaboratory;
+
+  /// No description provided for @pantryTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispensa'**
+  String get pantryTitle;
+
+  /// No description provided for @pantryEssences.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Essenza} other{{count} Essenze}}'**
+  String pantryEssences(int count);
+
+  /// No description provided for @pantrySpeciesSummary.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Essenza} other{{count} Essenze}} · {vis} Vis'**
+  String pantrySpeciesSummary(int count, int vis);
+
+  /// No description provided for @pantryPurity.
+  ///
+  /// In it, this message translates to:
+  /// **'Purezza {percent} %'**
+  String pantryPurity(int percent);
+
+  /// No description provided for @pantryVis.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis'**
+  String pantryVis(int vis);
+
+  /// No description provided for @pantryNoTraits.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessun tratto'**
+  String get pantryNoTraits;
+
+  /// No description provided for @pantryEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.'**
+  String get pantryEmpty;
+
+  /// No description provided for @debugSimulatePantry.
+  ///
+  /// In it, this message translates to:
+  /// **'Simula una Dispensa'**
+  String get debugSimulatePantry;
+
+  /// No description provided for @debugSimulatePantryDone.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa'**
+  String debugSimulatePantryDone(int count);
+
+  /// No description provided for @labTabReady.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricette pronte'**
+  String get labTabReady;
+
+  /// No description provided for @labTabShelf.
+  ///
+  /// In it, this message translates to:
+  /// **'Scaffale'**
+  String get labTabShelf;
+
+  /// No description provided for @readyCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 pronta} other{{count} pronte}}'**
+  String readyCount(int count);
+
+  /// No description provided for @shelfCount.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{1 pozione} other{{count} pozioni}}'**
+  String shelfCount(int count);
+
+  /// No description provided for @readySection.
+  ///
+  /// In it, this message translates to:
+  /// **'Pronte da preparare'**
+  String get readySection;
+
+  /// No description provided for @readyAlmost.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti manca poco'**
+  String get readyAlmost;
+
+  /// No description provided for @readyOthers.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Un\'altra ricetta chiede} other{Altre {count} ricette chiedono}} più Essenze: le trovi nel Ricettario.'**
+  String readyOthers(int count);
+
+  /// No description provided for @readyEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.'**
+  String get readyEmpty;
+
+  /// No description provided for @readyAnyPlant.
+  ///
+  /// In it, this message translates to:
+  /// **'una pianta a scelta'**
+  String get readyAnyPlant;
+
+  /// No description provided for @brewButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Prepara'**
+  String get brewButton;
+
+  /// No description provided for @brewChooseFree.
+  ///
+  /// In it, this message translates to:
+  /// **'Scegli la pianta dello slot libero'**
+  String get brewChooseFree;
+
+  /// No description provided for @brewChooseFreeHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Dà alla pozione il suo Tocco.'**
+  String get brewChooseFreeHint;
+
+  /// No description provided for @brewFreeOption.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis'**
+  String brewFreeOption(int vis);
+
+  /// No description provided for @potionTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozione'**
+  String get potionTitle;
+
+  /// No description provided for @potionPotency.
+  ///
+  /// In it, this message translates to:
+  /// **'Potenza {potency}'**
+  String potionPotency(int potency);
+
+  /// No description provided for @potionTouch.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocco: {touch}'**
+  String potionTouch(String touch);
+
+  /// No description provided for @potionFirstBonus.
+  ///
+  /// In it, this message translates to:
+  /// **'Prima pozione di questa ricetta: +{xp} PE'**
+  String potionFirstBonus(int xp);
+
+  /// No description provided for @potionSpoiledTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La pozione si è guastata'**
+  String get potionSpoiledTitle;
+
+  /// No description provided for @potionSpoiledText.
+  ///
+  /// In it, this message translates to:
+  /// **'{name}: pianta tossica. In una ricetta da bere guasta la pozione: le Vis sono perse, ma ora lo sai.'**
+  String potionSpoiledText(String name);
+
+  /// No description provided for @shelfEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Lo Scaffale è vuoto: le pozioni che prepari restano qui.'**
+  String get shelfEmpty;
+
+  /// No description provided for @recipeBestPotency.
+  ///
+  /// In it, this message translates to:
+  /// **'Potenza migliore: {potency}'**
+  String recipeBestPotency(int potency);
+
+  /// No description provided for @readyMissingVis.
+  ///
+  /// In it, this message translates to:
+  /// **'Ti mancano {vis} Vis'**
+  String readyMissingVis(int vis);
+
+  /// No description provided for @shelfUse.
+  ///
+  /// In it, this message translates to:
+  /// **'Usa'**
+  String get shelfUse;
+
+  /// No description provided for @shelfHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Tienila per la collezione o usala: l\'effetto vale 7 giorni, con la forza della sua potenza; il Tocco aggiunge un piccolo effetto in più.'**
+  String get shelfHint;
+
+  /// No description provided for @shelfActive.
+  ///
+  /// In it, this message translates to:
+  /// **'Effetti in corso'**
+  String get shelfActive;
+
+  /// No description provided for @shelfActiveLine.
+  ///
+  /// In it, this message translates to:
+  /// **'{effect} · forza {strength} · fino al {date}'**
+  String shelfActiveLine(String effect, int strength, String date);
+
+  /// No description provided for @shelfUsed.
+  ///
+  /// In it, this message translates to:
+  /// **'{effect} per 7 giorni'**
+  String shelfUsed(String effect);
+
+  /// No description provided for @glossTavolaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola'**
+  String get glossTavolaTerm;
+
+  /// No description provided for @glossTavolaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una ricetta nel Ricettario, come le tavole illustrate degli erbari: \"1 Tavola su 3\". Nella Pagina di una pianta le Tavole che non hai sono slot vuoti con il cerchietto del grado.'**
+  String get glossTavolaText;
+
+  /// No description provided for @glossLaboratorioTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Laboratorio'**
+  String get glossLaboratorioTerm;
+
+  /// No description provided for @glossLaboratorioText.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.'**
+  String get glossLaboratorioText;
+
+  /// No description provided for @glossRicettarioTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricettario'**
+  String get glossRicettarioTerm;
+
+  /// No description provided for @glossRicettarioText.
+  ///
+  /// In it, this message translates to:
+  /// **'La collezione delle Tavole, una per paese: una Pagina per pianta e, in cima, le Mitiche della Zona, numerate.'**
+  String get glossRicettarioText;
+
+  /// No description provided for @glossComponenteTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Componente'**
+  String get glossComponenteTerm;
+
+  /// No description provided for @glossComponenteText.
+  ///
+  /// In it, this message translates to:
+  /// **'Un pezzo del nome di una Tavola incompleta (\"Tintura di Eranthis Brinata del…\"): le Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza con dei componenti da trovare.'**
+  String get glossComponenteText;
+
+  /// No description provided for @glossRiciclatoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Riciclato'**
+  String get glossRiciclatoTerm;
+
+  /// No description provided for @glossRiciclatoText.
+  ///
+  /// In it, this message translates to:
+  /// **'Un doppione uscito dal Bottino dell\'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po\' di Vis.'**
+  String get glossRiciclatoText;
+
+  /// No description provided for @glossDispensaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Dispensa'**
+  String get glossDispensaTerm;
+
+  /// No description provided for @glossDispensaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.'**
+  String get glossDispensaText;
+
+  /// No description provided for @glossRicettePronteTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Ricette pronte'**
+  String get glossRicettePronteTerm;
+
+  /// No description provided for @glossRicettePronteText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.'**
+  String get glossRicettePronteText;
+
+  /// No description provided for @glossPozioneTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozione'**
+  String get glossPozioneTerm;
+
+  /// No description provided for @glossPozioneText.
+  ///
+  /// In it, this message translates to:
+  /// **'Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.'**
+  String get glossPozioneText;
+
+  /// No description provided for @glossToccoTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocco'**
+  String get glossToccoTerm;
+
+  /// No description provided for @glossToccoText.
+  ///
+  /// In it, this message translates to:
+  /// **'L\'aggettivo che la pianta dello slot libero dà alla pozione (Rigogliosa, Limpida, Presaga, Copiosa): quando la usi, aggiunge un piccolo effetto.'**
+  String get glossToccoText;
+
+  /// No description provided for @glossPozioneGuastataTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozione guastata'**
+  String get glossPozioneGuastataTerm;
+
+  /// No description provided for @glossPozioneGuastataText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una pozione da bere con una pianta tossica nello slot libero: le Vis sono perse, ma impari che la pianta è tossica.'**
+  String get glossPozioneGuastataText;
+
+  /// No description provided for @glossScaffaleTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Scaffale'**
+  String get glossScaffaleTerm;
+
+  /// No description provided for @glossScaffaleText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le pozioni che hai: tienile per la collezione o usale. L\'effetto vale 7 giorni, con la forza della potenza.'**
+  String get glossScaffaleText;
+
+  /// No description provided for @legendPotions.
+  ///
+  /// In it, this message translates to:
+  /// **'Pozioni'**
+  String get legendPotions;
+
+  /// No description provided for @legendVessel.
+  ///
+  /// In it, this message translates to:
+  /// **'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.'**
+  String get legendVessel;
+
+  /// No description provided for @viewMet.
+  ///
+  /// In it, this message translates to:
+  /// **'Incontrate'**
+  String get viewMet;
+
+  /// No description provided for @erbarioSpecies.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie'**
+  String get erbarioSpecies;
+
+  /// No description provided for @tipOfDayTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Consiglio del giorno'**
+  String get tipOfDayTitle;
+
+  /// No description provided for @tip01.
+  ///
+  /// In it, this message translates to:
+  /// **'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.'**
+  String get tip01;
+
+  /// No description provided for @tip02.
+  ///
+  /// In it, this message translates to:
+  /// **'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.'**
+  String get tip02;
+
+  /// No description provided for @tip03.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.'**
+  String get tip03;
+
+  /// No description provided for @tip04.
+  ///
+  /// In it, this message translates to:
+  /// **'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.'**
+  String get tip04;
+
+  /// No description provided for @tip05.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.'**
+  String get tip05;
+
+  /// No description provided for @tip06.
+  ///
+  /// In it, this message translates to:
+  /// **'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.'**
+  String get tip06;
+
+  /// No description provided for @tip07.
+  ///
+  /// In it, this message translates to:
+  /// **'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.'**
+  String get tip07;
+
+  /// No description provided for @tip08.
+  ///
+  /// In it, this message translates to:
+  /// **'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.'**
+  String get tip08;
+
+  /// No description provided for @tip09.
+  ///
+  /// In it, this message translates to:
+  /// **'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.'**
+  String get tip09;
+
+  /// No description provided for @tip10.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.'**
+  String get tip10;
+
+  /// No description provided for @tip11.
+  ///
+  /// In it, this message translates to:
+  /// **'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.'**
+  String get tip11;
+
+  /// No description provided for @tip12.
+  ///
+  /// In it, this message translates to:
+  /// **'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.'**
+  String get tip12;
+
+  /// No description provided for @tip13.
+  ///
+  /// In it, this message translates to:
+  /// **'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.'**
+  String get tip13;
+
+  /// No description provided for @tip14.
+  ///
+  /// In it, this message translates to:
+  /// **'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.'**
+  String get tip14;
+
+  /// No description provided for @tip15.
+  ///
+  /// In it, this message translates to:
+  /// **'\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.'**
+  String get tip15;
 }
 
 class _AppLocalizationsDelegate

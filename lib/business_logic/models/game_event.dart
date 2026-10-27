@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
+
 /// Come è avvenuto l'incontro con una specie.
 enum EncounterMethod {
   /// Pulsante di debug: nessuna foto, nessuna posizione.
@@ -15,11 +18,12 @@ enum EncounterMethod {
 /// Modalità di una risposta: apprendimento di un livello o ripasso a distanza di giorni.
 enum AnswerMode { learning, review }
 
-/// Da dove arriva una ricetta imparata: dallo studio (le comuni) o dal Bottino dell'Esperienza (tappa C).
+/// Da dove arriva una ricetta imparata: dallo studio (la Comune di una pianta) o dal Bottino dell'Esperienza.
 enum RecipeOrigin { study, trove }
 
-/// Passi dell'onboarding che non si deducono dallo stato di gioco.
-enum OnboardingMark { erbarioVisited, skipped }
+/// Passi dell'onboarding che non si deducono dallo stato di gioco. [albumVisited] è il Ricettario aperto (si chiamava
+/// Album: il nome è salvato negli eventi e non si rinomina).
+enum OnboardingMark { erbarioVisited, albumVisited, skipped }
 
 /// Evento di gioco. Si salvano solo eventi: livelli, PE ed erbario si ricalcolano rileggendoli
 /// (vedi `GameState.replay`). È lo stesso formato che un giorno verrà inviato al server.
@@ -72,6 +76,8 @@ sealed class GameEvent {
         simulated: d['simulated'] as bool,
         // Assenti negli eventi salvati prima dello step 4 della tappa B.
         vis: d['vis'] as int? ?? 0,
+        // Assente prima della Dispensa (step 7 della tappa C): la si ricava dal livello di studio di allora.
+        purity: (d['purity'] as num?)?.toDouble(),
         xp: d['xp'] as int? ?? 0,
         occurredAt: occurredAt,
       ),
@@ -97,6 +103,39 @@ sealed class GameEvent {
         origin: RecipeOrigin.values.byName(d['origin'] as String),
         occurredAt: occurredAt,
       ),
+      TroveOpened.typeId => TroveOpened(
+        grade: Grade.values.byName(d['grade'] as String),
+        price: d['price'] as int,
+        gift: d['gift'] as bool? ?? false,
+        finds: [for (final f in d['finds'] as List) TroveFind.fromJson(f as Map<String, dynamic>)],
+        occurredAt: occurredAt,
+      ),
+      WelcomeGiftOffered.typeId => WelcomeGiftOffered(occurredAt: occurredAt),
+      PotionBrewed.typeId => PotionBrewed(
+        recipeId: d['recipe'] as String,
+        essences: (d['essences'] as Map<String, dynamic>).map((i, vis) => MapEntry(int.parse(i), vis as int)),
+        potency: d['potency'] as int,
+        touch: d['touch'] == null ? null : PotionEffect.values.byName(d['touch'] as String),
+        freeSpecies: d['freeSpecies'] as String?,
+        spoiled: d['spoiled'] as bool? ?? false,
+        xp: d['xp'] as int,
+        occurredAt: occurredAt,
+      ),
+      PotionUsed.typeId => PotionUsed(
+        potionIndex: d['potion'] as int,
+        effect: PotionEffect.values.byName(d['effect'] as String),
+        strength: d['strength'] as int,
+        touch: d['touch'] == null ? null : PotionEffect.values.byName(d['touch'] as String),
+        occurredAt: occurredAt,
+      ),
+      RecipeRecycled.typeId => RecipeRecycled(
+        recipeId: d['recipe'] as String,
+        fromGrade: Grade.values.byName(d['fromGrade'] as String),
+        used: d['used'] as int,
+        vis: (d['vis'] as Map<String, dynamic>).map((sci, amount) => MapEntry(sci, amount as int)),
+        occurredAt: occurredAt,
+      ),
+      XpGranted.typeId => XpGranted(xp: d['xp'] as int, reason: d['reason'] as String, occurredAt: occurredAt),
       OnboardingMarked.typeId => OnboardingMarked(
         mark: OnboardingMark.values.byName(d['mark'] as String),
         occurredAt: occurredAt,
@@ -195,6 +234,10 @@ class EssenceDrawn extends GameEvent {
 
   /// Unità di Vis ("la linfa sottile delle piante") immagazzinate con questa raccolta.
   final int vis;
+
+  /// Purezza dell'Essenza, dal livello di studio della specie in quel momento; `null` negli eventi di prima della
+  /// Dispensa.
+  final double? purity;
   @override
   final int xp;
 
@@ -203,6 +246,7 @@ class EssenceDrawn extends GameEvent {
     this.traits = const [],
     required this.simulated,
     this.vis = 0,
+    this.purity,
     this.xp = 0,
     required super.occurredAt,
   });
@@ -216,6 +260,7 @@ class EssenceDrawn extends GameEvent {
     'traits': traits,
     'simulated': simulated,
     'vis': vis,
+    'purity': ?purity,
     'xp': xp,
   };
 }
@@ -307,7 +352,8 @@ class OnboardingMarked extends GameEvent {
   Map<String, dynamic> payload() => {'mark': mark.name};
 }
 
-/// Ricetta imparata: si sa farla. Il caso (quale tra le ricette possibili) si salva qui, non si ricalcola.
+/// Ricetta imparata: si sa farla. Studiando, la Comune della pianta; dal Bottino, quella uscita (il caso si salva qui,
+/// non si ricalcola).
 class RecipeLearned extends GameEvent {
   static const typeId = 'recipe_learned';
   final String recipeId;
@@ -320,4 +366,209 @@ class RecipeLearned extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'recipe': recipeId, 'origin': origin.name};
+}
+
+/// Che cosa è una cosa uscita da un Bottino dell'Esperienza.
+enum TroveFindKind {
+  /// Una Tavola nuova: completa (le Comuni) o con dei pezzi del nome da trovare.
+  recipe,
+
+  /// Un pezzo del nome di una Tavola incompleta che hai.
+  piece,
+
+  /// Un doppione (Tavola che hai già, anche incompleta): diventa un riciclato del suo grado.
+  recycled,
+}
+
+/// Una cosa uscita da un Bottino. Porta con sé il grado e i pezzi mancanti: lo stato del gioco non conosce il
+/// catalogo, e il caso non si ricalcola.
+class TroveFind {
+  final String recipeId;
+  final Grade grade;
+  final TroveFindKind kind;
+
+  /// Pezzi del nome che mancano alla Tavola nuova (0 = completa); per pezzi e doppioni 0.
+  final int missing;
+
+  /// L'assaggio del grado sopra: al primo Bottino di un grado, una Tavola del grado successivo.
+  final bool taste;
+
+  const TroveFind({
+    required this.recipeId,
+    required this.grade,
+    required this.kind,
+    this.missing = 0,
+    this.taste = false,
+  });
+
+  factory TroveFind.fromJson(Map<String, dynamic> json) => TroveFind(
+    recipeId: json['recipe'] as String,
+    grade: Grade.values.byName(json['grade'] as String),
+    kind: TroveFindKind.values.byName(json['kind'] as String),
+    missing: json['missing'] as int? ?? 0,
+    taste: json['taste'] as bool? ?? false,
+  );
+
+  Map<String, dynamic> toJson() => {
+    'recipe': recipeId,
+    'grade': grade.name,
+    'kind': kind.name,
+    'missing': missing,
+    'taste': taste,
+  };
+}
+
+/// Bottino dell'Esperienza comprato e aperto: il saldo cala di [price], e quel che è uscito si salva qui.
+class TroveOpened extends GameEvent {
+  static const typeId = 'trove_opened';
+  final Grade grade;
+  final int price;
+
+  /// Comprato con il regalo "bentornato", a prezzo di favore.
+  final bool gift;
+  final List<TroveFind> finds;
+
+  const TroveOpened({
+    required this.grade,
+    required this.price,
+    this.gift = false,
+    required this.finds,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'grade': grade.name,
+    'price': price,
+    'gift': gift,
+    'finds': [for (final f in finds) f.toJson()],
+  };
+}
+
+/// "Ehi, c'è un regalo per te": il primo Bottino raro a prezzo di favore è stato offerto. Si riscatta dopo
+/// un'Essenza attinta da quel momento.
+class WelcomeGiftOffered extends GameEvent {
+  static const typeId = 'welcome_gift_offered';
+
+  const WelcomeGiftOffered({required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {};
+}
+
+/// PE dati fuori dal gioco: oggi solo dagli strumenti di prova ([reason] `debug`).
+class XpGranted extends GameEvent {
+  static const typeId = 'xp_granted';
+  @override
+  final int xp;
+  final String reason;
+
+  const XpGranted({required this.xp, required this.reason, required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'xp': xp, 'reason': reason};
+}
+
+/// Riciclo: [used] riciclati di [fromGrade] e un po' di Vis diventano un componente della Tavola incompleta
+/// [recipeId] (dello stesso grado con 3, del grado sopra con 9). Le Vis spese si salvano per specie.
+class RecipeRecycled extends GameEvent {
+  static const typeId = 'recipe_recycled';
+  final String recipeId;
+  final Grade fromGrade;
+  final int used;
+  final Map<String, int> vis;
+
+  const RecipeRecycled({
+    required this.recipeId,
+    required this.fromGrade,
+    required this.used,
+    required this.vis,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'recipe': recipeId, 'fromGrade': fromGrade.name, 'used': used, 'vis': vis};
+}
+
+/// Pozione preparata: le Vis prese dalle Essenze (per indice), la potenza, il Tocco e i PE, calcolati al momento. Con
+/// [spoiled] la pozione si è guastata (una pianta tossica, [freeSpecies], nello slot libero di una ricetta da bere):
+/// le Vis sono perse, niente pozione, e si impara che la pianta è tossica.
+class PotionBrewed extends GameEvent {
+  static const typeId = 'potion_brewed';
+  final String recipeId;
+  final Map<int, int> essences;
+  final int potency;
+  final PotionEffect? touch;
+  final String? freeSpecies;
+  final bool spoiled;
+  @override
+  final int xp;
+
+  const PotionBrewed({
+    required this.recipeId,
+    required this.essences,
+    required this.potency,
+    this.touch,
+    this.freeSpecies,
+    this.spoiled = false,
+    required this.xp,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'recipe': recipeId,
+    'essences': {for (final MapEntry(key: i, value: vis) in essences.entries) '$i': vis},
+    'potency': potency,
+    'touch': touch?.name,
+    'freeSpecies': freeSpecies,
+    'spoiled': spoiled,
+    'xp': xp,
+  };
+}
+
+/// Pozione usata: lascia lo Scaffale e il suo effetto vale per qualche giorno, con la forza della potenza; il Tocco
+/// aggiunge un piccolo effetto in più. Effetto e forza si salvano qui (la ricetta potrebbe cambiare).
+class PotionUsed extends GameEvent {
+  static const typeId = 'potion_used';
+  final int potionIndex;
+  final PotionEffect effect;
+
+  /// Da 1 a 10: la potenza della pozione.
+  final int strength;
+  final PotionEffect? touch;
+
+  const PotionUsed({
+    required this.potionIndex,
+    required this.effect,
+    required this.strength,
+    this.touch,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'potion': potionIndex,
+    'effect': effect.name,
+    'strength': strength,
+    'touch': touch?.name,
+  };
 }

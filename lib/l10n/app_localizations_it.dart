@@ -85,12 +85,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get retry => 'Riprova';
 
   @override
-  String get erbarioEncounteredSection => 'Incontrate';
-
-  @override
-  String get erbarioMissingSection => 'Da trovare nel bolognese';
-
-  @override
   String get simulateEncounter => 'Simula Incontro';
 
   @override
@@ -110,9 +104,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get navStudy => 'Home';
-
-  @override
-  String get navRecipes => 'Ricette';
 
   @override
   String get rankApprentice => 'Apprendista';
@@ -136,7 +127,12 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    return 'Prossimo Rango: $rank a $xp PE';
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Prossimo Rango: $rank a $xpString PE';
   }
 
   @override
@@ -304,11 +300,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get summaryMastery => 'Maestria raggiunta!';
 
   @override
-  String summaryRecipeUnlocked(String recipe) {
-    return 'Ricetta sbloccata: $recipe';
-  }
-
-  @override
   String get summaryNewFunFacts =>
       'Nuove Curiosità in arrivo: le riceverai una al giorno.';
 
@@ -395,7 +386,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get reviewsNone =>
-      'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.';
+      'Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.';
 
   @override
   String get reviewsStart => 'Ripassa';
@@ -404,13 +395,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get desiderataTitle => 'Desiderata';
 
   @override
-  String desiderataCount(int count, int max) {
-    return '$count su $max';
-  }
-
-  @override
   String get desiderataEmpty =>
-      'Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.';
+      'Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.';
 
   @override
   String get desiderataSuggestions => 'In stagione adesso';
@@ -434,10 +420,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get desiderataRemove => 'Togli dalle Desiderata';
-
-  @override
-  String get desiderataFull =>
-      'Hai già 3 Desiderata: completane o togline una.';
 
   @override
   String desiderataWhere(String band) {
@@ -571,23 +553,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get recipesTitle => 'Ricette';
 
   @override
-  String get recipeUnlocked => 'Imparata';
-
-  @override
-  String get recipeLocked => 'Da imparare';
-
-  @override
-  String recipeKnownIngredients(int known, int total) {
-    return 'Ingredienti già Incontrati $known/$total';
-  }
-
-  @override
   String get recipeAnySpecies => 'qualsiasi specie';
-
-  @override
-  String recipeCurrentLevel(int level) {
-    return 'ora: Livello $level';
-  }
 
   @override
   String erbarioPages(int done, int total) {
@@ -605,13 +571,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get missionVisitErbarioBody =>
       'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.';
-
-  @override
-  String get missionMarkDesiderataTitle => 'Scegli le tue Desiderata';
-
-  @override
-  String get missionMarkDesiderataBody =>
-      'Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.';
 
   @override
   String get missionFirstEncounterTitle => 'Incontra una specie';
@@ -632,7 +591,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionFirstRecipeBody =>
-      'Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.';
+      'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.';
 
   @override
   String get missionSkip => 'Salta l\'Apprendistato';
@@ -641,13 +600,10 @@ class AppLocalizationsIt extends AppLocalizations {
   String get missionActionOpenErbario => 'Apri l\'Erbario';
 
   @override
-  String get missionActionChooseDesiderata => 'Scegli nell\'Erbario';
-
-  @override
   String get missionActionStudy => 'Inizia a studiare';
 
   @override
-  String get missionActionRecipes => 'Vedi le Ricette';
+  String get missionActionRecipes => 'Apri il Ricettario';
 
   @override
   String get missionGlossary => 'Glossario';
@@ -1010,11 +966,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String recipeLearnByStudying(String species) {
-    return 'Si impara studiando: $species';
-  }
-
-  @override
   String get debugGradePreview => 'Anteprima dei Gradi';
 
   @override
@@ -1032,27 +983,6 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get badgeProtected => 'Specie Protetta';
-
-  @override
-  String recipesCount(int learned, int total) {
-    return '$learned di $total';
-  }
-
-  @override
-  String recipeIngredientCount(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString Ingredienti',
-      one: '1 Ingrediente',
-    );
-    return '$_temp0';
-  }
 
   @override
   String get legendTitle => 'Legenda';
@@ -1124,18 +1054,11 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossBottinoText =>
-      'Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).';
-
-  @override
-  String get glossFigurinaTerm => 'Figurina';
-
-  @override
-  String get glossFigurinaText =>
-      'Una Ricetta o una Pozione nell\'Album. L\'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.';
+      'Il Bottino che si compra con i PE: scegli il grado e spendi il saldo; dentro c\'è una Tavola a sorpresa, spesso incompleta, o un componente di una che hai. Le Mitiche escono solo dal Bottino mitico.';
 
   @override
   String get recipesEmpty =>
-      'Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall\'Erbario.';
+      'Non conosci ancora nessuna Ricetta. Ogni pianta ha la sua Ricetta Comune: la impari superando il Livello 1 della specie, dalla Home o dall\'Erbario.';
 
   @override
   String get viewAll => 'Tutte';
@@ -1255,4 +1178,744 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get traitWhenWaningMoon =>
       'Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.';
+
+  @override
+  String get recipeBookTitle => 'Ricettario';
+
+  @override
+  String recipeBookPlates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Tavole',
+      one: '1 Tavola',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recipeBookPagesSummary(int pages, int total, int complete) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages Pagine',
+      one: '1 Pagina',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      complete,
+      locale: localeName,
+      other: '$complete complete',
+      one: '1 completa',
+    );
+    return '$_temp0 su $total · $_temp1';
+  }
+
+  @override
+  String recipeBookPageCount(int known, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Tavole',
+      one: '1 Tavola',
+    );
+    return '$_temp0 su $total';
+  }
+
+  @override
+  String get recipeBookFavouredTraits => 'Tratti d\'elezione';
+
+  @override
+  String get recipeBookVocation => 'Vocazione';
+
+  @override
+  String get recipeBookMissingPlate => 'Tavola da trovare';
+
+  @override
+  String get recipeBookSwipeHint => 'Scorri per sfogliare le Pagine';
+
+  @override
+  String recipeBookSpeciesLink(int known, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Tavole',
+      one: '1 Tavola',
+    );
+    return 'Ricettario · $_temp0 su $total';
+  }
+
+  @override
+  String get recipeMonths => 'Quando si può fare';
+
+  @override
+  String get recipeNever =>
+      'Mai: gli ingredienti non si incontrano negli stessi mesi';
+
+  @override
+  String get recipeEffect => 'Effetto';
+
+  @override
+  String get effectRegrowth => 'Ricrescita';
+
+  @override
+  String get effectClarity => 'Limpidezza';
+
+  @override
+  String get effectOmen => 'Presagio';
+
+  @override
+  String get effectAbundance => 'Abbondanza';
+
+  @override
+  String get effectRegrowthText =>
+      'Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).';
+
+  @override
+  String get effectClarityText =>
+      'Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).';
+
+  @override
+  String get effectOmenText =>
+      'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).';
+
+  @override
+  String get effectAbundanceText =>
+      'Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).';
+
+  @override
+  String mythicNumber(String number) {
+    return 'Tavola n. $number';
+  }
+
+  @override
+  String get mythicToFind => 'Da trovare';
+
+  @override
+  String mythicWindow(String from, String to) {
+    return 'Solo dal $from al $to';
+  }
+
+  @override
+  String get mythicAllYear => 'Tutto l\'anno';
+
+  @override
+  String get mythicsIntro =>
+      'Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano solo nel Bottino dell\'Esperienza mitico.';
+
+  @override
+  String recipeBookMythicsRow(String zone) {
+    return 'Mitiche · $zone';
+  }
+
+  @override
+  String recipeBookMythicsCount(int known, int total) {
+    return '$known su $total';
+  }
+
+  @override
+  String get debugSimulateRecipeBook => 'Simula un Ricettario';
+
+  @override
+  String debugSimulateRecipeBookDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Tavole aggiunte',
+      one: '1 Tavola aggiunta',
+    );
+    return '$_temp0 al Ricettario';
+  }
+
+  @override
+  String get troveTitle => 'Bottino dell\'Esperienza';
+
+  @override
+  String get navTrove => 'Bottino';
+
+  @override
+  String get labBalance => 'Saldo';
+
+  @override
+  String labBalanceXp(int xp) {
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return '$xpString PE da spendere';
+  }
+
+  @override
+  String labTrovesLeft(int left, int total) {
+    return '$left su $total oggi';
+  }
+
+  @override
+  String troveName(String grade) {
+    return 'Bottino dell\'Esperienza · $grade';
+  }
+
+  @override
+  String get troveGradeCommon => 'comune';
+
+  @override
+  String get troveGradeUncommon => 'non comune';
+
+  @override
+  String get troveGradeRare => 'raro';
+
+  @override
+  String get troveGradeMythic => 'mitico';
+
+  @override
+  String get troveContentsCommon =>
+      'Quasi sempre una Comune, a volte una Non comune';
+
+  @override
+  String get troveContentsUncommon =>
+      'Per lo più Non comuni, a volte una Comune o una Rara';
+
+  @override
+  String get troveContentsRare => 'Per lo più Rare, a volte una Non comune';
+
+  @override
+  String get troveContentsMythic => 'Una Rara o una Mitica, metà e metà';
+
+  @override
+  String troveSpend(int cost) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+
+    return 'Spendi $costString PE';
+  }
+
+  @override
+  String troveNeedXp(int xp) {
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Ti mancano $xpString PE';
+  }
+
+  @override
+  String troveCostMissing(int cost, int xp) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Costa $costString PE: te ne mancano $xpString';
+  }
+
+  @override
+  String troveDailyLimit(int total) {
+    return 'Per oggi basta: $total Bottino dell\'Esperienza al giorno. Torna domani.';
+  }
+
+  @override
+  String get troveRules =>
+      'Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell\'Esperienza. Al primo comune e al primo non comune, in regalo una Tavola del grado sopra. Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.';
+
+  @override
+  String labIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Tavole incomplete',
+      one: '1 Tavola incompleta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String labRecycled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count riciclati',
+      one: '1 riciclato',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get welcomeGiftTitle => 'Ehi, c\'è un regalo per te';
+
+  @override
+  String welcomeGiftBody(int full, int price) {
+    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String fullString = fullNumberFormat.format(full);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String priceString = priceNumberFormat.format(price);
+
+    return 'Il tuo primo Bottino dell\'Esperienza · raro a prezzo di favore: $priceString PE invece di $fullString.';
+  }
+
+  @override
+  String get welcomeGiftWaiting =>
+      'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.';
+
+  @override
+  String welcomeGiftRedeem(int price) {
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String priceString = priceNumberFormat.format(price);
+
+    return 'Riscatta · $priceString PE';
+  }
+
+  @override
+  String get troveTapToTurn => 'Tocca le Tavole per girarle';
+
+  @override
+  String get troveFindNew => 'Nuova Tavola';
+
+  @override
+  String troveFindIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'mancano $count componenti',
+      one: 'manca 1 componente',
+    );
+    return 'Nuova Tavola · $_temp0';
+  }
+
+  @override
+  String get troveFindPiece => 'Un componente trovato';
+
+  @override
+  String get troveFindCompleted => 'Tavola completata';
+
+  @override
+  String troveFindRecycled(String grade) {
+    return 'Doppione: 1 riciclato $grade';
+  }
+
+  @override
+  String get troveFindTaste => 'Assaggio del grado sopra';
+
+  @override
+  String get troveNothing => 'Questa volta non è uscito niente di nuovo.';
+
+  @override
+  String get troveDone => 'Fatto';
+
+  @override
+  String recipeMissingPieces(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Mancano $count componenti',
+      one: 'Manca 1 componente',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recipeEffectUnknown =>
+      'Da scoprire: manca un componente del nome.';
+
+  @override
+  String get debugGrantXp => 'Aggiungi 5.000 PE';
+
+  @override
+  String get recycleTitle => 'Riciclo';
+
+  @override
+  String get recycleIntro =>
+      'Ogni doppione è un riciclato del suo grado. 3 riciclati fanno un componente dello stesso grado, 9 uno del grado sopra, per una Tavola incompleta a tua scelta. Costa un po\' di Vis.';
+
+  @override
+  String recycleVis(int vis) {
+    return '$vis Vis da spendere';
+  }
+
+  @override
+  String recycleUse(int count, String grade, int vis) {
+    return '$count riciclati $grade · $vis Vis';
+  }
+
+  @override
+  String recycleNeedVis(int vis) {
+    return 'Servono $vis Vis';
+  }
+
+  @override
+  String get recycleNothing =>
+      'Con i riciclati che hai non completi ancora nessun componente.';
+
+  @override
+  String recycleDone(String name) {
+    return 'Componente aggiunto: $name';
+  }
+
+  @override
+  String recycleCompleted(String name) {
+    return 'Tavola completata: $name';
+  }
+
+  @override
+  String get recycledGradeCommon => 'comuni';
+
+  @override
+  String get recycledGradeUncommon => 'non comuni';
+
+  @override
+  String get recycledGradeRare => 'rari';
+
+  @override
+  String get recycledGradeMythic => 'mitici';
+
+  @override
+  String get labTitle => 'Laboratorio';
+
+  @override
+  String get navLaboratory => 'Laboratorio';
+
+  @override
+  String get pantryTitle => 'Dispensa';
+
+  @override
+  String pantryEssences(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze',
+      one: '1 Essenza',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pantrySpeciesSummary(int count, int vis) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze',
+      one: '1 Essenza',
+    );
+    return '$_temp0 · $vis Vis';
+  }
+
+  @override
+  String pantryPurity(int percent) {
+    return 'Purezza $percent %';
+  }
+
+  @override
+  String pantryVis(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get pantryNoTraits => 'Nessun tratto';
+
+  @override
+  String get pantryEmpty =>
+      'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.';
+
+  @override
+  String get debugSimulatePantry => 'Simula una Dispensa';
+
+  @override
+  String debugSimulatePantryDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essenze aggiunte',
+      one: '1 Essenza aggiunta',
+    );
+    return '$_temp0 alla Dispensa';
+  }
+
+  @override
+  String get labTabReady => 'Ricette pronte';
+
+  @override
+  String get labTabShelf => 'Scaffale';
+
+  @override
+  String readyCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pronte',
+      one: '1 pronta',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String shelfCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pozioni',
+      one: '1 pozione',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get readySection => 'Pronte da preparare';
+
+  @override
+  String get readyAlmost => 'Ti manca poco';
+
+  @override
+  String readyOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Altre $count ricette chiedono',
+      one: 'Un\'altra ricetta chiede',
+    );
+    return '$_temp0 più Essenze: le trovi nel Ricettario.';
+  }
+
+  @override
+  String get readyEmpty =>
+      'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.';
+
+  @override
+  String get readyAnyPlant => 'una pianta a scelta';
+
+  @override
+  String get brewButton => 'Prepara';
+
+  @override
+  String get brewChooseFree => 'Scegli la pianta dello slot libero';
+
+  @override
+  String get brewChooseFreeHint => 'Dà alla pozione il suo Tocco.';
+
+  @override
+  String brewFreeOption(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get potionTitle => 'Pozione';
+
+  @override
+  String potionPotency(int potency) {
+    return 'Potenza $potency';
+  }
+
+  @override
+  String potionTouch(String touch) {
+    return 'Tocco: $touch';
+  }
+
+  @override
+  String potionFirstBonus(int xp) {
+    return 'Prima pozione di questa ricetta: +$xp PE';
+  }
+
+  @override
+  String get potionSpoiledTitle => 'La pozione si è guastata';
+
+  @override
+  String potionSpoiledText(String name) {
+    return '$name: pianta tossica. In una ricetta da bere guasta la pozione: le Vis sono perse, ma ora lo sai.';
+  }
+
+  @override
+  String get shelfEmpty =>
+      'Lo Scaffale è vuoto: le pozioni che prepari restano qui.';
+
+  @override
+  String recipeBestPotency(int potency) {
+    return 'Potenza migliore: $potency';
+  }
+
+  @override
+  String readyMissingVis(int vis) {
+    return 'Ti mancano $vis Vis';
+  }
+
+  @override
+  String get shelfUse => 'Usa';
+
+  @override
+  String get shelfHint =>
+      'Tienila per la collezione o usala: l\'effetto vale 7 giorni, con la forza della sua potenza; il Tocco aggiunge un piccolo effetto in più.';
+
+  @override
+  String get shelfActive => 'Effetti in corso';
+
+  @override
+  String shelfActiveLine(String effect, int strength, String date) {
+    return '$effect · forza $strength · fino al $date';
+  }
+
+  @override
+  String shelfUsed(String effect) {
+    return '$effect per 7 giorni';
+  }
+
+  @override
+  String get glossTavolaTerm => 'Tavola';
+
+  @override
+  String get glossTavolaText =>
+      'Una ricetta nel Ricettario, come le tavole illustrate degli erbari: \"1 Tavola su 3\". Nella Pagina di una pianta le Tavole che non hai sono slot vuoti con il cerchietto del grado.';
+
+  @override
+  String get glossLaboratorioTerm => 'Laboratorio';
+
+  @override
+  String get glossLaboratorioText =>
+      'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.';
+
+  @override
+  String get glossRicettarioTerm => 'Ricettario';
+
+  @override
+  String get glossRicettarioText =>
+      'La collezione delle Tavole, una per paese: una Pagina per pianta e, in cima, le Mitiche della Zona, numerate.';
+
+  @override
+  String get glossComponenteTerm => 'Componente';
+
+  @override
+  String get glossComponenteText =>
+      'Un pezzo del nome di una Tavola incompleta (\"Tintura di Eranthis Brinata del…\"): le Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza con dei componenti da trovare.';
+
+  @override
+  String get glossRiciclatoTerm => 'Riciclato';
+
+  @override
+  String get glossRiciclatoText =>
+      'Un doppione uscito dal Bottino dell\'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po\' di Vis.';
+
+  @override
+  String get glossDispensaTerm => 'Dispensa';
+
+  @override
+  String get glossDispensaText =>
+      'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.';
+
+  @override
+  String get glossRicettePronteTerm => 'Ricette pronte';
+
+  @override
+  String get glossRicettePronteText =>
+      'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.';
+
+  @override
+  String get glossPozioneTerm => 'Pozione';
+
+  @override
+  String get glossPozioneText =>
+      'Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.';
+
+  @override
+  String get glossToccoTerm => 'Tocco';
+
+  @override
+  String get glossToccoText =>
+      'L\'aggettivo che la pianta dello slot libero dà alla pozione (Rigogliosa, Limpida, Presaga, Copiosa): quando la usi, aggiunge un piccolo effetto.';
+
+  @override
+  String get glossPozioneGuastataTerm => 'Pozione guastata';
+
+  @override
+  String get glossPozioneGuastataText =>
+      'Una pozione da bere con una pianta tossica nello slot libero: le Vis sono perse, ma impari che la pianta è tossica.';
+
+  @override
+  String get glossScaffaleTerm => 'Scaffale';
+
+  @override
+  String get glossScaffaleText =>
+      'Le pozioni che hai: tienile per la collezione o usale. L\'effetto vale 7 giorni, con la forza della potenza.';
+
+  @override
+  String get legendPotions => 'Pozioni';
+
+  @override
+  String get legendVessel =>
+      'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.';
+
+  @override
+  String get viewMet => 'Incontrate';
+
+  @override
+  String get erbarioSpecies => 'Specie';
+
+  @override
+  String get tipOfDayTitle => 'Consiglio del giorno';
+
+  @override
+  String get tip01 =>
+      'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.';
+
+  @override
+  String get tip02 =>
+      'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.';
+
+  @override
+  String get tip03 =>
+      'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.';
+
+  @override
+  String get tip04 =>
+      'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.';
+
+  @override
+  String get tip05 =>
+      'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.';
+
+  @override
+  String get tip06 =>
+      'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.';
+
+  @override
+  String get tip07 =>
+      'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.';
+
+  @override
+  String get tip08 =>
+      'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.';
+
+  @override
+  String get tip09 =>
+      'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.';
+
+  @override
+  String get tip10 =>
+      'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.';
+
+  @override
+  String get tip11 =>
+      'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.';
+
+  @override
+  String get tip12 =>
+      'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.';
+
+  @override
+  String get tip13 =>
+      'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.';
+
+  @override
+  String get tip14 =>
+      'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.';
+
+  @override
+  String get tip15 =>
+      '\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.';
 }

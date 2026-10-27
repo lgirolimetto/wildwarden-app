@@ -493,6 +493,9 @@ String? leadingEmoji(String label) {
 PreferredSizeWidget clayAppBar(
   BuildContext context, {
   String? title,
+
+  /// Stile del titolo, se diverso (es. il nome di una specie).
+  TextStyle? titleStyle,
   List<Widget> actions = const [],
   IconData leadingIcon = Icons.arrow_back_rounded,
   VoidCallback? onLeading,
@@ -522,7 +525,7 @@ PreferredSizeWidget clayAppBar(
       ),
     ),
   ),
-  title: title == null ? null : Text(title, style: context.texts.headlineSmall),
+  title: title == null ? null : Text(title, style: titleStyle ?? context.texts.headlineSmall),
   actions: [
     for (final a in actions)
       Padding(

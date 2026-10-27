@@ -16,9 +16,10 @@ class SpeciesTraits {
   /// `true` se in Italia è stata introdotta dall'uomo, `false` se è autoctona; `null` se non si sa.
   final bool? introducedInItaly;
 
-  /// Indicatori ecologici EIVE (0-10): luce e umidità del suolo.
+  /// Indicatori ecologici EIVE (0-10): luce, umidità e nutrienti del suolo.
   final double? light;
   final double? moisture;
+  final double? nutrients;
   final Set<SeedDispersal> dispersal;
 
   const SpeciesTraits({
@@ -27,6 +28,7 @@ class SpeciesTraits {
     this.introducedInItaly,
     this.light,
     this.moisture,
+    this.nutrients,
     this.dispersal = const {},
   });
 
@@ -40,6 +42,7 @@ class SpeciesTraits {
       introducedInItaly: json['introducedInItaly'] as bool?,
       light: (ecology['light'] as num?)?.toDouble(),
       moisture: (ecology['moisture'] as num?)?.toDouble(),
+      nutrients: (ecology['nutrients'] as num?)?.toDouble(),
       dispersal: {for (final id in (json['dispersal'] as List?) ?? const []) ?SeedDispersal.values.asNameMap()[id]},
     );
   }

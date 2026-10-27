@@ -95,6 +95,7 @@ class ErbarioFilter {
 /// Le viste già pronte: chi non vuole configurare niente ha comunque un erbario utile.
 enum BuiltInView {
   all(ErbarioFilter.all),
+  met(ErbarioFilter(statuses: {SpeciesStatus.met})),
   inSeason(ErbarioFilter(inSeason: true)),
   desiderata(ErbarioFilter(statuses: {SpeciesStatus.desiderata})),
   protectedSpecies(ErbarioFilter(protectedOnly: true));

@@ -22,8 +22,9 @@ void main() {
     result.fold((failures) => fail('Catalogo non valido: ${failures.join(', ')}'), (catalog) {
       expect(catalog.species, hasLength(50));
       expect(catalog.species.every((s) => s.images.isNotEmpty), isTrue, reason: 'ogni specie ha almeno una foto');
-      for (final recipe in catalog.recipes) {
-        for (final ingredient in recipe.ingredients.where((i) => i.speciesSci != null)) {
+      expect(catalog.mythics, hasLength(3));
+      for (final mythic in catalog.mythics) {
+        for (final ingredient in mythic.ingredients.where((i) => i.speciesSci != null)) {
           expect(
             catalog.speciesBySci(ingredient.speciesSci!),
             isNotNull,

@@ -41,8 +41,6 @@
   "themeModeDark": "Scuro",
   "loadingError": "Non è stato possibile caricare i dati",
   "retry": "Riprova",
-  "erbarioEncounteredSection": "Incontrate",
-  "erbarioMissingSection": "Da trovare nel bolognese",
   "simulateEncounter": "Simula Incontro",
   "levelToStudy": "Da studiare",
   "levelRecognise": "Riconoscerla",
@@ -50,7 +48,6 @@
   "levelWhereWhen": "Il suo ambiente",
   "levelMastery": "Maestria",
   "navStudy": "Home",
-  "navRecipes": "Ricette",
   "rankApprentice": "Apprendista",
   "rankWanderer": "Viandante",
   "rankSeeker": "Cercatore",
@@ -71,7 +68,8 @@
         "type": "String"
       },
       "xp": {
-        "type": "int"
+        "type": "int",
+        "format": "decimalPattern"
       }
     }
   },
@@ -295,14 +293,6 @@
     }
   },
   "summaryMastery": "Maestria raggiunta!",
-  "summaryRecipeUnlocked": "Ricetta sbloccata: {recipe}",
-  "@summaryRecipeUnlocked": {
-    "placeholders": {
-      "recipe": {
-        "type": "String"
-      }
-    }
-  },
   "summaryNewFunFacts": "Nuove Curiosità in arrivo: le riceverai una al giorno.",
   "saveToNotebook": "Salva nel Taccuino",
   "savedToNotebook": "Nel Taccuino",
@@ -383,21 +373,10 @@
       }
     }
   },
-  "reviewsNone": "Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7 e 21 giorni.",
+  "reviewsNone": "Niente da ripassare oggi. I Fatti imparati tornano dopo 1, 3, 7, 21, 60 e 180 giorni.",
   "reviewsStart": "Ripassa",
   "desiderataTitle": "Desiderata",
-  "desiderataCount": "{count} su {max}",
-  "@desiderataCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      },
-      "max": {
-        "type": "int"
-      }
-    }
-  },
-  "desiderataEmpty": "Scegli fino a 3 specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
+  "desiderataEmpty": "Scegli le specie da cercare: vedrai foto e indicazioni su dove e quando trovarle.",
   "desiderataSuggestions": "In stagione adesso",
   "seasonalFirstHint": "Tre specie facili da riconoscere, per cominciare subito: si studia anche da casa.",
   "seasonalHint": "Puoi studiarle subito o segnarle come Desiderata da cercare.",
@@ -405,7 +384,6 @@
   "yourSpeciesMet": "Incontrata",
   "desiderataAdd": "Aggiungi alle Desiderata",
   "desiderataRemove": "Togli dalle Desiderata",
-  "desiderataFull": "Hai già 3 Desiderata: completane o togline una.",
   "desiderataWhere": "Dove: {band}",
   "@desiderataWhere": {
     "placeholders": {
@@ -536,28 +514,7 @@
   "traitDew": "💧 Rugiada",
   "traitDusk": "🌅 Tramonto",
   "recipesTitle": "Ricette",
-  "recipeUnlocked": "Imparata",
-  "recipeLocked": "Da imparare",
-  "recipeKnownIngredients": "Ingredienti già Incontrati {known}/{total}",
-  "@recipeKnownIngredients": {
-    "placeholders": {
-      "known": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
   "recipeAnySpecies": "qualsiasi specie",
-  "recipeCurrentLevel": "ora: Livello {level}",
-  "@recipeCurrentLevel": {
-    "placeholders": {
-      "level": {
-        "type": "int"
-      }
-    }
-  },
   "erbarioPages": "Pagine compilate {done}/{total}",
   "@erbarioPages": {
     "placeholders": {
@@ -582,19 +539,16 @@
   },
   "missionVisitErbarioTitle": "Apri l'Erbario",
   "missionVisitErbarioBody": "L'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.",
-  "missionMarkDesiderataTitle": "Scegli le tue Desiderata",
-  "missionMarkDesiderataBody": "Scegli fino a 3 specie da cercare: per ognuna vedrai foto, periodo e quota. Comincia da una in stagione adesso.",
   "missionFirstEncounterTitle": "Incontra una specie",
   "missionFirstEncounterBody": "Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell'Erbario. Fotografa, non raccogliere.",
   "missionFirstLevelTitle": "Studia la tua prima specie",
   "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.",
   "missionFirstRecipeTitle": "La prima Ricetta",
-  "missionFirstRecipeBody": "Porta una specie al Livello richiesto da una Ricetta per sbloccarla. Le Ricette chiedono specie e condizioni diverse: un motivo per uscire di nuovo.",
+  "missionFirstRecipeBody": "Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell'Esperienza.",
   "missionSkip": "Salta l'Apprendistato",
   "missionActionOpenErbario": "Apri l'Erbario",
-  "missionActionChooseDesiderata": "Scegli nell'Erbario",
   "missionActionStudy": "Inizia a studiare",
-  "missionActionRecipes": "Vedi le Ricette",
+  "missionActionRecipes": "Apri il Ricettario",
   "missionGlossary": "Glossario",
   "apprenticeshipComplete": "Apprendistato completato!",
   "glossaryTitle": "Legenda e glossario",
@@ -935,40 +889,12 @@
       }
     }
   },
-  "recipeLearnByStudying": "Si impara studiando: {species}",
-  "@recipeLearnByStudying": {
-    "placeholders": {
-      "species": {
-        "type": "String"
-      }
-    }
-  },
   "debugGradePreview": "Anteprima dei Gradi",
   "debugGradeSampleName": "Elisir di Prova",
   "debugGradeSampleIngredient": "Erba d'argento",
   "debugGradeSampleEffect": "La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).",
   "badgeEncountered": "Incontrata il",
   "badgeProtected": "Specie Protetta",
-  "recipesCount": "{learned} di {total}",
-  "recipeIngredientCount": "{count, plural, =1{1 Ingrediente} other{{count} Ingredienti}}",
-  "@recipesCount": {
-    "placeholders": {
-      "learned": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
-  "@recipeIngredientCount": {
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
   "legendTitle": "Legenda",
   "glossarySection": "Glossario",
   "legendGrades": "Gradi (Ricette, Pozioni, Bottino)",
@@ -989,10 +915,8 @@
   "glossGradoTerm": "Grado",
   "glossGradoText": "Comune, Non comune, Rara, Mitica: bianco, argento, oro, oro rosso. Vale per Ingredienti, Ricette, Pozioni e Bottino dell'Esperienza.",
   "glossBottinoTerm": "Bottino dell'Esperienza",
-  "glossBottinoText": "Il Bottino che si compra con i PE: scegli il Grado, il contenuto è a sorpresa (Ricette, Curiosità rare, indizi).",
-  "glossFigurinaTerm": "Figurina",
-  "glossFigurinaText": "Una Ricetta o una Pozione nell'Album. L'Album delle Ricette mostra quelle che conosci; il contatore dice quante sono in tutto.",
-  "recipesEmpty": "Non conosci ancora nessuna Ricetta. Le Ricette Comuni si imparano studiando: supera il Livello 1 di una specie, dalla Home o dall'Erbario.",
+  "glossBottinoText": "Il Bottino che si compra con i PE: scegli il grado e spendi il saldo; dentro c'è una Tavola a sorpresa, spesso incompleta, o un componente di una che hai. Le Mitiche escono solo dal Bottino mitico.",
+  "recipesEmpty": "Non conosci ancora nessuna Ricetta. Ogni pianta ha la sua Ricetta Comune: la impari superando il Livello 1 della specie, dalla Home o dall'Erbario.",
   "viewAll": "Tutte",
   "viewInSeason": "In stagione adesso",
   "viewDesiderata": "Le mie Desiderata",
@@ -1029,5 +953,528 @@
   "traitWhenDawn": "Dalle prime luci a circa un'ora dopo il sorgere del sole.",
   "traitWhenNewMoon": "Tutto il giorno della luna nuova: non serve uscire di notte.",
   "traitWhenWaxingMoon": "Tutti i giorni in cui la luna cresce, tra la nuova e la piena: non serve uscire di notte.",
-  "traitWhenWaningMoon": "Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte."
+  "traitWhenWaningMoon": "Tutti i giorni in cui la luna cala, tra la piena e la nuova: non serve uscire di notte.",
+  "recipeBookTitle": "Ricettario",
+  "recipeBookPlates": "{count, plural, =1{1 Tavola} other{{count} Tavole}}",
+  "@recipeBookPlates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeBookPagesSummary": "{pages, plural, =1{1 Pagina} other{{pages} Pagine}} su {total} · {complete, plural, =1{1 completa} other{{complete} complete}}",
+  "@recipeBookPagesSummary": {
+    "placeholders": {
+      "pages": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "complete": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeBookPageCount": "{known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}",
+  "@recipeBookPageCount": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeBookFavouredTraits": "Tratti d'elezione",
+  "recipeBookVocation": "Vocazione",
+  "recipeBookMissingPlate": "Tavola da trovare",
+  "recipeBookSwipeHint": "Scorri per sfogliare le Pagine",
+  "recipeBookSpeciesLink": "Ricettario · {known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}",
+  "@recipeBookSpeciesLink": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeMonths": "Quando si può fare",
+  "recipeNever": "Mai: gli ingredienti non si incontrano negli stessi mesi",
+  "recipeEffect": "Effetto",
+  "effectRegrowth": "Ricrescita",
+  "effectClarity": "Limpidezza",
+  "effectOmen": "Presagio",
+  "effectAbundance": "Abbondanza",
+  "effectRegrowthText": "Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).",
+  "effectClarityText": "Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).",
+  "effectOmenText": "Per 7 giorni un'Essenza senza tratti può prendere il tratto d'elezione della pianta (effetto di gioco).",
+  "effectAbundanceText": "Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).",
+  "mythicNumber": "Tavola n. {number}",
+  "@mythicNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "mythicToFind": "Da trovare",
+  "mythicWindow": "Solo dal {from} al {to}",
+  "@mythicWindow": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "mythicAllYear": "Tutto l'anno",
+  "mythicsIntro": "Le Mitiche della Zona: scritte a mano, legate ai suoi luoghi e alle sue feste. Si trovano solo nel Bottino dell'Esperienza mitico.",
+  "recipeBookMythicsRow": "Mitiche · {zone}",
+  "@recipeBookMythicsRow": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "recipeBookMythicsCount": "{known} su {total}",
+  "@recipeBookMythicsCount": {
+    "placeholders": {
+      "known": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "debugSimulateRecipeBook": "Simula un Ricettario",
+  "debugSimulateRecipeBookDone": "{count, plural, =1{1 Tavola aggiunta} other{{count} Tavole aggiunte}} al Ricettario",
+  "@debugSimulateRecipeBookDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "troveTitle": "Bottino dell'Esperienza",
+  "navTrove": "Bottino",
+  "labBalance": "Saldo",
+  "labBalanceXp": "{xp} PE da spendere",
+  "@labBalanceXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "labTrovesLeft": "{left} su {total} oggi",
+  "@labTrovesLeft": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "troveName": "Bottino dell'Esperienza · {grade}",
+  "@troveName": {
+    "placeholders": {
+      "grade": {
+        "type": "String"
+      }
+    }
+  },
+  "troveGradeCommon": "comune",
+  "troveGradeUncommon": "non comune",
+  "troveGradeRare": "raro",
+  "troveGradeMythic": "mitico",
+  "troveContentsCommon": "Quasi sempre una Comune, a volte una Non comune",
+  "troveContentsUncommon": "Per lo più Non comuni, a volte una Comune o una Rara",
+  "troveContentsRare": "Per lo più Rare, a volte una Non comune",
+  "troveContentsMythic": "Una Rara o una Mitica, metà e metà",
+  "troveSpend": "Spendi {cost} PE",
+  "@troveSpend": {
+    "placeholders": {
+      "cost": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "troveNeedXp": "Ti mancano {xp} PE",
+  "troveCostMissing": "Costa {cost} PE: te ne mancano {xp}",
+  "@troveCostMissing": {
+    "placeholders": {
+      "cost": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "xp": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "@troveNeedXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "troveDailyLimit": "Per oggi basta: {total} Bottino dell'Esperienza al giorno. Torna domani.",
+  "@troveDailyLimit": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "troveRules": "Le Tavole Non comuni, Rare e Mitiche escono incomplete: i componenti che mancano si trovano in altri Bottino dell'Esperienza. Al primo comune e al primo non comune, in regalo una Tavola del grado sopra. Le Mitiche escono solo dal Bottino dell'Esperienza mitico.",
+  "labIncomplete": "{count, plural, =1{1 Tavola incompleta} other{{count} Tavole incomplete}}",
+  "@labIncomplete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "labRecycled": "{count, plural, =1{1 riciclato} other{{count} riciclati}}",
+  "@labRecycled": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "welcomeGiftTitle": "Ehi, c'è un regalo per te",
+  "welcomeGiftBody": "Il tuo primo Bottino dell'Esperienza · raro a prezzo di favore: {price} PE invece di {full}.",
+  "@welcomeGiftBody": {
+    "placeholders": {
+      "full": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "price": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "welcomeGiftWaiting": "Si riscatta dopo un'Essenza: esci e attingi da una stazione.",
+  "welcomeGiftRedeem": "Riscatta · {price} PE",
+  "@welcomeGiftRedeem": {
+    "placeholders": {
+      "price": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "troveTapToTurn": "Tocca le Tavole per girarle",
+  "troveFindNew": "Nuova Tavola",
+  "troveFindIncomplete": "Nuova Tavola · {count, plural, =1{manca 1 componente} other{mancano {count} componenti}}",
+  "@troveFindIncomplete": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "troveFindPiece": "Un componente trovato",
+  "troveFindCompleted": "Tavola completata",
+  "troveFindRecycled": "Doppione: 1 riciclato {grade}",
+  "@troveFindRecycled": {
+    "placeholders": {
+      "grade": {
+        "type": "String"
+      }
+    }
+  },
+  "troveFindTaste": "Assaggio del grado sopra",
+  "troveNothing": "Questa volta non è uscito niente di nuovo.",
+  "troveDone": "Fatto",
+  "recipeMissingPieces": "{count, plural, =1{Manca 1 componente} other{Mancano {count} componenti}}",
+  "@recipeMissingPieces": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeEffectUnknown": "Da scoprire: manca un componente del nome.",
+  "debugGrantXp": "Aggiungi 5.000 PE",
+  "recycleTitle": "Riciclo",
+  "recycleIntro": "Ogni doppione è un riciclato del suo grado. 3 riciclati fanno un componente dello stesso grado, 9 uno del grado sopra, per una Tavola incompleta a tua scelta. Costa un po' di Vis.",
+  "recycleVis": "{vis} Vis da spendere",
+  "@recycleVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "recycleUse": "{count} riciclati {grade} · {vis} Vis",
+  "@recycleUse": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "grade": {
+        "type": "String"
+      },
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "recycleNeedVis": "Servono {vis} Vis",
+  "@recycleNeedVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "recycleNothing": "Con i riciclati che hai non completi ancora nessun componente.",
+  "recycleDone": "Componente aggiunto: {name}",
+  "@recycleDone": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recycleCompleted": "Tavola completata: {name}",
+  "@recycleCompleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recycledGradeCommon": "comuni",
+  "recycledGradeUncommon": "non comuni",
+  "recycledGradeRare": "rari",
+  "recycledGradeMythic": "mitici",
+  "labTitle": "Laboratorio",
+  "navLaboratory": "Laboratorio",
+  "pantryTitle": "Dispensa",
+  "pantryEssences": "{count, plural, =1{1 Essenza} other{{count} Essenze}}",
+  "@pantryEssences": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pantrySpeciesSummary": "{count, plural, =1{1 Essenza} other{{count} Essenze}} · {vis} Vis",
+  "@pantrySpeciesSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "pantryPurity": "Purezza {percent} %",
+  "@pantryPurity": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "pantryVis": "{vis} Vis",
+  "@pantryVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "pantryNoTraits": "Nessun tratto",
+  "pantryEmpty": "La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.",
+  "debugSimulatePantry": "Simula una Dispensa",
+  "debugSimulatePantryDone": "{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa",
+  "@debugSimulatePantryDone": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "labTabReady": "Ricette pronte",
+  "labTabShelf": "Scaffale",
+  "readyCount": "{count, plural, =1{1 pronta} other{{count} pronte}}",
+  "@readyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shelfCount": "{count, plural, =1{1 pozione} other{{count} pozioni}}",
+  "@shelfCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "readySection": "Pronte da preparare",
+  "readyAlmost": "Ti manca poco",
+  "readyOthers": "{count, plural, =1{Un'altra ricetta chiede} other{Altre {count} ricette chiedono}} più Essenze: le trovi nel Ricettario.",
+  "@readyOthers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "readyEmpty": "Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell'Esperienza.",
+  "readyAnyPlant": "una pianta a scelta",
+  "brewButton": "Prepara",
+  "brewChooseFree": "Scegli la pianta dello slot libero",
+  "brewChooseFreeHint": "Dà alla pozione il suo Tocco.",
+  "brewFreeOption": "{vis} Vis",
+  "@brewFreeOption": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "potionTitle": "Pozione",
+  "potionPotency": "Potenza {potency}",
+  "@potionPotency": {
+    "placeholders": {
+      "potency": {
+        "type": "int"
+      }
+    }
+  },
+  "potionTouch": "Tocco: {touch}",
+  "@potionTouch": {
+    "placeholders": {
+      "touch": {
+        "type": "String"
+      }
+    }
+  },
+  "potionFirstBonus": "Prima pozione di questa ricetta: +{xp} PE",
+  "@potionFirstBonus": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "potionSpoiledTitle": "La pozione si è guastata",
+  "potionSpoiledText": "{name}: pianta tossica. In una ricetta da bere guasta la pozione: le Vis sono perse, ma ora lo sai.",
+  "@potionSpoiledText": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "shelfEmpty": "Lo Scaffale è vuoto: le pozioni che prepari restano qui.",
+  "recipeBestPotency": "Potenza migliore: {potency}",
+  "@recipeBestPotency": {
+    "placeholders": {
+      "potency": {
+        "type": "int"
+      }
+    }
+  },
+  "readyMissingVis": "Ti mancano {vis} Vis",
+  "@readyMissingVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "shelfUse": "Usa",
+  "shelfHint": "Tienila per la collezione o usala: l'effetto vale 7 giorni, con la forza della sua potenza; il Tocco aggiunge un piccolo effetto in più.",
+  "shelfActive": "Effetti in corso",
+  "shelfActiveLine": "{effect} · forza {strength} · fino al {date}",
+  "@shelfActiveLine": {
+    "placeholders": {
+      "effect": {
+        "type": "String"
+      },
+      "strength": {
+        "type": "int"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "shelfUsed": "{effect} per 7 giorni",
+  "@shelfUsed": {
+    "placeholders": {
+      "effect": {
+        "type": "String"
+      }
+    }
+  },
+  "glossTavolaTerm": "Tavola",
+  "glossTavolaText": "Una ricetta nel Ricettario, come le tavole illustrate degli erbari: \"1 Tavola su 3\". Nella Pagina di una pianta le Tavole che non hai sono slot vuoti con il cerchietto del grado.",
+  "glossLaboratorioTerm": "Laboratorio",
+  "glossLaboratorioText": "La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.",
+  "glossRicettarioTerm": "Ricettario",
+  "glossRicettarioText": "La collezione delle Tavole, una per paese: una Pagina per pianta e, in cima, le Mitiche della Zona, numerate.",
+  "glossComponenteTerm": "Componente",
+  "glossComponenteText": "Un pezzo del nome di una Tavola incompleta (\"Tintura di Eranthis Brinata del…\"): le Non comuni, Rare e Mitiche escono dal Bottino dell'Esperienza con dei componenti da trovare.",
+  "glossRiciclatoTerm": "Riciclato",
+  "glossRiciclatoText": "Un doppione uscito dal Bottino dell'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po' di Vis.",
+  "glossDispensaTerm": "Dispensa",
+  "glossDispensaText": "Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l'hai attinta) e le sue Vis.",
+  "glossRicettePronteTerm": "Ricette pronte",
+  "glossRicettePronteText": "Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.",
+  "glossPozioneTerm": "Pozione",
+  "glossPozioneText": "Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.",
+  "glossToccoTerm": "Tocco",
+  "glossToccoText": "L'aggettivo che la pianta dello slot libero dà alla pozione (Rigogliosa, Limpida, Presaga, Copiosa): quando la usi, aggiunge un piccolo effetto.",
+  "glossPozioneGuastataTerm": "Pozione guastata",
+  "glossPozioneGuastataText": "Una pozione da bere con una pianta tossica nello slot libero: le Vis sono perse, ma impari che la pianta è tossica.",
+  "glossScaffaleTerm": "Scaffale",
+  "glossScaffaleText": "Le pozioni che hai: tienile per la collezione o usale. L'effetto vale 7 giorni, con la forza della potenza.",
+  "legendPotions": "Pozioni",
+  "legendVessel": "Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L'icona in alto a destra è l'effetto.",
+  "viewMet": "Incontrate",
+  "erbarioSpecies": "Specie",
+  "tipOfDayTitle": "Consiglio del giorno",
+  "tip01": "Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.",
+  "tip02": "La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.",
+  "tip03": "Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.",
+  "tip04": "Nel Bottino dell'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell'Esperienza.",
+  "tip05": "Le Mitiche escono solo dal Bottino dell'Esperienza mitico.",
+  "tip06": "I doppioni del Bottino dell'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.",
+  "tip07": "Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.",
+  "tip08": "Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.",
+  "tip09": "Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.",
+  "tip10": "Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.",
+  "tip11": "Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.",
+  "tip12": "I Tratti dicono in che condizioni hai attinto un'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.",
+  "tip13": "I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.",
+  "tip14": "Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.",
+  "tip15": "\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono."
 }

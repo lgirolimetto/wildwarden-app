@@ -62,6 +62,23 @@ Future<void> openTab(WidgetTester tester, String label) async {
   await tester.pumpAndSettle();
 }
 
+/// Apre le Impostazioni dal pulsante in alto nella Home. Il pulsante sta nella testata del diorama, che scorrendo
+/// esce dallo schermo: si usa la sua azione invece di toccarlo.
+Future<void> openSettings(WidgetTester tester) async {
+  await openTab(tester, 'Home');
+  final list = find.descendant(of: find.byKey(const ValueKey('study-home-list')), matching: find.byType(Scrollable));
+  tester.state<ScrollableState>(list.first).position.jumpTo(0);
+  await tester.pump();
+  tester.widget<ClayIconButton>(find.byKey(const ValueKey('open-settings'), skipOffstage: false)).onPressed();
+  await tester.pumpAndSettle();
+}
+
+/// Torna indietro dalla pagina aperta sopra la Home.
+Future<void> goBack(WidgetTester tester) async {
+  await tester.tap(find.byKey(const ValueKey('clay-back')).last);
+  await tester.pumpAndSettle();
+}
+
 /// Risponde alla domanda corrente della sessione di studio toccando l'opzione giusta (o una sbagliata).
 Future<void> answerCurrentQuestion(WidgetTester tester, {bool correctly = true}) async {
   final question = Get.find<StudyController>().question!;
@@ -105,9 +122,10 @@ Future<void> scrollToTop(WidgetTester tester) async {
 }
 
 /// La lista verticale della pagina in primo piano: con una pagina aperta sopra un'altra, quella sotto resta
-/// nell'albero dei widget, e la sua lista viene prima.
+/// nell'albero dei widget, e la sua lista viene prima. Solo quelle che si toccano: le schede della Home non scelte
+/// restano nell'albero (`IndexedStack`) ma non si vedono.
 Finder _topVerticalScrollable() =>
-    find.byWidgetPredicate((w) => w is Scrollable && w.axisDirection == AxisDirection.down).last;
+    find.byWidgetPredicate((w) => w is Scrollable && w.axisDirection == AxisDirection.down).hitTestable().last;
 
 /// Scorre fino a [finder] e lo tocca.
 Future<void> scrollAndTap(WidgetTester tester, Finder finder) async {

@@ -1,5 +1,8 @@
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
+import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/localized_text.dart';
 import 'package:druid_app/business_logic/models/species_traits.dart';
 
@@ -29,6 +32,28 @@ class SpeciesImage {
     local: json['local'] as bool,
   );
 }
+
+/// La specie in tutto il paese (il Ricettario è nazionale: capitolo 02, "Ricettario, Tavole, Laboratorio e Zone"):
+/// stagionalità e clima dei posti dove è osservata. Decidono i tratti d'elezione della sua pagina.
+class NationalData {
+  /// Peso relativo di ogni mese in tutto il paese (indice 0 = gennaio), corretto per l'attività degli osservatori.
+  final List<double> monthsRelative;
+
+  /// Giorni al mese con sole, pioggia, nebbia, rugiada e gelo nei posti dove la specie è osservata.
+  final Map<Trait, List<double>> climate;
+
+  const NationalData({required this.monthsRelative, required this.climate});
+
+  factory NationalData.fromJson(Map<String, dynamic> json) => NationalData(
+    monthsRelative: (json['monthsRelative'] as List).map((v) => (v as num).toDouble()).toList(),
+    climate: (json['climate'] as Map<String, dynamic>).map(
+      (id, days) => MapEntry(Trait.values.byName(id), climateDays(days as List)),
+    ),
+  );
+}
+
+/// Giorni al mese di una condizione meteo, dal JSON del catalogo.
+List<double> climateDays(List<dynamic> days) => [for (final d in days) (d as num).toDouble()];
 
 /// Specie del catalogo di una zona, con i dati ricavati dalle osservazioni GBIF.
 class Species {
@@ -69,6 +94,18 @@ class Species {
   /// nessuna delle liste ufficiali della pipeline la protegge.
   final List<String> protection;
 
+  /// Rarità della pianta nella Zona, dalle osservazioni: poche osservazioni = difficile da raggiungere (capitolo 02,
+  /// 2026-10-27). Decide la pagina del Ricettario e i compagni delle ricette.
+  final Grade grade;
+
+  /// Tratti d'elezione e vocazione corretti a mano (porta di servizio di `extras.json`); `null` = li calcola la
+  /// regola delle ricette.
+  final List<Trait>? favouredTraits;
+  final List<PotionEffect>? vocation;
+
+  /// La specie in tutto il paese; `null` se la pipeline non l'ha calcolata (le regole usano allora i dati della Zona).
+  final NationalData? national;
+
   const Species({
     required this.sci,
     required this.name,
@@ -88,6 +125,10 @@ class Species {
     this.mysteryColor,
     this.traits = SpeciesTraits.none,
     this.protection = const [],
+    this.grade = Grade.common,
+    this.favouredTraits,
+    this.vocation,
+    this.national,
   });
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
@@ -115,6 +156,10 @@ class Species {
         ? SpeciesTraits.none
         : SpeciesTraits.fromJson(json['traits'] as Map<String, dynamic>),
     protection: (json['protection'] as List?)?.cast<String>() ?? const [],
+    grade: Grade.values.byName(json['grade'] as String),
+    favouredTraits: (json['favouredTraits'] as List?)?.map((t) => Trait.values.byName(t as String)).toList(),
+    vocation: (json['vocation'] as List?)?.map((e) => PotionEffect.values.byName(e as String)).toList(),
+    national: json['national'] == null ? null : NationalData.fromJson(json['national'] as Map<String, dynamic>),
   );
 }
 

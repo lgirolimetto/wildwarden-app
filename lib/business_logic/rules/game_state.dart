@@ -1,4 +1,9 @@
+import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/potion.dart';
+import 'package:druid_app/business_logic/rules/essences.dart';
+import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
 
@@ -18,8 +23,8 @@ class GameState {
   /// PE spesi (Bottino dell'Esperienza, tappa C): il **saldo** è carriera meno spesi.
   final int spentXp;
 
-  /// Vis immagazzinate, per specie.
-  final Map<String, int> vis;
+  /// Le Essenze attinte, nell'ordine: la Dispensa. Le Vis stanno nelle Essenze (vedi [vis]).
+  final List<Essence> essences;
 
   /// Ultima raccolta di ogni specie: una al giorno.
   final Map<String, DateTime> lastDraws;
@@ -42,15 +47,48 @@ class GameState {
   final Set<String> notebook;
   final Set<OnboardingMark> onboardingMarks;
 
-  /// Ricette imparate, per id.
-  final Set<String> learnedRecipes;
+  /// Ricette imparate (ricette ad affissi e Mitiche), per id, con il giorno in cui si sono imparate. Gli id delle
+  /// ricette scritte a mano prima della tappa C restano qui ma non corrispondono più a nessuna ricetta.
+  final Map<String, DateTime> learnedRecipes;
+
+  /// Tavole trovate incomplete, per id, con i pezzi del nome che mancano ancora (sempre più di 0: completata, passa
+  /// in [learnedRecipes]).
+  final Map<String, int> missingPieces;
+
+  /// Riciclati per grado: i doppioni usciti dal Bottino (si spendono nel riciclo, step 6).
+  final Map<Grade, int> recycled;
+
+  /// Bottini dell'Esperienza aperti, con il grado e il momento.
+  final List<(Grade, DateTime)> troves;
+
+  /// Quando sono state attinte le Essenze, in ordine.
+  final List<DateTime> essenceTimes;
+
+  /// Le pozioni preparate (lo Scaffale), nell'ordine.
+  final List<Potion> potions;
+
+  /// La potenza migliore raggiunta per ogni ricetta: la mostra la Tavola.
+  final Map<String, int> bestPotency;
+
+  /// Le piante che sai tossiche perché ti hanno guastato una pozione.
+  final Set<String> knownToxic;
+
+  /// Gli effetti delle pozioni usate, anche quelli finiti (vedi `activeEffects` in `rules/recipes/potion_effects.dart`).
+  final List<ActiveEffect> effects;
+
+  /// Momento del primo evento: quando si è cominciato a giocare.
+  final DateTime? startedAt;
+
+  /// Quando è stato offerto il regalo "bentornato" (`null` = mai).
+  final DateTime? welcomeOfferedAt;
+  final bool welcomeRedeemed;
 
   const GameState({
     this.firstEncounters = const {},
     this.xp = 0,
     this.pendingXp = const {},
     this.spentXp = 0,
-    this.vis = const {},
+    this.essences = const [],
     this.lastDraws = const {},
     this.passedLevels = const {},
     this.mastered = const {},
@@ -63,6 +101,17 @@ class GameState {
     this.notebook = const {},
     this.onboardingMarks = const {},
     this.learnedRecipes = const {},
+    this.missingPieces = const {},
+    this.recycled = const {},
+    this.troves = const [],
+    this.essenceTimes = const [],
+    this.potions = const [],
+    this.bestPotency = const {},
+    this.knownToxic = const {},
+    this.effects = const [],
+    this.startedAt,
+    this.welcomeOfferedAt,
+    this.welcomeRedeemed = false,
   });
 
   static const empty = GameState();
@@ -80,6 +129,15 @@ class GameState {
   /// PE che si possono spendere.
   int get balance => xp - spentXp;
 
+  /// Vis che restano, per specie (anche 0, se le hai spese tutte).
+  Map<String, int> get vis {
+    final total = <String, int>{};
+    for (final e in essences) {
+      total[e.speciesSci] = (total[e.speciesSci] ?? 0) + e.vis;
+    }
+    return total;
+  }
+
   /// Almeno un'essenza di questa specie è stata attinta: i suoi PE sono reali.
   bool hasDrawn(String speciesSci) => draws.containsKey(speciesSci);
 
@@ -95,7 +153,8 @@ class GameState {
   ];
 
   GameState apply(GameEvent event) {
-    final next = _withXp(event);
+    final started = startedAt == null ? _copy(startedAt: event.occurredAt) : this;
+    final next = started._withXp(event);
     return switch (event) {
       SpeciesEncountered(:final speciesSci, :final occurredAt) =>
         next.hasEncountered(speciesSci)
@@ -123,15 +182,27 @@ class GameState {
       ),
       MasteryReached(:final speciesSci) => next._copy(mastered: {...mastered, speciesSci}),
       // La prima essenza di una specie incassa i suoi PE virtuali.
-      EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, vis: final gained) => next._copy(
+      EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, :final purity, vis: final gained) => next._copy(
         xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
         pendingXp: {...next.pendingXp}..remove(speciesSci),
         draws: {
           ...draws,
           speciesSci: [...?draws[speciesSci], traits],
         },
-        vis: {...vis, speciesSci: (vis[speciesSci] ?? 0) + gained},
+        essences: [
+          ...essences,
+          Essence(
+            index: essences.length,
+            speciesSci: speciesSci,
+            traits: traits,
+            // Gli eventi di prima della Dispensa non hanno la purezza: quella del livello di studio di allora.
+            purity: purity ?? purityOfLevel(levelOf(speciesSci)),
+            vis: gained,
+            drawnAt: occurredAt,
+          ),
+        ],
         lastDraws: {...lastDraws, speciesSci: occurredAt},
+        essenceTimes: [...essenceTimes, occurredAt],
       ),
       DesiderataChanged(:final speciesSci, :final marked) => next._copy(
         desiderata: marked ? {...desiderata, speciesSci} : ({...desiderata}..remove(speciesSci)),
@@ -146,8 +217,104 @@ class GameState {
       NoteSaved(:final speciesSci, :final text) => next._copy(notes: {...notes, speciesSci: text}),
       NotebookEntrySaved(:final factId) => next._copy(notebook: {...notebook, factId}),
       OnboardingMarked(:final mark) => next._copy(onboardingMarks: {...onboardingMarks, mark}),
-      RecipeLearned(:final recipeId) => next._copy(learnedRecipes: {...learnedRecipes, recipeId}),
+      RecipeLearned(:final recipeId, :final occurredAt) =>
+        learnedRecipes.containsKey(recipeId)
+            ? next
+            : next._copy(learnedRecipes: {...learnedRecipes, recipeId: occurredAt}),
+      TroveOpened() => next._openTrove(event),
+      WelcomeGiftOffered(:final occurredAt) => next._copy(welcomeOfferedAt: welcomeOfferedAt ?? occurredAt),
+      XpGranted() => next,
+      RecipeRecycled() => next._recycle(event),
+      PotionBrewed() => next._brew(event),
+      PotionUsed() => next._use(event),
     };
+  }
+
+  GameState _use(PotionUsed event) {
+    final until = event.occurredAt.add(const Duration(days: potionEffectDays));
+    return _copy(
+      potions: [for (final p in potions) p.index == event.potionIndex ? p.used(event.occurredAt) : p],
+      effects: [
+        ...effects,
+        ActiveEffect(effect: event.effect, strength: event.strength, until: until),
+        if (event.touch case final touch?) ActiveEffect(effect: touch, strength: touchStrength, until: until),
+      ],
+    );
+  }
+
+  GameState _brew(PotionBrewed event) {
+    final spent = [
+      for (final e in essences)
+        if (event.essences[e.index] case final int vis) e.withVis(e.vis - vis) else e,
+    ];
+    if (event.spoiled) {
+      return _copy(essences: spent, knownToxic: {...knownToxic, ?event.freeSpecies});
+    }
+    final best = bestPotency[event.recipeId] ?? 0;
+    return _copy(
+      essences: spent,
+      potions: [
+        ...potions,
+        Potion(
+          index: potions.length,
+          recipeId: event.recipeId,
+          potency: event.potency,
+          touch: event.touch,
+          brewedAt: event.occurredAt,
+        ),
+      ],
+      bestPotency: {...bestPotency, event.recipeId: event.potency > best ? event.potency : best},
+    );
+  }
+
+  GameState _recycle(RecipeRecycled event) {
+    final missing = {...missingPieces};
+    final learned = {...learnedRecipes};
+    final left = (missing[event.recipeId] ?? 1) - 1;
+    if (left > 0) {
+      missing[event.recipeId] = left;
+    } else {
+      missing.remove(event.recipeId);
+      learned.putIfAbsent(event.recipeId, () => event.occurredAt);
+    }
+    return _copy(
+      missingPieces: missing,
+      learnedRecipes: learned,
+      recycled: {...recycled, event.fromGrade: (recycled[event.fromGrade] ?? 0) - event.used},
+      essences: event.vis.entries.fold<List<Essence>>(essences, (list, e) => spendVis(list, e.key, e.value)),
+    );
+  }
+
+  GameState _openTrove(TroveOpened event) {
+    final learned = {...learnedRecipes};
+    final missing = {...missingPieces};
+    final recycledNow = {...recycled};
+    for (final find in event.finds) {
+      switch (find.kind) {
+        case TroveFindKind.recipe when find.missing <= 0:
+          learned.putIfAbsent(find.recipeId, () => event.occurredAt);
+        case TroveFindKind.recipe:
+          if (!learned.containsKey(find.recipeId)) missing[find.recipeId] = find.missing;
+        case TroveFindKind.piece:
+          final left = (missing[find.recipeId] ?? 1) - 1;
+          if (left > 0) {
+            missing[find.recipeId] = left;
+          } else {
+            missing.remove(find.recipeId);
+            learned.putIfAbsent(find.recipeId, () => event.occurredAt);
+          }
+        case TroveFindKind.recycled:
+          recycledNow[find.grade] = (recycledNow[find.grade] ?? 0) + 1;
+      }
+    }
+    return _copy(
+      spentXp: spentXp + event.price,
+      learnedRecipes: learned,
+      missingPieces: missing,
+      recycled: recycledNow,
+      troves: [...troves, (event.grade, event.occurredAt)],
+      welcomeRedeemed: welcomeRedeemed || event.gift,
+    );
   }
 
   /// Aggiunge i PE dell'evento: virtuali se vengono dallo studio di una specie mai attinta, reali altrimenti
@@ -168,7 +335,7 @@ class GameState {
     int? xp,
     Map<String, int>? pendingXp,
     int? spentXp,
-    Map<String, int>? vis,
+    List<Essence>? essences,
     Map<String, DateTime>? lastDraws,
     Map<String, int>? passedLevels,
     Set<String>? mastered,
@@ -180,13 +347,24 @@ class GameState {
     Map<String, String>? notes,
     Set<String>? notebook,
     Set<OnboardingMark>? onboardingMarks,
-    Set<String>? learnedRecipes,
+    Map<String, DateTime>? learnedRecipes,
+    Map<String, int>? missingPieces,
+    Map<Grade, int>? recycled,
+    List<(Grade, DateTime)>? troves,
+    List<DateTime>? essenceTimes,
+    List<Potion>? potions,
+    Map<String, int>? bestPotency,
+    Set<String>? knownToxic,
+    List<ActiveEffect>? effects,
+    DateTime? startedAt,
+    DateTime? welcomeOfferedAt,
+    bool? welcomeRedeemed,
   }) => GameState(
     firstEncounters: firstEncounters ?? this.firstEncounters,
     xp: xp ?? this.xp,
     pendingXp: pendingXp ?? this.pendingXp,
     spentXp: spentXp ?? this.spentXp,
-    vis: vis ?? this.vis,
+    essences: essences ?? this.essences,
     lastDraws: lastDraws ?? this.lastDraws,
     passedLevels: passedLevels ?? this.passedLevels,
     mastered: mastered ?? this.mastered,
@@ -199,5 +377,16 @@ class GameState {
     notebook: notebook ?? this.notebook,
     onboardingMarks: onboardingMarks ?? this.onboardingMarks,
     learnedRecipes: learnedRecipes ?? this.learnedRecipes,
+    missingPieces: missingPieces ?? this.missingPieces,
+    recycled: recycled ?? this.recycled,
+    troves: troves ?? this.troves,
+    essenceTimes: essenceTimes ?? this.essenceTimes,
+    potions: potions ?? this.potions,
+    bestPotency: bestPotency ?? this.bestPotency,
+    knownToxic: knownToxic ?? this.knownToxic,
+    effects: effects ?? this.effects,
+    startedAt: startedAt ?? this.startedAt,
+    welcomeOfferedAt: welcomeOfferedAt ?? this.welcomeOfferedAt,
+    welcomeRedeemed: welcomeRedeemed ?? this.welcomeRedeemed,
   );
 }

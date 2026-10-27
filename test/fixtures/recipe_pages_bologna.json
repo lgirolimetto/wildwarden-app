@@ -1,0 +1,6855 @@
+[
+ {
+  "sci": "Viburnum tinus",
+  "grade": "common",
+  "favouredTraits": [
+   "waningMoon",
+   "dusk",
+   "moon"
+  ],
+  "vocation": [
+   "abundance",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/viburnum-tinus·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Lentaggine dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Viburnum tinus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/viburnum-tinus·waningMoon·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "waningMoon"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Lentaggine Calante dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Viburnum tinus",
+      "qty": 2,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/viburnum-tinus·dusk+moon·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "moon"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Lentaggine Crepuscolare Plenilunare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Viburnum tinus",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Anemone hortensis",
+  "grade": "common",
+  "favouredTraits": [
+   "dawn",
+   "sun",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/anemone-hortensis·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Infuso",
+    "name": "Infuso d'Anemone fior di stella della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Anemone hortensis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/anemone-hortensis·dawn·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Anemone fior di stella Aurorale della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Anemone hortensis",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/anemone-hortensis·waxingMoon+sun·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "sun"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir d'Anemone fior di stella Crescente Solare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Anemone hortensis",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Prunus spinosa",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Orchis purpurea",
+  "grade": "common",
+  "favouredTraits": [
+   "waxingMoon",
+   "rain",
+   "dusk"
+  ],
+  "vocation": [
+   "omen"
+  ],
+  "cards": [
+   {
+    "id": "it/orchis-purpurea·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Infuso",
+    "name": "Infuso d'Orchide maggiore del Presagio",
+    "ingredients": [
+     {
+      "species": "Orchis purpurea",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/orchis-purpurea·waxingMoon·omen",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "omen",
+    "base": "Tintura",
+    "name": "Tintura d'Orchide maggiore Crescente del Presagio",
+    "ingredients": [
+     {
+      "species": "Orchis purpurea",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/orchis-purpurea·dusk+rain·omen",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "rain"
+    ],
+    "effect": "omen",
+    "base": "Filtro",
+    "name": "Filtro d'Orchide maggiore Crepuscolare Piovano del Presagio",
+    "ingredients": [
+     {
+      "species": "Orchis purpurea",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Euphorbia helioscopia",
+  "grade": "common",
+  "favouredTraits": [
+   "frost",
+   "dawn",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/euphorbia-helioscopia·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento d'Euforbia calenzuola del Presagio",
+    "ingredients": [
+     {
+      "species": "Euphorbia helioscopia",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/euphorbia-helioscopia·frost·omen",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Euforbia calenzuola Brinato del Presagio",
+    "ingredients": [
+     {
+      "species": "Euphorbia helioscopia",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/euphorbia-helioscopia·dawn+waxingMoon·abundance",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "waxingMoon"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo d'Euforbia calenzuola Aurorale Crescente dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Euphorbia helioscopia",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Anemone hortensis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Prunus spinosa",
+  "grade": "common",
+  "favouredTraits": [
+   "waxingMoon",
+   "dawn",
+   "frost"
+  ],
+  "vocation": [
+   "abundance",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/prunus-spinosa·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Prugnolo dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Prunus spinosa",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   },
+   {
+    "id": "it/prunus-spinosa·waxingMoon·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Prugnolo Crescente dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Prunus spinosa",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   },
+   {
+    "id": "it/prunus-spinosa·dawn+frost·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "frost"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Prugnolo Aurorale Brinato della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Prunus spinosa",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 3,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Paliurus spina-christi",
+  "grade": "rare",
+  "favouredTraits": [
+   "sun",
+   "dawn",
+   "fog"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/paliurus-spina-christi·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Marruca della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Paliurus spina-christi",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/paliurus-spina-christi·sun·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Marruca Solare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Paliurus spina-christi",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/paliurus-spina-christi·dawn·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Marruca Aurorale della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Paliurus spina-christi",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Viburnum lantana",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/paliurus-spina-christi·dawn+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Marruca Aurorale Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Paliurus spina-christi",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Cornus mas",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Celtis australis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     8
+    ]
+   },
+   {
+    "id": "it/paliurus-spina-christi·sun+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "sun",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Marruca Solare Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Paliurus spina-christi",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Alliaria petiolata",
+  "grade": "common",
+  "favouredTraits": [
+   "dusk",
+   "moon",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/alliaria-petiolata·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Infuso",
+    "name": "Infuso d'Alliaria dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Alliaria petiolata",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/alliaria-petiolata·dusk·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "dusk"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura d'Alliaria Crepuscolare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Alliaria petiolata",
+      "qty": 2,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/alliaria-petiolata·waxingMoon+moon·abundance",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "moon"
+    ],
+    "effect": "abundance",
+    "base": "Elisir",
+    "name": "Elisir d'Alliaria Crescente Plenilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Alliaria petiolata",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Euonymus europaeus",
+  "grade": "common",
+  "favouredTraits": [
+   "fog",
+   "dew",
+   "newMoon"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/euonymus-europaeus·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Berretto da prete del Presagio",
+    "ingredients": [
+     {
+      "species": "Euonymus europaeus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/euonymus-europaeus·fog·omen",
+    "grade": "uncommon",
+    "traits": [
+     "fog"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Berretto da prete Nebbioso del Presagio",
+    "ingredients": [
+     {
+      "species": "Euonymus europaeus",
+      "qty": 2,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Hedera helix",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/euonymus-europaeus·newMoon+dew·abundance",
+    "grade": "rare",
+    "traits": [
+     "newMoon",
+     "dew"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Berretto da prete Novilunare Rugiadoso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Euonymus europaeus",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Ligustrum vulgare",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11,
+     12
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Clematis vitalba",
+  "grade": "common",
+  "favouredTraits": [
+   "newMoon",
+   "fog",
+   "sun"
+  ],
+  "vocation": [
+   "omen",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/clematis-vitalba·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Clematide vitalba del Presagio",
+    "ingredients": [
+     {
+      "species": "Clematis vitalba",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/clematis-vitalba·newMoon·omen",
+    "grade": "uncommon",
+    "traits": [
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Clematide vitalba Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Clematis vitalba",
+      "qty": 2,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/clematis-vitalba·sun+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "sun",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Balsamo",
+    "name": "Balsamo di Clematide vitalba Solare Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Clematis vitalba",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Ruscus aculeatus",
+  "grade": "common",
+  "favouredTraits": [
+   "newMoon",
+   "dusk",
+   "moon"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/ruscus-aculeatus·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Ruscolo pungitopo del Presagio",
+    "ingredients": [
+     {
+      "species": "Ruscus aculeatus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/ruscus-aculeatus·newMoon·omen",
+    "grade": "uncommon",
+    "traits": [
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Ruscolo pungitopo Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Ruscus aculeatus",
+      "qty": 2,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Helleborus foetidus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "id": "it/ruscus-aculeatus·dusk+moon·abundance",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "moon"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Ruscolo pungitopo Crepuscolare Plenilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Ruscus aculeatus",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Helleborus viridis",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Cotinus coggygria",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "dawn",
+   "sun",
+   "fog"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/cotinus-coggygria·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Sommacco selvatico della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cotinus coggygria",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/cotinus-coggygria·dawn·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Sommacco selvatico Aurorale della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cotinus coggygria",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Celtis australis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/cotinus-coggygria·sun·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Sommacco selvatico Solare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cotinus coggygria",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/cotinus-coggygria·sun+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "sun",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Sommacco selvatico Solare Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cotinus coggygria",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Paliurus spina-christi",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Malva sylvestris",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Laurus nobilis",
+  "grade": "common",
+  "favouredTraits": [
+   "fog",
+   "dusk",
+   "moon"
+  ],
+  "vocation": [
+   "regrowth",
+   "clarity"
+  ],
+  "cards": [
+   {
+    "id": "it/laurus-nobilis·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Sciroppo",
+    "name": "Sciroppo d'Alloro della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Laurus nobilis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/laurus-nobilis·fog·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Alloro Nebbiosa della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Laurus nobilis",
+      "qty": 2,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Viburnum tinus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/laurus-nobilis·dusk+moon·clarity",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "moon"
+    ],
+    "effect": "clarity",
+    "base": "Distillato",
+    "name": "Distillato d'Alloro Crepuscolare Plenilunare della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Laurus nobilis",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Cornus sanguinea",
+  "grade": "common",
+  "favouredTraits": [
+   "rain",
+   "dew",
+   "waningMoon"
+  ],
+  "vocation": [
+   "abundance",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/cornus-sanguinea·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Corniolo sanguinello dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Cornus sanguinea",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/cornus-sanguinea·rain·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Corniolo sanguinello Piovana dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/cornus-sanguinea·waningMoon+dew·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Corniolo sanguinello Calante Rugiadoso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cornus sanguinea",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     8,
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Viburnum lantana",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "sun",
+   "dawn",
+   "rain"
+  ],
+  "vocation": [
+   "abundance",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/viburnum-lantana·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Viburno lantana dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Viburnum lantana",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/viburnum-lantana·sun·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Viburno lantana Solare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Viburnum lantana",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Cornus mas",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     8
+    ]
+   },
+   {
+    "id": "it/viburnum-lantana·dawn·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Viburno lantana Aurorale della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Viburnum lantana",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/viburnum-lantana·dawn+rain·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Viburno lantana Aurorale Piovano della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Viburnum lantana",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Chelidonium majus",
+  "grade": "common",
+  "favouredTraits": [
+   "newMoon",
+   "rain",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/chelidonium-majus·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Celidonia del Presagio",
+    "ingredients": [
+     {
+      "species": "Chelidonium majus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/chelidonium-majus·newMoon·omen",
+    "grade": "uncommon",
+    "traits": [
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Celidonia Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Chelidonium majus",
+      "qty": 2,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/chelidonium-majus·waxingMoon+rain·abundance",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Celidonia Crescente Piovano dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Chelidonium majus",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Celtis australis",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "waningMoon",
+   "dawn",
+   "fog"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/celtis-australis·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Bagolaro della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Celtis australis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/celtis-australis·waningMoon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "waningMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Bagolaro Calante della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Celtis australis",
+      "qty": 2,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/celtis-australis·dawn·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Bagolaro Aurorale dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Celtis australis",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Malva sylvestris",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/celtis-australis·dawn+fog·abundance",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "fog"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Bagolaro Aurorale Nebbioso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Celtis australis",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Linaria vulgaris",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     9
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Fraxinus ornus",
+  "grade": "common",
+  "favouredTraits": [
+   "waxingMoon",
+   "dusk",
+   "moon"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/fraxinus-ornus·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Frassino da manna della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Fraxinus ornus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/fraxinus-ornus·waxingMoon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Frassino da manna Crescente della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Fraxinus ornus",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   },
+   {
+    "id": "it/fraxinus-ornus·dusk+moon·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "moon"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Frassino da manna Crepuscolare Plenilunare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Fraxinus ornus",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Corylus avellana",
+  "grade": "common",
+  "favouredTraits": [
+   "frost",
+   "fog",
+   "waningMoon"
+  ],
+  "vocation": [
+   "abundance",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/corylus-avellana·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Decotto",
+    "name": "Decotto di Nocciolo dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Corylus avellana",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     5,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/corylus-avellana·frost·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Nocciolo Brinata dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Corylus avellana",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Cornus mas",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     2
+    ]
+   },
+   {
+    "id": "it/corylus-avellana·waningMoon+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Nocciolo Calante Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Melissa officinalis",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "rain",
+   "waxingMoon",
+   "dew"
+  ],
+  "vocation": [
+   "clarity"
+  ],
+  "cards": [
+   {
+    "id": "it/melissa-officinalis·clarity",
+    "grade": "common",
+    "traits": [],
+    "effect": "clarity",
+    "base": "Infuso",
+    "name": "Infuso di Melissa della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melissa officinalis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/melissa-officinalis·rain·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura di Melissa Piovana della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melissa officinalis",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/melissa-officinalis·waxingMoon·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura di Melissa Crescente della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melissa officinalis",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "id": "it/melissa-officinalis·waxingMoon+dew·clarity",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "dew"
+    ],
+    "effect": "clarity",
+    "base": "Elisir",
+    "name": "Elisir di Melissa Crescente Rugiadoso della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Acer campestre",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "dew",
+   "waningMoon",
+   "fog"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/acer-campestre·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto d'Acero oppio della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Acer campestre",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/acer-campestre·dew·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Acero oppio Rugiadosa della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Acer campestre",
+      "qty": 2,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/acer-campestre·waningMoon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "waningMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Acero oppio Calante della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Acer campestre",
+      "qty": 2,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/acer-campestre·waningMoon+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato d'Acero oppio Calante Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Populus alba",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     9,
+     10,
+     11,
+     12
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Juglans regia",
+  "grade": "common",
+  "favouredTraits": [
+   "rain",
+   "dew",
+   "dusk"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/juglans-regia·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Noce della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Juglans regia",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/juglans-regia·rain·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Noce Piovana della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Juglans regia",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/juglans-regia·dusk+dew·abundance",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "dew"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Noce Crepuscolare Rugiadoso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Salvia pratensis",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "dawn",
+   "waxingMoon",
+   "sun"
+  ],
+  "vocation": [
+   "clarity"
+  ],
+  "cards": [
+   {
+    "id": "it/salvia-pratensis·clarity",
+    "grade": "common",
+    "traits": [],
+    "effect": "clarity",
+    "base": "Infuso",
+    "name": "Infuso di Salvia della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Salvia pratensis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/salvia-pratensis·dawn·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura di Salvia Aurorale della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Salvia pratensis",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Fraxinus ornus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/salvia-pratensis·waxingMoon·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura di Salvia Crescente della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Salvia pratensis",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/salvia-pratensis·waxingMoon+sun·clarity",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "sun"
+    ],
+    "effect": "clarity",
+    "base": "Elisir",
+    "name": "Elisir di Salvia Crescente Solare della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Salvia pratensis",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Borago officinalis",
+  "grade": "common",
+  "favouredTraits": [
+   "dawn",
+   "sun",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "abundance",
+   "clarity"
+  ],
+  "cards": [
+   {
+    "id": "it/borago-officinalis·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Infuso",
+    "name": "Infuso di Borragine dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Borago officinalis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     12
+    ]
+   },
+   {
+    "id": "it/borago-officinalis·dawn·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Borragine Aurorale dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Borago officinalis",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Anemone hortensis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/borago-officinalis·waxingMoon+sun·clarity",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "sun"
+    ],
+    "effect": "clarity",
+    "base": "Elisir",
+    "name": "Elisir di Borragine Crescente Solare della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Prunus spinosa",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Cornus mas",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Cornus mas",
+  "grade": "common",
+  "favouredTraits": [
+   "frost",
+   "dusk",
+   "moon"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/cornus-mas·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Corniolo maschio della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cornus mas",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3,
+     8
+    ]
+   },
+   {
+    "id": "it/cornus-mas·frost·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Corniolo maschio Brinata della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cornus mas",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     2
+    ]
+   },
+   {
+    "id": "it/cornus-mas·dusk+moon·abundance",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "moon"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Corniolo maschio Crepuscolare Plenilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Cornus mas",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Viburnum lantana",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     8
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Melittis melissophyllum",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "rain",
+   "waxingMoon",
+   "dusk"
+  ],
+  "vocation": [
+   "clarity"
+  ],
+  "cards": [
+   {
+    "id": "it/melittis-melissophyllum·clarity",
+    "grade": "common",
+    "traits": [],
+    "effect": "clarity",
+    "base": "Infuso",
+    "name": "Infuso d'Erba limona della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "id": "it/melittis-melissophyllum·rain·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura d'Erba limona Piovana della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Anacamptis morio",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/melittis-melissophyllum·waxingMoon·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura d'Erba limona Crescente della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Fraxinus ornus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/melittis-melissophyllum·dusk+waxingMoon·clarity",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "waxingMoon"
+    ],
+    "effect": "clarity",
+    "base": "Elisir",
+    "name": "Elisir d'Erba limona Crepuscolare Crescente della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Orchis purpurea",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Helleborus viridis",
+  "grade": "rare",
+  "favouredTraits": [
+   "dusk",
+   "moon",
+   "newMoon"
+  ],
+  "vocation": [
+   "omen"
+  ],
+  "cards": [
+   {
+    "id": "it/helleborus-viridis·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento d'Elleboro verde del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus viridis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/helleborus-viridis·dusk·omen",
+    "grade": "uncommon",
+    "traits": [
+     "dusk"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Elleboro verde Crepuscolare del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus viridis",
+      "qty": 2,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Ruscus aculeatus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/helleborus-viridis·moon·omen",
+    "grade": "uncommon",
+    "traits": [
+     "moon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Elleboro verde Plenilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus viridis",
+      "qty": 2,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Helleborus foetidus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "id": "it/helleborus-viridis·moon+newMoon·omen",
+    "grade": "rare",
+    "traits": [
+     "moon",
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Elleboro verde Plenilunare Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus viridis",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   },
+   {
+    "id": "it/helleborus-viridis·dusk+newMoon·omen",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Elleboro verde Crepuscolare Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus viridis",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Hedera helix",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Euphorbia cyparissias",
+  "grade": "common",
+  "favouredTraits": [
+   "dawn",
+   "waxingMoon",
+   "newMoon"
+  ],
+  "vocation": [
+   "omen"
+  ],
+  "cards": [
+   {
+    "id": "it/euphorbia-cyparissias·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento d'Euforbia cipressina del Presagio",
+    "ingredients": [
+     {
+      "species": "Euphorbia cyparissias",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     10
+    ]
+   },
+   {
+    "id": "it/euphorbia-cyparissias·dawn·omen",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Euforbia cipressina Aurorale del Presagio",
+    "ingredients": [
+     {
+      "species": "Euphorbia cyparissias",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     10
+    ]
+   },
+   {
+    "id": "it/euphorbia-cyparissias·waxingMoon+newMoon·omen",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Euforbia cipressina Crescente Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Euphorbia cyparissias",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Prunus spinosa",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Malva sylvestris",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "dawn",
+   "sun",
+   "fog"
+  ],
+  "vocation": [
+   "clarity",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/malva-sylvestris·clarity",
+    "grade": "common",
+    "traits": [],
+    "effect": "clarity",
+    "base": "Infuso",
+    "name": "Infuso di Malva selvatica della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Malva sylvestris",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/malva-sylvestris·dawn·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura di Malva selvatica Aurorale della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Malva sylvestris",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/malva-sylvestris·sun·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Malva selvatica Solare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Malva sylvestris",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Celtis australis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/malva-sylvestris·sun+fog·abundance",
+    "grade": "rare",
+    "traits": [
+     "sun",
+     "fog"
+    ],
+    "effect": "abundance",
+    "base": "Elisir",
+    "name": "Elisir di Malva selvatica Solare Nebbioso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Malva sylvestris",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Prunus cerasifera",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "rain",
+   "waxingMoon",
+   "dawn"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/prunus-cerasifera·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Sciroppo",
+    "name": "Sciroppo di Mirabolano della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Prunus cerasifera",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "id": "it/prunus-cerasifera·rain·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Mirabolano Piovana della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Prunus cerasifera",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   {
+    "id": "it/prunus-cerasifera·waxingMoon·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Mirabolano Crescente dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Prunus cerasifera",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Prunus spinosa",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   },
+   {
+    "id": "it/prunus-cerasifera·dawn+waxingMoon·abundance",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "waxingMoon"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Mirabolano Aurorale Crescente dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Prunus cerasifera",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Orchis purpurea",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Anacamptis pyramidalis",
+  "grade": "common",
+  "favouredTraits": [
+   "sun",
+   "dawn",
+   "waningMoon"
+  ],
+  "vocation": [
+   "omen"
+  ],
+  "cards": [
+   {
+    "id": "it/anacamptis-pyramidalis·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Infuso",
+    "name": "Infuso d'Orchide piramidale del Presagio",
+    "ingredients": [
+     {
+      "species": "Anacamptis pyramidalis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6
+    ]
+   },
+   {
+    "id": "it/anacamptis-pyramidalis·sun·omen",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "omen",
+    "base": "Tintura",
+    "name": "Tintura d'Orchide piramidale Solare del Presagio",
+    "ingredients": [
+     {
+      "species": "Anacamptis pyramidalis",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Viburnum lantana",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6
+    ]
+   },
+   {
+    "id": "it/anacamptis-pyramidalis·dawn+waningMoon·omen",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "waningMoon"
+    ],
+    "effect": "omen",
+    "base": "Filtro",
+    "name": "Filtro d'Orchide piramidale Aurorale Calante del Presagio",
+    "ingredients": [
+     {
+      "species": "Anacamptis pyramidalis",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Ostrya carpinifolia",
+  "grade": "common",
+  "favouredTraits": [
+   "dusk",
+   "moon",
+   "newMoon"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/ostrya-carpinifolia·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Carpino nero della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Ostrya carpinifolia",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     12
+    ]
+   },
+   {
+    "id": "it/ostrya-carpinifolia·dusk·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dusk"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Carpino nero Crepuscolare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Ostrya carpinifolia",
+      "qty": 2,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Cornus mas",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     8
+    ]
+   },
+   {
+    "id": "it/ostrya-carpinifolia·moon+newMoon·regrowth",
+    "grade": "rare",
+    "traits": [
+     "moon",
+     "newMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato di Carpino nero Plenilunare Novilunare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Ostrya carpinifolia",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Viburnum lantana",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Glechoma hederacea",
+  "grade": "rare",
+  "favouredTraits": [
+   "frost",
+   "waxingMoon",
+   "rain"
+  ],
+  "vocation": [
+   "clarity",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/glechoma-hederacea·clarity",
+    "grade": "common",
+    "traits": [],
+    "effect": "clarity",
+    "base": "Decotto",
+    "name": "Decotto d'Edera terrestre della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Glechoma hederacea",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/glechoma-hederacea·frost·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura d'Edera terrestre Brinata della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Glechoma hederacea",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/glechoma-hederacea·waxingMoon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Edera terrestre Crescente della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Glechoma hederacea",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Alliaria petiolata",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/glechoma-hederacea·waxingMoon+rain·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato d'Edera terrestre Crescente Piovano della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Orchis purpurea",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   },
+   {
+    "id": "it/glechoma-hederacea·rain+frost·clarity",
+    "grade": "rare",
+    "traits": [
+     "rain",
+     "frost"
+    ],
+    "effect": "clarity",
+    "base": "Distillato",
+    "name": "Distillato d'Edera terrestre Piovano Brinato della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Populus alba",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Linaria vulgaris",
+  "grade": "rare",
+  "favouredTraits": [
+   "dawn",
+   "waningMoon",
+   "fog"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/linaria-vulgaris·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Infuso",
+    "name": "Infuso di Linaiola della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Linaria vulgaris",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/linaria-vulgaris·dawn·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Linaiola Aurorale della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Linaria vulgaris",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Celtis australis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/linaria-vulgaris·waningMoon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "waningMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Linaiola Calante della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Linaria vulgaris",
+      "qty": 2,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Malva sylvestris",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/linaria-vulgaris·waningMoon+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir di Linaiola Calante Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Linaria vulgaris",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     9
+    ]
+   },
+   {
+    "id": "it/linaria-vulgaris·dawn+fog·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "fog"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir di Linaiola Aurorale Nebbioso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Linaria vulgaris",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Populus alba",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "dew",
+   "rain",
+   "dawn"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/populus-alba·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Pioppo bianco della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Populus alba",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/populus-alba·dew·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Pioppo bianco Rugiadosa della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Populus alba",
+      "qty": 2,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/populus-alba·rain·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Pioppo bianco Piovana dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Populus alba",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/populus-alba·dawn+rain·abundance",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Pioppo bianco Aurorale Piovano dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Populus alba",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     9,
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Anacamptis morio",
+  "grade": "common",
+  "favouredTraits": [
+   "sun",
+   "waxingMoon",
+   "dawn"
+  ],
+  "vocation": [
+   "omen"
+  ],
+  "cards": [
+   {
+    "id": "it/anacamptis-morio·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Infuso",
+    "name": "Infuso d'Orchide minore del Presagio",
+    "ingredients": [
+     {
+      "species": "Anacamptis morio",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/anacamptis-morio·sun·omen",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "omen",
+    "base": "Tintura",
+    "name": "Tintura d'Orchide minore Solare del Presagio",
+    "ingredients": [
+     {
+      "species": "Anacamptis morio",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/anacamptis-morio·dawn+waxingMoon·omen",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "waxingMoon"
+    ],
+    "effect": "omen",
+    "base": "Filtro",
+    "name": "Filtro d'Orchide minore Aurorale Crescente del Presagio",
+    "ingredients": [
+     {
+      "species": "Anacamptis morio",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Senecio vulgaris",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "frost",
+   "fog",
+   "waningMoon"
+  ],
+  "vocation": [
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/senecio-vulgaris·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Infuso",
+    "name": "Infuso di Senecione dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Senecio vulgaris",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "id": "it/senecio-vulgaris·frost·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Senecione Brinata dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Senecio vulgaris",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Prunus cerasifera",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   },
+   {
+    "id": "it/senecio-vulgaris·fog·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "fog"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Senecione Nebbiosa dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Senecio vulgaris",
+      "qty": 2,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "id": "it/senecio-vulgaris·waningMoon+fog·abundance",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "fog"
+    ],
+    "effect": "abundance",
+    "base": "Elisir",
+    "name": "Elisir di Senecione Calante Nebbioso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Senecio vulgaris",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Malva sylvestris",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Lunaria annua",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "frost",
+   "rain",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/lunaria-annua·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Infuso",
+    "name": "Infuso d'Erba d'argento dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Lunaria annua",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     3,
+     4,
+     5,
+     12
+    ]
+   },
+   {
+    "id": "it/lunaria-annua·frost·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura d'Erba d'argento Brinata dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Lunaria annua",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/lunaria-annua·rain·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura d'Erba d'argento Piovana dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Lunaria annua",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Alliaria petiolata",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/lunaria-annua·waxingMoon+rain·abundance",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Elisir",
+    "name": "Elisir d'Erba d'argento Crescente Piovano dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Eranthis hyemalis",
+  "grade": "mythic",
+  "favouredTraits": [
+   "frost",
+   "newMoon",
+   "fog"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/eranthis-hyemalis·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Piè di gallo del Presagio",
+    "ingredients": [
+     {
+      "species": "Eranthis hyemalis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   },
+   {
+    "id": "it/eranthis-hyemalis·frost·omen",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Piè di gallo Brinato del Presagio",
+    "ingredients": [
+     {
+      "species": "Eranthis hyemalis",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Ruscus aculeatus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   },
+   {
+    "id": "it/eranthis-hyemalis·newMoon·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "newMoon"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Piè di gallo Novilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Eranthis hyemalis",
+      "qty": 2,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   },
+   {
+    "id": "it/eranthis-hyemalis·newMoon+fog·abundance",
+    "grade": "rare",
+    "traits": [
+     "newMoon",
+     "fog"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Piè di gallo Novilunare Nebbioso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Eranthis hyemalis",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Helleborus viridis",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Helleborus foetidus",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   },
+   {
+    "id": "it/eranthis-hyemalis·fog+frost·omen",
+    "grade": "rare",
+    "traits": [
+     "fog",
+     "frost"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Piè di gallo Nebbioso Brinato del Presagio",
+    "ingredients": [
+     {
+      "species": "Eranthis hyemalis",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Hedera helix",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Convolvulus arvensis",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "sun",
+   "dawn",
+   "rain"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/convolvulus-arvensis·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Infuso",
+    "name": "Infuso di Vilucchio della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/convolvulus-arvensis·sun·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Vilucchio Solare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Malva sylvestris",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/convolvulus-arvensis·dawn·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Vilucchio Aurorale della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/convolvulus-arvensis·dawn+rain·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir di Vilucchio Aurorale Piovano della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Convolvulus arvensis",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Celtis australis",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Viburnum lantana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     8,
+     9
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Ligustrum vulgare",
+  "grade": "rare",
+  "favouredTraits": [
+   "dew",
+   "newMoon",
+   "waningMoon"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/ligustrum-vulgare·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Ligustro del Presagio",
+    "ingredients": [
+     {
+      "species": "Ligustrum vulgare",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/ligustrum-vulgare·dew·omen",
+    "grade": "uncommon",
+    "traits": [
+     "dew"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Ligustro Rugiadoso del Presagio",
+    "ingredients": [
+     {
+      "species": "Ligustrum vulgare",
+      "qty": 2,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Euonymus europaeus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/ligustrum-vulgare·newMoon·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "newMoon"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Ligustro Novilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Ligustrum vulgare",
+      "qty": 2,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/ligustrum-vulgare·waningMoon+newMoon·abundance",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "newMoon"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Ligustro Calante Novilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Ligustrum vulgare",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Cyclamen hederifolium",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Clematis vitalba",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/ligustrum-vulgare·waningMoon+dew·omen",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "dew"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Ligustro Calante Rugiadoso del Presagio",
+    "ingredients": [
+     {
+      "species": "Ligustrum vulgare",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Helleborus foetidus",
+  "grade": "common",
+  "favouredTraits": [
+   "frost",
+   "newMoon",
+   "waningMoon"
+  ],
+  "vocation": [
+   "omen",
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/helleborus-foetidus·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento d'Elleboro puzzolente del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus foetidus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "id": "it/helleborus-foetidus·frost·omen",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Elleboro puzzolente Brinato del Presagio",
+    "ingredients": [
+     {
+      "species": "Helleborus foetidus",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Ruscus aculeatus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     12
+    ]
+   },
+   {
+    "id": "it/helleborus-foetidus·waningMoon+newMoon·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "newMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Balsamo",
+    "name": "Balsamo d'Elleboro puzzolente Calante Novilunare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Helleborus foetidus",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Viburnum tinus",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Vinca major",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "dew",
+   "waxingMoon",
+   "rain"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/vinca-major·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Pervinca maggiore della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Vinca major",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/vinca-major·dew·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Pervinca maggiore Rugiadosa della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Alliaria petiolata",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/vinca-major·waxingMoon·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Pervinca maggiore Crescente dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Vinca major",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Orchis purpurea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/vinca-major·waxingMoon+rain·abundance",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Pervinca maggiore Crescente Piovano dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Vinca major",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Tragopogon porrifolius",
+  "grade": "rare",
+  "favouredTraits": [
+   "dawn",
+   "sun",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/tragopogon-porrifolius·abundance",
+    "grade": "common",
+    "traits": [],
+    "effect": "abundance",
+    "base": "Infuso",
+    "name": "Infuso di Barba di Becco violetta dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/tragopogon-porrifolius·dawn·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Barba di Becco violetta Aurorale dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/tragopogon-porrifolius·sun·abundance",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "abundance",
+    "base": "Tintura",
+    "name": "Tintura di Barba di Becco violetta Solare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Anacamptis morio",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/tragopogon-porrifolius·waxingMoon+sun·abundance",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "sun"
+    ],
+    "effect": "abundance",
+    "base": "Elisir",
+    "name": "Elisir di Barba di Becco violetta Crescente Solare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Orchis purpurea",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   },
+   {
+    "id": "it/tragopogon-porrifolius·dawn+waxingMoon·abundance",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "waxingMoon"
+    ],
+    "effect": "abundance",
+    "base": "Elisir",
+    "name": "Elisir di Barba di Becco violetta Aurorale Crescente dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Tragopogon porrifolius",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Borago officinalis",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Fraxinus ornus",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Hedera helix",
+  "grade": "common",
+  "favouredTraits": [
+   "newMoon",
+   "fog",
+   "dusk"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/hedera-helix·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento d'Edera del Presagio",
+    "ingredients": [
+     {
+      "species": "Hedera helix",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/hedera-helix·newMoon·omen",
+    "grade": "uncommon",
+    "traits": [
+     "newMoon"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo d'Edera Novilunare del Presagio",
+    "ingredients": [
+     {
+      "species": "Hedera helix",
+      "qty": 2,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     1,
+     2,
+     3,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/hedera-helix·dusk+fog·abundance",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "fog"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo d'Edera Crepuscolare Nebbioso dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Hedera helix",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Euonymus europaeus",
+      "qty": 3,
+      "traits": [
+       "fog"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Cyclamen hederifolium",
+  "grade": "rare",
+  "favouredTraits": [
+   "dusk",
+   "moon",
+   "dew"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/cyclamen-hederifolium·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Infuso",
+    "name": "Infuso di Ciclamino napoletano della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cyclamen hederifolium",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/cyclamen-hederifolium·dusk·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dusk"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Ciclamino napoletano Crepuscolare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cyclamen hederifolium",
+      "qty": 2,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Laurus nobilis",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/cyclamen-hederifolium·moon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "moon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Ciclamino napoletano Plenilunare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cyclamen hederifolium",
+      "qty": 2,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/cyclamen-hederifolium·moon+dew·regrowth",
+    "grade": "rare",
+    "traits": [
+     "moon",
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir di Ciclamino napoletano Plenilunare Rugiadoso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cyclamen hederifolium",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Ostrya carpinifolia",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     12
+    ]
+   },
+   {
+    "id": "it/cyclamen-hederifolium·dusk+dew·regrowth",
+    "grade": "rare",
+    "traits": [
+     "dusk",
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir di Ciclamino napoletano Crepuscolare Rugiadoso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Cyclamen hederifolium",
+      "qty": 3,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Viburnum tinus",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     10,
+     11,
+     12
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Hippocrepis emerus",
+  "grade": "uncommon",
+  "favouredTraits": [
+   "waxingMoon",
+   "frost",
+   "sun"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/hippocrepis-emerus·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto d'Erba cornetta della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     12
+    ]
+   },
+   {
+    "id": "it/hippocrepis-emerus·waxingMoon·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "waxingMoon"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Erba cornetta Crescente della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 2,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Fraxinus ornus",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   },
+   {
+    "id": "it/hippocrepis-emerus·frost·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "frost"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Erba cornetta Brinata della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 2,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Melittis melissophyllum",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   },
+   {
+    "id": "it/hippocrepis-emerus·sun+frost·regrowth",
+    "grade": "rare",
+    "traits": [
+     "sun",
+     "frost"
+    ],
+    "effect": "regrowth",
+    "base": "Distillato",
+    "name": "Distillato d'Erba cornetta Solare Brinato della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Hippocrepis emerus",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Anacamptis morio",
+      "qty": 3,
+      "traits": [
+       "frost"
+      ]
+     },
+     {
+      "species": "Salvia pratensis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Fagus sylvatica",
+  "grade": "common",
+  "favouredTraits": [
+   "dusk",
+   "moon",
+   "rain"
+  ],
+  "vocation": [
+   "regrowth",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/fagus-sylvatica·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Decotto",
+    "name": "Decotto di Faggio della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Fagus sylvatica",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/fagus-sylvatica·dusk·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dusk"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura di Faggio Crepuscolare della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Fagus sylvatica",
+      "qty": 2,
+      "traits": [
+       "dusk"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/fagus-sylvatica·moon+rain·abundance",
+    "grade": "rare",
+    "traits": [
+     "moon",
+     "rain"
+    ],
+    "effect": "abundance",
+    "base": "Distillato",
+    "name": "Distillato di Faggio Plenilunare Piovano dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Fagus sylvatica",
+      "qty": 3,
+      "traits": [
+       "moon"
+      ]
+     },
+     {
+      "species": "Ostrya carpinifolia",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Corylus avellana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     10
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Althaea cannabina",
+  "grade": "mythic",
+  "favouredTraits": [
+   "dawn",
+   "sun",
+   "waningMoon"
+  ],
+  "vocation": [
+   "clarity"
+  ],
+  "cards": [
+   {
+    "id": "it/althaea-cannabina·clarity",
+    "grade": "common",
+    "traits": [],
+    "effect": "clarity",
+    "base": "Infuso",
+    "name": "Infuso d'Altea canapina della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Althaea cannabina",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   },
+   {
+    "id": "it/althaea-cannabina·dawn·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "dawn"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura d'Altea canapina Aurorale della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Althaea cannabina",
+      "qty": 2,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Cotinus coggygria",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   },
+   {
+    "id": "it/althaea-cannabina·sun·clarity",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "clarity",
+    "base": "Tintura",
+    "name": "Tintura d'Altea canapina Solare della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Althaea cannabina",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Malva sylvestris",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   },
+   {
+    "id": "it/althaea-cannabina·waningMoon+sun·clarity",
+    "grade": "rare",
+    "traits": [
+     "waningMoon",
+     "sun"
+    ],
+    "effect": "clarity",
+    "base": "Elisir",
+    "name": "Elisir d'Altea canapina Calante Solare della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Althaea cannabina",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Celtis australis",
+      "qty": 3,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Viburnum lantana",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     8,
+     9,
+     10
+    ]
+   },
+   {
+    "id": "it/althaea-cannabina·dawn+waningMoon·clarity",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "waningMoon"
+    ],
+    "effect": "clarity",
+    "base": "Elisir",
+    "name": "Elisir d'Altea canapina Aurorale Calante della Limpidezza",
+    "ingredients": [
+     {
+      "species": "Althaea cannabina",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": [
+       "waningMoon"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     8,
+     9,
+     10
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Sambucus ebulus",
+  "grade": "common",
+  "favouredTraits": [
+   "sun",
+   "newMoon",
+   "dawn"
+  ],
+  "vocation": [
+   "omen",
+   "abundance"
+  ],
+  "cards": [
+   {
+    "id": "it/sambucus-ebulus·omen",
+    "grade": "common",
+    "traits": [],
+    "effect": "omen",
+    "base": "Unguento",
+    "name": "Unguento di Sambuco lebbio del Presagio",
+    "ingredients": [
+     {
+      "species": "Sambucus ebulus",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/sambucus-ebulus·sun·omen",
+    "grade": "uncommon",
+    "traits": [
+     "sun"
+    ],
+    "effect": "omen",
+    "base": "Balsamo",
+    "name": "Balsamo di Sambuco lebbio Solare del Presagio",
+    "ingredients": [
+     {
+      "species": "Sambucus ebulus",
+      "qty": 2,
+      "traits": [
+       "sun"
+      ]
+     },
+     {
+      "species": "Juglans regia",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   {
+    "id": "it/sambucus-ebulus·dawn+newMoon·abundance",
+    "grade": "rare",
+    "traits": [
+     "dawn",
+     "newMoon"
+    ],
+    "effect": "abundance",
+    "base": "Balsamo",
+    "name": "Balsamo di Sambuco lebbio Aurorale Novilunare dell'Abbondanza",
+    "ingredients": [
+     {
+      "species": "Sambucus ebulus",
+      "qty": 3,
+      "traits": [
+       "dawn"
+      ]
+     },
+     {
+      "species": "Clematis vitalba",
+      "qty": 3,
+      "traits": [
+       "newMoon"
+      ]
+     },
+     {
+      "species": "Fagus sylvatica",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     6,
+     7,
+     8,
+     9
+    ]
+   }
+  ]
+ },
+ {
+  "sci": "Equisetum telmateia",
+  "grade": "rare",
+  "favouredTraits": [
+   "rain",
+   "dew",
+   "waxingMoon"
+  ],
+  "vocation": [
+   "regrowth"
+  ],
+  "cards": [
+   {
+    "id": "it/equisetum-telmateia·regrowth",
+    "grade": "common",
+    "traits": [],
+    "effect": "regrowth",
+    "base": "Infuso",
+    "name": "Infuso d'Equiseto massimo della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Equisetum telmateia",
+      "qty": 1,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 1,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/equisetum-telmateia·rain·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Equiseto massimo Piovana della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Equisetum telmateia",
+      "qty": 2,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Populus alba",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12
+    ]
+   },
+   {
+    "id": "it/equisetum-telmateia·dew·regrowth",
+    "grade": "uncommon",
+    "traits": [
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Tintura",
+    "name": "Tintura d'Equiseto massimo Rugiadosa della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Equisetum telmateia",
+      "qty": 2,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Cornus sanguinea",
+      "qty": 2,
+      "traits": []
+     },
+     {
+      "species": null,
+      "qty": 2,
+      "traits": []
+     }
+    ],
+    "months": [
+     5,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   {
+    "id": "it/equisetum-telmateia·waxingMoon+dew·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "dew"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir d'Equiseto massimo Crescente Rugiadoso della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Equisetum telmateia",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Glechoma hederacea",
+      "qty": 3,
+      "traits": [
+       "dew"
+      ]
+     },
+     {
+      "species": "Melissa officinalis",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     3,
+     4
+    ]
+   },
+   {
+    "id": "it/equisetum-telmateia·waxingMoon+rain·regrowth",
+    "grade": "rare",
+    "traits": [
+     "waxingMoon",
+     "rain"
+    ],
+    "effect": "regrowth",
+    "base": "Elisir",
+    "name": "Elisir d'Equiseto massimo Crescente Piovano della Ricrescita",
+    "ingredients": [
+     {
+      "species": "Equisetum telmateia",
+      "qty": 3,
+      "traits": [
+       "waxingMoon"
+      ]
+     },
+     {
+      "species": "Lunaria annua",
+      "qty": 3,
+      "traits": [
+       "rain"
+      ]
+     },
+     {
+      "species": "Acer campestre",
+      "qty": 3,
+      "traits": []
+     }
+    ],
+    "months": [
+     4,
+     5,
+     12
+    ]
+   }
+  ]
+ }
+]

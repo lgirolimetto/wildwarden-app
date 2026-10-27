@@ -57,6 +57,15 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   /// Colori dei gradi: comune, non comune, rara, mitica (vedi `liveries/grade_colors.dart`).
   final List<Color> gradeColors;
 
+  /// Colori del liquido delle pozioni, uno per tratto nell'ordine di `Trait` (vedi `liveries/potion_colors.dart`).
+  final List<Color> traitColors;
+
+  /// Liquido delle pozioni senza tratti (le Comuni); `null` = quello degli indizi.
+  final Color? plainPotion;
+
+  /// Colore dei nomi delle specie; `null` = quello del testo.
+  final Color? speciesName;
+
   /// Pagine dense (ricette, impostazioni, glossario…): sfondo e superfici più chiari, per dare contrasto dove la
   /// livrea è molto scura. `null` = come le altre pagine. Vedi `DenseArea`.
   final Color? denseBackground;
@@ -78,6 +87,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     this.neu = false,
     this.neuLight = Colors.transparent,
     this.gradeColors = const [],
+    this.traitColors = const [],
+    this.plainPotion,
+    this.speciesName,
     this.denseBackground,
     this.denseSurface,
   }) : assert(levelColors.length == 5, 'Servono 5 colori: livelli 0-4'),
@@ -89,6 +101,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
 
   /// Colore del grado [index] (0 = comune … 3 = mitica); se la livrea non li ha, quelli dei livelli di studio.
   Color gradeColor(int index) => gradeColors.length == 4 ? gradeColors[index] : levelColor(index + 1);
+
+  /// Colore del liquido per il tratto [index]; se la livrea non li ha, quello degli indizi.
+  Color traitColor(int index) => index < traitColors.length ? traitColors[index] : hint;
 
   @override
   DruidTokens copyWith({
@@ -107,6 +122,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     bool? neu,
     Color? neuLight,
     List<Color>? gradeColors,
+    List<Color>? traitColors,
+    Color? plainPotion,
+    Color? speciesName,
     Color? denseBackground,
     Color? denseSurface,
   }) => DruidTokens(
@@ -125,6 +143,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     neu: neu ?? this.neu,
     neuLight: neuLight ?? this.neuLight,
     gradeColors: gradeColors ?? this.gradeColors,
+    traitColors: traitColors ?? this.traitColors,
+    plainPotion: plainPotion ?? this.plainPotion,
+    speciesName: speciesName ?? this.speciesName,
     denseBackground: denseBackground ?? this.denseBackground,
     denseSurface: denseSurface ?? this.denseSurface,
   );
@@ -156,6 +177,11 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
       gradeColors: gradeColors.length == other.gradeColors.length
           ? lerpList(gradeColors, other.gradeColors)
           : (t < 0.5 ? gradeColors : other.gradeColors),
+      traitColors: traitColors.length == other.traitColors.length
+          ? lerpList(traitColors, other.traitColors)
+          : (t < 0.5 ? traitColors : other.traitColors),
+      plainPotion: Color.lerp(plainPotion, other.plainPotion, t),
+      speciesName: Color.lerp(speciesName, other.speciesName, t),
       denseBackground: Color.lerp(denseBackground, other.denseBackground, t),
       denseSurface: Color.lerp(denseSurface, other.denseSurface, t),
     );

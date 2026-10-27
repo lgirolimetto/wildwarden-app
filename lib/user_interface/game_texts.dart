@@ -1,6 +1,7 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
@@ -74,6 +75,7 @@ class GameTexts {
 
   String builtInView(BuiltInView v) => switch (v) {
     BuiltInView.all => l10n.viewAll,
+    BuiltInView.met => l10n.viewMet,
     BuiltInView.inSeason => l10n.viewInSeason,
     BuiltInView.desiderata => l10n.viewDesiderata,
     BuiltInView.protectedSpecies => l10n.viewProtected,
@@ -100,6 +102,63 @@ class GameTexts {
     Grade.uncommon => l10n.gradeUncommon,
     Grade.rare => l10n.gradeRare,
     Grade.mythic => l10n.gradeMythic,
+  };
+
+  /// I consigli del giorno, a rotazione.
+  List<String> get tips => [
+    l10n.tip01,
+    l10n.tip02,
+    l10n.tip03,
+    l10n.tip04,
+    l10n.tip05,
+    l10n.tip06,
+    l10n.tip07,
+    l10n.tip08,
+    l10n.tip09,
+    l10n.tip10,
+    l10n.tip11,
+    l10n.tip12,
+    l10n.tip13,
+    l10n.tip14,
+    l10n.tip15,
+  ];
+
+  /// Il grado di un Bottino dell'Esperienza, al maschile ("Bottino dell'Esperienza · raro").
+  String troveGrade(Grade g) => switch (g) {
+    Grade.common => l10n.troveGradeCommon,
+    Grade.uncommon => l10n.troveGradeUncommon,
+    Grade.rare => l10n.troveGradeRare,
+    Grade.mythic => l10n.troveGradeMythic,
+  };
+
+  /// Il grado dei riciclati, al plurale ("3 riciclati non comuni").
+  String recycledGrade(Grade g) => switch (g) {
+    Grade.common => l10n.recycledGradeCommon,
+    Grade.uncommon => l10n.recycledGradeUncommon,
+    Grade.rare => l10n.recycledGradeRare,
+    Grade.mythic => l10n.recycledGradeMythic,
+  };
+
+  /// Che cosa esce di solito da un Bottino di quel grado.
+  String troveContents(Grade g) => switch (g) {
+    Grade.common => l10n.troveContentsCommon,
+    Grade.uncommon => l10n.troveContentsUncommon,
+    Grade.rare => l10n.troveContentsRare,
+    Grade.mythic => l10n.troveContentsMythic,
+  };
+
+  String effect(PotionEffect e) => switch (e) {
+    PotionEffect.regrowth => l10n.effectRegrowth,
+    PotionEffect.clarity => l10n.effectClarity,
+    PotionEffect.omen => l10n.effectOmen,
+    PotionEffect.abundance => l10n.effectAbundance,
+  };
+
+  String effectText(PotionEffect e) => switch (e) {
+    PotionEffect.regrowth => l10n.effectRegrowthText,
+    PotionEffect.clarity => l10n.effectClarityText,
+    PotionEffect.omen => l10n.effectOmenText,
+    PotionEffect.abundance => l10n.effectAbundanceText,
   };
 
   String trait(Trait t) => switch (t) {
@@ -273,7 +332,6 @@ class GameTexts {
 
   String missionTitle(Mission m) => switch (m) {
     Mission.visitErbario => l10n.missionVisitErbarioTitle,
-    Mission.markDesiderata => l10n.missionMarkDesiderataTitle,
     Mission.firstEncounter => l10n.missionFirstEncounterTitle,
     Mission.firstLevel => l10n.missionFirstLevelTitle,
     Mission.firstRecipe => l10n.missionFirstRecipeTitle,
@@ -281,7 +339,6 @@ class GameTexts {
 
   String missionBody(Mission m) => switch (m) {
     Mission.visitErbario => l10n.missionVisitErbarioBody,
-    Mission.markDesiderata => l10n.missionMarkDesiderataBody,
     Mission.firstEncounter => l10n.missionFirstEncounterBody,
     Mission.firstLevel => l10n.missionFirstLevelBody,
     Mission.firstRecipe => l10n.missionFirstRecipeBody,

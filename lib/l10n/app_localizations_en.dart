@@ -85,12 +85,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Retry';
 
   @override
-  String get erbarioEncounteredSection => 'Encountered';
-
-  @override
-  String get erbarioMissingSection => 'Still to find around Bologna';
-
-  @override
   String get simulateEncounter => 'Simulate Encounter';
 
   @override
@@ -110,9 +104,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navStudy => 'Home';
-
-  @override
-  String get navRecipes => 'Recipes';
 
   @override
   String get rankApprentice => 'Apprentice';
@@ -136,7 +127,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String nextRank(String rank, int xp) {
-    return 'Next Rank: $rank at $xp XP';
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Next Rank: $rank at $xpString XP';
   }
 
   @override
@@ -306,11 +302,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get summaryMastery => 'Mastery reached!';
 
   @override
-  String summaryRecipeUnlocked(String recipe) {
-    return 'Recipe unlocked: $recipe';
-  }
-
-  @override
   String get summaryNewFunFacts =>
       'New Curiosities on the way: you\'ll get one a day.';
 
@@ -397,7 +388,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewsNone =>
-      'Nothing to review today. What you learn comes back after 1, 3, 7 and 21 days.';
+      'Nothing to review today. What you learn comes back after 1, 3, 7, 21, 60 and 180 days.';
 
   @override
   String get reviewsStart => 'Review';
@@ -406,13 +397,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get desiderataTitle => 'Desiderata';
 
   @override
-  String desiderataCount(int count, int max) {
-    return '$count of $max';
-  }
-
-  @override
   String get desiderataEmpty =>
-      'Choose up to 3 species to look for: you\'ll see photos and where and when to find them.';
+      'Choose the species to look for: you\'ll see photos and where and when to find them.';
 
   @override
   String get desiderataSuggestions => 'In season now';
@@ -436,10 +422,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get desiderataRemove => 'Remove from Desiderata';
-
-  @override
-  String get desiderataFull =>
-      'You already have 3 Desiderata: complete or remove one.';
 
   @override
   String desiderataWhere(String band) {
@@ -573,23 +555,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recipesTitle => 'Recipes';
 
   @override
-  String get recipeUnlocked => 'Learned';
-
-  @override
-  String get recipeLocked => 'To learn';
-
-  @override
-  String recipeKnownIngredients(int known, int total) {
-    return 'Ingredients already Met $known/$total';
-  }
-
-  @override
   String get recipeAnySpecies => 'any species';
-
-  @override
-  String recipeCurrentLevel(int level) {
-    return 'now: Level $level';
-  }
 
   @override
   String erbarioPages(int done, int total) {
@@ -607,13 +573,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get missionVisitErbarioBody =>
       'The Herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and Meeting them.';
-
-  @override
-  String get missionMarkDesiderataTitle => 'Choose your Desiderata';
-
-  @override
-  String get missionMarkDesiderataBody =>
-      'Choose up to 3 species to look for: for each you\'ll see photos, season and altitude. Start with one in season now.';
 
   @override
   String get missionFirstEncounterTitle => 'Meet a species';
@@ -634,7 +593,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionFirstRecipeBody =>
-      'Bring a species to the Level a Recipe requires to unlock it. Recipes ask for different species and conditions: a reason to go out again.';
+      'Studying a species teaches you its Common Recipe: you\'ll find it in the Recipe Book, on the plant\'s Page. The other Plates on the Page come from the Trove of Experience.';
 
   @override
   String get missionSkip => 'Skip the Apprenticeship';
@@ -643,13 +602,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get missionActionOpenErbario => 'Open the Herbarium';
 
   @override
-  String get missionActionChooseDesiderata => 'Choose in the Herbarium';
-
-  @override
   String get missionActionStudy => 'Start studying';
 
   @override
-  String get missionActionRecipes => 'See the Recipes';
+  String get missionActionRecipes => 'Open the Recipe Book';
 
   @override
   String get missionGlossary => 'Glossary';
@@ -1011,11 +967,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String recipeLearnByStudying(String species) {
-    return 'Learned by studying: $species';
-  }
-
-  @override
   String get debugGradePreview => 'Grade preview';
 
   @override
@@ -1033,27 +984,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get badgeProtected => 'Protected Species';
-
-  @override
-  String recipesCount(int learned, int total) {
-    return '$learned of $total';
-  }
-
-  @override
-  String recipeIngredientCount(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString Ingredients',
-      one: '1 Ingredient',
-    );
-    return '$_temp0';
-  }
 
   @override
   String get legendTitle => 'Legend';
@@ -1123,18 +1053,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossBottinoText =>
-      'The Trove you buy with XP: you choose the Grade, the content is a surprise (Recipes, rare Curiosities, hints).';
-
-  @override
-  String get glossFigurinaTerm => 'Figurine';
-
-  @override
-  String get glossFigurinaText =>
-      'A Recipe or a Potion in the Album. The Recipe Album shows the ones you know; the counter says how many there are in all.';
+      'The Trove you buy with XP: choose the grade and spend your balance; inside there\'s a surprise Plate, often incomplete, or a component of one you have. Mythics only come from the mythic Trove.';
 
   @override
   String get recipesEmpty =>
-      'You don\'t know any Recipes yet. Common Recipes are learned by studying: pass Level 1 of a species, from Home or the Herbarium.';
+      'You don\'t know any Recipe yet. Every plant has its own Common Recipe: you learn it by passing Level 1 of the species, from Home or the Herbarium.';
 
   @override
   String get viewAll => 'All';
@@ -1254,4 +1177,731 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get traitWhenWaningMoon =>
       'Every day the moon is shrinking, from full to new: no need to go out at night.';
+
+  @override
+  String get recipeBookTitle => 'Recipe Book';
+
+  @override
+  String recipeBookPlates(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Plates',
+      one: '1 Plate',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recipeBookPagesSummary(int pages, int total, int complete) {
+    String _temp0 = intl.Intl.pluralLogic(
+      pages,
+      locale: localeName,
+      other: '$pages Pages',
+      one: '1 Page',
+    );
+    return '$_temp0 of $total · $complete complete';
+  }
+
+  @override
+  String recipeBookPageCount(int known, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Plates',
+      one: '1 Plate',
+    );
+    return '$_temp0 of $total';
+  }
+
+  @override
+  String get recipeBookFavouredTraits => 'Favoured traits';
+
+  @override
+  String get recipeBookVocation => 'Vocation';
+
+  @override
+  String get recipeBookMissingPlate => 'Plate to find';
+
+  @override
+  String get recipeBookSwipeHint => 'Swipe to leaf through the Pages';
+
+  @override
+  String recipeBookSpeciesLink(int known, int total) {
+    String _temp0 = intl.Intl.pluralLogic(
+      known,
+      locale: localeName,
+      other: '$known Plates',
+      one: '1 Plate',
+    );
+    return 'Recipe Book · $_temp0 of $total';
+  }
+
+  @override
+  String get recipeMonths => 'When it can be made';
+
+  @override
+  String get recipeNever =>
+      'Never: the ingredients are not found in the same months';
+
+  @override
+  String get recipeEffect => 'Effect';
+
+  @override
+  String get effectRegrowth => 'Regrowth';
+
+  @override
+  String get effectClarity => 'Clarity';
+
+  @override
+  String get effectOmen => 'Omens';
+
+  @override
+  String get effectAbundance => 'Abundance';
+
+  @override
+  String get effectRegrowthText =>
+      'For 7 days species are ready again sooner, down to 12 hours later (game effect).';
+
+  @override
+  String get effectClarityText =>
+      'For 7 days extra purity on every Essence (game effect).';
+
+  @override
+  String get effectOmenText =>
+      'For 7 days an Essence without traits can take the plant\'s favoured trait (game effect).';
+
+  @override
+  String get effectAbundanceText =>
+      'For 7 days extra Vis on every Essence, up to +50% (game effect).';
+
+  @override
+  String mythicNumber(String number) {
+    return 'Plate No. $number';
+  }
+
+  @override
+  String get mythicToFind => 'To find';
+
+  @override
+  String mythicWindow(String from, String to) {
+    return 'Only from $from to $to';
+  }
+
+  @override
+  String get mythicAllYear => 'All year round';
+
+  @override
+  String get mythicsIntro =>
+      'The Mythics of the Area: handwritten, tied to its places and feasts. They only come from the mythic Trove of Experience.';
+
+  @override
+  String recipeBookMythicsRow(String zone) {
+    return 'Mythics · $zone';
+  }
+
+  @override
+  String recipeBookMythicsCount(int known, int total) {
+    return '$known of $total';
+  }
+
+  @override
+  String get debugSimulateRecipeBook => 'Simulate a Recipe Book';
+
+  @override
+  String debugSimulateRecipeBookDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Plates added',
+      one: '1 Plate added',
+    );
+    return '$_temp0 to the Recipe Book';
+  }
+
+  @override
+  String get troveTitle => 'Trove of Experience';
+
+  @override
+  String get navTrove => 'Trove';
+
+  @override
+  String get labBalance => 'Balance';
+
+  @override
+  String labBalanceXp(int xp) {
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return '$xpString XP to spend';
+  }
+
+  @override
+  String labTrovesLeft(int left, int total) {
+    return '$left of $total today';
+  }
+
+  @override
+  String troveName(String grade) {
+    return 'Trove of Experience · $grade';
+  }
+
+  @override
+  String get troveGradeCommon => 'common';
+
+  @override
+  String get troveGradeUncommon => 'uncommon';
+
+  @override
+  String get troveGradeRare => 'rare';
+
+  @override
+  String get troveGradeMythic => 'mythic';
+
+  @override
+  String get troveContentsCommon =>
+      'Almost always a Common, sometimes an Uncommon';
+
+  @override
+  String get troveContentsUncommon =>
+      'Mostly Uncommons, sometimes a Common or a Rare';
+
+  @override
+  String get troveContentsRare => 'Mostly Rares, sometimes an Uncommon';
+
+  @override
+  String get troveContentsMythic => 'A Rare or a Mythic, half and half';
+
+  @override
+  String troveSpend(int cost) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+
+    return 'Spend $costString XP';
+  }
+
+  @override
+  String troveNeedXp(int xp) {
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'You need $xpString more XP';
+  }
+
+  @override
+  String troveCostMissing(int cost, int xp) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Costs $costString XP: you need $xpString more';
+  }
+
+  @override
+  String troveDailyLimit(int total) {
+    return 'That\'s enough for today: $total Trove of Experience a day. Come back tomorrow.';
+  }
+
+  @override
+  String get troveRules =>
+      'Uncommon, Rare and Mythic Plates come out incomplete: the missing components are found in other Trove of Experience. With the first common and the first uncommon, a Plate of the grade above as a gift. Mythics only come from the mythic Trove of Experience.';
+
+  @override
+  String labIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count incomplete Plates',
+      one: '1 incomplete Plate',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String labRecycled(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count recycled',
+      one: '1 recycled',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get welcomeGiftTitle => 'Hey, there\'s a gift for you';
+
+  @override
+  String welcomeGiftBody(int full, int price) {
+    final intl.NumberFormat fullNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String fullString = fullNumberFormat.format(full);
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String priceString = priceNumberFormat.format(price);
+
+    return 'Your first Trove of Experience · rare at a friendly price: $priceString XP instead of $fullString.';
+  }
+
+  @override
+  String get welcomeGiftWaiting =>
+      'You can redeem it after an Essence: go out and draw from a station.';
+
+  @override
+  String welcomeGiftRedeem(int price) {
+    final intl.NumberFormat priceNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String priceString = priceNumberFormat.format(price);
+
+    return 'Redeem · $priceString XP';
+  }
+
+  @override
+  String get troveTapToTurn => 'Tap the Plates to turn them';
+
+  @override
+  String get troveFindNew => 'New Plate';
+
+  @override
+  String troveFindIncomplete(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count components missing',
+      one: '1 component missing',
+    );
+    return 'New Plate · $_temp0';
+  }
+
+  @override
+  String get troveFindPiece => 'A component found';
+
+  @override
+  String get troveFindCompleted => 'Plate completed';
+
+  @override
+  String troveFindRecycled(String grade) {
+    return 'Duplicate: 1 $grade recycled';
+  }
+
+  @override
+  String get troveFindTaste => 'A taste of the grade above';
+
+  @override
+  String get troveNothing => 'Nothing new this time.';
+
+  @override
+  String get troveDone => 'Done';
+
+  @override
+  String recipeMissingPieces(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count components missing',
+      one: '1 component missing',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get recipeEffectUnknown =>
+      'Still to discover: a component of the name is missing.';
+
+  @override
+  String get debugGrantXp => 'Add 5,000 XP';
+
+  @override
+  String get recycleTitle => 'Recycling';
+
+  @override
+  String get recycleIntro =>
+      'Every duplicate is one recycled of its grade. 3 recycled make a component of the same grade, 9 one of the grade above, for an incomplete Plate of your choice. It costs a little Vis.';
+
+  @override
+  String recycleVis(int vis) {
+    return '$vis Vis to spend';
+  }
+
+  @override
+  String recycleUse(int count, String grade, int vis) {
+    return '$count $grade recycled · $vis Vis';
+  }
+
+  @override
+  String recycleNeedVis(int vis) {
+    return 'You need $vis Vis';
+  }
+
+  @override
+  String get recycleNothing =>
+      'With the recycled you have you can\'t make a component yet.';
+
+  @override
+  String recycleDone(String name) {
+    return 'Component added: $name';
+  }
+
+  @override
+  String recycleCompleted(String name) {
+    return 'Plate completed: $name';
+  }
+
+  @override
+  String get recycledGradeCommon => 'common';
+
+  @override
+  String get recycledGradeUncommon => 'uncommon';
+
+  @override
+  String get recycledGradeRare => 'rare';
+
+  @override
+  String get recycledGradeMythic => 'mythic';
+
+  @override
+  String get labTitle => 'Laboratory';
+
+  @override
+  String get navLaboratory => 'Laboratory';
+
+  @override
+  String get pantryTitle => 'Pantry';
+
+  @override
+  String pantryEssences(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences',
+      one: '1 Essence',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String pantrySpeciesSummary(int count, int vis) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences',
+      one: '1 Essence',
+    );
+    return '$_temp0 · $vis Vis';
+  }
+
+  @override
+  String pantryPurity(int percent) {
+    return 'Purity $percent%';
+  }
+
+  @override
+  String pantryVis(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get pantryNoTraits => 'No traits';
+
+  @override
+  String get pantryEmpty =>
+      'The Pantry is empty: the Essences you draw from stations stay here, with their traits, purity and Vis. For now you draw with \"Simulate drawing\" in the species card.';
+
+  @override
+  String get debugSimulatePantry => 'Simulate a Pantry';
+
+  @override
+  String debugSimulatePantryDone(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Essences added',
+      one: '1 Essence added',
+    );
+    return '$_temp0 to the Pantry';
+  }
+
+  @override
+  String get labTabReady => 'Ready recipes';
+
+  @override
+  String get labTabShelf => 'Shelf';
+
+  @override
+  String readyCount(int count) {
+    return '$count ready';
+  }
+
+  @override
+  String shelfCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count potions',
+      one: '1 potion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get readySection => 'Ready to brew';
+
+  @override
+  String get readyAlmost => 'Almost there';
+
+  @override
+  String readyOthers(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count more recipes need',
+      one: 'Another recipe needs',
+    );
+    return '$_temp0 more Essences: you\'ll find them in the Recipe Book.';
+  }
+
+  @override
+  String get readyEmpty =>
+      'You don\'t know any recipes to brew yet: Commons are learned by studying, the others in the Trove of Experience.';
+
+  @override
+  String get readyAnyPlant => 'a plant of your choice';
+
+  @override
+  String get brewButton => 'Brew';
+
+  @override
+  String get brewChooseFree => 'Choose the plant for the free slot';
+
+  @override
+  String get brewChooseFreeHint => 'It gives the potion its Touch.';
+
+  @override
+  String brewFreeOption(int vis) {
+    return '$vis Vis';
+  }
+
+  @override
+  String get potionTitle => 'Potion';
+
+  @override
+  String potionPotency(int potency) {
+    return 'Potency $potency';
+  }
+
+  @override
+  String potionTouch(String touch) {
+    return 'Touch: $touch';
+  }
+
+  @override
+  String potionFirstBonus(int xp) {
+    return 'First potion of this recipe: +$xp XP';
+  }
+
+  @override
+  String get potionSpoiledTitle => 'The potion spoiled';
+
+  @override
+  String potionSpoiledText(String name) {
+    return '$name: a toxic plant. In a drinkable recipe it spoils the potion: the Vis are lost, but now you know.';
+  }
+
+  @override
+  String get shelfEmpty =>
+      'The Shelf is empty: the potions you brew stay here.';
+
+  @override
+  String recipeBestPotency(int potency) {
+    return 'Best potency: $potency';
+  }
+
+  @override
+  String readyMissingVis(int vis) {
+    return 'You need $vis more Vis';
+  }
+
+  @override
+  String get shelfUse => 'Use';
+
+  @override
+  String get shelfHint =>
+      'Keep it for the collection or use it: the effect lasts 7 days, as strong as its potency; the Touch adds a small extra effect.';
+
+  @override
+  String get shelfActive => 'Effects in progress';
+
+  @override
+  String shelfActiveLine(String effect, int strength, String date) {
+    return '$effect · strength $strength · until $date';
+  }
+
+  @override
+  String shelfUsed(String effect) {
+    return '$effect for 7 days';
+  }
+
+  @override
+  String get glossTavolaTerm => 'Plate';
+
+  @override
+  String get glossTavolaText =>
+      'A recipe in the Recipe Book, like the illustrated plates of herbaria: \"1 Plate of 3\". On a plant\'s Page the Plates you don\'t have are empty slots with the grade circle.';
+
+  @override
+  String get glossLaboratorioTerm => 'Laboratory';
+
+  @override
+  String get glossLaboratorioText =>
+      'Your base, the greenhouse shed at the edge of the woods: you work inside it, with the Recipe Book, Pantry, Ready recipes and Shelf.';
+
+  @override
+  String get glossRicettarioTerm => 'Recipe Book';
+
+  @override
+  String get glossRicettarioText =>
+      'The collection of Plates, one per country: a Page for each plant and, at the top, the Mythics of the Area, numbered.';
+
+  @override
+  String get glossComponenteTerm => 'Component';
+
+  @override
+  String get glossComponenteText =>
+      'A piece of the name of an incomplete Plate (\"Frosted Eranthis Tincture of…\"): Uncommons, Rares and Mythics come out of the Trove of Experience with components still to find.';
+
+  @override
+  String get glossRiciclatoTerm => 'Recycled';
+
+  @override
+  String get glossRiciclatoText =>
+      'A duplicate from the Trove of Experience: 3 recycled of a grade make a component of the same grade, 9 one of the grade above, for a little Vis.';
+
+  @override
+  String get glossDispensaTerm => 'Pantry';
+
+  @override
+  String get glossDispensaText =>
+      'The Essences you\'ve drawn, each with its traits, purity (from the plant\'s study level when you drew it) and its Vis.';
+
+  @override
+  String get glossRicettePronteTerm => 'Ready recipes';
+
+  @override
+  String get glossRicettePronteText =>
+      'The recipes you can brew now with your Pantry, and the ones that are almost there, with what\'s missing.';
+
+  @override
+  String get glossPozioneTerm => 'Potion';
+
+  @override
+  String get glossPozioneText =>
+      'Brewed from a recipe with the Vis of your Essences. It has a potency from 1 to 10, mostly from purity: the better you know the plants, the stronger it is. You keep it on the Shelf or use it.';
+
+  @override
+  String get glossToccoTerm => 'Touch';
+
+  @override
+  String get glossToccoText =>
+      'The adjective the plant in the free slot gives the potion (Lush, Clear, Prescient, Bountiful): when you use it, it adds a small effect.';
+
+  @override
+  String get glossPozioneGuastataTerm => 'Spoiled potion';
+
+  @override
+  String get glossPozioneGuastataText =>
+      'A drinkable potion with a toxic plant in the free slot: the Vis are lost, but you learn the plant is toxic.';
+
+  @override
+  String get glossScaffaleTerm => 'Shelf';
+
+  @override
+  String get glossScaffaleText =>
+      'The potions you have: keep them for the collection or use them. The effect lasts 7 days, as strong as the potency.';
+
+  @override
+  String get legendPotions => 'Potions';
+
+  @override
+  String get legendVessel =>
+      'The vessel shows the recipe\'s base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect.';
+
+  @override
+  String get viewMet => 'Met';
+
+  @override
+  String get erbarioSpecies => 'Species';
+
+  @override
+  String get tipOfDayTitle => 'Tip of the day';
+
+  @override
+  String get tip01 =>
+      'Studying a plant makes its Essences purer: from 40% without study to 100% with Mastery.';
+
+  @override
+  String get tip02 =>
+      'The purity of your Essences decides most of a potion\'s Potency: the better you know the plants, the stronger it is.';
+
+  @override
+  String get tip03 =>
+      'Commons are learned by studying: pass level 1 of a species and its Common is in the Recipe Book.';
+
+  @override
+  String get tip04 =>
+      'In the Trove of Experience, Uncommon, Rare and Mythic Plates come out incomplete: the missing Components are found in other Trove of Experience.';
+
+  @override
+  String get tip05 => 'Mythics only come from the mythic Trove of Experience.';
+
+  @override
+  String get tip06 =>
+      'Duplicates from the Trove of Experience become Recycled: 3 make a Component of the same grade, 9 one of the grade above.';
+
+  @override
+  String get tip07 =>
+      'Recycling spends your least precious Essences first: the ones with Traits stay for recipes.';
+
+  @override
+  String get tip08 =>
+      'Put any plant you like in a recipe\'s free slot: it gives the potion its Touch.';
+
+  @override
+  String get tip09 =>
+      'Beware of toxic plants in the free slot of a drinkable recipe: the potion spoils.';
+
+  @override
+  String get tip10 =>
+      'The Laboratory\'s Ready recipes tell you what\'s missing: it\'s the list for your next outing.';
+
+  @override
+  String get tip11 =>
+      'Using a potion gives its effect for 7 days, as strong as its Potency.';
+
+  @override
+  String get tip12 =>
+      'Traits tell the conditions you drew an Essence in; a recipe\'s name recalls them: \"Full-moon\" wants the Full moon.';
+
+  @override
+  String get tip13 =>
+      'Study XP stays to Cash in until you draw the first Essence of that species.';
+
+  @override
+  String get tip14 =>
+      'In the Legend (Settings → Legend and glossary) you\'ll find what symbols and colours mean.';
+
+  @override
+  String get tip15 =>
+      '\"Collecting\" in the game means taking photos: plants stay where they are.';
 }

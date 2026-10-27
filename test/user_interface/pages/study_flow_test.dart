@@ -1,13 +1,17 @@
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
+import '../../helpers/fakes.dart';
 import '../../helpers/test_app.dart';
 
 final _feb = DateTime(2027, 2, 1);
@@ -46,14 +50,13 @@ void main() {
     testWidgets('la stellina della stagione segna una desiderata', (tester) async {
       registerTestDependencies(events: [_passed('Fagus sylvatica'), _erbarioVisited()]);
       await pumpDruidApp(tester);
-      expect(find.text('Scegli le tue Desiderata'), findsOneWidget);
+      expect(find.text('Incontra una specie'), findsOneWidget);
 
       // Dopo il primo avvio si propongono tutte le specie in stagione, anche le tossiche.
       await scrollAndTap(tester, find.byKey(const ValueKey('add-desiderata-Eranthis hyemalis')));
       await scrollToTop(tester);
       expect(find.text('Incontra una specie'), findsOneWidget);
-      await scrollTo(tester, find.byKey(const ValueKey('desiderata-Eranthis hyemalis')));
-      expect(find.byKey(const ValueKey('desiderata-Eranthis hyemalis')), findsOneWidget);
+      expect(Get.find<ProgressController>().state.desiderata, {'Eranthis hyemalis'});
     });
 
     testWidgets('incontrare una desiderata la compie: PE e missione successiva', (tester) async {
@@ -67,9 +70,11 @@ void main() {
       await pumpDruidApp(tester);
       final xpBefore = Get.find<ProgressController>().state.xp;
 
-      await scrollAndTap(tester, find.byKey(const ValueKey('simulate-desiderata-Eranthis hyemalis')));
+      await openTab(tester, 'Erbario');
+      await scrollAndTap(tester, find.byKey(const ValueKey('simulate-Eranthis hyemalis')));
 
       expect(Get.find<ProgressController>().state.xp - xpBefore, XpRules.desiderataFulfilled);
+      await openTab(tester, 'Home');
       await scrollToTop(tester);
       expect(find.byKey(const ValueKey('mission-firstRecipe')), findsOneWidget);
     });
@@ -223,14 +228,14 @@ void main() {
       await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
       expect(find.byKey(const ValueKey('start-review')), findsNothing);
 
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       final advance = find.byKey(const ValueKey('advance-1'));
       await scrollTo(tester, advance);
       await tester.tap(advance);
       await tester.pumpAndSettle();
       expect(find.text('Giorno simulato: +1'), findsOneWidget);
 
-      await openTab(tester, 'Home');
+      await goBack(tester);
       await scrollToTop(tester);
       expect(find.text('3 Fatti da ripassare oggi'), findsOneWidget);
       await scrollAndTap(tester, find.byKey(const ValueKey('start-review')));
@@ -270,49 +275,73 @@ void main() {
       expect(level3, findsWidgets);
     });
 
-    testWidgets('album delle ricette: solo le ricette che conosci, con il contatore', (tester) async {
-      registerTestDependencies(
-        events: [RecipeLearned(recipeId: 'pozione-prova-comune', origin: RecipeOrigin.study, occurredAt: _feb)],
-      );
+    testWidgets('Ricettario: le pagine delle piante che conosci, con gli slot vuoti e la ricetta aperta', (
+      tester,
+    ) async {
+      registerTestDependencies(events: [_passed('Malva sylvestris')]);
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricette');
+      await openTab(tester, 'Laboratorio');
 
-      expect(find.text('1 di 4'), findsOneWidget);
-      expect(find.text('Pozione di Prova del Prato'), findsOneWidget);
-      expect(find.byKey(const ValueKey('figurine-infuso-prova-faggio')), findsNothing, reason: 'niente segnaposto');
-      expect(find.text('?'), findsNothing);
+      final malva = recipeBookOf(smallCatalog()).pageOf('Malva sylvestris')!;
+      expect(find.text('1 Tavola'), findsOneWidget);
+      expect(find.text('1 Pagina su 4 · 0 complete'), findsOneWidget);
+      expect(find.text('1 Tavola su 3'), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Malva sylvestris')));
 
-      // Imparata: ingredienti con il nome della pianta, anche se non incontrata.
-      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-pozione-prova-comune')));
-      expect(find.text('2 × Malva selvatica'), findsOneWidget);
-      expect(find.text('Ingredienti già Incontrati 0/2'), findsOneWidget);
-      expect(find.text('Effetto di gioco di prova.'), findsOneWidget);
+      // La pagina: la Comune imparata studiando, le altre Tavole come slot vuoti con il solo grado.
+      expect(find.text('1 Tavola su 3'), findsOneWidget);
+      expect(find.text("Tratti d'elezione"), findsOneWidget);
+      expect(find.byKey(ValueKey('plate-${malva.recipes.first.id}')), findsOneWidget);
+      expect(find.byKey(ValueKey('empty-slot-${malva.recipes[1].id}')), findsOneWidget);
+      expect(find.text(malva.recipes[1].name('it')), findsNothing, reason: 'lo slot vuoto non svela il nome');
+      // Il recipiente della base in tutte e due; il liquido (colore dei tratti) solo nella Tavola che hai.
+      final vessels = tester.widgetList<PotionVessel>(find.byType(PotionVessel)).toList();
+      expect(vessels.map((v) => v.shape), contains(VesselShape.of(malva.recipes.first.base)));
+      expect(vessels.where((v) => v.liquids.isEmpty), isNotEmpty);
+      expect(vessels.where((v) => v.liquids.length == malva.recipes.first.traits.length), isNotEmpty);
+
+      await scrollAndTap(tester, find.byKey(ValueKey('plate-${malva.recipes.first.id}')));
+      expect(find.text(malva.recipes.first.name('it')), findsOneWidget);
+      expect(find.text('1 × Malva selvatica'), findsOneWidget);
+      expect(find.text('1 × qualsiasi specie'), findsOneWidget);
+      expect(find.byKey(const ValueKey('recipe-months')), findsOneWidget);
     });
 
     testWidgets('un ingrediente con un tratto spiega quando vale', (tester) async {
+      final eranthis = recipeBookOf(smallCatalog()).pageOf('Eranthis hyemalis')!;
+      final frosty = eranthis.recipes.firstWhere((r) => r.traits.contains(Trait.frost));
       registerTestDependencies(
-        events: [LevelPassed(speciesSci: 'Eranthis hyemalis', level: 2, xp: 20, occurredAt: _feb)],
+        events: [RecipeLearned(recipeId: frosty.id, origin: RecipeOrigin.trove, occurredAt: _feb)],
       );
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricette');
+      await openTab(tester, 'Laboratorio');
 
-      await scrollAndTap(tester, find.byKey(const ValueKey('figurine-tintura-lanterna-inverno')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
+      await scrollAndTap(tester, find.byKey(ValueKey('plate-${frosty.id}')));
       expect(find.text('Quando fa sotto zero: brina e ghiaccio.'), findsOneWidget);
     });
 
-    testWidgets('nessuna ricetta conosciuta: l\'album spiega come impararle', (tester) async {
+    testWidgets('nessuna ricetta conosciuta: il Ricettario spiega come impararle; le Mitiche della Zona in cima', (
+      tester,
+    ) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Ricette');
+      await openTab(tester, 'Laboratorio');
 
-      expect(find.text('0 di 4'), findsOneWidget);
-      expect(find.byKey(const ValueKey('recipes-empty')), findsOneWidget);
+      expect(find.byKey(const ValueKey('recipe-book-empty')), findsOneWidget);
+      expect(find.text('Mitiche · Provincia di Bologna'), findsOneWidget);
+      expect(find.text('0 su 1'), findsOneWidget);
+
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-mythics')));
+      expect(find.text('Tavola n. 1'), findsOneWidget);
+      expect(find.text('Da trovare'), findsOneWidget);
+      expect(find.text('La Lanterna di Santa Lucia'), findsNothing);
     });
 
     testWidgets('legenda e glossario: simboli e termini del gioco', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       await scrollAndTap(tester, find.text('Legenda e glossario'));
 
       expect(find.text('Legenda'), findsOneWidget);
@@ -343,7 +372,7 @@ void main() {
     testWidgets('anteprima dei gradi: una scheda per grado, con il cerchietto', (tester) async {
       registerTestDependencies();
       await pumpDruidApp(tester);
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       await scrollAndTap(tester, find.byKey(const ValueKey('open-grade-preview')));
 
       for (final key in ['preview-common', 'preview-uncommon', 'preview-rare', 'preview-mythic']) {
@@ -352,19 +381,19 @@ void main() {
       }
     });
 
-    testWidgets('curiosità del giorno: consegnata all\'apertura dello Studio', (tester) async {
+    testWidgets('il consiglio del giorno al posto della curiosità (che per ora non si consegna)', (tester) async {
       registerTestDependencies(events: [_met('Eranthis hyemalis')]);
       await pumpDruidApp(tester);
-      await tester.pumpAndSettle();
+      await scrollTo(tester, find.byKey(const ValueKey('tip-of-day')));
 
-      expect(Get.find<ProgressController>().state.revealedFunFacts, hasLength(1));
-      expect(find.textContaining('posto tra le piante spontanee'), findsOneWidget);
+      expect(find.text('Consiglio del giorno'), findsOneWidget);
+      expect(Get.find<ProgressController>().state.revealedFunFacts, isEmpty);
     });
 
     testWidgets('azzerare i progressi richiede due tocchi', (tester) async {
       registerTestDependencies(events: [_met('Eranthis hyemalis')]);
       await pumpDruidApp(tester);
-      await openTab(tester, 'Impostazioni');
+      await openSettings(tester);
       final reset = find.byKey(const ValueKey('debug-reset'));
       await scrollTo(tester, reset);
 

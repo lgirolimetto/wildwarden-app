@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -50,14 +51,15 @@ void main() {
     expect(store.events.whereType<AnswerGiven>(), hasLength(3));
   });
 
-  test('livello 1 superato: si impara una ricetta comune con quella specie, salvata come evento', () async {
+  test('livello 1 superato: si impara la Comune della pianta, salvata come evento', () async {
     study.startLevel(catalog, 'Malva sylvestris', 1);
     await answerAll();
 
     final learned = study.summary!.learnedRecipe!;
-    expect(learned.id, 'pozione-prova-comune');
+    expect(learned.id, recipeBookOf(catalog).pageOf('Malva sylvestris')!.recipes.first.id);
+    expect(learned.plant.sci, 'Malva sylvestris');
     expect(store.events.whereType<RecipeLearned>().single.recipeId, learned.id);
-    expect(progress.state.learnedRecipes, {learned.id});
+    expect(progress.state.learnedRecipes.keys, {learned.id});
   });
 
   test('un errore: la risposta resta visibile finché non si va avanti, e il fatto torna', () async {
@@ -89,7 +91,8 @@ void main() {
     expect(study.startReview(catalog), isTrue);
     expect(study.mode, AnswerMode.review);
     await answerAll();
-    expect(study.summary!.xp, 3 * XpRules.reviewRemembered);
+    // Primo ripasso: i fatti sono nella scatola 1.
+    expect(study.summary!.xp, 3 * XpRules.review(correct: true, box: 1));
   });
 
   test('le opzioni della domanda corrente non cambiano finché non si risponde', () async {

@@ -1,10 +1,11 @@
 /// Ripasso a intervalli crescenti (sistema di Leitner): ogni fatto sta in una "scatola";
 /// ricordarlo lo sposta nella successiva, dimenticarlo lo riporta alla prima.
 ///
-/// Indice = scatola. La scatola 0 è "non ancora imparato".
-const reviewIntervalsDays = [0, 1, 3, 7, 21];
+/// Indice = scatola. La scatola 0 è "non ancora imparato". Fino a 180 giorni: un fatto consolidato torna sempre più
+/// di rado (prima, dopo 21 giorni tornava ogni 21 per sempre).
+const reviewIntervalsDays = [0, 1, 3, 7, 21, 60, 180];
 
-const maxBox = 4;
+const maxBox = 6;
 
 /// Scatola dalla quale un fatto si considera consolidato (ricordato a 1 e 3 giorni): serve per la maestria.
 const consolidatedBox = 3;

@@ -26,6 +26,10 @@ import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/plant_pages_page.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/page_dots.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -97,14 +101,10 @@ class _ToFind extends StatelessWidget {
           const SizedBox(height: Gaps.m),
           FilledButton.icon(
             key: const ValueKey('toggle-desiderata'),
-            onPressed: desired || canAddDesiderata(state) ? () => progress.toggleDesiderata(species.sci) : null,
+            onPressed: () => progress.toggleDesiderata(species.sci),
             icon: Icon(desired ? Icons.star : Icons.star_outline),
             label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
           ),
-          if (!desired && !canAddDesiderata(state)) ...[
-            const SizedBox(height: Gaps.xs),
-            Text(context.l10n.desiderataFull, style: context.texts.bodySmall),
-          ],
           if (Get.find<AppConfig>().showDebugTools) ...[
             const SizedBox(height: Gaps.s),
             OutlinedButton.icon(
@@ -245,6 +245,7 @@ class _SpeciesSheet extends StatelessWidget {
             if (species.isProtected) _ProtectedNote(species: species),
             if (!state.hasEncountered(species.sci)) _ToFind(species: species, state: state, progress: progress),
             _StudyLadder(species: species, catalog: catalog, state: state),
+            _RecipeBookLink(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
             _Section(
               title: context.l10n.sectionTraits,
@@ -510,7 +511,7 @@ class _PhotoLabel extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: context.texts.headlineSmall?.copyWith(color: onHero),
+                  style: speciesNameStyle(context, context.texts.headlineSmall?.copyWith(color: onHero), green: false),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -545,6 +546,42 @@ class _PhotoLabel extends StatelessWidget {
     return ClipRRect(
       borderRadius: radius,
       child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12), child: veil),
+    );
+  }
+}
+
+/// La riga che porta alla Pagina della pianta nel Ricettario, se ne conosci almeno una Tavola.
+class _RecipeBookLink extends StatelessWidget {
+  final Species species;
+  final Catalog catalog;
+  final GameState state;
+
+  const _RecipeBookLink({required this.species, required this.catalog, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    final collected = collectedPages(catalog, state).where((p) => p.page.plant.sci == species.sci).firstOrNull;
+    if (collected == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: Gaps.l),
+      child: ClayCard(
+        key: const ValueKey('species-collected-link'),
+        padding: const EdgeInsets.all(Gaps.m),
+        onTap: () => Get.to<void>(() => PlantPagesPage(initialSci: species.sci)),
+        child: Row(
+          children: [
+            const Icon(Icons.collections_bookmark_rounded),
+            const SizedBox(width: Gaps.m),
+            Expanded(
+              child: Text(
+                context.l10n.recipeBookSpeciesLink(collected.knownCount, collected.page.recipes.length),
+                style: context.texts.titleMedium,
+              ),
+            ),
+            PageDots(collected: collected),
+          ],
+        ),
+      ),
     );
   }
 }

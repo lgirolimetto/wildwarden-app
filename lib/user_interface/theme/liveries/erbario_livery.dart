@@ -2,6 +2,7 @@ import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/livery.dart';
 import 'package:druid_app/user_interface/theme/liveries/grade_colors.dart';
+import 'package:druid_app/user_interface/theme/liveries/potion_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Livrea di default: verdi di prato e di bosco. Di giorno salvia chiara, di notte sottobosco.
@@ -50,6 +51,9 @@ class ErbarioLivery extends Livery {
     final light = brightness == Brightness.light;
     return DruidTokens(
       gradeColors: metalGradeColors(brightness),
+      traitColors: potionTraitColors(brightness),
+      plainPotion: plainPotionColor(brightness),
+      speciesName: speciesNameColor(brightness),
       levelColors: light
           ? const [Color(0xFFB4C9A8), Color(0xFF8DC07A), Color(0xFF5FA34B), Color(0xFF2F7A2A), Color(0xFFC08B1E)]
           : const [Color(0xFF4A5E45), Color(0xFF6E9E5F), Color(0xFF8FC67A), Color(0xFFB6E39F), Color(0xFFF0C766)],

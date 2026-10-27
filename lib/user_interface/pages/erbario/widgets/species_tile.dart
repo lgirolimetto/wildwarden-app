@@ -6,6 +6,7 @@ import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -28,7 +29,10 @@ class UnknownSpeciesTile extends StatelessWidget {
     image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
     protected: species.isProtected,
     children: [
-      Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
+      Text(
+        species.name.resolve(context.contentLanguage),
+        style: speciesNameStyle(context, context.texts.titleMedium, green: false),
+      ),
       if (level > 0) ...[const SizedBox(height: Gaps.xs), _LevelDots(level: level)],
       if (onStudy != null) _StudyTileButton(species: species, onStudy: onStudy!),
       if (onSimulateEncounter != null) ...[
@@ -67,7 +71,10 @@ class EncounteredSpeciesTile extends StatelessWidget {
     color: context.druid.neu ? context.colors.surfaceContainerLowest : null,
     protected: species.isProtected,
     children: [
-      Text(species.name.resolve(context.contentLanguage), style: context.texts.titleMedium),
+      Text(
+        species.name.resolve(context.contentLanguage),
+        style: speciesNameStyle(context, context.texts.titleMedium, green: false),
+      ),
       if (encounteredAt != null) ...[
         const SizedBox(height: Gaps.s),
         StampBadge(

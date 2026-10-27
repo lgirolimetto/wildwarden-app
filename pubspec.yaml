@@ -18,6 +18,7 @@ dependencies:
     sdk: flutter
   get: ^4.7.3
   intl: ^0.20.2
+  material_symbols_icons: ^4.2960.0
   path_provider: ^2.1.6
   shared_preferences: ^2.5.5
 
@@ -40,4 +41,9 @@ flutter:
     - family: YoungSerif
       fonts:
         - asset: assets/fonts/YoungSerif-Regular.ttf
+    # IM FELL English SC di Igino Marini, SIL Open Font License 1.1 (assets/fonts/IMFellEnglishSC-OFL.txt): il
+    # maiuscoletto dei nomi delle specie, come nei cartellini d'erbario.
+    - family: FellSC
+      fonts:
+        - asset: assets/fonts/IMFellEnglishSC-Regular.ttf
 

@@ -1,5 +1,7 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -66,12 +68,11 @@ void main() {
     ]);
   });
 
-  test('non si possono avere più di 3 desiderata', () async {
-    for (final sci in ['Eranthis hyemalis', 'Helleborus viridis', 'Malva sylvestris']) {
+  test('le desiderata non hanno limite', () async {
+    for (final sci in ['Eranthis hyemalis', 'Helleborus viridis', 'Malva sylvestris', 'Fagus sylvatica']) {
       expect(await controller.toggleDesiderata(sci), isTrue);
     }
-    expect(await controller.toggleDesiderata('Fagus sylvatica'), isFalse);
-    expect(controller.state.desiderata, hasLength(3));
+    expect(controller.state.desiderata, hasLength(4));
   });
 
   test('curiosità del giorno: una sola per giorno', () async {
@@ -89,6 +90,48 @@ void main() {
 
     expect(store.events.whereType<NoteSaved>(), hasLength(1));
     expect(controller.state.notes['Eranthis hyemalis'], 'sotto i noccioli');
+  });
+
+  test('simulare un Ricettario: Tavole di più piante e la prima Mitica, una volta sola', () async {
+    final added = await controller.simulateRecipeBook();
+
+    final learned = store.events.whereType<RecipeLearned>().toList();
+    expect(added, learned.length);
+    expect(learned.map((e) => e.recipeId), contains('lanterna-santa-lucia'));
+    expect(collectedPages(catalog, controller.state), hasLength(4), reason: 'il catalogo di prova ha 4 piante');
+    expect(collectedPages(catalog, controller.state).where((p) => p.complete), isNotEmpty);
+
+    expect(await controller.simulateRecipeBook(), 0, reason: 'le Tavole già imparate non si ripetono');
+  });
+
+  test('simulare una Dispensa: Essenze di più piante nei giorni scorsi, con i tratti d\'elezione', () async {
+    final drawn = await controller.simulatePantry();
+
+    expect(controller.state.essences, hasLength(drawn));
+    expect(controller.state.vis.keys, hasLength(4), reason: 'il catalogo di prova ha 4 piante');
+    expect(controller.state.essences.every((e) => e.drawnAt.isBefore(clock.now())), isTrue);
+    expect(controller.state.essences.any((e) => e.traits.isNotEmpty), isTrue);
+  });
+
+  test('con Abbondanza e Limpidezza in corso le Essenze hanno più Vis e più purezza', () async {
+    await controller.encounter('Malva sylvestris', method: EncounterMethod.simulated);
+    await controller.record(
+      PotionBrewed(recipeId: 'r', essences: const {}, potency: 10, xp: 0, occurredAt: clock.now()),
+    );
+    await controller.record(
+      PotionUsed(
+        potionIndex: 0,
+        effect: PotionEffect.abundance,
+        strength: 10,
+        touch: PotionEffect.clarity,
+        occurredAt: clock.now(),
+      ),
+    );
+    await controller.drawSimulated('Malva sylvestris');
+
+    final essence = controller.state.essences.single;
+    expect(essence.vis, 15);
+    expect(essence.purity, closeTo(0.44, 1e-9));
   });
 
   test('azzerare cancella tutti i progressi', () async {
