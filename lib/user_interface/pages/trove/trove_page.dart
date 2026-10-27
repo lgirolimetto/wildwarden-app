@@ -17,6 +17,7 @@ import 'package:druid_app/user_interface/pages/trove/trove_opening_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:get/get.dart';
 
 /// Il Bottino dell'Esperienza, una scheda della barra in basso (decisione del 2026-10-27: è il pezzo più "cool" del
@@ -53,7 +54,7 @@ class _TrovePane extends StatelessWidget {
       children: [
         ClayPageHeader(
           title: context.l10n.troveTitle,
-          icon: Icons.filter_vintage_rounded,
+          icon: Symbols.garden_cart_rounded,
           iconColor: context.druid.gradeColor(Grade.rare.index),
         ),
         const SizedBox(height: Gaps.xl),

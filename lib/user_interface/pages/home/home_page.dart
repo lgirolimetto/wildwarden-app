@@ -9,6 +9,7 @@ import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/pages/trove/trove_page.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/symbols.dart';
 import 'package:get/get.dart';
 
 /// Contenitore con la barra di navigazione in basso. La scheda scelta sta in [HomeController].
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
         (Icons.home_rounded, context.l10n.navStudy),
         (Icons.menu_book_rounded, context.l10n.navErbario),
         (Icons.science_rounded, context.l10n.navLaboratory),
-        (Icons.filter_vintage_rounded, context.l10n.navTrove),
+        (Symbols.garden_cart_rounded, context.l10n.navTrove),
       ],
     ),
   );
