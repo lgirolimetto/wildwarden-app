@@ -2348,12 +2348,6 @@ abstract class AppLocalizations {
   /// **'mitico'**
   String get troveGradeMythic;
 
-  /// No description provided for @troveCost.
-  ///
-  /// In it, this message translates to:
-  /// **'{cost} PE'**
-  String troveCost(int cost);
-
   /// No description provided for @troveContentsCommon.
   ///
   /// In it, this message translates to:
@@ -2378,17 +2372,23 @@ abstract class AppLocalizations {
   /// **'Una Rara o una Mitica, metà e metà'**
   String get troveContentsMythic;
 
-  /// No description provided for @troveOpen.
+  /// No description provided for @troveSpend.
   ///
   /// In it, this message translates to:
-  /// **'Apri'**
-  String get troveOpen;
+  /// **'Spendi {cost} PE'**
+  String troveSpend(int cost);
 
   /// No description provided for @troveNeedXp.
   ///
   /// In it, this message translates to:
   /// **'Ti mancano {xp} PE'**
   String troveNeedXp(int xp);
+
+  /// No description provided for @troveCostMissing.
+  ///
+  /// In it, this message translates to:
+  /// **'Costa {cost} PE: te ne mancano {xp}'**
+  String troveCostMissing(int cost, int xp);
 
   /// No description provided for @troveDailyLimit.
   ///

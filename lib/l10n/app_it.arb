@@ -1119,8 +1119,12 @@
   "troveGradeUncommon": "non comune",
   "troveGradeRare": "raro",
   "troveGradeMythic": "mitico",
-  "troveCost": "{cost} PE",
-  "@troveCost": {
+  "troveContentsCommon": "Quasi sempre una Comune, a volte una Non comune",
+  "troveContentsUncommon": "Per lo più Non comuni, a volte una Comune o una Rara",
+  "troveContentsRare": "Per lo più Rare, a volte una Non comune o una Mitica",
+  "troveContentsMythic": "Una Rara o una Mitica, metà e metà",
+  "troveSpend": "Spendi {cost} PE",
+  "@troveSpend": {
     "placeholders": {
       "cost": {
         "type": "int",
@@ -1128,12 +1132,20 @@
       }
     }
   },
-  "troveContentsCommon": "Quasi sempre una Comune, a volte una Non comune",
-  "troveContentsUncommon": "Per lo più Non comuni, a volte una Comune o una Rara",
-  "troveContentsRare": "Per lo più Rare, a volte una Non comune o una Mitica",
-  "troveContentsMythic": "Una Rara o una Mitica, metà e metà",
-  "troveOpen": "Apri",
   "troveNeedXp": "Ti mancano {xp} PE",
+  "troveCostMissing": "Costa {cost} PE: te ne mancano {xp}",
+  "@troveCostMissing": {
+    "placeholders": {
+      "cost": {
+        "type": "int",
+        "format": "decimalPattern"
+      },
+      "xp": {
+        "type": "int",
+        "format": "decimalPattern"
+      }
+    }
+  },
   "@troveNeedXp": {
     "placeholders": {
       "xp": {

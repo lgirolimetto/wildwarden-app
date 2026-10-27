@@ -51,7 +51,7 @@ class _TrovePane extends StatelessWidget {
       children: [
         ClayPageHeader(
           title: context.l10n.troveTitle,
-          icon: Icons.auto_awesome_rounded,
+          icon: Icons.inventory_2_rounded,
           iconColor: context.druid.gradeColor(Grade.rare.index),
         ),
         const SizedBox(height: Gaps.xl),
@@ -125,7 +125,6 @@ class _TroveCard extends StatelessWidget {
               const SizedBox(width: Gaps.m),
               // Solo il grado: "Bottino dell'Esperienza" sta già nell'intestazione della pagina.
               Expanded(child: Text(_capitalized(context.game.troveGrade(grade)), style: context.texts.titleMedium)),
-              Pill(context.l10n.troveCost(cost)),
             ],
           ),
           const SizedBox(height: Gaps.xs),
@@ -134,11 +133,12 @@ class _TroveCard extends StatelessWidget {
           switch (block) {
             null => ClayButton(
               key: ValueKey('open-trove-${grade.name}'),
-              label: context.l10n.troveOpen,
+              // "Spendi", non "Apri": il Bottino si compra con il saldo (capitolo 02, il costo sempre accanto).
+              label: context.l10n.troveSpend(cost),
               icon: Icons.auto_awesome_rounded,
               onPressed: () => _open(context, progress, grade),
             ),
-            TroveBlock.balance => Text(context.l10n.troveNeedXp(cost - state.balance), style: hint),
+            TroveBlock.balance => Text(context.l10n.troveCostMissing(cost, cost - state.balance), style: hint),
             TroveBlock.dailyLimit => Text(context.l10n.troveDailyLimit(EconomyRules.trovesPerDay), style: hint),
           },
         ],

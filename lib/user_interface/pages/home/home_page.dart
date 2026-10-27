@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
         (Icons.home_rounded, context.l10n.navStudy),
         (Icons.menu_book_rounded, context.l10n.navErbario),
         (Icons.collections_bookmark_rounded, context.l10n.navRecipes),
-        (Icons.auto_awesome_rounded, context.l10n.navTrove),
+        (Icons.inventory_2_rounded, context.l10n.navTrove),
       ],
     ),
   );

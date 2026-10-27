@@ -27,7 +27,7 @@ void main() {
 
     expect(find.text('100 PE da spendere'), findsOneWidget);
     expect(find.text('Comune'), findsOneWidget);
-    expect(find.text('Ti mancano 50 PE'), findsOneWidget);
+    expect(find.text('Costa 150 PE: te ne mancano 50'), findsOneWidget);
     expect(find.byKey(const ValueKey('open-trove-common')), findsNothing);
   });
 

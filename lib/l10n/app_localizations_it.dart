@@ -1403,16 +1403,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get troveGradeMythic => 'mitico';
 
   @override
-  String troveCost(int cost) {
-    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
-      localeName,
-    );
-    final String costString = costNumberFormat.format(cost);
-
-    return '$costString PE';
-  }
-
-  @override
   String get troveContentsCommon =>
       'Quasi sempre una Comune, a volte una Non comune';
 
@@ -1428,7 +1418,14 @@ class AppLocalizationsIt extends AppLocalizations {
   String get troveContentsMythic => 'Una Rara o una Mitica, metà e metà';
 
   @override
-  String get troveOpen => 'Apri';
+  String troveSpend(int cost) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+
+    return 'Spendi $costString PE';
+  }
 
   @override
   String troveNeedXp(int xp) {
@@ -1438,6 +1435,20 @@ class AppLocalizationsIt extends AppLocalizations {
     final String xpString = xpNumberFormat.format(xp);
 
     return 'Ti mancano $xpString PE';
+  }
+
+  @override
+  String troveCostMissing(int cost, int xp) {
+    final intl.NumberFormat costNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String costString = costNumberFormat.format(cost);
+    final intl.NumberFormat xpNumberFormat = intl.NumberFormat.decimalPattern(
+      localeName,
+    );
+    final String xpString = xpNumberFormat.format(xp);
+
+    return 'Costa $costString PE: te ne mancano $xpString';
   }
 
   @override
