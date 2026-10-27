@@ -12,6 +12,7 @@ import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
+import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/base/loadable_controller.dart';
@@ -130,6 +131,29 @@ class ProgressController extends LoadableController<GameState> {
     final price = gift ? EconomyRules.welcomeTrovePrice : EconomyRules.troveCost(grade);
     final result = await record(TroveOpened(grade: grade, price: price, gift: gift, finds: finds, occurredAt: now));
     return result.isValid ? finds : null;
+  }
+
+  /// Ricicla per la Tavola incompleta di [option]: spende i riciclati e le Vis (dalle specie che ne hanno di più) e
+  /// aggiunge un componente. Restituisce `false` se non si può (riciclati o Vis che non bastano).
+  Future<bool> recycle(RecycleOption option) async {
+    final catalog = _catalog();
+    if (catalog == null) return false;
+    final available = recycleOptions(
+      catalog,
+      state,
+    ).any((o) => o.recipeId == option.recipeId && o.fromGrade == option.fromGrade && o.used == option.used);
+    final vis = visToSpend(state, option.visCost);
+    if (!available || vis == null) return false;
+    final result = await record(
+      RecipeRecycled(
+        recipeId: option.recipeId,
+        fromGrade: option.fromGrade,
+        used: option.used,
+        vis: vis,
+        occurredAt: now,
+      ),
+    );
+    return result.isValid;
   }
 
   /// Offre il regalo "bentornato" se è il momento (una volta sola).

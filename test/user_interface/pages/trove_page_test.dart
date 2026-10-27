@@ -110,4 +110,32 @@ void main() {
     expect(find.text('?'), findsOneWidget);
     expect(find.text('Da scoprire: manca un componente del nome.'), findsOneWidget);
   });
+
+  testWidgets('riciclo: 3 doppioni Non comuni e 10 Vis completano la Non comune', (tester) async {
+    final uncommon = recipeBookOf(smallCatalog()).pageOf('Malva sylvestris')!.recipes[1];
+    registerTestDependencies(
+      events: [
+        SpeciesEncountered(speciesSci: 'Malva sylvestris', method: EncounterMethod.simulated, occurredAt: _feb),
+        EssenceDrawn(speciesSci: 'Malva sylvestris', simulated: true, vis: 20, occurredAt: _feb),
+        TroveOpened(
+          grade: Grade.uncommon,
+          price: 0,
+          finds: [
+            TroveFind(recipeId: uncommon.id, grade: Grade.uncommon, kind: TroveFindKind.recipe, missing: 1),
+            for (var i = 0; i < 3; i++)
+              const TroveFind(recipeId: 'x', grade: Grade.uncommon, kind: TroveFindKind.recycled),
+          ],
+          occurredAt: _feb,
+        ),
+      ],
+    );
+    await openTrove(tester);
+
+    await scrollAndTap(tester, find.byKey(ValueKey('recycle-${uncommon.id}-uncommon')));
+    final state = Get.find<ProgressController>().state;
+    expect(state.missingPieces, isEmpty);
+    expect(state.learnedRecipes.keys, contains(uncommon.id));
+    expect(state.vis['Malva sylvestris'], 10);
+    expect(find.text('Tavola completata: ${uncommon.name('it')}'), findsOneWidget);
+  });
 }

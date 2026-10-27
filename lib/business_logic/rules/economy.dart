@@ -39,6 +39,20 @@ abstract final class EconomyRules {
   /// Zona.
   static const troveKnownPlantsShare = 0.75;
 
+  /// Riciclo dei doppioni: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra (al
+  /// massimo un grado).
+  static const recycleSameGrade = 3;
+  static const recycleGradeUp = 9;
+
+  /// Vis di qualsiasi specie che costa un componente riciclato, secondo il suo grado (proposta 🟡 del capitolo 02, da
+  /// confermare con il simulatore).
+  static int recycleVisCost(Grade grade) => switch (grade) {
+    Grade.common => 5,
+    Grade.uncommon => 10,
+    Grade.rare => 20,
+    Grade.mythic => 40,
+  };
+
   /// Pezzi del nome che mancano a una Tavola trovata nel Bottino: la Non comune non sa l'effetto, la Rara il secondo
   /// tratto e l'effetto, la Mitica le sue 3 parole.
   static int missingPiecesWhenFound(Grade grade) => switch (grade) {

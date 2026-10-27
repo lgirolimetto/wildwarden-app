@@ -401,5 +401,17 @@
   "troveDone": "Done",
   "recipeMissingPieces": "{count, plural, =1{1 component missing} other{{count} components missing}}",
   "recipeEffectUnknown": "Still to discover: a component of the name is missing.",
-  "debugGrantXp": "Add 5,000 XP"
+  "debugGrantXp": "Add 5,000 XP",
+  "recycleTitle": "Recycling",
+  "recycleIntro": "Every duplicate is one recycled of its grade. 3 recycled make a component of the same grade, 9 one of the grade above, for an incomplete Plate of your choice. It costs a little Vis.",
+  "recycleVis": "{vis} Vis to spend",
+  "recycleUse": "{count} {grade} recycled · {vis} Vis",
+  "recycleNeedVis": "You need {vis} Vis",
+  "recycleNothing": "With the recycled you have you can't make a component yet.",
+  "recycleDone": "Component added: {name}",
+  "recycleCompleted": "Plate completed: {name}",
+  "recycledGradeCommon": "common",
+  "recycledGradeUncommon": "uncommon",
+  "recycledGradeRare": "rare",
+  "recycledGradeMythic": "mythic"
 }

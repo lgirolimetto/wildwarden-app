@@ -108,6 +108,13 @@ sealed class GameEvent {
         occurredAt: occurredAt,
       ),
       WelcomeGiftOffered.typeId => WelcomeGiftOffered(occurredAt: occurredAt),
+      RecipeRecycled.typeId => RecipeRecycled(
+        recipeId: d['recipe'] as String,
+        fromGrade: Grade.values.byName(d['fromGrade'] as String),
+        used: d['used'] as int,
+        vis: (d['vis'] as Map<String, dynamic>).map((sci, amount) => MapEntry(sci, amount as int)),
+        occurredAt: occurredAt,
+      ),
       XpGranted.typeId => XpGranted(xp: d['xp'] as int, reason: d['reason'] as String, occurredAt: occurredAt),
       OnboardingMarked.typeId => OnboardingMarked(
         mark: OnboardingMark.values.byName(d['mark'] as String),
@@ -443,4 +450,28 @@ class XpGranted extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'xp': xp, 'reason': reason};
+}
+
+/// Riciclo: [used] riciclati di [fromGrade] e un po' di Vis diventano un componente della Tavola incompleta
+/// [recipeId] (dello stesso grado con 3, del grado sopra con 9). Le Vis spese si salvano per specie.
+class RecipeRecycled extends GameEvent {
+  static const typeId = 'recipe_recycled';
+  final String recipeId;
+  final Grade fromGrade;
+  final int used;
+  final Map<String, int> vis;
+
+  const RecipeRecycled({
+    required this.recipeId,
+    required this.fromGrade,
+    required this.used,
+    required this.vis,
+    required super.occurredAt,
+  });
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'recipe': recipeId, 'fromGrade': fromGrade.name, 'used': used, 'vis': vis};
 }

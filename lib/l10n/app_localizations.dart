@@ -2509,6 +2509,78 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Aggiungi 5.000 PE'**
   String get debugGrantXp;
+
+  /// No description provided for @recycleTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Riciclo'**
+  String get recycleTitle;
+
+  /// No description provided for @recycleIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni doppione è un riciclato del suo grado. 3 riciclati fanno un componente dello stesso grado, 9 uno del grado sopra, per una Tavola incompleta a tua scelta. Costa un po\' di Vis.'**
+  String get recycleIntro;
+
+  /// No description provided for @recycleVis.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis da spendere'**
+  String recycleVis(int vis);
+
+  /// No description provided for @recycleUse.
+  ///
+  /// In it, this message translates to:
+  /// **'{count} riciclati {grade} · {vis} Vis'**
+  String recycleUse(int count, String grade, int vis);
+
+  /// No description provided for @recycleNeedVis.
+  ///
+  /// In it, this message translates to:
+  /// **'Servono {vis} Vis'**
+  String recycleNeedVis(int vis);
+
+  /// No description provided for @recycleNothing.
+  ///
+  /// In it, this message translates to:
+  /// **'Con i riciclati che hai non completi ancora nessun componente.'**
+  String get recycleNothing;
+
+  /// No description provided for @recycleDone.
+  ///
+  /// In it, this message translates to:
+  /// **'Componente aggiunto: {name}'**
+  String recycleDone(String name);
+
+  /// No description provided for @recycleCompleted.
+  ///
+  /// In it, this message translates to:
+  /// **'Tavola completata: {name}'**
+  String recycleCompleted(String name);
+
+  /// No description provided for @recycledGradeCommon.
+  ///
+  /// In it, this message translates to:
+  /// **'comuni'**
+  String get recycledGradeCommon;
+
+  /// No description provided for @recycledGradeUncommon.
+  ///
+  /// In it, this message translates to:
+  /// **'non comuni'**
+  String get recycledGradeUncommon;
+
+  /// No description provided for @recycledGradeRare.
+  ///
+  /// In it, this message translates to:
+  /// **'rari'**
+  String get recycledGradeRare;
+
+  /// No description provided for @recycledGradeMythic.
+  ///
+  /// In it, this message translates to:
+  /// **'mitici'**
+  String get recycledGradeMythic;
 }
 
 class _AppLocalizationsDelegate

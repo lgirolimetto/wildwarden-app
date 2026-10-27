@@ -1235,5 +1235,58 @@
     }
   },
   "recipeEffectUnknown": "Da scoprire: manca un componente del nome.",
-  "debugGrantXp": "Aggiungi 5.000 PE"
+  "debugGrantXp": "Aggiungi 5.000 PE",
+  "recycleTitle": "Riciclo",
+  "recycleIntro": "Ogni doppione è un riciclato del suo grado. 3 riciclati fanno un componente dello stesso grado, 9 uno del grado sopra, per una Tavola incompleta a tua scelta. Costa un po' di Vis.",
+  "recycleVis": "{vis} Vis da spendere",
+  "@recycleVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "recycleUse": "{count} riciclati {grade} · {vis} Vis",
+  "@recycleUse": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "grade": {
+        "type": "String"
+      },
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "recycleNeedVis": "Servono {vis} Vis",
+  "@recycleNeedVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "recycleNothing": "Con i riciclati che hai non completi ancora nessun componente.",
+  "recycleDone": "Componente aggiunto: {name}",
+  "@recycleDone": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recycleCompleted": "Tavola completata: {name}",
+  "@recycleCompleted": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "recycledGradeCommon": "comuni",
+  "recycledGradeUncommon": "non comuni",
+  "recycledGradeRare": "rari",
+  "recycledGradeMythic": "mitici"
 }

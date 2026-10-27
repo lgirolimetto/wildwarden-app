@@ -184,7 +184,26 @@ class GameState {
       TroveOpened() => next._openTrove(event),
       WelcomeGiftOffered(:final occurredAt) => next._copy(welcomeOfferedAt: welcomeOfferedAt ?? occurredAt),
       XpGranted() => next,
+      RecipeRecycled() => next._recycle(event),
     };
+  }
+
+  GameState _recycle(RecipeRecycled event) {
+    final missing = {...missingPieces};
+    final learned = {...learnedRecipes};
+    final left = (missing[event.recipeId] ?? 1) - 1;
+    if (left > 0) {
+      missing[event.recipeId] = left;
+    } else {
+      missing.remove(event.recipeId);
+      learned.putIfAbsent(event.recipeId, () => event.occurredAt);
+    }
+    return _copy(
+      missingPieces: missing,
+      learnedRecipes: learned,
+      recycled: {...recycled, event.fromGrade: (recycled[event.fromGrade] ?? 0) - event.used},
+      vis: {...vis, for (final MapEntry(key: sci, value: spent) in event.vis.entries) sci: (vis[sci] ?? 0) - spent},
+    );
   }
 
   GameState _openTrove(TroveOpened event) {

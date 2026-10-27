@@ -1565,4 +1565,52 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get debugGrantXp => 'Aggiungi 5.000 PE';
+
+  @override
+  String get recycleTitle => 'Riciclo';
+
+  @override
+  String get recycleIntro =>
+      'Ogni doppione è un riciclato del suo grado. 3 riciclati fanno un componente dello stesso grado, 9 uno del grado sopra, per una Tavola incompleta a tua scelta. Costa un po\' di Vis.';
+
+  @override
+  String recycleVis(int vis) {
+    return '$vis Vis da spendere';
+  }
+
+  @override
+  String recycleUse(int count, String grade, int vis) {
+    return '$count riciclati $grade · $vis Vis';
+  }
+
+  @override
+  String recycleNeedVis(int vis) {
+    return 'Servono $vis Vis';
+  }
+
+  @override
+  String get recycleNothing =>
+      'Con i riciclati che hai non completi ancora nessun componente.';
+
+  @override
+  String recycleDone(String name) {
+    return 'Componente aggiunto: $name';
+  }
+
+  @override
+  String recycleCompleted(String name) {
+    return 'Tavola completata: $name';
+  }
+
+  @override
+  String get recycledGradeCommon => 'comuni';
+
+  @override
+  String get recycledGradeUncommon => 'non comuni';
+
+  @override
+  String get recycledGradeRare => 'rari';
+
+  @override
+  String get recycledGradeMythic => 'mitici';
 }

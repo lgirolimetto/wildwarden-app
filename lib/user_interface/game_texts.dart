@@ -111,6 +111,14 @@ class GameTexts {
     Grade.mythic => l10n.troveGradeMythic,
   };
 
+  /// Il grado dei riciclati, al plurale ("3 riciclati non comuni").
+  String recycledGrade(Grade g) => switch (g) {
+    Grade.common => l10n.recycledGradeCommon,
+    Grade.uncommon => l10n.recycledGradeUncommon,
+    Grade.rare => l10n.recycledGradeRare,
+    Grade.mythic => l10n.recycledGradeMythic,
+  };
+
   /// Che cosa esce di solito da un Bottino di quel grado.
   String troveContents(Grade g) => switch (g) {
     Grade.common => l10n.troveContentsCommon,

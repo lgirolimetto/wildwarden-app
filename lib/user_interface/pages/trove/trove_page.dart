@@ -2,6 +2,8 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/recipes/collection.dart';
+import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/accent_card.dart';
@@ -96,9 +98,108 @@ class _TrovePane extends StatelessWidget {
         ],
         const SizedBox(height: Gaps.s),
         Text(context.l10n.troveRules, style: hint),
+        if (recycled > 0) ...[
+          const SizedBox(height: Gaps.xl),
+          _RecycleCard(catalog: catalog, state: state, progress: progress),
+        ],
       ],
     );
   }
+}
+
+/// Riciclo: i riciclati per grado, le Vis, e per ogni Tavola incompleta i modi di aggiungerle un componente.
+class _RecycleCard extends StatelessWidget {
+  final Catalog catalog;
+  final GameState state;
+  final ProgressController progress;
+
+  const _RecycleCard({required this.catalog, required this.state, required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    final hint = context.texts.bodySmall?.copyWith(color: context.druid.hint);
+    final vis = totalVis(state);
+    final byRecipe = <String, List<RecycleOption>>{};
+    for (final option in recycleOptions(catalog, state)) {
+      (byRecipe[option.recipeId] ??= []).add(option);
+    }
+    return ClayCard(
+      key: const ValueKey('recycle'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(context.l10n.recycleTitle, style: context.texts.titleMedium),
+          const SizedBox(height: Gaps.s),
+          Wrap(
+            spacing: Gaps.l,
+            runSpacing: Gaps.s,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              for (final grade in Grade.values)
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    GradeDot(grade: grade, label: context.game.grade(grade)),
+                    const SizedBox(width: Gaps.xs),
+                    Text('${state.recycled[grade] ?? 0}', style: context.texts.titleSmall),
+                  ],
+                ),
+              Text(context.l10n.recycleVis(vis), style: context.texts.titleSmall),
+            ],
+          ),
+          const SizedBox(height: Gaps.s),
+          Text(context.l10n.recycleIntro, style: hint),
+          const SizedBox(height: Gaps.m),
+          if (byRecipe.isEmpty) Text(context.l10n.recycleNothing, style: hint),
+          for (final MapEntry(key: id, value: options) in byRecipe.entries) ...[
+            Text(_recipeName(context, catalog, state, id), style: context.texts.titleSmall),
+            const SizedBox(height: Gaps.s),
+            for (final option in options) ...[
+              if (option.visCost > vis)
+                Text(
+                  '${context.l10n.recycleUse(option.used, context.game.recycledGrade(option.fromGrade), option.visCost)}'
+                  ' — ${context.l10n.recycleNeedVis(option.visCost)}',
+                  style: hint,
+                )
+              else
+                ClayButton(
+                  key: ValueKey('recycle-$id-${option.fromGrade.name}'),
+                  label: context.l10n.recycleUse(
+                    option.used,
+                    context.game.recycledGrade(option.fromGrade),
+                    option.visCost,
+                  ),
+                  icon: Icons.recycling_rounded,
+                  onPressed: () => _recycle(context, option),
+                ),
+              const SizedBox(height: Gaps.s),
+            ],
+            const SizedBox(height: Gaps.s),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Future<void> _recycle(BuildContext context, RecycleOption option) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
+    if (!await progress.recycle(option)) return;
+    if (!context.mounted) return;
+    final name = _recipeName(context, catalog, progress.state, option.recipeId);
+    final completed = !progress.state.missingPieces.containsKey(option.recipeId);
+    messenger.showSnackBar(SnackBar(content: Text(completed ? l10n.recycleCompleted(name) : l10n.recycleDone(name))));
+  }
+}
+
+/// Il nome di una Tavola o di una Mitica com'è adesso (parziale se mancano componenti).
+String _recipeName(BuildContext context, Catalog catalog, GameState state, String id) {
+  final lang = context.contentLanguage;
+  final missing = state.missingPieces[id] ?? 0;
+  for (final m in catalog.mythics) {
+    if (m.id == id) return m.name(lang, missing: missing);
+  }
+  return recipeBookOf(catalog).recipeById(id)?.name(lang, missing: missing) ?? id;
 }
 
 class _TroveCard extends StatelessWidget {
