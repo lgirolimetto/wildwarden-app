@@ -2,6 +2,7 @@ import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/potion.dart';
+import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
@@ -91,6 +92,9 @@ class GameState {
   final DateTime? welcomeOfferedAt;
   final bool welcomeRedeemed;
 
+  /// Le stazioni, nell'ordine in cui sono nate (blocco 2).
+  final List<Station> stations;
+
   const GameState({
     this.firstEncounters = const {},
     this.xp = 0,
@@ -122,6 +126,7 @@ class GameState {
     this.startedAt,
     this.welcomeOfferedAt,
     this.welcomeRedeemed = false,
+    this.stations = const [],
   });
 
   static const empty = GameState();
@@ -244,6 +249,7 @@ class GameState {
       TroveOpened() => next._openTrove(event),
       WelcomeGiftOffered(:final occurredAt) => next._copy(welcomeOfferedAt: welcomeOfferedAt ?? occurredAt),
       XpGranted() => next,
+      StationCreated(:final station) => next._copy(stations: [...stations, station]),
       RecipeRecycled() => next._recycle(event),
       PotionBrewed() => next._brew(event),
       PotionUsed() => next._use(event),
@@ -392,6 +398,7 @@ class GameState {
     DateTime? startedAt,
     DateTime? welcomeOfferedAt,
     bool? welcomeRedeemed,
+    List<Station>? stations,
   }) => GameState(
     firstEncounters: firstEncounters ?? this.firstEncounters,
     xp: xp ?? this.xp,
@@ -423,5 +430,6 @@ class GameState {
     startedAt: startedAt ?? this.startedAt,
     welcomeOfferedAt: welcomeOfferedAt ?? this.welcomeOfferedAt,
     welcomeRedeemed: welcomeRedeemed ?? this.welcomeRedeemed,
+    stations: stations ?? this.stations,
   );
 }
