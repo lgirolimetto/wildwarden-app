@@ -40,6 +40,7 @@ registerTestDependencies({
     clock: clock,
     random: Random(seed),
     imageFactory: const FakeImageFactory(),
+    fieldTestLog: InMemoryFieldTestLog(),
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }

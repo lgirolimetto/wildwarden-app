@@ -442,6 +442,19 @@ void main() {
       }
     });
 
+    testWidgets('prova sul campo: si apre dagli strumenti di prova e avvisa se manca la chiave Pl@ntNet', (
+      tester,
+    ) async {
+      registerTestDependencies();
+      await pumpDruidApp(tester);
+      await openSettings(tester);
+      await scrollAndTap(tester, find.byKey(const ValueKey('open-field-test')));
+
+      expect(find.byKey(const ValueKey('field-test-run')), findsOneWidget);
+      expect(find.textContaining('Manca la chiave Pl@ntNet'), findsOneWidget);
+      expect(find.text('Nessuna prova salvata'), findsOneWidget);
+    });
+
     testWidgets('il consiglio del giorno al posto della curiosità (che per ora non si consegna)', (tester) async {
       registerTestDependencies(events: [_met('Eranthis hyemalis')]);
       await pumpDruidApp(tester);

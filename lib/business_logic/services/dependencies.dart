@@ -2,13 +2,21 @@ import 'dart:math';
 
 import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
+import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
+import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/services/camera/system_camera_photo_source.dart';
 import 'package:druid_app/business_logic/services/catalog/asset_catalog_repository.dart';
 import 'package:druid_app/business_logic/services/clock/offset_clock.dart';
+import 'package:druid_app/business_logic/services/field_test/file_field_test_log.dart';
+import 'package:druid_app/business_logic/services/location/geolocator_sampler.dart';
 import 'package:druid_app/business_logic/services/persistence/drift_game_event_store.dart';
 import 'package:druid_app/business_logic/services/persistence/druid_database.dart';
+import 'package:druid_app/business_logic/services/plantnet/plantnet_identifier.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/controllers/erbario/erbario_views_controller.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
@@ -30,6 +38,10 @@ void registerDependencies({
   IClock? clock,
   Random? random,
   RemoteImageFactory? imageFactory,
+  IPlantIdentifier? plantIdentifier,
+  IPhotoSource? photoSource,
+  ILocationSampler? locationSampler,
+  IFieldTestLog? fieldTestLog,
 }) {
   Get.put<AppConfig>(config, permanent: true);
   Get.put<IPreferences>(preferences, permanent: true);
@@ -43,6 +55,10 @@ void registerDependencies({
   Get.put<ICatalogRepository>(catalogRepository ?? AssetCatalogRepository(), permanent: true);
   Get.put<IGameEventStore>(eventStore ?? DriftGameEventStore(DruidDatabase.onDevice()), permanent: true);
   Get.put<RemoteImageFactory>(imageFactory ?? const CachedRemoteImageFactory(), permanent: true);
+  Get.put<IPlantIdentifier>(plantIdentifier ?? PlantNetIdentifier(config), permanent: true);
+  Get.put<IPhotoSource>(photoSource ?? SystemCameraPhotoSource(), permanent: true);
+  Get.put<ILocationSampler>(locationSampler ?? const GeolocatorSampler(), permanent: true);
+  Get.put<IFieldTestLog>(fieldTestLog ?? FileFieldTestLog(), permanent: true);
 
   Get.put(ThemeController(Get.find()), permanent: true);
   Get.put(ErbarioViewsController(Get.find()), permanent: true);

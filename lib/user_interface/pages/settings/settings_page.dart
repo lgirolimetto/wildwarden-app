@@ -6,6 +6,7 @@ import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/pages/glossary/glossary.dart';
+import 'package:druid_app/user_interface/pages/settings/field_test_page.dart';
 import 'package:druid_app/user_interface/pages/settings/grade_preview_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/livery_registry.dart';
@@ -126,6 +127,11 @@ class _DebugToolsState extends State<_DebugTools> {
           ),
         ],
         const SizedBox(height: Gaps.s),
+        OutlinedButton(
+          key: const ValueKey('open-field-test'),
+          onPressed: () => Get.to<void>(() => const FieldTestPage()),
+          child: Text(context.l10n.debugFieldTest),
+        ),
         OutlinedButton(
           key: const ValueKey('open-grade-preview'),
           onPressed: () => Get.to<void>(() => const GradePreviewPage()),

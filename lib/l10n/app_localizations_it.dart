@@ -1969,4 +1969,88 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get simulateMastery => 'Simula Maestria';
+
+  @override
+  String get debugFieldTest => 'Prova sul campo';
+
+  @override
+  String get fieldTestIntro =>
+      'Ogni prova scatta una foto, la manda a Pl@ntNet e misura il GPS dal tocco per almeno 20 secondi (e 10 dopo la foto). Le prove finiscono in un CSV da scaricare con adb.';
+
+  @override
+  String get fieldTestExpected => 'Pianta attesa';
+
+  @override
+  String get fieldTestExpectedHint => 'es. elleboro verde, Helleborus viridis';
+
+  @override
+  String get fieldTestPlace => 'Luogo';
+
+  @override
+  String get fieldTestPlaceHint => 'sole, ombra degli alberi, città…';
+
+  @override
+  String get fieldTestRun => 'Scatta e misura';
+
+  @override
+  String get fieldTestPhasePhoto => 'Fotocamera…';
+
+  @override
+  String get fieldTestPhaseIdentifying => 'Pl@ntNet sta guardando la foto…';
+
+  @override
+  String get fieldTestPhaseLocating => 'GPS: ancora qualche secondo…';
+
+  @override
+  String get fieldTestNoKey =>
+      'Manca la chiave Pl@ntNet (PLANTNET_API_KEY): la foto e il GPS si misurano, l\'identificazione no.';
+
+  @override
+  String fieldTestOutcome(String outcome) {
+    return 'Esito: $outcome';
+  }
+
+  @override
+  String fieldTestTimes(String photo, String plantnet, String kb) {
+    return 'Foto in $photo s · Pl@ntNet in $plantnet ms · $kb KB';
+  }
+
+  @override
+  String fieldTestGps(String first, String a5, String a10, String a20) {
+    return 'GPS: prima posizione dopo $first s · precisione a 5 s $a5 m, a 10 s $a10 m, a 20 s $a20 m';
+  }
+
+  @override
+  String fieldTestGpsAfterPhoto(int during, String first, String accuracy) {
+    return 'Posizioni durante la foto: $during · dopo la foto la prima in $first s, precisione $accuracy m';
+  }
+
+  @override
+  String fieldTestRemaining(String count) {
+    return 'Identificazioni rimaste oggi: $count';
+  }
+
+  @override
+  String fieldTestRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count prove salvate',
+      one: '1 prova salvata',
+      zero: 'Nessuna prova salvata',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get fieldTestCopy => 'Copia il CSV';
+
+  @override
+  String get fieldTestCopied => 'CSV copiato';
+
+  @override
+  String get fieldTestClear => 'Cancella le prove';
+
+  @override
+  String get fieldTestClearConfirm => 'Tocca di nuovo per cancellarle';
 }

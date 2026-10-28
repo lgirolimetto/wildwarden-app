@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Foto delle specie (e in futuro Pl@ntNet, meteo, server): serve anche nelle build release. -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Posizione delle stazioni, solo con l'app aperta (niente background). -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:label="Druid"
         android:name="${applicationName}"

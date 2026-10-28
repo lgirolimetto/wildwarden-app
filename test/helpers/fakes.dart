@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
+import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -91,4 +92,25 @@ class FakeClock implements IClock {
   DateTime now() => current;
 
   void advance(Duration duration) => current = current.add(duration);
+}
+
+/// Registro delle prove sul campo in memoria.
+class InMemoryFieldTestLog implements IFieldTestLog {
+  final rows = <String>[];
+  String? header;
+
+  @override
+  Future<String> location() async => '/prova_sul_campo.csv';
+
+  @override
+  Future<void> append(String header, String row) async {
+    this.header ??= header;
+    rows.add(row);
+  }
+
+  @override
+  Future<String> readAll() async => rows.isEmpty ? '' : '$header\n${rows.join('\n')}\n';
+
+  @override
+  Future<void> clear() async => rows.clear();
 }

@@ -1955,4 +1955,89 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get simulateMastery => 'Simulate Mastery';
+
+  @override
+  String get debugFieldTest => 'Field test';
+
+  @override
+  String get fieldTestIntro =>
+      'Each test takes a photo, sends it to Pl@ntNet and measures GPS from the tap for at least 20 seconds (and 10 after the photo). Tests are saved to a CSV to pull with adb.';
+
+  @override
+  String get fieldTestExpected => 'Expected plant';
+
+  @override
+  String get fieldTestExpectedHint =>
+      'e.g. green hellebore, Helleborus viridis';
+
+  @override
+  String get fieldTestPlace => 'Place';
+
+  @override
+  String get fieldTestPlaceHint => 'sun, under trees, town…';
+
+  @override
+  String get fieldTestRun => 'Shoot and measure';
+
+  @override
+  String get fieldTestPhasePhoto => 'Camera…';
+
+  @override
+  String get fieldTestPhaseIdentifying => 'Pl@ntNet is looking at the photo…';
+
+  @override
+  String get fieldTestPhaseLocating => 'GPS: a few more seconds…';
+
+  @override
+  String get fieldTestNoKey =>
+      'The Pl@ntNet key (PLANTNET_API_KEY) is missing: photo and GPS are measured, identification is not.';
+
+  @override
+  String fieldTestOutcome(String outcome) {
+    return 'Outcome: $outcome';
+  }
+
+  @override
+  String fieldTestTimes(String photo, String plantnet, String kb) {
+    return 'Photo in $photo s · Pl@ntNet in $plantnet ms · $kb KB';
+  }
+
+  @override
+  String fieldTestGps(String first, String a5, String a10, String a20) {
+    return 'GPS: first fix after $first s · accuracy at 5 s $a5 m, at 10 s $a10 m, at 20 s $a20 m';
+  }
+
+  @override
+  String fieldTestGpsAfterPhoto(int during, String first, String accuracy) {
+    return 'Fixes during the photo: $during · after the photo the first in $first s, accuracy $accuracy m';
+  }
+
+  @override
+  String fieldTestRemaining(String count) {
+    return 'Identifications left today: $count';
+  }
+
+  @override
+  String fieldTestRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tests saved',
+      one: '1 test saved',
+      zero: 'No tests saved',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get fieldTestCopy => 'Copy the CSV';
+
+  @override
+  String get fieldTestCopied => 'CSV copied';
+
+  @override
+  String get fieldTestClear => 'Delete the tests';
+
+  @override
+  String get fieldTestClearConfirm => 'Tap again to delete them';
 }

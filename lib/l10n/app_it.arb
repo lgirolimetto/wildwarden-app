@@ -1534,5 +1534,89 @@
     }
   },
   "tip16": "La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.",
-  "simulateMastery": "Simula Maestria"
+  "simulateMastery": "Simula Maestria",
+  "debugFieldTest": "Prova sul campo",
+  "fieldTestIntro": "Ogni prova scatta una foto, la manda a Pl@ntNet e misura il GPS dal tocco per almeno 20 secondi (e 10 dopo la foto). Le prove finiscono in un CSV da scaricare con adb.",
+  "fieldTestExpected": "Pianta attesa",
+  "fieldTestExpectedHint": "es. elleboro verde, Helleborus viridis",
+  "fieldTestPlace": "Luogo",
+  "fieldTestPlaceHint": "sole, ombra degli alberi, città…",
+  "fieldTestRun": "Scatta e misura",
+  "fieldTestPhasePhoto": "Fotocamera…",
+  "fieldTestPhaseIdentifying": "Pl@ntNet sta guardando la foto…",
+  "fieldTestPhaseLocating": "GPS: ancora qualche secondo…",
+  "fieldTestNoKey": "Manca la chiave Pl@ntNet (PLANTNET_API_KEY): la foto e il GPS si misurano, l'identificazione no.",
+  "fieldTestOutcome": "Esito: {outcome}",
+  "@fieldTestOutcome": {
+    "placeholders": {
+      "outcome": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestTimes": "Foto in {photo} s · Pl@ntNet in {plantnet} ms · {kb} KB",
+  "@fieldTestTimes": {
+    "placeholders": {
+      "photo": {
+        "type": "String"
+      },
+      "plantnet": {
+        "type": "String"
+      },
+      "kb": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestGps": "GPS: prima posizione dopo {first} s · precisione a 5 s {a5} m, a 10 s {a10} m, a 20 s {a20} m",
+  "@fieldTestGps": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "a5": {
+        "type": "String"
+      },
+      "a10": {
+        "type": "String"
+      },
+      "a20": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestGpsAfterPhoto": "Posizioni durante la foto: {during} · dopo la foto la prima in {first} s, precisione {accuracy} m",
+  "@fieldTestGpsAfterPhoto": {
+    "placeholders": {
+      "during": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "accuracy": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestRemaining": "Identificazioni rimaste oggi: {count}",
+  "@fieldTestRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestRows": "{count, plural, =0{Nessuna prova salvata} =1{1 prova salvata} other{{count} prove salvate}}",
+  "@fieldTestRows": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fieldTestCopy": "Copia il CSV",
+  "fieldTestCopied": "CSV copiato",
+  "fieldTestClear": "Cancella le prove",
+  "fieldTestClearConfirm": "Tocca di nuovo per cancellarle"
 }

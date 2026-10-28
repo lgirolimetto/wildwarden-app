@@ -16,7 +16,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  geolocator: ^14.1.2
   get: ^4.7.3
+  image_picker: ^1.2.4
   intl: ^0.20.2
   material_symbols_icons: ^4.2960.0
   path_provider: ^2.1.6

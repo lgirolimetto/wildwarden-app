@@ -3079,6 +3079,132 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Simula Maestria'**
   String get simulateMastery;
+
+  /// No description provided for @debugFieldTest.
+  ///
+  /// In it, this message translates to:
+  /// **'Prova sul campo'**
+  String get debugFieldTest;
+
+  /// No description provided for @fieldTestIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni prova scatta una foto, la manda a Pl@ntNet e misura il GPS dal tocco per almeno 20 secondi (e 10 dopo la foto). Le prove finiscono in un CSV da scaricare con adb.'**
+  String get fieldTestIntro;
+
+  /// No description provided for @fieldTestExpected.
+  ///
+  /// In it, this message translates to:
+  /// **'Pianta attesa'**
+  String get fieldTestExpected;
+
+  /// No description provided for @fieldTestExpectedHint.
+  ///
+  /// In it, this message translates to:
+  /// **'es. elleboro verde, Helleborus viridis'**
+  String get fieldTestExpectedHint;
+
+  /// No description provided for @fieldTestPlace.
+  ///
+  /// In it, this message translates to:
+  /// **'Luogo'**
+  String get fieldTestPlace;
+
+  /// No description provided for @fieldTestPlaceHint.
+  ///
+  /// In it, this message translates to:
+  /// **'sole, ombra degli alberi, città…'**
+  String get fieldTestPlaceHint;
+
+  /// No description provided for @fieldTestRun.
+  ///
+  /// In it, this message translates to:
+  /// **'Scatta e misura'**
+  String get fieldTestRun;
+
+  /// No description provided for @fieldTestPhasePhoto.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotocamera…'**
+  String get fieldTestPhasePhoto;
+
+  /// No description provided for @fieldTestPhaseIdentifying.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet sta guardando la foto…'**
+  String get fieldTestPhaseIdentifying;
+
+  /// No description provided for @fieldTestPhaseLocating.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS: ancora qualche secondo…'**
+  String get fieldTestPhaseLocating;
+
+  /// No description provided for @fieldTestNoKey.
+  ///
+  /// In it, this message translates to:
+  /// **'Manca la chiave Pl@ntNet (PLANTNET_API_KEY): la foto e il GPS si misurano, l\'identificazione no.'**
+  String get fieldTestNoKey;
+
+  /// No description provided for @fieldTestOutcome.
+  ///
+  /// In it, this message translates to:
+  /// **'Esito: {outcome}'**
+  String fieldTestOutcome(String outcome);
+
+  /// No description provided for @fieldTestTimes.
+  ///
+  /// In it, this message translates to:
+  /// **'Foto in {photo} s · Pl@ntNet in {plantnet} ms · {kb} KB'**
+  String fieldTestTimes(String photo, String plantnet, String kb);
+
+  /// No description provided for @fieldTestGps.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS: prima posizione dopo {first} s · precisione a 5 s {a5} m, a 10 s {a10} m, a 20 s {a20} m'**
+  String fieldTestGps(String first, String a5, String a10, String a20);
+
+  /// No description provided for @fieldTestGpsAfterPhoto.
+  ///
+  /// In it, this message translates to:
+  /// **'Posizioni durante la foto: {during} · dopo la foto la prima in {first} s, precisione {accuracy} m'**
+  String fieldTestGpsAfterPhoto(int during, String first, String accuracy);
+
+  /// No description provided for @fieldTestRemaining.
+  ///
+  /// In it, this message translates to:
+  /// **'Identificazioni rimaste oggi: {count}'**
+  String fieldTestRemaining(String count);
+
+  /// No description provided for @fieldTestRows.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Nessuna prova salvata} =1{1 prova salvata} other{{count} prove salvate}}'**
+  String fieldTestRows(int count);
+
+  /// No description provided for @fieldTestCopy.
+  ///
+  /// In it, this message translates to:
+  /// **'Copia il CSV'**
+  String get fieldTestCopy;
+
+  /// No description provided for @fieldTestCopied.
+  ///
+  /// In it, this message translates to:
+  /// **'CSV copiato'**
+  String get fieldTestCopied;
+
+  /// No description provided for @fieldTestClear.
+  ///
+  /// In it, this message translates to:
+  /// **'Cancella le prove'**
+  String get fieldTestClear;
+
+  /// No description provided for @fieldTestClearConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca di nuovo per cancellarle'**
+  String get fieldTestClearConfirm;
 }
 
 class _AppLocalizationsDelegate
