@@ -626,7 +626,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossDesiderataText =>
-      'Negli erbari e tra i collezionisti, l\'elenco degli esemplari che si desidera trovare. Qui sono le specie (al massimo 3) che hai scelto di cercare.';
+      'Negli erbari e tra i collezionisti, l\'elenco degli esemplari che si desidera trovare. Qui sono le specie che hai scelto di cercare, quante vuoi.';
 
   @override
   String get glossErborizzareTerm => 'Erborizzare';
