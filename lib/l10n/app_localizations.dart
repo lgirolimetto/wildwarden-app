@@ -3306,55 +3306,19 @@ abstract class AppLocalizations {
   /// No description provided for @cameraGatherHint.
   ///
   /// In it, this message translates to:
-  /// **'Inquadra tutta la pianta e muovi piano il telefono per raccoglierne la Vis'**
+  /// **'Inquadra tutta la pianta: la Vis sale mentre la fotografi, più in fretta se ti muovi'**
   String get cameraGatherHint;
-
-  /// No description provided for @cameraZoomFirst.
-  ///
-  /// In it, this message translates to:
-  /// **'Inquadra prima senza zoom: la Vis si raccoglie da vicino'**
-  String get cameraZoomFirst;
-
-  /// No description provided for @cameraVisGathered.
-  ///
-  /// In it, this message translates to:
-  /// **'Vis raccolta: ora puoi zoomare e scattare'**
-  String get cameraVisGathered;
 
   /// No description provided for @cameraShutterLocked.
   ///
   /// In it, this message translates to:
-  /// **'Prima raccogli la Vis: muovi piano il telefono attorno alla pianta'**
+  /// **'Ancora un attimo: la Vis comincia a salire'**
   String get cameraShutterLocked;
-
-  /// No description provided for @cameraWeakTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Vis molto debole'**
-  String get cameraWeakTitle;
-
-  /// No description provided for @cameraWeakText.
-  ///
-  /// In it, this message translates to:
-  /// **'Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.'**
-  String get cameraWeakText;
-
-  /// No description provided for @cameraWeakRetry.
-  ///
-  /// In it, this message translates to:
-  /// **'Riprova'**
-  String get cameraWeakRetry;
-
-  /// No description provided for @cameraWeakAnyway.
-  ///
-  /// In it, this message translates to:
-  /// **'Raccogli comunque'**
-  String get cameraWeakAnyway;
 
   /// No description provided for @cameraLeafHint.
   ///
   /// In it, this message translates to:
-  /// **'Ora avvicinati a una foglia, piano: la Vis continua a salire'**
+  /// **'Ora avvicinati a una foglia: più calma, più Vis'**
   String get cameraLeafHint;
 
   /// No description provided for @cameraFlowerHint.
@@ -3398,6 +3362,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Flora regionale (Europa sudorientale)'**
   String get fieldTestRegionalResult;
+
+  /// No description provided for @cameraZoomSlower.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza zoom la Vis sale più in fretta'**
+  String get cameraZoomSlower;
 }
 
 class _AppLocalizationsDelegate

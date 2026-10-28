@@ -44,8 +44,8 @@ class FieldTestRecord {
   final bool systemCamera;
   final CameraDiagnostics? diagnostics;
 
-  /// Vis piena o debole allo scatto (solo fotocamera dell'app).
-  final bool? visFull;
+  /// Verifica provvisoria passata o scatto sospetto (solo fotocamera dell'app).
+  final bool? verified;
 
   /// Le parti della pianta fotografate (intera, foglia, fiore) e i tratti del momento.
   final List<PlantOrgan> organs;
@@ -72,7 +72,7 @@ class FieldTestRecord {
     required this.fixes,
     this.systemCamera = false,
     this.diagnostics,
-    this.visFull,
+    this.verified,
     this.organs = const [],
     this.traits = const [],
     this.visGathered,
@@ -168,9 +168,9 @@ class FieldTestRecord {
       cell(diagnostics?.resizeMs),
       diagnostics?.zoom.toStringAsFixed(1) ?? '',
       cell(diagnostics?.flash),
-      switch (visFull) {
-        true => 'piena',
-        false => 'debole',
+      switch (verified) {
+        true => 'mosso',
+        false => 'sospetto',
         null => '',
       },
       cell(candidates.isEmpty || candidates.first.commonNames.isEmpty ? null : candidates.first.commonNames.first),

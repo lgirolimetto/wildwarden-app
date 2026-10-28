@@ -145,7 +145,7 @@ class FieldTestController extends GetxController {
       fixes: fixes,
       systemCamera: systemCamera,
       diagnostics: taken.diagnostics,
-      visFull: taken.visFull,
+      verified: taken.verified,
       visGathered: taken.visGathered,
       regionalCandidates: regionalCandidates,
       regionalTime: regionalTime,

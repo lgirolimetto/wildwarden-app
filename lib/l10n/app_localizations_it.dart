@@ -2122,35 +2122,15 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get cameraGatherHint =>
-      'Inquadra tutta la pianta e muovi piano il telefono per raccoglierne la Vis';
-
-  @override
-  String get cameraZoomFirst =>
-      'Inquadra prima senza zoom: la Vis si raccoglie da vicino';
-
-  @override
-  String get cameraVisGathered => 'Vis raccolta: ora puoi zoomare e scattare';
+      'Inquadra tutta la pianta: la Vis sale mentre la fotografi, più in fretta se ti muovi';
 
   @override
   String get cameraShutterLocked =>
-      'Prima raccogli la Vis: muovi piano il telefono attorno alla pianta';
-
-  @override
-  String get cameraWeakTitle => 'Vis molto debole';
-
-  @override
-  String get cameraWeakText =>
-      'Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.';
-
-  @override
-  String get cameraWeakRetry => 'Riprova';
-
-  @override
-  String get cameraWeakAnyway => 'Raccogli comunque';
+      'Ancora un attimo: la Vis comincia a salire';
 
   @override
   String get cameraLeafHint =>
-      'Ora avvicinati a una foglia, piano: la Vis continua a salire';
+      'Ora avvicinati a una foglia: più calma, più Vis';
 
   @override
   String get cameraFlowerHint => 'E un fiore, se c\'è';
@@ -2173,4 +2153,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get fieldTestRegionalResult => 'Flora regionale (Europa sudorientale)';
+
+  @override
+  String get cameraZoomSlower => 'Senza zoom la Vis sale più in fretta';
 }

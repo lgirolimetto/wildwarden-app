@@ -17,16 +17,17 @@ class TakenPhoto {
   /// Solo dalla fotocamera dell'app: come è andata l'analisi dei fotogrammi e la riduzione della foto.
   final CameraDiagnostics? diagnostics;
 
-  /// Solo dalla fotocamera dell'app: la Vis era piena (verifica passata) o debole ("Raccogli comunque").
-  final bool? visFull;
+  /// Solo dalla fotocamera dell'app: la verifica provvisoria è passata (il telefono si è mosso durante la sessione); se
+  /// no lo scatto è sospetto.
+  final bool? verified;
 
-  /// Solo dalla fotocamera dell'app: quanta Vis si è raccolta (0–1) della parte che serviva per gli scatti fatti.
+  /// Solo dalla fotocamera dell'app: la Vis raccolta (0–1), l'anello alla fine della sessione.
   final double? visGathered;
 
-  const TakenPhoto({this.photos = const [], this.traits = const [], this.diagnostics, this.visFull, this.visGathered});
+  const TakenPhoto({this.photos = const [], this.traits = const [], this.diagnostics, this.verified, this.visGathered});
 
   /// Una foto sola della pianta intera.
-  TakenPhoto.single(String path, {this.diagnostics, this.visFull, this.visGathered})
+  TakenPhoto.single(String path, {this.diagnostics, this.verified, this.visGathered})
     : photos = [PlantPhoto(path, PlantOrgan.whole)],
       traits = const [];
 

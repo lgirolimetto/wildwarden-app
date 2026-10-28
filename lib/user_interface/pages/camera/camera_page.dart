@@ -75,7 +75,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
   FrameVerdict _verdict = FrameVerdict.none;
   final _vis = VisGathering();
-  bool _weakAsked = false;
   final _streamWatch = Stopwatch();
   final _sinceAnalysis = Stopwatch();
   int _received = 0, _analyzed = 0, _analysisMicros = 0;
@@ -238,56 +237,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     _analyzed++;
     _verdict = verdict;
     if (_shooting) return;
-    final changed = _vis.update(step: step, evidence: verdict.evidence, zoom: _zoom);
+    if (_vis.update(step: step, evidence: verdict.evidence, zoom: _zoom)) unawaited(HapticFeedback.mediumImpact());
     setState(() {});
-    if (changed) _onVisChanged();
-  }
-
-  void _onVisChanged() {
-    switch (_vis.state) {
-      case VisState.ready:
-        HapticFeedback.mediumImpact();
-        if (_vis.zoomedWhileGathering) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.cameraVisGathered)));
-        }
-      case VisState.weak when !_weakAsked:
-        _weakAsked = true;
-        _askWeak();
-      default:
-    }
-  }
-
-  /// "Vis molto debole": raccoglierla comunque (poca Vis, scatto sospetto) o riprovare.
-  Future<void> _askWeak() async {
-    final anyway = await showDialog<bool>(
-      context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(dialogContext.l10n.cameraWeakTitle),
-        content: Text(dialogContext.l10n.cameraWeakText),
-        actions: [
-          TextButton(
-            key: const ValueKey('camera-weak-retry'),
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(dialogContext.l10n.cameraWeakRetry),
-          ),
-          FilledButton(
-            key: const ValueKey('camera-weak-anyway'),
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: Text(dialogContext.l10n.cameraWeakAnyway),
-          ),
-        ],
-      ),
-    );
-    if (!mounted) return;
-    setState(() {
-      if (anyway ?? false) {
-        _vis.acceptWeak();
-      } else {
-        _vis.retry();
-        _weakAsked = false;
-      }
-    });
   }
 
   CameraDiagnostics _diagnostics({required int captureMs, required int resizeMs}) {
@@ -333,7 +284,6 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       }
       _shots.add(PlantPhoto(path, PlantOrgan.values[_shots.length]));
       _vis.shotTaken();
-      _weakAsked = false;
       if (!mounted) return;
       unawaited(HapticFeedback.lightImpact());
       if (_shots.length == PlantOrgan.values.length) return _finish();
@@ -359,8 +309,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       photos: List.unmodifiable(_shots),
       traits: _traitsNow(),
       diagnostics: _diagnostics(captureMs: _captureMs, resizeMs: _resizeMs),
-      visFull: _vis.full,
-      visGathered: _vis.gathered,
+      verified: _vis.moved,
+      visGathered: _vis.progress,
     ),
   );
 
@@ -463,13 +413,13 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                   const SizedBox(height: Gaps.l),
                   if (camera != null)
                     Center(
-                      child: _Hint(switch ((_vis.state, _shots.length)) {
-                        (VisState.zoomFirst, _) => context.l10n.cameraZoomFirst,
-                        (_, 0) => context.l10n.cameraGatherHint,
-                        (_, 1) => context.l10n.cameraLeafHint,
+                      child: _Hint(switch (_shots.length) {
+                        0 => context.l10n.cameraGatherHint,
+                        1 => context.l10n.cameraLeafHint,
                         _ => context.l10n.cameraFlowerHint,
                       }),
                     ),
+                  if (camera != null && _vis.zoomed) Center(child: _Hint(context.l10n.cameraZoomSlower)),
                   if (camera != null && _shots.length == 2 && !_shooting)
                     Center(
                       child: TextButton(
@@ -497,7 +447,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       const Spacer(),
                       _Shutter(
                         progress: _vis.progress,
-                        full: _vis.state == VisState.ready,
+                        full: _vis.canShoot,
                         enabled: camera != null && _vis.canShoot && !_shooting,
                         busy: _shooting,
                         onPressed: _shoot,

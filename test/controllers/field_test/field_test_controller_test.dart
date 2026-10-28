@@ -142,7 +142,7 @@ void main() {
         photos: [PlantPhoto(photo, PlantOrgan.whole), PlantPhoto(photo, PlantOrgan.leaf)],
         traits: const [Trait.dusk, Trait.waningMoon],
         diagnostics: diagnostics,
-        visFull: true,
+        verified: true,
       ),
     );
     final system = _Camera(TakenPhoto.single(photo));
@@ -152,7 +152,7 @@ void main() {
     expect(c.last!.systemCamera, isFalse);
     expect(
       c.last!.toCsvRow(),
-      contains(',app,30.0,9.5,3.2,410,880,2.0,auto,piena,Elleboro verde,whole+leaf,dusk+waningMoon,'),
+      contains(',app,30.0,9.5,3.2,410,880,2.0,auto,mosso,Elleboro verde,whole+leaf,dusk+waningMoon,'),
     );
 
     c.setSystemCamera(true);
