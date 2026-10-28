@@ -2915,91 +2915,91 @@ abstract class AppLocalizations {
   /// No description provided for @tip01.
   ///
   /// In it, this message translates to:
-  /// **'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.'**
+  /// **'Più studi una pianta, più sono pure le Essenze che ne attingi: la purezza va dal 40 % (pianta mai studiata) al 100 % (pianta di cui hai la Maestria).'**
   String get tip01;
 
   /// No description provided for @tip02.
   ///
   /// In it, this message translates to:
-  /// **'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.'**
+  /// **'Nella Potenza di una pozione conta soprattutto la purezza delle Essenze che usi: più conosci le piante delle ricette, più le tue pozioni sono potenti.'**
   String get tip02;
 
   /// No description provided for @tip03.
   ///
   /// In it, this message translates to:
-  /// **'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.'**
+  /// **'Le Tavole Comuni del Ricettario si imparano studiando: quando superi il livello 1 di una specie, la Tavola Comune di quella pianta entra nel tuo Ricettario.'**
   String get tip03;
 
   /// No description provided for @tip04.
   ///
   /// In it, this message translates to:
-  /// **'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.'**
+  /// **'Le Tavole Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza incomplete, con il nome a pezzi: ogni pezzo che manca è un Componente, e lo trovi aprendo altri Bottino dell\'Esperienza.'**
   String get tip04;
 
   /// No description provided for @tip05.
   ///
   /// In it, this message translates to:
-  /// **'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.'**
+  /// **'Le Tavole Mitiche si trovano solo aprendo il Bottino dell\'Esperienza di grado mitico.'**
   String get tip05;
 
   /// No description provided for @tip06.
   ///
   /// In it, this message translates to:
-  /// **'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.'**
+  /// **'Se il Bottino dell\'Esperienza ti dà una Tavola o un Componente che hai già, è un doppione: lo ricicli con un po\' di Vis. 3 Riciclati fanno un Componente dello stesso grado, 9 un Componente del grado sopra.'**
   String get tip06;
 
   /// No description provided for @tip07.
   ///
   /// In it, this message translates to:
-  /// **'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.'**
+  /// **'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.'**
   String get tip07;
 
   /// No description provided for @tip08.
   ///
   /// In it, this message translates to:
-  /// **'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.'**
+  /// **'Ogni ricetta ha uno slot libero, «qualsiasi specie»: la pianta che ci metti dà alla pozione il suo Tocco (Rigogliosa, Limpida, Presaga o Copiosa).'**
   String get tip08;
 
   /// No description provided for @tip09.
   ///
   /// In it, this message translates to:
-  /// **'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.'**
+  /// **'Attenzione allo slot libero delle ricette da bere: con una pianta tossica la pozione si guasta e perdi la Vis usata, ma impari che quella pianta è tossica.'**
   String get tip09;
 
   /// No description provided for @tip10.
   ///
   /// In it, this message translates to:
-  /// **'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.'**
+  /// **'Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.'**
   String get tip10;
 
   /// No description provided for @tip11.
   ///
   /// In it, this message translates to:
-  /// **'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.'**
+  /// **'Quando usi una pozione dello Scaffale, il suo effetto dura 7 giorni ed è tanto più forte quanto più alta è la sua Potenza.'**
   String get tip11;
 
   /// No description provided for @tip12.
   ///
   /// In it, this message translates to:
-  /// **'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.'**
+  /// **'I Tratti di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.'**
   String get tip12;
 
   /// No description provided for @tip13.
   ///
   /// In it, this message translates to:
-  /// **'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.'**
+  /// **'I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.'**
   String get tip13;
 
   /// No description provided for @tip14.
   ///
   /// In it, this message translates to:
-  /// **'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.'**
+  /// **'Il significato di simboli, colori e gradi è nella Legenda: Impostazioni → Legenda e glossario.'**
   String get tip14;
 
   /// No description provided for @tip15.
   ///
   /// In it, this message translates to:
-  /// **'\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.'**
+  /// **'«Raccogliere», nel gioco, vuol dire fotografare: le piante restano dove sono, intatte.'**
   String get tip15;
 
   /// No description provided for @viewToFind.
@@ -3071,7 +3071,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip16.
   ///
   /// In it, this message translates to:
-  /// **'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.'**
+  /// **'La Maestria di una specie va mantenuta: se per 30 giorni non rispondi a domande su quella specie, la Maestria si assopisce. La risvegli con 5 domande, dalla scheda della specie o da «Le tue specie» in Home.'**
   String get tip16;
 
   /// No description provided for @simulateMastery.
@@ -3372,7 +3372,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip17.
   ///
   /// In it, this message translates to:
-  /// **'Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più.'**
+  /// **'Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.'**
   String get tip17;
 
   /// No description provided for @capturePhotograph.

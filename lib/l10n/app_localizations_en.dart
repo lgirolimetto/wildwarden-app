@@ -1848,62 +1848,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip01 =>
-      'Studying a plant makes its Essences purer: from 40% without study to 100% with Mastery.';
+      'The more you study a plant, the purer the Essences you draw from it: purity goes from 40% (a plant you never studied) to 100% (a plant you have Mastery of).';
 
   @override
   String get tip02 =>
-      'The purity of your Essences decides most of a potion\'s Potency: the better you know the plants, the stronger it is.';
+      'A potion\'s Potency depends mostly on the purity of the Essences you use: the better you know the plants in a recipe, the stronger your potions.';
 
   @override
   String get tip03 =>
-      'Commons are learned by studying: pass level 1 of a species and its Common is in the Recipe Book.';
+      'The Common Plates of the Recipe Book are learned by studying: when you pass level 1 of a species, that plant\'s Common Plate enters your Recipe Book.';
 
   @override
   String get tip04 =>
-      'In the Trove of Experience, Uncommon, Rare and Mythic Plates come out incomplete: the missing Components are found in other Trove of Experience.';
+      'Uncommon, Rare and Mythic Plates come out of the Trove of Experience incomplete, with their name in pieces: each missing piece is a Component, found by opening more Trove of Experience.';
 
   @override
-  String get tip05 => 'Mythics only come from the mythic Trove of Experience.';
+  String get tip05 =>
+      'Mythic Plates are only found by opening a mythic-grade Trove of Experience.';
 
   @override
   String get tip06 =>
-      'Duplicates from the Trove of Experience become Recycled: 3 make a Component of the same grade, 9 one of the grade above.';
+      'If the Trove of Experience gives you a Plate or a Component you already have, it\'s a duplicate: recycle it with a little Vis. 3 Recycled make a Component of the same grade, 9 a Component of the grade above.';
 
   @override
   String get tip07 =>
-      'Recycling spends your least precious Essences first: the ones with Traits stay for recipes.';
+      'Recycling a duplicate costs a little Vis, taken from your Essences: the least precious Essences are used first, so the ones with Traits stay for recipes.';
 
   @override
   String get tip08 =>
-      'Put any plant you like in a recipe\'s free slot: it gives the potion its Touch.';
+      'Every recipe has a free slot, “any species”: the plant you put there gives the potion its Touch (Lush, Clear, Prescient or Bountiful).';
 
   @override
   String get tip09 =>
-      'Beware of toxic plants in the free slot of a drinkable recipe: the potion spoils.';
+      'Beware of the free slot in recipes to drink: with a toxic plant the potion spoils and you lose the Vis used, but you learn that plant is toxic.';
 
   @override
   String get tip10 =>
-      'The Laboratory\'s Ready recipes tell you what\'s missing: it\'s the list for your next outing.';
+      'In the Laboratory, the Ready recipes tab shows the recipes you can make now and, for the others, which Essences you are missing: it\'s the list of plants to look for on your next outing.';
 
   @override
   String get tip11 =>
-      'Using a potion gives its effect for 7 days, as strong as its Potency.';
+      'When you use a potion from the Shelf, its effect lasts 7 days and is as strong as its Potency.';
 
   @override
   String get tip12 =>
-      'Traits tell the conditions you drew an Essence in; a recipe\'s name recalls them: \"Full-moon\" wants the Full moon.';
+      'An Essence\'s Traits tell the conditions you drew it in (weather, time of day, moon); a recipe\'s name says which Traits it needs: “Full-moon” asks for an Essence drawn under the Full moon.';
 
   @override
   String get tip13 =>
-      'Study XP stays to Cash in until you draw the first Essence of that species.';
+      'The XP you earn studying a species stays to Cash in until you draw the first Essence of that species: only then does it become real XP.';
 
   @override
   String get tip14 =>
-      'In the Legend (Settings → Legend and glossary) you\'ll find what symbols and colours mean.';
+      'The meaning of symbols, colours and grades is in the Legend: Settings → Legend and glossary.';
 
   @override
   String get tip15 =>
-      '\"Collecting\" in the game means taking photos: plants stay where they are.';
+      'In the game, “gathering” means photographing: plants stay where they are, untouched.';
 
   @override
   String get viewToFind => 'To find';
@@ -1951,7 +1952,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip16 =>
-      'Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home.';
+      'A species\' Mastery has to be kept: if for 30 days you answer no questions about that species, its Mastery falls dormant. Reawaken it with 5 questions, from the species page or from “Your species” on Home.';
 
   @override
   String get simulateMastery => 'Simulate Mastery';
@@ -2145,7 +2146,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip17 =>
-      'When you photograph a plant its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more.';
+      'When you photograph a plant, its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more Vis.';
 
   @override
   String get capturePhotograph => 'Photograph a plant';
