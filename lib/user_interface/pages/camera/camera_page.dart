@@ -245,9 +245,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
   void _onVisChanged() {
     switch (_vis.state) {
-      case VisState.full:
+      case VisState.ready:
         HapticFeedback.mediumImpact();
-        if (_vis.startedZoomed) {
+        if (_vis.zoomedWhileGathering) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.cameraVisGathered)));
         }
       case VisState.weak when !_weakAsked:
@@ -332,10 +332,16 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         _resizeMs = resizeMs;
       }
       _shots.add(PlantPhoto(path, PlantOrgan.values[_shots.length]));
+      _vis.shotTaken();
+      _weakAsked = false;
       if (!mounted) return;
       unawaited(HapticFeedback.lightImpact());
       if (_shots.length == PlantOrgan.values.length) return _finish();
-      setState(() => _shooting = false);
+      // Si continua a raccogliere la Vis per il prossimo scatto: lo streaming riparte.
+      _sinceAnalysis.reset();
+      _streamWatch.start();
+      await camera.startImageStream(_onFrame);
+      if (mounted) setState(() => _shooting = false);
     } catch (e) {
       // Qualsiasi errore (fotocamera, file, riduzione) sblocca lo scatto e si mostra: niente pulsante bloccato.
       if (mounted) {
@@ -353,7 +359,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       photos: List.unmodifiable(_shots),
       traits: _traitsNow(),
       diagnostics: _diagnostics(captureMs: _captureMs, resizeMs: _resizeMs),
-      visFull: _vis.state == VisState.full,
+      visFull: _vis.full,
+      visGathered: _vis.gathered,
     ),
   );
 
@@ -455,18 +462,14 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                     ),
                   const SizedBox(height: Gaps.l),
                   if (camera != null)
-                    if (_shots.isNotEmpty)
-                      Center(
-                        child: _Hint(_shots.length == 1 ? context.l10n.cameraLeafHint : context.l10n.cameraFlowerHint),
-                      )
-                    else if (_vis.state == VisState.gathering || _vis.state == VisState.zoomFirst)
-                      Center(
-                        child: _Hint(
-                          _vis.state == VisState.zoomFirst
-                              ? context.l10n.cameraZoomFirst
-                              : context.l10n.cameraGatherHint,
-                        ),
-                      ),
+                    Center(
+                      child: _Hint(switch ((_vis.state, _shots.length)) {
+                        (VisState.zoomFirst, _) => context.l10n.cameraZoomFirst,
+                        (_, 0) => context.l10n.cameraGatherHint,
+                        (_, 1) => context.l10n.cameraLeafHint,
+                        _ => context.l10n.cameraFlowerHint,
+                      }),
+                    ),
                   if (camera != null && _shots.length == 2 && !_shooting)
                     Center(
                       child: TextButton(
@@ -494,7 +497,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       const Spacer(),
                       _Shutter(
                         progress: _vis.progress,
-                        full: _vis.state == VisState.full,
+                        full: _vis.state == VisState.ready,
                         enabled: camera != null && _vis.canShoot && !_shooting,
                         busy: _shooting,
                         onPressed: _shoot,

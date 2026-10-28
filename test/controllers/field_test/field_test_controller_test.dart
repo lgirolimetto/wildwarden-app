@@ -22,10 +22,15 @@ class _Camera implements IPhotoSource {
 
 class _Identifier implements IPlantIdentifier {
   int calls = 0;
+  final floras = <PlantFlora>[];
 
   @override
-  Future<Validation<PlantIdentification>> identify(List<PlantPhoto> photos) async {
+  Future<Validation<PlantIdentification>> identify(
+    List<PlantPhoto> photos, {
+    PlantFlora flora = PlantFlora.world,
+  }) async {
     calls++;
+    floras.add(flora);
     return Valid(
       const PlantIdentification(
         candidates: [
@@ -147,18 +152,28 @@ void main() {
     expect(c.last!.systemCamera, isFalse);
     expect(
       c.last!.toCsvRow(),
-      endsWith(',app,30.0,9.5,3.2,410,880,2.0,auto,piena,Elleboro verde,whole+leaf,dusk+waningMoon'),
+      contains(',app,30.0,9.5,3.2,410,880,2.0,auto,piena,Elleboro verde,whole+leaf,dusk+waningMoon,'),
     );
 
     c.setSystemCamera(true);
     await c.run(expected: '', place: '');
     expect(c.last!.systemCamera, isTrue);
-    expect(c.last!.toCsvRow(), endsWith(',sistema,,,,,,,,,Elleboro verde,whole,'));
+    expect(c.last!.toCsvRow(), contains(',sistema,,,,,,,,,Elleboro verde,whole,,'));
   });
 
   test('senza fotocamera di sistema l\'interruttore resta spento', () {
     final c = controller(_Camera(TakenPhoto.single(photo)), _Location());
     c.setSystemCamera(true);
     expect(c.useSystemCamera, isFalse);
+  });
+
+  test('confronto con la flora regionale: le stesse foto, una seconda identificazione, nel CSV', () async {
+    final c = controller(_Camera(TakenPhoto.single(photo)), _Location())..setCompareRegional(true);
+
+    await c.run(expected: 'elleboro', place: '');
+
+    expect(identifier.floras, [PlantFlora.world, PlantFlora.regional]);
+    expect(c.last!.regionalCandidates!.single.scientificName, 'Helleborus viridis');
+    expect(c.last!.toCsvRow(), endsWith(',Helleborus viridis,0.800,,,,,Elleboro verde'));
   });
 }

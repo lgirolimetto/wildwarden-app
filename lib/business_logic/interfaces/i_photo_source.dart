@@ -20,10 +20,13 @@ class TakenPhoto {
   /// Solo dalla fotocamera dell'app: la Vis era piena (verifica passata) o debole ("Raccogli comunque").
   final bool? visFull;
 
-  const TakenPhoto({this.photos = const [], this.traits = const [], this.diagnostics, this.visFull});
+  /// Solo dalla fotocamera dell'app: quanta Vis si è raccolta (0–1) della parte che serviva per gli scatti fatti.
+  final double? visGathered;
+
+  const TakenPhoto({this.photos = const [], this.traits = const [], this.diagnostics, this.visFull, this.visGathered});
 
   /// Una foto sola della pianta intera.
-  TakenPhoto.single(String path, {this.diagnostics, this.visFull})
+  TakenPhoto.single(String path, {this.diagnostics, this.visFull, this.visGathered})
     : photos = [PlantPhoto(path, PlantOrgan.whole)],
       traits = const [];
 

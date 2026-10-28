@@ -1695,7 +1695,7 @@
       }
     }
   },
-  "cameraGatherHint": "Muovi piano il telefono attorno alla pianta per raccoglierne la Vis",
+  "cameraGatherHint": "Inquadra tutta la pianta e muovi piano il telefono per raccoglierne la Vis",
   "cameraZoomFirst": "Inquadra prima senza zoom: la Vis si raccoglie da vicino",
   "cameraVisGathered": "Vis raccolta: ora puoi zoomare e scattare",
   "cameraShutterLocked": "Prima raccogli la Vis: muovi piano il telefono attorno alla pianta",
@@ -1703,10 +1703,12 @@
   "cameraWeakText": "Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.",
   "cameraWeakRetry": "Riprova",
   "cameraWeakAnyway": "Raccogli comunque",
-  "cameraLeafHint": "Ora avvicinati a una foglia",
+  "cameraLeafHint": "Ora avvicinati a una foglia, piano: la Vis continua a salire",
   "cameraFlowerHint": "E un fiore, se c'è",
   "cameraNoFlower": "Non ha fiori",
   "cameraOrganWhole": "Pianta intera",
   "cameraOrganLeaf": "Foglia",
-  "cameraOrganFlower": "Fiore"
+  "cameraOrganFlower": "Fiore",
+  "fieldTestRegional": "Confronta con la flora regionale (2 identificazioni)",
+  "fieldTestRegionalResult": "Flora regionale (Europa sudorientale)"
 }

@@ -3306,7 +3306,7 @@ abstract class AppLocalizations {
   /// No description provided for @cameraGatherHint.
   ///
   /// In it, this message translates to:
-  /// **'Muovi piano il telefono attorno alla pianta per raccoglierne la Vis'**
+  /// **'Inquadra tutta la pianta e muovi piano il telefono per raccoglierne la Vis'**
   String get cameraGatherHint;
 
   /// No description provided for @cameraZoomFirst.
@@ -3354,7 +3354,7 @@ abstract class AppLocalizations {
   /// No description provided for @cameraLeafHint.
   ///
   /// In it, this message translates to:
-  /// **'Ora avvicinati a una foglia'**
+  /// **'Ora avvicinati a una foglia, piano: la Vis continua a salire'**
   String get cameraLeafHint;
 
   /// No description provided for @cameraFlowerHint.
@@ -3386,6 +3386,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Fiore'**
   String get cameraOrganFlower;
+
+  /// No description provided for @fieldTestRegional.
+  ///
+  /// In it, this message translates to:
+  /// **'Confronta con la flora regionale (2 identificazioni)'**
+  String get fieldTestRegional;
+
+  /// No description provided for @fieldTestRegionalResult.
+  ///
+  /// In it, this message translates to:
+  /// **'Flora regionale (Europa sudorientale)'**
+  String get fieldTestRegionalResult;
 }
 
 class _AppLocalizationsDelegate

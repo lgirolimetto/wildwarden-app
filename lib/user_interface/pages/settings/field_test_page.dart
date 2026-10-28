@@ -83,6 +83,13 @@ class _FieldTestPageState extends State<FieldTestPage> {
                 trailing: ClaySwitch(value: controller.useSystemCamera, onChanged: controller.setSystemCamera),
                 onTap: () => controller.setSystemCamera(!controller.useSystemCamera),
               ),
+              ListTile(
+                key: const ValueKey('field-test-regional'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(context.l10n.fieldTestRegional),
+                trailing: ClaySwitch(value: controller.compareRegional, onChanged: controller.setCompareRegional),
+                onTap: () => controller.setCompareRegional(!controller.compareRegional),
+              ),
               const SizedBox(height: Gaps.s),
               FilledButton.icon(
                 key: const ValueKey('field-test-run'),
@@ -172,6 +179,16 @@ class _LastTest extends StatelessWidget {
               '${(candidate.score * 100).toStringAsFixed(candidate.score < 0.01 ? 1 : 0)} % · ${candidate.scientificName}'
               '${candidate.commonNames.isEmpty ? '' : ' (${candidate.commonNames.first})'}',
             ),
+          if (record.regionalCandidates case final regional?) ...[
+            const SizedBox(height: Gaps.s),
+            Text(context.l10n.fieldTestRegionalResult, style: context.texts.labelLarge),
+            for (final candidate in regional.take(3))
+              Text(
+                '${(candidate.score * 100).toStringAsFixed(candidate.score < 0.01 ? 1 : 0)} % · '
+                '${candidate.scientificName}'
+                '${candidate.commonNames.isEmpty ? '' : ' (${candidate.commonNames.first})'}',
+              ),
+          ],
           const SizedBox(height: Gaps.s),
           Text(
             context.l10n.fieldTestTimes(

@@ -13,7 +13,8 @@ class FieldTestRecord {
       'top1,punteggio1,top2,punteggio2,top3,punteggio3,giusta_top1,giusta_top3,rimaste,'
       'gps_esito,gps_primo_s,precisione_5s_m,precisione_10s_m,precisione_20s_m,'
       'posizioni_durante_foto,gps_dopo_foto_primo_s,precisione_dopo_foto_10s_m,posizioni,'
-      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms,zoom,flash,vis,nome_comune1,foto,tratti';
+      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms,zoom,flash,vis,nome_comune1,foto,tratti,vis_raccolta,'
+      'reg_ms,reg_top1,reg_punteggio1,reg_top2,reg_punteggio2,reg_top3,reg_punteggio3,reg_nome_comune1';
 
   /// Dopo la foto le posizioni si raccolgono ancora per questo tempo (mentre risponde Pl@ntNet).
   static const afterPhoto = Duration(seconds: 10);
@@ -50,6 +51,13 @@ class FieldTestRecord {
   final List<PlantOrgan> organs;
   final List<Trait> traits;
 
+  /// Quanta Vis si è raccolta (0–1), solo fotocamera dell'app.
+  final double? visGathered;
+
+  /// Le stesse foto con la flora regionale (confronto, una seconda identificazione); null se non chiesto.
+  final List<PlantCandidate>? regionalCandidates;
+  final Duration? regionalTime;
+
   const FieldTestRecord({
     required this.at,
     required this.expected,
@@ -67,6 +75,9 @@ class FieldTestRecord {
     this.visFull,
     this.organs = const [],
     this.traits = const [],
+    this.visGathered,
+    this.regionalCandidates,
+    this.regionalTime,
   });
 
   Duration? get firstFix => fixes.isEmpty ? null : fixes.first.elapsed;
@@ -111,8 +122,17 @@ class FieldTestRecord {
 
     String seconds(Duration? d) => d == null ? '' : (d.inMilliseconds / 1000).toStringAsFixed(1);
     String metres(double? m) => m == null ? '' : m.toStringAsFixed(0);
-    String candidate(int i) => i < candidates.length ? cell(candidates[i].scientificName) : '';
-    String score(int i) => i < candidates.length ? candidates[i].score.toStringAsFixed(3) : '';
+    String candidate(int i, [List<PlantCandidate>? list]) {
+      final from = list ?? candidates;
+      return i < from.length ? cell(from[i].scientificName) : '';
+    }
+
+    String score(int i, [List<PlantCandidate>? list]) {
+      final from = list ?? candidates;
+      return i < from.length ? from[i].score.toStringAsFixed(3) : '';
+    }
+
+    final regional = regionalCandidates ?? const <PlantCandidate>[];
 
     return [
       at.toIso8601String(),
@@ -156,6 +176,15 @@ class FieldTestRecord {
       cell(candidates.isEmpty || candidates.first.commonNames.isEmpty ? null : candidates.first.commonNames.first),
       organs.map((o) => o.name).join('+'),
       traits.map((t) => t.name).join('+'),
+      visGathered?.toStringAsFixed(2) ?? '',
+      cell(regionalTime?.inMilliseconds),
+      candidate(0, regional),
+      score(0, regional),
+      candidate(1, regional),
+      score(1, regional),
+      candidate(2, regional),
+      score(2, regional),
+      cell(regional.isEmpty || regional.first.commonNames.isEmpty ? null : regional.first.commonNames.first),
     ].join(',');
   }
 }

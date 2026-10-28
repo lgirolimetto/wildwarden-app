@@ -53,6 +53,14 @@ class FieldTestController extends GetxController {
 
   bool get canUseSystemCamera => _systemCamera != null;
 
+  /// Manda le stesse foto anche alla flora regionale di Pl@ntNet (una seconda identificazione per prova).
+  bool compareRegional = false;
+
+  void setCompareRegional(bool value) {
+    compareRegional = value;
+    update();
+  }
+
   void setSystemCamera(bool value) {
     useSystemCamera = value && canUseSystemCamera;
     update();
@@ -89,7 +97,8 @@ class FieldTestController extends GetxController {
 
     var outcome = 'annullata';
     int? photoKb;
-    Duration? identifyTime;
+    Duration? identifyTime, regionalTime;
+    List<PlantCandidate>? regionalCandidates;
     var identification = PlantIdentification.none;
     final taken = photo.fold((_) => TakenPhoto.cancelled, (taken) => taken);
     final path = taken.path;
@@ -105,6 +114,12 @@ class FieldTestController extends GetxController {
         identification = value;
         outcome = value.candidates.isEmpty ? 'nessuna' : 'ok';
       });
+      if (compareRegional) {
+        final regionalStarted = watch.elapsed;
+        final regional = await _identifier.identify(taken.photos, flora: PlantFlora.regional);
+        regionalTime = watch.elapsed - regionalStarted;
+        regionalCandidates = regional.fold((_) => const [], (value) => value.candidates);
+      }
     }
 
     _phase(FieldTestPhase.locating);
@@ -131,6 +146,9 @@ class FieldTestController extends GetxController {
       systemCamera: systemCamera,
       diagnostics: taken.diagnostics,
       visFull: taken.visFull,
+      visGathered: taken.visGathered,
+      regionalCandidates: regionalCandidates,
+      regionalTime: regionalTime,
       organs: [for (final p in taken.photos) p.organ],
       traits: taken.traits,
     );

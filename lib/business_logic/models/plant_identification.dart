@@ -10,6 +10,19 @@ enum PlantOrgan {
   const PlantOrgan(this.plantNetName);
 }
 
+/// Le piante fra cui Pl@ntNet cerca: tutto il mondo, o la flora della regione botanica della Zona (per Bologna l'Europa
+/// sudorientale, in cui le regioni botaniche mettono l'Italia). Con la flora regionale una pianta coltivata lontano dal
+/// suo ambiente è riconosciuta con meno sicurezza: meno forza (capitolo 02, 2026-10-28). Da provare con la Prova sul
+/// campo; con più Zone il progetto verrà dal catalogo.
+enum PlantFlora {
+  world('all'),
+  regional('k-southeastern-europe');
+
+  final String plantNetProject;
+
+  const PlantFlora(this.plantNetProject);
+}
+
 /// Una foto per il riconoscimento.
 class PlantPhoto {
   final String path;

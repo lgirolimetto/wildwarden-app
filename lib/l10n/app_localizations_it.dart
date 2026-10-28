@@ -2122,7 +2122,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get cameraGatherHint =>
-      'Muovi piano il telefono attorno alla pianta per raccoglierne la Vis';
+      'Inquadra tutta la pianta e muovi piano il telefono per raccoglierne la Vis';
 
   @override
   String get cameraZoomFirst =>
@@ -2149,7 +2149,8 @@ class AppLocalizationsIt extends AppLocalizations {
   String get cameraWeakAnyway => 'Raccogli comunque';
 
   @override
-  String get cameraLeafHint => 'Ora avvicinati a una foglia';
+  String get cameraLeafHint =>
+      'Ora avvicinati a una foglia, piano: la Vis continua a salire';
 
   @override
   String get cameraFlowerHint => 'E un fiore, se c\'è';
@@ -2165,4 +2166,11 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get cameraOrganFlower => 'Fiore';
+
+  @override
+  String get fieldTestRegional =>
+      'Confronta con la flora regionale (2 identificazioni)';
+
+  @override
+  String get fieldTestRegionalResult => 'Flora regionale (Europa sudorientale)';
 }
