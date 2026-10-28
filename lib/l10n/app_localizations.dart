@@ -3278,6 +3278,30 @@ abstract class AppLocalizations {
     String capture,
     String resize,
   );
+
+  /// No description provided for @cameraFlashOff.
+  ///
+  /// In it, this message translates to:
+  /// **'Flash spento'**
+  String get cameraFlashOff;
+
+  /// No description provided for @cameraFlashAuto.
+  ///
+  /// In it, this message translates to:
+  /// **'Flash automatico'**
+  String get cameraFlashAuto;
+
+  /// No description provided for @cameraFlashOn.
+  ///
+  /// In it, this message translates to:
+  /// **'Flash acceso'**
+  String get cameraFlashOn;
+
+  /// No description provided for @cameraZoom.
+  ///
+  /// In it, this message translates to:
+  /// **'Zoom {zoom}'**
+  String cameraZoom(String zoom);
 }
 
 class _AppLocalizationsDelegate

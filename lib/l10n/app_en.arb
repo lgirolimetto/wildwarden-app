@@ -526,5 +526,9 @@
   "cameraError": "The camera did not open ({error}).",
   "cameraDebug": "{size} · {received} fps · analysed {analyzed}/s · {ms} ms · sharpness {sharpness} · motion {motion}",
   "fieldTestSystemCamera": "System camera (for comparison)",
-  "fieldTestCamera": "Camera: {fps} fps, analysed {analyzed}/s in {ms} ms · shot {capture} ms · resize {resize} ms"
+  "fieldTestCamera": "Camera: {fps} fps, analysed {analyzed}/s in {ms} ms · shot {capture} ms · resize {resize} ms",
+  "cameraFlashOff": "Flash off",
+  "cameraFlashAuto": "Flash auto",
+  "cameraFlashOn": "Flash on",
+  "cameraZoom": "Zoom {zoom}"
 }

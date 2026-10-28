@@ -24,6 +24,19 @@ import 'package:path_provider/path_provider.dart';
 /// Centro della Zona, per i tratti del cielo finché il GPS non risponde (nel prototipo la Zona è Bologna).
 const _zoneCenter = (latitude: 44.4937, longitude: 11.3430);
 
+/// Gradini dello zoom sotto il mirino (1×, 2×, 5×) fino al massimo della fotocamera: per inquadrare bene una pianta
+/// anche da qualche metro, per sicurezza o per rispetto (senza calpestare o avvicinarsi troppo).
+List<double> zoomStops(double maxZoom) => [
+  for (final stop in const [1.0, 2.0, 5.0])
+    if (stop <= maxZoom) stop,
+];
+
+/// "2×", "2.4×": lo zoom come lo scrivono le fotocamere.
+String zoomLabel(double zoom) {
+  final rounded = (zoom * 10).round() / 10;
+  return '${rounded == rounded.roundToDouble() ? rounded.toInt() : rounded}×';
+}
+
 /// Fotocamera dell'app (step 1b del Campo, capitolo 07): mirino con i tratti del cielo e la precisione del GPS,
 /// streaming dei fotogrammi analizzato mentre si inquadra (senza registrare niente), scatto a piena risoluzione
 /// ridotto a 1600 px. Si chiude con la foto ([TakenPhoto]) o senza ([TakenPhoto.cancelled]).
@@ -56,6 +69,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   String _frameSize = '';
   bool _shooting = false;
   Timer? _debugTimer;
+
+  // Zoom (pizzico o gradini) e flash: si riapplicano quando la fotocamera si riapre.
+  double _minZoom = 1, _maxZoom = 1, _zoom = 1, _pinchStartZoom = 1;
+  FlashMode _flash = FlashMode.off;
+  bool _hasFlash = true;
 
   @override
   void initState() {
@@ -102,6 +120,15 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       _camera = camera;
       await camera.initialize();
       if (!mounted || _camera != camera) return;
+      _minZoom = await camera.getMinZoomLevel();
+      _maxZoom = await camera.getMaxZoomLevel();
+      _zoom = _zoom.clamp(_minZoom, _maxZoom);
+      await camera.setZoomLevel(_zoom);
+      try {
+        await camera.setFlashMode(_flash);
+      } on CameraException {
+        _hasFlash = false;
+      }
       _analyzer.reset();
       _streamWatch
         ..reset()
@@ -112,6 +139,33 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     } on CameraException catch (e) {
       _camera = null;
       if (mounted) setState(() => _error = e.code);
+    }
+  }
+
+  Future<void> _setZoom(double zoom) async {
+    final camera = _camera;
+    if (camera == null) return;
+    setState(() => _zoom = zoom.clamp(_minZoom, _maxZoom));
+    try {
+      await camera.setZoomLevel(_zoom);
+    } on CameraException {
+      // La fotocamera si sta chiudendo: lo zoom si riapplica alla riapertura.
+    }
+  }
+
+  Future<void> _nextFlash() async {
+    final camera = _camera;
+    if (camera == null) return;
+    final next = switch (_flash) {
+      FlashMode.off => FlashMode.auto,
+      FlashMode.auto => FlashMode.always,
+      _ => FlashMode.off,
+    };
+    try {
+      await camera.setFlashMode(next);
+      setState(() => _flash = next);
+    } on CameraException {
+      setState(() => _hasFlash = false);
     }
   }
 
@@ -233,13 +287,21 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         children: [
           if (camera != null && camera.value.isInitialized)
             // Anteprima a tutto schermo, ritagliata ai lati (previewSize è in orizzontale).
-            FittedBox(
-              fit: BoxFit.cover,
-              clipBehavior: Clip.hardEdge,
-              child: SizedBox(
-                width: camera.value.previewSize!.height,
-                height: camera.value.previewSize!.width,
-                child: CameraPreview(camera),
+            // Con due dita si avvicina e si allontana (zoom).
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onScaleStart: (_) => _pinchStartZoom = _zoom,
+              onScaleUpdate: (details) {
+                if (details.pointerCount > 1) _setZoom(_pinchStartZoom * details.scale);
+              },
+              child: FittedBox(
+                fit: BoxFit.cover,
+                clipBehavior: Clip.hardEdge,
+                child: SizedBox(
+                  width: camera.value.previewSize!.height,
+                  height: camera.value.previewSize!.width,
+                  child: CameraPreview(camera),
+                ),
               ),
             )
           else if (_error != null)
@@ -283,6 +345,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       ),
                     ),
                   const SizedBox(height: Gaps.l),
+                  if (camera != null && zoomStops(_maxZoom).length > 1)
+                    Center(
+                      child: _ZoomStops(stops: zoomStops(_maxZoom), zoom: _zoom, onSelected: _setZoom),
+                    ),
+                  const SizedBox(height: Gaps.m),
                   Row(
                     children: [
                       IconButton(
@@ -297,7 +364,26 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                         onPressed: _shoot,
                       ),
                       const Spacer(),
-                      const SizedBox(width: 48),
+                      if (_hasFlash)
+                        IconButton(
+                          key: const ValueKey('camera-flash'),
+                          onPressed: camera == null ? null : _nextFlash,
+                          icon: switch (_flash) {
+                            FlashMode.auto => _Glyph(
+                              icon: Icons.flash_auto_rounded,
+                              label: context.l10n.cameraFlashAuto,
+                              size: 30,
+                            ),
+                            FlashMode.always => _Glyph(
+                              icon: Icons.flash_on_rounded,
+                              label: context.l10n.cameraFlashOn,
+                              size: 30,
+                            ),
+                            _ => _Glyph(icon: Icons.flash_off_rounded, label: context.l10n.cameraFlashOff, size: 30),
+                          },
+                        )
+                      else
+                        const SizedBox(width: 48),
                     ],
                   ),
                 ],
@@ -378,6 +464,62 @@ class _Glyph extends StatelessWidget {
     return Tooltip(
       message: label,
       child: mirrored ? Transform.flip(flipX: true, child: glyph) : glyph,
+    );
+  }
+}
+
+/// I gradini dello zoom: quello in uso mostra lo zoom vero (anche fra un gradino e l'altro, dopo un pizzico).
+class _ZoomStops extends StatelessWidget {
+  final List<double> stops;
+  final double zoom;
+  final ValueChanged<double> onSelected;
+
+  const _ZoomStops({required this.stops, required this.zoom, required this.onSelected});
+
+  @override
+  Widget build(BuildContext context) {
+    final active = stops.lastWhere((stop) => zoom >= stop - 0.05, orElse: () => stops.first);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: context.colors.scrim.withValues(alpha: 0.35),
+        borderRadius: BorderRadius.circular(Gaps.xl),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(Gaps.xs),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            for (final stop in stops)
+              Semantics(
+                button: true,
+                selected: stop == active,
+                label: context.l10n.cameraZoom(zoomLabel(stop)),
+                child: GestureDetector(
+                  key: ValueKey('camera-zoom-${zoomLabel(stop)}'),
+                  onTap: () => onSelected(stop),
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: stop == active ? context.colors.surface.withValues(alpha: 0.7) : null,
+                    ),
+                    child: ExcludeSemantics(
+                      child: Text(
+                        zoomLabel(stop == active ? zoom : stop),
+                        style: context.texts.labelMedium?.copyWith(
+                          color: stop == active ? context.colors.primary : context.colors.onSurface,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }

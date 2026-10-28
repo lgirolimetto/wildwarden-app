@@ -2105,4 +2105,18 @@ class AppLocalizationsIt extends AppLocalizations {
   ) {
     return 'Fotocamera: $fps fps, analizzati $analyzed/s in $ms ms · scatto $capture ms · riduzione $resize ms';
   }
+
+  @override
+  String get cameraFlashOff => 'Flash spento';
+
+  @override
+  String get cameraFlashAuto => 'Flash automatico';
+
+  @override
+  String get cameraFlashOn => 'Flash acceso';
+
+  @override
+  String cameraZoom(String zoom) {
+    return 'Zoom $zoom';
+  }
 }
