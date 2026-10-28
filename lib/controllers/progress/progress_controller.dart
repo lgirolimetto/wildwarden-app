@@ -88,7 +88,7 @@ class ProgressController extends LoadableController<GameState> {
     final withOmen = traits.isEmpty && omen != null && favoured != null && _random.nextDouble() < omenChance(omen)
         ? [favoured.name]
         : traits;
-    final purity = purityOfLevel(state.levelOf(speciesSci));
+    final purity = purityOfLevel(purityLevelOf(state, speciesSci, now));
     await record(
       EssenceDrawn(
         speciesSci: speciesSci,
@@ -256,7 +256,7 @@ class ProgressController extends LoadableController<GameState> {
             traits: [for (final t in traits.take(random.nextInt(3))) t.name],
             simulated: true,
             vis: visPerDraw,
-            purity: purityOfLevel(state.levelOf(sci)),
+            purity: purityOfLevel(purityLevelOf(state, sci, now)),
             occurredAt: now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i)),
           ),
         );

@@ -33,6 +33,14 @@ class GameState {
   final Map<String, int> passedLevels;
   final Set<String> mastered;
 
+  /// Ultima domanda di ogni specie (studio o Ripasso), o il momento della Maestria o del risveglio se è più recente:
+  /// da qui si contano i giorni prima che la Maestria si assopisca.
+  final Map<String, DateTime> lastQuestions;
+
+  /// Maestrie che si sono assopite e non sono ancora state risvegliate. Quelle che si assopiscono adesso, senza
+  /// nessuna risposta dopo i 30 giorni, le dice `isMasteryDormant` in `rules/progression.dart`.
+  final Set<String> dormantMastery;
+
   /// Avanzamento dei fatti, per `Fact.id`.
   final Map<String, FactProgress> facts;
 
@@ -92,6 +100,8 @@ class GameState {
     this.lastDraws = const {},
     this.passedLevels = const {},
     this.mastered = const {},
+    this.lastQuestions = const {},
+    this.dormantMastery = const {},
     this.facts = const {},
     this.draws = const {},
     this.desiderata = const {},
@@ -160,14 +170,17 @@ class GameState {
         next.hasEncountered(speciesSci)
             ? next
             : next._copy(firstEncounters: {...firstEncounters, speciesSci: occurredAt}),
-      AnswerGiven(:final factId, :final correct, :final mode, :final occurredAt) => next._copy(
-        facts: {
-          ...facts,
-          factId: mode == AnswerMode.learning
-              ? progressOf(factId).afterLearningAnswer(correct: correct)
-              : progressOf(factId).afterReview(correct: correct, at: occurredAt),
-        },
-      ),
+      AnswerGiven(:final factId, :final correct, :final mode, :final occurredAt) =>
+        next
+            ._questionAsked(Fact.parseId(factId).speciesSci, occurredAt)
+            ._copy(
+              facts: {
+                ...facts,
+                factId: mode == AnswerMode.learning
+                    ? progressOf(factId).afterLearningAnswer(correct: correct)
+                    : progressOf(factId).afterReview(correct: correct, at: occurredAt),
+              },
+            ),
       LevelPassed(:final speciesSci, :final level, :final occurredAt) => next._copy(
         passedLevels: {
           ...passedLevels,
@@ -180,7 +193,14 @@ class GameState {
               Fact.idOf(speciesSci, kind): progressOf(Fact.idOf(speciesSci, kind)).afterLevelPassed(occurredAt),
         },
       ),
-      MasteryReached(:final speciesSci) => next._copy(mastered: {...mastered, speciesSci}),
+      MasteryReached(:final speciesSci, :final occurredAt) => next._copy(
+        mastered: {...mastered, speciesSci},
+        lastQuestions: {...lastQuestions, speciesSci: occurredAt},
+      ),
+      MasteryAwakened(:final speciesSci, :final occurredAt) => next._copy(
+        dormantMastery: {...dormantMastery}..remove(speciesSci),
+        lastQuestions: {...lastQuestions, speciesSci: occurredAt},
+      ),
       // La prima essenza di una specie incassa i suoi PE virtuali.
       EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, :final purity, vis: final gained) => next._copy(
         xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
@@ -228,6 +248,17 @@ class GameState {
       PotionBrewed() => next._brew(event),
       PotionUsed() => next._use(event),
     };
+  }
+
+  /// Una domanda di [speciesSci]: se arriva dopo i 30 giorni, la Maestria resta sopita fino al risveglio (un Ripasso
+  /// tardivo non basta).
+  GameState _questionAsked(String speciesSci, DateTime at) {
+    final last = lastQuestions[speciesSci];
+    final lapsed = mastered.contains(speciesSci) && last != null && masteryLapsed(last, at);
+    return _copy(
+      lastQuestions: {...lastQuestions, speciesSci: at},
+      dormantMastery: lapsed ? {...dormantMastery, speciesSci} : null,
+    );
   }
 
   GameState _use(PotionUsed event) {
@@ -339,6 +370,8 @@ class GameState {
     Map<String, DateTime>? lastDraws,
     Map<String, int>? passedLevels,
     Set<String>? mastered,
+    Map<String, DateTime>? lastQuestions,
+    Set<String>? dormantMastery,
     Map<String, FactProgress>? facts,
     Map<String, List<List<String>>>? draws,
     Set<String>? desiderata,
@@ -368,6 +401,8 @@ class GameState {
     lastDraws: lastDraws ?? this.lastDraws,
     passedLevels: passedLevels ?? this.passedLevels,
     mastered: mastered ?? this.mastered,
+    lastQuestions: lastQuestions ?? this.lastQuestions,
+    dormantMastery: dormantMastery ?? this.dormantMastery,
     facts: facts ?? this.facts,
     draws: draws ?? this.draws,
     desiderata: desiderata ?? this.desiderata,

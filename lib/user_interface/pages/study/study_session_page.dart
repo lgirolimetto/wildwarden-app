@@ -254,6 +254,7 @@ class _OutcomeCard extends StatelessWidget {
     final followUp = switch (outcome.event.mode) {
       AnswerMode.learning => outcome.willReturn ? l10n.answerWillReturn : null,
       AnswerMode.review => outcome.correct ? l10n.answerRemembered(reviewIntervalsDays[box]) : l10n.answerForgotten,
+      AnswerMode.awakening => null,
     };
     return ClayCard(
       padding: EdgeInsets.zero,

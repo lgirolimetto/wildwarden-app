@@ -89,6 +89,65 @@ void main() {
     });
   });
 
+  group('maestria da mantenere', () {
+    const sci = 'Malva sylvestris';
+    final factId = Fact.idOf(sci, FactKind.family);
+
+    AnswerGiven review(DateTime at) =>
+        AnswerGiven(factId: factId, correct: true, mode: AnswerMode.review, xp: 0, occurredAt: at);
+    GameState mastered() => play([met(sci), passed(sci, 3), MasteryReached(speciesSci: sci, xp: 50, occurredAt: feb)]);
+
+    test('resta sveglia per 29 giorni dopo la maestria, si assopisce al trentesimo', () {
+      final state = mastered();
+      expect(isMasteryDormant(state, sci, feb.add(const Duration(days: 29))), isFalse);
+      expect(isMasteryDormant(state, sci, feb.add(const Duration(days: 30))), isTrue);
+    });
+
+    test('una domanda della specie entro i 30 giorni sposta la scadenza', () {
+      final state = mastered().apply(review(feb.add(const Duration(days: 20))));
+      expect(isMasteryDormant(state, sci, feb.add(const Duration(days: 45))), isFalse);
+      expect(isMasteryDormant(state, sci, feb.add(const Duration(days: 50))), isTrue);
+    });
+
+    test('un ripasso arrivato dopo i 30 giorni non la risveglia', () {
+      final late = feb.add(const Duration(days: 40));
+      final state = mastered().apply(review(late));
+      expect(state.dormantMastery, contains(sci));
+      expect(isMasteryDormant(state, sci, late.add(const Duration(days: 1))), isTrue);
+    });
+
+    test('il mini-quiz superato la risveglia e fa ripartire i 30 giorni', () {
+      final awake = feb.add(const Duration(days: 40));
+      final state = mastered().apply(review(awake)).apply(MasteryAwakened(speciesSci: sci, occurredAt: awake));
+      expect(isMasteryDormant(state, sci, awake.add(const Duration(days: 29))), isFalse);
+      expect(isMasteryDormant(state, sci, awake.add(const Duration(days: 30))), isTrue);
+    });
+
+    test('le domande di prima della maestria non contano', () {
+      final state = play([
+        met(sci),
+        review(feb.subtract(const Duration(days: 90))),
+        passed(sci, 3),
+        MasteryReached(speciesSci: sci, xp: 50, occurredAt: feb),
+      ]);
+      expect(state.dormantMastery, isEmpty);
+      expect(isMasteryDormant(state, sci, feb.add(const Duration(days: 1))), isFalse);
+    });
+
+    test('senza maestria non c\'è niente da assopire', () {
+      final state = play([met(sci), passed(sci, 3)]);
+      expect(isMasteryDormant(state, sci, feb.add(const Duration(days: 365))), isFalse);
+    });
+
+    test('sopita, la purezza è quella del livello 3; il livello resta 4', () {
+      final state = mastered();
+      expect(purityLevelOf(state, sci, feb), 4);
+      final later = feb.add(const Duration(days: 31));
+      expect(purityLevelOf(state, sci, later), 3);
+      expect(state.levelOf(sci), 4);
+    });
+  });
+
   group('livello successivo', () {
     test('si parte dal livello 1', () {
       expect(nextStudyLevel(catalog.speciesBySci('Malva sylvestris')!, catalog, play([met('Malva sylvestris')])), 1);

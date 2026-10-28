@@ -59,6 +59,14 @@ void main() {
     });
   });
 
+  test('risveglio della maestria: andata e ritorno dal database, tipo stabile', () {
+    final event = MasteryAwakened(speciesSci: 'Fagus sylvatica', occurredAt: feb);
+    final decoded =
+        GameEvent.decode(type: event.type, payload: event.encodePayload(), occurredAt: feb) as MasteryAwakened;
+    expect(decoded.speciesSci, 'Fagus sylvatica');
+    expect(MasteryAwakened.typeId, 'mastery_awakened');
+  });
+
   test('ricetta imparata: andata e ritorno dal database e nello stato', () {
     final event = RecipeLearned(recipeId: 'pozione-prova-comune', origin: RecipeOrigin.study, occurredAt: feb);
     final decoded =

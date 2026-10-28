@@ -15,8 +15,9 @@ enum EncounterMethod {
   guide,
 }
 
-/// Modalità di una risposta: apprendimento di un livello o ripasso a distanza di giorni.
-enum AnswerMode { learning, review }
+/// Come si risponde: studio di un livello, Ripasso o mini-quiz per risvegliare la Maestria ([awakening], che non si
+/// salva come `AnswerGiven`).
+enum AnswerMode { learning, review, awakening }
 
 /// Da dove arriva una ricetta imparata: dallo studio (la Comune di una pianta) o dal Bottino dell'Esperienza.
 enum RecipeOrigin { study, trove }
@@ -70,6 +71,7 @@ sealed class GameEvent {
         xp: d['xp'] as int,
         occurredAt: occurredAt,
       ),
+      MasteryAwakened.typeId => MasteryAwakened(speciesSci: d['species'] as String, occurredAt: occurredAt),
       EssenceDrawn.typeId => EssenceDrawn(
         speciesSci: d['species'] as String,
         traits: _decodeTraits(d),
@@ -221,6 +223,20 @@ class MasteryReached extends GameEvent {
 
   @override
   Map<String, dynamic> payload() => {'species': speciesSci, 'xp': xp};
+}
+
+/// La Maestria sopita di una specie si è risvegliata: il mini-quiz è stato superato. Niente PE.
+class MasteryAwakened extends GameEvent {
+  static const typeId = 'mastery_awakened';
+  final String speciesSci;
+
+  const MasteryAwakened({required this.speciesSci, required super.occurredAt});
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {'species': speciesSci};
 }
 
 /// Essenza attinta da una stazione, con tutti i tratti veri in quel momento (vuoto = nessuno) e le [vis]
