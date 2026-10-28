@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:camera/camera.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
@@ -13,10 +12,12 @@ import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/services/camera/photo_resizer.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -52,6 +53,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   final _streamWatch = Stopwatch();
   final _sinceAnalysis = Stopwatch();
   int _received = 0, _analyzed = 0, _analysisMicros = 0;
+  String _frameSize = '';
   bool _shooting = false;
   Timer? _debugTimer;
 
@@ -59,6 +61,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    // Tutto lo schermo all'immagine: le barre di Android tornano con un trascinamento dal bordo.
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     _openCamera();
     _startLocation();
     if (_debug) _debugTimer = Timer.periodic(const Duration(seconds: 1), (_) => setState(() {}));
@@ -67,6 +71,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     _debugTimer?.cancel();
     _closeCamera();
     _fixes?.cancel();
@@ -132,6 +137,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
   void _onFrame(CameraImage image) {
     _received++;
+    _frameSize = '${image.width}×${image.height}';
     if (_sinceAnalysis.isRunning && _sinceAnalysis.elapsed < _analysisInterval) return;
     _sinceAnalysis
       ..reset()
@@ -173,7 +179,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       final captureMs = watch.elapsedMilliseconds;
       final bytes = await file.readAsBytes();
       watch.reset();
-      final resized = await Isolate.run(() => resizeJpeg(bytes));
+      final resized = await resizeJpegInBackground(bytes);
       final resizeMs = watch.elapsedMilliseconds;
       final directory = Directory('${(await getApplicationDocumentsDirectory()).path}/photos');
       await directory.create(recursive: true);
@@ -193,7 +199,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           ),
         );
       }
-    } on Exception catch (e) {
+    } catch (e) {
+      // Qualsiasi errore (fotocamera, file, riduzione) sblocca lo scatto e si mostra: niente pulsante bloccato.
       if (mounted) {
         setState(() {
           _shooting = false;
@@ -265,6 +272,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                     _Plate(
                       child: Text(
                         context.l10n.cameraDebug(
+                          _frameSize,
                           live.receivedPerSecond.toStringAsFixed(0),
                           live.analyzedPerSecond.toStringAsFixed(1),
                           live.analysisMs.toStringAsFixed(1),
@@ -279,10 +287,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                     children: [
                       IconButton(
                         key: const ValueKey('camera-close'),
-                        tooltip: context.l10n.cameraClose,
-                        color: context.colors.onSurface,
                         onPressed: () => Navigator.of(context).pop(TakenPhoto.cancelled),
-                        icon: const Icon(Icons.close_rounded, size: 32),
+                        icon: _Glyph(icon: Icons.close_rounded, label: context.l10n.cameraClose, size: 32),
                       ),
                       const Spacer(),
                       _Shutter(
@@ -304,8 +310,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   }
 }
 
-/// Il display del mirino, come ISO e diaframma su una fotocamera: i tratti del cielo adesso e il GPS.
+/// Il display del mirino, come ISO e diaframma su una fotocamera: solo icone sopra l'immagine (i tratti del cielo
+/// adesso e il GPS), come in realtà aumentata. Il testo resta per l'accessibilità.
 class _Readout extends StatelessWidget {
+  static const _size = 30.0;
+
   final List<Trait> sky;
   final double? accuracy;
   final bool locationOff;
@@ -314,23 +323,61 @@ class _Readout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = context.texts.labelLarge?.copyWith(color: context.colors.onSurface);
-    return Wrap(
-      spacing: Gaps.s,
-      runSpacing: Gaps.s,
+    final (gpsIcon, gpsLabel, gpsAlpha) = locationOff
+        ? (Icons.gps_off_rounded, context.l10n.cameraGpsOff, 0.6)
+        : accuracy == null
+        ? (Icons.gps_not_fixed_rounded, context.l10n.cameraGpsSearching, 0.6)
+        : (
+            accuracy! <= _goodAccuracy ? Icons.gps_fixed_rounded : Icons.gps_not_fixed_rounded,
+            context.l10n.cameraGps(accuracy!.round()),
+            1.0,
+          );
+    return Row(
       children: [
-        for (final trait in sky) _Plate(child: Text(context.game.trait(trait), style: style)),
-        _Plate(
-          child: Text(
-            locationOff
-                ? context.l10n.cameraGpsOff
-                : accuracy == null
-                ? context.l10n.cameraGpsSearching
-                : context.l10n.cameraGps(accuracy!.round()),
-            style: style,
-          ),
-        ),
+        for (final trait in sky) ...[_overlayIcon(context, trait), const SizedBox(width: Gaps.l)],
+        const Spacer(),
+        _Glyph(icon: gpsIcon, label: gpsLabel, size: _size, alpha: gpsAlpha),
       ],
+    );
+  }
+
+  Widget _overlayIcon(BuildContext context, Trait trait) {
+    final label = context.game.trait(trait);
+    final emoji = label.split(' ').first;
+    return _Glyph(
+      icon: traitIconOf(emoji) ?? Icons.eco_outlined,
+      label: label,
+      size: _size,
+      mirrored: traitIconMirrored(emoji),
+    );
+  }
+}
+
+/// Precisione del GPS da stazione: sotto questa il segno è pieno. Provvisoria: si tara con la prova sul campo.
+const _goodAccuracy = 15.0;
+
+/// Un'icona sospesa sull'immagine, chiara con un'ombra morbida perché si legga su qualsiasi sfondo.
+class _Glyph extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final double size;
+  final double alpha;
+  final bool mirrored;
+
+  const _Glyph({required this.icon, required this.label, required this.size, this.alpha = 1, this.mirrored = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final glyph = Icon(
+      icon,
+      size: size,
+      semanticLabel: label,
+      color: context.colors.onSurface.withValues(alpha: alpha),
+      shadows: [Shadow(color: context.colors.scrim.withValues(alpha: 0.7), blurRadius: 8)],
+    );
+    return Tooltip(
+      message: label,
+      child: mirrored ? Transform.flip(flipX: true, child: glyph) : glyph,
     );
   }
 }

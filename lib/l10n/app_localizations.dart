@@ -3251,8 +3251,9 @@ abstract class AppLocalizations {
   /// No description provided for @cameraDebug.
   ///
   /// In it, this message translates to:
-  /// **'{received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}'**
+  /// **'{size} · {received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}'**
   String cameraDebug(
+    String size,
     String received,
     String analyzed,
     String ms,

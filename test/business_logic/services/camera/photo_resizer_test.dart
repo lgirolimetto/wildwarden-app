@@ -23,4 +23,9 @@ void main() {
   test('una foto non leggibile è un errore', () {
     expect(() => resizeJpeg(Uint8List.fromList([1, 2, 3])), throwsFormatException);
   });
+
+  test('anche in un isolate', () async {
+    final resized = decode(await resizeJpegInBackground(img.encodeJpg(img.Image(width: 2000, height: 1000))));
+    expect((resized.width, resized.height), (1600, 800));
+  });
 }

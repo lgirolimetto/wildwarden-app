@@ -1640,9 +1640,12 @@
       }
     }
   },
-  "cameraDebug": "{received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}",
+  "cameraDebug": "{size} · {received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}",
   "@cameraDebug": {
     "placeholders": {
+      "size": {
+        "type": "String"
+      },
       "received": {
         "type": "String"
       },

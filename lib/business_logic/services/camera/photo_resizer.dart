@@ -1,3 +1,4 @@
+import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:image/image.dart' as img;
@@ -25,3 +26,7 @@ Uint8List resizeJpeg(Uint8List jpeg, {int maxSide = photoMaxSide, int quality = 
       : img.copyResize(upright, height: maxSide, interpolation: img.Interpolation.average);
   return img.encodeJpg(resized, quality: quality);
 }
+
+/// [resizeJpeg] in un isolate. Funzione a sé: la chiusura passata all'isolate deve portarsi dietro solo i byte (non
+/// una pagina con i suoi timer, che non si possono spedire).
+Future<Uint8List> resizeJpegInBackground(Uint8List jpeg) => Isolate.run(() => resizeJpeg(jpeg));

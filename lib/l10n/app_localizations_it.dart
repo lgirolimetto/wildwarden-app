@@ -2082,13 +2082,14 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String cameraDebug(
+    String size,
     String received,
     String analyzed,
     String ms,
     String sharpness,
     String motion,
   ) {
-    return '$received fps · analizzati $analyzed/s · $ms ms · nitidezza $sharpness · movimento $motion';
+    return '$size · $received fps · analizzati $analyzed/s · $ms ms · nitidezza $sharpness · movimento $motion';
   }
 
   @override
