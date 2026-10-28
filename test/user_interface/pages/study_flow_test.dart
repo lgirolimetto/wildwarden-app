@@ -244,6 +244,67 @@ void main() {
     });
   });
 
+  group('maestria da mantenere', () {
+    const sci = 'Helleborus viridis';
+    final mastered = <GameEvent>[
+      _met(sci),
+      LevelPassed(speciesSci: sci, level: 3, xp: 0, occurredAt: _feb),
+      MasteryReached(speciesSci: sci, xp: 0, occurredAt: _feb),
+    ];
+
+    Future<void> answerQuiz(WidgetTester tester, {required int wrong}) async {
+      final study = Get.find<StudyController>();
+      var left = wrong;
+      while (study.question != null) {
+        await answerCurrentQuestion(tester, correctly: left-- <= 0);
+        await goToNextQuestion(tester);
+      }
+    }
+
+    testWidgets('dopo 30 giorni la Home propone di risvegliarla; 4 giuste su 5 bastano', (tester) async {
+      final deps = registerTestDependencies(events: mastered);
+      deps.clock.advance(const Duration(days: 20));
+      await pumpDruidApp(tester);
+
+      await scrollTo(tester, find.byKey(const ValueKey('my-$sci')));
+      expect(find.text('Maestria da risvegliare'), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('awaken-$sci')));
+      expect(find.textContaining('Risveglio della Maestria ·'), findsOneWidget);
+
+      await answerQuiz(tester, wrong: 1);
+      expect(find.byKey(const ValueKey('summary-awakened')), findsOneWidget);
+      expect(Get.find<ProgressController>().masteryDormant(sci), isFalse);
+      await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
+      expect(find.text('Maestria da risvegliare'), findsNothing);
+    });
+
+    testWidgets('nella scheda: sopita, mini-quiz sbagliato, riprova subito e si risveglia', (tester) async {
+      final deps = registerTestDependencies(events: mastered);
+      deps.clock.advance(const Duration(days: 20));
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Erbario');
+      await tester.tap(find.byKey(const ValueKey('met-$sci')));
+      await tester.pumpAndSettle();
+      expect(find.text('Maestria sopita'), findsWidgets, reason: 'nella testata, al posto di "Maestria"');
+
+      await scrollTo(tester, find.byKey(const ValueKey('mastery-dormant')));
+      expect(find.textContaining('pure al 90 % invece che al 100 %'), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('awaken-mastery')));
+      await answerQuiz(tester, wrong: 2);
+      expect(find.byKey(const ValueKey('summary-still-dormant')), findsOneWidget);
+      expect(Get.find<ProgressController>().masteryDormant(sci), isTrue);
+
+      await scrollAndTap(tester, find.byKey(const ValueKey('retry-awakening')));
+      await completeSession(tester);
+      expect(find.byKey(const ValueKey('summary-awakened')), findsOneWidget);
+      await scrollAndTap(tester, find.byKey(const ValueKey('close-session')));
+
+      await scrollTo(tester, find.textContaining('dopo 30 giorni senza, si assopisce'));
+      expect(find.byKey(const ValueKey('mastery-dormant')), findsNothing);
+      expect(find.text('Maestria raggiunta'), findsOneWidget);
+    });
+  });
+
   group('erbario, ricette, curiosità', () {
     testWidgets('la scheda della specie si rivela livello per livello', (tester) async {
       registerTestDependencies(

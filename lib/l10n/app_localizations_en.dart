@@ -663,7 +663,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossMaestriaText =>
-      'The final Level of a species: you must remember what you learned days later and have Drawn the species in the field under different conditions.';
+      'The final Level of a species: you must remember what you learned days later and have Drawn the species in the field under different conditions. It has to be kept: after 30 days without questions about the species it falls dormant, and a short quiz reawakens it.';
 
   @override
   String get glossMissioneTerm => 'Quest';
@@ -1907,4 +1907,49 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get viewToFind => 'To find';
+
+  @override
+  String get levelMasteryDormant => 'Dormant Mastery';
+
+  @override
+  String get masteryToAwaken => 'Mastery to reawaken';
+
+  @override
+  String get awakenButton => 'Reawaken';
+
+  @override
+  String get awakenMasteryButton => 'Reawaken your Mastery';
+
+  @override
+  String masteryKeepHint(int days) {
+    return 'Mastery is kept by answering a question about this species now and then: after $days days without one, it falls dormant.';
+  }
+
+  @override
+  String masteryDormantText(
+    int days,
+    int dormant,
+    int full,
+    int questions,
+    int needed,
+  ) {
+    return 'No questions about this species for $days days: your Mastery has fallen dormant and new Essences are $dormant % pure instead of $full %. Reawaken it with $questions questions from every Level: $needed right answers are enough.';
+  }
+
+  @override
+  String get awakeningTheme => 'Reawakening your Mastery';
+
+  @override
+  String summaryAwakened(String name, int full) {
+    return 'Mastery reawakened: Essences of $name are $full % pure again.';
+  }
+
+  @override
+  String summaryStillDormant(int needed, int total) {
+    return 'Still dormant: you need at least $needed right answers out of $total. You can try again right away.';
+  }
+
+  @override
+  String get tip16 =>
+      'Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home.';
 }
