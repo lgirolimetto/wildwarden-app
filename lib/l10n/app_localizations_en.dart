@@ -628,7 +628,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossDesiderataText =>
-      'In herbaria and among collectors, the list of specimens one wishes to find. Here, the species (up to 3) you have chosen to look for.';
+      'In herbaria and among collectors, the list of specimens one wishes to find. Here, the species you have chosen to look for, as many as you like.';
 
   @override
   String get glossErborizzareTerm => 'Botanizing';

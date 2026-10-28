@@ -1115,7 +1115,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossDesiderataText.
   ///
   /// In it, this message translates to:
-  /// **'Negli erbari e tra i collezionisti, l\'elenco degli esemplari che si desidera trovare. Qui sono le specie (al massimo 3) che hai scelto di cercare.'**
+  /// **'Negli erbari e tra i collezionisti, l\'elenco degli esemplari che si desidera trovare. Qui sono le specie che hai scelto di cercare, quante vuoi.'**
   String get glossDesiderataText;
 
   /// No description provided for @glossErborizzareTerm.
