@@ -5,10 +5,10 @@
 library;
 
 /// Tempo di indizi pieni che riempie l'anello (con indizi a metà ci vuole il doppio).
-const visFillTime = Duration(milliseconds: 2500);
+const visFillTime = Duration(seconds: 5);
 
 /// Dopo questo tempo senza anello pieno la Vis è debole.
-const visPatience = Duration(seconds: 10);
+const visPatience = Duration(seconds: 15);
 
 /// Sopra questo zoom la profondità della scena quasi non si vede: si chiede di inquadrare prima senza zoom.
 const visMaxZoom = 1.5;

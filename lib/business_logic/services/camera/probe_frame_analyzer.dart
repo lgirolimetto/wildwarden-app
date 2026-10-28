@@ -10,11 +10,12 @@ class ProbeFrameAnalyzer implements IFrameAnalyzer {
   static const gridWidth = 320;
   static const gridHeight = 240;
 
-  /// Movimento medio per punto (0–255): sotto [stillMotion] è il rumore del sensore a telefono fermo (2–3 sul Poco al
-  /// chiuso), da [steadyMotion] l'indizio è pieno, sopra [blurMotion] l'immagine è mossa.
-  static const stillMotion = 5.0;
-  static const steadyMotion = 12.0;
-  static const blurMotion = 45.0;
+  /// Movimento medio per punto (0–255): sotto [stillMotion] c'è il rumore del sensore a telefono fermo (2–3 sul Poco al
+  /// chiuso) e il tremito della mano (alzata il 2026-10-28: con 5 l'anello si riempiva quasi da solo), da
+  /// [steadyMotion] l'indizio è pieno, sopra [blurMotion] l'immagine è mossa.
+  static const stillMotion = 9.0;
+  static const steadyMotion = 20.0;
+  static const blurMotion = 50.0;
 
   Uint8List? _previous;
 

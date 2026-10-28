@@ -304,6 +304,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
           TakenPhoto(
             path,
             diagnostics: _diagnostics(captureMs: captureMs, resizeMs: resizeMs),
+            visFull: _vis.state == VisState.full,
           ),
         );
       }

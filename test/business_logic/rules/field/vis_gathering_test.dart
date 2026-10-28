@@ -11,19 +11,19 @@ void main() {
     }
   }
 
-  test('indizi pieni: l\'anello si riempie in 2,5 secondi e si può scattare', () {
+  test('indizi pieni: l\'anello si riempie in 5 secondi e si può scattare', () {
     final vis = VisGathering();
-    run(vis, const Duration(milliseconds: 1200));
+    run(vis, const Duration(milliseconds: 2400));
     expect(vis.progress, closeTo(0.48, 0.01));
     expect(vis.canShoot, isFalse);
-    run(vis, const Duration(milliseconds: 1400));
+    run(vis, const Duration(milliseconds: 2700));
     expect(vis.state, VisState.full);
     expect(vis.canShoot, isTrue);
   });
 
-  test('telefono fermo (nessun indizio): dopo 10 secondi la Vis è debole', () {
+  test('telefono fermo (nessun indizio): dopo 15 secondi la Vis è debole', () {
     final vis = VisGathering();
-    run(vis, const Duration(milliseconds: 9900), evidence: 0);
+    run(vis, const Duration(milliseconds: 14900), evidence: 0);
     expect(vis.state, VisState.gathering);
     run(vis, frame, evidence: 0);
     expect(vis.state, VisState.weak);
@@ -61,7 +61,7 @@ void main() {
 
   test('un salto lungo tra due fotogrammi (app in pausa) non riempie l\'anello di colpo', () {
     final vis = VisGathering()..update(step: const Duration(seconds: 30), evidence: 1, zoom: 1);
-    expect(vis.progress, closeTo(0.1, 0.001));
+    expect(vis.progress, closeTo(0.05, 0.001));
     expect(vis.state, VisState.gathering);
   });
 }

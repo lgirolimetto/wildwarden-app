@@ -88,7 +88,11 @@ class _FieldTestPageState extends State<FieldTestPage> {
                 key: const ValueKey('field-test-run'),
                 onPressed: controller.running
                     ? null
-                    : () => controller.run(expected: _expected.text, place: _place.text),
+                    : () {
+                        // Via la tastiera: al ritorno dalla fotocamera non deve riaprirsi.
+                        FocusScope.of(context).unfocus();
+                        controller.run(expected: _expected.text, place: _place.text);
+                      },
                 icon: const Icon(Icons.photo_camera_outlined),
                 label: Text(context.l10n.fieldTestRun),
               ),
