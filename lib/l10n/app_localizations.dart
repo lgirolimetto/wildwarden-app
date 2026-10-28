@@ -3318,7 +3318,7 @@ abstract class AppLocalizations {
   /// No description provided for @cameraLeafHint.
   ///
   /// In it, this message translates to:
-  /// **'Ora avvicinati a una foglia: più calma, più Vis'**
+  /// **'Ora avvicinati a una foglia'**
   String get cameraLeafHint;
 
   /// No description provided for @cameraFlowerHint.
@@ -3368,6 +3368,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Senza zoom la Vis sale più in fretta'**
   String get cameraZoomSlower;
+
+  /// No description provided for @tip17.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più.'**
+  String get tip17;
 }
 
 class _AppLocalizationsDelegate

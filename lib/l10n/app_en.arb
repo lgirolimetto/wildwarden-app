@@ -533,7 +533,7 @@
   "cameraZoom": "Zoom {zoom}",
   "cameraGatherHint": "Frame the whole plant: the Vis rises while you photograph it, faster if you move",
   "cameraShutterLocked": "Just a moment: the Vis is starting to rise",
-  "cameraLeafHint": "Now get close to a leaf: the calmer, the more Vis",
+  "cameraLeafHint": "Now get close to a leaf",
   "cameraFlowerHint": "And a flower, if there is one",
   "cameraNoFlower": "No flowers",
   "cameraOrganWhole": "Whole plant",
@@ -541,5 +541,6 @@
   "cameraOrganFlower": "Flower",
   "fieldTestRegional": "Compare with the regional flora (2 identifications)",
   "fieldTestRegionalResult": "Regional flora (Southeastern Europe)",
-  "cameraZoomSlower": "Without zoom the Vis rises faster"
+  "cameraZoomSlower": "Without zoom the Vis rises faster",
+  "tip17": "When you photograph a plant its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more."
 }

@@ -2116,8 +2116,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Just a moment: the Vis is starting to rise';
 
   @override
-  String get cameraLeafHint =>
-      'Now get close to a leaf: the calmer, the more Vis';
+  String get cameraLeafHint => 'Now get close to a leaf';
 
   @override
   String get cameraFlowerHint => 'And a flower, if there is one';
@@ -2143,4 +2142,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cameraZoomSlower => 'Without zoom the Vis rises faster';
+
+  @override
+  String get tip17 =>
+      'When you photograph a plant its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more.';
 }

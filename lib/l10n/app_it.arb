@@ -1697,7 +1697,7 @@
   },
   "cameraGatherHint": "Inquadra tutta la pianta: la Vis sale mentre la fotografi, più in fretta se ti muovi",
   "cameraShutterLocked": "Ancora un attimo: la Vis comincia a salire",
-  "cameraLeafHint": "Ora avvicinati a una foglia: più calma, più Vis",
+  "cameraLeafHint": "Ora avvicinati a una foglia",
   "cameraFlowerHint": "E un fiore, se c'è",
   "cameraNoFlower": "Non ha fiori",
   "cameraOrganWhole": "Pianta intera",
@@ -1705,5 +1705,6 @@
   "cameraOrganFlower": "Fiore",
   "fieldTestRegional": "Confronta con la flora regionale (2 identificazioni)",
   "fieldTestRegionalResult": "Flora regionale (Europa sudorientale)",
-  "cameraZoomSlower": "Senza zoom la Vis sale più in fretta"
+  "cameraZoomSlower": "Senza zoom la Vis sale più in fretta",
+  "tip17": "Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più."
 }
