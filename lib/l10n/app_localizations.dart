@@ -3302,6 +3302,54 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Zoom {zoom}'**
   String cameraZoom(String zoom);
+
+  /// No description provided for @cameraGatherHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Muovi piano il telefono attorno alla pianta per raccoglierne la Vis'**
+  String get cameraGatherHint;
+
+  /// No description provided for @cameraZoomFirst.
+  ///
+  /// In it, this message translates to:
+  /// **'Inquadra prima senza zoom: la Vis si raccoglie da vicino'**
+  String get cameraZoomFirst;
+
+  /// No description provided for @cameraVisGathered.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis raccolta: ora puoi zoomare e scattare'**
+  String get cameraVisGathered;
+
+  /// No description provided for @cameraShutterLocked.
+  ///
+  /// In it, this message translates to:
+  /// **'Prima raccogli la Vis: muovi piano il telefono attorno alla pianta'**
+  String get cameraShutterLocked;
+
+  /// No description provided for @cameraWeakTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Vis molto debole'**
+  String get cameraWeakTitle;
+
+  /// No description provided for @cameraWeakText.
+  ///
+  /// In it, this message translates to:
+  /// **'Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.'**
+  String get cameraWeakText;
+
+  /// No description provided for @cameraWeakRetry.
+  ///
+  /// In it, this message translates to:
+  /// **'Riprova'**
+  String get cameraWeakRetry;
+
+  /// No description provided for @cameraWeakAnyway.
+  ///
+  /// In it, this message translates to:
+  /// **'Raccogli comunque'**
+  String get cameraWeakAnyway;
 }
 
 class _AppLocalizationsDelegate

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:camera/camera.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
@@ -10,6 +11,7 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/rules/field/sky.dart';
+import 'package:druid_app/business_logic/rules/field/vis_gathering.dart';
 import 'package:druid_app/business_logic/services/camera/photo_resizer.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
@@ -62,7 +64,9 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   LocationFix? _bestFix;
   bool _locationOff = false;
 
-  FrameVerdict _verdict = FrameVerdict.waiting;
+  FrameVerdict _verdict = FrameVerdict.none;
+  final _vis = VisGathering();
+  bool _weakAsked = false;
   final _streamWatch = Stopwatch();
   final _sinceAnalysis = Stopwatch();
   int _received = 0, _analyzed = 0, _analysisMicros = 0;
@@ -193,6 +197,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     _received++;
     _frameSize = '${image.width}×${image.height}';
     if (_sinceAnalysis.isRunning && _sinceAnalysis.elapsed < _analysisInterval) return;
+    final step = _sinceAnalysis.isRunning ? _sinceAnalysis.elapsed : Duration.zero;
     _sinceAnalysis
       ..reset()
       ..start();
@@ -203,11 +208,58 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     );
     _analysisMicros += watch.elapsedMicroseconds;
     _analyzed++;
-    if (verdict.ready != _verdict.ready) {
-      setState(() => _verdict = verdict);
-    } else {
-      _verdict = verdict;
+    _verdict = verdict;
+    if (_shooting) return;
+    final changed = _vis.update(step: step, evidence: verdict.evidence, zoom: _zoom);
+    setState(() {});
+    if (changed) _onVisChanged();
+  }
+
+  void _onVisChanged() {
+    switch (_vis.state) {
+      case VisState.full:
+        HapticFeedback.mediumImpact();
+        if (_vis.startedZoomed) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(context.l10n.cameraVisGathered)));
+        }
+      case VisState.weak when !_weakAsked:
+        _weakAsked = true;
+        _askWeak();
+      default:
     }
+  }
+
+  /// "Vis molto debole": raccoglierla comunque (poca Vis, scatto sospetto) o riprovare.
+  Future<void> _askWeak() async {
+    final anyway = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(dialogContext.l10n.cameraWeakTitle),
+        content: Text(dialogContext.l10n.cameraWeakText),
+        actions: [
+          TextButton(
+            key: const ValueKey('camera-weak-retry'),
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(dialogContext.l10n.cameraWeakRetry),
+          ),
+          FilledButton(
+            key: const ValueKey('camera-weak-anyway'),
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(dialogContext.l10n.cameraWeakAnyway),
+          ),
+        ],
+      ),
+    );
+    if (!mounted) return;
+    setState(() {
+      if (anyway ?? false) {
+        _vis.acceptWeak();
+      } else {
+        _vis.retry();
+        _weakAsked = false;
+      }
+    });
   }
 
   CameraDiagnostics _diagnostics({required int captureMs, required int resizeMs}) {
@@ -225,7 +277,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
 
   Future<void> _shoot() async {
     final camera = _camera;
-    if (camera == null || _shooting || !_verdict.ready) return;
+    if (camera == null || _shooting || !_vis.canShoot) return;
     setState(() => _shooting = true);
     try {
       _streamWatch.stop();
@@ -341,12 +393,20 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                           live.analyzedPerSecond.toStringAsFixed(1),
                           live.analysisMs.toStringAsFixed(1),
                           _verdict.sharpness.toStringAsFixed(0),
-                          _verdict.motion.toStringAsFixed(1),
+                          '${_verdict.motion.toStringAsFixed(1)} · Vis ${(_vis.progress * 100).round()} %',
                         ),
+
                         style: context.texts.bodySmall?.copyWith(color: context.colors.onSurface),
                       ),
                     ),
                   const SizedBox(height: Gaps.l),
+                  if (camera != null && (_vis.state == VisState.gathering || _vis.state == VisState.zoomFirst))
+                    Center(
+                      child: _Hint(
+                        _vis.state == VisState.zoomFirst ? context.l10n.cameraZoomFirst : context.l10n.cameraGatherHint,
+                      ),
+                    ),
+                  const SizedBox(height: Gaps.m),
                   if (camera != null && zoomStops(_maxZoom).length > 1)
                     Center(
                       child: _ZoomStops(stops: zoomStops(_maxZoom), zoom: _zoom, onSelected: _setZoom),
@@ -361,9 +421,14 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       ),
                       const Spacer(),
                       _Shutter(
-                        enabled: camera != null && _verdict.ready && !_shooting,
+                        progress: _vis.progress,
+                        full: _vis.state == VisState.full,
+                        enabled: camera != null && _vis.canShoot && !_shooting,
                         busy: _shooting,
                         onPressed: _shoot,
+                        onLocked: () => ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(SnackBar(content: Text(context.l10n.cameraShutterLocked))),
                       ),
                       const Spacer(),
                       if (_hasFlash)
@@ -545,37 +610,97 @@ class _Plate extends StatelessWidget {
   );
 }
 
+/// Un'indicazione breve sopra l'immagine, chiara con un'ombra come le icone.
+class _Hint extends StatelessWidget {
+  final String text;
+
+  const _Hint(this.text);
+
+  @override
+  Widget build(BuildContext context) => Text(
+    text,
+    key: const ValueKey('camera-hint'),
+    textAlign: TextAlign.center,
+    style: context.texts.titleSmall?.copyWith(
+      color: context.colors.onSurface,
+      shadows: [Shadow(color: context.colors.scrim.withValues(alpha: 0.8), blurRadius: 8)],
+    ),
+  );
+}
+
+/// Pulsante di scatto che si riempie come se immagazzinasse la Vis: un anello cresce attorno e, pieno, il pulsante
+/// diventa rosso (capitolo 05). Con la Vis debole accettata resta pallido ma scatta.
 class _Shutter extends StatelessWidget {
+  static const _size = 80.0;
+
+  final double progress;
+  final bool full;
   final bool enabled;
   final bool busy;
   final VoidCallback onPressed;
+  final VoidCallback onLocked;
 
-  const _Shutter({required this.enabled, required this.busy, required this.onPressed});
+  const _Shutter({
+    required this.progress,
+    required this.full,
+    required this.enabled,
+    required this.busy,
+    required this.onPressed,
+    required this.onLocked,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final ring = context.colors.onSurface.withValues(alpha: enabled ? 1 : 0.4);
+    final light = context.colors.onSurface;
+    final core = full ? context.colors.error : light.withValues(alpha: enabled ? 0.85 : 0.3);
     return Semantics(
       button: true,
+      enabled: enabled,
       label: context.l10n.cameraShutter,
+      value: '${(progress * 100).round()} %',
       child: GestureDetector(
         key: const ValueKey('camera-shutter'),
-        onTap: enabled ? onPressed : null,
-        child: Container(
-          width: 76,
-          height: 76,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: ring, width: 4),
+        onTap: enabled ? onPressed : onLocked,
+        child: SizedBox.square(
+          dimension: _size,
+          child: CustomPaint(
+            painter: _RingPainter(progress: progress, track: light.withValues(alpha: 0.3), fill: light),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: busy
+                  ? CircularProgressIndicator(color: light)
+                  : AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      decoration: BoxDecoration(shape: BoxShape.circle, color: core),
+                    ),
+            ),
           ),
-          padding: const EdgeInsets.all(6),
-          child: busy
-              ? CircularProgressIndicator(color: ring)
-              : DecoratedBox(
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: ring),
-                ),
         ),
       ),
     );
   }
+}
+
+/// L'anello della Vis: la traccia intera e, sopra, l'arco già raccolto (da mezzogiorno, in senso orario).
+class _RingPainter extends CustomPainter {
+  final double progress;
+  final Color track;
+  final Color fill;
+
+  const _RingPainter({required this.progress, required this.track, required this.fill});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const stroke = 5.0;
+    final rect = (Offset.zero & size).deflate(stroke / 2);
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = stroke
+      ..strokeCap = StrokeCap.round;
+    canvas.drawArc(rect, 0, 2 * pi, false, paint..color = track);
+    if (progress > 0) canvas.drawArc(rect, -pi / 2, 2 * pi * progress, false, paint..color = fill);
+  }
+
+  @override
+  bool shouldRepaint(_RingPainter old) => old.progress != progress || old.track != track || old.fill != fill;
 }

@@ -1694,5 +1694,13 @@
         "type": "String"
       }
     }
-  }
+  },
+  "cameraGatherHint": "Muovi piano il telefono attorno alla pianta per raccoglierne la Vis",
+  "cameraZoomFirst": "Inquadra prima senza zoom: la Vis si raccoglie da vicino",
+  "cameraVisGathered": "Vis raccolta: ora puoi zoomare e scattare",
+  "cameraShutterLocked": "Prima raccogli la Vis: muovi piano il telefono attorno alla pianta",
+  "cameraWeakTitle": "Vis molto debole",
+  "cameraWeakText": "Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.",
+  "cameraWeakRetry": "Riprova",
+  "cameraWeakAnyway": "Raccogli comunque"
 }

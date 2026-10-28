@@ -17,8 +17,12 @@ void main() {
     return CameraFrame(width: width, height: height, bytesPerRow: bytesPerRow, luma: bytes);
   }
 
-  test('sempre pronto: nel blocco 2 misura soltanto', () {
-    expect(ProbeFrameAnalyzer().analyze(frame((x, y) => 128)).ready, isTrue);
+  test('indizio provvisorio dal movimento: fermo no, mosso piano sì, mosso troppo no', () {
+    expect(ProbeFrameAnalyzer.evidenceOf(2), 0);
+    expect(ProbeFrameAnalyzer.evidenceOf(8.5), closeTo(0.5, 0.01));
+    expect(ProbeFrameAnalyzer.evidenceOf(20), 1);
+    expect(ProbeFrameAnalyzer.evidenceOf(60), 0);
+    expect(ProbeFrameAnalyzer().analyze(frame((x, y) => 128)).evidence, 0);
   });
 
   test('nitidezza: zero su un grigio uniforme, alta su una scacchiera', () {

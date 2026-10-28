@@ -2119,4 +2119,32 @@ class AppLocalizationsIt extends AppLocalizations {
   String cameraZoom(String zoom) {
     return 'Zoom $zoom';
   }
+
+  @override
+  String get cameraGatherHint =>
+      'Muovi piano il telefono attorno alla pianta per raccoglierne la Vis';
+
+  @override
+  String get cameraZoomFirst =>
+      'Inquadra prima senza zoom: la Vis si raccoglie da vicino';
+
+  @override
+  String get cameraVisGathered => 'Vis raccolta: ora puoi zoomare e scattare';
+
+  @override
+  String get cameraShutterLocked =>
+      'Prima raccogli la Vis: muovi piano il telefono attorno alla pianta';
+
+  @override
+  String get cameraWeakTitle => 'Vis molto debole';
+
+  @override
+  String get cameraWeakText =>
+      'Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.';
+
+  @override
+  String get cameraWeakRetry => 'Riprova';
+
+  @override
+  String get cameraWeakAnyway => 'Raccogli comunque';
 }

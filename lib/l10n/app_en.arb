@@ -530,5 +530,13 @@
   "cameraFlashOff": "Flash off",
   "cameraFlashAuto": "Flash auto",
   "cameraFlashOn": "Flash on",
-  "cameraZoom": "Zoom {zoom}"
+  "cameraZoom": "Zoom {zoom}",
+  "cameraGatherHint": "Move the phone slowly around the plant to gather its Vis",
+  "cameraZoomFirst": "Frame it without zoom first: Vis is gathered up close",
+  "cameraVisGathered": "Vis gathered: now you can zoom and shoot",
+  "cameraShutterLocked": "Gather the Vis first: move the phone slowly around the plant",
+  "cameraWeakTitle": "Very weak Vis",
+  "cameraWeakText": "The Vis here is barely there: maybe the phone is still, or you're not framing a real plant. You can gather it anyway, but it will be little.",
+  "cameraWeakRetry": "Try again",
+  "cameraWeakAnyway": "Gather anyway"
 }

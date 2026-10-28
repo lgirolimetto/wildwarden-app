@@ -12,7 +12,10 @@ class TakenPhoto {
   /// Solo dalla fotocamera dell'app: come è andata l'analisi dei fotogrammi e la riduzione della foto.
   final CameraDiagnostics? diagnostics;
 
-  const TakenPhoto(this.path, {this.diagnostics});
+  /// Solo dalla fotocamera dell'app: la Vis era piena (verifica passata) o debole ("Raccogli comunque").
+  final bool? visFull;
+
+  const TakenPhoto(this.path, {this.diagnostics, this.visFull});
 
   static const cancelled = TakenPhoto(null);
 }

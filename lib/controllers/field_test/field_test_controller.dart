@@ -129,6 +129,7 @@ class FieldTestController extends GetxController {
       fixes: fixes,
       systemCamera: systemCamera,
       diagnostics: photo.fold((_) => null, (taken) => taken.diagnostics),
+      visFull: photo.fold((_) => null, (taken) => taken.visFull),
     );
     await _log.append(FieldTestRecord.header, record.toCsvRow());
     last = record;
