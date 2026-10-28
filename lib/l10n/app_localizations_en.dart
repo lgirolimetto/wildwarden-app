@@ -1933,7 +1933,7 @@ class AppLocalizationsEn extends AppLocalizations {
     int questions,
     int needed,
   ) {
-    return 'No questions about this species for $days days: your Mastery has fallen dormant and new Essences are $dormant % pure instead of $full %. Reawaken it with $questions questions from every Level: $needed right answers are enough.';
+    return 'After $days days without questions about this species your Mastery has fallen dormant: new Essences are $dormant% pure instead of $full%. Reawaken it with $questions questions from every Level: $needed right answers are enough.';
   }
 
   @override
@@ -1941,7 +1941,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String summaryAwakened(String name, int full) {
-    return 'Mastery reawakened: Essences of $name are $full % pure again.';
+    return 'Mastery reawakened: Essences of $name are $full% pure again.';
   }
 
   @override
@@ -1952,4 +1952,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tip16 =>
       'Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home.';
+
+  @override
+  String get simulateMastery => 'Simulate Mastery';
 }

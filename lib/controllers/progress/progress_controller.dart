@@ -18,6 +18,7 @@ import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
+import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/base/loadable_controller.dart';
 
@@ -109,6 +110,16 @@ class ProgressController extends LoadableController<GameState> {
     );
     await checkMastery(speciesSci);
     return true;
+  }
+
+  /// Strumento di prova: la Maestria di [speciesSci] subito, con i livelli che mancano, senza PE. Serve a provare la
+  /// Maestria sopita (con i giorni simulati) senza fare studio, ripassi ed essenze.
+  Future<void> simulateMastery(String speciesSci) async {
+    if (state.mastered.contains(speciesSci)) return;
+    for (var level = state.levelOf(speciesSci) + 1; level <= maxStudyLevel; level++) {
+      await record(LevelPassed(speciesSci: speciesSci, level: level, xp: 0, occurredAt: now));
+    }
+    await record(MasteryReached(speciesSci: speciesSci, xp: 0, occurredAt: now));
   }
 
   /// Registra la maestria se le condizioni sono appena state raggiunte.

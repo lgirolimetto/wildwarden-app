@@ -57,6 +57,15 @@ void main() {
     expect(controller.state.xp, XpRules.desiderataFulfilled);
   });
 
+  test('simula maestria: i livelli che mancano e la maestria, senza PE; dopo 30 giorni è sopita', () async {
+    await controller.simulateMastery('Malva sylvestris');
+    expect(controller.state.levelOf('Malva sylvestris'), 4);
+    expect(controller.state.xp + controller.state.xpToCash, 0);
+    expect(controller.masteryDormant('Malva sylvestris'), isFalse);
+    clock.advance(const Duration(days: 30));
+    expect(controller.masteryDormant('Malva sylvestris'), isTrue);
+  });
+
   test('attingere simulato salva tutti i tratti scelti', () async {
     await controller.encounter('Helleborus viridis', method: EncounterMethod.simulated);
 

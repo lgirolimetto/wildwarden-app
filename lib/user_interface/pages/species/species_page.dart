@@ -886,6 +886,13 @@ class _MasterySectionState extends State<_MasterySection> {
               icon: const Icon(Icons.bug_report_outlined),
               label: Text(l10n.simulateDraw),
             ),
+            if (!widget.state.mastered.contains(widget.species.sci))
+              OutlinedButton.icon(
+                key: const ValueKey('simulate-mastery'),
+                onPressed: () => widget.progress.simulateMastery(widget.species.sci),
+                icon: const Icon(Icons.bug_report_outlined),
+                label: Text(l10n.simulateMastery),
+              ),
             if (!widget.state.hasEncountered(widget.species.sci))
               Text(l10n.drawNeedsEncounter, style: context.texts.bodySmall)
             else if (isExhausted(widget.state, widget.species.sci, widget.progress.now))

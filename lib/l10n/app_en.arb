@@ -490,9 +490,10 @@
   "awakenButton": "Reawaken",
   "awakenMasteryButton": "Reawaken your Mastery",
   "masteryKeepHint": "Mastery is kept by answering a question about this species now and then: after {days} days without one, it falls dormant.",
-  "masteryDormantText": "No questions about this species for {days} days: your Mastery has fallen dormant and new Essences are {dormant} % pure instead of {full} %. Reawaken it with {questions} questions from every Level: {needed} right answers are enough.",
+  "masteryDormantText": "After {days} days without questions about this species your Mastery has fallen dormant: new Essences are {dormant}% pure instead of {full}%. Reawaken it with {questions} questions from every Level: {needed} right answers are enough.",
   "awakeningTheme": "Reawakening your Mastery",
-  "summaryAwakened": "Mastery reawakened: Essences of {name} are {full} % pure again.",
+  "summaryAwakened": "Mastery reawakened: Essences of {name} are {full}% pure again.",
   "summaryStillDormant": "Still dormant: you need at least {needed} right answers out of {total}. You can try again right away.",
-  "tip16": "Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home."
+  "tip16": "Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home.",
+  "simulateMastery": "Simulate Mastery"
 }

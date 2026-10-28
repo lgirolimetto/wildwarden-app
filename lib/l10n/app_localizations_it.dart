@@ -1947,7 +1947,7 @@ class AppLocalizationsIt extends AppLocalizations {
     int questions,
     int needed,
   ) {
-    return 'Da $days giorni nessuna domanda su questa specie: la Maestria si è assopita e le nuove Essenze sono pure al $dormant % invece che al $full %. Risvegliala con $questions domande su tutti i Livelli: ne bastano $needed giuste.';
+    return 'Dopo $days giorni senza domande su questa specie la Maestria si è assopita: le nuove Essenze sono pure al $dormant % invece che al $full %. Risvegliala con $questions domande su tutti i Livelli: ne bastano $needed giuste.';
   }
 
   @override
@@ -1966,4 +1966,7 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get tip16 =>
       'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.';
+
+  @override
+  String get simulateMastery => 'Simula Maestria';
 }

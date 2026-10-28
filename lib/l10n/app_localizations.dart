@@ -3041,7 +3041,7 @@ abstract class AppLocalizations {
   /// No description provided for @masteryDormantText.
   ///
   /// In it, this message translates to:
-  /// **'Da {days} giorni nessuna domanda su questa specie: la Maestria si è assopita e le nuove Essenze sono pure al {dormant} % invece che al {full} %. Risvegliala con {questions} domande su tutti i Livelli: ne bastano {needed} giuste.'**
+  /// **'Dopo {days} giorni senza domande su questa specie la Maestria si è assopita: le nuove Essenze sono pure al {dormant} % invece che al {full} %. Risvegliala con {questions} domande su tutti i Livelli: ne bastano {needed} giuste.'**
   String masteryDormantText(
     int days,
     int dormant,
@@ -3073,6 +3073,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.'**
   String get tip16;
+
+  /// No description provided for @simulateMastery.
+  ///
+  /// In it, this message translates to:
+  /// **'Simula Maestria'**
+  String get simulateMastery;
 }
 
 class _AppLocalizationsDelegate
