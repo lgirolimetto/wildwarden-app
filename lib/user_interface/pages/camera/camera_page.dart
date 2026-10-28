@@ -218,6 +218,8 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       analysisMs: _analyzed == 0 ? 0 : _analysisMicros / _analyzed / 1000,
       captureMs: captureMs,
       resizeMs: resizeMs,
+      zoom: _zoom,
+      flash: _hasFlash ? _flash.name : 'none',
     );
   }
 

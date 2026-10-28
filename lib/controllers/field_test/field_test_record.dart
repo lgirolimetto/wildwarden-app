@@ -12,7 +12,7 @@ class FieldTestRecord {
       'top1,punteggio1,top2,punteggio2,top3,punteggio3,giusta_top1,giusta_top3,rimaste,'
       'gps_esito,gps_primo_s,precisione_5s_m,precisione_10s_m,precisione_20s_m,'
       'posizioni_durante_foto,gps_dopo_foto_primo_s,precisione_dopo_foto_10s_m,posizioni,'
-      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms';
+      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms,zoom,flash';
 
   /// Dopo la foto le posizioni si raccolgono ancora per questo tempo (mentre risponde Pl@ntNet).
   static const afterPhoto = Duration(seconds: 10);
@@ -135,6 +135,8 @@ class FieldTestRecord {
       diagnostics?.analysisMs.toStringAsFixed(1) ?? '',
       cell(diagnostics?.captureMs),
       cell(diagnostics?.resizeMs),
+      diagnostics?.zoom.toStringAsFixed(1) ?? '',
+      cell(diagnostics?.flash),
     ].join(',');
   }
 }

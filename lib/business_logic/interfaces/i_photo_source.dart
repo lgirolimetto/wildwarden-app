@@ -30,11 +30,17 @@ class CameraDiagnostics {
   final int captureMs;
   final int resizeMs;
 
+  /// Zoom e flash dello scatto ("off", "auto", "always").
+  final double zoom;
+  final String flash;
+
   const CameraDiagnostics({
     required this.receivedPerSecond,
     required this.analyzedPerSecond,
     required this.analysisMs,
     required this.captureMs,
     required this.resizeMs,
+    this.zoom = 1,
+    this.flash = 'off',
   });
 }
