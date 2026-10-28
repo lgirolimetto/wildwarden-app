@@ -7,11 +7,15 @@ import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
+import 'package:druid_app/business_logic/rules/study/facts.dart';
+import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
+import 'package:druid_app/business_logic/rules/study/study_session.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
@@ -222,6 +226,9 @@ class _SpeciesSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final level = state.levelOf(species.sci);
+    final levelLabel = progress.masteryDormant(species.sci)
+        ? context.l10n.levelMasteryDormant
+        : levelName(context.l10n, level);
     final game = context.game;
     final lore = catalog.lore[species.sci];
     Widget locked(int at) => _Locked(level: at);
@@ -233,9 +240,7 @@ class _SpeciesSheet extends StatelessWidget {
           image: RemoteImage(species.images.first.url),
           credit: '${species.images.first.creator} · ${species.images.first.license}',
           title: game.name(species),
-          subtitle: state.hasEncountered(species.sci)
-              ? levelName(context.l10n, level)
-              : '${context.l10n.notEncounteredYet} · ${levelName(context.l10n, level)}',
+          subtitle: state.hasEncountered(species.sci) ? levelLabel : '${context.l10n.notEncounteredYet} · $levelLabel',
           level: level,
           protected: species.isProtected,
         ),
@@ -821,8 +826,16 @@ class _MasterySectionState extends State<_MasterySection> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.state.mastered.contains(widget.species.sci))
+          if (widget.progress.masteryDormant(widget.species.sci))
+            _DormantMastery(speciesSci: widget.species.sci, catalog: widget.catalog)
+          else if (widget.state.mastered.contains(widget.species.sci)) ...[
             Text(l10n.masteryReached, style: context.texts.titleMedium),
+            Text(
+              l10n.masteryKeepHint(masteryDormantDays),
+              style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
+            ),
+            const SizedBox(height: Gaps.xs),
+          ],
           if ((widget.state.pendingXp[widget.species.sci] ?? 0) > 0)
             Text(
               l10n.speciesXpToCash(widget.state.pendingXp[widget.species.sci]!),
@@ -873,6 +886,13 @@ class _MasterySectionState extends State<_MasterySection> {
               icon: const Icon(Icons.bug_report_outlined),
               label: Text(l10n.simulateDraw),
             ),
+            if (!widget.state.mastered.contains(widget.species.sci))
+              OutlinedButton.icon(
+                key: const ValueKey('simulate-mastery'),
+                onPressed: () => widget.progress.simulateMastery(widget.species.sci),
+                icon: const Icon(Icons.bug_report_outlined),
+                label: Text(l10n.simulateMastery),
+              ),
             if (!widget.state.hasEncountered(widget.species.sci))
               Text(l10n.drawNeedsEncounter, style: context.texts.bodySmall)
             else if (isExhausted(widget.state, widget.species.sci, widget.progress.now))
@@ -880,6 +900,43 @@ class _MasterySectionState extends State<_MasterySection> {
           ],
         ],
       ),
+    );
+  }
+}
+
+/// La Maestria sopita: che cosa vuol dire e il pulsante del mini-quiz che la risveglia.
+class _DormantMastery extends StatelessWidget {
+  final String speciesSci;
+  final Catalog catalog;
+
+  const _DormantMastery({required this.speciesSci, required this.catalog});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.levelMasteryDormant, key: const ValueKey('mastery-dormant'), style: context.texts.titleMedium),
+        const SizedBox(height: Gaps.xs),
+        Text(
+          l10n.masteryDormantText(
+            masteryDormantDays,
+            (purityOfLevel(maxStudyLevel) * 100).round(),
+            (purityOfLevel(maxStudyLevel + 1) * 100).round(),
+            awakeningQuestions,
+            awakeningQuestions - awakeningMistakesAllowed,
+          ),
+        ),
+        const SizedBox(height: Gaps.s),
+        FilledButton.icon(
+          key: const ValueKey('awaken-mastery'),
+          onPressed: () => startAwakening(catalog, speciesSci),
+          icon: const Icon(Icons.wb_twilight_rounded),
+          label: Text(l10n.awakenMasteryButton),
+        ),
+        const SizedBox(height: Gaps.s),
+      ],
     );
   }
 }

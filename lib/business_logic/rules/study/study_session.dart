@@ -7,6 +7,11 @@ import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 
+/// Domande del mini-quiz che risveglia la Maestria sopita, e quanti errori si possono fare (capitolo 03: 5 domande,
+/// ne bastano 4).
+const awakeningQuestions = 5;
+const awakeningMistakesAllowed = 1;
+
 /// Esito di una risposta, con l'evento da salvare.
 class AnswerOutcome {
   final Question question;
@@ -35,10 +40,11 @@ class _Pending {
   const _Pending(this.fact, {this.avoid});
 }
 
-/// Una sessione di studio: un livello di una specie (apprendimento) o i ripassi del giorno.
+/// Una sessione di studio: un livello di una specie (apprendimento), i ripassi del giorno o il mini-quiz che risveglia
+/// la Maestria sopita.
 ///
 /// In apprendimento un fatto sbagliato torna dopo due domande, in un'altra forma, finché non viene superato;
-/// il livello è superato quando la coda è vuota. Nei ripassi ogni fatto si chiede una volta sola.
+/// il livello è superato quando la coda è vuota. Nei ripassi e nel mini-quiz ogni fatto si chiede una volta sola.
 class StudySession {
   final AnswerMode mode;
   final Catalog _catalog;
@@ -46,7 +52,7 @@ class StudySession {
   final List<_Pending> _queue;
   final Set<String> _wrongInSession = {};
 
-  /// Specie e livello studiati (solo in apprendimento).
+  /// Specie studiata (apprendimento e mini-quiz) e livello (solo in apprendimento).
   final String? speciesSci;
   final int? level;
   final int totalFacts;
@@ -77,6 +83,19 @@ class StudySession {
   factory StudySession.review({required List<Fact> dueFacts, required Catalog catalog, required Random random}) =>
       StudySession._(AnswerMode.review, catalog, random, dueFacts);
 
+  /// Mini-quiz della Maestria sopita: [awakeningQuestions] fatti a caso tra tutti i livelli della specie (tutti, se
+  /// sono meno), senza PE.
+  factory StudySession.awakening({required String speciesSci, required Catalog catalog, required Random random}) {
+    final facts = factsOf(catalog.speciesBySci(speciesSci)!, catalog)..shuffle(random);
+    return StudySession._(
+      AnswerMode.awakening,
+      catalog,
+      random,
+      facts.take(awakeningQuestions).toList(),
+      speciesSci: speciesSci,
+    );
+  }
+
   bool get isFinished => _queue.isEmpty;
 
   /// Domanda corrente; ogni chiamata restituisce la stessa finché non si risponde.
@@ -89,13 +108,15 @@ class StudySession {
     final question = current;
     final fact = question.fact;
     final correct = question.isCorrect(chosen);
-    final xp = mode == AnswerMode.learning
-        ? XpRules.learning(
-            correct: correct,
-            wrongEarlierInSession: _wrongInSession.contains(fact.id),
-            mistakeRewardedBefore: state.progressOf(fact.id).mistakeRewarded,
-          )
-        : XpRules.review(correct: correct, box: state.progressOf(fact.id).box);
+    final xp = switch (mode) {
+      AnswerMode.learning => XpRules.learning(
+        correct: correct,
+        wrongEarlierInSession: _wrongInSession.contains(fact.id),
+        mistakeRewardedBefore: state.progressOf(fact.id).mistakeRewarded,
+      ),
+      AnswerMode.review => XpRules.review(correct: correct, box: state.progressOf(fact.id).box),
+      AnswerMode.awakening => 0,
+    };
 
     _queue.removeAt(0);
     _current = null;

@@ -1,5 +1,7 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
 import 'package:druid_app/business_logic/rules/study/study_session.dart';
@@ -94,16 +96,19 @@ class _QuestionView extends StatelessWidget {
         ClayProgressBar(value: study.totalFacts == 0 ? 0 : study.completedFacts / study.totalFacts, height: 4),
         const SizedBox(height: Gaps.xs),
         // Il tema del livello sta qui, non nel titolo: il titolo resta il nome della specie, che non va tagliato.
-        Text(
-          study.mode == AnswerMode.learning
-              ? context.l10n.studyThemeProgress(
-                  levelName(context.l10n, study.level ?? 0),
-                  study.completedFacts,
-                  study.totalFacts,
-                )
-              : context.l10n.studyProgress(study.completedFacts, study.totalFacts),
-          style: context.texts.bodySmall,
-        ),
+        Text(switch (study.mode) {
+          AnswerMode.learning => context.l10n.studyThemeProgress(
+            levelName(context.l10n, study.level ?? 0),
+            study.completedFacts,
+            study.totalFacts,
+          ),
+          AnswerMode.awakening => context.l10n.studyThemeProgress(
+            context.l10n.awakeningTheme,
+            study.completedFacts,
+            study.totalFacts,
+          ),
+          _ => context.l10n.studyProgress(study.completedFacts, study.totalFacts),
+        }, style: context.texts.bodySmall),
         const SizedBox(height: Gaps.l),
         Text(game.prompt(question), style: context.texts.headlineSmall),
         if (question.imageUrl != null) ...[
@@ -254,6 +259,7 @@ class _OutcomeCard extends StatelessWidget {
     final followUp = switch (outcome.event.mode) {
       AnswerMode.learning => outcome.willReturn ? l10n.answerWillReturn : null,
       AnswerMode.review => outcome.correct ? l10n.answerRemembered(reviewIntervalsDays[box]) : l10n.answerForgotten,
+      AnswerMode.awakening => null,
     };
     return ClayCard(
       padding: EdgeInsets.zero,
@@ -323,6 +329,9 @@ class _Summary extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final species = summary.speciesSci == null ? null : catalog?.speciesBySci(summary.speciesSci!);
+    if (summary.awakened != null && species != null && catalog != null) {
+      return _AwakeningSummary(summary: summary, species: species, catalog: catalog!);
+    }
     return ListView(
       padding: const EdgeInsets.all(Gaps.xl),
       children: [
@@ -361,5 +370,55 @@ class _Summary extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+/// Riepilogo del mini-quiz della Maestria sopita: risvegliata, oppure ancora sopita con "Riprova" (si rifà subito).
+class _AwakeningSummary extends StatelessWidget {
+  final SessionSummary summary;
+  final Species species;
+  final Catalog catalog;
+
+  const _AwakeningSummary({required this.summary, required this.species, required this.catalog});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final study = Get.find<StudyController>();
+    final awakened = summary.awakened!;
+    return ListView(
+      padding: const EdgeInsets.all(Gaps.xl),
+      children: [
+        Text(l10n.summaryTitle, style: context.texts.headlineMedium),
+        const SizedBox(height: Gaps.l),
+        Text(
+          awakened
+              ? l10n.summaryAwakened(context.game.name(species), (purityOfLevel(4) * 100).round())
+              : l10n.summaryStillDormant(summary.answers - awakeningMistakesAllowed, summary.answers),
+          key: ValueKey(awakened ? 'summary-awakened' : 'summary-still-dormant'),
+          style: context.texts.titleMedium,
+        ),
+        const SizedBox(height: Gaps.s),
+        Text(l10n.summaryAnswers(summary.correct, summary.answers)),
+        const SizedBox(height: Gaps.xl),
+        if (!awakened) ...[
+          FilledButton(
+            key: const ValueKey('retry-awakening'),
+            onPressed: () => study.startAwakening(catalog, species.sci),
+            child: Text(l10n.retry),
+          ),
+          const SizedBox(height: Gaps.s),
+        ],
+        if (awakened)
+          FilledButton(key: const ValueKey('close-session'), onPressed: () => _close(study), child: Text(l10n.close))
+        else
+          OutlinedButton(key: const ValueKey('close-session'), onPressed: () => _close(study), child: Text(l10n.close)),
+      ],
+    );
+  }
+
+  void _close(StudyController study) {
+    study.close();
+    Get.back<void>();
   }
 }

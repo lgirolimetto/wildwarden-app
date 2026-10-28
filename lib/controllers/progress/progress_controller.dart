@@ -18,6 +18,7 @@ import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/business_logic/rules/recipes/recycling.dart';
 import 'package:druid_app/business_logic/rules/recipes/trove.dart';
+import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/base/loadable_controller.dart';
 
@@ -50,6 +51,9 @@ class ProgressController extends LoadableController<GameState> {
   GameState get state => uiData.fold((_) => GameState.empty, (s) => s);
 
   DateTime get now => _clock.now();
+
+  /// La Maestria di [speciesSci] è sopita adesso (vedi `isMasteryDormant`).
+  bool masteryDormant(String speciesSci) => isMasteryDormant(state, speciesSci, now);
 
   /// Salva un evento e lo applica allo stato. Se il salvataggio fallisce lo stato non cambia.
   Future<Validation<GameState>> record(GameEvent event) async {
@@ -88,7 +92,7 @@ class ProgressController extends LoadableController<GameState> {
     final withOmen = traits.isEmpty && omen != null && favoured != null && _random.nextDouble() < omenChance(omen)
         ? [favoured.name]
         : traits;
-    final purity = purityOfLevel(state.levelOf(speciesSci));
+    final purity = purityOfLevel(purityLevelOf(state, speciesSci, now));
     await record(
       EssenceDrawn(
         speciesSci: speciesSci,
@@ -106,6 +110,16 @@ class ProgressController extends LoadableController<GameState> {
     );
     await checkMastery(speciesSci);
     return true;
+  }
+
+  /// Strumento di prova: la Maestria di [speciesSci] subito, con i livelli che mancano, senza PE. Serve a provare la
+  /// Maestria sopita (con i giorni simulati) senza fare studio, ripassi ed essenze.
+  Future<void> simulateMastery(String speciesSci) async {
+    if (state.mastered.contains(speciesSci)) return;
+    for (var level = state.levelOf(speciesSci) + 1; level <= maxStudyLevel; level++) {
+      await record(LevelPassed(speciesSci: speciesSci, level: level, xp: 0, occurredAt: now));
+    }
+    await record(MasteryReached(speciesSci: speciesSci, xp: 0, occurredAt: now));
   }
 
   /// Registra la maestria se le condizioni sono appena state raggiunte.
@@ -256,7 +270,7 @@ class ProgressController extends LoadableController<GameState> {
             traits: [for (final t in traits.take(random.nextInt(3))) t.name],
             simulated: true,
             vis: visPerDraw,
-            purity: purityOfLevel(state.levelOf(sci)),
+            purity: purityOfLevel(purityLevelOf(state, sci, now)),
             occurredAt: now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i)),
           ),
         );

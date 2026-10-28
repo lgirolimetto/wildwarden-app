@@ -111,7 +111,7 @@ class _DebugToolsState extends State<_DebugTools> {
             spacing: Gaps.chip,
             runSpacing: Gaps.chipRun,
             children: [
-              for (final days in [1, 3, 7])
+              for (final days in [1, 3, 7, 30])
                 OutlinedButton(
                   key: ValueKey('advance-$days'),
                   onPressed: () async {

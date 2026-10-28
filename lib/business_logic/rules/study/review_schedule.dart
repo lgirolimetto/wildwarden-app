@@ -10,6 +10,14 @@ const maxBox = 6;
 /// Scatola dalla quale un fatto si considera consolidato (ricordato a 1 e 3 giorni): serve per la maestria.
 const consolidatedBox = 3;
 
+/// Giorni senza domande di una specie dopo i quali la sua Maestria si assopisce (capitolo 03, "La Maestria si
+/// mantiene").
+const masteryDormantDays = 30;
+
+/// Sono passati [masteryDormantDays] da [lastQuestion] a [now]: la Maestria si assopisce.
+bool masteryLapsed(DateTime lastQuestion, DateTime now) =>
+    !now.isBefore(lastQuestion.add(const Duration(days: masteryDormantDays)));
+
 DateTime startOfDay(DateTime t) => DateTime(t.year, t.month, t.day);
 
 DateTime addDays(DateTime day, int days) => DateTime(day.year, day.month, day.day + days);

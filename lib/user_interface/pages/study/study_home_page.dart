@@ -479,8 +479,13 @@ class _YourSpecies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final inStudy = speciesInStudy(state);
+    bool dormant(Species s) => progress.masteryDormant(s.sci);
+    // Prima le Maestrie da risvegliare, poi dal livello più basso.
     final mine = catalog.species.where((s) => inStudy.contains(s.sci)).toList()
-      ..sort((a, b) => state.levelOf(a.sci).compareTo(state.levelOf(b.sci)));
+      ..sort(
+        (a, b) =>
+            dormant(a) != dormant(b) ? (dormant(a) ? -1 : 1) : state.levelOf(a.sci).compareTo(state.levelOf(b.sci)),
+      );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -495,15 +500,18 @@ class _YourSpecies extends StatelessWidget {
                   key: ValueKey('my-${s.sci}'),
                   species: s,
                   level: state.levelOf(s.sci),
-                  subtitle:
-                      '${levelName(context.l10n, state.levelOf(s.sci))} · '
-                      '${state.hasEncountered(s.sci) ? context.l10n.yourSpeciesMet : context.l10n.notEncounteredYet}',
-                  studyKey: ValueKey('study-${s.sci}'),
+                  subtitle: dormant(s)
+                      ? context.l10n.masteryToAwaken
+                      : '${levelName(context.l10n, state.levelOf(s.sci))} · '
+                            '${state.hasEncountered(s.sci) ? context.l10n.yourSpeciesMet : context.l10n.notEncounteredYet}',
+                  studyKey: ValueKey(dormant(s) ? 'awaken-${s.sci}' : 'study-${s.sci}'),
                   studyLabel: switch (nextStudyLevel(s, catalog, state)) {
+                    _ when dormant(s) => context.l10n.awakenButton,
                     final int level => context.l10n.studyLevelButton(level),
                     null => '',
                   },
                   onStudy: switch (nextStudyLevel(s, catalog, state)) {
+                    _ when dormant(s) => () => startAwakening(catalog, s.sci),
                     final int level => () => startLevelStudy(catalog, s.sci, level),
                     null => null,
                   },
@@ -517,6 +525,12 @@ class _YourSpecies extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Avvia il mini-quiz che risveglia la Maestria sopita e apre la sessione.
+void startAwakening(Catalog catalog, String speciesSci) {
+  Get.find<StudyController>().startAwakening(catalog, speciesSci);
+  Get.to<void>(() => const StudySessionPage());
 }
 
 /// Avvia lo studio di un livello e apre la sessione.

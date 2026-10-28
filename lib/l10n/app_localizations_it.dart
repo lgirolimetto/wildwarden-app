@@ -661,7 +661,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossMaestriaText =>
-      'L\'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse.';
+      'L\'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse. Va mantenuta: dopo 30 giorni senza domande della specie si assopisce e si risveglia con un mini-quiz.';
 
   @override
   String get glossMissioneTerm => 'Missione';
@@ -1921,4 +1921,52 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get viewToFind => 'Da trovare';
+
+  @override
+  String get levelMasteryDormant => 'Maestria sopita';
+
+  @override
+  String get masteryToAwaken => 'Maestria da risvegliare';
+
+  @override
+  String get awakenButton => 'Risveglia';
+
+  @override
+  String get awakenMasteryButton => 'Risveglia la Maestria';
+
+  @override
+  String masteryKeepHint(int days) {
+    return 'La Maestria si mantiene rispondendo ogni tanto a una domanda di questa specie: dopo $days giorni senza, si assopisce.';
+  }
+
+  @override
+  String masteryDormantText(
+    int days,
+    int dormant,
+    int full,
+    int questions,
+    int needed,
+  ) {
+    return 'Dopo $days giorni senza domande su questa specie la Maestria si è assopita: le nuove Essenze sono pure al $dormant % invece che al $full %. Risvegliala con $questions domande su tutti i Livelli: ne bastano $needed giuste.';
+  }
+
+  @override
+  String get awakeningTheme => 'Risveglio della Maestria';
+
+  @override
+  String summaryAwakened(String name, int full) {
+    return 'Maestria risvegliata: le Essenze di $name tornano pure al $full %.';
+  }
+
+  @override
+  String summaryStillDormant(int needed, int total) {
+    return 'Ancora sopita: servono almeno $needed risposte giuste su $total. Puoi riprovare subito.';
+  }
+
+  @override
+  String get tip16 =>
+      'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.';
+
+  @override
+  String get simulateMastery => 'Simula Maestria';
 }

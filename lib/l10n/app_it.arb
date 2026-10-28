@@ -565,7 +565,7 @@
   "glossAttingereTerm": "Attingere",
   "glossAttingereText": "Trarre l'Essenza da una Stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.",
   "glossMaestriaTerm": "Maestria",
-  "glossMaestriaText": "L'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse.",
+  "glossMaestriaText": "L'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse. Va mantenuta: dopo 30 giorni senza domande della specie si assopisce e si risveglia con un mini-quiz.",
   "glossMissioneTerm": "Missione",
   "glossMissioneText": "Un obiettivo da raggiungere nel mondo reale o nello studio: Incontrare una specie, superare un Livello, sbloccare una Ricetta.",
   "debugTitle": "Strumenti di prova",
@@ -1477,5 +1477,62 @@
   "tip13": "I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.",
   "tip14": "Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.",
   "tip15": "\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.",
-  "viewToFind": "Da trovare"
+  "viewToFind": "Da trovare",
+  "levelMasteryDormant": "Maestria sopita",
+  "masteryToAwaken": "Maestria da risvegliare",
+  "awakenButton": "Risveglia",
+  "awakenMasteryButton": "Risveglia la Maestria",
+  "masteryKeepHint": "La Maestria si mantiene rispondendo ogni tanto a una domanda di questa specie: dopo {days} giorni senza, si assopisce.",
+  "@masteryKeepHint": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "masteryDormantText": "Dopo {days} giorni senza domande su questa specie la Maestria si è assopita: le nuove Essenze sono pure al {dormant} % invece che al {full} %. Risvegliala con {questions} domande su tutti i Livelli: ne bastano {needed} giuste.",
+  "@masteryDormantText": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "dormant": {
+        "type": "int"
+      },
+      "full": {
+        "type": "int"
+      },
+      "questions": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "awakeningTheme": "Risveglio della Maestria",
+  "summaryAwakened": "Maestria risvegliata: le Essenze di {name} tornano pure al {full} %.",
+  "@summaryAwakened": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "full": {
+        "type": "int"
+      }
+    }
+  },
+  "summaryStillDormant": "Ancora sopita: servono almeno {needed} risposte giuste su {total}. Puoi riprovare subito.",
+  "@summaryStillDormant": {
+    "placeholders": {
+      "needed": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tip16": "La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.",
+  "simulateMastery": "Simula Maestria"
 }

@@ -1175,7 +1175,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossMaestriaText.
   ///
   /// In it, this message translates to:
-  /// **'L\'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse.'**
+  /// **'L\'ultimo Livello di una specie: richiede di ricordare ciò che hai imparato a distanza di giorni e di aver Attinto la specie sul campo in condizioni diverse. Va mantenuta: dopo 30 giorni senza domande della specie si assopisce e si risveglia con un mini-quiz.'**
   String get glossMaestriaText;
 
   /// No description provided for @glossMissioneTerm.
@@ -3007,6 +3007,78 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Da trovare'**
   String get viewToFind;
+
+  /// No description provided for @levelMasteryDormant.
+  ///
+  /// In it, this message translates to:
+  /// **'Maestria sopita'**
+  String get levelMasteryDormant;
+
+  /// No description provided for @masteryToAwaken.
+  ///
+  /// In it, this message translates to:
+  /// **'Maestria da risvegliare'**
+  String get masteryToAwaken;
+
+  /// No description provided for @awakenButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Risveglia'**
+  String get awakenButton;
+
+  /// No description provided for @awakenMasteryButton.
+  ///
+  /// In it, this message translates to:
+  /// **'Risveglia la Maestria'**
+  String get awakenMasteryButton;
+
+  /// No description provided for @masteryKeepHint.
+  ///
+  /// In it, this message translates to:
+  /// **'La Maestria si mantiene rispondendo ogni tanto a una domanda di questa specie: dopo {days} giorni senza, si assopisce.'**
+  String masteryKeepHint(int days);
+
+  /// No description provided for @masteryDormantText.
+  ///
+  /// In it, this message translates to:
+  /// **'Dopo {days} giorni senza domande su questa specie la Maestria si è assopita: le nuove Essenze sono pure al {dormant} % invece che al {full} %. Risvegliala con {questions} domande su tutti i Livelli: ne bastano {needed} giuste.'**
+  String masteryDormantText(
+    int days,
+    int dormant,
+    int full,
+    int questions,
+    int needed,
+  );
+
+  /// No description provided for @awakeningTheme.
+  ///
+  /// In it, this message translates to:
+  /// **'Risveglio della Maestria'**
+  String get awakeningTheme;
+
+  /// No description provided for @summaryAwakened.
+  ///
+  /// In it, this message translates to:
+  /// **'Maestria risvegliata: le Essenze di {name} tornano pure al {full} %.'**
+  String summaryAwakened(String name, int full);
+
+  /// No description provided for @summaryStillDormant.
+  ///
+  /// In it, this message translates to:
+  /// **'Ancora sopita: servono almeno {needed} risposte giuste su {total}. Puoi riprovare subito.'**
+  String summaryStillDormant(int needed, int total);
+
+  /// No description provided for @tip16.
+  ///
+  /// In it, this message translates to:
+  /// **'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.'**
+  String get tip16;
+
+  /// No description provided for @simulateMastery.
+  ///
+  /// In it, this message translates to:
+  /// **'Simula Maestria'**
+  String get simulateMastery;
 }
 
 class _AppLocalizationsDelegate

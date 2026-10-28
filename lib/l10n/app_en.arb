@@ -179,7 +179,7 @@
   "glossAttingereTerm": "Draw",
   "glossAttingereText": "Drawing the Essence from a Station without touching the plant: you photograph and observe, you don't pick.",
   "glossMaestriaTerm": "Mastery",
-  "glossMaestriaText": "The final Level of a species: you must remember what you learned days later and have Drawn the species in the field under different conditions.",
+  "glossMaestriaText": "The final Level of a species: you must remember what you learned days later and have Drawn the species in the field under different conditions. It has to be kept: after 30 days without questions about the species it falls dormant, and a short quiz reawakens it.",
   "glossMissioneTerm": "Quest",
   "glossMissioneText": "A goal to reach in the real world or in your studies: Meet a species, pass a Level, unlock a Recipe.",
   "debugTitle": "Testing tools",
@@ -484,5 +484,16 @@
   "tip13": "Study XP stays to Cash in until you draw the first Essence of that species.",
   "tip14": "In the Legend (Settings → Legend and glossary) you'll find what symbols and colours mean.",
   "tip15": "\"Collecting\" in the game means taking photos: plants stay where they are.",
-  "viewToFind": "To find"
+  "viewToFind": "To find",
+  "levelMasteryDormant": "Dormant Mastery",
+  "masteryToAwaken": "Mastery to reawaken",
+  "awakenButton": "Reawaken",
+  "awakenMasteryButton": "Reawaken your Mastery",
+  "masteryKeepHint": "Mastery is kept by answering a question about this species now and then: after {days} days without one, it falls dormant.",
+  "masteryDormantText": "After {days} days without questions about this species your Mastery has fallen dormant: new Essences are {dormant}% pure instead of {full}%. Reawaken it with {questions} questions from every Level: {needed} right answers are enough.",
+  "awakeningTheme": "Reawakening your Mastery",
+  "summaryAwakened": "Mastery reawakened: Essences of {name} are {full}% pure again.",
+  "summaryStillDormant": "Still dormant: you need at least {needed} right answers out of {total}. You can try again right away.",
+  "tip16": "Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home.",
+  "simulateMastery": "Simulate Mastery"
 }

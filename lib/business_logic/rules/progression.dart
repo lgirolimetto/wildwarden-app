@@ -3,11 +3,26 @@ import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
+import 'package:druid_app/business_logic/rules/study/review_schedule.dart';
 
 /// Regole che combinano stato di gioco e catalogo: maestria, desiderata, ripassi. Le ricette stanno in `recipes/`.
 
 const masteryDraws = 3;
 const masteryDistinctTraits = 2;
+
+/// La Maestria di [speciesSci] è sopita (capitolo 03, "La Maestria si mantiene"): 30 giorni senza domande della specie,
+/// o si è assopita prima e non è ancora stata risvegliata con il mini-quiz. Il livello 4 resta: si perde solo il
+/// vantaggio sulla purezza.
+bool isMasteryDormant(GameState state, String speciesSci, DateTime now) {
+  if (!state.mastered.contains(speciesSci)) return false;
+  if (state.dormantMastery.contains(speciesSci)) return true;
+  final last = state.lastQuestions[speciesSci];
+  return last != null && masteryLapsed(last, now);
+}
+
+/// Il livello che decide la purezza delle Essenze attinte adesso: con la Maestria sopita vale il livello 3.
+int purityLevelOf(GameState state, String speciesSci, DateTime now) =>
+    isMasteryDormant(state, speciesSci, now) ? maxStudyLevel : state.levelOf(speciesSci);
 
 class MasteryProgress {
   final int consolidatedFacts;

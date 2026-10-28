@@ -22,6 +22,9 @@ class SessionSummary {
   final int? levelPassed;
   final bool masteryReached;
 
+  /// Esito del mini-quiz della Maestria sopita (`null` per le altre sessioni).
+  final bool? awakened;
+
   /// La Comune della pianta, imparata superando il livello 1 (se non la conoscevi già).
   final PlantRecipe? learnedRecipe;
 
@@ -33,6 +36,7 @@ class SessionSummary {
     this.speciesSci,
     this.levelPassed,
     this.masteryReached = false,
+    this.awakened,
     this.learnedRecipe,
   });
 }
@@ -77,6 +81,10 @@ class StudyController extends GetxController {
     return true;
   }
 
+  /// Mini-quiz per risvegliare la Maestria sopita di [speciesSci]: si rifà quante volte si vuole.
+  void startAwakening(Catalog catalog, String speciesSci) =>
+      _start(catalog, StudySession.awakening(speciesSci: speciesSci, catalog: catalog, random: _random));
+
   void _start(Catalog catalog, StudySession session) {
     _catalog = catalog;
     _session = session;
@@ -95,7 +103,8 @@ class StudyController extends GetxController {
     if (outcome.correct) _correct++;
     _xp += outcome.xp;
     update();
-    await _progress.record(outcome.event);
+    // Le risposte del mini-quiz non si salvano: non cambiano i ripassi e non contano come domande della specie.
+    if (session.mode != AnswerMode.awakening) await _progress.record(outcome.event);
   }
 
   /// Passa alla domanda successiva, o chiude la sessione se era l'ultima.
@@ -110,6 +119,7 @@ class StudyController extends GetxController {
   }
 
   Future<void> _finish(StudySession session) async {
+    if (session.mode == AnswerMode.awakening) return _finishAwakening(session);
     int? passed;
     PlantRecipe? learned;
     var mastery = false;
@@ -154,6 +164,21 @@ class StudyController extends GetxController {
       levelPassed: passed,
       masteryReached: mastery,
       learnedRecipe: learned,
+    );
+  }
+
+  Future<void> _finishAwakening(StudySession session) async {
+    final awakened = _answers - _correct <= awakeningMistakesAllowed;
+    if (awakened) {
+      await _progress.record(MasteryAwakened(speciesSci: session.speciesSci!, occurredAt: _progress.now));
+    }
+    summary = SessionSummary(
+      mode: session.mode,
+      answers: _answers,
+      correct: _correct,
+      xp: 0,
+      speciesSci: session.speciesSci,
+      awakened: awakened,
     );
   }
 
