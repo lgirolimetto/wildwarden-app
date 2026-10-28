@@ -92,6 +92,39 @@ void main() {
     });
   });
 
+  group('mini-quiz della maestria', () {
+    StudySession quiz({int seed = 1}) =>
+        StudySession.awakening(speciesSci: 'Helleborus viridis', catalog: catalog, random: Random(seed));
+
+    test('5 fatti diversi presi da tutti i livelli della specie', () {
+      final species = catalog.speciesBySci('Helleborus viridis')!;
+      expect(factsOf(species, catalog).length, greaterThan(awakeningQuestions));
+      final levels = <int?>{};
+      for (var seed = 0; seed < 20; seed++) {
+        final session = quiz(seed: seed);
+        expect(session.totalFacts, awakeningQuestions);
+        final seen = <String>{};
+        while (!session.isFinished) {
+          seen.add(session.current.fact.id);
+          levels.add(session.current.fact.level);
+          session.answer(session.current.answer, state: GameState.empty, at: at);
+        }
+        expect(seen, hasLength(awakeningQuestions));
+      }
+      expect(levels, {1, 2, 3});
+    });
+
+    test('niente PE e un errore non torna in coda', () {
+      final session = quiz();
+      final right = session.answer(session.current.answer, state: GameState.empty, at: at);
+      final wrong = session.answer(wrongOf(session.current), state: GameState.empty, at: at);
+      expect(right.xp, 0);
+      expect(wrong.xp, 0);
+      expect(wrong.willReturn, isFalse);
+      expect(session.completedFacts, 2);
+    });
+  });
+
   group('ripassi', () {
     test('nel ripasso dimenticare non dà PE e niente torna in coda', () {
       final fact = Fact(catalog.speciesBySci('Helleborus viridis')!, FactKind.scientificName);

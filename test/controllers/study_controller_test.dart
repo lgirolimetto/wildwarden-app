@@ -95,6 +95,59 @@ void main() {
     expect(study.summary!.xp, 3 * XpRules.review(correct: true, box: 1));
   });
 
+  group('mini-quiz della maestria', () {
+    const sci = 'Helleborus viridis';
+
+    Future<void> dormantMastery() async {
+      await progress.encounter(sci, method: EncounterMethod.simulated);
+      await progress.record(LevelPassed(speciesSci: sci, level: 3, xp: 0, occurredAt: progress.now));
+      await progress.record(MasteryReached(speciesSci: sci, xp: 0, occurredAt: progress.now));
+      clock.advance(const Duration(days: 31));
+    }
+
+    Future<void> answerQuiz({required int wrong}) async {
+      var left = wrong;
+      while (study.question != null) {
+        final q = study.question!;
+        await study.answer(left-- > 0 ? q.options.firstWhere((o) => o != q.answer) : q.answer);
+        await study.next();
+      }
+    }
+
+    test('4 giuste su 5 risvegliano la maestria, senza PE e senza salvare le risposte', () async {
+      await dormantMastery();
+      expect(progress.masteryDormant(sci), isTrue);
+      final xpBefore = progress.state.xp + progress.state.xpToCash;
+
+      study.startAwakening(catalog, sci);
+      expect(study.mode, AnswerMode.awakening);
+      await answerQuiz(wrong: 1);
+
+      expect(study.summary!.awakened, isTrue);
+      expect(study.summary!.answers, 5);
+      expect(study.summary!.xp, 0);
+      expect(store.events.whereType<MasteryAwakened>().single.speciesSci, sci);
+      expect(store.events.whereType<AnswerGiven>(), isEmpty);
+      expect(progress.masteryDormant(sci), isFalse);
+      expect(progress.state.xp + progress.state.xpToCash, xpBefore);
+    });
+
+    test('con 2 errori resta sopita, e si può rifare subito', () async {
+      await dormantMastery();
+
+      study.startAwakening(catalog, sci);
+      await answerQuiz(wrong: 2);
+      expect(study.summary!.awakened, isFalse);
+      expect(store.events.whereType<MasteryAwakened>(), isEmpty);
+      expect(progress.masteryDormant(sci), isTrue);
+
+      study.startAwakening(catalog, sci);
+      await answerQuiz(wrong: 0);
+      expect(study.summary!.awakened, isTrue);
+      expect(progress.masteryDormant(sci), isFalse);
+    });
+  });
+
   test('le opzioni della domanda corrente non cambiano finché non si risponde', () async {
     await progress.encounter('Fagus sylvatica', method: EncounterMethod.simulated);
     study.startLevel(catalog, 'Fagus sylvatica', 2);

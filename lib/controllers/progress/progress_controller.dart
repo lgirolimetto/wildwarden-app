@@ -51,6 +51,9 @@ class ProgressController extends LoadableController<GameState> {
 
   DateTime get now => _clock.now();
 
+  /// La Maestria di [speciesSci] è sopita adesso (vedi `isMasteryDormant`).
+  bool masteryDormant(String speciesSci) => isMasteryDormant(state, speciesSci, now);
+
   /// Salva un evento e lo applica allo stato. Se il salvataggio fallisce lo stato non cambia.
   Future<Validation<GameState>> record(GameEvent event) async {
     final saved = await _store.append(event);

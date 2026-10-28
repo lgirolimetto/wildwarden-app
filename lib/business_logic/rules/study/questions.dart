@@ -167,11 +167,11 @@ class Question {
 /// Numero massimo di risposte sbagliate proposte per domanda.
 const _distractorCount = 3;
 
-/// Forme disponibili per un fatto, nel suo catalogo. Nei ripassi ([AnswerMode.review]) si aggiungono quelle che
-/// chiedono il nome comune.
+/// Forme disponibili per un fatto, nel suo catalogo. Nei ripassi ([AnswerMode.review]) e nel mini-quiz della
+/// Maestria si aggiungono quelle che chiedono il nome comune.
 List<QuestionForm> formsFor(Fact fact, Catalog catalog, {AnswerMode mode = AnswerMode.learning}) {
   final s = fact.species;
-  final review = mode == AnswerMode.review;
+  final review = mode != AnswerMode.learning;
   final canShowPhotos = catalog.species.where((o) => o.sci != s.sci && o.images.isNotEmpty).length >= 2;
   return switch (fact.kind) {
     FactKind.appearance => [
