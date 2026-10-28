@@ -1,4 +1,6 @@
+import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/services/dependencies.dart';
 import 'package:druid_app/controllers/field_test/field_test_controller.dart';
 import 'package:druid_app/controllers/field_test/field_test_record.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
@@ -38,7 +40,14 @@ class _FieldTestPageState extends State<FieldTestPage> {
       body: DruidBackground(
         belowAppBar: true,
         child: GetBuilder<FieldTestController>(
-          init: FieldTestController(Get.find(), Get.find(), Get.find(), Get.find(), Get.find()),
+          init: FieldTestController(
+            Get.find(),
+            Get.find(),
+            Get.find(),
+            Get.find(),
+            Get.find(),
+            systemCamera: Get.find<IPhotoSource>(tag: systemCameraTag),
+          ),
           builder: (controller) => ListView(
             padding: const EdgeInsets.all(Gaps.l),
             children: [
@@ -67,7 +76,14 @@ class _FieldTestPageState extends State<FieldTestPage> {
                   border: const OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: Gaps.l),
+              ListTile(
+                key: const ValueKey('field-test-system-camera'),
+                contentPadding: EdgeInsets.zero,
+                title: Text(context.l10n.fieldTestSystemCamera),
+                trailing: ClaySwitch(value: controller.useSystemCamera, onChanged: controller.setSystemCamera),
+                onTap: () => controller.setSystemCamera(!controller.useSystemCamera),
+              ),
+              const SizedBox(height: Gaps.s),
               FilledButton.icon(
                 key: const ValueKey('field-test-run'),
                 onPressed: controller.running
@@ -161,6 +177,16 @@ class _LastTest extends StatelessWidget {
             ),
           ),
           if (record.remainingRequests case final remaining?) Text(context.l10n.fieldTestRemaining('$remaining')),
+          if (record.diagnostics case final d?)
+            Text(
+              context.l10n.fieldTestCamera(
+                d.receivedPerSecond.toStringAsFixed(0),
+                d.analyzedPerSecond.toStringAsFixed(1),
+                d.analysisMs.toStringAsFixed(1),
+                '${d.captureMs}',
+                '${d.resizeMs}',
+              ),
+            ),
           const SizedBox(height: Gaps.s),
           if (record.locationOutcome != 'ok')
             Text(record.locationOutcome, style: TextStyle(color: context.colors.error))

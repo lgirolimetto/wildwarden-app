@@ -1,9 +1,15 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Foto delle specie (e in futuro Pl@ntNet, meteo, server): serve anche nelle build release. -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- Posizione delle stazioni, solo con l'app aperta (niente background). -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Fotocamera dell'app (mirino e verifica durante la ripresa). Il plugin chiede anche microfono e memoria
+         esterna, che non servono: niente video, le foto restano nei documenti dell'app. -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"/>
     <application
         android:label="Druid"
         android:name="${applicationName}"

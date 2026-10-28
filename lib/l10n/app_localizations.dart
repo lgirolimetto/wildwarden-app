@@ -3205,6 +3205,78 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Tocca di nuovo per cancellarle'**
   String get fieldTestClearConfirm;
+
+  /// No description provided for @cameraClose.
+  ///
+  /// In it, this message translates to:
+  /// **'Chiudi la fotocamera'**
+  String get cameraClose;
+
+  /// No description provided for @cameraShutter.
+  ///
+  /// In it, this message translates to:
+  /// **'Scatta'**
+  String get cameraShutter;
+
+  /// No description provided for @cameraGps.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS ±{metres} m'**
+  String cameraGps(int metres);
+
+  /// No description provided for @cameraGpsSearching.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS…'**
+  String get cameraGpsSearching;
+
+  /// No description provided for @cameraGpsOff.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS spento'**
+  String get cameraGpsOff;
+
+  /// No description provided for @cameraDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Per fotografare le piante serve il permesso della fotocamera: lo dai dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get cameraDenied;
+
+  /// No description provided for @cameraError.
+  ///
+  /// In it, this message translates to:
+  /// **'La fotocamera non si è aperta ({error}).'**
+  String cameraError(String error);
+
+  /// No description provided for @cameraDebug.
+  ///
+  /// In it, this message translates to:
+  /// **'{received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}'**
+  String cameraDebug(
+    String received,
+    String analyzed,
+    String ms,
+    String sharpness,
+    String motion,
+  );
+
+  /// No description provided for @fieldTestSystemCamera.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotocamera di sistema (per confronto)'**
+  String get fieldTestSystemCamera;
+
+  /// No description provided for @fieldTestCamera.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotocamera: {fps} fps, analizzati {analyzed}/s in {ms} ms · scatto {capture} ms · riduzione {resize} ms'**
+  String fieldTestCamera(
+    String fps,
+    String analyzed,
+    String ms,
+    String capture,
+    String resize,
+  );
 }
 
 class _AppLocalizationsDelegate

@@ -1618,5 +1618,67 @@
   "fieldTestCopy": "Copia il CSV",
   "fieldTestCopied": "CSV copiato",
   "fieldTestClear": "Cancella le prove",
-  "fieldTestClearConfirm": "Tocca di nuovo per cancellarle"
+  "fieldTestClearConfirm": "Tocca di nuovo per cancellarle",
+  "cameraClose": "Chiudi la fotocamera",
+  "cameraShutter": "Scatta",
+  "cameraGps": "GPS ±{metres} m",
+  "@cameraGps": {
+    "placeholders": {
+      "metres": {
+        "type": "int"
+      }
+    }
+  },
+  "cameraGpsSearching": "GPS…",
+  "cameraGpsOff": "GPS spento",
+  "cameraDenied": "Per fotografare le piante serve il permesso della fotocamera: lo dai dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "cameraError": "La fotocamera non si è aperta ({error}).",
+  "@cameraError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraDebug": "{received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}",
+  "@cameraDebug": {
+    "placeholders": {
+      "received": {
+        "type": "String"
+      },
+      "analyzed": {
+        "type": "String"
+      },
+      "ms": {
+        "type": "String"
+      },
+      "sharpness": {
+        "type": "String"
+      },
+      "motion": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestSystemCamera": "Fotocamera di sistema (per confronto)",
+  "fieldTestCamera": "Fotocamera: {fps} fps, analizzati {analyzed}/s in {ms} ms · scatto {capture} ms · riduzione {resize} ms",
+  "@fieldTestCamera": {
+    "placeholders": {
+      "fps": {
+        "type": "String"
+      },
+      "analyzed": {
+        "type": "String"
+      },
+      "ms": {
+        "type": "String"
+      },
+      "capture": {
+        "type": "String"
+      },
+      "resize": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 
@@ -10,7 +11,8 @@ class FieldTestRecord {
       'quando,pianta_attesa,luogo,foto_s,foto_kb,plantnet_ms,esito,'
       'top1,punteggio1,top2,punteggio2,top3,punteggio3,giusta_top1,giusta_top3,rimaste,'
       'gps_esito,gps_primo_s,precisione_5s_m,precisione_10s_m,precisione_20s_m,'
-      'posizioni_durante_foto,gps_dopo_foto_primo_s,precisione_dopo_foto_10s_m,posizioni';
+      'posizioni_durante_foto,gps_dopo_foto_primo_s,precisione_dopo_foto_10s_m,posizioni,'
+      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms';
 
   /// Dopo la foto le posizioni si raccolgono ancora per questo tempo (mentre risponde Pl@ntNet).
   static const afterPhoto = Duration(seconds: 10);
@@ -36,6 +38,10 @@ class FieldTestRecord {
   final String locationOutcome;
   final List<LocationFix> fixes;
 
+  /// Fotocamera dell'app o di sistema; le misure dello streaming solo con quella dell'app.
+  final bool systemCamera;
+  final CameraDiagnostics? diagnostics;
+
   const FieldTestRecord({
     required this.at,
     required this.expected,
@@ -48,6 +54,8 @@ class FieldTestRecord {
     required this.remainingRequests,
     required this.locationOutcome,
     required this.fixes,
+    this.systemCamera = false,
+    this.diagnostics,
   });
 
   Duration? get firstFix => fixes.isEmpty ? null : fixes.first.elapsed;
@@ -121,6 +129,12 @@ class FieldTestRecord {
       seconds(firstFixAfterPhoto),
       metres(accuracyAfterPhoto),
       fixes.length,
+      systemCamera ? 'sistema' : 'app',
+      diagnostics?.receivedPerSecond.toStringAsFixed(1) ?? '',
+      diagnostics?.analyzedPerSecond.toStringAsFixed(1) ?? '',
+      diagnostics?.analysisMs.toStringAsFixed(1) ?? '',
+      cell(diagnostics?.captureMs),
+      cell(diagnostics?.resizeMs),
     ].join(',');
   }
 }

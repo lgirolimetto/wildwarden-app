@@ -17,6 +17,9 @@ enum FieldTestPhase { idle, photo, identifying, locating }
 /// salva ogni prova in una riga del CSV.
 class FieldTestController extends GetxController {
   final IPhotoSource _camera;
+
+  /// La fotocamera di sistema, per il confronto con quella dell'app.
+  final IPhotoSource? _systemCamera;
   final IPlantIdentifier _identifier;
   final ILocationSampler _location;
   final IFieldTestLog _log;
@@ -33,9 +36,10 @@ class FieldTestController extends GetxController {
     this._location,
     this._log,
     this._clock, {
+    IPhotoSource? systemCamera,
     this.minimumWindow = FieldTestRecord.minimumWindow,
     this.afterPhoto = FieldTestRecord.afterPhoto,
-  });
+  }) : _systemCamera = systemCamera;
 
   FieldTestPhase phase = FieldTestPhase.idle;
   FieldTestRecord? last;
@@ -43,6 +47,16 @@ class FieldTestController extends GetxController {
   int rows = 0;
 
   bool get running => phase != FieldTestPhase.idle;
+
+  /// La prossima prova usa la fotocamera di sistema invece di quella dell'app.
+  bool useSystemCamera = false;
+
+  bool get canUseSystemCamera => _systemCamera != null;
+
+  void setSystemCamera(bool value) {
+    useSystemCamera = value && canUseSystemCamera;
+    update();
+  }
 
   @override
   void onInit() {
@@ -69,7 +83,8 @@ class FieldTestController extends GetxController {
 
     final recording = await _location.start();
     final watch = Stopwatch()..start();
-    final photo = await _camera.takePhoto();
+    final systemCamera = useSystemCamera;
+    final photo = await (systemCamera ? _systemCamera! : _camera).takePhoto();
     final photoTime = watch.elapsed;
 
     var outcome = 'annullata';
@@ -112,6 +127,8 @@ class FieldTestController extends GetxController {
       remainingRequests: identification.remainingRequests,
       locationOutcome: recording.isValid ? 'ok' : _message(recording),
       fixes: fixes,
+      systemCamera: systemCamera,
+      diagnostics: photo.fold((_) => null, (taken) => taken.diagnostics),
     );
     await _log.append(FieldTestRecord.header, record.toCsvRow());
     last = record;

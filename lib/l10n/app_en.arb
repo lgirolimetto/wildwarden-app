@@ -516,5 +516,15 @@
   "fieldTestCopy": "Copy the CSV",
   "fieldTestCopied": "CSV copied",
   "fieldTestClear": "Delete the tests",
-  "fieldTestClearConfirm": "Tap again to delete them"
+  "fieldTestClearConfirm": "Tap again to delete them",
+  "cameraClose": "Close the camera",
+  "cameraShutter": "Shoot",
+  "cameraGps": "GPS ±{metres} m",
+  "cameraGpsSearching": "GPS…",
+  "cameraGpsOff": "GPS off",
+  "cameraDenied": "To photograph plants the app needs the camera permission: grant it from Android settings, under the app's Permissions.",
+  "cameraError": "The camera did not open ({error}).",
+  "cameraDebug": "{received} fps · analysed {analyzed}/s · {ms} ms · sharpness {sharpness} · motion {motion}",
+  "fieldTestSystemCamera": "System camera (for comparison)",
+  "fieldTestCamera": "Camera: {fps} fps, analysed {analyzed}/s in {ms} ms · shot {capture} ms · resize {resize} ms"
 }

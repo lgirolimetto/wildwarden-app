@@ -2053,4 +2053,55 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get fieldTestClearConfirm => 'Tocca di nuovo per cancellarle';
+
+  @override
+  String get cameraClose => 'Chiudi la fotocamera';
+
+  @override
+  String get cameraShutter => 'Scatta';
+
+  @override
+  String cameraGps(int metres) {
+    return 'GPS ±$metres m';
+  }
+
+  @override
+  String get cameraGpsSearching => 'GPS…';
+
+  @override
+  String get cameraGpsOff => 'GPS spento';
+
+  @override
+  String get cameraDenied =>
+      'Per fotografare le piante serve il permesso della fotocamera: lo dai dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String cameraError(String error) {
+    return 'La fotocamera non si è aperta ($error).';
+  }
+
+  @override
+  String cameraDebug(
+    String received,
+    String analyzed,
+    String ms,
+    String sharpness,
+    String motion,
+  ) {
+    return '$received fps · analizzati $analyzed/s · $ms ms · nitidezza $sharpness · movimento $motion';
+  }
+
+  @override
+  String get fieldTestSystemCamera => 'Fotocamera di sistema (per confronto)';
+
+  @override
+  String fieldTestCamera(
+    String fps,
+    String analyzed,
+    String ms,
+    String capture,
+    String resize,
+  ) {
+    return 'Fotocamera: $fps fps, analizzati $analyzed/s in $ms ms · scatto $capture ms · riduzione $resize ms';
+  }
 }

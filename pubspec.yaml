@@ -9,6 +9,7 @@ environment:
 dependencies:
   bitapp_functional_dart: ^1.0.4
   cached_network_image: ^3.4.1
+  camera: ^0.12.2
   dio: ^5.11.1
   drift: ^2.35.2
   drift_flutter: ^0.3.1
@@ -18,6 +19,7 @@ dependencies:
     sdk: flutter
   geolocator: ^14.1.2
   get: ^4.7.3
+  image: ^4.12.0
   image_picker: ^1.2.4
   intl: ^0.20.2
   material_symbols_icons: ^4.2960.0

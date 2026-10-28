@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
+import 'package:druid_app/business_logic/interfaces/i_frame_analyzer.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/services/camera/probe_frame_analyzer.dart';
 import 'package:druid_app/business_logic/services/camera/system_camera_photo_source.dart';
 import 'package:druid_app/business_logic/services/catalog/asset_catalog_repository.dart';
 import 'package:druid_app/business_logic/services/clock/offset_clock.dart';
@@ -25,7 +27,11 @@ import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/pages/camera/in_app_camera_photo_source.dart';
 import 'package:get/get.dart';
+
+/// Etichetta di GetX della fotocamera di sistema (l'[IPhotoSource] senza etichetta è quella dell'app).
+const systemCameraTag = 'system-camera';
 
 /// Registra servizi e controller globali. Unico contenitore di dipendenze: GetX.
 ///
@@ -40,6 +46,8 @@ void registerDependencies({
   RemoteImageFactory? imageFactory,
   IPlantIdentifier? plantIdentifier,
   IPhotoSource? photoSource,
+  IPhotoSource? systemPhotoSource,
+  IFrameAnalyzer? frameAnalyzer,
   ILocationSampler? locationSampler,
   IFieldTestLog? fieldTestLog,
 }) {
@@ -56,8 +64,11 @@ void registerDependencies({
   Get.put<IGameEventStore>(eventStore ?? DriftGameEventStore(DruidDatabase.onDevice()), permanent: true);
   Get.put<RemoteImageFactory>(imageFactory ?? const CachedRemoteImageFactory(), permanent: true);
   Get.put<IPlantIdentifier>(plantIdentifier ?? PlantNetIdentifier(config), permanent: true);
-  Get.put<IPhotoSource>(photoSource ?? SystemCameraPhotoSource(), permanent: true);
-  Get.put<ILocationSampler>(locationSampler ?? const GeolocatorSampler(), permanent: true);
+  // Il gioco usa la fotocamera dell'app (capitolo 07); quella di sistema resta per il confronto nella Prova sul campo.
+  Get.put<IPhotoSource>(photoSource ?? const InAppCameraPhotoSource(), permanent: true);
+  Get.put<IPhotoSource>(systemPhotoSource ?? SystemCameraPhotoSource(), tag: systemCameraTag, permanent: true);
+  Get.put<IFrameAnalyzer>(frameAnalyzer ?? ProbeFrameAnalyzer(), permanent: true);
+  Get.put<ILocationSampler>(locationSampler ?? GeolocatorSampler(), permanent: true);
   Get.put<IFieldTestLog>(fieldTestLog ?? FileFieldTestLog(), permanent: true);
 
   Get.put(ThemeController(Get.find()), permanent: true);
