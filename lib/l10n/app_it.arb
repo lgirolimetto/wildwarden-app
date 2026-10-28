@@ -1706,5 +1706,61 @@
   "fieldTestRegional": "Confronta con la flora regionale (2 identificazioni)",
   "fieldTestRegionalResult": "Flora regionale (Europa sudorientale)",
   "cameraZoomSlower": "Senza zoom la Vis sale più in fretta",
-  "tip17": "Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più."
+  "tip17": "Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più.",
+  "capturePhotograph": "Fotografa una pianta",
+  "captureNoKey": "Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l'incontro si prova con Simula Incontro.",
+  "captureLimitTitle": "Per oggi basta stazioni nuove",
+  "captureLimitText": "Oggi è già nata una stazione nuova: domani potrai fotografare un'altra pianta. Le stazioni hanno bisogno del loro tempo.",
+  "captureGuessTitle": "Che pianta pensi che sia?",
+  "captureGuessHint": "Nome comune o scientifico",
+  "captureGuessConfirm": "Ecco la mia ipotesi",
+  "captureGuessSkip": "Non lo so",
+  "captureIdentifying": "Pl@ntNet sta guardando le foto…",
+  "captureFailed": "Pl@ntNet non ha risposto ({error}).",
+  "@captureFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "captureRetry": "Riprova",
+  "captureNone": "Pl@ntNet non riconosce questa pianta: riprova più vicino, con la luce sulla pianta, e fotografa anche una foglia o un fiore.",
+  "captureContested": "Pl@ntNet è indeciso: quale hai davanti?",
+  "captureProposed": "Pl@ntNet pensa che sia:",
+  "captureConfirm": "È questa",
+  "captureKindDiscovery": "Scoperta",
+  "captureKindGuest": "Ospite",
+  "captureGuestText": "Non è originaria dei tuoi luoghi: è un'Ospite, e la sua Vis qui è molto debole.",
+  "captureDiscoveryText": "Nella tua Zona non risulta mai osservata: è una Scoperta, da confermare.",
+  "captureGuessExact": "Ci hai preso!",
+  "captureGuessGenus": "Quasi! È un {genus}.",
+  "@captureGuessGenus": {
+    "placeholders": {
+      "genus": {
+        "type": "String"
+      }
+    }
+  },
+  "captureGuessWrong": "La tua ipotesi era «{guess}».",
+  "@captureGuessWrong": {
+    "placeholders": {
+      "guess": {
+        "type": "String"
+      }
+    }
+  },
+  "captureStationCreated": "È nata una nuova stazione.",
+  "captureStationExisting": "Sei alla tua stazione di questa pianta.",
+  "captureStationNoPosition": "Senza posizione: l'incontro vale, la stazione no.",
+  "captureStationLimit": "Oggi è già nata una stazione nuova: questa vale come incontro.",
+  "captureXp": "+{xp} PE",
+  "@captureXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "captureDone": "Fatto"
 }

@@ -2159,4 +2159,104 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get tip17 =>
       'Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più.';
+
+  @override
+  String get capturePhotograph => 'Fotografa una pianta';
+
+  @override
+  String get captureNoKey =>
+      'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'incontro si prova con Simula Incontro.';
+
+  @override
+  String get captureLimitTitle => 'Per oggi basta stazioni nuove';
+
+  @override
+  String get captureLimitText =>
+      'Oggi è già nata una stazione nuova: domani potrai fotografare un\'altra pianta. Le stazioni hanno bisogno del loro tempo.';
+
+  @override
+  String get captureGuessTitle => 'Che pianta pensi che sia?';
+
+  @override
+  String get captureGuessHint => 'Nome comune o scientifico';
+
+  @override
+  String get captureGuessConfirm => 'Ecco la mia ipotesi';
+
+  @override
+  String get captureGuessSkip => 'Non lo so';
+
+  @override
+  String get captureIdentifying => 'Pl@ntNet sta guardando le foto…';
+
+  @override
+  String captureFailed(String error) {
+    return 'Pl@ntNet non ha risposto ($error).';
+  }
+
+  @override
+  String get captureRetry => 'Riprova';
+
+  @override
+  String get captureNone =>
+      'Pl@ntNet non riconosce questa pianta: riprova più vicino, con la luce sulla pianta, e fotografa anche una foglia o un fiore.';
+
+  @override
+  String get captureContested => 'Pl@ntNet è indeciso: quale hai davanti?';
+
+  @override
+  String get captureProposed => 'Pl@ntNet pensa che sia:';
+
+  @override
+  String get captureConfirm => 'È questa';
+
+  @override
+  String get captureKindDiscovery => 'Scoperta';
+
+  @override
+  String get captureKindGuest => 'Ospite';
+
+  @override
+  String get captureGuestText =>
+      'Non è originaria dei tuoi luoghi: è un\'Ospite, e la sua Vis qui è molto debole.';
+
+  @override
+  String get captureDiscoveryText =>
+      'Nella tua Zona non risulta mai osservata: è una Scoperta, da confermare.';
+
+  @override
+  String get captureGuessExact => 'Ci hai preso!';
+
+  @override
+  String captureGuessGenus(String genus) {
+    return 'Quasi! È un $genus.';
+  }
+
+  @override
+  String captureGuessWrong(String guess) {
+    return 'La tua ipotesi era «$guess».';
+  }
+
+  @override
+  String get captureStationCreated => 'È nata una nuova stazione.';
+
+  @override
+  String get captureStationExisting =>
+      'Sei alla tua stazione di questa pianta.';
+
+  @override
+  String get captureStationNoPosition =>
+      'Senza posizione: l\'incontro vale, la stazione no.';
+
+  @override
+  String get captureStationLimit =>
+      'Oggi è già nata una stazione nuova: questa vale come incontro.';
+
+  @override
+  String captureXp(int xp) {
+    return '+$xp PE';
+  }
+
+  @override
+  String get captureDone => 'Fatto';
 }

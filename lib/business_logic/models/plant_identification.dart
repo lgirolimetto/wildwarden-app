@@ -40,7 +40,16 @@ class PlantCandidate {
   /// Chiave GBIF che Pl@ntNet associa alla specie, se la dà.
   final int? gbifKey;
 
-  const PlantCandidate({required this.scientificName, required this.commonNames, required this.score, this.gbifKey});
+  /// Famiglia (es. Araceae): per le schede delle piante fuori dalla mappa.
+  final String? family;
+
+  const PlantCandidate({
+    required this.scientificName,
+    required this.commonNames,
+    required this.score,
+    this.gbifKey,
+    this.family,
+  });
 
   factory PlantCandidate.fromJson(Map<String, dynamic> json) {
     final species = json['species'] as Map<String, dynamic>;
@@ -49,6 +58,7 @@ class PlantCandidate {
       commonNames: [for (final name in species['commonNames'] as List? ?? const []) name as String],
       score: (json['score'] as num).toDouble(),
       gbifKey: int.tryParse('${(json['gbif'] as Map?)?['id'] ?? ''}'),
+      family: (species['family'] as Map?)?['scientificNameWithoutAuthor'] as String?,
     );
   }
 }

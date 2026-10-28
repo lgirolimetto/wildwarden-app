@@ -3374,6 +3374,174 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Quando fotografi una pianta la sua Vis sale finché la inquadri: prenditi il tuo tempo e girale piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza ne raccoglie di più.'**
   String get tip17;
+
+  /// No description provided for @capturePhotograph.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa una pianta'**
+  String get capturePhotograph;
+
+  /// No description provided for @captureNoKey.
+  ///
+  /// In it, this message translates to:
+  /// **'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'incontro si prova con Simula Incontro.'**
+  String get captureNoKey;
+
+  /// No description provided for @captureLimitTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Per oggi basta stazioni nuove'**
+  String get captureLimitTitle;
+
+  /// No description provided for @captureLimitText.
+  ///
+  /// In it, this message translates to:
+  /// **'Oggi è già nata una stazione nuova: domani potrai fotografare un\'altra pianta. Le stazioni hanno bisogno del loro tempo.'**
+  String get captureLimitText;
+
+  /// No description provided for @captureGuessTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Che pianta pensi che sia?'**
+  String get captureGuessTitle;
+
+  /// No description provided for @captureGuessHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome comune o scientifico'**
+  String get captureGuessHint;
+
+  /// No description provided for @captureGuessConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Ecco la mia ipotesi'**
+  String get captureGuessConfirm;
+
+  /// No description provided for @captureGuessSkip.
+  ///
+  /// In it, this message translates to:
+  /// **'Non lo so'**
+  String get captureGuessSkip;
+
+  /// No description provided for @captureIdentifying.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet sta guardando le foto…'**
+  String get captureIdentifying;
+
+  /// No description provided for @captureFailed.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet non ha risposto ({error}).'**
+  String captureFailed(String error);
+
+  /// No description provided for @captureRetry.
+  ///
+  /// In it, this message translates to:
+  /// **'Riprova'**
+  String get captureRetry;
+
+  /// No description provided for @captureNone.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet non riconosce questa pianta: riprova più vicino, con la luce sulla pianta, e fotografa anche una foglia o un fiore.'**
+  String get captureNone;
+
+  /// No description provided for @captureContested.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet è indeciso: quale hai davanti?'**
+  String get captureContested;
+
+  /// No description provided for @captureProposed.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet pensa che sia:'**
+  String get captureProposed;
+
+  /// No description provided for @captureConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'È questa'**
+  String get captureConfirm;
+
+  /// No description provided for @captureKindDiscovery.
+  ///
+  /// In it, this message translates to:
+  /// **'Scoperta'**
+  String get captureKindDiscovery;
+
+  /// No description provided for @captureKindGuest.
+  ///
+  /// In it, this message translates to:
+  /// **'Ospite'**
+  String get captureKindGuest;
+
+  /// No description provided for @captureGuestText.
+  ///
+  /// In it, this message translates to:
+  /// **'Non è originaria dei tuoi luoghi: è un\'Ospite, e la sua Vis qui è molto debole.'**
+  String get captureGuestText;
+
+  /// No description provided for @captureDiscoveryText.
+  ///
+  /// In it, this message translates to:
+  /// **'Nella tua Zona non risulta mai osservata: è una Scoperta, da confermare.'**
+  String get captureDiscoveryText;
+
+  /// No description provided for @captureGuessExact.
+  ///
+  /// In it, this message translates to:
+  /// **'Ci hai preso!'**
+  String get captureGuessExact;
+
+  /// No description provided for @captureGuessGenus.
+  ///
+  /// In it, this message translates to:
+  /// **'Quasi! È un {genus}.'**
+  String captureGuessGenus(String genus);
+
+  /// No description provided for @captureGuessWrong.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua ipotesi era «{guess}».'**
+  String captureGuessWrong(String guess);
+
+  /// No description provided for @captureStationCreated.
+  ///
+  /// In it, this message translates to:
+  /// **'È nata una nuova stazione.'**
+  String get captureStationCreated;
+
+  /// No description provided for @captureStationExisting.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei alla tua stazione di questa pianta.'**
+  String get captureStationExisting;
+
+  /// No description provided for @captureStationNoPosition.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza posizione: l\'incontro vale, la stazione no.'**
+  String get captureStationNoPosition;
+
+  /// No description provided for @captureStationLimit.
+  ///
+  /// In it, this message translates to:
+  /// **'Oggi è già nata una stazione nuova: questa vale come incontro.'**
+  String get captureStationLimit;
+
+  /// No description provided for @captureXp.
+  ///
+  /// In it, this message translates to:
+  /// **'+{xp} PE'**
+  String captureXp(int xp);
+
+  /// No description provided for @captureDone.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto'**
+  String get captureDone;
 }
 
 class _AppLocalizationsDelegate

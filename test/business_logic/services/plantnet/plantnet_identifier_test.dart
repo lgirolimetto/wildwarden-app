@@ -44,6 +44,7 @@ void main() {
           'species': {
             'scientificNameWithoutAuthor': 'Helleborus viridis',
             'commonNames': ['Elleboro verde'],
+            'family': {'scientificNameWithoutAuthor': 'Ranunculaceae'},
           },
           'gbif': {'id': '3033108'},
         },
@@ -59,6 +60,7 @@ void main() {
     expect(result.candidates.first.commonNames, ['Elleboro verde']);
     expect(result.candidates.first.score, 0.81);
     expect(result.candidates.first.gbifKey, 3033108);
+    expect(result.candidates.first.family, 'Ranunculaceae');
     expect(result.candidates.last.gbifKey, isNull);
     expect(result.remainingRequests, 497);
   });

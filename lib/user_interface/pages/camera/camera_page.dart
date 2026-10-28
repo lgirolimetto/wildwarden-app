@@ -308,6 +308,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     TakenPhoto(
       photos: List.unmodifiable(_shots),
       traits: _traitsNow(),
+      position: _bestFix,
       diagnostics: _diagnostics(captureMs: _captureMs, resizeMs: _resizeMs),
       verified: _vis.moved,
       visGathered: _vis.progress,

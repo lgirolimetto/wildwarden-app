@@ -15,6 +15,7 @@ import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
+import 'package:druid_app/user_interface/pages/field/capture_page.dart';
 import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
@@ -73,6 +74,15 @@ class _StudyHomePageState extends State<StudyHomePage> {
                   const SizedBox(height: Gaps.l),
                   MissionBanner(mission: mission, catalog: catalog, state: state, now: now),
                 ],
+                const SizedBox(height: Gaps.l),
+                Center(
+                  child: ClayButton(
+                    key: const ValueKey('open-capture'),
+                    label: context.l10n.capturePhotograph,
+                    icon: Icons.photo_camera_outlined,
+                    onPressed: () => Get.to<void>(() => const CapturePage()),
+                  ),
+                ),
                 const SizedBox(height: Gaps.xl),
                 _SeasonalSection(catalog: catalog, state: state, now: now, progress: progress),
                 if (dueFacts(catalog, state, now).isNotEmpty) ...[

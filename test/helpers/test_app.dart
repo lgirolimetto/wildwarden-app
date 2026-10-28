@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -27,6 +29,8 @@ registerTestDependencies({
   List<GameEvent>? events,
   AppConfig config = testConfig,
   int seed = 1,
+  IPhotoSource? photoSource,
+  IPlantIdentifier? plantIdentifier,
 }) {
   final prefs = InMemoryPreferences(preferences);
   final repository = FakeCatalogRepository(catalog ?? Valid(smallCatalog()));
@@ -41,6 +45,8 @@ registerTestDependencies({
     random: Random(seed),
     imageFactory: const FakeImageFactory(),
     fieldTestLog: InMemoryFieldTestLog(),
+    photoSource: photoSource,
+    plantIdentifier: plantIdentifier,
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }

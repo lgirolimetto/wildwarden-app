@@ -25,6 +25,7 @@ import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
+import 'package:druid_app/user_interface/pages/field/capture_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -103,6 +104,13 @@ class _ToFind extends StatelessWidget {
         children: [
           Text(context.game.hint(species)),
           const SizedBox(height: Gaps.m),
+          FilledButton.icon(
+            key: const ValueKey('capture-from-species'),
+            onPressed: () => Get.to<void>(() => const CapturePage()),
+            icon: const Icon(Icons.photo_camera_outlined),
+            label: Text(context.l10n.capturePhotograph),
+          ),
+          const SizedBox(height: Gaps.s),
           FilledButton.icon(
             key: const ValueKey('toggle-desiderata'),
             onPressed: () => progress.toggleDesiderata(species.sci),

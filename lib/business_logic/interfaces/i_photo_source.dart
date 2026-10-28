@@ -1,5 +1,6 @@
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
+import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 
 /// Scatto di una foto con la fotocamera.
@@ -14,6 +15,10 @@ class TakenPhoto {
   /// I tratti del momento dello scatto (cielo e meteo): quelli dell'Essenza. Vuoti dalla fotocamera di sistema.
   final List<Trait> traits;
 
+  /// La posizione più precisa raccolta nel mirino: il punto della stazione. Null senza GPS o dalla fotocamera di
+  /// sistema.
+  final LocationFix? position;
+
   /// Solo dalla fotocamera dell'app: come è andata l'analisi dei fotogrammi e la riduzione della foto.
   final CameraDiagnostics? diagnostics;
 
@@ -24,12 +29,20 @@ class TakenPhoto {
   /// Solo dalla fotocamera dell'app: la Vis raccolta (0–1), l'anello alla fine della sessione.
   final double? visGathered;
 
-  const TakenPhoto({this.photos = const [], this.traits = const [], this.diagnostics, this.verified, this.visGathered});
+  const TakenPhoto({
+    this.photos = const [],
+    this.traits = const [],
+    this.position,
+    this.diagnostics,
+    this.verified,
+    this.visGathered,
+  });
 
   /// Una foto sola della pianta intera.
   TakenPhoto.single(String path, {this.diagnostics, this.verified, this.visGathered})
     : photos = [PlantPhoto(path, PlantOrgan.whole)],
-      traits = const [];
+      traits = const [],
+      position = null;
 
   static const cancelled = TakenPhoto();
 

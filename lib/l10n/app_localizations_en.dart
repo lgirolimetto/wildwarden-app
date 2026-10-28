@@ -2146,4 +2146,104 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tip17 =>
       'When you photograph a plant its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more.';
+
+  @override
+  String get capturePhotograph => 'Photograph a plant';
+
+  @override
+  String get captureNoKey =>
+      'The Pl@ntNet key (PLANTNET_API_KEY) is missing: for now try encounters with Simulate Encounter.';
+
+  @override
+  String get captureLimitTitle => 'No more new stations today';
+
+  @override
+  String get captureLimitText =>
+      'A new station was already born today: tomorrow you can photograph another plant. Stations need their time.';
+
+  @override
+  String get captureGuessTitle => 'Which plant do you think it is?';
+
+  @override
+  String get captureGuessHint => 'Common or scientific name';
+
+  @override
+  String get captureGuessConfirm => 'That\'s my guess';
+
+  @override
+  String get captureGuessSkip => 'I don\'t know';
+
+  @override
+  String get captureIdentifying => 'Pl@ntNet is looking at the photos…';
+
+  @override
+  String captureFailed(String error) {
+    return 'Pl@ntNet did not answer ($error).';
+  }
+
+  @override
+  String get captureRetry => 'Try again';
+
+  @override
+  String get captureNone =>
+      'Pl@ntNet doesn\'t recognise this plant: try again closer, with light on the plant, and photograph a leaf or a flower too.';
+
+  @override
+  String get captureContested =>
+      'Pl@ntNet can\'t decide: which one is in front of you?';
+
+  @override
+  String get captureProposed => 'Pl@ntNet thinks it is:';
+
+  @override
+  String get captureConfirm => 'That\'s it';
+
+  @override
+  String get captureKindDiscovery => 'Discovery';
+
+  @override
+  String get captureKindGuest => 'Guest';
+
+  @override
+  String get captureGuestText =>
+      'It is not native to your places: it is a Guest, and its Vis here is very weak.';
+
+  @override
+  String get captureDiscoveryText =>
+      'It has never been recorded in your Area: it is a Discovery, to be confirmed.';
+
+  @override
+  String get captureGuessExact => 'You got it!';
+
+  @override
+  String captureGuessGenus(String genus) {
+    return 'Close! It is a $genus.';
+  }
+
+  @override
+  String captureGuessWrong(String guess) {
+    return 'Your guess was “$guess”.';
+  }
+
+  @override
+  String get captureStationCreated => 'A new station is born.';
+
+  @override
+  String get captureStationExisting => 'You are at your station of this plant.';
+
+  @override
+  String get captureStationNoPosition =>
+      'No position: the encounter counts, the station doesn\'t.';
+
+  @override
+  String get captureStationLimit =>
+      'A new station was already born today: this one counts as an encounter.';
+
+  @override
+  String captureXp(int xp) {
+    return '+$xp XP';
+  }
+
+  @override
+  String get captureDone => 'Done';
 }

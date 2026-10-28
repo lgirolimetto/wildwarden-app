@@ -1,0 +1,172 @@
+import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
+import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/models/location_fix.dart';
+import 'package:druid_app/business_logic/models/plant_identification.dart';
+import 'package:druid_app/business_logic/models/station.dart';
+import 'package:druid_app/business_logic/rules/field/capture.dart';
+import 'package:druid_app/controllers/field/capture_controller.dart';
+import 'package:druid_app/controllers/progress/progress_controller.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import '../../helpers/fakes.dart';
+
+class _Camera implements IPhotoSource {
+  TakenPhoto photo;
+  _Camera(this.photo);
+
+  @override
+  Future<Validation<TakenPhoto>> takePhoto() async => Valid(photo);
+}
+
+class _Identifier implements IPlantIdentifier {
+  final Map<PlantFlora, Validation<PlantIdentification>> answers;
+  final calls = <PlantFlora>[];
+  _Identifier(this.answers);
+
+  @override
+  Future<Validation<PlantIdentification>> identify(
+    List<PlantPhoto> photos, {
+    PlantFlora flora = PlantFlora.world,
+  }) async {
+    calls.add(flora);
+    return answers[flora] ?? Valid(PlantIdentification.none);
+  }
+}
+
+void main() {
+  const config = AppConfig(flavor: 'test', plantNetApiKey: 'chiave', logHttp: false, showDebugTools: true);
+  const here = LocationFix(elapsed: Duration.zero, latitude: 44.483, longitude: 11.353, accuracy: 4);
+  const shot = TakenPhoto(
+    photos: [PlantPhoto('/foto.jpg', PlantOrgan.whole), PlantPhoto('/foglia.jpg', PlantOrgan.leaf)],
+    position: here,
+  );
+  late InMemoryGameEventStore store;
+  late FakeClock clock;
+  late ProgressController progress;
+
+  setUp(() async {
+    store = InMemoryGameEventStore();
+    clock = FakeClock(DateTime(2026, 10, 29, 10));
+    progress = ProgressController(store, clock, catalog: smallCatalog);
+    await progress.load();
+  });
+
+  PlantIdentification id(String sci, double score, {String? name, String? family}) => PlantIdentification(
+    candidates: [
+      PlantCandidate(scientificName: sci, commonNames: [?name], score: score, family: family),
+    ],
+  );
+
+  CaptureController capture({
+    TakenPhoto? photo,
+    Map<PlantFlora, Validation<PlantIdentification>> answers = const {},
+    AppConfig settings = config,
+  }) => CaptureController(progress, _Camera(photo ?? shot), _Identifier(answers), smallCatalog, settings);
+
+  test('senza chiave non si apre la fotocamera', () async {
+    final c = capture(
+      settings: const AppConfig(flavor: 't', plantNetApiKey: '', logHttp: false, showDebugTools: true),
+    );
+    await c.start();
+    expect(c.phase, CapturePhase.noKey);
+  });
+
+  test('una stazione nuova al giorno: lo si dice prima di Pl@ntNet', () async {
+    final c = capture(answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))});
+    await c.start();
+    await c.submitGuess(null);
+    await c.confirm();
+    expect(c.result!.station, StationOutcome.created);
+
+    final again = capture();
+    await again.start();
+    expect(again.phase, CapturePhase.limitReached);
+  });
+
+  test('fotocamera chiusa senza scattare', () async {
+    final c = capture(photo: TakenPhoto.cancelled);
+    await c.start();
+    expect(c.phase, CapturePhase.cancelled);
+  });
+
+  test('pianta della mappa con l\'ipotesi giusta: incontro, stazione, PE bonus', () async {
+    final c = capture(answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))});
+    await c.start();
+    expect(c.phase, CapturePhase.guessing);
+    await c.submitGuess('elleboro verde');
+    expect(c.phase, CapturePhase.review);
+    await c.confirm();
+
+    final result = c.result!;
+    expect(result.guess, GuessResult.exact);
+    expect(result.xp, guessExactXp);
+    expect(result.firstEncounter, isTrue);
+    final state = progress.state;
+    expect(state.hasEncountered('Helleborus viridis'), isTrue);
+    expect(state.stations.single.kind, StationKind.zone);
+    expect(state.stations.single.confidence, 0.7);
+    expect(state.xp, guessExactXp);
+  });
+
+  test('niente nella flora regionale: si chiede al mondo, è un\'Ospite con la sua famiglia', () async {
+    final identifier = {
+      PlantFlora.regional: Valid(PlantIdentification.none),
+      PlantFlora.world: Valid(id('Anthurium scherzerianum', 0.68, name: 'Anturio', family: 'Araceae')),
+    };
+    final c = capture(answers: identifier);
+    await c.start();
+    await c.submitGuess(null);
+    expect(c.review!.worldOnly, isTrue);
+    await c.confirm();
+
+    final station = progress.state.stations.single;
+    expect((station.kind, station.commonName, station.family), (StationKind.guest, 'Anturio', 'Araceae'));
+    expect(c.result!.xp, guestDiscoveryXp);
+  });
+
+  test('stessa specie entro 20 metri: è la stessa stazione, niente PE la seconda volta', () async {
+    final answers = {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))};
+    final first = capture(answers: answers);
+    await first.start();
+    await first.submitGuess('Helleborus viridis');
+    await first.confirm();
+
+    clock.current = clock.current.add(const Duration(days: 1));
+    final second = capture(answers: answers);
+    await second.start();
+    await second.submitGuess('Helleborus viridis');
+    await second.confirm();
+    expect(second.result!.station, StationOutcome.existing);
+    expect(second.result!.xp, 0);
+    expect(progress.state.stations, hasLength(1));
+  });
+
+  test('senza posizione l\'incontro vale, la stazione no', () async {
+    final c = capture(
+      photo: const TakenPhoto(photos: [PlantPhoto('/foto.jpg', PlantOrgan.whole)]),
+      answers: {PlantFlora.regional: Valid(id('Malva sylvestris', 0.8))},
+    );
+    await c.start();
+    await c.submitGuess(null);
+    await c.confirm();
+    expect(c.result!.station, StationOutcome.noPosition);
+    expect(progress.state.hasEncountered('Malva sylvestris'), isTrue);
+    expect(progress.state.stations, isEmpty);
+  });
+
+  test('errore di Pl@ntNet: si può riprovare con le stesse foto', () async {
+    final answers = <PlantFlora, Validation<PlantIdentification>>{
+      PlantFlora.regional: Fail.withError(StateError('rete'), message: 'Connessione assente').toInvalid(),
+    };
+    final c = capture(answers: answers);
+    await c.start();
+    await c.submitGuess(null);
+    expect((c.phase, c.error), (CapturePhase.failed, 'Connessione assente'));
+
+    answers[PlantFlora.regional] = Valid(id('Malva sylvestris', 0.8));
+    await c.identify();
+    expect(c.phase, CapturePhase.review);
+  });
+}
