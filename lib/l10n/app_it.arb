@@ -892,7 +892,7 @@
   "debugGradePreview": "Anteprima dei Gradi",
   "debugGradeSampleName": "Elisir di Prova",
   "debugGradeSampleIngredient": "Erba d'argento",
-  "debugGradeSampleEffect": "La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).",
+  "debugGradeSampleEffect": "La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).",
   "badgeEncountered": "Incontrata il",
   "badgeProtected": "Specie Protetta",
   "legendTitle": "Legenda",
@@ -909,7 +909,7 @@
   "glossEssenzaTerm": "Essenza",
   "glossEssenzaText": "Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.",
   "glossVisTerm": "Vis",
-  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.",
+  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.",
   "glossPeDaIncassareTerm": "PE da Incassare",
   "glossPeDaIncassareText": "I Punti Esperienza dello studio di una specie che non hai ancora Attinto. Si Incassano alla prima Essenza di quella specie e da lì contano per il Rango.",
   "glossGradoTerm": "Grado",
@@ -944,7 +944,7 @@
   "legendTraitsMoon": "Luna",
   "legendTraitsWeather": "Meteo",
   "traitWhenFrost": "Quando fa sotto zero: brina e ghiaccio.",
-  "traitWhenRain": "Mentre piove. Con il temporale la Raccolta è sospesa.",
+  "traitWhenRain": "Mentre piove. Con il temporale non si attinge.",
   "traitWhenFog": "Quando c'è nebbia.",
   "traitWhenSun": "Con il sole e poche nuvole.",
   "traitWhenMoon": "Tutto il giorno della luna piena: non serve uscire di notte.",
@@ -1476,7 +1476,7 @@
   "tip12": "I Tratti di un'Essenza dicono in che condizioni l'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un'Essenza attinta con la Luna piena.",
   "tip13": "I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.",
   "tip14": "Il significato di simboli, colori e gradi è nella Legenda: Impostazioni → Legenda e glossario.",
-  "tip15": "«Raccogliere», nel gioco, vuol dire fotografare: le piante restano dove sono, intatte.",
+  "tip15": "Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.",
   "viewToFind": "Da trovare",
   "levelMasteryDormant": "Maestria sopita",
   "masteryToAwaken": "Maestria da risvegliare",
@@ -1707,7 +1707,6 @@
   "fieldTestRegionalResult": "Flora regionale (Europa sudorientale)",
   "cameraZoomSlower": "Senza zoom la Vis sale più in fretta",
   "tip17": "Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.",
-  "capturePhotograph": "Fotografa una pianta",
   "captureNoKey": "Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l'incontro si prova con Simula Incontro.",
   "captureLimitTitle": "Per oggi basta stazioni nuove",
   "captureLimitText": "Oggi è già nata una stazione nuova: domani potrai fotografare un'altra pianta. Le stazioni hanno bisogno del loro tempo.",
@@ -1762,5 +1761,8 @@
       }
     }
   },
-  "captureDone": "Fatto"
+  "captureDone": "Fatto",
+  "captureAction": "Attingi",
+  "captureTitle": "Attingi la Vis",
+  "captureFromSpecies": "Attingi la sua Vis"
 }

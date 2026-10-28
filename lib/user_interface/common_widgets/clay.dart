@@ -617,7 +617,17 @@ class ClayNavBar extends StatelessWidget {
   final ValueChanged<int> onSelected;
   final List<(IconData, String)> items;
 
-  const ClayNavBar({super.key, required this.selectedIndex, required this.onSelected, required this.items});
+  /// L'azione principale del gioco al centro della barra, più grande e rialzata (Attingi): non è una scheda, apre una
+  /// pagina. L'etichetta è solo per l'accessibilità.
+  final ({IconData icon, String label, VoidCallback onPressed})? action;
+
+  const ClayNavBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onSelected,
+    required this.items,
+    this.action,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -631,7 +641,8 @@ class ClayNavBar extends StatelessWidget {
         decoration: clayDecoration(context, color: colors.surfaceContainerLow, radius: 38),
         child: Row(
           children: [
-            for (final (i, (icon, label)) in items.indexed)
+            for (final (i, (icon, label)) in items.indexed) ...[
+              if (action case final action? when i == items.length ~/ 2) _NavAction(action: action),
               Expanded(
                 child: Semantics(
                   selected: i == selectedIndex,
@@ -682,11 +693,43 @@ class ClayNavBar extends StatelessWidget {
                   ),
                 ),
               ),
+            ],
           ],
         ),
       ),
     );
   }
+}
+
+/// Il pulsante centrale della barra: un cerchio più grande, nel colore principale, che sporge sopra la barra.
+class _NavAction extends StatelessWidget {
+  final ({IconData icon, String label, VoidCallback onPressed}) action;
+
+  const _NavAction({required this.action});
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    button: true,
+    label: action.label,
+    child: GestureDetector(
+      key: const ValueKey('nav-action'),
+      onTap: action.onPressed,
+      child: Transform.translate(
+        offset: const Offset(0, -16),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Gaps.xs),
+          child: ClayCircle(
+            color: context.colors.primary,
+            icon: action.icon,
+            iconColor: context.colors.onPrimary,
+            size: 60,
+            keepColor: true,
+            pressable: true,
+          ),
+        ),
+      ),
+    ),
+  );
 }
 
 /// Stile in plastilina per i pulsanti Material (usato dal tema delle livree `clay`): pillola con sfumatura, riflesso

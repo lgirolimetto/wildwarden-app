@@ -1685,7 +1685,7 @@ abstract class AppLocalizations {
   /// No description provided for @debugGradeSampleEffect.
   ///
   /// In it, this message translates to:
-  /// **'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).'**
+  /// **'La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).'**
   String get debugGradeSampleEffect;
 
   /// No description provided for @badgeEncountered.
@@ -1787,7 +1787,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossVisText.
   ///
   /// In it, this message translates to:
-  /// **'La linfa sottile delle piante: l\'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.'**
+  /// **'La linfa sottile delle piante: l\'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.'**
   String get glossVisText;
 
   /// No description provided for @glossPeDaIncassareTerm.
@@ -1997,7 +1997,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitWhenRain.
   ///
   /// In it, this message translates to:
-  /// **'Mentre piove. Con il temporale la Raccolta è sospesa.'**
+  /// **'Mentre piove. Con il temporale non si attinge.'**
   String get traitWhenRain;
 
   /// No description provided for @traitWhenFog.
@@ -2999,7 +2999,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip15.
   ///
   /// In it, this message translates to:
-  /// **'«Raccogliere», nel gioco, vuol dire fotografare: le piante restano dove sono, intatte.'**
+  /// **'Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.'**
   String get tip15;
 
   /// No description provided for @viewToFind.
@@ -3375,12 +3375,6 @@ abstract class AppLocalizations {
   /// **'Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.'**
   String get tip17;
 
-  /// No description provided for @capturePhotograph.
-  ///
-  /// In it, this message translates to:
-  /// **'Fotografa una pianta'**
-  String get capturePhotograph;
-
   /// No description provided for @captureNoKey.
   ///
   /// In it, this message translates to:
@@ -3542,6 +3536,24 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Fatto'**
   String get captureDone;
+
+  /// No description provided for @captureAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi'**
+  String get captureAction;
+
+  /// No description provided for @captureTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi la Vis'**
+  String get captureTitle;
+
+  /// No description provided for @captureFromSpecies.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi la sua Vis'**
+  String get captureFromSpecies;
 }
 
 class _AppLocalizationsDelegate

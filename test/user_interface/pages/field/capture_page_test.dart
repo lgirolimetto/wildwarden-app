@@ -59,7 +59,7 @@ void main() {
       ),
     );
     await pumpDruidApp(tester);
-    await scrollAndTap(tester, find.byKey(const ValueKey('open-capture')));
+    await tester.tap(find.byKey(const ValueKey('nav-action')));
     await tester.pumpAndSettle();
 
     expect(find.text('Che pianta pensi che sia?'), findsOneWidget);
@@ -98,7 +98,7 @@ void main() {
       ),
     );
     await pumpDruidApp(tester);
-    await scrollAndTap(tester, find.byKey(const ValueKey('open-capture')));
+    await tester.tap(find.byKey(const ValueKey('nav-action')));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('capture-guess-skip')));
     await tester.pumpAndSettle();
@@ -113,7 +113,7 @@ void main() {
   testWidgets('senza chiave Pl@ntNet l\'app lo dice', (tester) async {
     registerTestDependencies(photoSource: _Camera(photo));
     await pumpDruidApp(tester);
-    await scrollAndTap(tester, find.byKey(const ValueKey('open-capture')));
+    await tester.tap(find.byKey(const ValueKey('nav-action')));
     await tester.pumpAndSettle();
     expect(find.textContaining('Manca la chiave di Pl@ntNet'), findsOneWidget);
   });

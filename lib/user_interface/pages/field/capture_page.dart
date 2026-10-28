@@ -16,7 +16,7 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// "Fotografa una pianta" (step 3 del Campo): apre il mirino, chiede l'ipotesi, mostra cosa ha visto Pl@ntNet e com'è
+/// "Attingi" (step 3 del Campo): apre il mirino, chiede l'ipotesi, mostra cosa ha visto Pl@ntNet e com'è
 /// andata (incontro, stazione, PE).
 class CapturePage extends StatefulWidget {
   const CapturePage({super.key});
@@ -55,7 +55,7 @@ class _CapturePageState extends State<CapturePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: clayAppBar(context, title: context.l10n.capturePhotograph),
+    appBar: clayAppBar(context, title: context.l10n.captureTitle),
     extendBodyBehindAppBar: true,
     body: DruidBackground(
       belowAppBar: true,

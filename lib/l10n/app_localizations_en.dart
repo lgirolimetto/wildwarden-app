@@ -1904,7 +1904,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip15 =>
-      'In the game, “gathering” means photographing: plants stay where they are, untouched.';
+      'In the game a plant is never picked: you photograph it and draw its Vis. Plants stay where they are, untouched.';
 
   @override
   String get viewToFind => 'To find';
@@ -2149,9 +2149,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'When you photograph a plant, its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more Vis.';
 
   @override
-  String get capturePhotograph => 'Photograph a plant';
-
-  @override
   String get captureNoKey =>
       'The Pl@ntNet key (PLANTNET_API_KEY) is missing: for now try encounters with Simulate Encounter.';
 
@@ -2247,4 +2244,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get captureDone => 'Done';
+
+  @override
+  String get captureAction => 'Draw';
+
+  @override
+  String get captureTitle => 'Draw the Vis';
+
+  @override
+  String get captureFromSpecies => 'Draw its Vis';
 }

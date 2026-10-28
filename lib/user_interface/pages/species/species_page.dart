@@ -108,7 +108,7 @@ class _ToFind extends StatelessWidget {
             key: const ValueKey('capture-from-species'),
             onPressed: () => Get.to<void>(() => const CapturePage()),
             icon: const Icon(Icons.photo_camera_outlined),
-            label: Text(context.l10n.capturePhotograph),
+            label: Text(context.l10n.captureFromSpecies),
           ),
           const SizedBox(height: Gaps.s),
           FilledButton.icon(

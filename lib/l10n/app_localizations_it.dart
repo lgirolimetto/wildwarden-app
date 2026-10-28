@@ -976,7 +976,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get debugGradeSampleEffect =>
-      'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).';
+      'La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).';
 
   @override
   String get badgeEncountered => 'Incontrata il';
@@ -1033,7 +1033,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossVisText =>
-      'La linfa sottile delle piante: l\'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.';
+      'La linfa sottile delle piante: l\'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.';
 
   @override
   String get glossPeDaIncassareTerm => 'PE da Incassare';
@@ -1142,8 +1142,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitWhenFrost => 'Quando fa sotto zero: brina e ghiaccio.';
 
   @override
-  String get traitWhenRain =>
-      'Mentre piove. Con il temporale la Raccolta è sospesa.';
+  String get traitWhenRain => 'Mentre piove. Con il temporale non si attinge.';
 
   @override
   String get traitWhenFog => 'Quando c\'è nebbia.';
@@ -1917,7 +1916,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip15 =>
-      '«Raccogliere», nel gioco, vuol dire fotografare: le piante restano dove sono, intatte.';
+      'Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.';
 
   @override
   String get viewToFind => 'Da trovare';
@@ -2161,9 +2160,6 @@ class AppLocalizationsIt extends AppLocalizations {
       'Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.';
 
   @override
-  String get capturePhotograph => 'Fotografa una pianta';
-
-  @override
   String get captureNoKey =>
       'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'incontro si prova con Simula Incontro.';
 
@@ -2259,4 +2255,13 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get captureDone => 'Fatto';
+
+  @override
+  String get captureAction => 'Attingi';
+
+  @override
+  String get captureTitle => 'Attingi la Vis';
+
+  @override
+  String get captureFromSpecies => 'Attingi la sua Vis';
 }

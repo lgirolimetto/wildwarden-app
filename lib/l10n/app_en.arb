@@ -483,7 +483,7 @@
   "tip12": "An Essence's Traits tell the conditions you drew it in (weather, time of day, moon); a recipe's name says which Traits it needs: “Full-moon” asks for an Essence drawn under the Full moon.",
   "tip13": "The XP you earn studying a species stays to Cash in until you draw the first Essence of that species: only then does it become real XP.",
   "tip14": "The meaning of symbols, colours and grades is in the Legend: Settings → Legend and glossary.",
-  "tip15": "In the game, “gathering” means photographing: plants stay where they are, untouched.",
+  "tip15": "In the game a plant is never picked: you photograph it and draw its Vis. Plants stay where they are, untouched.",
   "viewToFind": "To find",
   "levelMasteryDormant": "Dormant Mastery",
   "masteryToAwaken": "Mastery to reawaken",
@@ -543,7 +543,6 @@
   "fieldTestRegionalResult": "Regional flora (Southeastern Europe)",
   "cameraZoomSlower": "Without zoom the Vis rises faster",
   "tip17": "When you photograph a plant, its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more Vis.",
-  "capturePhotograph": "Photograph a plant",
   "captureNoKey": "The Pl@ntNet key (PLANTNET_API_KEY) is missing: for now try encounters with Simulate Encounter.",
   "captureLimitTitle": "No more new stations today",
   "captureLimitText": "A new station was already born today: tomorrow you can photograph another plant. Stations need their time.",
@@ -570,5 +569,8 @@
   "captureStationNoPosition": "No position: the encounter counts, the station doesn't.",
   "captureStationLimit": "A new station was already born today: this one counts as an encounter.",
   "captureXp": "+{xp} XP",
-  "captureDone": "Done"
+  "captureDone": "Done",
+  "captureAction": "Draw",
+  "captureTitle": "Draw the Vis",
+  "captureFromSpecies": "Draw its Vis"
 }
