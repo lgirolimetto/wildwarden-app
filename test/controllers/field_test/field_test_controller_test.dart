@@ -137,12 +137,12 @@ void main() {
 
     await c.run(expected: '', place: '');
     expect(c.last!.systemCamera, isFalse);
-    expect(c.last!.toCsvRow(), endsWith(',app,30.0,9.5,3.2,410,880,2.0,auto,piena'));
+    expect(c.last!.toCsvRow(), endsWith(',app,30.0,9.5,3.2,410,880,2.0,auto,piena,Elleboro verde'));
 
     c.setSystemCamera(true);
     await c.run(expected: '', place: '');
     expect(c.last!.systemCamera, isTrue);
-    expect(c.last!.toCsvRow(), endsWith(',sistema,,,,,,,,'));
+    expect(c.last!.toCsvRow(), endsWith(',sistema,,,,,,,,,Elleboro verde'));
   });
 
   test('senza fotocamera di sistema l\'interruttore resta spento', () {
