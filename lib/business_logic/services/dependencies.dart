@@ -8,6 +8,7 @@ import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
+import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/services/camera/probe_frame_analyzer.dart';
@@ -19,6 +20,7 @@ import 'package:druid_app/business_logic/services/location/geolocator_sampler.da
 import 'package:druid_app/business_logic/services/persistence/drift_game_event_store.dart';
 import 'package:druid_app/business_logic/services/persistence/druid_database.dart';
 import 'package:druid_app/business_logic/services/plantnet/plantnet_identifier.dart';
+import 'package:druid_app/business_logic/services/weather/open_meteo_service.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/controllers/erbario/erbario_views_controller.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
@@ -48,6 +50,7 @@ void registerDependencies({
   IPhotoSource? photoSource,
   IPhotoSource? systemPhotoSource,
   IFrameAnalyzer? frameAnalyzer,
+  IWeatherService? weatherService,
   ILocationSampler? locationSampler,
   IFieldTestLog? fieldTestLog,
 }) {
@@ -68,6 +71,7 @@ void registerDependencies({
   Get.put<IPhotoSource>(photoSource ?? const InAppCameraPhotoSource(), permanent: true);
   Get.put<IPhotoSource>(systemPhotoSource ?? SystemCameraPhotoSource(), tag: systemCameraTag, permanent: true);
   Get.put<IFrameAnalyzer>(frameAnalyzer ?? ProbeFrameAnalyzer(), permanent: true);
+  Get.put<IWeatherService>(weatherService ?? OpenMeteoService(config, effectiveClock), permanent: true);
   Get.put<ILocationSampler>(locationSampler ?? GeolocatorSampler(), permanent: true);
   Get.put<IFieldTestLog>(fieldTestLog ?? FileFieldTestLog(), permanent: true);
 

@@ -1702,5 +1702,11 @@
   "cameraWeakTitle": "Vis molto debole",
   "cameraWeakText": "Qui la Vis si sente appena: forse il telefono è fermo, o non stai inquadrando una pianta vera. Puoi raccoglierla comunque, ma sarà poca.",
   "cameraWeakRetry": "Riprova",
-  "cameraWeakAnyway": "Raccogli comunque"
+  "cameraWeakAnyway": "Raccogli comunque",
+  "cameraLeafHint": "Ora avvicinati a una foglia",
+  "cameraFlowerHint": "E un fiore, se c'è",
+  "cameraNoFlower": "Non ha fiori",
+  "cameraOrganWhole": "Pianta intera",
+  "cameraOrganLeaf": "Foglia",
+  "cameraOrganFlower": "Fiore"
 }

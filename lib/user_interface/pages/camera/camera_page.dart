@@ -7,11 +7,15 @@ import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_frame_analyzer.dart';
 import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
+import 'package:druid_app/business_logic/models/plant_identification.dart';
+import 'package:druid_app/business_logic/models/weather_now.dart';
 import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/rules/field/vis_gathering.dart';
+import 'package:druid_app/business_logic/rules/field/weather_traits.dart';
 import 'package:druid_app/business_logic/services/camera/photo_resizer.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
@@ -64,6 +68,11 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   LocationFix? _bestFix;
   bool _locationOff = false;
 
+  // Il meteo si chiede una volta, appena c'è una posizione (o dopo qualche secondo, al centro della Zona).
+  WeatherNow? _weather;
+  bool _weatherAsked = false;
+  Timer? _weatherFallback;
+
   FrameVerdict _verdict = FrameVerdict.none;
   final _vis = VisGathering();
   bool _weakAsked = false;
@@ -79,6 +88,10 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
   FlashMode _flash = FlashMode.off;
   bool _hasFlash = true;
 
+  // Le foto della pianta: intera, foglia, fiore (se c'è). Vanno a Pl@ntNet insieme (capitolo 02).
+  final _shots = <PlantPhoto>[];
+  int _captureMs = 0, _resizeMs = 0;
+
   @override
   void initState() {
     super.initState();
@@ -87,6 +100,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     _openCamera();
     _startLocation();
+    _weatherFallback = Timer(const Duration(seconds: 5), () => _loadWeather(_bestFix));
     if (_debug) _debugTimer = Timer.periodic(const Duration(seconds: 1), (_) => setState(() {}));
   }
 
@@ -95,6 +109,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     _debugTimer?.cancel();
+    _weatherFallback?.cancel();
     _closeCamera();
     _fixes?.cancel();
     _location?.stop();
@@ -189,8 +204,21 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       _location = recording;
       _fixes = recording.updates.listen((fix) {
         if (_bestFix == null || fix.accuracy <= _bestFix!.accuracy) setState(() => _bestFix = fix);
+        _loadWeather(fix);
       });
     });
+  }
+
+  Future<void> _loadWeather(LocationFix? fix) async {
+    if (_weatherAsked) return;
+    _weatherAsked = true;
+    _weatherFallback?.cancel();
+    final result = await Get.find<IWeatherService>().now(
+      fix?.latitude ?? _zoneCenter.latitude,
+      fix?.longitude ?? _zoneCenter.longitude,
+    );
+    // Senza rete il mirino mostra solo il cielo: il meteo non è indispensabile per scattare.
+    if (mounted) result.fold((_) {}, (weather) => setState(() => _weather = weather));
   }
 
   void _onFrame(CameraImage image) {
@@ -299,15 +327,15 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       } on FileSystemException {
         // Già cancellato dalla fotocamera: niente da fare.
       }
-      if (mounted) {
-        Navigator.of(context).pop(
-          TakenPhoto(
-            path,
-            diagnostics: _diagnostics(captureMs: captureMs, resizeMs: resizeMs),
-            visFull: _vis.state == VisState.full,
-          ),
-        );
+      if (_shots.isEmpty) {
+        _captureMs = captureMs;
+        _resizeMs = resizeMs;
       }
+      _shots.add(PlantPhoto(path, PlantOrgan.values[_shots.length]));
+      if (!mounted) return;
+      unawaited(HapticFeedback.lightImpact());
+      if (_shots.length == PlantOrgan.values.length) return _finish();
+      setState(() => _shooting = false);
     } catch (e) {
       // Qualsiasi errore (fotocamera, file, riduzione) sblocca lo scatto e si mostra: niente pulsante bloccato.
       if (mounted) {
@@ -317,6 +345,35 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         });
       }
     }
+  }
+
+  /// Fine: le foto scattate (il fiore si può saltare) con i tratti del momento.
+  void _finish() => Navigator.of(context).pop(
+    TakenPhoto(
+      photos: List.unmodifiable(_shots),
+      traits: _traitsNow(),
+      diagnostics: _diagnostics(captureMs: _captureMs, resizeMs: _resizeMs),
+      visFull: _vis.state == VisState.full,
+    ),
+  );
+
+  /// Chiudere senza finire butta le foto già scattate.
+  void _cancel() {
+    for (final shot in _shots) {
+      File(shot.path).delete().ignore();
+    }
+    Navigator.of(context).pop(TakenPhoto.cancelled);
+  }
+
+  /// I tratti di adesso, qui: il cielo (luce e luna) e il meteo.
+  List<Trait> _traitsNow() {
+    final latitude = _bestFix?.latitude ?? _zoneCenter.latitude;
+    final longitude = _bestFix?.longitude ?? _zoneCenter.longitude;
+    final weather = _weather;
+    return [
+      ...skyTraits(_clock.now(), latitude, longitude),
+      if (weather != null) ...weatherTraits(weather, latitude, longitude),
+    ];
   }
 
   // Come ogni fotocamera il mirino è scuro, con qualsiasi tema: si usa il tema scuro della livrea.
@@ -330,11 +387,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     final camera = _camera;
     final position = _bestFix;
     final live = _diagnostics(captureMs: 0, resizeMs: 0);
-    final sky = skyTraits(
-      _clock.now(),
-      position?.latitude ?? _zoneCenter.latitude,
-      position?.longitude ?? _zoneCenter.longitude,
-    );
+    final sky = _traitsNow();
     return Scaffold(
       backgroundColor: context.colors.scrim,
       body: Stack(
@@ -401,12 +454,30 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       ),
                     ),
                   const SizedBox(height: Gaps.l),
-                  if (camera != null && (_vis.state == VisState.gathering || _vis.state == VisState.zoomFirst))
+                  if (camera != null)
+                    if (_shots.isNotEmpty)
+                      Center(
+                        child: _Hint(_shots.length == 1 ? context.l10n.cameraLeafHint : context.l10n.cameraFlowerHint),
+                      )
+                    else if (_vis.state == VisState.gathering || _vis.state == VisState.zoomFirst)
+                      Center(
+                        child: _Hint(
+                          _vis.state == VisState.zoomFirst
+                              ? context.l10n.cameraZoomFirst
+                              : context.l10n.cameraGatherHint,
+                        ),
+                      ),
+                  if (camera != null && _shots.length == 2 && !_shooting)
                     Center(
-                      child: _Hint(
-                        _vis.state == VisState.zoomFirst ? context.l10n.cameraZoomFirst : context.l10n.cameraGatherHint,
+                      child: TextButton(
+                        key: const ValueKey('camera-no-flower'),
+                        style: TextButton.styleFrom(foregroundColor: context.colors.onSurface),
+                        onPressed: _finish,
+                        child: Text(context.l10n.cameraNoFlower),
                       ),
                     ),
+                  const SizedBox(height: Gaps.m),
+                  if (camera != null) Center(child: _OrganSteps(done: _shots.length)),
                   const SizedBox(height: Gaps.m),
                   if (camera != null && zoomStops(_maxZoom).length > 1)
                     Center(
@@ -417,7 +488,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                     children: [
                       IconButton(
                         key: const ValueKey('camera-close'),
-                        onPressed: () => Navigator.of(context).pop(TakenPhoto.cancelled),
+                        onPressed: _cancel,
                         icon: _Glyph(icon: Icons.close_rounded, label: context.l10n.cameraClose, size: 32),
                       ),
                       const Spacer(),
@@ -609,6 +680,48 @@ class _Plate extends StatelessWidget {
       child: child,
     ),
   );
+}
+
+/// Le tre foto della pianta: intera, foglia, fiore. Quelle fatte sono piene, quella da fare è evidenziata.
+class _OrganSteps extends StatelessWidget {
+  final int done;
+
+  const _OrganSteps({required this.done});
+
+  @override
+  Widget build(BuildContext context) {
+    final labels = [context.l10n.cameraOrganWhole, context.l10n.cameraOrganLeaf, context.l10n.cameraOrganFlower];
+    const icons = [Icons.park_rounded, Icons.eco_rounded, Icons.local_florist_rounded];
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (final organ in PlantOrgan.values) ...[
+          if (organ.index > 0) const SizedBox(width: Gaps.xl),
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              _Glyph(
+                icon: icons[organ.index],
+                label: labels[organ.index],
+                size: 26,
+                alpha: organ.index < done
+                    ? 1
+                    : organ.index == done
+                    ? 0.9
+                    : 0.35,
+              ),
+              if (organ.index < done)
+                Positioned(
+                  right: -8,
+                  bottom: -6,
+                  child: Icon(Icons.check_circle_rounded, size: 16, color: context.colors.primary),
+                ),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
 }
 
 /// Un'indicazione breve sopra l'immagine, chiara con un'ombra come le icone.

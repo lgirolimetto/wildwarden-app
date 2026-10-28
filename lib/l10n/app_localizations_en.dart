@@ -2134,4 +2134,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get cameraWeakAnyway => 'Gather anyway';
+
+  @override
+  String get cameraLeafHint => 'Now get close to a leaf';
+
+  @override
+  String get cameraFlowerHint => 'And a flower, if there is one';
+
+  @override
+  String get cameraNoFlower => 'No flowers';
+
+  @override
+  String get cameraOrganWhole => 'Whole plant';
+
+  @override
+  String get cameraOrganLeaf => 'Leaf';
+
+  @override
+  String get cameraOrganFlower => 'Flower';
 }

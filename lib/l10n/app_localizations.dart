@@ -3350,6 +3350,42 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Raccogli comunque'**
   String get cameraWeakAnyway;
+
+  /// No description provided for @cameraLeafHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Ora avvicinati a una foglia'**
+  String get cameraLeafHint;
+
+  /// No description provided for @cameraFlowerHint.
+  ///
+  /// In it, this message translates to:
+  /// **'E un fiore, se c\'è'**
+  String get cameraFlowerHint;
+
+  /// No description provided for @cameraNoFlower.
+  ///
+  /// In it, this message translates to:
+  /// **'Non ha fiori'**
+  String get cameraNoFlower;
+
+  /// No description provided for @cameraOrganWhole.
+  ///
+  /// In it, this message translates to:
+  /// **'Pianta intera'**
+  String get cameraOrganWhole;
+
+  /// No description provided for @cameraOrganLeaf.
+  ///
+  /// In it, this message translates to:
+  /// **'Foglia'**
+  String get cameraOrganLeaf;
+
+  /// No description provided for @cameraOrganFlower.
+  ///
+  /// In it, this message translates to:
+  /// **'Fiore'**
+  String get cameraOrganFlower;
 }
 
 class _AppLocalizationsDelegate

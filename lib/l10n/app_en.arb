@@ -538,5 +538,11 @@
   "cameraWeakTitle": "Very weak Vis",
   "cameraWeakText": "The Vis here is barely there: maybe the phone is still, or you're not framing a real plant. You can gather it anyway, but it will be little.",
   "cameraWeakRetry": "Try again",
-  "cameraWeakAnyway": "Gather anyway"
+  "cameraWeakAnyway": "Gather anyway",
+  "cameraLeafHint": "Now get close to a leaf",
+  "cameraFlowerHint": "And a flower, if there is one",
+  "cameraNoFlower": "No flowers",
+  "cameraOrganWhole": "Whole plant",
+  "cameraOrganLeaf": "Leaf",
+  "cameraOrganFlower": "Flower"
 }

@@ -1,13 +1,18 @@
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
+import 'package:druid_app/business_logic/models/plant_identification.dart';
 
 /// Scatto di una foto con la fotocamera.
 abstract interface class IPhotoSource {
   Future<Validation<TakenPhoto>> takePhoto();
 }
 
-/// La foto scattata, o nessuna se chi gioca è tornato indietro senza scattare.
+/// Le foto di una pianta (intera, foglia, fiore se c'è), o nessuna se chi gioca è tornato indietro senza scattare.
 class TakenPhoto {
-  final String? path;
+  final List<PlantPhoto> photos;
+
+  /// I tratti del momento dello scatto (cielo e meteo): quelli dell'Essenza. Vuoti dalla fotocamera di sistema.
+  final List<Trait> traits;
 
   /// Solo dalla fotocamera dell'app: come è andata l'analisi dei fotogrammi e la riduzione della foto.
   final CameraDiagnostics? diagnostics;
@@ -15,9 +20,17 @@ class TakenPhoto {
   /// Solo dalla fotocamera dell'app: la Vis era piena (verifica passata) o debole ("Raccogli comunque").
   final bool? visFull;
 
-  const TakenPhoto(this.path, {this.diagnostics, this.visFull});
+  const TakenPhoto({this.photos = const [], this.traits = const [], this.diagnostics, this.visFull});
 
-  static const cancelled = TakenPhoto(null);
+  /// Una foto sola della pianta intera.
+  TakenPhoto.single(String path, {this.diagnostics, this.visFull})
+    : photos = [PlantPhoto(path, PlantOrgan.whole)],
+      traits = const [];
+
+  static const cancelled = TakenPhoto();
+
+  /// La prima foto (la pianta intera): quella che resta come figurina.
+  String? get path => photos.isEmpty ? null : photos.first.path;
 }
 
 /// Misure della fotocamera dell'app (prova di fattibilità dello step 1b del Campo).

@@ -18,6 +18,6 @@ class SystemCameraPhotoSource implements IPhotoSource {
         maxHeight: photoMaxSide.toDouble(),
         imageQuality: photoJpegQuality,
       )
-      .then((file) => TakenPhoto(file?.path))
+      .then((file) => file == null ? TakenPhoto.cancelled : TakenPhoto.single(file.path))
       .tryCatch();
 }

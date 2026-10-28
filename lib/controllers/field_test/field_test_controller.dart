@@ -91,14 +91,15 @@ class FieldTestController extends GetxController {
     int? photoKb;
     Duration? identifyTime;
     var identification = PlantIdentification.none;
-    final path = photo.fold((_) => null, (taken) => taken.path);
+    final taken = photo.fold((_) => TakenPhoto.cancelled, (taken) => taken);
+    final path = taken.path;
     if (!photo.isValid) {
       outcome = _message(photo);
     } else if (path != null) {
-      photoKb = File(path).lengthSync() ~/ 1024;
+      photoKb = taken.photos.fold<int>(0, (sum, p) => sum + File(p.path).lengthSync()) ~/ 1024;
       _phase(FieldTestPhase.identifying);
       final started = watch.elapsed;
-      final result = await _identifier.identify(path);
+      final result = await _identifier.identify(taken.photos);
       identifyTime = watch.elapsed - started;
       result.fold((_) => outcome = _message(result), (value) {
         identification = value;
@@ -128,8 +129,10 @@ class FieldTestController extends GetxController {
       locationOutcome: recording.isValid ? 'ok' : _message(recording),
       fixes: fixes,
       systemCamera: systemCamera,
-      diagnostics: photo.fold((_) => null, (taken) => taken.diagnostics),
-      visFull: photo.fold((_) => null, (taken) => taken.visFull),
+      diagnostics: taken.diagnostics,
+      visFull: taken.visFull,
+      organs: [for (final p in taken.photos) p.organ],
+      traits: taken.traits,
     );
     await _log.append(FieldTestRecord.header, record.toCsvRow());
     last = record;

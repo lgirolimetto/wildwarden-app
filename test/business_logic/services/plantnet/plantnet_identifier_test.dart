@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/business_logic/services/http/dio_factory.dart';
 import 'package:druid_app/business_logic/services/plantnet/plantnet_identifier.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,7 +51,9 @@ void main() {
       'remainingIdentificationRequests': 497,
     });
 
-    final result = (await identifier.identify(photo.path)).fold((_) => fail('atteso Valid'), (r) => r);
+    final result = (await identifier.identify([
+      PlantPhoto(photo.path, PlantOrgan.whole),
+    ])).fold((_) => fail('atteso Valid'), (r) => r);
 
     expect(result.candidates.map((c) => c.scientificName), ['Helleborus viridis', 'Helleborus foetidus']);
     expect(result.candidates.first.commonNames, ['Elleboro verde']);
@@ -63,7 +66,9 @@ void main() {
   test('404 di Pl@ntNet: nessuna specie riconosciuta, non un errore', () async {
     reply(404, {'statusCode': 404, 'error': 'Not Found', 'message': 'Species not found'});
 
-    final result = (await identifier.identify(photo.path)).fold((_) => fail('atteso Valid'), (r) => r);
+    final result = (await identifier.identify([
+      PlantPhoto(photo.path, PlantOrgan.whole),
+    ])).fold((_) => fail('atteso Valid'), (r) => r);
 
     expect(result.candidates, isEmpty);
   });
@@ -71,14 +76,36 @@ void main() {
   test('errore del server: Fail con messaggio leggibile', () async {
     reply(500, {'error': 'boom'});
 
-    final result = await identifier.identify(photo.path);
+    final result = await identifier.identify([PlantPhoto(photo.path, PlantOrgan.whole)]);
 
     result.fold((failures) => expect(failures.single.message, 'Risposta HTTP 500'), (_) => fail('atteso Fail'));
   });
 
   test('senza chiave non chiama Pl@ntNet', () async {
-    final result = await PlantNetIdentifier(testConfig, dio: dio).identify(photo.path);
+    final result = await PlantNetIdentifier(testConfig, dio: dio).identify([PlantPhoto(photo.path, PlantOrgan.whole)]);
 
     result.fold((failures) => expect(failures.single.message, 'Chiave Pl@ntNet assente'), (_) => fail('atteso Fail'));
+  });
+
+  test('più foto della stessa pianta in una richiesta, ognuna con la sua parte', () async {
+    FormData? sent;
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          sent = options.data as FormData;
+          handler.next(options);
+        },
+      ),
+    );
+    reply(200, {'results': <Object>[]});
+
+    await identifier.identify([
+      PlantPhoto(photo.path, PlantOrgan.whole),
+      PlantPhoto(photo.path, PlantOrgan.leaf),
+      PlantPhoto(photo.path, PlantOrgan.flower),
+    ]);
+
+    expect(sent!.files.map((f) => f.key), ['images', 'images', 'images']);
+    expect(sent!.fields.map((f) => f.value), ['auto', 'leaf', 'flower']);
   });
 }

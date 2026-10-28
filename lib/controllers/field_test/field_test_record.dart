@@ -1,4 +1,5 @@
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 
@@ -12,7 +13,7 @@ class FieldTestRecord {
       'top1,punteggio1,top2,punteggio2,top3,punteggio3,giusta_top1,giusta_top3,rimaste,'
       'gps_esito,gps_primo_s,precisione_5s_m,precisione_10s_m,precisione_20s_m,'
       'posizioni_durante_foto,gps_dopo_foto_primo_s,precisione_dopo_foto_10s_m,posizioni,'
-      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms,zoom,flash,vis,nome_comune1';
+      'fotocamera,fotogrammi_s,analizzati_s,analisi_ms,scatto_ms,riduzione_ms,zoom,flash,vis,nome_comune1,foto,tratti';
 
   /// Dopo la foto le posizioni si raccolgono ancora per questo tempo (mentre risponde Pl@ntNet).
   static const afterPhoto = Duration(seconds: 10);
@@ -45,6 +46,10 @@ class FieldTestRecord {
   /// Vis piena o debole allo scatto (solo fotocamera dell'app).
   final bool? visFull;
 
+  /// Le parti della pianta fotografate (intera, foglia, fiore) e i tratti del momento.
+  final List<PlantOrgan> organs;
+  final List<Trait> traits;
+
   const FieldTestRecord({
     required this.at,
     required this.expected,
@@ -60,6 +65,8 @@ class FieldTestRecord {
     this.systemCamera = false,
     this.diagnostics,
     this.visFull,
+    this.organs = const [],
+    this.traits = const [],
   });
 
   Duration? get firstFix => fixes.isEmpty ? null : fixes.first.elapsed;
@@ -147,6 +154,8 @@ class FieldTestRecord {
         null => '',
       },
       cell(candidates.isEmpty || candidates.first.commonNames.isEmpty ? null : candidates.first.commonNames.first),
+      organs.map((o) => o.name).join('+'),
+      traits.map((t) => t.name).join('+'),
     ].join(',');
   }
 }

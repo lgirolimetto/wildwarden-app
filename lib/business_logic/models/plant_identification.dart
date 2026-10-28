@@ -1,3 +1,23 @@
+/// La parte della pianta in una foto, con il nome che le dà Pl@ntNet: la pianta intera (Pl@ntNet la riconosce da
+/// sé, "auto"), una foglia, un fiore. Le tre foto di una pianta vanno a Pl@ntNet insieme (capitolo 02, 2026-10-28).
+enum PlantOrgan {
+  whole('auto'),
+  leaf('leaf'),
+  flower('flower');
+
+  final String plantNetName;
+
+  const PlantOrgan(this.plantNetName);
+}
+
+/// Una foto per il riconoscimento.
+class PlantPhoto {
+  final String path;
+  final PlantOrgan organ;
+
+  const PlantPhoto(this.path, this.organ);
+}
+
 /// Una specie proposta da Pl@ntNet per una foto, con la sicurezza (0–1).
 class PlantCandidate {
   final String scientificName;

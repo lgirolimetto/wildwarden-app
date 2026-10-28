@@ -5,7 +5,8 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/business_logic/services/http/dio_factory.dart';
 
-/// Pl@ntNet (API v2, progetto "all"): una foto, organo riconosciuto in automatico.
+/// Pl@ntNet (API v2, progetto "all"): fino a 5 foto della stessa pianta in una richiesta, ognuna con la sua parte
+/// (organo); Pl@ntNet le combina in un solo risultato.
 ///
 /// ⚠️ La chiave viaggia dentro l'app: va bene solo sul telefono dello sviluppatore (vedi [AppConfig.plantNetApiKey]).
 class PlantNetIdentifier implements IPlantIdentifier {
@@ -21,7 +22,7 @@ class PlantNetIdentifier implements IPlantIdentifier {
       _language = language;
 
   @override
-  Future<Validation<PlantIdentification>> identify(String photoPath) async {
+  Future<Validation<PlantIdentification>> identify(List<PlantPhoto> photos) async {
     if (_apiKey.isEmpty) {
       return Fail.withError(StateError('PLANTNET_API_KEY'), message: 'Chiave Pl@ntNet assente').toInvalid();
     }
@@ -29,10 +30,12 @@ class PlantNetIdentifier implements IPlantIdentifier {
         .post<Map<String, dynamic>>(
           '/v2/identify/all',
           queryParameters: {'api-key': _apiKey, 'lang': _language, 'nb-results': 5, 'include-related-images': false},
-          data: FormData.fromMap({
-            'images': await MultipartFile.fromFile(photoPath, filename: 'pianta.jpg'),
-            'organs': 'auto',
-          }),
+          data: FormData()
+            ..files.addAll([
+              for (final (i, photo) in photos.indexed)
+                MapEntry('images', await MultipartFile.fromFile(photo.path, filename: 'pianta-$i.jpg')),
+            ])
+            ..fields.addAll([for (final photo in photos) MapEntry('organs', photo.organ.plantNetName)]),
           // 404 = nessuna specie riconosciuta: non è un errore.
           options: Options(validateStatus: (status) => status == 200 || status == 404),
         )

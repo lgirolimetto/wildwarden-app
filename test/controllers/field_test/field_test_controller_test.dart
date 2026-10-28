@@ -4,6 +4,7 @@ import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/controllers/field_test/field_test_controller.dart';
 import 'package:druid_app/controllers/field_test/field_test_record.dart';
@@ -23,7 +24,7 @@ class _Identifier implements IPlantIdentifier {
   int calls = 0;
 
   @override
-  Future<Validation<PlantIdentification>> identify(String photoPath) async {
+  Future<Validation<PlantIdentification>> identify(List<PlantPhoto> photos) async {
     calls++;
     return Valid(
       const PlantIdentification(
@@ -73,7 +74,7 @@ void main() {
 
   test('una prova: foto, Pl@ntNet e posizioni in una riga del CSV', () async {
     final location = _Location();
-    final c = controller(_Camera(TakenPhoto(photo)), location);
+    final c = controller(_Camera(TakenPhoto.single(photo)), location);
 
     await c.run(expected: 'elleboro', place: 'sole');
 
@@ -102,7 +103,7 @@ void main() {
   });
 
   test('posizione negata: si misura solo la foto e il CSV dice perché', () async {
-    final c = controller(_Camera(TakenPhoto(photo)), _Location(allowed: false));
+    final c = controller(_Camera(TakenPhoto.single(photo)), _Location(allowed: false));
 
     await c.run(expected: 'elleboro', place: '');
 
@@ -112,7 +113,7 @@ void main() {
   });
 
   test('cancellare le prove svuota il registro', () async {
-    final c = controller(_Camera(TakenPhoto(photo)), _Location());
+    final c = controller(_Camera(TakenPhoto.single(photo)), _Location());
     await c.run(expected: '', place: '');
 
     await c.clearLog();
@@ -131,22 +132,32 @@ void main() {
       zoom: 2,
       flash: 'auto',
     );
-    final app = _Camera(TakenPhoto(photo, diagnostics: diagnostics, visFull: true));
-    final system = _Camera(TakenPhoto(photo));
+    final app = _Camera(
+      TakenPhoto(
+        photos: [PlantPhoto(photo, PlantOrgan.whole), PlantPhoto(photo, PlantOrgan.leaf)],
+        traits: const [Trait.dusk, Trait.waningMoon],
+        diagnostics: diagnostics,
+        visFull: true,
+      ),
+    );
+    final system = _Camera(TakenPhoto.single(photo));
     final c = controller(app, _Location(), system: system);
 
     await c.run(expected: '', place: '');
     expect(c.last!.systemCamera, isFalse);
-    expect(c.last!.toCsvRow(), endsWith(',app,30.0,9.5,3.2,410,880,2.0,auto,piena,Elleboro verde'));
+    expect(
+      c.last!.toCsvRow(),
+      endsWith(',app,30.0,9.5,3.2,410,880,2.0,auto,piena,Elleboro verde,whole+leaf,dusk+waningMoon'),
+    );
 
     c.setSystemCamera(true);
     await c.run(expected: '', place: '');
     expect(c.last!.systemCamera, isTrue);
-    expect(c.last!.toCsvRow(), endsWith(',sistema,,,,,,,,,Elleboro verde'));
+    expect(c.last!.toCsvRow(), endsWith(',sistema,,,,,,,,,Elleboro verde,whole,'));
   });
 
   test('senza fotocamera di sistema l\'interruttore resta spento', () {
-    final c = controller(_Camera(TakenPhoto(photo)), _Location());
+    final c = controller(_Camera(TakenPhoto.single(photo)), _Location());
     c.setSystemCamera(true);
     expect(c.useSystemCamera, isFalse);
   });
