@@ -44,6 +44,7 @@ void main() {
             'scientificNameWithoutAuthor': 'Helleborus viridis',
             'commonNames': ['Elleboro verde'],
           },
+          'gbif': {'id': '3033108'},
         },
       ],
       'remainingIdentificationRequests': 497,
@@ -54,6 +55,8 @@ void main() {
     expect(result.candidates.map((c) => c.scientificName), ['Helleborus viridis', 'Helleborus foetidus']);
     expect(result.candidates.first.commonNames, ['Elleboro verde']);
     expect(result.candidates.first.score, 0.81);
+    expect(result.candidates.first.gbifKey, 3033108);
+    expect(result.candidates.last.gbifKey, isNull);
     expect(result.remainingRequests, 497);
   });
 

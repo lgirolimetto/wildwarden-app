@@ -4,7 +4,10 @@ class PlantCandidate {
   final List<String> commonNames;
   final double score;
 
-  const PlantCandidate({required this.scientificName, required this.commonNames, required this.score});
+  /// Chiave GBIF che Pl@ntNet associa alla specie, se la dà.
+  final int? gbifKey;
+
+  const PlantCandidate({required this.scientificName, required this.commonNames, required this.score, this.gbifKey});
 
   factory PlantCandidate.fromJson(Map<String, dynamic> json) {
     final species = json['species'] as Map<String, dynamic>;
@@ -12,6 +15,7 @@ class PlantCandidate {
       scientificName: species['scientificNameWithoutAuthor'] as String,
       commonNames: [for (final name in species['commonNames'] as List? ?? const []) name as String],
       score: (json['score'] as num).toDouble(),
+      gbifKey: int.tryParse('${(json['gbif'] as Map?)?['id'] ?? ''}'),
     );
   }
 }

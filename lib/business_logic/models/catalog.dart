@@ -88,6 +88,8 @@ class Catalog {
 
   Species? speciesBySci(String sci) => _bySci[sci];
 
+  Species? speciesByGbifKey(int key) => species.where((s) => s.gbifKey == key).firstOrNull;
+
   /// Specie della stessa famiglia presenti nel catalogo, esclusa quella indicata.
   List<Species> relativesOf(Species species) =>
       this.species.where((s) => s.family == species.family && s.sci != species.sci).toList();

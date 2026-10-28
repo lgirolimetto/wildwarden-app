@@ -22,6 +22,11 @@ void main() {
     result.fold((failures) => fail('Catalogo non valido: ${failures.join(', ')}'), (catalog) {
       expect(catalog.species, hasLength(50));
       expect(catalog.species.every((s) => s.images.isNotEmpty), isTrue, reason: 'ogni specie ha almeno una foto');
+      expect(
+        catalog.species.map((s) => s.gbifKey).whereType<int>().toSet(),
+        hasLength(50),
+        reason: 'ogni specie ha la sua chiave GBIF (per legare le risposte di Pl@ntNet)',
+      );
       expect(catalog.mythics, hasLength(3));
       for (final mythic in catalog.mythics) {
         for (final ingredient in mythic.ingredients.where((i) => i.speciesSci != null)) {
