@@ -12,6 +12,7 @@ import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/services/camera/photo_resizer.dart';
+import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -202,8 +203,14 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
     }
   }
 
+  // Come ogni fotocamera il mirino è scuro, con qualsiasi tema: si usa il tema scuro della livrea.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Theme(
+    data: Get.find<ThemeController>().darkTheme,
+    child: Builder(builder: _viewfinder),
+  );
+
+  Widget _viewfinder(BuildContext context) {
     final camera = _camera;
     final position = _bestFix;
     final live = _diagnostics(captureMs: 0, resizeMs: 0);
@@ -218,7 +225,16 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
         fit: StackFit.expand,
         children: [
           if (camera != null && camera.value.isInitialized)
-            Center(child: CameraPreview(camera))
+            // Anteprima a tutto schermo, ritagliata ai lati (previewSize è in orizzontale).
+            FittedBox(
+              fit: BoxFit.cover,
+              clipBehavior: Clip.hardEdge,
+              child: SizedBox(
+                width: camera.value.previewSize!.height,
+                height: camera.value.previewSize!.width,
+                child: CameraPreview(camera),
+              ),
+            )
           else if (_error != null)
             Center(
               child: Padding(
@@ -228,7 +244,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       ? context.l10n.cameraDenied
                       : context.l10n.cameraError(_error!),
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: context.colors.onInverseSurface),
+                  style: TextStyle(color: context.colors.onSurface),
                 ),
               ),
             ),
@@ -255,7 +271,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                           _verdict.sharpness.toStringAsFixed(0),
                           _verdict.motion.toStringAsFixed(1),
                         ),
-                        style: context.texts.bodySmall?.copyWith(color: context.colors.onInverseSurface),
+                        style: context.texts.bodySmall?.copyWith(color: context.colors.onSurface),
                       ),
                     ),
                   const SizedBox(height: Gaps.l),
@@ -264,7 +280,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       IconButton(
                         key: const ValueKey('camera-close'),
                         tooltip: context.l10n.cameraClose,
-                        color: context.colors.onInverseSurface,
+                        color: context.colors.onSurface,
                         onPressed: () => Navigator.of(context).pop(TakenPhoto.cancelled),
                         icon: const Icon(Icons.close_rounded, size: 32),
                       ),
@@ -298,7 +314,7 @@ class _Readout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = context.texts.labelLarge?.copyWith(color: context.colors.onInverseSurface);
+    final style = context.texts.labelLarge?.copyWith(color: context.colors.onSurface);
     return Wrap(
       spacing: Gaps.s,
       runSpacing: Gaps.s,
@@ -328,7 +344,7 @@ class _Plate extends StatelessWidget {
   @override
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      color: context.colors.inverseSurface.withValues(alpha: 0.55),
+      color: context.colors.surface.withValues(alpha: 0.6),
       borderRadius: BorderRadius.circular(Gaps.s),
     ),
     child: Padding(
@@ -347,7 +363,7 @@ class _Shutter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ring = context.colors.onInverseSurface.withValues(alpha: enabled ? 1 : 0.4);
+    final ring = context.colors.onSurface.withValues(alpha: enabled ? 1 : 0.4);
     return Semantics(
       button: true,
       label: context.l10n.cameraShutter,
