@@ -1217,7 +1217,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get effectOmenText =>
-      'Per 7 giorni un\'Essenza senza Qualia può prendere la prima Affinità della pianta (effetto di gioco).';
+      'Per 7 giorni un\'Essenza può prendere un\'Affinità della pianta che non ha; se le ha già tutte, purezza in più (effetto di gioco).';
 
   @override
   String get effectAbundanceText =>

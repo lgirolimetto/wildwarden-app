@@ -985,7 +985,7 @@
   "effectAbundance": "Abbondanza",
   "effectRegrowthText": "Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).",
   "effectClarityText": "Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).",
-  "effectOmenText": "Per 7 giorni un'Essenza senza Qualia può prendere la prima Affinità della pianta (effetto di gioco).",
+  "effectOmenText": "Per 7 giorni un'Essenza può prendere un'Affinità della pianta che non ha; se le ha già tutte, purezza in più (effetto di gioco).",
   "effectAbundanceText": "Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).",
   "mythicNumber": "Tavola n. {number}",
   "@mythicNumber": {

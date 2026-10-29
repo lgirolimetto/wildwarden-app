@@ -327,7 +327,7 @@
   "effectAbundance": "Abundance",
   "effectRegrowthText": "For 7 days species are ready again sooner, down to 12 hours later (game effect).",
   "effectClarityText": "For 7 days extra purity on every Essence (game effect).",
-  "effectOmenText": "For 7 days an Essence without Qualia can take the plant's first Affinity (game effect).",
+  "effectOmenText": "For 7 days an Essence can take one of the plant's Affinities it doesn't have; if it has them all, extra purity (game effect).",
   "effectAbundanceText": "For 7 days extra Vis on every Essence, up to +50% (game effect).",
   "mythicNumber": "Plate No. {number}",
   "mythicToFind": "To find",

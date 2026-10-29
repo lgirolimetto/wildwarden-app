@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
@@ -52,5 +53,28 @@ void main() {
     final event = used(PotionEffect.omen, 7, touch: PotionEffect.clarity, potion: 3);
     final back = GameEvent.decode(type: event.type, payload: event.encodePayload(), occurredAt: feb);
     expect(back.payload(), event.payload());
+  });
+
+  group('Presagio su un\'Essenza', () {
+    const affinities = [Trait.sun, Trait.dawn, Trait.fog];
+    ({List<String> traits, double purity}) omen(List<String> traits, {double roll = 0}) =>
+        withOmen(traits: traits, affinities: affinities, purity: 0.5, strength: 5, roll: roll);
+
+    test('prende la prima Affinità che manca, in più alle sue Qualia (la luna c\'è sempre)', () {
+      expect(omen(['waningMoon', 'rain']).traits, ['waningMoon', 'rain', 'sun']);
+      expect(omen(['waxingMoon', 'sun']).traits, ['waxingMoon', 'sun', 'dawn'], reason: 'il Sole c\'è già: l\'Alba');
+    });
+
+    test('con tutte le Affinità, purezza in più come con la Limpidezza', () {
+      final all = omen(['dawn', 'moon', 'sun', 'fog']);
+      expect(all.traits, ['dawn', 'moon', 'sun', 'fog']);
+      expect(all.purity, purityWithClarity(0.5, 5));
+    });
+
+    test('se non scatta non cambia niente', () {
+      final none = omen(['waningMoon'], roll: 0.9);
+      expect(none.traits, ['waningMoon']);
+      expect(none.purity, 0.5);
+    });
   });
 }
