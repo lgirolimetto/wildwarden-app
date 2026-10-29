@@ -4,6 +4,7 @@ import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
+import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -34,6 +35,7 @@ registerTestDependencies({
   IPhotoSource? photoSource,
   IPlantIdentifier? plantIdentifier,
   IPermissions? permissions,
+  IWeatherService? weatherService,
   bool firstRunDone = true,
 }) {
   // Di solito l'onboarding di primo avvio è già fatto: i test partono dalla Home.
@@ -58,6 +60,7 @@ registerTestDependencies({
     plantIdentifier: plantIdentifier,
     permissions: permissions ?? FakePermissions(),
     linkOpener: FakeLinkOpener(),
+    weatherService: weatherService ?? FakeWeatherService(),
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }
