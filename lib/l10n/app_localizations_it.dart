@@ -2285,4 +2285,134 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get stationsNote =>
       'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.';
+
+  @override
+  String get firstRunWelcomeTitle => 'Benvenuto in Druid';
+
+  @override
+  String get firstRunWelcomeIntro =>
+      'Sei un erborista: trovi le piante vere, le fotografi, le studi e con le loro Essenze prepari pozioni di fantasia. Prima di cominciare, le regole del gioco nel mondo vero.';
+
+  @override
+  String get firstRunRuleNoPickTitle => 'Fotografa, non raccogliere';
+
+  @override
+  String get firstRunRuleNoPickText =>
+      'Le piante non si raccolgono mai: si fotografano e restano dove sono. Non strappare foglie o fiori e non calpestarle.';
+
+  @override
+  String get firstRunRuleProtectedTitle => 'Specie e aree protette';
+
+  @override
+  String get firstRunRuleProtectedText =>
+      'Alcune specie sono protette dalla legge. Nei parchi e nelle riserve resta sui sentieri e rispetta i loro regolamenti.';
+
+  @override
+  String get firstRunRulePrivateTitle => 'Niente proprietà private';
+
+  @override
+  String get firstRunRulePrivateText =>
+      'Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.';
+
+  @override
+  String get firstRunRuleDaylightTitle => 'Con la luce del giorno';
+
+  @override
+  String get firstRunRuleDaylightText =>
+      'Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.';
+
+  @override
+  String get firstRunRuleSafetyTitle => 'Attenzione a dove metti i piedi';
+
+  @override
+  String get firstRunRuleSafetyText =>
+      'Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di\' a qualcuno dove vai.';
+
+  @override
+  String get firstRunRuleToxicTitle => 'Le piante non si mangiano';
+
+  @override
+  String get firstRunRuleToxicText =>
+      'Molte piante sono tossiche. Non mangiarle e non usarle per curarti: le pozioni del gioco sono di fantasia e non danno indicazioni d\'uso reali.';
+
+  @override
+  String get firstRunRuleIdentifyTitle => 'Il riconoscimento può sbagliare';
+
+  @override
+  String get firstRunRuleIdentifyText =>
+      'Pl@ntNet riconosce le piante dalle foto, ma può sbagliare. Gli avvisi di tossicità sono da verificare.';
+
+  @override
+  String get firstRunRulePrivacyTitle => 'Le tue foto e la tua posizione';
+
+  @override
+  String get firstRunRulePrivacyText =>
+      'Le foto vanno a Pl@ntNet solo per riconoscere la pianta. La posizione delle tue Stazioni resta sul tuo telefono: non si mostra e non si condivide.';
+
+  @override
+  String get firstRunTermsFooter =>
+      'Toccando Accetto confermi di aver letto queste regole e di giocare con prudenza e rispetto.';
+
+  @override
+  String get firstRunAccept => 'Accetto';
+
+  @override
+  String get firstRunCameraTitle => 'Le foto delle piante';
+
+  @override
+  String get firstRunCameraText =>
+      'Per Incontrare una pianta la fotografi con la fotocamera dell\'app: la pianta intera, una foglia e il fiore se c\'è. Così Pl@ntNet la riconosce e la tua foto entra nell\'Erbario.';
+
+  @override
+  String get firstRunCameraAllow => 'Consenti';
+
+  @override
+  String get firstRunCameraDenied =>
+      'Senza fotocamera non puoi Incontrare le piante. Puoi dare il permesso quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String get firstRunLocationTitle => 'La posizione';
+
+  @override
+  String get firstRunLocationText =>
+      'Dove fotografi una pianta nasce una Stazione: lì potrai tornare ad Attingere. Serve la posizione precisa, solo mentre usi l\'app. Le tue Stazioni restano sul telefono: non si mostrano e non si condividono.';
+
+  @override
+  String get firstRunLocationAllow => 'Attiva';
+
+  @override
+  String get firstRunLocationDenied =>
+      'Senza posizione gli Incontri valgono, ma non nascono Stazioni. Puoi attivarla quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String get firstRunLocationApproximate =>
+      'Con la posizione approssimativa le Stazioni non sono precise. Puoi scegliere la posizione precisa dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String get firstRunOpenSettings => 'Apri le impostazioni';
+
+  @override
+  String get firstRunNext => 'Avanti';
+
+  @override
+  String get firstRunReadyTitle => 'Sei pronto a giocare';
+
+  @override
+  String get firstRunReadyText =>
+      'Il tutorial ti accompagna nel primo giro, tutto da casa: fotografi un\'aromatica di cucina, la studi e prepari la tua prima pozione.';
+
+  @override
+  String get firstRunStartTutorial => 'Fai il tutorial';
+
+  @override
+  String get firstRunLater => 'Più tardi';
+
+  @override
+  String get firstRunLaterNote =>
+      'Il tutorial resta in Home: lo fai quando vuoi.';
+
+  @override
+  String firstRunProgress(int step, int total) {
+    return 'Passo $step di $total';
+  }
 }

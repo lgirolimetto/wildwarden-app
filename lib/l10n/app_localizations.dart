@@ -3584,6 +3584,228 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.'**
   String get stationsNote;
+
+  /// No description provided for @firstRunWelcomeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Benvenuto in Druid'**
+  String get firstRunWelcomeTitle;
+
+  /// No description provided for @firstRunWelcomeIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei un erborista: trovi le piante vere, le fotografi, le studi e con le loro Essenze prepari pozioni di fantasia. Prima di cominciare, le regole del gioco nel mondo vero.'**
+  String get firstRunWelcomeIntro;
+
+  /// No description provided for @firstRunRuleNoPickTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa, non raccogliere'**
+  String get firstRunRuleNoPickTitle;
+
+  /// No description provided for @firstRunRuleNoPickText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le piante non si raccolgono mai: si fotografano e restano dove sono. Non strappare foglie o fiori e non calpestarle.'**
+  String get firstRunRuleNoPickText;
+
+  /// No description provided for @firstRunRuleProtectedTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie e aree protette'**
+  String get firstRunRuleProtectedTitle;
+
+  /// No description provided for @firstRunRuleProtectedText.
+  ///
+  /// In it, this message translates to:
+  /// **'Alcune specie sono protette dalla legge. Nei parchi e nelle riserve resta sui sentieri e rispetta i loro regolamenti.'**
+  String get firstRunRuleProtectedText;
+
+  /// No description provided for @firstRunRulePrivateTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Niente proprietà private'**
+  String get firstRunRulePrivateTitle;
+
+  /// No description provided for @firstRunRulePrivateText.
+  ///
+  /// In it, this message translates to:
+  /// **'Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.'**
+  String get firstRunRulePrivateText;
+
+  /// No description provided for @firstRunRuleDaylightTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Con la luce del giorno'**
+  String get firstRunRuleDaylightTitle;
+
+  /// No description provided for @firstRunRuleDaylightText.
+  ///
+  /// In it, this message translates to:
+  /// **'Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.'**
+  String get firstRunRuleDaylightText;
+
+  /// No description provided for @firstRunRuleSafetyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Attenzione a dove metti i piedi'**
+  String get firstRunRuleSafetyTitle;
+
+  /// No description provided for @firstRunRuleSafetyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di\' a qualcuno dove vai.'**
+  String get firstRunRuleSafetyText;
+
+  /// No description provided for @firstRunRuleToxicTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le piante non si mangiano'**
+  String get firstRunRuleToxicTitle;
+
+  /// No description provided for @firstRunRuleToxicText.
+  ///
+  /// In it, this message translates to:
+  /// **'Molte piante sono tossiche. Non mangiarle e non usarle per curarti: le pozioni del gioco sono di fantasia e non danno indicazioni d\'uso reali.'**
+  String get firstRunRuleToxicText;
+
+  /// No description provided for @firstRunRuleIdentifyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il riconoscimento può sbagliare'**
+  String get firstRunRuleIdentifyTitle;
+
+  /// No description provided for @firstRunRuleIdentifyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet riconosce le piante dalle foto, ma può sbagliare. Gli avvisi di tossicità sono da verificare.'**
+  String get firstRunRuleIdentifyText;
+
+  /// No description provided for @firstRunRulePrivacyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le tue foto e la tua posizione'**
+  String get firstRunRulePrivacyTitle;
+
+  /// No description provided for @firstRunRulePrivacyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le foto vanno a Pl@ntNet solo per riconoscere la pianta. La posizione delle tue Stazioni resta sul tuo telefono: non si mostra e non si condivide.'**
+  String get firstRunRulePrivacyText;
+
+  /// No description provided for @firstRunTermsFooter.
+  ///
+  /// In it, this message translates to:
+  /// **'Toccando Accetto confermi di aver letto queste regole e di giocare con prudenza e rispetto.'**
+  String get firstRunTermsFooter;
+
+  /// No description provided for @firstRunAccept.
+  ///
+  /// In it, this message translates to:
+  /// **'Accetto'**
+  String get firstRunAccept;
+
+  /// No description provided for @firstRunCameraTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le foto delle piante'**
+  String get firstRunCameraTitle;
+
+  /// No description provided for @firstRunCameraText.
+  ///
+  /// In it, this message translates to:
+  /// **'Per Incontrare una pianta la fotografi con la fotocamera dell\'app: la pianta intera, una foglia e il fiore se c\'è. Così Pl@ntNet la riconosce e la tua foto entra nell\'Erbario.'**
+  String get firstRunCameraText;
+
+  /// No description provided for @firstRunCameraAllow.
+  ///
+  /// In it, this message translates to:
+  /// **'Consenti'**
+  String get firstRunCameraAllow;
+
+  /// No description provided for @firstRunCameraDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza fotocamera non puoi Incontrare le piante. Puoi dare il permesso quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get firstRunCameraDenied;
+
+  /// No description provided for @firstRunLocationTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La posizione'**
+  String get firstRunLocationTitle;
+
+  /// No description provided for @firstRunLocationText.
+  ///
+  /// In it, this message translates to:
+  /// **'Dove fotografi una pianta nasce una Stazione: lì potrai tornare ad Attingere. Serve la posizione precisa, solo mentre usi l\'app. Le tue Stazioni restano sul telefono: non si mostrano e non si condividono.'**
+  String get firstRunLocationText;
+
+  /// No description provided for @firstRunLocationAllow.
+  ///
+  /// In it, this message translates to:
+  /// **'Attiva'**
+  String get firstRunLocationAllow;
+
+  /// No description provided for @firstRunLocationDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza posizione gli Incontri valgono, ma non nascono Stazioni. Puoi attivarla quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get firstRunLocationDenied;
+
+  /// No description provided for @firstRunLocationApproximate.
+  ///
+  /// In it, this message translates to:
+  /// **'Con la posizione approssimativa le Stazioni non sono precise. Puoi scegliere la posizione precisa dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get firstRunLocationApproximate;
+
+  /// No description provided for @firstRunOpenSettings.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri le impostazioni'**
+  String get firstRunOpenSettings;
+
+  /// No description provided for @firstRunNext.
+  ///
+  /// In it, this message translates to:
+  /// **'Avanti'**
+  String get firstRunNext;
+
+  /// No description provided for @firstRunReadyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei pronto a giocare'**
+  String get firstRunReadyTitle;
+
+  /// No description provided for @firstRunReadyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial ti accompagna nel primo giro, tutto da casa: fotografi un\'aromatica di cucina, la studi e prepari la tua prima pozione.'**
+  String get firstRunReadyText;
+
+  /// No description provided for @firstRunStartTutorial.
+  ///
+  /// In it, this message translates to:
+  /// **'Fai il tutorial'**
+  String get firstRunStartTutorial;
+
+  /// No description provided for @firstRunLater.
+  ///
+  /// In it, this message translates to:
+  /// **'Più tardi'**
+  String get firstRunLater;
+
+  /// No description provided for @firstRunLaterNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial resta in Home: lo fai quando vuoi.'**
+  String get firstRunLaterNote;
+
+  /// No description provided for @firstRunProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'Passo {step} di {total}'**
+  String firstRunProgress(int step, int total);
 }
 
 class _AppLocalizationsDelegate

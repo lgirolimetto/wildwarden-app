@@ -1783,5 +1783,52 @@
       }
     }
   },
-  "stationsNote": "Solo sul tuo telefono: il punto preciso non si mostra e non si condivide."
+  "stationsNote": "Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.",
+  "firstRunWelcomeTitle": "Benvenuto in Druid",
+  "firstRunWelcomeIntro": "Sei un erborista: trovi le piante vere, le fotografi, le studi e con le loro Essenze prepari pozioni di fantasia. Prima di cominciare, le regole del gioco nel mondo vero.",
+  "firstRunRuleNoPickTitle": "Fotografa, non raccogliere",
+  "firstRunRuleNoPickText": "Le piante non si raccolgono mai: si fotografano e restano dove sono. Non strappare foglie o fiori e non calpestarle.",
+  "firstRunRuleProtectedTitle": "Specie e aree protette",
+  "firstRunRuleProtectedText": "Alcune specie sono protette dalla legge. Nei parchi e nelle riserve resta sui sentieri e rispetta i loro regolamenti.",
+  "firstRunRulePrivateTitle": "Niente proprietà private",
+  "firstRunRulePrivateText": "Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.",
+  "firstRunRuleDaylightTitle": "Con la luce del giorno",
+  "firstRunRuleDaylightText": "Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.",
+  "firstRunRuleSafetyTitle": "Attenzione a dove metti i piedi",
+  "firstRunRuleSafetyText": "Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di' a qualcuno dove vai.",
+  "firstRunRuleToxicTitle": "Le piante non si mangiano",
+  "firstRunRuleToxicText": "Molte piante sono tossiche. Non mangiarle e non usarle per curarti: le pozioni del gioco sono di fantasia e non danno indicazioni d'uso reali.",
+  "firstRunRuleIdentifyTitle": "Il riconoscimento può sbagliare",
+  "firstRunRuleIdentifyText": "Pl@ntNet riconosce le piante dalle foto, ma può sbagliare. Gli avvisi di tossicità sono da verificare.",
+  "firstRunRulePrivacyTitle": "Le tue foto e la tua posizione",
+  "firstRunRulePrivacyText": "Le foto vanno a Pl@ntNet solo per riconoscere la pianta. La posizione delle tue Stazioni resta sul tuo telefono: non si mostra e non si condivide.",
+  "firstRunTermsFooter": "Toccando Accetto confermi di aver letto queste regole e di giocare con prudenza e rispetto.",
+  "firstRunAccept": "Accetto",
+  "firstRunCameraTitle": "Le foto delle piante",
+  "firstRunCameraText": "Per Incontrare una pianta la fotografi con la fotocamera dell'app: la pianta intera, una foglia e il fiore se c'è. Così Pl@ntNet la riconosce e la tua foto entra nell'Erbario.",
+  "firstRunCameraAllow": "Consenti",
+  "firstRunCameraDenied": "Senza fotocamera non puoi Incontrare le piante. Puoi dare il permesso quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "firstRunLocationTitle": "La posizione",
+  "firstRunLocationText": "Dove fotografi una pianta nasce una Stazione: lì potrai tornare ad Attingere. Serve la posizione precisa, solo mentre usi l'app. Le tue Stazioni restano sul telefono: non si mostrano e non si condividono.",
+  "firstRunLocationAllow": "Attiva",
+  "firstRunLocationDenied": "Senza posizione gli Incontri valgono, ma non nascono Stazioni. Puoi attivarla quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "firstRunLocationApproximate": "Con la posizione approssimativa le Stazioni non sono precise. Puoi scegliere la posizione precisa dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "firstRunOpenSettings": "Apri le impostazioni",
+  "firstRunNext": "Avanti",
+  "firstRunReadyTitle": "Sei pronto a giocare",
+  "firstRunReadyText": "Il tutorial ti accompagna nel primo giro, tutto da casa: fotografi un'aromatica di cucina, la studi e prepari la tua prima pozione.",
+  "firstRunStartTutorial": "Fai il tutorial",
+  "firstRunLater": "Più tardi",
+  "firstRunLaterNote": "Il tutorial resta in Home: lo fai quando vuoi.",
+  "firstRunProgress": "Passo {step} di {total}",
+  "@firstRunProgress": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  }
 }

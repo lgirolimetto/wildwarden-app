@@ -1,6 +1,8 @@
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/l10n/app_localizations.dart';
 import 'package:druid_app/user_interface/routes.dart';
+import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
+import 'package:druid_app/business_logic/rules/first_run.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +20,7 @@ class DruidApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       localeResolutionCallback: resolveLocale,
-      initialRoute: Routes.home,
+      initialRoute: needsFirstRun(Get.find<IPreferences>()) ? Routes.firstRun : Routes.home,
       getPages: appPages,
     ),
   );

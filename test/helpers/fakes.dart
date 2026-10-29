@@ -6,6 +6,7 @@ import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
+import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -132,4 +133,31 @@ class InMemoryFieldTestLog implements IFieldTestLog {
 
   @override
   Future<void> clear() async => rows.clear();
+}
+
+/// Permessi finti: rispondono come si chiede e contano le richieste.
+class FakePermissions implements IPermissions {
+  PermissionOutcome camera;
+  PermissionOutcome location;
+  final requests = <String>[];
+
+  FakePermissions({this.camera = PermissionOutcome.granted, this.location = PermissionOutcome.granted});
+
+  @override
+  Future<Validation<PermissionOutcome>> requestCamera() async {
+    requests.add('camera');
+    return Valid(camera);
+  }
+
+  @override
+  Future<Validation<PermissionOutcome>> requestLocation() async {
+    requests.add('location');
+    return Valid(location);
+  }
+
+  @override
+  Future<Validation<bool>> openAppSettings() async {
+    requests.add('settings');
+    return Valid(true);
+  }
 }
