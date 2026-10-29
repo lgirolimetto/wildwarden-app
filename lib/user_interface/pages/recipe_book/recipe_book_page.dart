@@ -99,10 +99,11 @@ class RecipeBookView extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.m),
             sliver: SliverToBoxAdapter(
               child: Text(
+                // Il conto di tutto il Ricettario, anche con il filtro: dice che cosa hai, non che cosa vedi.
                 context.l10n.recipeBookPagesSummary(
-                  pages.length,
+                  all.length,
                   recipeBookOf(catalog).pages.length,
-                  pages.where((p) => p.complete).length,
+                  all.where((p) => p.complete).length,
                 ),
                 key: const ValueKey('recipe-book-pages-summary'),
                 style: context.texts.bodySmall?.copyWith(color: context.druid.hint),

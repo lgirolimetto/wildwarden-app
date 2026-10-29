@@ -186,6 +186,11 @@ void main() {
       await tester.pumpAndSettle();
       expect(malva, findsOneWidget);
       expect(fagus, findsNothing, reason: 'la Comune del faggio vuole Vis di faggio, che non hai');
+      expect(
+        find.text('2 Pagine su 4 · 0 complete'),
+        findsOneWidget,
+        reason: 'il conto resta quello di tutto il Ricettario',
+      );
     });
 
     testWidgets('con il filtro e niente da preparare, lo dice', (tester) async {
