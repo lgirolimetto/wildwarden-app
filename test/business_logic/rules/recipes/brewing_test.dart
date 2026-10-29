@@ -1,5 +1,6 @@
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
+import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
@@ -120,5 +121,32 @@ void main() {
     );
     final back = GameEvent.decode(type: event.type, payload: event.encodePayload(), occurredAt: feb);
     expect(back.payload(), event.payload());
+  });
+
+  group('quante pozioni', () {
+    test('una Tavola: quante ne prepari di fila, con lo slot libero dalla pianta che ha più Vis', () {
+      final brewable = brewableOf(catalog, malvaCommon.id)!;
+      final state = GameState.replay([drawn(malva, vis: 30), drawn(fagus)]);
+      expect(brewsOf(brewable, state.essences), 2, reason: 'Malva + Malva, poi Malva + Faggio');
+      expect(brewsOf(brewable, GameState.empty.essences), 0);
+      final plenty = GameState.replay([drawn(malva, vis: 200), drawn(fagus, vis: 200)]);
+      expect(brewsOf(brewable, plenty.essences), brewCountCap);
+    });
+
+    test('un gruppo con le Vis condivise: il minimo che prepari comunque, e "+" se ordinando bene ne fai di più', () {
+      final x = Essence(index: 0, speciesSci: malva, traits: const [], purity: 0.4, vis: 30, drawnAt: feb);
+      Brewable needs(String id, int vis) => Brewable(
+        id: id,
+        grade: Grade.common,
+        ingredients: [BrewIngredient(speciesSci: malva, traits: const [], vis: vis)],
+        drinkable: true,
+        effect: PotionEffect.regrowth,
+      );
+      final tincture = needs('tintura', 10), infusion = needs('infuso', 20);
+      // 3 Tinture, oppure 1 Tintura e 1 Infuso: almeno 2, ma si può arrivare a 3.
+      expect(groupBrews([tincture, infusion], [x]), (least: 2, more: true));
+      expect(groupBrews([tincture], [x]), (least: 3, more: false));
+      expect(groupBrews([infusion], [x.withVis(10)]), (least: 0, more: false));
+    });
   });
 }

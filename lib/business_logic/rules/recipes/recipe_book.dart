@@ -126,7 +126,8 @@ class RecipeBook {
   /// Le pagine della Zona: il Ricettario da completare e il Bottino dell'Esperienza.
   final List<PlantPage> pages;
 
-  /// Le pagine delle aromatiche del tutorial, solo con la Comune: non entrano nel Bottino né nel conto delle pagine.
+  /// Le pagine delle aromatiche del tutorial, con la Comune e la Non comune (il compagno scritto nel loro catalogo):
+  /// non entrano nel Bottino né nel conto delle pagine.
   final List<PlantPage> kitchenPages;
   final Map<String, PlantPage> _bySci;
   final Map<String, PlantRecipe> _byId;
@@ -155,17 +156,18 @@ class _Builder {
 
   _Builder(this.catalog) : climate = catalog.climate, toxic = catalog.safety.keys.toSet(), ranks = _traitRanks(catalog);
 
-  /// Le pagine della Zona e, a parte, quelle delle aromatiche del tutorial: solo la Comune (tratti d'elezione ed
-  /// effetti scritti a mano nel loro catalogo). Le pagine della Zona restano quelle dell'anteprima del core.
+  /// Le pagine della Zona e, a parte, quelle delle aromatiche del tutorial: la Comune e una Non comune con la prima
+  /// Affinità e il compagno del loro catalogo (Affinità ed effetti scritti a mano; capitolo 03, 2026-10-29). Le pagine
+  /// della Zona restano quelle dell'anteprima del core.
   RecipeBook build() => RecipeBook._(
     [for (final s in catalog.species) _page(s)],
-    [for (final s in catalog.kitchen) _page(s, commonOnly: true)],
+    [for (final s in catalog.kitchen) _page(s, kitchen: true)],
   );
 
-  PlantPage _page(Species plant, {bool commonOnly = false}) {
+  PlantPage _page(Species plant, {bool kitchen = false}) {
     final favoured = plant.favouredTraits ?? _favouredTraits(plant);
     final vocation = plant.vocation ?? _vocation(plant, toxic.contains(plant.sci));
-    final (uncommon, rare) = commonOnly ? (0, 0) : _pageShape[plant.grade]!;
+    final (uncommon, rare) = kitchen ? (plant.companion == null ? 0 : 1, 0) : _pageShape[plant.grade]!;
     final cards = <(Grade, List<Trait>, PotionEffect)>[
       (Grade.common, const [], vocation[0]),
       for (var i = 0; i < min(uncommon, favoured.length); i++)
@@ -184,11 +186,22 @@ class _Builder {
       plant: plant,
       favouredTraits: favoured,
       vocation: vocation,
-      recipes: [for (final (grade, traits, effect) in cards) _recipe(plant, grade, traits, effect, used)],
+      recipes: [
+        for (final (grade, traits, effect) in cards) _recipe(plant, grade, traits, effect, used, kitchen: kitchen),
+      ],
     );
   }
 
-  PlantRecipe _recipe(Species plant, Grade grade, List<Trait> traits, PotionEffect effect, Set<String> used) {
+  /// [kitchen]: le aromatiche del tutorial chiedono una dose sola per ingrediente anche nella Non comune (10 Vis: un
+  /// Attingere a testa basta, il tutorial intermedio si chiude in una sessione; capitolo 03, 2026-10-29).
+  PlantRecipe _recipe(
+    Species plant,
+    Grade grade,
+    List<Trait> traits,
+    PotionEffect effect,
+    Set<String> used, {
+    bool kitchen = false,
+  }) {
     final sorted = [...traits]..sort((a, b) => a.index.compareTo(b.index));
     final rows = _ingredients(plant, grade, sorted, used);
     final withToxic = rows.any((r) => r.plant != null && toxic.contains(r.plant!.sci));
@@ -201,7 +214,7 @@ class _Builder {
       base: _base(plant, grade, effect, withToxic),
       ingredients: [
         for (final r in rows)
-          RecipeIngredient(speciesSci: r.plant?.sci, quantity: recipeQuantity[grade]!, traits: r.traits),
+          RecipeIngredient(speciesSci: r.plant?.sci, quantity: kitchen ? 1 : recipeQuantity[grade]!, traits: r.traits),
       ],
       months: [for (final m in _window(rows)) m + 1],
     );
@@ -231,6 +244,11 @@ class _Builder {
       return chosen;
     }
 
+    // Le aromatiche del tutorial: il compagno è quello del loro catalogo (le aromatiche non stanno nei compagni
+    // d'habitat).
+    if (grade == Grade.uncommon && plant.companion != null) {
+      return [...rows, _Row(catalog.speciesBySci(plant.companion!), const []), const _Row(null, [])];
+    }
     if (grade == Grade.uncommon) return [...rows, _Row(pick(mainMonths), const []), const _Row(null, [])];
     final second = traits[1];
     final holder = pick(mainMonths, second);

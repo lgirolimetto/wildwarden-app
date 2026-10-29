@@ -15,8 +15,9 @@ import 'package:druid_app/business_logic/rules/field/station_state.dart';
 import 'package:druid_app/business_logic/rules/field/suspension.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
+import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/tutorial.dart';
-import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
+import 'package:druid_app/business_logic/rules/tutorial_intermediate.dart';
 import 'package:druid_app/controllers/field/capture_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -346,6 +347,83 @@ void main() {
       expect(currentTutorialStep(state), TutorialStep.brew);
       final ready = readyRecipes(withKitchen(), state, clock.now()).where((r) => r.ready);
       expect(ready.map((r) => r.brewable.id), hasLength(1));
+    });
+  });
+
+  group('tutorial intermedio', () {
+    Catalog withKitchen() => smallCatalog(kitchen: true);
+    final gps = FakeLocationSampler(at: (latitude: 44.48301, longitude: 11.35301, accuracy: 6));
+    // Il cielo coperto: niente Sole tra le Qualia del momento.
+    const cloudy = TakenPhoto(
+      photos: [PlantPhoto('/qui.jpg', PlantOrgan.whole)],
+      traits: [Trait.waningMoon, Trait.rain],
+      visGathered: 0.3,
+      verified: true,
+    );
+
+    /// Il Base fatto con il rosmarino, il Livello 2 superato, l'Intermedio iniziato: si è al passo del Sole.
+    Future<Station> atSunStep() async {
+      progress = ProgressController(store, clock, catalog: withKitchen);
+      await progress.load();
+      for (final m in [OnboardingMark.tutorialStarted, OnboardingMark.tutorialFinished]) {
+        await progress.markOnboarding(m);
+      }
+      await progress.encounter('Salvia rosmarinus', method: EncounterMethod.photo);
+      await progress.record(
+        StationCreated(
+          station: Station(
+            id: 'rosmarino',
+            speciesSci: 'Salvia rosmarinus',
+            kind: StationKind.zone,
+            latitude: 44.483,
+            longitude: 11.353,
+            accuracy: 5,
+            confidence: 0.8,
+            createdAt: clock.now(),
+            tutorial: true,
+          ),
+        ),
+      );
+      final station = progress.state.stations.single;
+      await progress.drawAtStation(station, vis: 10);
+      for (final level in [1, 2]) {
+        await progress.record(
+          LevelPassed(speciesSci: 'Salvia rosmarinus', level: level, xp: 0, occurredAt: clock.now()),
+        );
+      }
+      clock.advance(const Duration(minutes: 5));
+      await progress.markOnboarding(OnboardingMark.intermediateStarted);
+      clock.advance(const Duration(minutes: 5));
+      return station;
+    }
+
+    test('al passo del Sole: la Stazione appena usata si sblocca, Vis piena e il Sole prestato', () async {
+      final station = await atSunStep();
+      final c = capture(camera: _Camera(cloudy), location: gps, weather: FakeWeatherService(), catalog: withKitchen);
+      await c.start();
+      expect(c.statusOf(station), StationStatus.ready, reason: 'il tutorial non fa aspettare la rigenerazione');
+
+      await c.drawAt(station);
+      final essence = progress.state.essences.last;
+      expect(essence.traits, ['waningMoon', 'rain', 'sun']);
+      expect(essence.vis, visPerDraw, reason: 'con le regole della cucina la Vis è piena');
+      expect(c.lentSun, isTrue);
+      expect(currentIntermediateStep(withKitchen(), progress.state), IntermediateStep.companion);
+    });
+
+    test('con il Sole vero nessuna eccezione', () async {
+      final station = await atSunStep();
+      const sunny = TakenPhoto(
+        photos: [PlantPhoto('/qui.jpg', PlantOrgan.whole)],
+        traits: [Trait.waningMoon, Trait.sun],
+        visGathered: 0.3,
+        verified: true,
+      );
+      final c = capture(camera: _Camera(sunny), location: gps, weather: FakeWeatherService(), catalog: withKitchen);
+      await c.start();
+      await c.drawAt(station);
+      expect(progress.state.essences.last.traits, ['waningMoon', 'sun']);
+      expect(c.lentSun, isFalse);
     });
   });
 

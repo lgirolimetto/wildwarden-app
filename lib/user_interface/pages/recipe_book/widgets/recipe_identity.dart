@@ -44,8 +44,9 @@ class RecipeNameText extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => TextWithSpecies(
+  Widget build(BuildContext context) => RecipeTitle(
     recipeNameOf(context, catalog, state, recipeId),
+    full: recipeNameOf(context, catalog, GameState.empty, recipeId),
     plant: recipePlantNameOf(context, catalog, recipeId),
     style: style,
     textAlign: textAlign,
@@ -82,3 +83,72 @@ class RecipeIdVessel extends StatelessWidget {
     return RecipeVessel(recipe: recipe, size: size);
   }
 }
+
+/// Il nome di una ricetta con il nome della pianta nello stile delle specie e i pezzi che mancano ([missingPiece])
+/// **criptati** con "#", nello stesso carattere del nome (capitolo 02, 2026-10-29): lunghi quanto il pezzo vero di
+/// [full]. Si capisce che mancano delle parole del nome e quante sono.
+class RecipeTitle extends StatelessWidget {
+  final String text;
+  final String? plant;
+
+  /// Il nome intero, per la lunghezza dei pezzi criptati; `null` = "#####" per pezzo.
+  final String? full;
+  final TextStyle? style;
+  final int? maxLines;
+  final TextAlign? textAlign;
+
+  const RecipeTitle(this.text, {super.key, required this.plant, this.full, this.style, this.maxLines, this.textAlign});
+
+  @override
+  Widget build(BuildContext context) {
+    final base = style ?? DefaultTextStyle.of(context).style;
+    final pieces = text.split(missingPiece);
+    final hidden = _hiddenPieces(pieces, full);
+    var plantDone = false;
+    List<InlineSpan> segment(String part) {
+      final at = plantDone || plant == null || plant!.isEmpty ? -1 : part.indexOf(plant!);
+      if (at < 0) return [TextSpan(text: part)];
+      plantDone = true;
+      return [
+        TextSpan(text: part.substring(0, at)),
+        TextSpan(text: plant, style: speciesNameStyle(context, base)),
+        TextSpan(text: part.substring(at + plant!.length)),
+      ];
+    }
+
+    return Text.rich(
+      TextSpan(
+        children: [
+          for (final (i, part) in pieces.indexed) ...[
+            if (i > 0) TextSpan(text: cipherWord(hidden[i - 1])),
+            ...segment(part),
+          ],
+        ],
+      ),
+      style: base,
+      maxLines: maxLines,
+      overflow: maxLines == null ? null : TextOverflow.ellipsis,
+      textAlign: textAlign,
+    );
+  }
+}
+
+/// I pezzi che mancano, presi dal nome intero tra i pezzi noti ([known] è il nome parziale diviso dove mancano).
+List<String> _hiddenPieces(List<String> known, String? full) {
+  final count = known.length - 1;
+  if (full == null) return List.filled(count, 'xxxxx');
+  final hidden = <String>[];
+  var pos = known.first.length;
+  for (var i = 1; i < known.length; i++) {
+    final part = known[i];
+    final last = i == known.length - 1;
+    final at = last ? full.length - part.length : full.indexOf(part.isEmpty ? ' ' : part, pos);
+    if (at < pos) return List.filled(count, 'xxxxx');
+    hidden.add(full.substring(pos, at));
+    pos = at + part.length;
+  }
+  return hidden;
+}
+
+/// Un pezzo che manca, criptato: ogni lettera un "#", gli spazi e gli apostrofi restano ("del Presagio" → "### ########").
+String cipherWord(String word) => word.replaceAll(RegExp(r"[^\s'’]"), '#');

@@ -512,7 +512,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String masteryDraws(int done, int total, int traits, int needed) {
-    return 'Essenze Attinte: $done/$total · Tratti diversi: $traits/$needed';
+    return 'Essenze Attinte: $done/$total · Qualia diverse: $traits/$needed';
   }
 
   @override
@@ -526,7 +526,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get simulateDraw => 'Simula Attingere';
 
   @override
-  String get noTrait => 'Nessun Tratto';
+  String get noTrait => 'Nessuna Qualia';
 
   @override
   String get traitFrost => '❄️ Gelo';
@@ -538,7 +538,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitFog => '🌫 Nebbia';
 
   @override
-  String get traitSun => '☀️ Solare';
+  String get traitSun => '☀️ Sole';
 
   @override
   String get traitMoon => '🌕 Luna piena';
@@ -595,11 +595,11 @@ class AppLocalizationsIt extends AppLocalizations {
       'In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai Incontrato una specie e dove potrai tornare ad Attingere.';
 
   @override
-  String get glossTrattoTerm => 'Tratto';
+  String get glossTrattoTerm => 'Qualia';
 
   @override
   String get glossTrattoText =>
-      'Una condizione del momento in cui Attingi un\'Essenza (Luna piena, Pioggia, Nebbia, Rugiada…): un\'Essenza le porta tutte. Le Ricette chiedono Tratti diversi: la stessa pianta in giorni diversi dà Essenze diverse.';
+      'Una condizione del momento in cui Attingi un\'Essenza (Sole, Luna piena, Pioggia, Nebbia, Rugiada…): un\'Essenza le porta tutte. Le Ricette chiedono Qualia diverse: la stessa pianta in giorni diversi dà Essenze diverse. Si dice «una Qualia», «le Qualia», come la Vis.';
 
   @override
   String get glossAttingereTerm => 'Attingere';
@@ -925,7 +925,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get debugGradeSampleEffect =>
-      'La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).';
+      'La prossima volta che attingi con la Luna piena ha una Qualia in più (effetto di gioco).';
 
   @override
   String get badgeEncountered => 'Incontrata il';
@@ -961,7 +961,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get legendLevels => 'Livelli di studio';
 
   @override
-  String get legendTraits => 'Tratti delle Essenze';
+  String get legendTraits => 'Qualia delle Essenze';
 
   @override
   String get glossProtettaTerm => 'Protetta';
@@ -975,7 +975,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossEssenzaText =>
-      'Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.';
+      'Ciò che Attingi da una Stazione: ha le sue Vis, una Purezza, che cresce con la conoscenza della specie, e delle Qualia, date dalle condizioni del momento.';
 
   @override
   String get glossVisTerm => 'Vis';
@@ -1170,7 +1170,7 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get recipeBookFavouredTraits => 'Tratti d\'elezione';
+  String get recipeBookFavouredTraits => 'Affinità';
 
   @override
   String get recipeBookVocation => 'Vocazione';
@@ -1191,13 +1191,6 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return 'Ricettario · $_temp0 su $total';
   }
-
-  @override
-  String get recipeMonths => 'Quando si può fare';
-
-  @override
-  String get recipeNever =>
-      'Mai: gli ingredienti non si incontrano negli stessi mesi';
 
   @override
   String get recipeEffect => 'Effetto';
@@ -1224,7 +1217,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get effectOmenText =>
-      'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).';
+      'Per 7 giorni un\'Essenza può prendere un\'Affinità della pianta che non ha; se le ha già tutte, purezza in più (effetto di gioco).';
 
   @override
   String get effectAbundanceText =>
@@ -1253,11 +1246,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String recipeBookMythicsRow(String zone) {
     return 'Mitiche · $zone';
-  }
-
-  @override
-  String recipeBookMythicsCount(int known, int total) {
-    return '$known su $total';
   }
 
   @override
@@ -1430,17 +1418,6 @@ class AppLocalizationsIt extends AppLocalizations {
   String get troveFindNew => 'Nuova Tavola';
 
   @override
-  String troveFindIncomplete(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'mancano $count componenti',
-      one: 'manca 1 componente',
-    );
-    return 'Nuova Tavola · $_temp0';
-  }
-
-  @override
   String get troveFindPiece => 'Un componente trovato';
 
   @override
@@ -1465,8 +1442,8 @@ class AppLocalizationsIt extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Mancano $count componenti',
-      one: 'Manca 1 componente',
+      other: 'Non si conoscono ancora $count Componenti',
+      one: 'Non si conosce ancora 1 Componente',
     );
     return '$_temp0';
   }
@@ -1568,11 +1545,8 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get pantryNoTraits => 'Nessun tratto';
-
-  @override
   String get pantryEmpty =>
-      'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.';
+      'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con le loro Vis, la purezza e le Qualia. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.';
 
   @override
   String get debugSimulatePantry => 'Simula una Dispensa';
@@ -1589,21 +1563,7 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get labTabReady => 'Ricette pronte';
-
-  @override
   String get labTabShelf => 'Scaffale';
-
-  @override
-  String readyCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count pronte',
-      one: '1 pronta',
-    );
-    return '$_temp0';
-  }
 
   @override
   String shelfCount(int count) {
@@ -1615,27 +1575,6 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get readySection => 'Pronte da preparare';
-
-  @override
-  String get readyAlmost => 'Ti manca poco';
-
-  @override
-  String readyOthers(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Altre $count ricette chiedono',
-      one: 'Un\'altra ricetta chiede',
-    );
-    return '$_temp0 più Essenze: le trovi nel Ricettario.';
-  }
-
-  @override
-  String get readyEmpty =>
-      'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.';
 
   @override
   String get readyAnyPlant => 'una pianta a scelta';
@@ -1653,6 +1592,49 @@ class AppLocalizationsIt extends AppLocalizations {
   String brewFreeOption(int vis) {
     return '$vis Vis';
   }
+
+  @override
+  String get recipeReady => 'Preparabile';
+
+  @override
+  String get recipeBookOnlyReady => 'Mostra solo preparabili';
+
+  @override
+  String get recipeBookNoneReady =>
+      'Nessuna Tavola preparabile adesso. Apri una Tavola per vedere quali Essenze ti mancano.';
+
+  @override
+  String brewTouchEffect(String effect, int strength, String relation) {
+    return '$effect, forza $strength: $relation';
+  }
+
+  @override
+  String get brewTouchStrengthens => 'rafforza l\'effetto della pozione';
+
+  @override
+  String get brewTouchAdds => 'un piccolo effetto in più';
+
+  @override
+  String get brewNoTouch => 'Nessun Tocco';
+
+  @override
+  String get brewConfirmTitle => 'Prepari questa pozione?';
+
+  @override
+  String get brewConfirmSpends => 'Spendi';
+
+  @override
+  String get brewCancel => 'Annulla';
+
+  @override
+  String get brewConfirm => 'Conferma';
+
+  @override
+  String get glossPreparabileTerm => 'Preparabile';
+
+  @override
+  String get glossPreparabileText =>
+      'Una Tavola che puoi preparare adesso con le Vis della Dispensa: nel Ricettario ha l\'icona \"pronta\" e si trova con il filtro \"Mostra solo preparabili\".';
 
   @override
   String get potionTitle => 'Pozione';
@@ -1726,7 +1708,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossLaboratorioText =>
-      'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.';
+      'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa e Scaffale.';
 
   @override
   String get glossRicettarioTerm => 'Ricettario';
@@ -1754,14 +1736,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossDispensaText =>
-      'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.';
-
-  @override
-  String get glossRicettePronteTerm => 'Ricette pronte';
-
-  @override
-  String get glossRicettePronteText =>
-      'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.';
+      'Le Essenze attinte, ognuna con le sue Vis, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Qualia.';
 
   @override
   String get glossPozioneTerm => 'Pozione';
@@ -1796,7 +1771,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get legendVessel =>
-      'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.';
+      'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido le Qualia: uno strato per Qualia. Grigio se la Tavola è incompleta.';
 
   @override
   String get viewMet => 'Incontrate';
@@ -1833,7 +1808,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip07 =>
-      'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.';
+      'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con le Qualia restano per le ricette.';
 
   @override
   String get tip08 =>
@@ -1845,7 +1820,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip10 =>
-      'Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.';
+      'Nel Ricettario, il filtro \"Mostra solo preparabili\" lascia le Tavole che puoi preparare adesso; aprendo le altre vedi quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.';
 
   @override
   String get tip11 =>
@@ -1853,7 +1828,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip12 =>
-      'I Tratti di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.';
+      'Le Qualia di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Qualia servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.';
 
   @override
   String get tip13 =>
@@ -2268,7 +2243,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get firstRunRuleDaylightText =>
-      'Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.';
+      'Non uscire a giocare di notte o con poca luce. Le Qualia della luna valgono tutto il giorno: non serve mai.';
 
   @override
   String get firstRunRuleSafetyTitle => 'Attenzione a dove metti i piedi';
@@ -2416,7 +2391,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tutorialBrewBody =>
-      'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.';
+      'Nella barra si è acceso il Laboratorio: nel Ricettario trovi la Ricetta Comune pronta, preparala con le tue due Essenze. Le pozioni sono di fantasia.';
 
   @override
   String get tutorialTroveTitle => 'Il Bottino dell\'Esperienza';
@@ -2459,7 +2434,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get captureTutorialEssence =>
-      'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.';
+      'Ne hai Attinto la prima Essenza, con le Qualia di questo momento: la trovi nella Dispensa del Laboratorio.';
 
   @override
   String get sourcesLabel => 'Fonte: ';
@@ -2531,7 +2506,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get captureDrawnPantry =>
-      'La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.';
+      'La trovi nella Dispensa del Laboratorio, con le Qualia di questo momento.';
 
   @override
   String get stationsTitle => 'Le tue Stazioni';
@@ -2571,7 +2546,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get dykMoon =>
-      'I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.';
+      'Le Qualia della luna valgono tutto il giorno della fase: non serve uscire di notte.';
 
   @override
   String get dykNoPicking =>
@@ -2584,4 +2559,170 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get dykIsolation =>
       'Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis.';
+
+  @override
+  String get tip18 =>
+      'Attingi con lune e meteo diversi: non sai mai quali Qualia ti serviranno.';
+
+  @override
+  String get glossAffinitaTerm => 'Affinità';
+
+  @override
+  String get glossAffinitaText =>
+      'Come vive una pianta: la luce, l\'umidità, la quota. Ogni pianta ha anche 3 Qualia sue, che le sue Tavole Non comuni e Rare chiedono: le scopri trovando le Tavole.';
+
+  @override
+  String get affinityLightFull => 'Ama la luce piena.';
+
+  @override
+  String get affinityLightHalf => 'Sta bene a mezz\'ombra.';
+
+  @override
+  String get affinityLightShade => 'Ama l\'ombra.';
+
+  @override
+  String get affinityMoistureDry => 'Preferisce i terreni asciutti.';
+
+  @override
+  String get affinityMoistureDamp => 'Preferisce i terreni umidi.';
+
+  @override
+  String affinityBands(String bands) {
+    return 'Cresce $bands.';
+  }
+
+  @override
+  String get affinityBandPlain => 'in pianura';
+
+  @override
+  String get affinityBandHill => 'in collina';
+
+  @override
+  String get affinityBandMountain => 'in montagna';
+
+  @override
+  String get affinityAnd => ' e ';
+
+  @override
+  String recipePotionsLeast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Prepari almeno $count pozioni',
+      one: 'Prepari almeno 1 pozione',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recipePotionsExact(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Prepari $count pozioni',
+      one: 'Prepari 1 pozione',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get incompleteInfoTitle => 'La Tavola è incompleta';
+
+  @override
+  String get incompleteWhatTitle => 'I «?»';
+
+  @override
+  String get incompleteWhatText =>
+      'Sono i pezzi del nome che non conosci ancora, i Componenti: alla Non comune manca l\'effetto, alla Rara l\'effetto e una Qualia, alla Mitica le sue parole.';
+
+  @override
+  String get incompleteBrewTitle => 'Non si prepara ancora';
+
+  @override
+  String get incompleteBrewText =>
+      'Finché manca un Componente la Tavola resta nel Ricettario, ma non si prepara.';
+
+  @override
+  String get incompleteWhereTitle => 'Dove si trovano';
+
+  @override
+  String get incompleteWhereText =>
+      'Nei Bottini dell\'Esperienza del suo Grado o più alti: a volte un Bottino dà un Componente invece di una Tavola nuova. Oppure con il Riciclo dei doppioni, in fondo alla pagina del Bottino.';
+
+  @override
+  String get incompleteInfoTooltip => 'Che cosa manca';
+
+  @override
+  String get recipeQualiaUnknown => 'Una Qualia che non conosci ancora';
+
+  @override
+  String get intermediateIntroTitle => 'Il tutorial intermedio';
+
+  @override
+  String get intermediateIntroBody =>
+      'Ancora da casa, con le aromatiche: Attingi alla tua Stazione, leggi le Qualia dell\'Essenza e prepari una Ricetta Non comune, con il Tocco dello slot libero.';
+
+  @override
+  String intermediateLabel(int step, int total) {
+    return 'Tutorial intermedio · passo $step di $total';
+  }
+
+  @override
+  String get intermediateSkip => 'Salta il tutorial intermedio';
+
+  @override
+  String get intermediateHerbTitle => 'Fotografa un\'aromatica';
+
+  @override
+  String get intermediateHerbBody =>
+      'Il tutorial intermedio usa le aromatiche di cucina: salvia, rosmarino o basilico, anche in vaso.';
+
+  @override
+  String get intermediateStudyTitle => 'Studia il Livello 2';
+
+  @override
+  String intermediateStudyBody(String plant) {
+    return 'Supera il Livello 2 di $plant: impari la sua Ricetta Non comune, che chiede la pianta attinta con il Sole.';
+  }
+
+  @override
+  String get intermediateDrawSunTitle => 'Attingi con il Sole';
+
+  @override
+  String intermediateDrawSunBody(String plant) {
+    return 'Torna alla Stazione di $plant e Attingi: uno scatto, senza Pl@ntNet. Le Qualia del momento entrano nell\'Essenza, e la Non comune vuole il Sole.';
+  }
+
+  @override
+  String get intermediateCompanionTitle => 'Il compagno';
+
+  @override
+  String intermediateCompanionBody(String companion) {
+    return 'La Non comune chiede anche $companion, il suo compagno: Attingi alla sua Stazione o fotografalo, se non l\'hai ancora.';
+  }
+
+  @override
+  String get intermediateBrewTitle => 'La Non comune e il Tocco';
+
+  @override
+  String get intermediateBrewBody =>
+      'Nel Laboratorio prepara la Non comune: nello slot libero metti una terza specie e guarda il Tocco che dà alla pozione.';
+
+  @override
+  String get intermediateFinishedTitle => 'Hai finito il tutorial intermedio';
+
+  @override
+  String get intermediateFinishedBody =>
+      'Sai Attingere alla tua Stazione, leggere le Qualia e usare il Tocco. Fuori ti aspettano le piante della Zona.';
+
+  @override
+  String get intermediateActionFinish => 'Fatto';
+
+  @override
+  String get captureLentSun =>
+      'Il tutorial ti presta il Sole. Fuori, le Qualia le decide il cielo: con le nuvole niente Sole.';
+
+  @override
+  String get potionTouchHint =>
+      'La pianta che hai messo nello slot libero ha dato alla pozione il suo Tocco: quando la usi, aggiunge un piccolo effetto, il suo.';
 }

@@ -1,4 +1,5 @@
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
 
 /// Icona "incisa", come stampata a secco: un filo d'ombra in alto a sinistra e uno di luce in basso a destra sotto il
@@ -19,7 +20,18 @@ class EngravedIcon extends StatelessWidget {
   /// Specchia il segno da destra a sinistra (vedi [traitIconMirrored]).
   final bool mirrored;
 
-  const EngravedIcon(this.icon, {super.key, this.size = 20, this.color, this.surface, this.mirrored = false});
+  /// Riempimento delle icone Material Symbols (1 = piena); `null` = quello dell'icona.
+  final double? fill;
+
+  const EngravedIcon(
+    this.icon, {
+    super.key,
+    this.size = 20,
+    this.color,
+    this.surface,
+    this.mirrored = false,
+    this.fill,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +42,7 @@ class EngravedIcon extends StatelessWidget {
     final glyph = Icon(
       icon,
       size: size,
+      fill: fill,
       color: (color ?? (dark ? Colors.white : context.colors.onSurface)).withValues(alpha: dark ? 0.9 : 0.7),
       shadows: dark
           ? [
@@ -64,3 +77,28 @@ IconData? traitIconOf(String emoji) => switch (emoji) {
 /// Le icone delle mezze lune sono la stessa, specchiata: [Icons.contrast] ha la metà sinistra piena come 🌗 (luna
 /// calante), 🌓 (crescente) la vuole a destra.
 bool traitIconMirrored(String emoji) => emoji == '🌓';
+
+/// Una Qualia come icona incisa, senza testo: il nome tenendo premuto.
+class QualiaIcon extends StatelessWidget {
+  /// Il nome con l'emoji davanti ("☀️ Sole"), come lo scrivono i testi.
+  final String label;
+
+  const QualiaIcon({super.key, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final emoji = leadingEmoji(label);
+    final name = emoji == null ? label : label.substring(emoji.length).trim();
+    return Tooltip(
+      message: name,
+      child: Semantics(
+        label: name,
+        child: EngravedIcon(
+          (emoji == null ? null : traitIconOf(emoji)) ?? Icons.eco_outlined,
+          size: 22,
+          mirrored: emoji != null && traitIconMirrored(emoji),
+        ),
+      ),
+    );
+  }
+}

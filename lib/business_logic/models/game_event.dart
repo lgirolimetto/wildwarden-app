@@ -42,6 +42,11 @@ enum OnboardingMark {
 
   /// Il Bottino aperto almeno una volta (passo del tutorial).
   troveVisited,
+
+  /// Tutorial intermedio iniziato, saltato, finito (capitolo 03, 2026-10-29: dopo il Base, quando vuoi).
+  intermediateStarted,
+  intermediateSkipped,
+  intermediateFinished,
 }
 
 /// Evento di gioco. Si salvano solo eventi: livelli, PE ed erbario si ricalcolano rileggendoli

@@ -9,20 +9,27 @@ import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
-import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
-import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
+import 'package:druid_app/user_interface/pages/laboratory/brew_section.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
+import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
+import 'package:druid_app/business_logic/rules/economy.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
+import 'package:druid_app/user_interface/common_widgets/vis_badge.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/incomplete_info.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-/// Una Tavola del Ricettario aperta: nome, ingredienti (sempre con il nome della pianta, il tratto quando lo chiede),
-/// i mesi in cui si può fare e l'effetto.
+/// Una Tavola del Ricettario aperta: nome, ingredienti (sempre con il nome della pianta, il tratto quando lo chiede) e
+/// l'effetto. Niente mesi (2026-10-29): con le Vis nella Dispensa si prepara quando vuoi, e la stagione di ogni pianta è
+/// nella sua scheda, che si apre toccando l'ingrediente.
 class PlantRecipePage extends StatelessWidget {
   final String recipeId;
 
@@ -41,16 +48,23 @@ class PlantRecipePage extends StatelessWidget {
         grade: recipe.grade,
         vessel: RecipeVessel(recipe: recipe, size: 80, missing: missing),
         title: recipe.name(context.contentLanguage, missing: missing),
+        fullTitle: recipe.name(context.contentLanguage),
         titlePlant: plantWord(recipe.plant.name.resolve(context.contentLanguage)),
         subtitle: missing > 0 ? context.l10n.recipeMissingPieces(missing) : null,
         ingredients: [
           for (final i in recipe.ingredients)
-            (speciesSci: i.speciesSci, quantity: i.quantity, traits: i.traits, hidden: hiddenTraits),
+            (
+              speciesSci: i.speciesSci,
+              vis: i.quantity * EconomyRules.visPerQuantity,
+              traits: i.traits,
+              hidden: hiddenTraits,
+            ),
         ],
-        months: recipe.months,
         effect: hidden.contains(NamePiece.effect)
             ? context.l10n.recipeEffectUnknown
             : context.game.effectText(recipe.effect),
+        effectIcon: hidden.contains(NamePiece.effect) ? null : effectIconOf(recipe.effect),
+        incomplete: missing > 0,
         catalog: catalog,
       );
     },
@@ -81,6 +95,7 @@ class MythicRecipePage extends StatelessWidget {
           size: 80,
         ),
         title: mythic.name(lang, missing: missing),
+        fullTitle: mythic.name(lang),
         subtitle:
             '${context.l10n.mythicNumber(mythic.number.toString())} · '
             '${window == null ? context.l10n.mythicAllYear : context.l10n.mythicWindow(day(window.fromMonth, window.fromDay), day(window.toMonth, window.toDay))}'
@@ -88,10 +103,16 @@ class MythicRecipePage extends StatelessWidget {
         story: mythic.story.resolve(lang),
         ingredients: [
           for (final i in mythic.ingredients)
-            (speciesSci: i.speciesSci, quantity: i.quantity, traits: [?i.trait], hidden: const <Trait>{}),
+            (
+              speciesSci: i.speciesSci,
+              vis: i.quantity * EconomyRules.visPerQuantity,
+              traits: [?i.trait],
+              hidden: const <Trait>{},
+            ),
         ],
-        months: null,
         effect: mythic.effectText.resolve(lang),
+        effectIcon: missing > 0 ? null : effectIconOf(mythic.effect),
+        incomplete: missing > 0,
         catalog: catalog,
       );
     },
@@ -130,22 +151,29 @@ class _RecipeScaffold extends StatelessWidget {
 }
 
 /// [hidden]: i tratti che non sai ancora (il secondo tratto di una Rara incompleta), mostrati come "?".
-typedef _IngredientView = ({String? speciesSci, int quantity, List<Trait> traits, Set<Trait> hidden});
+/// [vis]: le Vis che chiede (le quantità della ricetta per [EconomyRules.visPerQuantity]).
+typedef _IngredientView = ({String? speciesSci, int vis, List<Trait> traits, Set<Trait> hidden});
 
 class _RecipeCard extends StatelessWidget {
   final Grade grade;
   final Widget vessel;
   final String title;
 
+  /// Il nome intero, per la lunghezza dei pezzi criptati.
+  final String fullTitle;
+
   /// Il nome della pianta dentro [title], nello stile delle specie (`null` per le Mitiche).
   final String? titlePlant;
   final String? subtitle;
   final String? story;
   final List<_IngredientView> ingredients;
-
-  /// Mesi (1-12) in cui si può fare; `null` per le Mitiche, che hanno la loro finestra di date.
-  final List<int>? months;
   final String effect;
+
+  /// L'icona dell'effetto, accanto al suo testo; `null` se l'effetto non si sa ancora.
+  final IconData? effectIcon;
+
+  /// Mancano dei Componenti: accanto al sottotitolo la ⓘ che spiega dove trovarli.
+  final bool incomplete;
   final Catalog catalog;
 
   const _RecipeCard({
@@ -153,12 +181,14 @@ class _RecipeCard extends StatelessWidget {
     required this.grade,
     required this.vessel,
     required this.title,
+    required this.fullTitle,
     this.titlePlant,
     this.subtitle,
     this.story,
     required this.ingredients,
-    required this.months,
     required this.effect,
+    this.effectIcon,
+    this.incomplete = false,
     required this.catalog,
   });
 
@@ -179,21 +209,27 @@ class _RecipeCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: Gaps.s),
-          TextWithSpecies(title, plant: titlePlant, style: context.texts.titleLarge),
-          if (subtitle != null) Text(subtitle!, style: hint),
+          RecipeTitle(title, plant: titlePlant, full: fullTitle, style: context.texts.titleLarge),
+          if (subtitle != null)
+            Row(
+              children: [
+                Flexible(child: Text(subtitle!, style: hint)),
+                if (incomplete) ...[const SizedBox(width: Gaps.xs), const IncompleteInfoButton()],
+              ],
+            ),
           if (story != null) ...[const SizedBox(height: Gaps.s), Text(story!)],
           const SizedBox(height: Gaps.m),
           for (final ingredient in ingredients) _IngredientRow(ingredient: ingredient, catalog: catalog),
-          if (months != null) ...[
-            const SizedBox(height: Gaps.s),
-            Text(context.l10n.recipeMonths, style: context.texts.labelMedium),
-            const SizedBox(height: Gaps.xs),
-            if (months!.isEmpty) Text(context.l10n.recipeNever, style: hint) else _MonthStrip(months: months!),
-          ],
           const SizedBox(height: Gaps.m),
           Text(context.l10n.recipeEffect, style: context.texts.labelMedium),
           const SizedBox(height: Gaps.xs),
-          Text(effect),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (effectIcon != null) ...[EngravedIcon(effectIcon!, size: 18), const SizedBox(width: Gaps.s)],
+              Expanded(child: Text(effect)),
+            ],
+          ),
         ],
       ),
     );
@@ -211,7 +247,7 @@ class _IngredientRow extends StatelessWidget {
     // Le piante hanno sempre nome e foto: gli ingredienti non si nascondono (decisione del 2026-10-23).
     final species = ingredient.speciesSci == null ? null : catalog.speciesBySci(ingredient.speciesSci!);
     final name = species == null ? context.l10n.recipeAnySpecies : context.game.name(species);
-    return Padding(
+    final row = Padding(
       padding: const EdgeInsets.only(bottom: Gaps.s),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,60 +257,37 @@ class _IngredientRow extends StatelessWidget {
             runSpacing: Gaps.chipRun,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(text: '${ingredient.quantity} × '),
-                    TextSpan(
-                      text: name,
-                      style: species == null ? null : speciesNameStyle(context, context.texts.bodyLarge),
-                    ),
-                  ],
-                ),
-                style: context.texts.bodyLarge,
+              VisBadge(ingredient.vis),
+              Text(
+                name,
+                style: species == null ? context.texts.bodyLarge : speciesNameStyle(context, context.texts.bodyLarge),
               ),
-              for (final t in ingredient.traits) Pill(ingredient.hidden.contains(t) ? '?' : context.game.trait(t)),
+              // La Qualia come icona incisa, senza spiegazione (sta nella legenda e nel glossario); quella che non sai
+              // ancora, di una Rara incompleta, è un "?".
+              for (final t in ingredient.traits)
+                ingredient.hidden.contains(t)
+                    ? Tooltip(
+                        message: context.l10n.recipeQualiaUnknown,
+                        child: const EngravedIcon(Icons.question_mark_rounded, size: 22),
+                      )
+                    : QualiaIcon(label: context.game.trait(t)),
             ],
           ),
-          // Chi legge la ricetta scopre quando vale il tratto che chiede.
-          for (final t in ingredient.traits)
-            if (!ingredient.hidden.contains(t)) Text(context.game.traitWhen(t), style: context.texts.bodySmall),
         ],
       ),
     );
-  }
-}
-
-/// I dodici mesi in fila: in evidenza quelli in cui la ricetta si può fare.
-class _MonthStrip extends StatelessWidget {
-  final List<int> months;
-
-  const _MonthStrip({required this.months});
-
-  @override
-  Widget build(BuildContext context) {
-    final lang = context.contentLanguage;
-    return Wrap(
-      key: const ValueKey('recipe-months'),
-      spacing: Gaps.xs,
-      runSpacing: Gaps.xs,
-      children: [
-        for (var m = 1; m <= 12; m++)
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: Gaps.s, vertical: Gaps.xs),
-            decoration: BoxDecoration(
-              color: months.contains(m) ? context.druid.levelColor(4).withValues(alpha: 0.25) : null,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              DateFormat.MMM(lang).format(DateTime(2000, m)),
-              style: context.texts.labelSmall?.copyWith(
-                color: months.contains(m) ? context.colors.onSurface : context.druid.hint,
-                fontWeight: months.contains(m) ? FontWeight.w600 : null,
-              ),
-            ),
-          ),
-      ],
+    if (species == null) return row;
+    // La pianta porta alla sua scheda: stagione, dove cresce e tutto il resto (niente informazioni ripetute qui).
+    return InkWell(
+      key: ValueKey('ingredient-${species.sci}'),
+      borderRadius: BorderRadius.circular(8),
+      onTap: () => Get.to<void>(() => SpeciesPage(speciesSci: species.sci)),
+      child: Row(
+        children: [
+          Expanded(child: row),
+          Icon(Icons.chevron_right_rounded, color: context.druid.hint),
+        ],
+      ),
     );
   }
 }

@@ -23,6 +23,7 @@ import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/stations/station_texts.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -118,7 +119,7 @@ class _CapturePageState extends State<CapturePage> {
                 ),
               ],
               CapturePhase.review => _review(context, capture),
-              CapturePhase.done => _done(context, capture.result!),
+              CapturePhase.done => _done(context, capture.result!, capture),
             },
           ],
         ),
@@ -205,6 +206,7 @@ class _CapturePageState extends State<CapturePage> {
         const SizedBox(height: Gaps.xs),
         Text([for (final t in essence.traits) ?Trait.values.asNameMap()[t]].map(context.game.trait).join(' · ')),
       ],
+      if (capture.lentSun) ...[const SizedBox(height: Gaps.s), const _LentSun()],
       const SizedBox(height: Gaps.s),
       Text(context.l10n.captureDrawnPantry),
       const SizedBox(height: Gaps.xl),
@@ -318,7 +320,7 @@ class _CapturePageState extends State<CapturePage> {
     return sci == null ? null : catalog?.origins[sci]?.resolve(context.contentLanguage);
   }
 
-  List<Widget> _done(BuildContext context, CaptureResult result) {
+  List<Widget> _done(BuildContext context, CaptureResult result, CaptureController capture) {
     final choice = result.choice;
     final name = choice.species == null
         ? (choice.candidate.commonNames.firstOrNull ?? choice.candidate.scientificName)
@@ -365,6 +367,7 @@ class _CapturePageState extends State<CapturePage> {
       if (result.essence) ...[
         const SizedBox(height: Gaps.s),
         Text(context.l10n.captureTutorialEssence, key: const ValueKey('capture-essence')),
+        if (capture.lentSun) ...[const SizedBox(height: Gaps.s), const _LentSun()],
       ],
       if (result.xp > 0) ...[
         const SizedBox(height: Gaps.s),
@@ -504,4 +507,22 @@ class _KindBadge extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Il Sole prestato dal tutorial intermedio, spiegato (capitolo 03, 2026-10-29): fuori le Qualia le decide il cielo.
+class _LentSun extends StatelessWidget {
+  const _LentSun();
+
+  @override
+  Widget build(BuildContext context) => ClayCard(
+    key: const ValueKey('capture-lent-sun'),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const EngravedIcon(Icons.wb_sunny_outlined, size: 22),
+        const SizedBox(width: Gaps.m),
+        Expanded(child: Text(context.l10n.captureLentSun)),
+      ],
+    ),
+  );
 }

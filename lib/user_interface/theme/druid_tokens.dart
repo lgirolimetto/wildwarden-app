@@ -1,5 +1,6 @@
 import 'dart:ui' show lerpDouble;
 
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:flutter/material.dart';
 
 /// Colori di una scheda decorativa (sfondo e testo sopra).
@@ -66,6 +67,9 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   /// Colore dei nomi delle specie; `null` = quello del testo.
   final Color? speciesName;
 
+  /// L'oro della purezza (la barretta nella Dispensa); `null` = quello del Sole tra le Qualia.
+  final Color? purity;
+
   /// Pagine dense (ricette, impostazioni, glossario…): sfondo e superfici più chiari, per dare contrasto dove la
   /// livrea è molto scura. `null` = come le altre pagine. Vedi `DenseArea`.
   final Color? denseBackground;
@@ -90,10 +94,14 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     this.traitColors = const [],
     this.plainPotion,
     this.speciesName,
+    this.purity,
     this.denseBackground,
     this.denseSurface,
   }) : assert(levelColors.length == 5, 'Servono 5 colori: livelli 0-4'),
        assert(accentCards.length >= 3, 'Servono almeno 3 schede decorative');
+
+  /// L'oro della purezza.
+  Color get purityColor => purity ?? traitColor(Trait.sun.index);
 
   Color levelColor(int level) => levelColors[level.clamp(0, levelColors.length - 1)];
 
@@ -125,6 +133,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     List<Color>? traitColors,
     Color? plainPotion,
     Color? speciesName,
+    Color? purity,
     Color? denseBackground,
     Color? denseSurface,
   }) => DruidTokens(
@@ -146,6 +155,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     traitColors: traitColors ?? this.traitColors,
     plainPotion: plainPotion ?? this.plainPotion,
     speciesName: speciesName ?? this.speciesName,
+    purity: purity ?? this.purity,
     denseBackground: denseBackground ?? this.denseBackground,
     denseSurface: denseSurface ?? this.denseSurface,
   );
@@ -182,6 +192,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
           : (t < 0.5 ? traitColors : other.traitColors),
       plainPotion: Color.lerp(plainPotion, other.plainPotion, t),
       speciesName: Color.lerp(speciesName, other.speciesName, t),
+      purity: Color.lerp(purity, other.purity, t),
       denseBackground: Color.lerp(denseBackground, other.denseBackground, t),
       denseSurface: Color.lerp(denseSurface, other.denseSurface, t),
     );

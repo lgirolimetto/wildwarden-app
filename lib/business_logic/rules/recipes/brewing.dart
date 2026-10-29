@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
@@ -222,3 +224,89 @@ List<Brewable> knownBrewables(Catalog catalog, GameState state) => [
   for (final id in {...knownRecipeIds(catalog, state), ...state.learnedRecipes.keys})
     if (!state.missingPieces.containsKey(id)) ?brewableOf(catalog, id),
 ];
+
+/// Una ricetta che conosci, con ciò che le manca per prepararla adesso.
+class ReadyRecipe {
+  final Brewable brewable;
+
+  /// Cosa manca (lo slot libero manca solo se nessuna pianta ha abbastanza Vis).
+  final List<BrewShortfall> missing;
+  final BrewBlock? block;
+
+  const ReadyRecipe(this.brewable, this.missing, this.block);
+
+  /// Preparabile adesso: hai tutte le Vis e nessuna finestra di date la ferma.
+  bool get ready => missing.isEmpty && block == null;
+}
+
+/// Le ricette che conosci, valutate con le Essenze della Dispensa.
+List<ReadyRecipe> readyRecipes(Catalog catalog, GameState state, DateTime now) => [
+  for (final brewable in knownBrewables(catalog, state))
+    () {
+      final plan = planBrew(brewable, state.essences);
+      final freeOk = freeSlotCandidates(brewable, state.essences).isNotEmpty;
+      return ReadyRecipe(brewable, [
+        for (final m in plan.missing)
+          if (m.ingredient.speciesSci != null || !freeOk) m,
+      ], brewBlock(state, brewable, now));
+    }(),
+];
+
+/// Gli id delle ricette preparabili adesso: l'icona "pronta" e il filtro del Ricettario (capitolo 02, 2026-10-29).
+Set<String> preparableIds(Catalog catalog, GameState state, DateTime now) => {
+  for (final r in readyRecipes(catalog, state, now))
+    if (r.ready) r.brewable.id,
+};
+
+/// Il tetto dei conti delle pozioni preparabili: oltre si mostra "9+".
+const brewCountCap = 9;
+
+/// Le Essenze dopo aver preparato [brewable] una volta (lo slot libero con la pianta che ha più Vis); `null` se adesso
+/// non si può.
+List<Essence>? brewOnce(Brewable brewable, List<Essence> essences) {
+  final free = brewable.freeSlot == null ? null : freeSlotCandidates(brewable, essences).firstOrNull;
+  if (brewable.freeSlot != null && free == null) return null;
+  final plan = planBrew(brewable, essences, freeSpecies: free);
+  if (!plan.ready) return null;
+  return [
+    for (final e in essences)
+      if (plan.taken[e.index] case final int taken) e.withVis(e.vis - taken) else e,
+  ];
+}
+
+/// Quante pozioni di [brewable] prepari di fila con [essences], fino a [cap] ("×3" sulla Tavola).
+int brewsOf(Brewable brewable, List<Essence> essences, {int cap = brewCountCap}) {
+  var count = 0;
+  var left = essences;
+  while (count < cap) {
+    final next = brewOnce(brewable, left);
+    if (next == null) break;
+    left = next;
+    count++;
+  }
+  return count;
+}
+
+/// Le pozioni di un gruppo di ricette (la pagina di una pianta, le Mitiche) con le Vis condivise: [least] è il minimo
+/// che prepari comunque, in qualunque ordine, prima di restare senza Vis; [more] se scegliendo bene l'ordine ne fai di
+/// più ("2+", capitolo 02, 2026-10-29). Fino a [cap].
+({int least, bool more}) groupBrews(List<Brewable> brewables, List<Essence> essences, {int cap = brewCountCap}) {
+  final memo = <String, (int, int)>{};
+  (int, int) visit(List<Essence> state, int depth) {
+    if (depth == cap) return (0, 0);
+    final key = '$depth|${state.map((e) => e.vis).join(',')}';
+    if (memo[key] case final cached?) return cached;
+    int? least, most;
+    for (final b in brewables) {
+      final next = brewOnce(b, state);
+      if (next == null) continue;
+      final (l, m) = visit(next, depth + 1);
+      least = least == null ? l + 1 : min(least, l + 1);
+      most = most == null ? m + 1 : max(most, m + 1);
+    }
+    return memo[key] = (least ?? 0, most ?? 0);
+  }
+
+  final (least, most) = visit(essences, 0);
+  return (least: least, more: most > least);
+}

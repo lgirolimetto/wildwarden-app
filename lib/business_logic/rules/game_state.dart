@@ -59,6 +59,9 @@ class GameState {
   final Set<String> notebook;
   final Set<OnboardingMark> onboardingMarks;
 
+  /// Quando si è messo per la prima volta ogni segno (es. l'inizio del tutorial intermedio: contano le Essenze di dopo).
+  final Map<OnboardingMark, DateTime> onboardingMarkedAt;
+
   /// Ricette imparate (ricette ad affissi e Mitiche), per id, con il giorno in cui si sono imparate. Gli id delle
   /// ricette scritte a mano prima della tappa C restano qui ma non corrispondono più a nessuna ricetta.
   final Map<String, DateTime> learnedRecipes;
@@ -118,6 +121,7 @@ class GameState {
     this.notes = const {},
     this.notebook = const {},
     this.onboardingMarks = const {},
+    this.onboardingMarkedAt = const {},
     this.learnedRecipes = const {},
     this.missingPieces = const {},
     this.recycled = const {},
@@ -254,7 +258,10 @@ class GameState {
       ),
       NoteSaved(:final speciesSci, :final text) => next._copy(notes: {...notes, speciesSci: text}),
       NotebookEntrySaved(:final factId) => next._copy(notebook: {...notebook, factId}),
-      OnboardingMarked(:final mark) => next._copy(onboardingMarks: {...onboardingMarks, mark}),
+      OnboardingMarked(:final mark, :final occurredAt) => next._copy(
+        onboardingMarks: {...onboardingMarks, mark},
+        onboardingMarkedAt: {...onboardingMarkedAt, mark: onboardingMarkedAt[mark] ?? occurredAt},
+      ),
       RecipeLearned(:final recipeId, :final occurredAt) =>
         learnedRecipes.containsKey(recipeId)
             ? next
@@ -400,6 +407,7 @@ class GameState {
     Map<String, String>? notes,
     Set<String>? notebook,
     Set<OnboardingMark>? onboardingMarks,
+    Map<OnboardingMark, DateTime>? onboardingMarkedAt,
     Map<String, DateTime>? learnedRecipes,
     Map<String, int>? missingPieces,
     Map<Grade, int>? recycled,
@@ -433,6 +441,7 @@ class GameState {
     notes: notes ?? this.notes,
     notebook: notebook ?? this.notebook,
     onboardingMarks: onboardingMarks ?? this.onboardingMarks,
+    onboardingMarkedAt: onboardingMarkedAt ?? this.onboardingMarkedAt,
     learnedRecipes: learnedRecipes ?? this.learnedRecipes,
     missingPieces: missingPieces ?? this.missingPieces,
     recycled: recycled ?? this.recycled,

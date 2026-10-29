@@ -39,3 +39,7 @@ Color plainPotionColor(Brightness brightness) =>
 /// sera.
 Color speciesNameColor(Brightness brightness) =>
     brightness == Brightness.light ? const Color(0xFF3E6B47) : const Color(0xFFA9CFA1);
+
+/// L'oro della purezza: più caldo del giallo del Sole, verso l'arancio.
+Color purityColor(Brightness brightness) =>
+    brightness == Brightness.light ? const Color(0xFFC8901A) : const Color(0xFFDDAA45);

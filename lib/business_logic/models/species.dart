@@ -106,6 +106,10 @@ class Species {
   final List<Trait>? favouredTraits;
   final List<PotionEffect>? vocation;
 
+  /// Solo per le aromatiche del tutorial: il compagno della loro Non comune (capitolo 03, 2026-10-29); le piante della
+  /// Zona prendono i compagni dall'habitat.
+  final String? companion;
+
   /// La specie in tutto il paese; `null` se la pipeline non l'ha calcolata (le regole usano allora i dati della Zona).
   final NationalData? national;
 
@@ -132,6 +136,7 @@ class Species {
     this.grade = Grade.common,
     this.favouredTraits,
     this.vocation,
+    this.companion,
     this.national,
   });
 
@@ -164,6 +169,7 @@ class Species {
     grade: Grade.values.byName(json['grade'] as String),
     favouredTraits: (json['favouredTraits'] as List?)?.map((t) => Trait.values.byName(t as String)).toList(),
     vocation: (json['vocation'] as List?)?.map((e) => PotionEffect.values.byName(e as String)).toList(),
+    companion: json['companion'] as String?,
     national: json['national'] == null ? null : NationalData.fromJson(json['national'] as Map<String, dynamic>),
   );
 }

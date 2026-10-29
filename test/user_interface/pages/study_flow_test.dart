@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
@@ -6,6 +7,8 @@ import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/controllers/subscription/subscription_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
+import 'package:druid_app/user_interface/common_widgets/vis_badge.dart';
+import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -88,19 +91,19 @@ void main() {
       await openTab(tester, 'Erbario');
       await scrollAndTap(tester, find.byKey(const ValueKey('met-Helleborus viridis')));
       await scrollTo(tester, find.byKey(const ValueKey('species-xp-to-cash')));
-      // Un'essenza porta tutti i tratti veri in quel momento: se ne scelgono più d'uno.
+      // Un'essenza porta tutte le Qualia vere in quel momento: luce e meteo si scelgono, la luna del giorno c'è sempre.
+      expect(find.byKey(const ValueKey('draw-trait-moon')), findsNothing);
       await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-rain')));
       await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-dusk')));
-      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-moon')));
       await scrollAndTap(tester, find.byKey(const ValueKey('simulate-draw')));
 
       final state = Get.find<ProgressController>().state;
-      // I tratti si salvano nell'ordine in cui si mostrano: luce, luna, meteo.
+      // Le Qualia si salvano nell'ordine in cui si mostrano: luce, luna, meteo.
       expect(state.draws['Helleborus viridis'], [
-        ['dusk', 'moon', 'rain'],
+        ['dusk', moonTrait(Get.find<ProgressController>().now).name, 'rain'],
       ]);
       // Tre tratti distinti, ma il contatore si ferma al traguardo.
-      expect(find.text('Essenze Attinte: 1/3 · Tratti diversi: 2/2'), findsOneWidget);
+      expect(find.text('Essenze Attinte: 1/3 · Qualia diverse: 2/2'), findsOneWidget);
       expect(state.xpToCash, 0);
       expect(state.xp, 20 + XpRules.essenceDrawn);
       expect(state.vis['Helleborus viridis'], 10);
@@ -303,12 +306,13 @@ void main() {
       final malva = recipeBookOf(smallCatalog()).pageOf('Malva sylvestris')!;
       expect(find.text('1 Tavola'), findsOneWidget);
       expect(find.text('1 Pagina su 4 · 0 complete'), findsOneWidget);
-      expect(find.text('1 Tavola su 3'), findsOneWidget);
+      expect(find.text('1 Tavola su 3'), findsNothing, reason: 'sulla riga i cerchietti, non il conto delle Tavole');
       await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Malva sylvestris')));
 
       // La pagina: la Comune imparata studiando, le altre Tavole come slot vuoti con il solo grado.
       expect(find.text('1 Tavola su 3'), findsOneWidget);
-      expect(find.text("Tratti d'elezione"), findsOneWidget);
+      expect(find.text('Affinità'), findsOneWidget);
+      expect(find.text('Ama la luce piena. Cresce in pianura.'), findsOneWidget, reason: 'solo testo, dai dati');
       expect(find.byKey(ValueKey('plate-${malva.recipes.first.id}')), findsOneWidget);
       expect(find.byKey(ValueKey('empty-slot-${malva.recipes[1].id}')), findsOneWidget);
       expect(find.text(malva.recipes[1].name('it')), findsNothing, reason: 'lo slot vuoto non svela il nome');
@@ -320,12 +324,20 @@ void main() {
 
       await scrollAndTap(tester, find.byKey(ValueKey('plate-${malva.recipes.first.id}')));
       expect(find.text(malva.recipes.first.name('it')), findsOneWidget);
-      expect(find.text('1 × Malva selvatica'), findsOneWidget);
-      expect(find.text('1 × qualsiasi specie'), findsOneWidget);
-      expect(find.byKey(const ValueKey('recipe-months')), findsOneWidget);
+      // Le Vis in un badge, niente "1 ×": la stessa unità della Dispensa.
+      expect(find.text('Malva selvatica'), findsOneWidget);
+      expect(find.text('qualsiasi specie'), findsOneWidget);
+      expect(find.byType(VisBadge), findsNWidgets(2));
+      expect(find.text('10'), findsNWidgets(2));
+      expect(
+        find.byKey(const ValueKey('recipe-months')),
+        findsNothing,
+        reason: 'la stagione è nella scheda della specie',
+      );
+      expect(find.byKey(const ValueKey('ingredient-Malva sylvestris')), findsOneWidget);
     });
 
-    testWidgets('un ingrediente con un tratto spiega quando vale', (tester) async {
+    testWidgets('un ingrediente con una Qualia: l\'icona, il nome tenendo premuto, niente spiegazione', (tester) async {
       final eranthis = recipeBookOf(smallCatalog()).pageOf('Eranthis hyemalis')!;
       final frosty = eranthis.recipes.firstWhere((r) => r.traits.contains(Trait.frost));
       registerTestDependencies(
@@ -336,7 +348,12 @@ void main() {
 
       await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
       await scrollAndTap(tester, find.byKey(ValueKey('plate-${frosty.id}')));
-      expect(find.text('Quando fa sotto zero: brina e ghiaccio.'), findsOneWidget);
+      expect(find.byTooltip('Gelo'), findsOneWidget);
+      expect(
+        find.text('Quando fa sotto zero: brina e ghiaccio.'),
+        findsNothing,
+        reason: 'sta nella legenda e nel glossario',
+      );
     });
 
     testWidgets('nessuna ricetta conosciuta: il Ricettario spiega come impararle; le Mitiche della Zona in cima', (
@@ -348,7 +365,11 @@ void main() {
 
       expect(find.byKey(const ValueKey('recipe-book-empty')), findsOneWidget);
       expect(find.text('Mitiche · Provincia di Bologna'), findsOneWidget);
-      expect(find.text('0 su 1'), findsOneWidget);
+      expect(find.text('0 su 1'), findsNothing, reason: 'i cerchietti dicono quali hai');
+      expect(
+        find.descendant(of: find.byKey(const ValueKey('recipe-book-mythics')), matching: find.byType(GradeDot)),
+        findsOneWidget,
+      );
 
       await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-mythics')));
       expect(find.text('Tavola n. 1'), findsOneWidget);

@@ -1,3 +1,5 @@
+import 'package:druid_app/business_logic/rules/field/sky.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -113,14 +115,21 @@ void main() {
     expect(await controller.simulateRecipeBook(), 0, reason: 'le Tavole già imparate non si ripetono');
   });
 
-  test('simulare una Dispensa: Essenze di più piante nei giorni scorsi, con i tratti d\'elezione', () async {
-    final drawn = await controller.simulatePantry();
+  test(
+    'simulare una Dispensa: Essenze di più piante nei giorni scorsi, con la luna del giorno e le Affinità',
+    () async {
+      final drawn = await controller.simulatePantry();
 
-    expect(controller.state.essences, hasLength(drawn));
-    expect(controller.state.vis.keys, hasLength(4), reason: 'il catalogo di prova ha 4 piante');
-    expect(controller.state.essences.every((e) => e.drawnAt.isBefore(clock.now())), isTrue);
-    expect(controller.state.essences.any((e) => e.traits.isNotEmpty), isTrue);
-  });
+      expect(controller.state.essences, hasLength(drawn));
+      expect(controller.state.vis.keys, hasLength(4), reason: 'il catalogo di prova ha 4 piante');
+      expect(controller.state.essences.every((e) => e.drawnAt.isBefore(clock.now())), isTrue);
+      // Come quando si Attinge davvero: ogni Essenza ha la Qualia della luna del suo giorno, e una sola.
+      for (final e in controller.state.essences) {
+        expect(e.traits, contains(moonTrait(e.drawnAt).name));
+        expect(e.traits.where((t) => Trait.values.byName(t).group == TraitGroup.moon), hasLength(1));
+      }
+    },
+  );
 
   test('con Abbondanza e Limpidezza in corso le Essenze hanno più Vis e più purezza', () async {
     await controller.encounter('Malva sylvestris', method: EncounterMethod.simulated);

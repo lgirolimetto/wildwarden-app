@@ -42,6 +42,7 @@ import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/plant_pages_page.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/page_dots.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
+import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -1073,13 +1074,15 @@ class _MasterySectionState extends State<_MasterySection> {
               runSpacing: Gaps.chipRun,
               children: [
                 ClayChip(label: l10n.noTrait, selected: _traits.isEmpty, onTap: () => setState(_traits.clear)),
+                // La luna del giorno si aggiunge da sola, come quando si Attinge davvero: qui si scelgono luce e meteo.
                 for (final trait in Trait.values)
-                  ClayChip(
-                    key: ValueKey('draw-trait-${trait.name}'),
-                    label: context.game.trait(trait),
-                    selected: _traits.contains(trait),
-                    onTap: () => setState(() => _traits.contains(trait) ? _traits.remove(trait) : _traits.add(trait)),
-                  ),
+                  if (trait.group != TraitGroup.moon)
+                    ClayChip(
+                      key: ValueKey('draw-trait-${trait.name}'),
+                      label: context.game.trait(trait),
+                      selected: _traits.contains(trait),
+                      onTap: () => setState(() => _traits.contains(trait) ? _traits.remove(trait) : _traits.add(trait)),
+                    ),
               ],
             ),
             const SizedBox(height: Gaps.xs),
@@ -1088,9 +1091,10 @@ class _MasterySectionState extends State<_MasterySection> {
               onPressed: canDraw(widget.state, widget.species.sci, widget.progress.now)
                   ? () => widget.progress.drawSimulated(
                       widget.species.sci,
+                      // Nell'ordine in cui si mostrano: luce, luna, meteo.
                       traits: [
                         for (final trait in Trait.values)
-                          if (_traits.contains(trait)) trait.name,
+                          if (_traits.contains(trait) || trait == moonTrait(widget.progress.now)) trait.name,
                       ],
                     )
                   : null,

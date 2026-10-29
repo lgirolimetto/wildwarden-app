@@ -1,6 +1,12 @@
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
+import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/user_interface/common_widgets/vis_badge.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/ready_mark.dart';
+import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -37,7 +43,7 @@ void main() {
     expect(find.text('0 Essenze'), findsOneWidget);
   });
 
-  testWidgets('la Dispensa: le Essenze per specie, con tratti, purezza e Vis', (tester) async {
+  testWidgets('la Dispensa: le Essenze per specie, con Vis, purezza e Qualia', (tester) async {
     registerTestDependencies(
       events: [
         EssenceDrawn(
@@ -55,10 +61,20 @@ void main() {
 
     expect(find.text('2 Essenze'), findsOneWidget);
     expect(find.text('2 Essenze · 20 Vis'), findsOneWidget);
-    expect(find.text('Purezza 75 % · 10 Vis'), findsOneWidget);
-    expect(find.text('Purezza 40 % · 10 Vis'), findsOneWidget, reason: 'senza purezza: quella del livello 0');
-    expect(find.text('Nessun tratto'), findsOneWidget);
-    expect(find.textContaining('Rugiada'), findsOneWidget);
+    // Ogni Essenza: la data, la Vis con l'anello della purezza, le Qualia come icone (il nome tenendo premuto).
+    // La Vis come nel Ricettario: il fulmine con le Vis nel badge; sotto la purezza, una barretta oro.
+    expect(find.byType(VisBadge), findsNWidgets(2));
+    expect(find.byTooltip('10 Vis'), findsNWidgets(2));
+    expect(find.byTooltip('Purezza 75 %'), findsOneWidget);
+    expect(find.byTooltip('Purezza 40 %'), findsOneWidget, reason: 'senza purezza: quella del livello 0');
+    expect(find.byTooltip('Rugiada'), findsOneWidget);
+    expect(find.byTooltip('Luna piena'), findsOneWidget);
+    final sameYear = Get.find<ProgressController>().now.year == _feb.year;
+    expect(
+      find.text(sameYear ? '1 feb' : '1 feb 2027'),
+      findsNWidgets(2),
+      reason: 'l\'anno solo se non è quello in corso',
+    );
   });
 
   group('preparare', () {
@@ -69,32 +85,49 @@ void main() {
       EssenceDrawn(speciesSci: freeSci, simulated: true, vis: 10, purity: 1.0, occurredAt: _feb),
     ];
 
-    Future<void> openReady(WidgetTester tester) async {
+    /// Dal Ricettario alla Tavola della Comune della malva, dove c'è Prepara.
+    Future<void> openMalvaCommon(WidgetTester tester) async {
       await pumpDruidApp(tester);
       await openTab(tester, 'Laboratorio');
-      await tester.ensureVisible(find.byKey(const ValueKey('lab-tab-ready')));
-      await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('lab-tab-ready')));
+      await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Malva sylvestris')));
+      await scrollAndTap(tester, find.byKey(ValueKey('plate-${malvaCommon.id}')));
+    }
+
+    Future<void> chooseFree(WidgetTester tester, String sci) async {
+      await scrollAndTap(tester, find.byKey(ValueKey('brew-${malvaCommon.id}')));
+      await tester.tap(find.byKey(ValueKey('free-slot-$sci')));
       await tester.pumpAndSettle();
     }
 
-    testWidgets('dalle Ricette pronte: Prepara, la pianta dello slot libero, la pozione e lo Scaffale', (tester) async {
-      registerTestDependencies(events: events('Fagus sylvatica'));
-      await openReady(tester);
-
-      expect(find.text('1 pronta'), findsOneWidget);
-      await scrollAndTap(tester, find.byKey(ValueKey('brew-${malvaCommon.id}')));
-      await tester.tap(find.byKey(const ValueKey('free-slot-Fagus sylvatica')));
+    Future<void> confirm(WidgetTester tester) async {
+      await tester.tap(find.byKey(const ValueKey('brew-confirm-button')));
       await tester.pumpAndSettle();
+    }
+
+    testWidgets('dalla Tavola: Prepara, la pianta dello slot libero, la conferma, la pozione e lo Scaffale', (
+      tester,
+    ) async {
+      registerTestDependencies(events: events('Fagus sylvatica'));
+      await openMalvaCommon(tester);
+      await chooseFree(tester, 'Fagus sylvatica');
+
+      expect(find.byKey(const ValueKey('brew-confirm')), findsOneWidget);
+      await confirm(tester);
 
       expect(find.byKey(const ValueKey('potion-result')), findsOneWidget);
       final state = Get.find<ProgressController>().state;
       expect(state.potions, hasLength(1));
       expect(find.text('Potenza ${state.potions.single.potency}'), findsOneWidget);
       expect(find.text('Prima pozione di questa ricetta: +30 PE'), findsOneWidget);
+      expect(find.byKey(const ValueKey('potion-touch-hint')), findsNothing, reason: 'fuori dal tutorial intermedio');
 
       await tester.tap(find.byKey(const ValueKey('potion-done')));
       await tester.pumpAndSettle();
+      // Dalla Tavola alla pagina della pianta, poi al Laboratorio.
+      for (var i = 0; i < 2; i++) {
+        Get.back<void>();
+        await tester.pumpAndSettle();
+      }
       await scrollToTop(tester);
       await tester.ensureVisible(find.byKey(const ValueKey('lab-tab-shelf')));
       await tester.pumpAndSettle();
@@ -110,19 +143,139 @@ void main() {
       expect(Get.find<ProgressController>().state.potions.single.onShelf, isFalse);
     });
 
+    testWidgets('nel tutorial intermedio la pozione spiega il Tocco; fuori no', (tester) async {
+      OnboardingMarked mark(OnboardingMark m) => OnboardingMarked(mark: m, occurredAt: _feb);
+      registerTestDependencies(
+        events: [
+          mark(OnboardingMark.tutorialSkipped),
+          mark(OnboardingMark.intermediateStarted),
+          ...events('Fagus sylvatica'),
+        ],
+      );
+      await openMalvaCommon(tester);
+      await chooseFree(tester, 'Fagus sylvatica');
+      await confirm(tester);
+
+      expect(find.byKey(const ValueKey('potion-touch-hint')), findsOneWidget);
+    });
+
     testWidgets('una tossica nello slot libero guasta la pozione', (tester) async {
       registerTestDependencies(events: events('Helleborus viridis'));
-      await openReady(tester);
+      await openMalvaCommon(tester);
+      await chooseFree(tester, 'Helleborus viridis');
 
-      await scrollAndTap(tester, find.byKey(ValueKey('brew-${malvaCommon.id}')));
-      await tester.tap(find.byKey(const ValueKey('free-slot-Helleborus viridis')));
-      await tester.pumpAndSettle();
+      // La conferma non avvisa della tossica: la pozione guastata insegna.
+      expect(find.textContaining('tossic'), findsNothing);
+      await confirm(tester);
 
       final state = Get.find<ProgressController>().state;
       expect(state.potions, isEmpty);
       expect(state.knownToxic, {'Helleborus viridis'});
       expect(find.text('La pozione si è guastata'), findsOneWidget);
       expect(find.text('+30 PE'), findsOneWidget);
+    });
+
+    testWidgets('Annulla nella conferma non prepara niente', (tester) async {
+      registerTestDependencies(events: events('Fagus sylvatica'));
+      await openMalvaCommon(tester);
+      await chooseFree(tester, 'Fagus sylvatica');
+
+      await tester.tap(find.byKey(const ValueKey('brew-cancel')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('brew-confirm')), findsNothing);
+      expect(Get.find<ProgressController>().state.potions, isEmpty);
+      expect(Get.find<ProgressController>().state.essences.map((e) => e.vis), [10, 10]);
+    });
+
+    testWidgets('lo slot libero: ogni pianta con il Tocco che darebbe e il suo effetto', (tester) async {
+      registerTestDependencies(events: events('Fagus sylvatica'));
+      await openMalvaCommon(tester);
+      await scrollAndTap(tester, find.byKey(ValueKey('brew-${malvaCommon.id}')));
+
+      final option = find.byKey(const ValueKey('free-slot-Fagus sylvatica'));
+      expect(find.descendant(of: option, matching: find.byType(Pill)), findsOneWidget);
+      expect(find.descendant(of: option, matching: find.textContaining('forza 2')), findsOneWidget);
+    });
+
+    testWidgets('il Ricettario: icona "pronta" e filtro "Mostra solo preparabili"', (tester) async {
+      registerTestDependencies(
+        events: [
+          ...events('Helleborus viridis'),
+          LevelPassed(speciesSci: 'Fagus sylvatica', level: 1, xp: 0, occurredAt: _feb),
+        ],
+      );
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Laboratorio');
+
+      final malva = find.byKey(const ValueKey('recipe-book-page-Malva sylvestris'));
+      final fagus = find.byKey(const ValueKey('recipe-book-page-Fagus sylvatica'));
+      // Sulla riga quante pozioni prepari comunque: una sola Comune pronta, quindi "1" senza "+".
+      expect(find.descendant(of: malva, matching: find.byType(ReadyCount)), findsOneWidget);
+      expect(find.descendant(of: malva, matching: find.text('1')), findsOneWidget);
+      expect(fagus, findsOneWidget);
+
+      await tester.tap(find.byKey(const ValueKey('recipe-book-only-ready')));
+      await tester.pumpAndSettle();
+      expect(malva, findsOneWidget);
+      expect(fagus, findsNothing, reason: 'la Comune del faggio vuole Vis di faggio, che non hai');
+      expect(
+        find.text('2 Pagine su 4 · 0 complete'),
+        findsOneWidget,
+        reason: 'il conto resta quello di tutto il Ricettario',
+      );
+    });
+
+    testWidgets('due Tavole che si contendono le Vis: sulla riga il minimo con "+"', (tester) async {
+      final catalog = smallCatalog();
+      final uncommon = recipeBookOf(catalog).pageOf('Malva sylvestris')!.recipes[1];
+      // Nel catalogo ridotto la Non comune della Malva chiede la Malva con la sua Qualia e due slot liberi.
+      final malva = brewableOf(catalog, uncommon.id)!.ingredients.firstWhere((i) => i.speciesSci != null);
+      registerTestDependencies(
+        events: [
+          LevelPassed(speciesSci: 'Malva sylvestris', level: 1, xp: 0, occurredAt: _feb),
+          TroveOpened(
+            grade: Grade.uncommon,
+            price: 0,
+            finds: [TroveFind(recipeId: uncommon.id, grade: Grade.uncommon, kind: TroveFindKind.recipe)],
+            occurredAt: _feb,
+          ),
+          EssenceDrawn(
+            speciesSci: 'Malva sylvestris',
+            traits: [for (final t in malva.traits) t.name],
+            simulated: true,
+            vis: 20,
+            occurredAt: _feb,
+          ),
+          EssenceDrawn(speciesSci: 'Fagus sylvatica', simulated: true, vis: 40, occurredAt: _feb),
+        ],
+      );
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Laboratorio');
+
+      // Prima la Non comune: 1 pozione. Prima la Comune: 2. Il minimo è 1, ma si può fare di più.
+      final row = find.byKey(const ValueKey('recipe-book-page-Malva sylvestris'));
+      expect(find.descendant(of: row, matching: find.text('1+')), findsOneWidget);
+    });
+
+    testWidgets('con il filtro e niente da preparare, lo dice', (tester) async {
+      registerTestDependencies(
+        events: [LevelPassed(speciesSci: 'Malva sylvestris', level: 1, xp: 0, occurredAt: _feb)],
+      );
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Laboratorio');
+      await tester.tap(find.byKey(const ValueKey('recipe-book-only-ready')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const ValueKey('recipe-book-none-ready')), findsOneWidget);
+    });
+
+    testWidgets('la Tavola: niente mesi, la pianta apre la sua scheda', (tester) async {
+      registerTestDependencies(events: events('Fagus sylvatica'));
+      await openMalvaCommon(tester);
+
+      expect(find.byKey(const ValueKey('recipe-months')), findsNothing);
+      await scrollAndTap(tester, find.byKey(const ValueKey('ingredient-Malva sylvestris')));
+      expect(find.byType(SpeciesPage), findsOneWidget);
     });
   });
 }

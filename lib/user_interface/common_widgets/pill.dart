@@ -1,5 +1,6 @@
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
+import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -17,28 +18,7 @@ class Pill extends StatelessWidget {
     final color = context.colors.onSurface;
     final emoji = context.druid.clay ? leadingEmoji(text) : null;
     const radius = BorderRadius.all(Radius.circular(999));
-    // Nelle livree neumorfiche la pillola non si preme, quindi non è scavata: un solco sottile tutt'intorno e,
-    // subito dentro, la pillola che risale in rilievo (come la foto della scheda specie).
-    // Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45, rilievo depth 0.8 / strength 0.35.
-    // Variante appena più accennata, provata e da tenere come alternativa: solco depth 1 / strength 0.6,
-    // rilievo depth 1 / strength 0.5.
-    Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => context.druid.neu
-        ? NeuInset(
-            radius: radius,
-            depth: 0.8,
-            strength: 0.45,
-            child: Padding(
-              padding: const EdgeInsets.all(3),
-              child: NeuInset(
-                radius: radius,
-                depth: 0.8,
-                strength: 0.35,
-                convex: true,
-                child: Padding(padding: padding, child: child),
-              ),
-            ),
-          )
-        : Container(padding: padding, decoration: flat, child: child);
+    Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => pillFrame(context, padding, child, flat);
     if (emoji != null) {
       return frame(
         // Nell'incavo l'icona si stacca dal bordo sinistro, che è in ombra.
@@ -70,6 +50,114 @@ class Pill extends StatelessWidget {
         color: color.withValues(alpha: 0.12),
         borderRadius: radius,
         border: Border.all(color: color.withValues(alpha: 0.35)),
+      ),
+    );
+  }
+}
+
+/// Il bordo delle pillole, condiviso con le chip di sola lettura ([IconBadgeChip]). Nelle livree neumorfiche la
+/// pillola non si preme, quindi non è scavata: un solco sottile tutt'intorno e, subito dentro, la pillola che risale in
+/// rilievo (come la foto della scheda specie). Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45,
+/// rilievo depth 0.8 / strength 0.35. Variante appena più accennata, provata e da tenere come alternativa: solco
+/// depth 1 / strength 0.6, rilievo depth 1 / strength 0.5. Altrimenti [flat].
+Widget pillFrame(
+  BuildContext context,
+  EdgeInsets padding,
+  Widget child,
+  BoxDecoration flat, {
+  BorderRadius radius = const BorderRadius.all(Radius.circular(999)),
+}) {
+  return context.druid.neu
+      ? NeuInset(
+          radius: radius,
+          depth: 0.8,
+          strength: 0.45,
+          child: Padding(
+            padding: const EdgeInsets.all(3),
+            child: NeuInset(
+              radius: radius,
+              depth: 0.8,
+              strength: 0.35,
+              convex: true,
+              child: Padding(padding: padding, child: child),
+            ),
+          ),
+        )
+      : Container(padding: padding, decoration: flat, child: child);
+}
+
+/// Chip di sola lettura, tonda, con un'icona incisa e un numero nel badge tondo, come le notifiche, bordato come una
+/// chip (capitolo 02, 2026-10-29): la beuta con le pozioni che prepari ("2", "2+"), il fulmine della Vis
+/// con le Vis ("10").
+class IconBadgeChip extends StatelessWidget {
+  final IconData icon;
+  final String badge;
+
+  /// Tooltip e lettore di schermo ("Prepari almeno 2 pozioni", "10 Vis").
+  final String message;
+
+  /// Il colore dell'icona; `null` = quello del testo.
+  final Color? iconColor;
+
+  /// Il riempimento dell'icona (1 = piena); `null` = quello dell'icona.
+  final double? iconFill;
+
+  const IconBadgeChip({
+    super.key,
+    required this.icon,
+    required this.badge,
+    required this.message,
+    this.iconColor,
+    this.iconFill,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final color = context.colors.onSurface;
+    // Tonda, non ovale: stessa larghezza e altezza intorno all'icona.
+    final chip = pillFrame(
+      context,
+      const EdgeInsets.all(Gaps.s),
+      EngravedIcon(icon, size: 20, color: iconColor ?? color, fill: iconFill),
+      BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
+      ),
+    );
+    final label = Text(
+      badge,
+      style: context.texts.labelSmall?.copyWith(color: context.colors.onPrimary, fontWeight: FontWeight.w700),
+    );
+    // Il badge è una piccola chip a sua volta: piena, con il bordo del colore della scheda su cui sta, che la stacca
+    // dalla chip senza incavi (incavato sembrava deforme, 2026-10-29).
+    final badgeBox = Container(
+      constraints: const BoxConstraints(minWidth: 22, minHeight: 22),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: context.colors.primary,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: GradeCard.surfaceOf(context), width: 2),
+      ),
+      child: label,
+    );
+    return Tooltip(
+      message: message,
+      child: Semantics(
+        label: message,
+        excludeSemantics: true,
+        child: Padding(
+          // Spazio per il badge, che sporge in alto a destra; lo stesso a sinistra, così la chip resta al centro.
+          padding: const EdgeInsets.only(top: 6, left: 8, right: 8),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              chip,
+              Positioned(top: -6, right: -8, child: badgeBox),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -1,41 +1,77 @@
 import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
 import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
+import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
+import 'package:druid_app/business_logic/rules/tutorial_intermediate.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
+import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/laboratory/brew_section.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Prepara [brewable]: se ha lo slot libero chiede prima la pianta (che dà il Tocco), poi apre la pozione appena fatta.
+/// Prepara [brewable]: se ha lo slot libero chiede prima la pianta (che dà il Tocco), poi una conferma con quello che
+/// spende (sempre: preparare consuma Vis e non si torna indietro), poi apre la pozione appena fatta.
 Future<void> startBrew(BuildContext context, Catalog catalog, GameState state, Brewable brewable) async {
   final progress = Get.find<ProgressController>();
   String? freeSpecies;
   if (brewable.freeSlot != null) {
     freeSpecies = await showModalBottomSheet<String>(
       context: context,
+      isScrollControlled: true,
       builder: (context) => _FreeSlotSheet(catalog: catalog, state: state, brewable: brewable),
     );
     if (freeSpecies == null) return;
   }
+  if (!context.mounted) return;
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (context) =>
+        _BrewConfirmDialog(catalog: catalog, state: state, brewable: brewable, freeSpecies: freeSpecies),
+  );
+  if (confirmed != true) return;
   final event = await progress.brew(brewable.id, freeSpecies: freeSpecies);
   if (event == null) return;
   await Get.to<void>(() => PotionResultPage(event: event, firstBrew: !state.bestPotency.containsKey(brewable.id)));
 }
 
-/// La scelta della pianta per lo slot libero: quelle con abbastanza Vis. Le tossiche non si segnalano: è così che si
-/// impara (la pozione guastata).
+/// L'effetto di gioco di [brewable]: quello scritto a mano per le Mitiche, quello dell'effetto per le Tavole.
+String _effectTextOf(BuildContext context, Catalog catalog, Brewable brewable) {
+  for (final m in catalog.mythics) {
+    if (m.id == brewable.id) return m.effectText.resolve(context.contentLanguage);
+  }
+  return context.game.effectText(brewable.effect);
+}
+
+/// Il Tocco di [touch] in [brewable], in una riga: "Limpidezza, forza 2: un piccolo effetto in più" (o "rafforza
+/// l'effetto della pozione", se è lo stesso).
+String _touchLine(BuildContext context, Brewable brewable, PotionEffect touch) => context.l10n.brewTouchEffect(
+  context.game.effect(touch),
+  touchStrength,
+  touch == brewable.effect ? context.l10n.brewTouchStrengthens : context.l10n.brewTouchAdds,
+);
+
+/// L'aggettivo del Tocco di [touch], accordato con la base di [brewable] ("Limpida", "Limpido").
+String _touchAdjective(BuildContext context, Brewable brewable, PotionEffect touch) =>
+    touchAdjective(touch, context.contentLanguage, feminine: brewable.base?.feminine ?? true);
+
+/// La scelta della pianta per lo slot libero: quelle con abbastanza Vis, ognuna con il Tocco che darebbe e, sotto, il
+/// suo effetto di gioco (2026-10-29). Le tossiche non si segnalano: è così che si impara (la pozione guastata).
 class _FreeSlotSheet extends StatelessWidget {
   final Catalog catalog;
   final GameState state;
@@ -47,6 +83,7 @@ class _FreeSlotSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     // Le Vis che restano dopo gli altri ingredienti: quelle che lo slot libero può usare.
     final vis = freeSlotVis(brewable, state.essences);
+    final hint = context.texts.bodySmall?.copyWith(color: context.druid.hint);
     return SafeArea(
       child: ListView(
         key: const ValueKey('free-slot-sheet'),
@@ -54,21 +91,137 @@ class _FreeSlotSheet extends StatelessWidget {
         padding: const EdgeInsets.all(Gaps.l),
         children: [
           Text(context.l10n.brewChooseFree, style: context.texts.titleMedium),
-          Text(context.l10n.brewChooseFreeHint, style: context.texts.bodySmall?.copyWith(color: context.druid.hint)),
+          Text(context.l10n.brewChooseFreeHint, style: hint),
           const SizedBox(height: Gaps.s),
           for (final sci in freeSlotCandidates(brewable, state.essences))
             ListTile(
               key: ValueKey('free-slot-$sci'),
               contentPadding: EdgeInsets.zero,
-              title: Text(
-                catalog.speciesBySci(sci) == null ? sci : context.game.name(catalog.speciesBySci(sci)!),
-                style: speciesNameStyle(context, context.texts.bodyLarge),
+              title: Wrap(
+                spacing: Gaps.s,
+                runSpacing: Gaps.xs,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Text(
+                    catalog.speciesBySci(sci) == null ? sci : context.game.name(catalog.speciesBySci(sci)!),
+                    style: speciesNameStyle(context, context.texts.bodyLarge),
+                  ),
+                  if (touchOf(catalog, sci) case final touch?) Pill(_touchAdjective(context, brewable, touch)),
+                ],
               ),
+              subtitle: Text(switch (touchOf(catalog, sci)) {
+                final touch? => _touchLine(context, brewable, touch),
+                null => context.l10n.brewNoTouch,
+              }, style: hint),
               trailing: Text(context.l10n.brewFreeOption(vis[sci] ?? 0)),
               onTap: () => Navigator.of(context).pop(sci),
             ),
         ],
       ),
+    );
+  }
+}
+
+/// La conferma prima di preparare: la pozione (con il Tocco), le Vis che spende ingrediente per ingrediente e l'effetto.
+/// Annulla non consuma niente. Non avvisa delle tossiche nello slot libero (la pozione guastata insegna).
+class _BrewConfirmDialog extends StatelessWidget {
+  final Catalog catalog;
+  final GameState state;
+  final Brewable brewable;
+  final String? freeSpecies;
+
+  const _BrewConfirmDialog({required this.catalog, required this.state, required this.brewable, this.freeSpecies});
+
+  @override
+  Widget build(BuildContext context) {
+    final touch = touchOf(catalog, freeSpecies);
+    final label = context.texts.labelMedium?.copyWith(color: context.druid.hint);
+    return AlertDialog(
+      key: const ValueKey('brew-confirm'),
+      title: Text(context.l10n.brewConfirmTitle),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                RecipeIdVessel(catalog: catalog, recipeId: brewable.id, size: 48),
+                const SizedBox(width: Gaps.m),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RecipeNameText(
+                        catalog: catalog,
+                        state: state,
+                        recipeId: brewable.id,
+                        style: context.texts.titleSmall,
+                      ),
+                      if (touch != null)
+                        Text(
+                          context.l10n.potionTouch(_touchAdjective(context, brewable, touch)),
+                          style: context.texts.bodySmall,
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: Gaps.m),
+            Text(context.l10n.brewConfirmSpends, style: label),
+            for (final ingredient in brewable.ingredients) ...[
+              const SizedBox(height: Gaps.xs),
+              VisLine(
+                vis: ingredient.vis,
+                species: [?(ingredient.speciesSci ?? freeSpecies)],
+                traits: ingredient.traits,
+                catalog: catalog,
+              ),
+            ],
+            const SizedBox(height: Gaps.m),
+            Text(context.l10n.recipeEffect, style: label),
+            const SizedBox(height: Gaps.xs),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                EngravedIcon(effectIconOf(brewable.effect), size: 16),
+                const SizedBox(width: Gaps.s),
+                Expanded(child: Text(_effectTextOf(context, catalog, brewable), style: context.texts.bodySmall)),
+              ],
+            ),
+            if (touch != null) ...[
+              const SizedBox(height: Gaps.xs),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  EngravedIcon(effectIconOf(touch), size: 16),
+                  const SizedBox(width: Gaps.s),
+                  Expanded(
+                    child: Text(
+                      '${_touchAdjective(context, brewable, touch)} · ${_touchLine(context, brewable, touch)}',
+                      style: context.texts.bodySmall,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          key: const ValueKey('brew-cancel'),
+          onPressed: () => Navigator.of(context).pop(false),
+          child: Text(context.l10n.brewCancel),
+        ),
+        ClayButton(
+          key: const ValueKey('brew-confirm-button'),
+          label: context.l10n.brewConfirm,
+          icon: Icons.science_rounded,
+          onPressed: () => Navigator.of(context).pop(true),
+        ),
+      ],
     );
   }
 }
@@ -130,6 +283,16 @@ class PotionResultPage extends StatelessWidget {
                             ),
                             style: hint,
                           ),
+                        // Nel tutorial intermedio si scopre il Tocco: una frase che lo spiega (capitolo 03, 2026-10-29).
+                        if (touch != null && intermediateStatus(state) == IntermediateStatus.inProgress) ...[
+                          const SizedBox(height: Gaps.s),
+                          Text(
+                            context.l10n.potionTouchHint,
+                            key: const ValueKey('potion-touch-hint'),
+                            style: context.texts.bodyMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ],
                       if (event.xp > 0) ...[
                         const SizedBox(height: Gaps.m),

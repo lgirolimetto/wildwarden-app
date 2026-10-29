@@ -1,4 +1,5 @@
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/potion.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 
@@ -38,6 +39,23 @@ double purityWithClarity(double purity, int strength) => (purity + 0.02 * streng
 /// **Ricrescita**: la specie torna pronta prima; con forza 10 dopo 12 ore invece che il giorno dopo.
 Duration regrowthWait(int strength) => Duration(minutes: ((24 - 1.2 * strength) * 60).round());
 
-/// **Presagio**: probabilità che un'Essenza senza tratti prenda il primo tratto d'elezione della pianta, il 10 % per
-/// punto di forza.
+/// **Presagio**: probabilità che scatti a ogni Essenza, il 10 % per punto di forza.
 double omenChance(int strength) => strength / 10;
+
+/// **Presagio** su un'Essenza appena attinta (capitolo 02, 2026-10-29): se scatta ([roll] sotto [omenChance]),
+/// l'Essenza prende la prima delle [affinities] della pianta che non ha già, in più alle sue Qualia; se le ha già
+/// tutte, la purezza sale come con la Limpidezza della stessa forza. Prima valeva solo per un'Essenza senza Qualia, ma
+/// la luna del giorno c'è sempre e non scattava mai.
+({List<String> traits, double purity}) withOmen({
+  required List<String> traits,
+  required List<Trait> affinities,
+  required double purity,
+  required int strength,
+  required double roll,
+}) {
+  if (roll >= omenChance(strength)) return (traits: traits, purity: purity);
+  for (final a in affinities) {
+    if (!traits.contains(a.name)) return (traits: [...traits, a.name], purity: purity);
+  }
+  return (traits: traits, purity: purityWithClarity(purity, strength));
+}

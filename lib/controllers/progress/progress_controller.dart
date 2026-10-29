@@ -6,10 +6,12 @@ import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
+import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
@@ -107,23 +109,25 @@ class ProgressController extends LoadableController<GameState> {
     // Le Stazioni hanno il loro stato (una raccolta al giorno, poi la rigenerazione); senza Stazione una al giorno per
     // specie.
     if (stationId == null ? !canDraw(state, speciesSci, now) : !state.hasEncountered(speciesSci)) return false;
-    // Gli effetti delle pozioni usate: Abbondanza (Vis), Limpidezza (purezza), Presagio (un tratto d'elezione).
+    // Gli effetti delle pozioni usate: Abbondanza (Vis), Limpidezza (purezza), Presagio (un'Affinità che manca).
     final effects = activeEffects(state, now);
+    final base = purityOfLevel(purityLevelOf(state, speciesSci, now));
+    final clarity = effects[PotionEffect.clarity];
+    final purity = clarity == null ? base : purityWithClarity(base, clarity);
     final omen = effects[PotionEffect.omen];
-    final favoured = _catalog() == null ? null : recipeBookOf(_catalog()!).pageOf(speciesSci)?.favouredTraits.first;
-    final withOmen = traits.isEmpty && omen != null && favoured != null && _random.nextDouble() < omenChance(omen)
-        ? [favoured.name]
-        : traits;
-    final purity = purityOfLevel(purityLevelOf(state, speciesSci, now));
+    final affinities = _catalog() == null
+        ? const <Trait>[]
+        : recipeBookOf(_catalog()!).pageOf(speciesSci)?.favouredTraits ?? const <Trait>[];
+    final drawn = omen == null
+        ? (traits: traits, purity: purity)
+        : withOmen(traits: traits, affinities: affinities, purity: purity, strength: omen, roll: _random.nextDouble());
     await record(
       EssenceDrawn(
         speciesSci: speciesSci,
-        traits: withOmen,
+        traits: drawn.traits,
         simulated: simulated,
         vis: effects[PotionEffect.abundance] == null ? vis : visWithAbundance(vis, effects[PotionEffect.abundance]!),
-        purity: effects[PotionEffect.clarity] == null
-            ? purity
-            : purityWithClarity(purity, effects[PotionEffect.clarity]!),
+        purity: drawn.purity,
         xp: XpRules.essence(drawnToday: drawsToday(state, now)),
         stationId: stationId,
         occurredAt: now,
@@ -284,15 +288,20 @@ class ProgressController extends LoadableController<GameState> {
       }
       final count = 2 + random.nextInt(3);
       for (var j = 0; j < count; j++) {
-        final traits = [...page.favouredTraits]..shuffle(random);
+        // Come quando si Attinge davvero: sempre la luna del giorno, più fino a 2 Affinità della luce o del meteo.
+        final at = now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i));
+        final traits = [
+          for (final t in page.favouredTraits)
+            if (t.group != TraitGroup.moon) t,
+        ]..shuffle(random);
         await record(
           EssenceDrawn(
             speciesSci: sci,
-            traits: [for (final t in traits.take(random.nextInt(3))) t.name],
+            traits: [moonTrait(at).name, for (final t in traits.take(random.nextInt(3))) t.name],
             simulated: true,
             vis: visPerDraw,
             purity: purityOfLevel(purityLevelOf(state, sci, now)),
-            occurredAt: now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i)),
+            occurredAt: at,
           ),
         );
         drawn++;

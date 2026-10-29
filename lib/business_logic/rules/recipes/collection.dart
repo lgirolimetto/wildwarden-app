@@ -15,22 +15,41 @@ final _books = Expando<RecipeBook>('recipe-book');
 /// Il libro delle ricette della Zona, calcolato una volta per catalogo.
 RecipeBook recipeBookOf(Catalog catalog) => _books[catalog] ??= RecipeBook.of(catalog);
 
-/// La Comune che si impara superando il livello [recipeLearningLevel] di [speciesSci]: la sua, se non la conosci
-/// già.
-PlantRecipe? commonToLearn(String speciesSci, Catalog catalog, GameState state) {
-  final common = recipeBookOf(catalog).pageOf(speciesSci)?.recipes.first;
-  return common == null || state.learnedRecipes.containsKey(common.id) ? null : common;
+/// Il livello di studio che insegna la Non comune delle aromatiche del tutorial (capitolo 03, 2026-10-29): le Non
+/// comuni della Zona restano del Bottino.
+const kitchenUncommonLevel = 2;
+
+/// Le Tavole che si imparano studiando [speciesSci] fino a [level]: la Comune dal livello [recipeLearningLevel] e,
+/// per le aromatiche del tutorial, la Non comune dal livello [kitchenUncommonLevel].
+List<PlantRecipe> studyRecipes(String speciesSci, int level, Catalog catalog) {
+  final book = recipeBookOf(catalog);
+  final page = book.pageOf(speciesSci);
+  if (page == null) return const [];
+  final kitchen = book.kitchenPages.contains(page);
+  return [
+    if (level >= recipeLearningLevel) page.recipes.first,
+    if (kitchen && level >= kitchenUncommonLevel && page.recipes.length > 1) page.recipes[1],
+  ];
 }
 
-/// Id delle ricette ad affissi che conosci: quelle imparate e la Comune di ogni pianta studiata almeno al livello
-/// [recipeLearningLevel] (anche quelle studiate prima della tappa C, quando la ricetta imparata era un'altra).
+/// La Tavola che si impara superando proprio il livello [level] di [speciesSci], se non la conosci già.
+PlantRecipe? recipeToLearn(String speciesSci, int level, Catalog catalog, GameState state) {
+  final now = studyRecipes(speciesSci, level, catalog);
+  final before = studyRecipes(speciesSci, level - 1, catalog);
+  final learned = now.where((r) => !before.contains(r)).firstOrNull;
+  return learned == null || state.learnedRecipes.containsKey(learned.id) ? null : learned;
+}
+
+/// Id delle ricette ad affissi che conosci: quelle imparate e quelle che lo studio insegna ([studyRecipes]: la Comune
+/// di ogni pianta studiata almeno al livello [recipeLearningLevel], anche quelle studiate prima della tappa C, quando la
+/// ricetta imparata era un'altra; la Non comune delle aromatiche).
 Set<String> knownRecipeIds(Catalog catalog, GameState state) {
   final book = recipeBookOf(catalog);
   return {
     for (final id in state.learnedRecipes.keys)
       if (book.recipeById(id) != null) id,
     for (final MapEntry(key: sci, value: level) in state.passedLevels.entries)
-      if (level >= recipeLearningLevel) ?book.pageOf(sci)?.recipes.first.id,
+      for (final r in studyRecipes(sci, level, catalog)) r.id,
   };
 }
 

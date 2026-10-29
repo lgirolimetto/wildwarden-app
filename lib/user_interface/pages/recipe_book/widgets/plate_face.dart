@@ -1,11 +1,12 @@
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/mythic.dart';
 import 'package:druid_app/business_logic/rules/recipes/recipe_book.dart';
-import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
-import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/incomplete_info.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/ready_mark.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -21,24 +22,25 @@ class PlateFace extends StatelessWidget {
   /// Riga sotto il nome (es. cosa è uscito dal Bottino); `null` = i componenti che mancano, se mancano.
   final String? caption;
 
-  const PlateFace({super.key, required this.recipe, this.missing = 0, this.caption});
+  /// Quante pozioni di questa Tavola prepari adesso: la beuta con il numero accanto al cerchietto (0 = niente).
+  final int brews;
+
+  const PlateFace({super.key, required this.recipe, this.missing = 0, this.caption, this.brews = 0});
 
   @override
   Widget build(BuildContext context) {
-    final effectKnown = !recipe.hiddenPieces(missing).contains(NamePiece.effect);
-    final note = caption ?? (missing > 0 ? context.l10n.recipeMissingPieces(missing) : null);
+    // Quanti Componenti mancano lo dice la Tavola aperta: fuori bastano le rune del nome (2026-10-29).
+    final note = caption;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade)),
+            if (brews > 0) ...[const SizedBox(width: Gaps.s), ReadyCount(count: brews)],
             const Spacer(),
-            if (effectKnown)
-              Tooltip(
-                message: context.game.effect(recipe.effect),
-                child: EngravedIcon(effectIconOf(recipe.effect), size: 18),
-              ),
+            // L'effetto è nel nome ("…della Ricrescita"): niente icona che lo ripeta (2026-10-29).
+            if (missing > 0) const IncompleteInfoButton(size: 18),
           ],
         ),
         Expanded(
@@ -46,8 +48,9 @@ class PlateFace extends StatelessWidget {
             builder: (size) => RecipeVessel(recipe: recipe, size: size, missing: missing),
           ),
         ),
-        TextWithSpecies(
+        RecipeTitle(
           recipe.name(context.contentLanguage, missing: missing),
+          full: recipe.name(context.contentLanguage),
           plant: plantWord(recipe.plant.name.resolve(context.contentLanguage)),
           style: context.texts.titleMedium,
           maxLines: 4,
@@ -71,7 +74,7 @@ class MythicFace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final note = caption ?? (missing > 0 ? context.l10n.recipeMissingPieces(missing) : null);
+    final note = caption;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -80,22 +83,27 @@ class MythicFace extends StatelessWidget {
             GradeDot(grade: Grade.mythic, label: context.game.grade(Grade.mythic)),
             const SizedBox(width: Gaps.s),
             Text(context.l10n.mythicNumber(mythic.number.toString()), style: context.texts.labelLarge),
+            const Spacer(),
+            if (missing > 0) const IncompleteInfoButton(size: 18),
           ],
         ),
         Expanded(
           child: VesselSlot(
             builder: (size) => PotionVessel(
               shape: VesselShape.starred,
-              liquids: [context.druid.gradeColor(Grade.mythic.index)],
+              liquids: [
+                missing > 0 ? context.druid.hint.withValues(alpha: 0.35) : context.druid.gradeColor(Grade.mythic.index),
+              ],
               size: size,
             ),
           ),
         ),
-        Text(
+        RecipeTitle(
           mythic.name(context.contentLanguage, missing: missing),
+          plant: null,
+          full: mythic.name(context.contentLanguage),
           style: context.texts.titleMedium,
           maxLines: 4,
-          overflow: TextOverflow.ellipsis,
         ),
         if (note != null) ...[
           const SizedBox(height: Gaps.xs),
