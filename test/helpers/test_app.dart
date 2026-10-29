@@ -57,6 +57,7 @@ registerTestDependencies({
     photoSource: photoSource,
     plantIdentifier: plantIdentifier,
     permissions: permissions ?? FakePermissions(),
+    linkOpener: FakeLinkOpener(),
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }

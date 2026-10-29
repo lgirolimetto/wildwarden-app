@@ -1,4 +1,5 @@
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
+import 'package:druid_app/business_logic/interfaces/i_link_opener.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -377,7 +378,13 @@ void main() {
 
     await scrollAndTap(tester, find.byKey(const ValueKey('met-Ocimum basilicum')));
     expect(find.byKey(const ValueKey('species-origin')), findsOneWidget);
-    expect(find.text('Fonte: POWO (Kew)'), findsOneWidget);
+    final powo = find.descendant(
+      of: find.byKey(const ValueKey('species-origin-sources')),
+      matching: find.text('POWO (Kew)'),
+    );
+    expect(powo, findsOneWidget);
+    await tester.tap(powo);
+    expect((Get.find<ILinkOpener>() as FakeLinkOpener).opened.single, startsWith('https://powo.science.kew.org/'));
   });
 
   testWidgets('senza tutorial e senza aromatiche incontrate niente vassoio "Dalla cucina"', (tester) async {

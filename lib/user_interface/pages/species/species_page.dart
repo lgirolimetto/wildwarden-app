@@ -24,6 +24,7 @@ import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/sources_line.dart';
 import 'package:druid_app/user_interface/common_widgets/species_picture.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
@@ -219,10 +220,20 @@ class _SafetyWarning extends StatelessWidget {
             Icon(icon, size: 20, color: context.druid.warning),
           const SizedBox(width: Gaps.s),
           Expanded(
-            child: Text(
-              key: const ValueKey('safety-warning'),
-              context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
-              style: TextStyle(color: context.druid.warning),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  key: const ValueKey('safety-warning'),
+                  // Verificato con due fonti autorevoli: senza "da verificare" (capitolo 04).
+                  catalog.safetyVerified.contains(species.sci)
+                      ? safety.resolve(context.contentLanguage)
+                      : context.l10n.safetyWarning(safety.resolve(context.contentLanguage)),
+                  style: TextStyle(color: context.druid.warning),
+                ),
+                if (catalog.safetySources[species.sci] case final sources? when sources.isNotEmpty)
+                  SourcesLine(sources, key: const ValueKey('safety-sources')),
+              ],
             ),
           ),
         ],
@@ -277,11 +288,7 @@ class _SpeciesSheet extends StatelessWidget {
                     Text(origin.resolve(context.contentLanguage), key: const ValueKey('species-origin')),
                     if (catalog.originSources[species.sci] case final sources? when sources.isNotEmpty) ...[
                       const SizedBox(height: Gaps.xs),
-                      Text(
-                        context.l10n.sourcesLine(sources.map((r) => r.name).join(' · ')),
-                        key: const ValueKey('species-origin-sources'),
-                        style: context.texts.labelSmall?.copyWith(color: context.druid.hint),
-                      ),
+                      SourcesLine(sources, key: const ValueKey('species-origin-sources')),
                     ],
                   ],
                 ),
@@ -305,10 +312,10 @@ class _SpeciesSheet extends StatelessWidget {
                       children: [
                         for (final line in game.traitLines(species, level)) Text(line),
                         const SizedBox(height: Gaps.xs),
-                        Text(
-                          context.l10n.sourcesTraits,
-                          style: context.texts.labelSmall?.copyWith(color: context.druid.hint),
-                        ),
+                        SourcesLine([
+                          if (species.traits.powoUrl case final url?) SourceRef(name: 'POWO (Kew)', url: url),
+                          ...traitDatasets,
+                        ]),
                       ],
                     ),
             ),
@@ -378,9 +385,16 @@ class _SpeciesSheet extends StatelessWidget {
             _Section(
               title: context.l10n.sectionLore,
               child: level >= 4
-                  ? Text(
-                      lore?.resolve(context.contentLanguage) ?? context.l10n.masteryReached,
-                      style: const TextStyle(fontStyle: FontStyle.italic),
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          lore?.resolve(context.contentLanguage) ?? context.l10n.masteryReached,
+                          style: const TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                        if (catalog.loreSources[species.sci] case final sources? when sources.isNotEmpty)
+                          SourcesLine(sources),
+                      ],
                     )
                   : locked(4),
             ),
@@ -946,7 +960,17 @@ class _FunFactsSection extends StatelessWidget {
           for (final fact in seen)
             Padding(
               padding: const EdgeInsets.only(bottom: Gaps.xs),
-              child: Text('• ${context.game.funFact(fact)}'),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('• ${context.game.funFact(fact)}'),
+                  if (fact case CuratedFunFactItem(:final sources) when sources.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(left: Gaps.m),
+                      child: SourcesLine(sources),
+                    ),
+                ],
+              ),
             ),
           if (seen.length < all.length)
             Text(

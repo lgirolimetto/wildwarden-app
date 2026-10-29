@@ -165,7 +165,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "326271-2",
+    "nativeRange": "Medit."
    },
    "protection": [],
    "grade": "common",
@@ -347,7 +349,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "708415-1",
+    "nativeRange": "Medit."
    },
    "protection": [],
    "grade": "common",
@@ -528,7 +532,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "649036-1",
+    "nativeRange": "Europe to Caucasus, NE. Algeria"
    },
    "protection": [
     "regional-emilia-romagna"
@@ -713,7 +719,9 @@
     "dispersal": [
      "ants",
      "launched"
-    ]
+    ],
+    "powoId": "346754-1",
+    "nativeRange": "Macaronesia, N. Africa, Temp. Eurasia to Indian Subcontinent"
    },
    "protection": [],
    "grade": "common",
@@ -894,7 +902,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "730297-1",
+    "nativeRange": "Europe to C. Asia and Iran, NW. Africa"
    },
    "protection": [],
    "grade": "common",
@@ -1074,7 +1084,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "717707-1",
+    "nativeRange": "Medit. to C. Asia and NW. Aghanistan"
    },
    "protection": [],
    "grade": "rare",
@@ -1247,7 +1259,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "1176324-2",
+    "nativeRange": "Europe to C. Asia and N. Myanmar, NW. Africa"
    },
    "protection": [],
    "grade": "common",
@@ -1424,7 +1438,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "160876-1",
+    "nativeRange": "Europe to Caucasus"
    },
    "protection": [],
    "grade": "common",
@@ -1608,7 +1624,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "319145-2",
+    "nativeRange": "Europe to Afghanistan"
    },
    "protection": [],
    "grade": "common",
@@ -1784,7 +1802,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "540443-1",
+    "nativeRange": "Macaronesia to Medit., W. & SC. Europe to Caucasus"
    },
    "protection": [
     "habitats-annex-v"
@@ -1953,7 +1973,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "69498-1",
+    "nativeRange": "SC. Europe to C. & S. China"
    },
    "protection": [],
    "grade": "uncommon",
@@ -2128,7 +2150,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "465049-1",
+    "nativeRange": "Medit."
    },
    "protection": [],
    "grade": "common",
@@ -2292,7 +2316,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "271661-1",
+    "nativeRange": "Europe to Lebanon and N. Iraq"
    },
    "protection": [],
    "grade": "common",
@@ -2461,7 +2487,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "326265-2",
+    "nativeRange": "Europe to Iran, NW. Africa"
    },
    "protection": [],
    "grade": "uncommon",
@@ -2634,7 +2662,9 @@
     },
     "dispersal": [
      "ants"
-    ]
+    ],
+    "powoId": "303589-2",
+    "nativeRange": "Macaronesia, Europe to W. Siberia, Medit. to N. Iran"
    },
    "protection": [],
    "grade": "common",
@@ -2800,7 +2830,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "850999-1",
+    "nativeRange": "Medit. to N. Iran"
    },
    "protection": [],
    "grade": "uncommon",
@@ -2961,7 +2993,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "609128-1",
+    "nativeRange": "EC. & S. Europe to Caucasus"
    },
    "protection": [],
    "grade": "common",
@@ -3133,7 +3167,9 @@
     },
     "dispersal": [
      "hoardedByAnimals"
-    ]
+    ],
+    "powoId": "295446-1",
+    "nativeRange": "Europe to Caucasus"
    },
    "protection": [],
    "grade": "common",
@@ -3310,7 +3346,9 @@
     },
     "dispersal": [
      "stuckToAnimals"
-    ]
+    ],
+    "powoId": "450084-1",
+    "nativeRange": "Medit. to C. Asia"
    },
    "protection": [],
    "grade": "uncommon",
@@ -3496,7 +3534,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "781250-1",
+    "nativeRange": "Europe to Iran, N. Algeria"
    },
    "protection": [],
    "grade": "uncommon",
@@ -3674,7 +3714,9 @@
     },
     "dispersal": [
      "hoardedByAnimals"
-    ]
+    ],
+    "powoId": "442427-1",
+    "nativeRange": "NE. & E. Türkiye to Lebanon and W. Himalaya"
    },
    "protection": [],
    "grade": "common",
@@ -3857,7 +3899,9 @@
     },
     "dispersal": [
      "stuckToAnimals"
-    ]
+    ],
+    "powoId": "457007-1",
+    "nativeRange": "Europe"
    },
    "protection": [],
    "grade": "uncommon",
@@ -4036,7 +4080,9 @@
     },
     "dispersal": [
      "ants"
-    ]
+    ],
+    "powoId": "113618-1",
+    "nativeRange": "W. & C. Medit."
    },
    "protection": [],
    "grade": "common",
@@ -4212,7 +4258,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "271612-1",
+    "nativeRange": "Europe to Caucasus"
    },
    "protection": [],
    "grade": "common",
@@ -4384,7 +4432,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "450128-1",
+    "nativeRange": "Europe to Türkiye"
    },
    "protection": [],
    "grade": "uncommon",
@@ -4564,7 +4614,9 @@
     },
     "dispersal": [
      "ants"
-    ]
+    ],
+    "powoId": "711386-1",
+    "nativeRange": "C. & SC. Europe"
    },
    "protection": [],
    "grade": "rare",
@@ -4746,7 +4798,9 @@
     "dispersal": [
      "ants",
      "launched"
-    ]
+    ],
+    "powoId": "346205-1",
+    "nativeRange": "Europe to NW. Türkiye"
    },
    "protection": [],
    "grade": "common",
@@ -4930,7 +4984,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "561932-1",
+    "nativeRange": "Macaronesia, Europe to C. Asia and W. Himalaya"
    },
    "protection": [],
    "grade": "uncommon",
@@ -5100,7 +5156,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "729568-1",
+    "nativeRange": "SE. Europe to C. Asia and Himalaya"
    },
    "protection": [],
    "grade": "uncommon",
@@ -5280,7 +5338,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "615773-1",
+    "nativeRange": "Europe, Medit. to N. Iran"
    },
    "protection": [
     "regional-emilia-romagna"
@@ -5457,7 +5517,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "295664-1",
+    "nativeRange": "SC. & S. Europeto Caucasus, Lebanon"
    },
    "protection": [],
    "grade": "common",
@@ -5633,7 +5695,9 @@
     },
     "dispersal": [
      "ants"
-    ]
+    ],
+    "powoId": "447338-1",
+    "nativeRange": "Europe to Siberia and Xinjiang"
    },
    "protection": [],
    "grade": "rare",
@@ -5814,7 +5878,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "325777-2",
+    "nativeRange": "Europe to Siberia and C. Asia"
    },
    "protection": [],
    "grade": "rare",
@@ -5998,7 +6064,9 @@
     "dispersal": [
      "water",
      "wind"
-    ]
+    ],
+    "powoId": "776573-1",
+    "nativeRange": "C. & S. Europe to Xinjiang and W. Himalaya"
    },
    "protection": [],
    "grade": "uncommon",
@@ -6178,7 +6246,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "998308-1",
+    "nativeRange": "Europe, Medit. to Iran"
    },
    "protection": [
     "regional-emilia-romagna"
@@ -6365,7 +6435,9 @@
     "dispersal": [
      "water",
      "wind"
-    ]
+    ],
+    "powoId": "248251-1",
+    "nativeRange": "Macaronesia, Europe to China and Arabian Pen."
    },
    "protection": [],
    "grade": "uncommon",
@@ -6534,7 +6606,9 @@
     },
     "dispersal": [
      "wind"
-    ]
+    ],
+    "powoId": "286647-1",
+    "nativeRange": "SC. & S. Europe"
    },
    "protection": [],
    "grade": "uncommon",
@@ -6707,7 +6781,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "711189-1",
+    "nativeRange": "SE. France to Bulgaria"
    },
    "protection": [],
    "grade": "mythic",
@@ -6891,7 +6967,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "265849-1",
+    "nativeRange": "Temp. & Subtrop. Old World"
    },
    "protection": [],
    "grade": "uncommon",
@@ -7062,7 +7140,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "610130-1",
+    "nativeRange": "NW. Africa, Europe to NW. Iran"
    },
    "protection": [],
    "grade": "rare",
@@ -7243,7 +7323,9 @@
     },
     "dispersal": [
      "ants"
-    ]
+    ],
+    "powoId": "711317-1",
+    "nativeRange": "W. Europe to C. Germany and S. Italy, N. Morocco"
    },
    "protection": [],
    "grade": "common",
@@ -7419,7 +7501,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "82697-1",
+    "nativeRange": "S. Europe to Caucasus"
    },
    "protection": [
     "regional-emilia-romagna"
@@ -7587,7 +7671,9 @@
     "dispersal": [
      "stuckToAnimals",
      "wind"
-    ]
+    ],
+    "powoId": "256109-1",
+    "nativeRange": "Canary Is., Medit. to Arabian Pen."
    },
    "protection": [],
    "grade": "rare",
@@ -7762,7 +7848,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "90723-1",
+    "nativeRange": "Europe, Medit. to Iran"
    },
    "protection": [],
    "grade": "common",
@@ -7941,7 +8029,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "700730-1",
+    "nativeRange": "France to Türkiye"
    },
    "protection": [],
    "grade": "rare",
@@ -8121,7 +8211,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "946593-1",
+    "nativeRange": "Europe to Caucasus, Medit."
    },
    "protection": [],
    "grade": "uncommon",
@@ -8295,7 +8387,9 @@
     },
     "dispersal": [
      "hoardedByAnimals"
-    ]
+    ],
+    "powoId": "305836-2",
+    "nativeRange": "Europe"
    },
    "protection": [],
    "grade": "common",
@@ -8474,7 +8568,9 @@
     },
     "dispersal": [
      "nearby"
-    ]
+    ],
+    "powoId": "558787-1",
+    "nativeRange": "C. & S. Europe to N. Pakistan"
    },
    "protection": [],
    "grade": "mythic",
@@ -8643,7 +8739,9 @@
     },
     "dispersal": [
      "eatenByAnimals"
-    ]
+    ],
+    "powoId": "149315-1",
+    "nativeRange": "Madeira, NW. Africa, Europe to S. Turkmenistan"
    },
    "protection": [],
    "grade": "common",
@@ -8829,7 +8927,9 @@
      "nutrients": 5.5,
      "soilReaction": 7.2
     },
-    "dispersal": []
+    "dispersal": [],
+    "powoId": "20007435-1",
+    "nativeRange": "Macaronesia, Europe to Iran, NW. Africa"
    },
    "protection": [],
    "grade": "rare",
@@ -9053,7 +9153,7 @@
  ],
  "lore": {
   "Eranthis hyemalis": {
-   "it": "Il Piè di gallo fiorisce quando il bosco dorme ancora: il suo oro trattiene la prima luce dell'anno. Gli erboristi lo chiamano 'la lanterna di gennaio'."
+   "it": "Il Piè di gallo fiorisce quando il bosco dorme ancora: il suo oro trattiene la prima luce dell'anno, come una piccola lanterna accesa nel cuore dell'inverno."
   },
   "Helleborus viridis": {
    "it": "L'Elleboro verde non teme la neve. La sua Essenza è fredda e paziente, e conserva le cose invece di trasformarle."
@@ -9062,7 +9162,7 @@
    "it": "Sotto i faggi il silenzio ha un peso. L'Essenza di faggio si Attinge solo in quota, dove le voci della pianura non arrivano."
   },
   "Anacamptis pyramidalis": {
-   "it": "L'Orchide piramidale compare a giugno, per poche settimane, nei prati che nessuno falcia. Chi la trova sa di essere arrivato al momento giusto."
+   "it": "L'Orchide piramidale compare tra maggio e giugno, per poche settimane, nei prati che nessuno falcia. Chi la trova sa di essere arrivato al momento giusto."
   },
   "Cyclamen hederifolium": {
    "it": "Il Ciclamino fiorisce quando gli altri si arrendono all'autunno. La sua Essenza ricorda: c'è ancora tempo."
@@ -9077,6 +9177,54 @@
    "it": "La Malva non chiede nulla: cresce nei fossi, nei cortili, lungo i binari. La sua Essenza è comune, ma nessuna Ricetta di base ne fa a meno."
   }
  },
+ "loreSources": {
+  "Eranthis hyemalis": [
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Eranthis"
+   }
+  ],
+  "Fagus sylvatica": [
+   {
+    "name": "Wikipedia",
+    "url": "https://it.wikipedia.org/wiki/Fagus_sylvatica"
+   }
+  ],
+  "Anacamptis pyramidalis": [
+   {
+    "name": "Wikipedia",
+    "url": "https://it.wikipedia.org/wiki/Anacamptis_pyramidalis"
+   },
+   {
+    "name": "NaturB Orchids (Università di Ferrara)",
+    "url": "https://naturb-orchids.unife.it/le-specie-studiate-con-naturb-orchids"
+   }
+  ],
+  "Cyclamen hederifolium": [
+   {
+    "name": "Wikipedia",
+    "url": "https://it.wikipedia.org/wiki/Cyclamen_hederifolium"
+   }
+  ],
+  "Chelidonium majus": [
+   {
+    "name": "BSBI",
+    "url": "https://bsbi.org/taxa/2cd4p9h.yha/chelidonium-majus"
+   }
+  ],
+  "Melissa officinalis": [
+   {
+    "name": "Wikipedia",
+    "url": "https://it.wikipedia.org/wiki/Melissa_officinalis"
+   }
+  ],
+  "Malva sylvestris": [
+   {
+    "name": "BSBI",
+    "url": "https://bsbi.org/taxa/2cd4p9h.yrv/malva-sylvestris"
+   }
+  ]
+ },
  "funFacts": {
   "Laurus nobilis": [
    {
@@ -9084,7 +9232,17 @@
     "text": {
      "it": "Dal nome latino dell'alloro, laurus, viene la parola 'laurea': nell'antichità le corone d'alloro premiavano poeti e vincitori."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Wiktionary (laurea)",
+      "url": "https://www.wikiwand.com/en/dictionary/laurea"
+     },
+     {
+      "name": "Etymonline (laureate)",
+      "url": "https://www.etymonline.com/it/word/laureate"
+     }
+    ]
    }
   ],
   "Eranthis hyemalis": [
@@ -9093,7 +9251,17 @@
     "text": {
      "it": "Eranthis viene dal greco 'er' (primavera) e 'anthos' (fiore), mentre hyemalis significa 'invernale': un fiore di primavera che sboccia in pieno inverno."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "NZPCN",
+      "url": "https://nzpcn.org.nz/flora/species/eranthis-hyemalis"
+     },
+     {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Eranthis_hyemalis"
+     }
+    ]
    }
   ],
   "Chelidonium majus": [
@@ -9102,7 +9270,17 @@
     "text": {
      "it": "Il nome viene dal greco chelidón, 'rondine': la tradizione legava la celidonia al ritorno delle rondini."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Wikipedia",
+      "url": "https://it.wikipedia.org/wiki/Chelidonium_majus"
+     },
+     {
+      "name": "The Met Cloisters",
+      "url": "https://blog.metmuseum.org/cloistersgardens/2011/05/06/swallow-wort/"
+     }
+    ]
    }
   ],
   "Melissa officinalis": [
@@ -9111,7 +9289,13 @@
     "text": {
      "it": "In greco melissa significa 'ape': è una delle piante più amate dalle api."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Spektrum Lexikon",
+      "url": "https://www.spektrum.de/lexikon/biologie/melisse/41988"
+     }
+    ]
    }
   ],
   "Juglans regia": [
@@ -9120,16 +9304,32 @@
     "text": {
      "it": "Juglans viene dal latino Iovis glans, 'ghianda di Giove': per i Romani la noce era un frutto degno degli dèi."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Wiktionary (iuglans)",
+      "url": "https://en.wiktionary.com/wiki/iuglans"
+     }
+    ]
    }
   ],
   "Euonymus europaeus": [
    {
     "level": 1,
     "text": {
-     "it": "Si chiama berretta del prete per i frutti, che ricordano il copricapo a quattro punte dei sacerdoti."
+     "it": "Si chiama berretta del prete per i frutti, capsule a quattro spicchi che ricordano l'antico copricapo dei sacerdoti."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Bosco Siro Negri (Università di Pavia)",
+      "url": "https://boscosironegri.unipv.it/wp-content/uploads/2022/06/05-specie-arbustive-meno-frequenti.pdf"
+     },
+     {
+      "name": "Montagne Aperte",
+      "url": "https://montagneaperte.it/ambienteebiodiversita/?p=10928"
+     }
+    ]
    }
   ],
   "Cyclamen hederifolium": [
@@ -9138,7 +9338,13 @@
     "text": {
      "it": "Un vecchio nome popolare del ciclamino è 'pan porcino': i maiali ne vanno in cerca dei tuberi, che per noi invece sono tossici."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Summa Gallicana",
+      "url": "https://summagallicana.it/lessico/c/ciclamino.htm"
+     }
+    ]
    }
   ],
   "Ruscus aculeatus": [
@@ -9147,7 +9353,17 @@
     "text": {
      "it": "Il nome pungitopo viene da un uso antico: i rametti spinosi si mettevano intorno ai cibi conservati per tenere lontani i topi."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Etnobotanica (Scuola Sant'Anna, Pisa)",
+      "url": "https://iris.santannapisa.it/retrieve/dd9e0b31-be15-709e-e053-3705fe0a83fd/275_vqr_Etnobotanica.pdf"
+     },
+     {
+      "name": "Flora urbana di Trieste (Università di Trieste)",
+      "url": "https://moodle2.units.it/pluginfile.php/760429/mod_resource/content/2/Guida_alla_flora_urbana_di_Trieste.pdf"
+     }
+    ]
    }
   ],
   "Fraxinus ornus": [
@@ -9156,7 +9372,13 @@
     "text": {
      "it": "Incidendo la corteccia del frassino da manna esce una linfa zuccherina, la 'manna', che in Sicilia si raccoglie ancora oggi."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Fondazione Slow Food",
+      "url": "https://www.fondazioneslowfood.com/it/presidi-slow-food/manna-delle-madonie/"
+     }
+    ]
    }
   ],
   "Prunus spinosa": [
@@ -9165,7 +9387,13 @@
     "text": {
      "it": "Con le bacche del prugnolo, raccolte dopo le prime gelate, in Emilia si prepara il bargnolino, un liquore tradizionale."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Wikipedia",
+      "url": "https://it.wikipedia.org/wiki/Bargnolino"
+     }
+    ]
    }
   ],
   "Equisetum telmateia": [
@@ -9174,7 +9402,17 @@
     "text": {
      "it": "Gli equiseti sono ricchi di silice: un tempo si usavano per lucidare pentole e metalli."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "UC Berkeley Botanical Garden",
+      "url": "https://botanicalgarden.berkeley.edu/glad-you-asked/horsetail-many-uses-from-domestic-to-medicinal"
+     },
+     {
+      "name": "Grieve, A Modern Herbal",
+      "url": "https://botanical.com/botanical/mgmh/h/hortai39.html"
+     }
+    ]
    }
   ],
   "Cornus mas": [
@@ -9183,16 +9421,36 @@
     "text": {
      "it": "Il legno di corniolo è durissimo: nell'antichità si usava per le aste delle lance."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Wikipedia",
+      "url": "https://it.wikipedia.org/wiki/Cornus_mas"
+     },
+     {
+      "name": "Wikipedia (Xyston)",
+      "url": "https://en.wikipedia.org/wiki/Xyston"
+     }
+    ]
    }
   ],
   "Clematis vitalba": [
    {
     "level": 2,
     "text": {
-     "it": "In Francia la vitalba era detta 'erba dei pezzenti': si racconta che i mendicanti la usassero per arrossarsi la pelle e impietosire i passanti."
+     "it": "In Francia la vitalba era detta 'erba dei pezzenti': si racconta che i mendicanti se la strofinassero sulla pelle per procurarsi piaghe e impietosire i passanti."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Museo di storia naturale di Friburgo",
+      "url": "https://www.fr.ch/mhnf/actualites/lherbe-aux-mendiants"
+     },
+     {
+      "name": "TAXREF (MNHN)",
+      "url": "https://taxref.mnhn.fr/taxref-web/taxa/91886"
+     }
+    ]
    }
   ],
   "Malva sylvestris": [
@@ -9201,16 +9459,32 @@
     "text": {
      "it": "Un vecchio proverbio dice 'la malva, da ogni mal ti salva': per secoli è stata tra le piante più presenti nella tradizione popolare."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Wikiquote",
+      "url": "https://it.wikiquote.org/wiki/Malva"
+     }
+    ]
    }
   ],
   "Fagus sylvatica": [
    {
     "level": 2,
     "text": {
-     "it": "Secondo un'etimologia diffusa (ma discussa), il tedesco Buch, 'libro', viene da Buche, 'faggio': le prime rune si incidevano su tavolette di faggio."
+     "it": "Secondo un'etimologia diffusa (ma discussa), il tedesco Buch, 'libro', viene da Buche, 'faggio': si pensa che le rune si incidessero su tavolette di faggio."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "OUP Blog",
+      "url": "https://blog.oup.com/2014/06/origin-word-book-etymology/"
+     },
+     {
+      "name": "Grammarphobia",
+      "url": "https://grammarphobia.com/blog/2018/05/beech-book.html"
+     }
+    ]
    }
   ],
   "Hedera helix": [
@@ -9219,46 +9493,232 @@
     "text": {
      "it": "L'edera era sacra a Dioniso, il Bacco dei Romani, che veniva raffigurato con una corona d'edera."
     },
-    "verified": false
+    "verified": true,
+    "sources": [
+     {
+      "name": "Lewis & Short (hedera)",
+      "url": "https://www.alatius.com/ls/index.php?id=20325"
+     }
+    ]
    }
   ]
  },
  "safety": {
   "Helleborus viridis": {
-   "it": "tossica"
+   "it": "tossica (tutta la pianta)",
+   "en": "toxic (whole plant)"
   },
   "Helleborus foetidus": {
-   "it": "tossica"
+   "it": "tossica (tutta la pianta)",
+   "en": "toxic (whole plant)"
   },
   "Eranthis hyemalis": {
-   "it": "tossica"
+   "it": "tossica (tutta la pianta, specie il tubero)",
+   "en": "toxic (whole plant, especially the tuber)"
   },
   "Chelidonium majus": {
-   "it": "tossica (lattice irritante)"
+   "it": "tossica; lattice irritante per pelle e occhi",
+   "en": "toxic; latex irritates skin and eyes"
   },
   "Euonymus europaeus": {
-   "it": "tossica (frutti)"
+   "it": "tossica (tutta la pianta, specie frutti e semi)",
+   "en": "toxic (whole plant, especially fruits and seeds)"
   },
   "Euphorbia helioscopia": {
-   "it": "lattice irritante"
+   "it": "tossica; lattice irritante, pericoloso per gli occhi",
+   "en": "toxic; irritant latex, dangerous to the eyes"
   },
   "Euphorbia cyparissias": {
-   "it": "lattice irritante"
+   "it": "tossica; lattice irritante, pericoloso per gli occhi",
+   "en": "toxic; irritant latex, dangerous to the eyes"
   },
   "Clematis vitalba": {
-   "it": "irritante"
+   "it": "irritante (pianta fresca: pelle e bocca)",
+   "en": "irritant (fresh plant: skin and mouth)"
   },
   "Hedera helix": {
-   "it": "tossica (bacche)"
+   "it": "tossica (bacche e foglie)",
+   "en": "toxic (berries and leaves)"
   },
   "Ligustrum vulgare": {
-   "it": "tossica (bacche)"
+   "it": "poco tossica (bacche e foglie)",
+   "en": "mildly toxic (berries and leaves)"
   },
   "Ruscus aculeatus": {
-   "it": "bacche da non ingerire"
+   "it": "bacche da non ingerire",
+   "en": "berries not to be eaten"
   },
   "Sambucus ebulus": {
-   "it": "tossica (bacche); somiglia al sambuco nero commestibile"
+   "it": "tossica (bacche, foglie, semi); simile al sambuco nero",
+   "en": "toxic (berries, leaves, seeds); resembles black elder"
   }
+ },
+ "safetySources": {
+  "Helleborus viridis": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/christrose"
+   },
+   {
+    "name": "BfR",
+    "url": "https://www.bfr.bund.de/bfr-giftgarten/schneerose/"
+   },
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Helleborus_viridis"
+   }
+  ],
+  "Helleborus foetidus": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/christrose"
+   },
+   {
+    "name": "BfR",
+    "url": "https://www.bfr.bund.de/bfr-giftgarten/schneerose/"
+   },
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Helleborus_foetidus"
+   }
+  ],
+  "Eranthis hyemalis": [
+   {
+    "name": "Spektrum Lexikon der Biologie",
+    "url": "https://www.spektrum.de/lexikon/biologie/winterling/70860"
+   },
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Eranthis_hyemalis"
+   },
+   {
+    "name": "Bochumer Botanischer Verein",
+    "url": "https://www.zobodat.at/pdf/Jahrb-Bochumer-Bot-Ver_2_0199-0201.pdf"
+   }
+  ],
+  "Chelidonium majus": [
+   {
+    "name": "BfR",
+    "url": "https://www.bfr.bund.de/bfr-giftgarten/schoellkraut/"
+   },
+   {
+    "name": "Centre Antipoisons (BE)",
+    "url": "https://www.centreantipoisons.be/tox-infos/vergiftiging-door-planten/"
+   }
+  ],
+  "Euonymus europaeus": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/pfaffenhuetchen"
+   },
+   {
+    "name": "Giftberatung Uniklinik Freiburg",
+    "url": "https://www.uniklinik-freiburg.de/giftberatung/liste-ausgewaehlter-giftpflanzen/pfaffenhuetchen.html"
+   },
+   {
+    "name": "Centre Antipoison de Lille",
+    "url": "https://www.cap.chu-lille.fr/2021/01/26/fusain/"
+   }
+  ],
+  "Euphorbia helioscopia": [
+   {
+    "name": "Centre Antipoisons (BE)",
+    "url": "https://www.centreantipoisons.be/tox-infos/euphorbia/"
+   },
+   {
+    "name": "CDFA",
+    "url": "https://blogs.cdfa.ca.gov/Section3162/wp-content/uploads/2024/06/Euphorbia-helioscopia.pdf"
+   },
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Euphorbia_helioscopia"
+   }
+  ],
+  "Euphorbia cyparissias": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/wolfsmich-zypressen"
+   },
+   {
+    "name": "BfR",
+    "url": "https://www.bfr.bund.de/bfr-giftgarten/zypressen-wolfsmilch/"
+   },
+   {
+    "name": "Centre Antipoisons (BE)",
+    "url": "https://www.centreantipoisons.be/tox-infos/euphorbia/"
+   }
+  ],
+  "Clematis vitalba": [
+   {
+    "name": "Massey University",
+    "url": "https://poisonousplants.massey.ac.nz/data/old_mans_beard/clem.html"
+   },
+   {
+    "name": "ACEP Now",
+    "url": "https://www.acepnow.com/article/toxicology-answer-what-are-the-side-effects-of-chewing-this-beautiful-bloom/"
+   }
+  ],
+  "Hedera helix": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/efeugemeiner"
+   },
+   {
+    "name": "Giftberatung Uniklinik Freiburg",
+    "url": "https://www.uniklinik-freiburg.de/giftberatung/liste-ausgewaehlter-giftpflanzen/efeu.html"
+   },
+   {
+    "name": "Centre Antipoison de Lille",
+    "url": "https://www.cap.chu-lille.fr/plantes-toxiques-en-france/"
+   }
+  ],
+  "Ligustrum vulgare": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/liguster-gemeiner"
+   },
+   {
+    "name": "Giftberatung Uniklinik Freiburg",
+    "url": "https://www.uniklinik-freiburg.de/giftberatung/liste-ausgewaehlter-giftpflanzen/liguster.html"
+   },
+   {
+    "name": "Centre Antipoison de Lille",
+    "url": "https://www.cap.chu-lille.fr/2021/01/05/troene/"
+   }
+  ],
+  "Ruscus aculeatus": [
+   {
+    "name": "Centre Antipoison de Lille",
+    "url": "https://www.cap.chu-lille.fr/2021/01/26/fragon"
+   },
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Ruscus_aculeatus"
+   }
+  ],
+  "Sambucus ebulus": [
+   {
+    "name": "GIZ Bonn",
+    "url": "https://gizbonn.de/giftzentrale-bonn/pflanzen/zwergholunder"
+   },
+   {
+    "name": "Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Sambucus_ebulus"
+   }
+  ]
+ },
+ "safetyVerified": {
+  "Helleborus viridis": true,
+  "Helleborus foetidus": true,
+  "Eranthis hyemalis": true,
+  "Chelidonium majus": true,
+  "Euonymus europaeus": true,
+  "Euphorbia helioscopia": true,
+  "Euphorbia cyparissias": true,
+  "Clematis vitalba": true,
+  "Hedera helix": true,
+  "Ligustrum vulgare": true,
+  "Ruscus aculeatus": true,
+  "Sambucus ebulus": true
  }
 }

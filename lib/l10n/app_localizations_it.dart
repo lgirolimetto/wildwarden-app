@@ -861,9 +861,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get sourcesTraits => 'Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0';
-
-  @override
   String get sectionTraits => 'Com\'è e come vive';
 
   @override
@@ -2461,11 +2458,9 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sectionOrigin => 'Da dove viene';
 
   @override
-  String sourcesLine(String sources) {
-    return 'Fonte: $sources';
-  }
-
-  @override
   String get captureTutorialEssence =>
       'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.';
+
+  @override
+  String get sourcesLabel => 'Fonte: ';
 }

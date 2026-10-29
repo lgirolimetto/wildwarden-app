@@ -808,7 +808,6 @@
       }
     }
   },
-  "sourcesTraits": "Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0",
   "sectionTraits": "Com'è e come vive",
   "xpToCash": "{xp} PE da Incassare: si Incassano alla prima Essenza di ogni specie",
   "@xpToCash": {
@@ -1844,13 +1843,6 @@
   "erbarioKitchen": "Dalla cucina",
   "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
   "sectionOrigin": "Da dove viene",
-  "sourcesLine": "Fonte: {sources}",
-  "@sourcesLine": {
-    "placeholders": {
-      "sources": {
-        "type": "String"
-      }
-    }
-  },
-  "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio."
+  "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.",
+  "sourcesLabel": "Fonte: "
 }

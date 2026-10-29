@@ -56,6 +56,22 @@ void main() {
     });
   });
 
+  test('fonti: avvisi di tossicità verificati con due fonti, curiosità con le loro, POWO per ogni specie', () async {
+    final result = await AssetCatalogRepository().loadCatalog();
+
+    result.fold((failures) => fail('Catalogo non valido: ${failures.join(', ')}'), (catalog) {
+      expect(catalog.safetyVerified, catalog.safety.keys.toSet());
+      for (final sci in catalog.safety.keys) {
+        expect(catalog.safetySources[sci], hasLength(greaterThanOrEqualTo(2)), reason: sci);
+      }
+      expect(catalog.safety['Hedera helix']?.resolve('en'), 'toxic (berries and leaves)');
+      final facts = catalog.funFacts.values.expand((f) => f);
+      expect(facts.every((f) => f.verified && f.sources.isNotEmpty), isTrue);
+      expect(catalog.species.every((s) => s.traits.powoUrl != null), isTrue);
+      expect(catalog.speciesBySci('Laurus nobilis')?.traits.nativeRange, 'Medit.');
+    });
+  });
+
   test('un JSON non valido diventa un Fail, non un\'eccezione', () async {
     final result = await AssetCatalogRepository(bundle: _StringBundle('{rotto')).loadCatalog();
     expect(result.isValid, isFalse);

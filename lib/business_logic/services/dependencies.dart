@@ -7,6 +7,7 @@ import 'package:druid_app/business_logic/interfaces/i_frame_analyzer.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_link_opener.dart';
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
@@ -21,6 +22,7 @@ import 'package:druid_app/business_logic/services/field_test/file_field_test_log
 import 'package:druid_app/business_logic/services/location/geolocator_sampler.dart';
 import 'package:druid_app/business_logic/services/persistence/drift_game_event_store.dart';
 import 'package:druid_app/business_logic/services/persistence/druid_database.dart';
+import 'package:druid_app/business_logic/services/links/browser_link_opener.dart';
 import 'package:druid_app/business_logic/services/permissions/device_permissions.dart';
 import 'package:druid_app/business_logic/services/plantnet/plantnet_identifier.dart';
 import 'package:druid_app/business_logic/services/weather/open_meteo_service.dart';
@@ -58,6 +60,7 @@ void registerDependencies({
   ILocationSampler? locationSampler,
   IFieldTestLog? fieldTestLog,
   IPermissions? permissions,
+  ILinkOpener? linkOpener,
 }) {
   Get.put<AppConfig>(config, permanent: true);
   Get.put<IPreferences>(preferences, permanent: true);
@@ -81,6 +84,7 @@ void registerDependencies({
   Get.put<ILocationSampler>(locationSampler ?? GeolocatorSampler(), permanent: true);
   Get.put<IFieldTestLog>(fieldTestLog ?? FileFieldTestLog(), permanent: true);
   Get.put<IPermissions>(permissions ?? const DevicePermissions(), permanent: true);
+  Get.put<ILinkOpener>(linkOpener ?? const BrowserLinkOpener(), permanent: true);
 
   Get.put(ThemeController(Get.find()), permanent: true);
   Get.put(ErbarioViewsController(Get.find()), permanent: true);
