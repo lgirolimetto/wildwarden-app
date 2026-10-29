@@ -70,4 +70,23 @@ void main() {
     await pumpDruidApp(tester);
     expect(find.byKey(const ValueKey('home-stations'), skipOffstage: false), findsNothing);
   });
+
+  testWidgets('"Lo sapevi che…" in Home: il primo è sulla raccolta sospesa col temporale', (tester) async {
+    registerTestDependencies(
+      didYouKnow: true,
+      events: [OnboardingMarked(mark: OnboardingMark.tutorialSkipped, occurredAt: now)],
+    );
+    await pumpDruidApp(tester);
+    expect(find.text('Lo sapevi che…'), findsOneWidget);
+    expect(find.textContaining('la raccolta è sospesa'), findsOneWidget);
+  });
+
+  testWidgets('durante il tutorial niente "Lo sapevi che…"', (tester) async {
+    registerTestDependencies(
+      didYouKnow: true,
+      events: [OnboardingMarked(mark: OnboardingMark.tutorialStarted, occurredAt: now)],
+    );
+    await pumpDruidApp(tester);
+    expect(find.text('Lo sapevi che…'), findsNothing);
+  });
 }

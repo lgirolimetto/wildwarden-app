@@ -2557,4 +2557,31 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get homeStationsOpen => 'Vedi';
+
+  @override
+  String get dykTitle => 'Lo sapevi che…';
+
+  @override
+  String get dykStorm =>
+      'Con il temporale e i fenomeni intensi previsti la raccolta è sospesa nei dintorni, da un\'ora prima a un\'ora dopo.';
+
+  @override
+  String get dykDaylight =>
+      'Alba e Tramonto valgono solo con la luce: non serve mai Attingere al buio.';
+
+  @override
+  String get dykMoon =>
+      'I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.';
+
+  @override
+  String get dykNoPicking =>
+      'Le piante non si raccolgono mai: si fotografano e se ne Attinge la Vis. Fotografa, non raccogliere.';
+
+  @override
+  String get dykOneDrawPerDay =>
+      'Da ogni Stazione si Attinge una volta al giorno; le piante rare ci mettono giorni a rigenerarsi.';
+
+  @override
+  String get dykIsolation =>
+      'Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis.';
 }

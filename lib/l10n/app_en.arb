@@ -652,5 +652,12 @@
   "stationsEmpty": "You have no Stations yet: they are born when you photograph a plant with Draw.",
   "stationExpectedVis": "Up to {vis} Vis",
   "stationStormSoon": "Forecast: {reason}; when you arrive, drawing may be suspended, until {when}",
-  "homeStationsOpen": "See"
+  "homeStationsOpen": "See",
+  "dykTitle": "Did you know…",
+  "dykStorm": "When thunderstorms or severe weather are forecast, drawing is suspended nearby, from an hour before to an hour after.",
+  "dykDaylight": "Dawn and Dusk only count in daylight: you never need to Draw in the dark.",
+  "dykMoon": "Moon Traits last the whole day of the phase: you never need to go out at night.",
+  "dykNoPicking": "Plants are never picked: you photograph them and Draw their Vis. Photograph, don't pick.",
+  "dykOneDrawPerDay": "You Draw from each Station once a day; rare plants take days to regrow.",
+  "dykIsolation": "Stations far from each other yield more: many plants in the same spot share their Vis."
 }

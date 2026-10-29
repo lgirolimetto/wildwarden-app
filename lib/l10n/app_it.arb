@@ -1946,5 +1946,12 @@
         "type": "String"
       }
     }
-  }
+  },
+  "dykTitle": "Lo sapevi che…",
+  "dykStorm": "Con il temporale e i fenomeni intensi previsti la raccolta è sospesa nei dintorni, da un'ora prima a un'ora dopo.",
+  "dykDaylight": "Alba e Tramonto valgono solo con la luce: non serve mai Attingere al buio.",
+  "dykMoon": "I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.",
+  "dykNoPicking": "Le piante non si raccolgono mai: si fotografano e se ne Attinge la Vis. Fotografa, non raccogliere.",
+  "dykOneDrawPerDay": "Da ogni Stazione si Attinge una volta al giorno; le piante rare ci mettono giorni a rigenerarsi.",
+  "dykIsolation": "Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis."
 }

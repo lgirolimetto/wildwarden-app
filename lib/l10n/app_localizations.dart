@@ -4034,6 +4034,48 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Vedi'**
   String get homeStationsOpen;
+
+  /// No description provided for @dykTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Lo sapevi che…'**
+  String get dykTitle;
+
+  /// No description provided for @dykStorm.
+  ///
+  /// In it, this message translates to:
+  /// **'Con il temporale e i fenomeni intensi previsti la raccolta è sospesa nei dintorni, da un\'ora prima a un\'ora dopo.'**
+  String get dykStorm;
+
+  /// No description provided for @dykDaylight.
+  ///
+  /// In it, this message translates to:
+  /// **'Alba e Tramonto valgono solo con la luce: non serve mai Attingere al buio.'**
+  String get dykDaylight;
+
+  /// No description provided for @dykMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.'**
+  String get dykMoon;
+
+  /// No description provided for @dykNoPicking.
+  ///
+  /// In it, this message translates to:
+  /// **'Le piante non si raccolgono mai: si fotografano e se ne Attinge la Vis. Fotografa, non raccogliere.'**
+  String get dykNoPicking;
+
+  /// No description provided for @dykOneDrawPerDay.
+  ///
+  /// In it, this message translates to:
+  /// **'Da ogni Stazione si Attinge una volta al giorno; le piante rare ci mettono giorni a rigenerarsi.'**
+  String get dykOneDrawPerDay;
+
+  /// No description provided for @dykIsolation.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis.'**
+  String get dykIsolation;
 }
 
 class _AppLocalizationsDelegate

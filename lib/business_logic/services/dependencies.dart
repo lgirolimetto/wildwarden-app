@@ -27,6 +27,7 @@ import 'package:druid_app/business_logic/services/permissions/device_permissions
 import 'package:druid_app/business_logic/services/plantnet/plantnet_identifier.dart';
 import 'package:druid_app/business_logic/services/weather/open_meteo_service.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
+import 'package:druid_app/controllers/did_you_know/did_you_know_controller.dart';
 import 'package:druid_app/controllers/erbario/erbario_views_controller.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -61,6 +62,7 @@ void registerDependencies({
   IFieldTestLog? fieldTestLog,
   IPermissions? permissions,
   ILinkOpener? linkOpener,
+  bool didYouKnow = true,
 }) {
   Get.put<AppConfig>(config, permanent: true);
   Get.put<IPreferences>(preferences, permanent: true);
@@ -101,4 +103,5 @@ void registerDependencies({
   Get.put(SubscriptionController(Get.find()), permanent: true);
   Get.put(StudyController(progress, random: random), permanent: true);
   Get.put(HomeController(progress), permanent: true);
+  Get.put(DidYouKnowController(Get.find(), Get.find(), enabled: didYouKnow), permanent: true);
 }

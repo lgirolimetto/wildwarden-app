@@ -39,6 +39,7 @@ registerTestDependencies({
   IWeatherService? weatherService,
   ILocationSampler? locationSampler,
   bool firstRunDone = true,
+  bool didYouKnow = false,
 }) {
   // Di solito l'onboarding di primo avvio è già fatto: i test partono dalla Home.
   final prefs = InMemoryPreferences({
@@ -64,6 +65,8 @@ registerTestDependencies({
     linkOpener: FakeLinkOpener(),
     weatherService: weatherService ?? FakeWeatherService(),
     locationSampler: locationSampler ?? FakeLocationSampler(),
+    // Il toast dei "Lo sapevi che…" coprirebbe i tocchi: acceso solo dove lo si prova.
+    didYouKnow: didYouKnow,
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }

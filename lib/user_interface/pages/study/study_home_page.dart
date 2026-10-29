@@ -10,7 +10,9 @@ import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
 import 'package:druid_app/business_logic/models/enums/season.dart';
 import 'package:druid_app/user_interface/common_widgets/accent_card.dart';
+import 'package:druid_app/controllers/did_you_know/did_you_know_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/did_you_know_toast.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/species_picture.dart';
@@ -40,6 +42,20 @@ class _StudyHomePageState extends State<StudyHomePage> {
   /// Opacità del velo sotto la barra di stato: compare quando il cielo del diorama è uscito dallo schermo.
   double _scrim = 0;
 
+  /// Il "Lo sapevi che…" del giorno si guarda una volta, quando i dati sono pronti.
+  bool _didYouKnowChecked = false;
+
+  /// Un "Lo sapevi che…" al giorno, come toast; non durante il tutorial (si nasconde il più possibile).
+  void _didYouKnowOnce(GameState state) {
+    if (_didYouKnowChecked) return;
+    _didYouKnowChecked = true;
+    if (tutorialStatus(state) == TutorialStatus.inProgress) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final tip = await Get.find<DidYouKnowController>().today();
+      if (tip != null && mounted) showDidYouKnow(context, tip);
+    });
+  }
+
   static double _scrimFor(double offset) => ((offset - _DioramaHeader.dioramaHeight * 0.6) / 60).clamp(0.0, 1.0);
 
   @override
@@ -62,6 +78,7 @@ class _StudyHomePageState extends State<StudyHomePage> {
     builder: (context, catalog, state, progress) {
       final now = progress.now;
       final tutorial = tutorialStatus(state);
+      _didYouKnowOnce(state);
       return ListView(
         key: const ValueKey('study-home-list'),
         padding: const EdgeInsets.only(bottom: homeBottomInset),

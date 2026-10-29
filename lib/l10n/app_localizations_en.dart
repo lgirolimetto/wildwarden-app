@@ -2546,4 +2546,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get homeStationsOpen => 'See';
+
+  @override
+  String get dykTitle => 'Did you know…';
+
+  @override
+  String get dykStorm =>
+      'When thunderstorms or severe weather are forecast, drawing is suspended nearby, from an hour before to an hour after.';
+
+  @override
+  String get dykDaylight =>
+      'Dawn and Dusk only count in daylight: you never need to Draw in the dark.';
+
+  @override
+  String get dykMoon =>
+      'Moon Traits last the whole day of the phase: you never need to go out at night.';
+
+  @override
+  String get dykNoPicking =>
+      'Plants are never picked: you photograph them and Draw their Vis. Photograph, don\'t pick.';
+
+  @override
+  String get dykOneDrawPerDay =>
+      'You Draw from each Station once a day; rare plants take days to regrow.';
+
+  @override
+  String get dykIsolation =>
+      'Stations far from each other yield more: many plants in the same spot share their Vis.';
 }

@@ -10,9 +10,12 @@ import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/rules/field/capture.dart';
 import 'package:druid_app/business_logic/rules/field/station_state.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
+import 'package:druid_app/business_logic/rules/did_you_know.dart';
+import 'package:druid_app/controllers/did_you_know/did_you_know_controller.dart';
 import 'package:druid_app/controllers/field/capture_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
+import 'package:druid_app/user_interface/common_widgets/did_you_know_toast.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
@@ -52,6 +55,11 @@ class _CapturePageState extends State<CapturePage> {
     );
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _capture.start();
+      // La prima raccolta sospesa: il suo "Lo sapevi che…" compare subito, qui.
+      if (_capture.suspension != null) {
+        final tip = await Get.find<DidYouKnowController>().firstTime(DidYouKnow.storm);
+        if (tip != null && mounted) showDidYouKnow(context, tip);
+      }
       // Fotocamera chiusa senza scattare: si torna da dove si era venuti.
       if (_capture.phase == CapturePhase.cancelled && mounted) Navigator.of(context).pop();
     });
