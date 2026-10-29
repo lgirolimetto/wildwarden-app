@@ -2521,4 +2521,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get captureDrawnPantry =>
       'You\'ll find it in the Laboratory Pantry, with the Traits of this moment.';
+
+  @override
+  String get stationsTitle => 'Your Stations';
+
+  @override
+  String stationsSummary(int ready, int total) {
+    return '$ready ready out of $total';
+  }
+
+  @override
+  String get stationsEmpty =>
+      'You have no Stations yet: they are born when you photograph a plant with Draw.';
+
+  @override
+  String stationExpectedVis(int vis) {
+    return 'Up to $vis Vis';
+  }
+
+  @override
+  String stationStormSoon(String reason, String when) {
+    return 'Forecast: $reason; when you arrive, drawing may be suspended, until $when';
+  }
+
+  @override
+  String get homeStationsOpen => 'See';
 }

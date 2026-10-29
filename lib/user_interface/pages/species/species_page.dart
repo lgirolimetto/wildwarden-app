@@ -9,6 +9,7 @@ import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
+import 'package:druid_app/business_logic/rules/field/station_state.dart';
 import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
@@ -30,6 +31,8 @@ import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/pages/field/capture_page.dart';
+import 'package:druid_app/user_interface/pages/stations/station_texts.dart';
+import 'package:druid_app/user_interface/pages/stations/stations_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -301,7 +304,7 @@ class _SpeciesSheet extends StatelessWidget {
             if (stations.isNotEmpty)
               _Section(
                 title: context.l10n.sectionStations,
-                child: _StationList(stations: stations),
+                child: _StationList(stations: stations, catalog: catalog, state: state, now: progress.now),
               ),
             _Section(
               title: context.l10n.sectionTraits,
@@ -719,8 +722,11 @@ class _TraitGlyph extends StatelessWidget {
 /// Le tue Stazioni della specie: la foto, la data, i tratti e la precisione del GPS, mai le coordinate (capitolo 02).
 class _StationList extends StatelessWidget {
   final List<Station> stations;
+  final Catalog catalog;
+  final GameState state;
+  final DateTime now;
 
-  const _StationList({required this.stations});
+  const _StationList({required this.stations, required this.catalog, required this.state, required this.now});
 
   @override
   Widget build(BuildContext context) => Column(
@@ -745,7 +751,25 @@ class _StationList extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: Gaps.m),
-              Expanded(child: Text(DateFormat.yMMMd(context.contentLanguage).format(station.createdAt))),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(DateFormat.yMMMd(context.contentLanguage).format(station.createdAt)),
+                    Text(
+                      stationStatusText(
+                        context,
+                        status: stationStatus(station, catalog, state, now),
+                        readyAt: readyAt(station, catalog, state, now),
+                        suspension: null,
+                        now: now,
+                      ),
+                      key: ValueKey('species-station-status-${station.id}'),
+                      style: context.texts.bodySmall?.copyWith(color: context.druid.hint),
+                    ),
+                  ],
+                ),
+              ),
               for (final trait in station.traits)
                 Padding(
                   padding: const EdgeInsets.only(right: Gaps.s),
@@ -759,6 +783,11 @@ class _StationList extends StatelessWidget {
           ),
         ),
       Text(context.l10n.stationsNote, style: context.texts.labelSmall?.copyWith(color: context.druid.hint)),
+      TextButton(
+        key: const ValueKey('open-stations'),
+        onPressed: () => Get.to<void>(() => const StationsPage()),
+        child: Text(context.l10n.stationsTitle),
+      ),
     ],
   );
 }

@@ -3998,6 +3998,42 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.'**
   String get captureDrawnPantry;
+
+  /// No description provided for @stationsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le tue Stazioni'**
+  String get stationsTitle;
+
+  /// No description provided for @stationsSummary.
+  ///
+  /// In it, this message translates to:
+  /// **'{ready} pronte su {total}'**
+  String stationsSummary(int ready, int total);
+
+  /// No description provided for @stationsEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Non hai ancora Stazioni: nascono quando fotografi una pianta con Attingi.'**
+  String get stationsEmpty;
+
+  /// No description provided for @stationExpectedVis.
+  ///
+  /// In it, this message translates to:
+  /// **'Fino a {vis} Vis'**
+  String stationExpectedVis(int vis);
+
+  /// No description provided for @stationStormSoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Previsto {reason}: al tuo arrivo la raccolta potrebbe essere sospesa, fino {when}'**
+  String stationStormSoon(String reason, String when);
+
+  /// No description provided for @homeStationsOpen.
+  ///
+  /// In it, this message translates to:
+  /// **'Vedi'**
+  String get homeStationsOpen;
 }
 
 class _AppLocalizationsDelegate

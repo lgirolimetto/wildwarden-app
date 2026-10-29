@@ -1913,5 +1913,38 @@
         "type": "int"
       }
     }
+  },
+  "stationsTitle": "Le tue Stazioni",
+  "stationsSummary": "{ready} pronte su {total}",
+  "stationsEmpty": "Non hai ancora Stazioni: nascono quando fotografi una pianta con Attingi.",
+  "stationExpectedVis": "Fino a {vis} Vis",
+  "stationStormSoon": "Previsto {reason}: al tuo arrivo la raccolta potrebbe essere sospesa, fino {when}",
+  "homeStationsOpen": "Vedi",
+  "@stationsSummary": {
+    "placeholders": {
+      "ready": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@stationExpectedVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "@stationStormSoon": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
   }
 }

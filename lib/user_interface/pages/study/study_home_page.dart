@@ -2,6 +2,7 @@ import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
+import 'package:druid_app/business_logic/rules/field/station_state.dart';
 import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
@@ -20,6 +21,7 @@ import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_session_page.dart';
+import 'package:druid_app/user_interface/pages/stations/stations_page.dart';
 import 'package:druid_app/user_interface/pages/study/widgets/tutorial_card.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -81,6 +83,10 @@ class _StudyHomePageState extends State<StudyHomePage> {
                   if (dueFacts(catalog, state, now).isNotEmpty) ...[
                     const SizedBox(height: Gaps.l),
                     _ReviewsCard(catalog: catalog, state: state, now: now),
+                  ],
+                  if (state.stations.isNotEmpty) ...[
+                    const SizedBox(height: Gaps.l),
+                    _StationsCard(catalog: catalog, state: state, now: now),
                   ],
                   const SizedBox(height: Gaps.xl),
                   _YourSpecies(catalog: catalog, state: state, progress: progress),
@@ -255,6 +261,41 @@ class _RankCard extends StatelessWidget {
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Le tue Stazioni: quante sono pronte adesso, e la pagina con tutte.
+class _StationsCard extends StatelessWidget {
+  final Catalog catalog;
+  final GameState state;
+  final DateTime now;
+
+  const _StationsCard({required this.catalog, required this.state, required this.now});
+
+  @override
+  Widget build(BuildContext context) {
+    final ready = state.stations.where((s) => stationStatus(s, catalog, state, now) == StationStatus.ready).length;
+    return ClayCard(
+      key: const ValueKey('home-stations'),
+      onTap: () => Get.to<void>(() => const StationsPage()),
+      child: Row(
+        children: [
+          ClayCircle(color: context.colors.secondaryContainer, icon: Icons.place_outlined, size: 40),
+          const SizedBox(width: Gaps.m),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(context.l10n.stationsTitle, style: context.texts.titleMedium),
+                const SizedBox(height: Gaps.xs),
+                Text(context.l10n.stationsSummary(ready, state.stations.length)),
+              ],
+            ),
+          ),
+          Text(context.l10n.homeStationsOpen, style: context.texts.labelLarge?.copyWith(color: context.colors.primary)),
+        ],
       ),
     );
   }

@@ -646,5 +646,11 @@
   "whenOtherDay": "{day} at {time}",
   "captureDrawnTitle": "You Drew an Essence",
   "captureDrawnVis": "{vis} Vis · purity {purity} %",
-  "captureDrawnPantry": "You'll find it in the Laboratory Pantry, with the Traits of this moment."
+  "captureDrawnPantry": "You'll find it in the Laboratory Pantry, with the Traits of this moment.",
+  "stationsTitle": "Your Stations",
+  "stationsSummary": "{ready} ready out of {total}",
+  "stationsEmpty": "You have no Stations yet: they are born when you photograph a plant with Draw.",
+  "stationExpectedVis": "Up to {vis} Vis",
+  "stationStormSoon": "Forecast: {reason}; when you arrive, drawing may be suspended, until {when}",
+  "homeStationsOpen": "See"
 }
