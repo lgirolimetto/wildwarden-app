@@ -1,6 +1,8 @@
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/mystery_cover.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
@@ -287,5 +289,67 @@ void main() {
     expect(find.text('Herbarium'), findsWidgets);
     final malva = smallCatalog().speciesBySci('Malva sylvestris')!;
     expect(find.text(malva.name.resolve('en')), findsOneWidget);
+  });
+
+  testWidgets('la tua foto prende il posto di quella del catalogo, con il timbro e le tue Stazioni', (tester) async {
+    final met = DateTime(2027, 2, 3, 10);
+    Station station(String id, DateTime at, {String? photo}) => Station(
+      id: id,
+      speciesSci: 'Eranthis hyemalis',
+      kind: StationKind.zone,
+      latitude: 44.48,
+      longitude: 11.35,
+      accuracy: 6.4,
+      confidence: 0.7,
+      createdAt: at,
+      photo: photo,
+      traits: photo == null ? const [] : const [Trait.waxingMoon],
+    );
+    registerTestDependencies(
+      events: [
+        SpeciesEncountered(speciesSci: 'Eranthis hyemalis', method: EncounterMethod.photo, occurredAt: met),
+        StationCreated(station: station('s1', met, photo: 'photos/piè.jpg')),
+        StationCreated(station: station('s2', met.add(const Duration(days: 4)))),
+      ],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    final tile = find.byKey(const ValueKey('met-Eranthis hyemalis'));
+    expect(find.descendant(of: tile, matching: find.byKey(const ValueKey('photo:photos/piè.jpg'))), findsOneWidget);
+    final catalogImage = find.byWidgetPredicate((w) => '${w.key}'.contains("'image:"));
+    expect(find.descendant(of: tile, matching: catalogImage), findsNothing);
+
+    await scrollAndTap(tester, tile);
+    expect(find.byKey(const ValueKey('own-photo-stamp')), findsOneWidget);
+    expect(find.text('La tua foto · 3 feb 2027'), findsOneWidget);
+    expect(
+      find.descendant(of: find.byKey(const ValueKey('own-photo-stamp')), matching: find.byType(Tooltip)),
+      findsOneWidget,
+    );
+
+    await scrollTo(tester, find.byKey(const ValueKey('station-s2')));
+    expect(find.text('LE TUE STAZIONI'), findsOneWidget);
+    expect(find.byKey(const ValueKey('station-s1')), findsOneWidget);
+    expect(find.text('± 6 m'), findsNWidgets(2));
+    expect(find.text('7 feb 2027'), findsOneWidget);
+  });
+
+  testWidgets('senza la tua foto la scheda tiene quella del catalogo e niente Stazioni', (tester) async {
+    registerTestDependencies(
+      events: [
+        SpeciesEncountered(
+          speciesSci: 'Eranthis hyemalis',
+          method: EncounterMethod.simulated,
+          occurredAt: DateTime(2027, 2, 3),
+        ),
+      ],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+    await scrollAndTap(tester, find.byKey(const ValueKey('met-Eranthis hyemalis')));
+
+    expect(find.byKey(const ValueKey('own-photo-stamp')), findsNothing);
+    expect(find.text('LE TUE STAZIONI'), findsNothing);
   });
 }

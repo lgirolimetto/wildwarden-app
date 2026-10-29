@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:druid_app/business_logic/models/app_config.dart';
@@ -39,6 +40,7 @@ class _CapturePageState extends State<CapturePage> {
       Get.find(),
       () => catalog.uiData.fold((_) => null, (c) => c),
       Get.find<AppConfig>(),
+      Get.find(),
     );
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _capture.start();
@@ -49,6 +51,7 @@ class _CapturePageState extends State<CapturePage> {
 
   @override
   void dispose() {
+    unawaited(_capture.discardPhotos());
     _guess.dispose();
     super.dispose();
   }
@@ -228,6 +231,7 @@ class _CapturePageState extends State<CapturePage> {
         StationOutcome.noPosition => context.l10n.captureStationNoPosition,
         StationOutcome.limitReached => context.l10n.captureStationLimit,
       }, key: const ValueKey('capture-station')),
+      if (result.firstPhoto) Text(context.l10n.captureFirstPhoto, key: const ValueKey('capture-first-photo')),
       if (result.xp > 0) ...[
         const SizedBox(height: Gaps.s),
         Text(
@@ -267,7 +271,7 @@ class _Message extends StatelessWidget {
   );
 }
 
-/// La foto della pianta intera: quella che diventa la figurina.
+/// La foto della pianta intera: quella che resta nella stazione.
 class _UserPhoto extends StatelessWidget {
   final String path;
 

@@ -7,6 +7,7 @@ import 'package:druid_app/business_logic/interfaces/i_frame_analyzer.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
@@ -41,6 +42,7 @@ const systemCameraTag = 'system-camera';
 void registerDependencies({
   required AppConfig config,
   required IPreferences preferences,
+  required IPhotoStore photoStore,
   ICatalogRepository? catalogRepository,
   IGameEventStore? eventStore,
   IClock? clock,
@@ -56,6 +58,7 @@ void registerDependencies({
 }) {
   Get.put<AppConfig>(config, permanent: true);
   Get.put<IPreferences>(preferences, permanent: true);
+  Get.put<IPhotoStore>(photoStore, permanent: true);
 
   // Con gli strumenti di debug il tempo si può far avanzare ("fai passare i giorni").
   final baseClock = clock ?? const SystemClock();

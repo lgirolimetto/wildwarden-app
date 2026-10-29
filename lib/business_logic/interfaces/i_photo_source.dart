@@ -46,7 +46,7 @@ class TakenPhoto {
 
   static const cancelled = TakenPhoto();
 
-  /// La prima foto (la pianta intera): quella che resta come figurina.
+  /// La prima foto (la pianta intera): quella che resta nella stazione.
   String? get path => photos.isEmpty ? null : photos.first.path;
 }
 

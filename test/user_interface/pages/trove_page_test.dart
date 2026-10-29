@@ -77,7 +77,7 @@ void main() {
     await openTrove(tester);
 
     expect(find.byKey(const ValueKey('welcome-gift')), findsOneWidget);
-    expect(find.text("Si riscatta dopo un'Essenza: esci e attingi da una stazione."), findsOneWidget);
+    expect(find.text("Si riscatta dopo un'Essenza: esci e Attingi da una Stazione."), findsOneWidget);
 
     await Get.find<ProgressController>().drawSimulated('Malva sylvestris');
     await tester.pumpAndSettle();

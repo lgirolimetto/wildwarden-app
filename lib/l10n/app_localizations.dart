@@ -1025,7 +1025,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstEncounterBody.
   ///
   /// In it, this message translates to:
-  /// **'Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell\'Erbario. Fotografa, non raccogliere.'**
+  /// **'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.'**
   String get missionFirstEncounterBody;
 
   /// No description provided for @missionFirstLevelTitle.
@@ -2369,7 +2369,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeGiftWaiting.
   ///
   /// In it, this message translates to:
-  /// **'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.'**
+  /// **'Si riscatta dopo un\'Essenza: esci e Attingi da una Stazione.'**
   String get welcomeGiftWaiting;
 
   /// No description provided for @welcomeGiftRedeem.
@@ -2573,7 +2573,7 @@ abstract class AppLocalizations {
   /// No description provided for @pantryEmpty.
   ///
   /// In it, this message translates to:
-  /// **'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.'**
+  /// **'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.'**
   String get pantryEmpty;
 
   /// No description provided for @debugSimulatePantry.
@@ -3378,19 +3378,19 @@ abstract class AppLocalizations {
   /// No description provided for @captureNoKey.
   ///
   /// In it, this message translates to:
-  /// **'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'incontro si prova con Simula Incontro.'**
+  /// **'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'Incontro si prova con Simula Incontro.'**
   String get captureNoKey;
 
   /// No description provided for @captureLimitTitle.
   ///
   /// In it, this message translates to:
-  /// **'Per oggi basta stazioni nuove'**
+  /// **'Per oggi basta Stazioni nuove'**
   String get captureLimitTitle;
 
   /// No description provided for @captureLimitText.
   ///
   /// In it, this message translates to:
-  /// **'Oggi è già nata una stazione nuova: domani potrai fotografare un\'altra pianta. Le stazioni hanno bisogno del loro tempo.'**
+  /// **'Oggi è già nata una Stazione nuova: domani potrai fotografare un\'altra pianta. Le Stazioni hanno bisogno del loro tempo.'**
   String get captureLimitText;
 
   /// No description provided for @captureGuessTitle.
@@ -3504,25 +3504,25 @@ abstract class AppLocalizations {
   /// No description provided for @captureStationCreated.
   ///
   /// In it, this message translates to:
-  /// **'È nata una nuova stazione.'**
+  /// **'È nata una nuova Stazione.'**
   String get captureStationCreated;
 
   /// No description provided for @captureStationExisting.
   ///
   /// In it, this message translates to:
-  /// **'Sei alla tua stazione di questa pianta.'**
+  /// **'Sei alla tua Stazione di questa pianta.'**
   String get captureStationExisting;
 
   /// No description provided for @captureStationNoPosition.
   ///
   /// In it, this message translates to:
-  /// **'Senza posizione: l\'incontro vale, la stazione no.'**
+  /// **'Senza posizione: l\'Incontro vale, la Stazione no.'**
   String get captureStationNoPosition;
 
   /// No description provided for @captureStationLimit.
   ///
   /// In it, this message translates to:
-  /// **'Oggi è già nata una stazione nuova: questa vale come incontro.'**
+  /// **'Oggi è già nata una Stazione nuova: questa vale come Incontro.'**
   String get captureStationLimit;
 
   /// No description provided for @captureXp.
@@ -3554,6 +3554,36 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Attingi la sua Vis'**
   String get captureFromSpecies;
+
+  /// No description provided for @captureFirstPhoto.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua foto prende il posto di quella dell\'Erbario, con il timbro di oggi.'**
+  String get captureFirstPhoto;
+
+  /// No description provided for @ownPhotoStamp.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua foto · {date}'**
+  String ownPhotoStamp(String date);
+
+  /// No description provided for @sectionStations.
+  ///
+  /// In it, this message translates to:
+  /// **'Le tue Stazioni'**
+  String get sectionStations;
+
+  /// No description provided for @stationAccuracy.
+  ///
+  /// In it, this message translates to:
+  /// **'± {meters} m'**
+  String stationAccuracy(int meters);
+
+  /// No description provided for @stationsNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.'**
+  String get stationsNote;
 }
 
 class _AppLocalizationsDelegate

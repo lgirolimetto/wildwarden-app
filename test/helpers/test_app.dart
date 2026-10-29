@@ -39,6 +39,7 @@ registerTestDependencies({
   registerDependencies(
     config: config,
     preferences: prefs,
+    photoStore: FakePhotoStore(),
     catalogRepository: repository,
     eventStore: eventStore,
     clock: clock,

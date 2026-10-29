@@ -1,7 +1,7 @@
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/user_interface/common_widgets/inset_badge.dart';
-import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/species_picture.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -26,7 +26,7 @@ class UnknownSpeciesTile extends StatelessWidget {
   Widget build(BuildContext context) => _TileFrame(
     aspect: tileAspect(species),
     color: context.druid.neu ? context.colors.surfaceBright : null,
-    image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
+    image: SpeciesPicture(species),
     protected: species.isProtected,
     children: [
       Text(
@@ -60,12 +60,22 @@ class EncounteredSpeciesTile extends StatelessWidget {
   /// `null` se la specie non ha più livelli da studiare.
   final VoidCallback? onStudy;
 
-  const EncounteredSpeciesTile({super.key, required this.species, this.level = 0, this.encounteredAt, this.onStudy});
+  /// La tua foto della specie, se l'hai fotografata: prende il posto di quella del catalogo.
+  final String? photo;
+
+  const EncounteredSpeciesTile({
+    super.key,
+    required this.species,
+    this.level = 0,
+    this.encounteredAt,
+    this.onStudy,
+    this.photo,
+  });
 
   @override
   Widget build(BuildContext context) => _TileFrame(
     aspect: tileAspect(species),
-    image: species.images.isEmpty ? const SizedBox.shrink() : RemoteImage(species.images.first.url),
+    image: SpeciesPicture(species, photo: photo),
     // Nelle livree neumorfiche le tessere hanno colori propri: incontrate le più chiare (`surfaceContainerLowest`),
     // da trovare un tono sotto (`surfaceBright`).
     color: context.druid.neu ? context.colors.surfaceContainerLowest : null,

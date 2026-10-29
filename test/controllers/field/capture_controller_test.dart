@@ -2,10 +2,12 @@ import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/field/capture.dart';
+import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/controllers/field/capture_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -40,13 +42,16 @@ void main() {
   const here = LocationFix(elapsed: Duration.zero, latitude: 44.483, longitude: 11.353, accuracy: 4);
   const shot = TakenPhoto(
     photos: [PlantPhoto('/foto.jpg', PlantOrgan.whole), PlantPhoto('/foglia.jpg', PlantOrgan.leaf)],
+    traits: [Trait.dawn, Trait.waxingMoon],
     position: here,
   );
   late InMemoryGameEventStore store;
   late FakeClock clock;
   late ProgressController progress;
+  late FakePhotoStore photos;
 
   setUp(() async {
+    photos = FakePhotoStore();
     store = InMemoryGameEventStore();
     clock = FakeClock(DateTime(2026, 10, 29, 10));
     progress = ProgressController(store, clock, catalog: smallCatalog);
@@ -63,7 +68,7 @@ void main() {
     TakenPhoto? photo,
     Map<PlantFlora, Validation<PlantIdentification>> answers = const {},
     AppConfig settings = config,
-  }) => CaptureController(progress, _Camera(photo ?? shot), _Identifier(answers), smallCatalog, settings);
+  }) => CaptureController(progress, _Camera(photo ?? shot), _Identifier(answers), smallCatalog, settings, photos);
 
   test('senza chiave non si apre la fotocamera', () async {
     final c = capture(
@@ -168,5 +173,66 @@ void main() {
     answers[PlantFlora.regional] = Valid(id('Malva sylvestris', 0.8));
     await c.identify();
     expect(c.phase, CapturePhase.review);
+  });
+
+  group('la tua foto con il timbro', () {
+    test('la Stazione nuova tiene la foto della pianta intera e i tratti; le altre foto si cancellano', () async {
+      final c = capture(answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))});
+      await c.start();
+      await c.submitGuess(null);
+      await c.confirm();
+
+      final station = progress.state.stations.single;
+      expect(station.photo, '/foto.jpg');
+      expect(station.traits, [Trait.dawn, Trait.waxingMoon]);
+      expect(firstPhotoOf(progress.state, 'Helleborus viridis'), station);
+      expect(c.result!.firstPhoto, isTrue);
+
+      await c.discardPhotos();
+      expect(photos.deleted, ['/foglia.jpg']);
+    });
+
+    test('senza Stazione nuova non resta nessuna foto', () async {
+      final c = capture(
+        photo: const TakenPhoto(photos: [PlantPhoto('/foto.jpg', PlantOrgan.whole)]),
+        answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))},
+      );
+      await c.start();
+      await c.submitGuess(null);
+      await c.confirm();
+
+      expect(c.result!.station, StationOutcome.noPosition);
+      expect(c.result!.firstPhoto, isFalse);
+      await c.discardPhotos();
+      expect(photos.deleted, ['/foto.jpg']);
+    });
+
+    test('chiusa prima della conferma: si cancellano tutte', () async {
+      final c = capture(answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))});
+      await c.start();
+      await c.discardPhotos();
+      expect(photos.deleted, ['/foto.jpg', '/foglia.jpg']);
+    });
+
+    test('la seconda Stazione della specie non cambia la foto', () async {
+      final first = capture(answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))});
+      await first.start();
+      await first.submitGuess(null);
+      await first.confirm();
+
+      clock.advance(const Duration(days: 1));
+      const far = LocationFix(elapsed: Duration.zero, latitude: 44.49, longitude: 11.36, accuracy: 6);
+      final second = capture(
+        photo: const TakenPhoto(photos: [PlantPhoto('/altra.jpg', PlantOrgan.whole)], position: far),
+        answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))},
+      );
+      await second.start();
+      await second.submitGuess(null);
+      await second.confirm();
+
+      expect(progress.state.stations, hasLength(2));
+      expect(second.result!.firstPhoto, isFalse);
+      expect(firstPhotoOf(progress.state, 'Helleborus viridis')!.photo, '/foto.jpg');
+    });
   });
 }

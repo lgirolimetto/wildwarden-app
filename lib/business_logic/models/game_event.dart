@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 
@@ -150,6 +151,12 @@ sealed class GameEvent {
           createdAt: occurredAt,
           commonName: d['name'] as String?,
           family: d['family'] as String?,
+          // Assenti prima dello step 4 del Campo (la tua foto con il timbro).
+          photo: d['photo'] as String?,
+          traits: [
+            for (final name in (d['traits'] as List<dynamic>? ?? const []).cast<String>())
+              ?Trait.values.asNameMap()[name],
+          ],
         ),
       ),
       XpGranted.typeId => XpGranted(xp: d['xp'] as int, reason: d['reason'] as String, occurredAt: occurredAt),
@@ -190,6 +197,8 @@ class StationCreated extends GameEvent {
     'confidence': station.confidence,
     if (station.commonName != null) 'name': station.commonName,
     if (station.family != null) 'family': station.family,
+    'photo': ?station.photo,
+    if (station.traits.isNotEmpty) 'traits': [for (final t in station.traits) t.name],
   };
 }
 

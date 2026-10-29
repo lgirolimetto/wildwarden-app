@@ -1,4 +1,5 @@
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -48,27 +49,36 @@ class CaptureResult {
   final StationOutcome station;
   final bool firstEncounter;
 
+  /// La foto è la prima di una specie del catalogo: prende il posto di quella dell'Erbario, con il timbro.
+  final bool firstPhoto;
+
   const CaptureResult({
     required this.choice,
     required this.guess,
     required this.xp,
     required this.station,
     required this.firstEncounter,
+    this.firstPhoto = false,
   });
 
   String get speciesSci => choice.species?.sci ?? choice.candidate.scientificName;
 }
 
 /// Il flusso della foto (step 3 del Campo): fotocamera dell'app (tre foto, Vis, tratti, posizione), ipotesi, Pl@ntNet
-/// (prima la flora regionale, poi quella del mondo), scelta, incontro, stazione e PE.
+/// (prima la flora regionale, poi quella del mondo), scelta, incontro, stazione e PE. Della sessione resta solo la foto
+/// della pianta intera di una stazione nuova (la tua foto con il timbro, step 4): le altre si cancellano con [discardPhotos].
 class CaptureController extends GetxController {
   final ProgressController _progress;
   final IPhotoSource _camera;
   final IPlantIdentifier _identifier;
   final Catalog? Function() _catalog;
   final AppConfig _config;
+  final IPhotoStore _photos;
 
-  CaptureController(this._progress, this._camera, this._identifier, this._catalog, this._config);
+  CaptureController(this._progress, this._camera, this._identifier, this._catalog, this._config, this._photos);
+
+  /// La foto salvata nella stazione nuova: alla chiusura non si cancella.
+  String? _kept;
 
   CapturePhase phase = CapturePhase.idle;
   TakenPhoto? photo;
@@ -140,6 +150,7 @@ class CaptureController extends GetxController {
     final guessResult = guessResultOf(guess, choice);
     final xp = captureXp(state, choice, guessResult);
     final first = !state.hasEncountered(sci);
+    final hadPhoto = firstPhotoOf(state, sci) != null;
     final position = taken.position;
 
     final StationOutcome station;
@@ -166,6 +177,8 @@ class CaptureController extends GetxController {
             accuracy: position.accuracy,
             confidence: choice.candidate.score,
             createdAt: now,
+            photo: _keep(taken.path),
+            traits: taken.traits,
             commonName: choice.species == null && choice.candidate.commonNames.isNotEmpty
                 ? choice.candidate.commonNames.first
                 : null,
@@ -175,7 +188,28 @@ class CaptureController extends GetxController {
       );
     }
     if (xp > 0) await _progress.record(XpGranted(xp: xp, reason: 'capture', occurredAt: now));
-    result = CaptureResult(choice: choice, guess: guessResult, xp: xp, station: station, firstEncounter: first);
+    result = CaptureResult(
+      choice: choice,
+      guess: guessResult,
+      xp: xp,
+      station: station,
+      firstEncounter: first,
+      firstPhoto: station == StationOutcome.created && _kept != null && choice.species != null && !hadPhoto,
+    );
     _go(CapturePhase.done);
+  }
+
+  String? _keep(String? path) {
+    _kept = path;
+    return path == null ? null : _photos.relative(path);
+  }
+
+  /// Alla chiusura della pagina: cancella le foto della sessione tranne quella della stazione nuova.
+  Future<void> discardPhotos() async {
+    final leftovers = [
+      for (final p in photo?.photos ?? const <PlantPhoto>[])
+        if (p.path != _kept) p.path,
+    ];
+    if (leftovers.isNotEmpty) await _photos.delete(leftovers);
   }
 }

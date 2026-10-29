@@ -6,6 +6,7 @@ import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -54,6 +55,24 @@ class FakeImageFactory implements RemoteImageFactory {
   @override
   Widget build(BuildContext context, String url, {BoxFit fit = BoxFit.cover}) =>
       ColoredBox(key: ValueKey('image:$url'), color: Colors.grey);
+
+  @override
+  Widget buildFile(BuildContext context, String path, {BoxFit fit = BoxFit.cover}) =>
+      ColoredBox(key: ValueKey('photo:$path'), color: Colors.green);
+}
+
+/// Foto di chi gioca in memoria: i percorsi restano quelli e le cancellazioni si contano.
+class FakePhotoStore implements IPhotoStore {
+  final deleted = <String>[];
+
+  @override
+  String relative(String path) => path;
+
+  @override
+  String absolute(String relative) => relative;
+
+  @override
+  Future<void> delete(Iterable<String> paths) async => deleted.addAll(paths);
 }
 
 class InMemoryGameEventStore implements IGameEventStore {

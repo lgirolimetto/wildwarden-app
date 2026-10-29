@@ -72,7 +72,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Ci hai preso!'), findsOneWidget);
-    expect(find.text('È nata una nuova stazione.'), findsOneWidget);
+    expect(find.text('È nata una nuova Stazione.'), findsOneWidget);
+    expect(find.byKey(const ValueKey('capture-first-photo')), findsOneWidget);
     expect(find.text('+20 PE'), findsOneWidget);
     final state = Get.find<ProgressController>().state;
     expect(state.hasEncountered('Helleborus viridis'), isTrue);

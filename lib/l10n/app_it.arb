@@ -540,7 +540,7 @@
   "missionVisitErbarioTitle": "Apri l'Erbario",
   "missionVisitErbarioBody": "L'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.",
   "missionFirstEncounterTitle": "Incontra una specie",
-  "missionFirstEncounterBody": "Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell'Erbario. Fotografa, non raccogliere.",
+  "missionFirstEncounterBody": "Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c'è. Riconosciuta, compare nell'Erbario con la tua foto. Fotografa, non raccogliere.",
   "missionFirstLevelTitle": "Studia la tua prima specie",
   "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.",
   "missionFirstRecipeTitle": "La prima Ricetta",
@@ -1173,7 +1173,7 @@
       }
     }
   },
-  "welcomeGiftWaiting": "Si riscatta dopo un'Essenza: esci e attingi da una stazione.",
+  "welcomeGiftWaiting": "Si riscatta dopo un'Essenza: esci e Attingi da una Stazione.",
   "welcomeGiftRedeem": "Riscatta · {price} PE",
   "@welcomeGiftRedeem": {
     "placeholders": {
@@ -1308,7 +1308,7 @@
     }
   },
   "pantryNoTraits": "Nessun tratto",
-  "pantryEmpty": "La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.",
+  "pantryEmpty": "La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.",
   "debugSimulatePantry": "Simula una Dispensa",
   "debugSimulatePantryDone": "{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa",
   "@debugSimulatePantryDone": {
@@ -1707,9 +1707,9 @@
   "fieldTestRegionalResult": "Flora regionale (Europa sudorientale)",
   "cameraZoomSlower": "Senza zoom la Vis sale più in fretta",
   "tip17": "Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.",
-  "captureNoKey": "Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l'incontro si prova con Simula Incontro.",
-  "captureLimitTitle": "Per oggi basta stazioni nuove",
-  "captureLimitText": "Oggi è già nata una stazione nuova: domani potrai fotografare un'altra pianta. Le stazioni hanno bisogno del loro tempo.",
+  "captureNoKey": "Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l'Incontro si prova con Simula Incontro.",
+  "captureLimitTitle": "Per oggi basta Stazioni nuove",
+  "captureLimitText": "Oggi è già nata una Stazione nuova: domani potrai fotografare un'altra pianta. Le Stazioni hanno bisogno del loro tempo.",
   "captureGuessTitle": "Che pianta pensi che sia?",
   "captureGuessHint": "Nome comune o scientifico",
   "captureGuessConfirm": "Ecco la mia ipotesi",
@@ -1749,10 +1749,10 @@
       }
     }
   },
-  "captureStationCreated": "È nata una nuova stazione.",
-  "captureStationExisting": "Sei alla tua stazione di questa pianta.",
-  "captureStationNoPosition": "Senza posizione: l'incontro vale, la stazione no.",
-  "captureStationLimit": "Oggi è già nata una stazione nuova: questa vale come incontro.",
+  "captureStationCreated": "È nata una nuova Stazione.",
+  "captureStationExisting": "Sei alla tua Stazione di questa pianta.",
+  "captureStationNoPosition": "Senza posizione: l'Incontro vale, la Stazione no.",
+  "captureStationLimit": "Oggi è già nata una Stazione nuova: questa vale come Incontro.",
   "captureXp": "+{xp} PE",
   "@captureXp": {
     "placeholders": {
@@ -1764,5 +1764,24 @@
   "captureDone": "Fatto",
   "captureAction": "Attingi",
   "captureTitle": "Attingi la Vis",
-  "captureFromSpecies": "Attingi la sua Vis"
+  "captureFromSpecies": "Attingi la sua Vis",
+  "captureFirstPhoto": "La tua foto prende il posto di quella dell'Erbario, con il timbro di oggi.",
+  "ownPhotoStamp": "La tua foto · {date}",
+  "@ownPhotoStamp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionStations": "Le tue Stazioni",
+  "stationAccuracy": "± {meters} m",
+  "@stationAccuracy": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "stationsNote": "Solo sul tuo telefono: il punto preciso non si mostra e non si condivide."
 }

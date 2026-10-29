@@ -1,3 +1,5 @@
+import 'package:druid_app/business_logic/models/enums/trait.dart';
+
 /// Che pianta è, rispetto alla mappa del posto (capitolo 02, "Zone come mappe e flora a cerchi").
 ///
 /// ⚠️ Il nome di ogni valore viene salvato negli eventi `StationCreated`: non si rinomina.
@@ -34,6 +36,15 @@ class Station {
   final String? commonName;
   final String? family;
 
+  /// La foto della pianta intera, relativa alla cartella dei documenti (`IPhotoStore`): quella della prima stazione di
+  /// una specie prende il posto della foto del catalogo (capitolo 02, "L'incontro è una figurina con il timbro"; nei
+  /// testi "la tua foto", perché le figurine sono diventate Tavole). Null per le stazioni nate prima dello step 4 del
+  /// Campo.
+  final String? photo;
+
+  /// I tratti del cielo e del meteo allo scatto: il timbro della tua foto, con la data.
+  final List<Trait> traits;
+
   const Station({
     required this.id,
     required this.speciesSci,
@@ -45,5 +56,7 @@ class Station {
     required this.createdAt,
     this.commonName,
     this.family,
+    this.photo,
+    this.traits = const [],
   });
 }

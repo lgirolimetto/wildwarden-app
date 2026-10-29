@@ -57,3 +57,18 @@ List<Station> stationsWithin(GameState state, double latitude, double longitude,
   for (final s in state.stations)
     if (distanceMeters(latitude, longitude, s.latitude, s.longitude) <= meters) s,
 ];
+
+/// Le tue stazioni di una specie, dalla più vecchia.
+List<Station> stationsOf(GameState state, String speciesSci) => [
+  for (final s in state.stations)
+    if (s.speciesSci == speciesSci) s,
+]..sort((a, b) => a.createdAt.compareTo(b.createdAt));
+
+/// La prima stazione di una specie con la tua foto: la foto con il timbro che prende il posto di quella del catalogo
+/// (capitolo 02, "L'incontro è una figurina con il timbro"). Null finché non l'hai fotografata.
+Station? firstPhotoOf(GameState state, String speciesSci) {
+  for (final s in stationsOf(state, speciesSci)) {
+    if (s.photo != null) return s;
+  }
+  return null;
+}

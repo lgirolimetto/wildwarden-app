@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/field/stations.dart';
@@ -15,6 +16,7 @@ void main() {
     double longitude = lon,
     DateTime? at,
     StationKind kind = StationKind.zone,
+    String? photo,
   }) => Station(
     id: '${sci.hashCode}-${(at ?? morning).millisecondsSinceEpoch}',
     speciesSci: sci,
@@ -24,6 +26,7 @@ void main() {
     accuracy: 5,
     confidence: 0.6,
     createdAt: at ?? morning,
+    photo: photo,
   );
 
   GameState with_(List<Station> stations) => GameState.replay([for (final s in stations) StationCreated(station: s)]);
@@ -83,5 +86,52 @@ void main() {
     expect((decoded.station.latitude, decoded.station.accuracy, decoded.station.confidence), (lat, 4.5, 0.68));
     expect((decoded.station.commonName, decoded.station.family), ('Anturio', 'Araceae'));
     expect(GameState.replay([decoded]).stations.single.id, 'a1');
+  });
+
+  test('la tua foto: quella della prima Stazione che ne ha una; le Stazioni dalla più vecchia', () {
+    final later = morning.add(const Duration(days: 2));
+    final state = with_([
+      station('Helleborus viridis', at: later, photo: 'photos/2.jpg', latitude: lat + 0.01),
+      station('Helleborus viridis'),
+      station(
+        'Helleborus viridis',
+        at: morning.add(const Duration(days: 5)),
+        photo: 'photos/3.jpg',
+        latitude: lat + 0.02,
+      ),
+    ]);
+    expect(stationsOf(state, 'Helleborus viridis').map((s) => s.createdAt), [
+      morning,
+      later,
+      morning.add(const Duration(days: 5)),
+    ]);
+    expect(firstPhotoOf(state, 'Helleborus viridis')!.photo, 'photos/2.jpg');
+    expect(firstPhotoOf(state, 'Malva sylvestris'), isNull);
+  });
+
+  test('evento della stazione con la foto e i tratti; quelli di prima ne sono senza', () {
+    final withPhoto = Station(
+      id: 'b2',
+      speciesSci: 'Helleborus viridis',
+      kind: StationKind.zone,
+      latitude: lat,
+      longitude: lon,
+      accuracy: 4,
+      confidence: 0.7,
+      createdAt: morning,
+      photo: 'photos/1.jpg',
+      traits: const [Trait.dawn, Trait.moon],
+    );
+    final event = StationCreated(station: withPhoto);
+    final decoded =
+        GameEvent.decode(type: event.type, payload: event.encodePayload(), occurredAt: morning) as StationCreated;
+    expect(decoded.station.photo, 'photos/1.jpg');
+    expect(decoded.station.traits, [Trait.dawn, Trait.moon]);
+
+    final old = StationCreated(station: station('Helleborus viridis'));
+    final decodedOld =
+        GameEvent.decode(type: old.type, payload: old.encodePayload(), occurredAt: morning) as StationCreated;
+    expect(decodedOld.station.photo, isNull);
+    expect(decodedOld.station.traits, isEmpty);
   });
 }

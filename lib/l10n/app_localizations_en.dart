@@ -579,7 +579,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionFirstEncounterBody =>
-      'Go out Botanizing and photograph one of your Desiderata: once recognised it will appear in the Herbarium. Photograph, don\'t pick.';
+      'Tap Draw in the middle of the bar and photograph a plant: whole, a leaf and the flower if there is one. Once recognised, it appears in the Herbarium with your photo. Photograph, don\'t pick.';
 
   @override
   String get missionFirstLevelTitle => 'Study your first species';
@@ -1457,7 +1457,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeGiftWaiting =>
-      'You can redeem it after an Essence: go out and draw from a station.';
+      'You can redeem it after an Essence: go out and Draw from a Station.';
 
   @override
   String welcomeGiftRedeem(int price) {
@@ -1617,7 +1617,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pantryEmpty =>
-      'The Pantry is empty: the Essences you draw from stations stay here, with their traits, purity and Vis. For now you draw with \"Simulate drawing\" in the species card.';
+      'The Pantry is empty: the Essences you Draw from Stations stay here, with their traits, purity and Vis. For now you Draw with \"Simulate Drawing\" in the species card.';
 
   @override
   String get debugSimulatePantry => 'Simulate a Pantry';
@@ -2150,14 +2150,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get captureNoKey =>
-      'The Pl@ntNet key (PLANTNET_API_KEY) is missing: for now try encounters with Simulate Encounter.';
+      'The Pl@ntNet key (PLANTNET_API_KEY) is missing: for now try Encounters with Simulate Encounter.';
 
   @override
-  String get captureLimitTitle => 'No more new stations today';
+  String get captureLimitTitle => 'No more new Stations today';
 
   @override
   String get captureLimitText =>
-      'A new station was already born today: tomorrow you can photograph another plant. Stations need their time.';
+      'A new Station was already born today: tomorrow you can photograph another plant. Stations need their time.';
 
   @override
   String get captureGuessTitle => 'Which plant do you think it is?';
@@ -2224,18 +2224,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get captureStationCreated => 'A new station is born.';
+  String get captureStationCreated => 'A new Station is born.';
 
   @override
-  String get captureStationExisting => 'You are at your station of this plant.';
+  String get captureStationExisting => 'You are at your Station of this plant.';
 
   @override
   String get captureStationNoPosition =>
-      'No position: the encounter counts, the station doesn\'t.';
+      'No position: the Encounter counts, the Station doesn\'t.';
 
   @override
   String get captureStationLimit =>
-      'A new station was already born today: this one counts as an encounter.';
+      'A new Station was already born today: this one counts as an Encounter.';
 
   @override
   String captureXp(int xp) {
@@ -2253,4 +2253,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get captureFromSpecies => 'Draw its Vis';
+
+  @override
+  String get captureFirstPhoto =>
+      'Your photo takes the place of the Herbarium one, with today\'s stamp.';
+
+  @override
+  String ownPhotoStamp(String date) {
+    return 'Your photo · $date';
+  }
+
+  @override
+  String get sectionStations => 'Your Stations';
+
+  @override
+  String stationAccuracy(int meters) {
+    return '± $meters m';
+  }
+
+  @override
+  String get stationsNote =>
+      'Only on your phone: the exact spot is never shown or shared.';
 }
