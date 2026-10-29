@@ -6,6 +6,7 @@ import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/ready_mark.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_vessel.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -21,7 +22,10 @@ class PlateFace extends StatelessWidget {
   /// Riga sotto il nome (es. cosa è uscito dal Bottino); `null` = i componenti che mancano, se mancano.
   final String? caption;
 
-  const PlateFace({super.key, required this.recipe, this.missing = 0, this.caption});
+  /// Preparabile adesso: l'icona "pronta" accanto al cerchietto.
+  final bool ready;
+
+  const PlateFace({super.key, required this.recipe, this.missing = 0, this.caption, this.ready = false});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,7 @@ class PlateFace extends StatelessWidget {
         Row(
           children: [
             GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade)),
+            if (ready) ...[const SizedBox(width: Gaps.xs), const ReadyMark(size: 18)],
             const Spacer(),
             if (effectKnown)
               Tooltip(

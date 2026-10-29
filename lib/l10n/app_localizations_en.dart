@@ -1187,13 +1187,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get recipeMonths => 'When it can be made';
-
-  @override
-  String get recipeNever =>
-      'Never: the ingredients are not found in the same months';
-
-  @override
   String get recipeEffect => 'Effect';
 
   @override
@@ -1583,15 +1576,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get labTabReady => 'Ready recipes';
-
-  @override
   String get labTabShelf => 'Shelf';
-
-  @override
-  String readyCount(int count) {
-    return '$count ready';
-  }
 
   @override
   String shelfCount(int count) {
@@ -1603,27 +1588,6 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get readySection => 'Ready to brew';
-
-  @override
-  String get readyAlmost => 'Almost there';
-
-  @override
-  String readyOthers(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count more recipes need',
-      one: 'Another recipe needs',
-    );
-    return '$_temp0 more Essences: you\'ll find them in the Recipe Book.';
-  }
-
-  @override
-  String get readyEmpty =>
-      'You don\'t know any recipes to brew yet: Commons are learned by studying, the others in the Trove of Experience.';
 
   @override
   String get readyAnyPlant => 'a plant of your choice';
@@ -1641,6 +1605,49 @@ class AppLocalizationsEn extends AppLocalizations {
   String brewFreeOption(int vis) {
     return '$vis Vis';
   }
+
+  @override
+  String get recipeReady => 'Ready to brew';
+
+  @override
+  String get recipeBookOnlyReady => 'Show only ready to brew';
+
+  @override
+  String get recipeBookNoneReady =>
+      'No Plate is ready to brew right now. Open a Plate to see which Essences you are missing.';
+
+  @override
+  String brewTouchEffect(String effect, int strength, String relation) {
+    return '$effect, strength $strength: $relation';
+  }
+
+  @override
+  String get brewTouchStrengthens => 'strengthens the potion\'s effect';
+
+  @override
+  String get brewTouchAdds => 'a small extra effect';
+
+  @override
+  String get brewNoTouch => 'No Touch';
+
+  @override
+  String get brewConfirmTitle => 'Brew this potion?';
+
+  @override
+  String get brewConfirmSpends => 'You spend';
+
+  @override
+  String get brewCancel => 'Cancel';
+
+  @override
+  String get brewConfirm => 'Confirm';
+
+  @override
+  String get glossPreparabileTerm => 'Ready to brew';
+
+  @override
+  String get glossPreparabileText =>
+      'A Plate you can brew now with the Vis in your Pantry: in the Recipe Book it has the \"ready\" icon and you find it with the \"Show only ready to brew\" filter.';
 
   @override
   String get potionTitle => 'Potion';
@@ -1714,7 +1721,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossLaboratorioText =>
-      'Your base, the greenhouse shed at the edge of the woods: you work inside it, with the Recipe Book, Pantry, Ready recipes and Shelf.';
+      'Your base, the greenhouse shed at the edge of the woods: you work inside it, with the Recipe Book, Pantry and Shelf.';
 
   @override
   String get glossRicettarioTerm => 'Recipe Book';
@@ -1743,13 +1750,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get glossDispensaText =>
       'The Essences you\'ve drawn, each with its traits, purity (from the plant\'s study level when you drew it) and its Vis.';
-
-  @override
-  String get glossRicettePronteTerm => 'Ready recipes';
-
-  @override
-  String get glossRicettePronteText =>
-      'The recipes you can brew now with your Pantry, and the ones that are almost there, with what\'s missing.';
 
   @override
   String get glossPozioneTerm => 'Potion';
@@ -1833,7 +1833,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip10 =>
-      'In the Laboratory, the Ready recipes tab shows the recipes you can make now and, for the others, which Essences you are missing: it\'s the list of plants to look for on your next outing.';
+      'In the Recipe Book, the \"Show only ready to brew\" filter keeps the Plates you can brew now; open the others to see which Essences you are missing: it\'s the list of plants to look for on your next outing.';
 
   @override
   String get tip11 =>
@@ -2405,7 +2405,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tutorialBrewBody =>
-      'The Laboratory has lit up in the bar: open Ready recipes and brew the Common Recipe with your two Essences. Potions are fantasy.';
+      'The Laboratory has lit up in the bar: in the Recipe Book you\'ll find the Common Recipe ready, brew it with your two Essences. Potions are fantasy.';
 
   @override
   String get tutorialTroveTitle => 'The Trove of Experience';

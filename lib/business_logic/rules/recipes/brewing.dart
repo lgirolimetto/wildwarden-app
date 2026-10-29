@@ -222,3 +222,36 @@ List<Brewable> knownBrewables(Catalog catalog, GameState state) => [
   for (final id in {...knownRecipeIds(catalog, state), ...state.learnedRecipes.keys})
     if (!state.missingPieces.containsKey(id)) ?brewableOf(catalog, id),
 ];
+
+/// Una ricetta che conosci, con ciò che le manca per prepararla adesso.
+class ReadyRecipe {
+  final Brewable brewable;
+
+  /// Cosa manca (lo slot libero manca solo se nessuna pianta ha abbastanza Vis).
+  final List<BrewShortfall> missing;
+  final BrewBlock? block;
+
+  const ReadyRecipe(this.brewable, this.missing, this.block);
+
+  /// Preparabile adesso: hai tutte le Vis e nessuna finestra di date la ferma.
+  bool get ready => missing.isEmpty && block == null;
+}
+
+/// Le ricette che conosci, valutate con le Essenze della Dispensa.
+List<ReadyRecipe> readyRecipes(Catalog catalog, GameState state, DateTime now) => [
+  for (final brewable in knownBrewables(catalog, state))
+    () {
+      final plan = planBrew(brewable, state.essences);
+      final freeOk = freeSlotCandidates(brewable, state.essences).isNotEmpty;
+      return ReadyRecipe(brewable, [
+        for (final m in plan.missing)
+          if (m.ingredient.speciesSci != null || !freeOk) m,
+      ], brewBlock(state, brewable, now));
+    }(),
+];
+
+/// Gli id delle ricette preparabili adesso: l'icona "pronta" e il filtro del Ricettario (capitolo 02, 2026-10-29).
+Set<String> preparableIds(Catalog catalog, GameState state, DateTime now) => {
+  for (final r in readyRecipes(catalog, state, now))
+    if (r.ready) r.brewable.id,
+};

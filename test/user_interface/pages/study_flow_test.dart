@@ -322,7 +322,12 @@ void main() {
       expect(find.text(malva.recipes.first.name('it')), findsOneWidget);
       expect(find.text('1 × Malva selvatica'), findsOneWidget);
       expect(find.text('1 × qualsiasi specie'), findsOneWidget);
-      expect(find.byKey(const ValueKey('recipe-months')), findsOneWidget);
+      expect(
+        find.byKey(const ValueKey('recipe-months')),
+        findsNothing,
+        reason: 'la stagione è nella scheda della specie',
+      );
+      expect(find.byKey(const ValueKey('ingredient-Malva sylvestris')), findsOneWidget);
     });
 
     testWidgets('un ingrediente con un tratto spiega quando vale', (tester) async {

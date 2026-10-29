@@ -2018,18 +2018,6 @@ abstract class AppLocalizations {
   /// **'Ricettario · {known, plural, =1{1 Tavola} other{{known} Tavole}} su {total}'**
   String recipeBookSpeciesLink(int known, int total);
 
-  /// No description provided for @recipeMonths.
-  ///
-  /// In it, this message translates to:
-  /// **'Quando si può fare'**
-  String get recipeMonths;
-
-  /// No description provided for @recipeNever.
-  ///
-  /// In it, this message translates to:
-  /// **'Mai: gli ingredienti non si incontrano negli stessi mesi'**
-  String get recipeNever;
-
   /// No description provided for @recipeEffect.
   ///
   /// In it, this message translates to:
@@ -2498,53 +2486,17 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa'**
   String debugSimulatePantryDone(int count);
 
-  /// No description provided for @labTabReady.
-  ///
-  /// In it, this message translates to:
-  /// **'Ricette pronte'**
-  String get labTabReady;
-
   /// No description provided for @labTabShelf.
   ///
   /// In it, this message translates to:
   /// **'Scaffale'**
   String get labTabShelf;
 
-  /// No description provided for @readyCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{count, plural, =1{1 pronta} other{{count} pronte}}'**
-  String readyCount(int count);
-
   /// No description provided for @shelfCount.
   ///
   /// In it, this message translates to:
   /// **'{count, plural, =1{1 pozione} other{{count} pozioni}}'**
   String shelfCount(int count);
-
-  /// No description provided for @readySection.
-  ///
-  /// In it, this message translates to:
-  /// **'Pronte da preparare'**
-  String get readySection;
-
-  /// No description provided for @readyAlmost.
-  ///
-  /// In it, this message translates to:
-  /// **'Ti manca poco'**
-  String get readyAlmost;
-
-  /// No description provided for @readyOthers.
-  ///
-  /// In it, this message translates to:
-  /// **'{count, plural, =1{Un\'altra ricetta chiede} other{Altre {count} ricette chiedono}} più Essenze: le trovi nel Ricettario.'**
-  String readyOthers(int count);
-
-  /// No description provided for @readyEmpty.
-  ///
-  /// In it, this message translates to:
-  /// **'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.'**
-  String get readyEmpty;
 
   /// No description provided for @readyAnyPlant.
   ///
@@ -2575,6 +2527,84 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'{vis} Vis'**
   String brewFreeOption(int vis);
+
+  /// No description provided for @recipeReady.
+  ///
+  /// In it, this message translates to:
+  /// **'Preparabile'**
+  String get recipeReady;
+
+  /// No description provided for @recipeBookOnlyReady.
+  ///
+  /// In it, this message translates to:
+  /// **'Mostra solo preparabili'**
+  String get recipeBookOnlyReady;
+
+  /// No description provided for @recipeBookNoneReady.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessuna Tavola preparabile adesso. Apri una Tavola per vedere quali Essenze ti mancano.'**
+  String get recipeBookNoneReady;
+
+  /// No description provided for @brewTouchEffect.
+  ///
+  /// In it, this message translates to:
+  /// **'{effect}, forza {strength}: {relation}'**
+  String brewTouchEffect(String effect, int strength, String relation);
+
+  /// No description provided for @brewTouchStrengthens.
+  ///
+  /// In it, this message translates to:
+  /// **'rafforza l\'effetto della pozione'**
+  String get brewTouchStrengthens;
+
+  /// No description provided for @brewTouchAdds.
+  ///
+  /// In it, this message translates to:
+  /// **'un piccolo effetto in più'**
+  String get brewTouchAdds;
+
+  /// No description provided for @brewNoTouch.
+  ///
+  /// In it, this message translates to:
+  /// **'Nessun Tocco'**
+  String get brewNoTouch;
+
+  /// No description provided for @brewConfirmTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Prepari questa pozione?'**
+  String get brewConfirmTitle;
+
+  /// No description provided for @brewConfirmSpends.
+  ///
+  /// In it, this message translates to:
+  /// **'Spendi'**
+  String get brewConfirmSpends;
+
+  /// No description provided for @brewCancel.
+  ///
+  /// In it, this message translates to:
+  /// **'Annulla'**
+  String get brewCancel;
+
+  /// No description provided for @brewConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Conferma'**
+  String get brewConfirm;
+
+  /// No description provided for @glossPreparabileTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Preparabile'**
+  String get glossPreparabileTerm;
+
+  /// No description provided for @glossPreparabileText.
+  ///
+  /// In it, this message translates to:
+  /// **'Una Tavola che puoi preparare adesso con le Vis della Dispensa: nel Ricettario ha l\'icona \"pronta\" e si trova con il filtro \"Mostra solo preparabili\".'**
+  String get glossPreparabileText;
 
   /// No description provided for @potionTitle.
   ///
@@ -2681,7 +2711,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossLaboratorioText.
   ///
   /// In it, this message translates to:
-  /// **'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.'**
+  /// **'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa e Scaffale.'**
   String get glossLaboratorioText;
 
   /// No description provided for @glossRicettarioTerm.
@@ -2731,18 +2761,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.'**
   String get glossDispensaText;
-
-  /// No description provided for @glossRicettePronteTerm.
-  ///
-  /// In it, this message translates to:
-  /// **'Ricette pronte'**
-  String get glossRicettePronteTerm;
-
-  /// No description provided for @glossRicettePronteText.
-  ///
-  /// In it, this message translates to:
-  /// **'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.'**
-  String get glossRicettePronteText;
 
   /// No description provided for @glossPozioneTerm.
   ///
@@ -2879,7 +2897,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip10.
   ///
   /// In it, this message translates to:
-  /// **'Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.'**
+  /// **'Nel Ricettario, il filtro \"Mostra solo preparabili\" lascia le Tavole che puoi preparare adesso; aprendo le altre vedi quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.'**
   String get tip10;
 
   /// No description provided for @tip11.
@@ -3804,7 +3822,7 @@ abstract class AppLocalizations {
   /// No description provided for @tutorialBrewBody.
   ///
   /// In it, this message translates to:
-  /// **'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.'**
+  /// **'Nella barra si è acceso il Laboratorio: nel Ricettario trovi la Ricetta Comune pronta, preparala con le tue due Essenze. Le pozioni sono di fantasia.'**
   String get tutorialBrewBody;
 
   /// No description provided for @tutorialTroveTitle.

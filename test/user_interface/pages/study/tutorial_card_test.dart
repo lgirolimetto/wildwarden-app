@@ -32,7 +32,7 @@ void main() {
     expect(find.byKey(const ValueKey('seasonal-Malva sylvestris'), skipOffstage: false), findsNothing);
   });
 
-  testWidgets('al passo della pozione il Laboratorio mostra solo le Ricette pronte', (tester) async {
+  testWidgets('al passo della pozione il Laboratorio mostra solo il Ricettario, con le preparabili', (tester) async {
     registerTestDependencies(
       events: [
         mark(OnboardingMark.tutorialStarted),
@@ -44,8 +44,9 @@ void main() {
     await pumpDruidApp(tester);
     await scrollAndTap(tester, find.byKey(const ValueKey('tutorial-action')));
 
-    expect(find.byKey(const ValueKey('ready-count')), findsOneWidget);
+    expect(find.byKey(const ValueKey('recipe-book')), findsOneWidget);
     expect(find.byKey(const ValueKey('lab-tab-recipe-book')), findsNothing);
+    expect(find.byKey(const ValueKey('recipe-book-only-ready')), findsOneWidget);
   });
 
   testWidgets('al passo del Bottino il pulsante lo apre e il passo si completa', (tester) async {

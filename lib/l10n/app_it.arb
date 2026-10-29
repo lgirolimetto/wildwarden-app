@@ -978,8 +978,6 @@
       }
     }
   },
-  "recipeMonths": "Quando si può fare",
-  "recipeNever": "Mai: gli ingredienti non si incontrano negli stessi mesi",
   "recipeEffect": "Effetto",
   "effectRegrowth": "Ricrescita",
   "effectClarity": "Limpidezza",
@@ -1293,16 +1291,7 @@
       }
     }
   },
-  "labTabReady": "Ricette pronte",
   "labTabShelf": "Scaffale",
-  "readyCount": "{count, plural, =1{1 pronta} other{{count} pronte}}",
-  "@readyCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "shelfCount": "{count, plural, =1{1 pozione} other{{count} pozioni}}",
   "@shelfCount": {
     "placeholders": {
@@ -1311,22 +1300,37 @@
       }
     }
   },
-  "readySection": "Pronte da preparare",
-  "readyAlmost": "Ti manca poco",
-  "readyOthers": "{count, plural, =1{Un'altra ricetta chiede} other{Altre {count} ricette chiedono}} più Essenze: le trovi nel Ricettario.",
-  "@readyOthers": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "readyEmpty": "Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell'Esperienza.",
   "readyAnyPlant": "una pianta a scelta",
   "brewButton": "Prepara",
   "brewChooseFree": "Scegli la pianta dello slot libero",
   "brewChooseFreeHint": "Dà alla pozione il suo Tocco.",
   "brewFreeOption": "{vis} Vis",
+  "recipeReady": "Preparabile",
+  "recipeBookOnlyReady": "Mostra solo preparabili",
+  "recipeBookNoneReady": "Nessuna Tavola preparabile adesso. Apri una Tavola per vedere quali Essenze ti mancano.",
+  "brewTouchEffect": "{effect}, forza {strength}: {relation}",
+  "@brewTouchEffect": {
+    "placeholders": {
+      "effect": {
+        "type": "String"
+      },
+      "strength": {
+        "type": "int"
+      },
+      "relation": {
+        "type": "String"
+      }
+    }
+  },
+  "brewTouchStrengthens": "rafforza l'effetto della pozione",
+  "brewTouchAdds": "un piccolo effetto in più",
+  "brewNoTouch": "Nessun Tocco",
+  "brewConfirmTitle": "Prepari questa pozione?",
+  "brewConfirmSpends": "Spendi",
+  "brewCancel": "Annulla",
+  "brewConfirm": "Conferma",
+  "glossPreparabileTerm": "Preparabile",
+  "glossPreparabileText": "Una Tavola che puoi preparare adesso con le Vis della Dispensa: nel Ricettario ha l'icona \"pronta\" e si trova con il filtro \"Mostra solo preparabili\".",
   "@brewFreeOption": {
     "placeholders": {
       "vis": {
@@ -1413,7 +1417,7 @@
   "glossTavolaTerm": "Tavola",
   "glossTavolaText": "Una ricetta nel Ricettario, come le tavole illustrate degli erbari: \"1 Tavola su 3\". Nella Pagina di una pianta le Tavole che non hai sono slot vuoti con il cerchietto del grado.",
   "glossLaboratorioTerm": "Laboratorio",
-  "glossLaboratorioText": "La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.",
+  "glossLaboratorioText": "La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa e Scaffale.",
   "glossRicettarioTerm": "Ricettario",
   "glossRicettarioText": "La collezione delle Tavole, una per paese: una Pagina per pianta e, in cima, le Mitiche della Zona, numerate.",
   "glossComponenteTerm": "Componente",
@@ -1422,8 +1426,6 @@
   "glossRiciclatoText": "Un doppione uscito dal Bottino dell'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po' di Vis.",
   "glossDispensaTerm": "Dispensa",
   "glossDispensaText": "Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l'hai attinta) e le sue Vis.",
-  "glossRicettePronteTerm": "Ricette pronte",
-  "glossRicettePronteText": "Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.",
   "glossPozioneTerm": "Pozione",
   "glossPozioneText": "Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.",
   "glossToccoTerm": "Tocco",
@@ -1446,7 +1448,7 @@
   "tip07": "Riciclare un doppione costa un po' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.",
   "tip08": "Ogni ricetta ha uno slot libero, «qualsiasi specie»: la pianta che ci metti dà alla pozione il suo Tocco (Rigogliosa, Limpida, Presaga o Copiosa).",
   "tip09": "Attenzione allo slot libero delle ricette da bere: con una pianta tossica la pozione si guasta e perdi la Vis usata, ma impari che quella pianta è tossica.",
-  "tip10": "Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.",
+  "tip10": "Nel Ricettario, il filtro \"Mostra solo preparabili\" lascia le Tavole che puoi preparare adesso; aprendo le altre vedi quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.",
   "tip11": "Quando usi una pozione dello Scaffale, il suo effetto dura 7 giorni ed è tanto più forte quanto più alta è la sua Potenza.",
   "tip12": "I Tratti di un'Essenza dicono in che condizioni l'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un'Essenza attinta con la Luna piena.",
   "tip13": "I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.",
@@ -1830,7 +1832,7 @@
   "tutorialSecondPhotographTitle": "Fotografa un'altra aromatica",
   "tutorialSecondPhotographBody": "La Ricetta Comune vuole la pianta e un'altra specie qualsiasi: fotografa un'altra aromatica e ne Attingi una seconda Essenza.",
   "tutorialBrewTitle": "Prepara la prima pozione",
-  "tutorialBrewBody": "Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.",
+  "tutorialBrewBody": "Nella barra si è acceso il Laboratorio: nel Ricettario trovi la Ricetta Comune pronta, preparala con le tue due Essenze. Le pozioni sono di fantasia.",
   "tutorialTroveTitle": "Il Bottino dell'Esperienza",
   "tutorialTroveBody": "Con i PE compri Bottini dell'Esperienza: dentro ci sono le Tavole di altre Ricette. Nella barra si è acceso il Bottino: aprilo, c'è un regalo per te.",
   "tutorialApprenticeTitle": "Sei Apprendista",

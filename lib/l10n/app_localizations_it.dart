@@ -1193,13 +1193,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get recipeMonths => 'Quando si può fare';
-
-  @override
-  String get recipeNever =>
-      'Mai: gli ingredienti non si incontrano negli stessi mesi';
-
-  @override
   String get recipeEffect => 'Effetto';
 
   @override
@@ -1589,21 +1582,7 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get labTabReady => 'Ricette pronte';
-
-  @override
   String get labTabShelf => 'Scaffale';
-
-  @override
-  String readyCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count pronte',
-      one: '1 pronta',
-    );
-    return '$_temp0';
-  }
 
   @override
   String shelfCount(int count) {
@@ -1615,27 +1594,6 @@ class AppLocalizationsIt extends AppLocalizations {
     );
     return '$_temp0';
   }
-
-  @override
-  String get readySection => 'Pronte da preparare';
-
-  @override
-  String get readyAlmost => 'Ti manca poco';
-
-  @override
-  String readyOthers(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Altre $count ricette chiedono',
-      one: 'Un\'altra ricetta chiede',
-    );
-    return '$_temp0 più Essenze: le trovi nel Ricettario.';
-  }
-
-  @override
-  String get readyEmpty =>
-      'Non conosci ancora ricette da preparare: le Comuni si imparano studiando, le altre nel Bottino dell\'Esperienza.';
 
   @override
   String get readyAnyPlant => 'una pianta a scelta';
@@ -1653,6 +1611,49 @@ class AppLocalizationsIt extends AppLocalizations {
   String brewFreeOption(int vis) {
     return '$vis Vis';
   }
+
+  @override
+  String get recipeReady => 'Preparabile';
+
+  @override
+  String get recipeBookOnlyReady => 'Mostra solo preparabili';
+
+  @override
+  String get recipeBookNoneReady =>
+      'Nessuna Tavola preparabile adesso. Apri una Tavola per vedere quali Essenze ti mancano.';
+
+  @override
+  String brewTouchEffect(String effect, int strength, String relation) {
+    return '$effect, forza $strength: $relation';
+  }
+
+  @override
+  String get brewTouchStrengthens => 'rafforza l\'effetto della pozione';
+
+  @override
+  String get brewTouchAdds => 'un piccolo effetto in più';
+
+  @override
+  String get brewNoTouch => 'Nessun Tocco';
+
+  @override
+  String get brewConfirmTitle => 'Prepari questa pozione?';
+
+  @override
+  String get brewConfirmSpends => 'Spendi';
+
+  @override
+  String get brewCancel => 'Annulla';
+
+  @override
+  String get brewConfirm => 'Conferma';
+
+  @override
+  String get glossPreparabileTerm => 'Preparabile';
+
+  @override
+  String get glossPreparabileText =>
+      'Una Tavola che puoi preparare adesso con le Vis della Dispensa: nel Ricettario ha l\'icona \"pronta\" e si trova con il filtro \"Mostra solo preparabili\".';
 
   @override
   String get potionTitle => 'Pozione';
@@ -1726,7 +1727,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossLaboratorioText =>
-      'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa, Ricette pronte e Scaffale.';
+      'La tua base, il capanno-serra ai margini del bosco: dentro si lavora, con Ricettario, Dispensa e Scaffale.';
 
   @override
   String get glossRicettarioTerm => 'Ricettario';
@@ -1755,13 +1756,6 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get glossDispensaText =>
       'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.';
-
-  @override
-  String get glossRicettePronteTerm => 'Ricette pronte';
-
-  @override
-  String get glossRicettePronteText =>
-      'Le ricette che puoi preparare adesso con la Dispensa, e quelle a cui manca poco, con cosa manca.';
 
   @override
   String get glossPozioneTerm => 'Pozione';
@@ -1845,7 +1839,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip10 =>
-      'Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.';
+      'Nel Ricettario, il filtro \"Mostra solo preparabili\" lascia le Tavole che puoi preparare adesso; aprendo le altre vedi quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.';
 
   @override
   String get tip11 =>
@@ -2416,7 +2410,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tutorialBrewBody =>
-      'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.';
+      'Nella barra si è acceso il Laboratorio: nel Ricettario trovi la Ricetta Comune pronta, preparala con le tue due Essenze. Le pozioni sono di fantasia.';
 
   @override
   String get tutorialTroveTitle => 'Il Bottino dell\'Esperienza';
