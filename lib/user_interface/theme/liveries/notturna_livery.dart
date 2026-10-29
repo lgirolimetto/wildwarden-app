@@ -27,6 +27,7 @@ class NotturnaLivery extends Livery {
       traitColors: potionTraitColors(brightness),
       plainPotion: plainPotionColor(brightness),
       speciesName: speciesNameColor(brightness),
+      vis: visColor(brightness),
       levelColors: light
           ? const [Color(0xFFC3C7D9), Color(0xFF9AA3CC), Color(0xFF6C7AB8), Color(0xFF3D4C8C), Color(0xFF9A8A4A)]
           : const [Color(0xFF3B4058), Color(0xFF55608F), Color(0xFF7C88C2), Color(0xFFA9B4EC), Color(0xFFD9CC8A)],

@@ -80,8 +80,9 @@ Widget pillFrame(BuildContext context, EdgeInsets padding, Widget child, BoxDeco
       : Container(padding: padding, decoration: flat, child: child);
 }
 
-/// Chip di sola lettura con un'icona incisa e un numero nel badge tondo, come le notifiche (capitolo 02, 2026-10-29):
-/// la beuta con le pozioni che prepari ("2", "2+"), la foglia della Vis con le Vis che chiede un ingrediente ("10").
+/// Chip di sola lettura, tonda, con un'icona incisa e un numero nel badge tondo, come le notifiche, incavato come i
+/// cerchietti dei gradi (capitolo 02, 2026-10-29): la beuta con le pozioni che prepari ("2", "2+"), il fulmine della Vis
+/// con le Vis ("10").
 class IconBadgeChip extends StatelessWidget {
   final IconData icon;
   final String badge;
@@ -89,21 +90,48 @@ class IconBadgeChip extends StatelessWidget {
   /// Tooltip e lettore di schermo ("Prepari almeno 2 pozioni", "10 Vis").
   final String message;
 
-  const IconBadgeChip({super.key, required this.icon, required this.badge, required this.message});
+  /// Il colore dell'icona; `null` = quello del testo.
+  final Color? iconColor;
+
+  const IconBadgeChip({super.key, required this.icon, required this.badge, required this.message, this.iconColor});
 
   @override
   Widget build(BuildContext context) {
     final color = context.colors.onSurface;
-    // Tonda, non ovale (2026-10-29): stessa larghezza e altezza intorno all'icona.
+    // Tonda, non ovale: stessa larghezza e altezza intorno all'icona.
     final chip = pillFrame(
       context,
       const EdgeInsets.all(Gaps.s),
-      EngravedIcon(icon, size: 20, color: color),
+      EngravedIcon(icon, size: 20, color: iconColor ?? color),
       BoxDecoration(
         color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(999),
         border: Border.all(color: color.withValues(alpha: 0.35)),
       ),
+    );
+    final label = Text(
+      badge,
+      style: context.texts.labelSmall?.copyWith(color: context.colors.onPrimary, fontWeight: FontWeight.w700),
+    );
+    const radius = BorderRadius.all(Radius.circular(999));
+    final badgeBox = ConstrainedBox(
+      constraints: const BoxConstraints(minWidth: 22, minHeight: 22),
+      child: context.druid.neu
+          ? NeuInset(
+              radius: radius,
+              color: context.colors.primary,
+              depth: 2,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Center(widthFactor: 1, heightFactor: 1, child: label),
+              ),
+            )
+          : Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(color: context.colors.primary, borderRadius: radius),
+              child: label,
+            ),
     );
     return Tooltip(
       message: message,
@@ -117,23 +145,7 @@ class IconBadgeChip extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               chip,
-              Positioned(
-                top: -6,
-                right: -8,
-                child: Container(
-                  constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(color: context.colors.primary, borderRadius: BorderRadius.circular(999)),
-                  child: Text(
-                    badge,
-                    style: context.texts.labelSmall?.copyWith(
-                      color: context.colors.onPrimary,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
+              Positioned(top: -6, right: -8, child: badgeBox),
             ],
           ),
         ),

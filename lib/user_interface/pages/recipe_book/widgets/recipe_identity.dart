@@ -85,13 +85,13 @@ class RecipeIdVessel extends StatelessWidget {
 }
 
 /// Il nome di una ricetta con il nome della pianta nello stile delle specie e i pezzi che mancano ([missingPiece])
-/// **criptati in rune** (capitolo 02, 2026-10-29): lunghi quanto il pezzo vero di [full], ma non si leggono. Si capisce
-/// che mancano delle parole del nome e quante sono.
+/// **criptati** con "#", nello stesso carattere del nome (capitolo 02, 2026-10-29): lunghi quanto il pezzo vero di
+/// [full]. Si capisce che mancano delle parole del nome e quante sono.
 class RecipeTitle extends StatelessWidget {
   final String text;
   final String? plant;
 
-  /// Il nome intero, per la lunghezza dei pezzi criptati; `null` = una parola di 5 rune per pezzo.
+  /// Il nome intero, per la lunghezza dei pezzi criptati; `null` = "#####" per pezzo.
   final String? full;
   final TextStyle? style;
   final int? maxLines;
@@ -116,12 +116,11 @@ class RecipeTitle extends StatelessWidget {
       ];
     }
 
-    final cipher = base.copyWith(color: context.druid.hint, letterSpacing: 1);
     return Text.rich(
       TextSpan(
         children: [
           for (final (i, part) in pieces.indexed) ...[
-            if (i > 0) TextSpan(text: cipherWord(hidden[i - 1], (full ?? text).hashCode + i), style: cipher),
+            if (i > 0) TextSpan(text: cipherWord(hidden[i - 1])),
             ...segment(part),
           ],
         ],
@@ -151,24 +150,5 @@ List<String> _hiddenPieces(List<String> known, String? full) {
   return hidden;
 }
 
-const _runes = [
-  'ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', 'ᚺ', 'ᚾ', 'ᛁ', 'ᛃ', //
-  'ᛇ', 'ᛈ', 'ᛉ', 'ᛊ', 'ᛏ', 'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛞ', 'ᛟ',
-];
-
-/// Una parola in rune lunga quanto [word] (spazi e apostrofi restano), con rune a caso ma fisse per [seed]: non lettera
-/// per lettera, altrimenti chi conosce le rune leggerebbe il pezzo.
-String cipherWord(String word, int seed) {
-  var h = seed & 0x7fffffff;
-  final out = StringBuffer();
-  for (final c in word.runes) {
-    final ch = String.fromCharCode(c);
-    if (ch == ' ' || ch == "'" || ch == '’') {
-      out.write(ch);
-      continue;
-    }
-    h = (h * 1103515245 + 12345) & 0x7fffffff;
-    out.write(_runes[h % _runes.length]);
-  }
-  return out.toString();
-}
+/// Un pezzo che manca, criptato: ogni lettera un "#", gli spazi e gli apostrofi restano ("del Presagio" → "### ########").
+String cipherWord(String word) => word.replaceAll(RegExp(r"[^\s'’]"), '#');

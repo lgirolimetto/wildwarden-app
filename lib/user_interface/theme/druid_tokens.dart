@@ -66,6 +66,10 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
   /// Colore dei nomi delle specie; `null` = quello del testo.
   final Color? speciesName;
 
+  /// Colore dell'icona della Vis (il fulmine): verde, scuro nel tema chiaro e chiaro nel tema scuro; `null` = quello
+  /// dei nomi delle specie.
+  final Color? vis;
+
   /// Pagine dense (ricette, impostazioni, glossario…): sfondo e superfici più chiari, per dare contrasto dove la
   /// livrea è molto scura. `null` = come le altre pagine. Vedi `DenseArea`.
   final Color? denseBackground;
@@ -90,10 +94,14 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     this.traitColors = const [],
     this.plainPotion,
     this.speciesName,
+    this.vis,
     this.denseBackground,
     this.denseSurface,
   }) : assert(levelColors.length == 5, 'Servono 5 colori: livelli 0-4'),
        assert(accentCards.length >= 3, 'Servono almeno 3 schede decorative');
+
+  /// Il verde della Vis.
+  Color get visColor => vis ?? speciesName ?? hint;
 
   Color levelColor(int level) => levelColors[level.clamp(0, levelColors.length - 1)];
 
@@ -125,6 +133,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     List<Color>? traitColors,
     Color? plainPotion,
     Color? speciesName,
+    Color? vis,
     Color? denseBackground,
     Color? denseSurface,
   }) => DruidTokens(
@@ -146,6 +155,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
     traitColors: traitColors ?? this.traitColors,
     plainPotion: plainPotion ?? this.plainPotion,
     speciesName: speciesName ?? this.speciesName,
+    vis: vis ?? this.vis,
     denseBackground: denseBackground ?? this.denseBackground,
     denseSurface: denseSurface ?? this.denseSurface,
   );
@@ -182,6 +192,7 @@ class DruidTokens extends ThemeExtension<DruidTokens> {
           : (t < 0.5 ? traitColors : other.traitColors),
       plainPotion: Color.lerp(plainPotion, other.plainPotion, t),
       speciesName: Color.lerp(speciesName, other.speciesName, t),
+      vis: Color.lerp(vis, other.vis, t),
       denseBackground: Color.lerp(denseBackground, other.denseBackground, t),
       denseSurface: Color.lerp(denseSurface, other.denseSurface, t),
     );

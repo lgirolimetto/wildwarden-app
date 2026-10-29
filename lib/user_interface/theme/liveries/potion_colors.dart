@@ -39,3 +39,7 @@ Color plainPotionColor(Brightness brightness) =>
 /// sera.
 Color speciesNameColor(Brightness brightness) =>
     brightness == Brightness.light ? const Color(0xFF3E6B47) : const Color(0xFFA9CFA1);
+
+/// Il verde dell'icona della Vis: scuro nel tema chiaro, chiaro nel tema scuro.
+Color visColor(Brightness brightness) =>
+    brightness == Brightness.light ? const Color(0xFF2E7D32) : const Color(0xFF9CD69A);

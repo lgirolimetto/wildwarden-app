@@ -113,13 +113,21 @@ void main() {
 
     // I pezzi che mancano sono pillole "?", non "…"; il recipiente grigio e la ⓘ dicono che è incompleta.
     final plate = find.byKey(ValueKey('plate-${rare.id}'));
-    // I pezzi che mancano sono criptati in rune, lunghi quanto quelli veri; fuori non si dice quanti sono.
+    // I pezzi che mancano sono criptati con "#", lunghi quanto quelli veri; fuori non si dice quanti sono.
     final full = rare.name('it');
     final known = rare.name('it', missing: 2).split('…').first;
     final title = tester.widget<RecipeTitle>(find.descendant(of: plate, matching: find.byType(RecipeTitle)));
     expect(title.full, full);
     expect(find.descendant(of: plate, matching: find.textContaining(known, findRichText: true)), findsOneWidget);
     expect(find.textContaining('…', findRichText: true), findsNothing);
+    expect(
+      find.descendant(
+        of: plate,
+        matching: find.textContaining(cipherWord(full.substring(known.length)), findRichText: true),
+      ),
+      findsOneWidget,
+      reason: 'i pezzi criptati con "#", lunghi quanto quelli veri',
+    );
     expect(find.textContaining(full.substring(known.length), findRichText: true), findsNothing);
     expect(find.text('Non si conoscono ancora 2 Componenti'), findsNothing);
     expect(find.descendant(of: plate, matching: find.byKey(const ValueKey('incomplete-info'))), findsOneWidget);

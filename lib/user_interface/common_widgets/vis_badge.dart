@@ -14,6 +14,10 @@ class VisBadge extends StatelessWidget {
   const VisBadge(this.vis, {super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      IconBadgeChip(icon: visIcon, badge: '$vis', message: context.l10n.pantryVis(vis));
+  Widget build(BuildContext context) => IconBadgeChip(
+    icon: visIcon,
+    iconColor: context.druid.visColor,
+    badge: '$vis',
+    message: context.l10n.pantryVis(vis),
+  );
 }

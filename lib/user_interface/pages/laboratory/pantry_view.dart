@@ -1,11 +1,7 @@
-import 'dart:math';
-
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
-import 'package:druid_app/business_logic/rules/harvest.dart';
-import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
@@ -116,15 +112,13 @@ class _SpeciesShelf extends StatelessWidget {
   }
 }
 
-/// Un'Essenza (capitolo 02, 2026-10-29): in alto la data (con l'anno solo se non è quello in corso); sotto la Vis, con
-/// l'anello oro della purezza intorno all'icona, la barretta e il numero, poi le icone delle Qualia.
+/// Un'Essenza (capitolo 02, 2026-10-29): in alto la data (con l'anno solo se non è quello in corso); sotto la Vis come
+/// nel Ricettario (il fulmine con le Vis nel badge) e sotto ancora la sua purezza, una barretta oro; poi le icone delle
+/// Qualia.
 class _EssenceRow extends StatelessWidget {
   final Essence essence;
 
   const _EssenceRow({required this.essence});
-
-  /// La barretta è piena al massimo che dà un Attingere (con l'Abbondanza al massimo).
-  static final _fullVis = visWithAbundance(visPerDraw, 10);
 
   @override
   Widget build(BuildContext context) {
@@ -147,25 +141,32 @@ class _EssenceRow extends StatelessWidget {
         const SizedBox(height: Gaps.xs),
         Row(
           children: [
-            Tooltip(
-              message: context.l10n.pantryPurity(purity),
-              child: _PurityChip(purity: essence.purity, semanticLabel: context.l10n.pantryPurity(purity)),
-            ),
-            const SizedBox(width: Gaps.s),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: SizedBox(
-                width: 48,
-                height: 6,
-                child: LinearProgressIndicator(
-                  value: (essence.vis / _fullVis).clamp(0.0, 1.0),
-                  backgroundColor: context.druid.hint.withValues(alpha: 0.2),
-                  color: context.colors.primary,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                VisBadge(essence.vis),
+                const SizedBox(height: Gaps.xs),
+                Tooltip(
+                  message: context.l10n.pantryPurity(purity),
+                  child: Semantics(
+                    label: context.l10n.pantryPurity(purity),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(999),
+                      child: SizedBox(
+                        width: 40,
+                        height: 5,
+                        child: LinearProgressIndicator(
+                          value: essence.purity.clamp(0.0, 1.0),
+                          backgroundColor: context.druid.hint.withValues(alpha: 0.2),
+                          // L'oro della luce, come il Sole.
+                          color: context.druid.traitColor(Trait.sun.index),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            const SizedBox(width: Gaps.s),
-            Text(context.l10n.pantryVis(essence.vis), style: context.texts.labelLarge),
             const Spacer(),
             for (final t in traits) ...[const SizedBox(width: Gaps.s), QualiaIcon(label: context.game.trait(t))],
           ],
@@ -173,51 +174,4 @@ class _EssenceRow extends StatelessWidget {
       ],
     );
   }
-}
-
-/// L'icona della Vis in una chip con intorno l'anello della purezza, del colore della luce: pieno a purezza 100 %.
-class _PurityChip extends StatelessWidget {
-  final double purity;
-  final String semanticLabel;
-
-  const _PurityChip({required this.purity, required this.semanticLabel});
-
-  @override
-  Widget build(BuildContext context) => Semantics(
-    label: semanticLabel,
-    child: SizedBox.square(
-      dimension: 36,
-      child: CustomPaint(
-        painter: _RingPainter(
-          progress: purity.clamp(0.0, 1.0),
-          track: context.druid.hint.withValues(alpha: 0.2),
-          fill: context.druid.traitColor(Trait.sun.index),
-        ),
-        child: const Center(child: EngravedIcon(visIcon, size: 18)),
-      ),
-    ),
-  );
-}
-
-class _RingPainter extends CustomPainter {
-  final double progress;
-  final Color track;
-  final Color fill;
-
-  const _RingPainter({required this.progress, required this.track, required this.fill});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    const stroke = 3.0;
-    final rect = (Offset.zero & size).deflate(stroke / 2);
-    final paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = stroke
-      ..strokeCap = StrokeCap.round;
-    canvas.drawArc(rect, 0, 2 * pi, false, paint..color = track);
-    if (progress > 0) canvas.drawArc(rect, -pi / 2, 2 * pi * progress, false, paint..color = fill);
-  }
-
-  @override
-  bool shouldRepaint(_RingPainter old) => old.progress != progress || old.track != track || old.fill != fill;
 }

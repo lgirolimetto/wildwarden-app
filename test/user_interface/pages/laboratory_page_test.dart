@@ -4,6 +4,7 @@ import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
+import 'package:druid_app/user_interface/common_widgets/vis_badge.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/ready_mark.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,9 @@ void main() {
     expect(find.text('2 Essenze'), findsOneWidget);
     expect(find.text('2 Essenze · 20 Vis'), findsOneWidget);
     // Ogni Essenza: la data, la Vis con l'anello della purezza, le Qualia come icone (il nome tenendo premuto).
-    expect(find.text('10 Vis'), findsNWidgets(2));
+    // La Vis come nel Ricettario: il fulmine con le Vis nel badge; sotto la purezza, una barretta oro.
+    expect(find.byType(VisBadge), findsNWidgets(2));
+    expect(find.byTooltip('10 Vis'), findsNWidgets(2));
     expect(find.byTooltip('Purezza 75 %'), findsOneWidget);
     expect(find.byTooltip('Purezza 40 %'), findsOneWidget, reason: 'senza purezza: quella del livello 0');
     expect(find.byTooltip('Rugiada'), findsOneWidget);
