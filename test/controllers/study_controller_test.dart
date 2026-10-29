@@ -62,6 +62,19 @@ void main() {
     expect(progress.state.learnedRecipes.keys, {learned.id});
   });
 
+  test('un\'aromatica del tutorial: il livello 2 insegna la sua Non comune, salvata come evento', () async {
+    catalog = smallCatalog(kitchen: true);
+    study.startLevel(catalog, 'Salvia rosmarinus', 1);
+    await answerAll();
+    study.startLevel(catalog, 'Salvia rosmarinus', 2);
+    await answerAll();
+
+    final uncommon = recipeBookOf(catalog).pageOf('Salvia rosmarinus')!.recipes[1];
+    expect(study.summary!.levelPassed, 2);
+    expect(study.summary!.learnedRecipe, uncommon);
+    expect(store.events.whereType<RecipeLearned>().map((e) => e.recipeId), contains(uncommon.id));
+  });
+
   test('un errore: la risposta resta visibile finché non si va avanti, e il fatto torna', () async {
     await progress.encounter('Helleborus viridis', method: EncounterMethod.simulated);
     study.startLevel(catalog, 'Helleborus viridis', 1);

@@ -90,7 +90,8 @@
    ],
    "synonyms": [
     "Rosmarinus officinalis"
-   ]
+   ],
+   "companion": "Salvia officinalis"
   },
   {
    "sci": "Salvia officinalis",
@@ -178,7 +179,8 @@
    ],
    "vocation": [
     "regrowth"
-   ]
+   ],
+   "companion": "Ocimum basilicum"
   },
   {
    "sci": "Ocimum basilicum",
@@ -277,7 +279,8 @@
      "name": "POWO (Kew)",
      "url": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:452874-1"
     }
-   ]
+   ],
+   "companion": "Salvia rosmarinus"
   }
  ]
 }

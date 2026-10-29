@@ -135,13 +135,12 @@ class StudyController extends GetxController {
       );
       _xp += XpRules.levelPassed;
       await _skipEmptyLevels(session.speciesSci!);
-      if (passed == recipeLearningLevel) {
-        learned = commonToLearn(session.speciesSci!, _catalog!, _progress.state);
-        if (learned != null) {
-          await _progress.record(
-            RecipeLearned(recipeId: learned.id, origin: RecipeOrigin.study, occurredAt: _progress.now),
-          );
-        }
+      // La Comune al livello 1; per le aromatiche del tutorial anche la Non comune al livello 2.
+      learned = recipeToLearn(session.speciesSci!, passed, _catalog!, _progress.state);
+      if (learned != null) {
+        await _progress.record(
+          RecipeLearned(recipeId: learned.id, origin: RecipeOrigin.study, occurredAt: _progress.now),
+        );
       }
     }
     final touched = session.mode == AnswerMode.learning
