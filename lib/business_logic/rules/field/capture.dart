@@ -84,6 +84,10 @@ CaptureReview reviewCapture({
 
 CaptureChoice _choice(PlantCandidate candidate, Catalog catalog, {required bool inRegionalFlora}) {
   final species = catalogSpeciesOf(candidate, catalog);
+  // Le aromatiche Ospiti del tutorial (il basilico) restano Ospiti anche se il catalogo le ha.
+  if (species != null && catalog.kitchenGuests.contains(species.sci)) {
+    return CaptureChoice(candidate, species, StationKind.guest);
+  }
   return CaptureChoice(candidate, species, stationKindOf(inCatalog: species != null, inRegionalFlora: inRegionalFlora));
 }
 

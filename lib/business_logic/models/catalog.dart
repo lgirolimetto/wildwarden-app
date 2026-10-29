@@ -57,6 +57,10 @@ class Catalog {
   /// Le fonti di [origins] (capitolo 04, "sempre con le fonti").
   final Map<String, List<SourceRef>> originSources;
 
+  /// Nomi scientifici vecchi (in minuscolo, genere e specie) → il nome del catalogo: Pl@ntNet può rispondere con un
+  /// sinonimo (es. "rosmarinus officinalis" → Salvia rosmarinus).
+  final Map<String, String> synonyms;
+
   final Map<String, Species> _bySci;
 
   Catalog({
@@ -73,6 +77,7 @@ class Catalog {
     this.kitchenGuests = const {},
     this.origins = const {},
     this.originSources = const {},
+    this.synonyms = const {},
   }) : _bySci = {
          for (final s in [...species, ...kitchen]) s.sci: s,
        };
@@ -114,6 +119,11 @@ class Catalog {
       origins: {
         for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
           if (s['origin'] case final Map<String, dynamic> origin) s['sci'] as String: LocalizedText.fromJson(origin),
+      },
+      synonyms: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          for (final synonym in ((s['synonyms'] as List?) ?? const []).cast<String>())
+            synonym.toLowerCase(): s['sci'] as String,
       },
       originSources: {
         for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())

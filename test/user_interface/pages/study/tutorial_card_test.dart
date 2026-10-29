@@ -28,6 +28,24 @@ void main() {
     expect(navLabel('Erbario'), findsNothing);
     expect(navLabel('Laboratorio'), findsNothing);
     expect(navLabel('Bottino'), findsNothing);
+    // Durante il tutorial la Home mostra solo il passo: il resto si nasconde.
+    expect(find.byKey(const ValueKey('seasonal-Malva sylvestris'), skipOffstage: false), findsNothing);
+  });
+
+  testWidgets('al passo della pozione il Laboratorio mostra solo le Ricette pronte', (tester) async {
+    registerTestDependencies(
+      events: [
+        mark(OnboardingMark.tutorialStarted),
+        SpeciesEncountered(speciesSci: 'Salvia officinalis', method: EncounterMethod.photo, occurredAt: day),
+        LevelPassed(speciesSci: 'Salvia officinalis', level: 1, xp: 20, occurredAt: day),
+        SpeciesEncountered(speciesSci: 'Laurus nobilis', method: EncounterMethod.photo, occurredAt: day),
+      ],
+    );
+    await pumpDruidApp(tester);
+    await scrollAndTap(tester, find.byKey(const ValueKey('tutorial-action')));
+
+    expect(find.byKey(const ValueKey('ready-count')), findsOneWidget);
+    expect(find.byKey(const ValueKey('lab-tab-recipe-book')), findsNothing);
   });
 
   testWidgets('al passo del Bottino il pulsante lo apre e il passo si completa', (tester) async {

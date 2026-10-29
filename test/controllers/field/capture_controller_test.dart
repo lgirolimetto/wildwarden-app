@@ -2,12 +2,16 @@ import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/models/catalog.dart';
+import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/field/capture.dart';
 import 'package:druid_app/business_logic/rules/field/stations.dart';
+import 'package:druid_app/business_logic/rules/tutorial.dart';
+import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
 import 'package:druid_app/controllers/field/capture_controller.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -68,7 +72,8 @@ void main() {
     TakenPhoto? photo,
     Map<PlantFlora, Validation<PlantIdentification>> answers = const {},
     AppConfig settings = config,
-  }) => CaptureController(progress, _Camera(photo ?? shot), _Identifier(answers), smallCatalog, settings, photos);
+    Catalog? Function() catalog = smallCatalog,
+  }) => CaptureController(progress, _Camera(photo ?? shot), _Identifier(answers), catalog, settings, photos);
 
   test('senza chiave non si apre la fotocamera', () async {
     final c = capture(
@@ -233,6 +238,79 @@ void main() {
       expect(progress.state.stations, hasLength(2));
       expect(second.result!.firstPhoto, isFalse);
       expect(firstPhotoOf(progress.state, 'Helleborus viridis')!.photo, '/foto.jpg');
+    });
+  });
+
+  group('regola del tutorial', () {
+    Catalog withKitchen() => smallCatalog(kitchen: true);
+
+    setUp(() async {
+      progress = ProgressController(store, clock, catalog: withKitchen);
+      await progress.load();
+      await progress.markOnboarding(OnboardingMark.tutorialStarted);
+    });
+
+    Future<CaptureController> shoot(PlantIdentification regional, {PlantIdentification? world, LocationFix? at}) async {
+      final c = capture(
+        catalog: withKitchen,
+        photo: TakenPhoto(
+          photos: const [PlantPhoto('/foto.jpg', PlantOrgan.whole)],
+          traits: const [Trait.dawn],
+          position: at ?? here,
+        ),
+        answers: {PlantFlora.regional: Valid(regional), PlantFlora.world: Valid(world ?? PlantIdentification.none)},
+      );
+      await c.start();
+      await c.submitGuess(null);
+      await c.confirm();
+      return c;
+    }
+
+    test("il rosmarino (anche con il vecchio nome): Incontro, Stazione in casa e subito l'Essenza", () async {
+      final c = await shoot(id('Rosmarinus officinalis', 0.8));
+
+      expect(c.result!.choice.species?.sci, 'Salvia rosmarinus');
+      expect(c.result!.essence, isTrue);
+      final state = progress.state;
+      expect(state.stations.single.tutorial, isTrue);
+      expect(state.essences.single.speciesSci, 'Salvia rosmarinus');
+      expect(state.essences.single.traits, ['dawn']);
+      expect(canCreateStation(state, clock.now()), isTrue, reason: 'le Stazioni del tutorial non contano');
+      expect(currentTutorialStep(state), TutorialStep.study);
+    });
+
+    test("il basilico è un'Ospite anche se il catalogo lo conosce, e dà la sua Essenza", () async {
+      final c = await shoot(PlantIdentification.none, world: id('Ocimum basilicum', 0.7, name: 'Basilico'));
+
+      expect(c.result!.choice.kind, StationKind.guest);
+      expect(c.result!.essence, isTrue);
+      expect(progress.state.essences.single.speciesSci, 'Ocimum basilicum');
+    });
+
+    test('durante il tutorial il limite del giorno non ferma la fotocamera', () async {
+      await shoot(id('Salvia officinalis', 0.8));
+      final second = capture(catalog: withKitchen);
+      await second.start();
+      expect(second.phase, CapturePhase.guessing);
+    });
+
+    test('una pianta della Zona durante il tutorial segue le regole normali: niente Essenza', () async {
+      final c = await shoot(id('Helleborus viridis', 0.7));
+      expect(c.result!.essence, isFalse);
+      expect(progress.state.stations.single.tutorial, isFalse);
+      expect(progress.state.essences, isEmpty);
+    });
+
+    test('due aromatiche e il Livello 1 della prima: la Comune è pronta da preparare', () async {
+      await shoot(id('Salvia rosmarinus', 0.8));
+      await progress.record(LevelPassed(speciesSci: 'Salvia rosmarinus', level: 1, xp: 20, occurredAt: clock.now()));
+      const kitchen = LocationFix(elapsed: Duration.zero, latitude: 44.4831, longitude: 11.3531, accuracy: 8);
+      await shoot(PlantIdentification.none, world: id('Ocimum basilicum', 0.7), at: kitchen);
+
+      final state = progress.state;
+      expect(currentTutorialStep(state), TutorialStep.brew);
+      final ready = readyRecipes(withKitchen(), state, clock.now()).where((r) => r.ready);
+      expect(ready.map((r) => r.brewable.id), hasLength(1));
     });
   });
 }

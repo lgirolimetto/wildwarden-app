@@ -2453,4 +2453,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String sourcesLine(String sources) {
     return 'Source: $sources';
   }
+
+  @override
+  String get captureTutorialEssence =>
+      'You Drew its first Essence, with the Traits of this moment: you\'ll find it in the Laboratory Pantry.';
 }

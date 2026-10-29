@@ -3890,6 +3890,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Fonte: {sources}'**
   String sourcesLine(String sources);
+
+  /// No description provided for @captureTutorialEssence.
+  ///
+  /// In it, this message translates to:
+  /// **'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.'**
+  String get captureTutorialEssence;
 }
 
 class _AppLocalizationsDelegate

@@ -74,16 +74,19 @@ class _StudyHomePageState extends State<StudyHomePage> {
                   const SizedBox(height: Gaps.l),
                   TutorialCard(catalog: catalog, state: state),
                 ],
-                const SizedBox(height: Gaps.xl),
-                _SeasonalSection(catalog: catalog, state: state, now: now, progress: progress),
-                if (dueFacts(catalog, state, now).isNotEmpty) ...[
-                  const SizedBox(height: Gaps.l),
-                  _ReviewsCard(catalog: catalog, state: state, now: now),
+                // Durante il tutorial la Home mostra solo il passo del momento: il resto si nasconde.
+                if (tutorial != TutorialStatus.inProgress) ...[
+                  const SizedBox(height: Gaps.xl),
+                  _SeasonalSection(catalog: catalog, state: state, now: now, progress: progress),
+                  if (dueFacts(catalog, state, now).isNotEmpty) ...[
+                    const SizedBox(height: Gaps.l),
+                    _ReviewsCard(catalog: catalog, state: state, now: now),
+                  ],
+                  const SizedBox(height: Gaps.xl),
+                  _YourSpecies(catalog: catalog, state: state, progress: progress),
+                  const SizedBox(height: Gaps.xl),
+                  _TipCard(now: now),
                 ],
-                const SizedBox(height: Gaps.xl),
-                _YourSpecies(catalog: catalog, state: state, progress: progress),
-                const SizedBox(height: Gaps.xl),
-                _TipCard(now: now),
               ],
             ),
           ),

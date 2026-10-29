@@ -628,5 +628,6 @@
   "erbarioKitchen": "From the kitchen",
   "kitchenHint": "A kitchen herb: you'll find it in a pot, on the balcony or at the supermarket. Photograph it from home, even just a leaf.",
   "sectionOrigin": "Where it comes from",
-  "sourcesLine": "Source: {sources}"
+  "sourcesLine": "Source: {sources}",
+  "captureTutorialEssence": "You Drew its first Essence, with the Traits of this moment: you'll find it in the Laboratory Pantry."
 }

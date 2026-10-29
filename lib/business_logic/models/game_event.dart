@@ -173,6 +173,7 @@ sealed class GameEvent {
             for (final name in (d['traits'] as List<dynamic>? ?? const []).cast<String>())
               ?Trait.values.asNameMap()[name],
           ],
+          tutorial: d['tutorial'] as bool? ?? false,
         ),
       ),
       XpGranted.typeId => XpGranted(xp: d['xp'] as int, reason: d['reason'] as String, occurredAt: occurredAt),
@@ -215,6 +216,7 @@ class StationCreated extends GameEvent {
     if (station.family != null) 'family': station.family,
     'photo': ?station.photo,
     if (station.traits.isNotEmpty) 'traits': [for (final t in station.traits) t.name],
+    if (station.tutorial) 'tutorial': true,
   };
 }
 

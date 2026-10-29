@@ -43,9 +43,12 @@ Station? sameStation(GameState state, String speciesSci, double latitude, double
   return closest;
 }
 
-/// Stazioni nuove già create oggi.
+/// Stazioni nuove già create oggi (quelle del tutorial non contano).
 int stationsCreatedOn(GameState state, DateTime day) => state.stations
-    .where((s) => s.createdAt.year == day.year && s.createdAt.month == day.month && s.createdAt.day == day.day)
+    .where(
+      (s) =>
+          !s.tutorial && s.createdAt.year == day.year && s.createdAt.month == day.month && s.createdAt.day == day.day,
+    )
     .length;
 
 /// Si può creare una stazione nuova oggi? Da chiedere **prima** di chiamare Pl@ntNet, per non sprecare un'identificazione.

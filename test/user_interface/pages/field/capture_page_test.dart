@@ -4,6 +4,7 @@ import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
+import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 
+import '../../../helpers/fakes.dart';
 import '../../../helpers/test_app.dart';
 
 class _Camera implements IPhotoSource {
@@ -117,5 +119,35 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('nav-action')));
     await tester.pumpAndSettle();
     expect(find.textContaining('Manca la chiave di Pl@ntNet'), findsOneWidget);
+  });
+
+  testWidgets('tutorial, il basilico: Ospite, da dove viene e la prima Essenza', (tester) async {
+    registerTestDependencies(
+      config: config,
+      catalog: Valid(smallCatalog(kitchen: true)),
+      events: [OnboardingMarked(mark: OnboardingMark.tutorialStarted, occurredAt: DateTime(2027, 2, 14))],
+      photoSource: _Camera(photo),
+      plantIdentifier: _Identifier(
+        regional: PlantIdentification.none,
+        world: const PlantIdentification(
+          candidates: [
+            PlantCandidate(scientificName: 'Ocimum basilicum', commonNames: ['Basilico'], score: 0.8),
+          ],
+        ),
+      ),
+    );
+    await pumpDruidApp(tester);
+    await tester.tap(find.byKey(const ValueKey('nav-action')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('capture-guess-skip')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('capture-confirm')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ospite'), findsOneWidget);
+    expect(find.byKey(const ValueKey('capture-origin')), findsOneWidget);
+    await scrollTo(tester, find.byKey(const ValueKey('capture-essence')));
+    expect(find.byKey(const ValueKey('capture-essence')), findsOneWidget);
+    expect(Get.find<ProgressController>().state.essences, hasLength(1));
   });
 }
