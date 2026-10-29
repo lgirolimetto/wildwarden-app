@@ -93,4 +93,26 @@ void main() {
     expect(page.complete, isFalse);
     expect(knownMythicIds(catalog, state), {'lanterna-santa-lucia'});
   });
+
+  group('aromatiche del tutorial', () {
+    final withKitchen = smallCatalog(kitchen: true);
+    final book = recipeBookOf(withKitchen);
+
+    test('una pagina con la sola Comune, fuori dalle pagine della Zona e dal Bottino', () {
+      final page = book.pageOf('Ocimum basilicum')!;
+      expect(page.recipes.map((r) => r.grade), [Grade.common]);
+      expect(page.recipes.single.ingredients.map((i) => i.speciesSci), ['Ocimum basilicum', null]);
+      expect(book.pages.map((p) => p.plant.sci), isNot(contains('Ocimum basilicum')));
+      expect(book.kitchenPages, hasLength(3));
+      expect(book.recipeById(page.recipes.single.id), isNotNull);
+    });
+
+    test('superato il Livello 1 la Comune è tua e la pagina compare tra quelle che hai', () {
+      final state = GameState.replay([
+        LevelPassed(speciesSci: 'Salvia rosmarinus', level: 1, xp: 20, occurredAt: DateTime(2026, 10, 29)),
+      ]);
+      expect(knownRecipeIds(withKitchen, state), {book.pageOf('Salvia rosmarinus')!.recipes.single.id});
+      expect(collectedPages(withKitchen, state).map((p) => p.page.plant.sci), ['Salvia rosmarinus']);
+    });
+  });
 }

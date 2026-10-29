@@ -41,6 +41,7 @@ flutter:
   generate: true
   assets:
     - assets/content/bologna/
+    - assets/content/kitchen/
   fonts:
     # Young Serif, SIL Open Font License 1.1 (assets/fonts/YoungSerif-OFL.txt): titoli della livrea Sottobosco.
     - family: YoungSerif

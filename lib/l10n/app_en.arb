@@ -624,5 +624,8 @@
   "tutorialActionStudy": "Study",
   "tutorialActionLaboratory": "Open the Laboratory",
   "tutorialActionTrove": "Open the Trove",
-  "tutorialActionFinish": "Continue"
+  "tutorialActionFinish": "Continue",
+  "erbarioKitchen": "From the kitchen",
+  "kitchenHint": "A kitchen herb: you'll find it in a pot, on the balcony or at the supermarket. Photograph it from home, even just a leaf.",
+  "sectionOrigin": "Where it comes from"
 }

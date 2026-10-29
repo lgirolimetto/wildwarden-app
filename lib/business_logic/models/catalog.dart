@@ -44,6 +44,16 @@ class Catalog {
   /// Avvisi di tossicità o irritazione. ⚠️ Vanno verificati a mano su fonti autorevoli.
   final Map<String, LocalizedText> safety;
 
+  /// Le aromatiche del tutorial da casa ("dalla cucina", blocco 2b): coltivate, fuori dalla Zona. Non entrano in
+  /// [species] (Erbario della Zona, stagione, percentili, compagni delle ricette); si trovano con [speciesBySci].
+  final List<Species> kitchen;
+
+  /// Le aromatiche che sono Ospiti (non crescono spontanee in Italia, come il basilico).
+  final Set<String> kitchenGuests;
+
+  /// Da dove viene un'aromatica Ospite: il primo "non lo sapevo" del tutorial.
+  final Map<String, LocalizedText> origins;
+
   final Map<String, Species> _bySci;
 
   Catalog({
@@ -56,9 +66,16 @@ class Catalog {
     required this.lore,
     required this.funFacts,
     required this.safety,
-  }) : _bySci = {for (final s in species) s.sci: s};
+    this.kitchen = const [],
+    this.kitchenGuests = const {},
+    this.origins = const {},
+  }) : _bySci = {
+         for (final s in [...species, ...kitchen]) s.sci: s,
+       };
 
-  factory Catalog.fromJson(Map<String, dynamic> json) {
+  /// [kitchen]: il catalogo delle aromatiche del tutorial (`assets/content/kitchen/catalog.json`, da
+  /// `tools/content-pipeline/kitchen.py`), facoltativo.
+  factory Catalog.fromJson(Map<String, dynamic> json, {Map<String, dynamic>? kitchen}) {
     final version = json['formatVersion'] as int;
     if (version != supportedFormatVersion) {
       throw FormatException('Formato catalogo $version non supportato (atteso $supportedFormatVersion)');
@@ -83,12 +100,26 @@ class Catalog {
             MapEntry(sci, (facts as List).map((f) => CuratedFunFact.fromJson(f as Map<String, dynamic>)).toList()),
       ),
       safety: texts('safety'),
+      kitchen: [
+        for (final s in (kitchen?['species'] as List?) ?? const []) Species.fromJson(s as Map<String, dynamic>),
+      ],
+      kitchenGuests: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (s['guest'] == true) s['sci'] as String,
+      },
+      origins: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (s['origin'] case final Map<String, dynamic> origin) s['sci'] as String: LocalizedText.fromJson(origin),
+      },
     );
   }
 
+  /// Un'aromatica del tutorial ("dalla cucina").
+  bool isKitchen(String sci) => kitchen.any((s) => s.sci == sci);
+
   Species? speciesBySci(String sci) => _bySci[sci];
 
-  Species? speciesByGbifKey(int key) => species.where((s) => s.gbifKey == key).firstOrNull;
+  Species? speciesByGbifKey(int key) => [...species, ...kitchen].where((s) => s.gbifKey == key).firstOrNull;
 
   /// Specie della stessa famiglia presenti nel catalogo, esclusa quella indicata.
   List<Species> relativesOf(Species species) =>

@@ -2438,4 +2438,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tutorialActionFinish => 'Continue';
+
+  @override
+  String get erbarioKitchen => 'From the kitchen';
+
+  @override
+  String get kitchenHint =>
+      'A kitchen herb: you\'ll find it in a pot, on the balcony or at the supermarket. Photograph it from home, even just a leaf.';
+
+  @override
+  String get sectionOrigin => 'Where it comes from';
 }

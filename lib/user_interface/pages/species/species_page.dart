@@ -96,7 +96,10 @@ class _ToFind extends StatelessWidget {
   final GameState state;
   final ProgressController progress;
 
-  const _ToFind({required this.species, required this.state, required this.progress});
+  /// Un'aromatica del tutorial: si trova in cucina, non nella Zona (niente Desiderata).
+  final bool kitchen;
+
+  const _ToFind({required this.species, required this.state, required this.progress, this.kitchen = false});
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +109,7 @@ class _ToFind extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(context.game.hint(species)),
+          Text(kitchen ? context.l10n.kitchenHint : context.game.hint(species)),
           const SizedBox(height: Gaps.m),
           FilledButton.icon(
             key: const ValueKey('capture-from-species'),
@@ -114,13 +117,15 @@ class _ToFind extends StatelessWidget {
             icon: const Icon(Icons.photo_camera_outlined),
             label: Text(context.l10n.captureFromSpecies),
           ),
-          const SizedBox(height: Gaps.s),
-          FilledButton.icon(
-            key: const ValueKey('toggle-desiderata'),
-            onPressed: () => progress.toggleDesiderata(species.sci),
-            icon: Icon(desired ? Icons.star : Icons.star_outline),
-            label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
-          ),
+          if (!kitchen) ...[
+            const SizedBox(height: Gaps.s),
+            FilledButton.icon(
+              key: const ValueKey('toggle-desiderata'),
+              onPressed: () => progress.toggleDesiderata(species.sci),
+              icon: Icon(desired ? Icons.star : Icons.star_outline),
+              label: Text(desired ? context.l10n.desiderataRemove : context.l10n.desiderataAdd),
+            ),
+          ],
           if (Get.find<AppConfig>().showDebugTools) ...[
             const SizedBox(height: Gaps.s),
             OutlinedButton.icon(
@@ -263,7 +268,13 @@ class _SpeciesSheet extends StatelessWidget {
           children: [
             _SafetyWarning(species: species, catalog: catalog),
             if (species.isProtected) _ProtectedNote(species: species),
-            if (!state.hasEncountered(species.sci)) _ToFind(species: species, state: state, progress: progress),
+            if (catalog.origins[species.sci] case final origin?)
+              _Section(
+                title: context.l10n.sectionOrigin,
+                child: Text(origin.resolve(context.contentLanguage), key: const ValueKey('species-origin')),
+              ),
+            if (!state.hasEncountered(species.sci))
+              _ToFind(species: species, state: state, progress: progress, kitchen: catalog.isKitchen(species.sci)),
             _StudyLadder(species: species, catalog: catalog, state: state),
             _RecipeBookLink(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),

@@ -2449,4 +2449,14 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tutorialActionFinish => 'Continua';
+
+  @override
+  String get erbarioKitchen => 'Dalla cucina';
+
+  @override
+  String get kitchenHint =>
+      'Un\'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.';
+
+  @override
+  String get sectionOrigin => 'Da dove viene';
 }

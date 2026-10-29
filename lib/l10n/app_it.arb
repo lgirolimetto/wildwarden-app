@@ -1840,5 +1840,8 @@
   "tutorialActionStudy": "Studia",
   "tutorialActionLaboratory": "Apri il Laboratorio",
   "tutorialActionTrove": "Apri il Bottino",
-  "tutorialActionFinish": "Continua"
+  "tutorialActionFinish": "Continua",
+  "erbarioKitchen": "Dalla cucina",
+  "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
+  "sectionOrigin": "Da dove viene"
 }

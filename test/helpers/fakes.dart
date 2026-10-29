@@ -15,13 +15,19 @@ import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:flutter/material.dart';
 
 /// Catalogo ridotto a 4 specie: elleboro verde, malva, piè di gallo, faggio.
-Catalog smallCatalog({Map<String, List<String>> protection = const {}}) {
+/// Con [kitchen] anche le aromatiche del tutorial, dal catalogo vero dell'app.
+Catalog smallCatalog({Map<String, List<String>> protection = const {}, bool kitchen = false}) {
   final json = jsonDecode(File('test/fixtures/catalog_small.json').readAsStringSync()) as Map<String, dynamic>;
   // Nel catalogo ridotto nessuna specie è protetta: i test che servono la proteggono qui.
   for (final species in (json['species'] as List).cast<Map<String, dynamic>>()) {
     if (protection.containsKey(species['sci'])) species['protection'] = protection[species['sci']];
   }
-  return Catalog.fromJson(json);
+  return Catalog.fromJson(
+    json,
+    kitchen: kitchen
+        ? jsonDecode(File('assets/content/kitchen/catalog.json').readAsStringSync()) as Map<String, dynamic>
+        : null,
+  );
 }
 
 class InMemoryPreferences implements IPreferences {

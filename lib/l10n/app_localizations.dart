@@ -3866,6 +3866,24 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Continua'**
   String get tutorialActionFinish;
+
+  /// No description provided for @erbarioKitchen.
+  ///
+  /// In it, this message translates to:
+  /// **'Dalla cucina'**
+  String get erbarioKitchen;
+
+  /// No description provided for @kitchenHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Un\'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.'**
+  String get kitchenHint;
+
+  /// No description provided for @sectionOrigin.
+  ///
+  /// In it, this message translates to:
+  /// **'Da dove viene'**
+  String get sectionOrigin;
 }
 
 class _AppLocalizationsDelegate

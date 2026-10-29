@@ -6,6 +6,7 @@ import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/erbario_views.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
+import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
@@ -71,6 +72,43 @@ class _ErbarioContent extends StatelessWidget {
       final level? => () => startLevelStudy(catalog, s.sci, level),
       null => null,
     };
+    (double, Widget) metTile(Species s) => (
+      // Altezza stimata, in larghezze di tessera: foto + nome, timbro e livello (+ "Studia").
+      1 / tileAspect(s) + 0.6 + (study(s) == null ? 0 : 0.2),
+      GestureDetector(
+        onTap: () => open(s.sci),
+        child: EncounteredSpeciesTile(
+          key: ValueKey('met-${s.sci}'),
+          species: s,
+          level: state.levelOf(s.sci),
+          encounteredAt: state.firstEncounters[s.sci],
+          onStudy: study(s),
+          photo: firstPhotoOf(state, s.sci)?.photo,
+        ),
+      ),
+    );
+    (double, Widget) unknownTile(Species s) => (
+      // Foto + nome (+ "Studia"); lo scudo delle protette sta sulla foto.
+      1 / tileAspect(s) + 0.3 + (study(s) == null ? 0 : 0.2),
+      GestureDetector(
+        onTap: () => open(s.sci),
+        child: UnknownSpeciesTile(
+          key: ValueKey('unknown-${s.sci}'),
+          species: s,
+          level: state.levelOf(s.sci),
+          onStudy: study(s),
+          onSimulateEncounter: onSimulateEncounter == null ? null : () => onSimulateEncounter!(s.sci),
+        ),
+      ),
+    );
+    // Le aromatiche del tutorial: un vassoio loro, solo durante il tutorial o quando ne hai Incontrata o studiata una.
+    final kitchen = [
+      for (final s in catalog.kitchen)
+        if (tutorialStatus(state) == TutorialStatus.inProgress ||
+            state.hasEncountered(s.sci) ||
+            state.levelOf(s.sci) > 0)
+          s,
+    ];
 
     return CustomScrollView(
       slivers: [
@@ -84,7 +122,12 @@ class _ErbarioContent extends StatelessWidget {
                 subtitle: context.l10n.erbarioPages(pages, catalog.species.length * 5),
                 icon: Icons.menu_book_rounded,
                 iconColor: context.druid.levelColor(1),
-                trailing: Pill(context.l10n.erbarioFound(state.encounteredCount, catalog.species.length)),
+                trailing: Pill(
+                  context.l10n.erbarioFound(
+                    catalog.species.where((s) => state.hasEncountered(s.sci)).length,
+                    catalog.species.length,
+                  ),
+                ),
               ),
             ),
           ),
@@ -111,39 +154,18 @@ class _ErbarioContent extends StatelessWidget {
                 ? context.druid.accent(2).background
                 : Color.lerp(context.druid.levelColor(2), context.colors.surface, 0.55)!,
             orbColor: context.druid.levelColor(2),
-            tiles: [
-              for (final s in encountered)
-                (
-                  // Altezza stimata, in larghezze di tessera: foto + nome, timbro e livello (+ "Studia").
-                  1 / tileAspect(s) + 0.6 + (study(s) == null ? 0 : 0.2),
-                  GestureDetector(
-                    onTap: () => open(s.sci),
-                    child: EncounteredSpeciesTile(
-                      key: ValueKey('met-${s.sci}'),
-                      species: s,
-                      level: state.levelOf(s.sci),
-                      encounteredAt: state.firstEncounters[s.sci],
-                      onStudy: study(s),
-                      photo: firstPhotoOf(state, s.sci)?.photo,
-                    ),
-                  ),
-                ),
-              for (final s in missing)
-                (
-                  // Foto + nome (+ "Studia"); lo scudo delle protette sta sulla foto.
-                  1 / tileAspect(s) + 0.3 + (study(s) == null ? 0 : 0.2),
-                  GestureDetector(
-                    onTap: () => open(s.sci),
-                    child: UnknownSpeciesTile(
-                      key: ValueKey('unknown-${s.sci}'),
-                      species: s,
-                      level: state.levelOf(s.sci),
-                      onStudy: study(s),
-                      onSimulateEncounter: onSimulateEncounter == null ? null : () => onSimulateEncounter!(s.sci),
-                    ),
-                  ),
-                ),
-            ],
+            tiles: [for (final s in encountered) metTile(s), for (final s in missing) unknownTile(s)],
+          ),
+        if (kitchen.isNotEmpty)
+          _Tray(
+            key: const ValueKey('kitchen-tray'),
+            title: context.l10n.erbarioKitchen,
+            icon: Icons.soup_kitchen_outlined,
+            color: context.druid.neu
+                ? context.druid.accent(1).background
+                : Color.lerp(context.druid.levelColor(1), context.colors.surface, 0.55)!,
+            orbColor: context.druid.levelColor(1),
+            tiles: [for (final s in kitchen) state.hasEncountered(s.sci) ? metTile(s) : unknownTile(s)],
           ),
         const SliverToBoxAdapter(child: SizedBox(height: homeBottomInset)),
       ],
@@ -162,6 +184,7 @@ class _Tray extends StatelessWidget {
   final List<(double, Widget)> tiles;
 
   const _Tray({
+    super.key,
     required this.title,
     required this.icon,
     required this.color,

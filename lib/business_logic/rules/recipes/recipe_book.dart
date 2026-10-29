@@ -121,16 +121,22 @@ class PlantPage {
   const PlantPage({required this.plant, required this.favouredTraits, required this.vocation, required this.recipes});
 }
 
-/// Tutte le pagine della Zona, nell'ordine del catalogo.
+/// Tutte le pagine della Zona, nell'ordine del catalogo, e quelle delle aromatiche del tutorial.
 class RecipeBook {
+  /// Le pagine della Zona: il Ricettario da completare e il Bottino dell'Esperienza.
   final List<PlantPage> pages;
+
+  /// Le pagine delle aromatiche del tutorial, solo con la Comune: non entrano nel Bottino né nel conto delle pagine.
+  final List<PlantPage> kitchenPages;
   final Map<String, PlantPage> _bySci;
   final Map<String, PlantRecipe> _byId;
 
-  RecipeBook._(this.pages)
-    : _bySci = {for (final p in pages) p.plant.sci: p},
+  RecipeBook._(this.pages, [this.kitchenPages = const []])
+    : _bySci = {
+        for (final p in [...pages, ...kitchenPages]) p.plant.sci: p,
+      },
       _byId = {
-        for (final p in pages)
+        for (final p in [...pages, ...kitchenPages])
           for (final r in p.recipes) r.id: r,
       };
 
@@ -149,12 +155,17 @@ class _Builder {
 
   _Builder(this.catalog) : climate = catalog.climate, toxic = catalog.safety.keys.toSet(), ranks = _traitRanks(catalog);
 
-  RecipeBook build() => RecipeBook._([for (final s in catalog.species) _page(s)]);
+  /// Le pagine della Zona e, a parte, quelle delle aromatiche del tutorial: solo la Comune (tratti d'elezione ed
+  /// effetti scritti a mano nel loro catalogo). Le pagine della Zona restano quelle dell'anteprima del core.
+  RecipeBook build() => RecipeBook._(
+    [for (final s in catalog.species) _page(s)],
+    [for (final s in catalog.kitchen) _page(s, commonOnly: true)],
+  );
 
-  PlantPage _page(Species plant) {
+  PlantPage _page(Species plant, {bool commonOnly = false}) {
     final favoured = plant.favouredTraits ?? _favouredTraits(plant);
     final vocation = plant.vocation ?? _vocation(plant, toxic.contains(plant.sci));
-    final (uncommon, rare) = _pageShape[plant.grade]!;
+    final (uncommon, rare) = commonOnly ? (0, 0) : _pageShape[plant.grade]!;
     final cards = <(Grade, List<Trait>, PotionEffect)>[
       (Grade.common, const [], vocation[0]),
       for (var i = 0; i < min(uncommon, favoured.length); i++)
