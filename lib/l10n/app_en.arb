@@ -676,7 +676,6 @@
   "affinityAnd": " and ",
   "recipePotionsLeast": "{count, plural, =1{You can brew at least 1 potion} other{You can brew at least {count} potions}}",
   "recipePotionsExact": "{count, plural, =1{You can brew 1 potion} other{You can brew {count} potions}}",
-  "recipeTimes": "×{count}",
   "incompleteInfoTitle": "The Plate is incomplete",
   "incompleteWhatTitle": "The “?”",
   "incompleteWhatText": "They are the pieces of the name you don't know yet, the Components: an Uncommon is missing its effect, a Rare its effect and one Qualia, a Mythic its words.",

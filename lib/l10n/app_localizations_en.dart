@@ -2632,11 +2632,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String recipeTimes(int count) {
-    return '×$count';
-  }
-
-  @override
   String get incompleteInfoTitle => 'The Plate is incomplete';
 
   @override

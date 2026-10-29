@@ -4173,12 +4173,6 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{Prepari 1 pozione} other{Prepari {count} pozioni}}'**
   String recipePotionsExact(int count);
 
-  /// No description provided for @recipeTimes.
-  ///
-  /// In it, this message translates to:
-  /// **'×{count}'**
-  String recipeTimes(int count);
-
   /// No description provided for @incompleteInfoTitle.
   ///
   /// In it, this message translates to:

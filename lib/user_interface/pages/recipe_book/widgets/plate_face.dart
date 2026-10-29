@@ -22,7 +22,7 @@ class PlateFace extends StatelessWidget {
   /// Riga sotto il nome (es. cosa è uscito dal Bottino); `null` = i componenti che mancano, se mancano.
   final String? caption;
 
-  /// Quante pozioni di questa Tavola prepari adesso: la beuta con "×N" accanto al cerchietto (0 = niente).
+  /// Quante pozioni di questa Tavola prepari adesso: la beuta con il numero accanto al cerchietto (0 = niente).
   final int brews;
 
   const PlateFace({super.key, required this.recipe, this.missing = 0, this.caption, this.brews = 0});
@@ -36,7 +36,7 @@ class PlateFace extends StatelessWidget {
         Row(
           children: [
             GradeDot(grade: recipe.grade, label: context.game.grade(recipe.grade)),
-            if (brews > 0) ...[const SizedBox(width: Gaps.xs), ReadyCount(count: brews, times: true, size: 18)],
+            if (brews > 0) ...[const SizedBox(width: Gaps.s), ReadyCount(count: brews)],
             const Spacer(),
             // L'effetto è nel nome ("…della Ricrescita"): niente icona che lo ripeta (2026-10-29).
             if (missing > 0) const IncompleteInfoButton(size: 18),

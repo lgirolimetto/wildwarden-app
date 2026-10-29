@@ -1,4 +1,6 @@
+import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/pill.dart';
@@ -201,6 +203,38 @@ void main() {
         findsOneWidget,
         reason: 'il conto resta quello di tutto il Ricettario',
       );
+    });
+
+    testWidgets('due Tavole che si contendono le Vis: sulla riga il minimo con "+"', (tester) async {
+      final catalog = smallCatalog();
+      final uncommon = recipeBookOf(catalog).pageOf('Malva sylvestris')!.recipes[1];
+      // Nel catalogo ridotto la Non comune della Malva chiede la Malva con la sua Qualia e due slot liberi.
+      final malva = brewableOf(catalog, uncommon.id)!.ingredients.firstWhere((i) => i.speciesSci != null);
+      registerTestDependencies(
+        events: [
+          LevelPassed(speciesSci: 'Malva sylvestris', level: 1, xp: 0, occurredAt: _feb),
+          TroveOpened(
+            grade: Grade.uncommon,
+            price: 0,
+            finds: [TroveFind(recipeId: uncommon.id, grade: Grade.uncommon, kind: TroveFindKind.recipe)],
+            occurredAt: _feb,
+          ),
+          EssenceDrawn(
+            speciesSci: 'Malva sylvestris',
+            traits: [for (final t in malva.traits) t.name],
+            simulated: true,
+            vis: 20,
+            occurredAt: _feb,
+          ),
+          EssenceDrawn(speciesSci: 'Fagus sylvatica', simulated: true, vis: 40, occurredAt: _feb),
+        ],
+      );
+      await pumpDruidApp(tester);
+      await openTab(tester, 'Laboratorio');
+
+      // Prima la Non comune: 1 pozione. Prima la Comune: 2. Il minimo è 1, ma si può fare di più.
+      final row = find.byKey(const ValueKey('recipe-book-page-Malva sylvestris'));
+      expect(find.descendant(of: row, matching: find.text('1+')), findsOneWidget);
     });
 
     testWidgets('con il filtro e niente da preparare, lo dice', (tester) async {

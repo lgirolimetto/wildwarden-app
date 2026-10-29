@@ -17,28 +17,7 @@ class Pill extends StatelessWidget {
     final color = context.colors.onSurface;
     final emoji = context.druid.clay ? leadingEmoji(text) : null;
     const radius = BorderRadius.all(Radius.circular(999));
-    // Nelle livree neumorfiche la pillola non si preme, quindi non è scavata: un solco sottile tutt'intorno e,
-    // subito dentro, la pillola che risale in rilievo (come la foto della scheda specie).
-    // Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45, rilievo depth 0.8 / strength 0.35.
-    // Variante appena più accennata, provata e da tenere come alternativa: solco depth 1 / strength 0.6,
-    // rilievo depth 1 / strength 0.5.
-    Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => context.druid.neu
-        ? NeuInset(
-            radius: radius,
-            depth: 0.8,
-            strength: 0.45,
-            child: Padding(
-              padding: const EdgeInsets.all(3),
-              child: NeuInset(
-                radius: radius,
-                depth: 0.8,
-                strength: 0.35,
-                convex: true,
-                child: Padding(padding: padding, child: child),
-              ),
-            ),
-          )
-        : Container(padding: padding, decoration: flat, child: child);
+    Widget frame(EdgeInsets padding, Widget child, BoxDecoration flat) => pillFrame(context, padding, child, flat);
     if (emoji != null) {
       return frame(
         // Nell'incavo l'icona si stacca dal bordo sinistro, che è in ombra.
@@ -70,6 +49,93 @@ class Pill extends StatelessWidget {
         color: color.withValues(alpha: 0.12),
         borderRadius: radius,
         border: Border.all(color: color.withValues(alpha: 0.35)),
+      ),
+    );
+  }
+}
+
+/// Il bordo delle pillole, condiviso con le chip di sola lettura ([IconBadgeChip]). Nelle livree neumorfiche la
+/// pillola non si preme, quindi non è scavata: un solco sottile tutt'intorno e, subito dentro, la pillola che risale in
+/// rilievo (come la foto della scheda specie). Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45,
+/// rilievo depth 0.8 / strength 0.35. Variante appena più accennata, provata e da tenere come alternativa: solco
+/// depth 1 / strength 0.6, rilievo depth 1 / strength 0.5. Altrimenti [flat].
+Widget pillFrame(BuildContext context, EdgeInsets padding, Widget child, BoxDecoration flat) {
+  const radius = BorderRadius.all(Radius.circular(999));
+  return context.druid.neu
+      ? NeuInset(
+          radius: radius,
+          depth: 0.8,
+          strength: 0.45,
+          child: Padding(
+            padding: const EdgeInsets.all(3),
+            child: NeuInset(
+              radius: radius,
+              depth: 0.8,
+              strength: 0.35,
+              convex: true,
+              child: Padding(padding: padding, child: child),
+            ),
+          ),
+        )
+      : Container(padding: padding, decoration: flat, child: child);
+}
+
+/// Chip di sola lettura con un'icona incisa e un numero nel badge tondo, come le notifiche (capitolo 02, 2026-10-29):
+/// la beuta con le pozioni che prepari ("2", "2+"), la foglia della Vis con le Vis che chiede un ingrediente ("10").
+class IconBadgeChip extends StatelessWidget {
+  final IconData icon;
+  final String badge;
+
+  /// Tooltip e lettore di schermo ("Prepari almeno 2 pozioni", "10 Vis").
+  final String message;
+
+  const IconBadgeChip({super.key, required this.icon, required this.badge, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    final color = context.colors.onSurface;
+    final chip = pillFrame(
+      context,
+      const EdgeInsets.symmetric(horizontal: Gaps.m, vertical: Gaps.xs),
+      EngravedIcon(icon, size: 20, color: color),
+      BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
+      ),
+    );
+    return Tooltip(
+      message: message,
+      child: Semantics(
+        label: message,
+        excludeSemantics: true,
+        child: Padding(
+          // Spazio per il badge, che sporge in alto a destra.
+          padding: const EdgeInsets.only(top: 6, right: 8),
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              chip,
+              Positioned(
+                top: -6,
+                right: -8,
+                child: Container(
+                  constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(color: context.colors.primary, borderRadius: BorderRadius.circular(999)),
+                  child: Text(
+                    badge,
+                    style: context.texts.labelSmall?.copyWith(
+                      color: context.colors.onPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

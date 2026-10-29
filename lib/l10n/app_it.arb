@@ -1980,14 +1980,6 @@
       }
     }
   },
-  "recipeTimes": "×{count}",
-  "@recipeTimes": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "incompleteInfoTitle": "La Tavola è incompleta",
   "incompleteWhatTitle": "I «?»",
   "incompleteWhatText": "Sono i pezzi del nome che non conosci ancora, i Componenti: alla Non comune manca l'effetto, alla Rara l'effetto e una Qualia, alla Mitica le sue parole.",
