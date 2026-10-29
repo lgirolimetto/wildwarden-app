@@ -377,6 +377,7 @@ void main() {
 
     await scrollAndTap(tester, find.byKey(const ValueKey('met-Ocimum basilicum')));
     expect(find.byKey(const ValueKey('species-origin')), findsOneWidget);
+    expect(find.text('Fonte: POWO (Kew)'), findsOneWidget);
   });
 
   testWidgets('senza tutorial e senza aromatiche incontrate niente vassoio "Dalla cucina"', (tester) async {

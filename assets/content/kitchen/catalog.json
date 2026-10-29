@@ -260,9 +260,15 @@
    ],
    "guest": true,
    "origin": {
-    "it": "Il basilico non cresce spontaneo in Italia: viene dalle zone tropicali dell'Asia e dell'Africa e si coltiva da migliaia di anni. Il simbolo della cucina mediterranea è un'Ospite.",
-    "en": "Basil doesn't grow wild in Italy: it comes from the tropics of Asia and Africa and has been grown for thousands of years. The symbol of Mediterranean cooking is a Guest."
-   }
+    "it": "Il basilico non cresce spontaneo in Italia: viene dalle zone tropicali e subtropicali dell'Asia, fino al nord dell'Australia, e si coltiva da migliaia di anni. Il simbolo della cucina mediterranea è un'Ospite.",
+    "en": "Basil doesn't grow wild in Italy: it comes from the tropics and subtropics of Asia, down to northern Australia, and has been grown for thousands of years. The symbol of Mediterranean cooking is a Guest."
+   },
+   "originSources": [
+    {
+     "name": "POWO (Kew)",
+     "url": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:452874-1"
+    }
+   ]
   }
  ]
 }

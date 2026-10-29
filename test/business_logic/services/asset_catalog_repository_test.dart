@@ -51,6 +51,7 @@ void main() {
       expect(catalog.speciesByGbifKey(catalog.kitchen.last.gbifKey!)?.sci, 'Ocimum basilicum');
       expect(catalog.kitchenGuests, {'Ocimum basilicum'});
       expect(catalog.origins['Ocimum basilicum']?.resolve('it'), contains('Asia'));
+      expect(catalog.originSources['Ocimum basilicum']?.single.url, startsWith('https://powo.science.kew.org/'));
       expect(catalog.speciesBySci('Laurus nobilis'), isNotNull, reason: "l'alloro è della Zona");
     });
   });

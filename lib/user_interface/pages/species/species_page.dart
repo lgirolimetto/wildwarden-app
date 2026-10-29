@@ -271,7 +271,20 @@ class _SpeciesSheet extends StatelessWidget {
             if (catalog.origins[species.sci] case final origin?)
               _Section(
                 title: context.l10n.sectionOrigin,
-                child: Text(origin.resolve(context.contentLanguage), key: const ValueKey('species-origin')),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(origin.resolve(context.contentLanguage), key: const ValueKey('species-origin')),
+                    if (catalog.originSources[species.sci] case final sources? when sources.isNotEmpty) ...[
+                      const SizedBox(height: Gaps.xs),
+                      Text(
+                        context.l10n.sourcesLine(sources.map((r) => r.name).join(' · ')),
+                        key: const ValueKey('species-origin-sources'),
+                        style: context.texts.labelSmall?.copyWith(color: context.druid.hint),
+                      ),
+                    ],
+                  ],
+                ),
               ),
             if (!state.hasEncountered(species.sci))
               _ToFind(species: species, state: state, progress: progress, kitchen: catalog.isKitchen(species.sci)),

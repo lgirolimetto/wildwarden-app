@@ -54,6 +54,9 @@ class Catalog {
   /// Da dove viene un'aromatica Ospite: il primo "non lo sapevo" del tutorial.
   final Map<String, LocalizedText> origins;
 
+  /// Le fonti di [origins] (capitolo 04, "sempre con le fonti").
+  final Map<String, List<SourceRef>> originSources;
+
   final Map<String, Species> _bySci;
 
   Catalog({
@@ -69,6 +72,7 @@ class Catalog {
     this.kitchen = const [],
     this.kitchenGuests = const {},
     this.origins = const {},
+    this.originSources = const {},
   }) : _bySci = {
          for (final s in [...species, ...kitchen]) s.sci: s,
        };
@@ -111,6 +115,11 @@ class Catalog {
         for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
           if (s['origin'] case final Map<String, dynamic> origin) s['sci'] as String: LocalizedText.fromJson(origin),
       },
+      originSources: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (s['originSources'] case final List<dynamic> sources)
+            s['sci'] as String: [for (final r in sources.cast<Map<String, dynamic>>()) SourceRef.fromJson(r)],
+      },
     );
   }
 
@@ -124,4 +133,15 @@ class Catalog {
   /// Specie della stessa famiglia presenti nel catalogo, esclusa quella indicata.
   List<Species> relativesOf(Species species) =>
       this.species.where((s) => s.family == species.family && s.sci != species.sci).toList();
+}
+
+/// Una fonte di un'affermazione del catalogo: il nome da mostrare e il link.
+class SourceRef {
+  final String name;
+  final String url;
+
+  const SourceRef({required this.name, required this.url});
+
+  factory SourceRef.fromJson(Map<String, dynamic> json) =>
+      SourceRef(name: json['name'] as String, url: json['url'] as String);
 }

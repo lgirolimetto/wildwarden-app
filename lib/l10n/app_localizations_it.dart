@@ -2459,4 +2459,9 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sectionOrigin => 'Da dove viene';
+
+  @override
+  String sourcesLine(String sources) {
+    return 'Fonte: $sources';
+  }
 }

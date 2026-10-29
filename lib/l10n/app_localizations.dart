@@ -3884,6 +3884,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Da dove viene'**
   String get sectionOrigin;
+
+  /// No description provided for @sourcesLine.
+  ///
+  /// In it, this message translates to:
+  /// **'Fonte: {sources}'**
+  String sourcesLine(String sources);
 }
 
 class _AppLocalizationsDelegate

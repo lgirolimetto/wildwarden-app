@@ -1843,5 +1843,13 @@
   "tutorialActionFinish": "Continua",
   "erbarioKitchen": "Dalla cucina",
   "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
-  "sectionOrigin": "Da dove viene"
+  "sectionOrigin": "Da dove viene",
+  "sourcesLine": "Fonte: {sources}",
+  "@sourcesLine": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  }
 }
