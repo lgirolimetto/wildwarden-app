@@ -6,10 +6,12 @@ import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
+import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
@@ -284,15 +286,20 @@ class ProgressController extends LoadableController<GameState> {
       }
       final count = 2 + random.nextInt(3);
       for (var j = 0; j < count; j++) {
-        final traits = [...page.favouredTraits]..shuffle(random);
+        // Come quando si Attinge davvero: sempre la luna del giorno, più fino a 2 Affinità della luce o del meteo.
+        final at = now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i));
+        final traits = [
+          for (final t in page.favouredTraits)
+            if (t.group != TraitGroup.moon) t,
+        ]..shuffle(random);
         await record(
           EssenceDrawn(
             speciesSci: sci,
-            traits: [for (final t in traits.take(random.nextInt(3))) t.name],
+            traits: [moonTrait(at).name, for (final t in traits.take(random.nextInt(3))) t.name],
             simulated: true,
             vis: visPerDraw,
             purity: purityOfLevel(purityLevelOf(state, sci, now)),
-            occurredAt: now.subtract(Duration(days: 1 + j * 3 + i % 3, hours: i)),
+            occurredAt: at,
           ),
         );
         drawn++;

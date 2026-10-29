@@ -4,6 +4,7 @@ import 'package:druid_app/business_logic/models/essence.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
+import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/common_widgets/vis_badge.dart';
@@ -105,20 +106,25 @@ class _SpeciesShelf extends StatelessWidget {
             ],
           ),
           const SizedBox(height: Gaps.s),
-          for (final (i, e) in essences.indexed) ...[if (i > 0) const Divider(height: Gaps.l), _EssenceRow(essence: e)],
+          // Le Essenze come piccole card, una accanto all'altra, a capo quando finisce lo spazio (2026-10-29).
+          Wrap(
+            spacing: Gaps.s,
+            runSpacing: Gaps.s,
+            children: [for (final e in essences) _EssenceCard(essence: e)],
+          ),
         ],
       ),
     );
   }
 }
 
-/// Un'Essenza (capitolo 02, 2026-10-29): in alto la data (con l'anno solo se non è quello in corso); sotto la Vis come
-/// nel Ricettario (il fulmine con le Vis nel badge) e sotto ancora la sua purezza, una barretta oro; poi le icone delle
-/// Qualia.
-class _EssenceRow extends StatelessWidget {
+/// Un'Essenza, una piccola card (capitolo 02, 2026-10-29): in testa la data (con l'anno solo se non è quello in corso);
+/// poi la Vis come nel Ricettario (il fulmine con le Vis nel badge) con sotto la purezza, una barretta oro; sotto le
+/// icone delle Qualia.
+class _EssenceCard extends StatelessWidget {
   final Essence essence;
 
-  const _EssenceRow({required this.essence});
+  const _EssenceCard({required this.essence});
 
   @override
   Widget build(BuildContext context) {
@@ -133,44 +139,57 @@ class _EssenceRow extends StatelessWidget {
         if (Trait.values.asNameMap()[t] case final Trait trait) trait,
     ];
     final purity = (essence.purity * 100).round();
-    return Column(
-      key: ValueKey('essence-${essence.index}'),
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(date, style: hint),
-        const SizedBox(height: Gaps.xs),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                VisBadge(essence.vis),
-                const SizedBox(height: Gaps.xs),
-                Tooltip(
-                  message: context.l10n.pantryPurity(purity),
-                  child: Semantics(
-                    label: context.l10n.pantryPurity(purity),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(999),
-                      child: SizedBox(
-                        width: 40,
-                        height: 5,
-                        child: LinearProgressIndicator(
-                          value: essence.purity.clamp(0.0, 1.0),
-                          backgroundColor: context.druid.hint.withValues(alpha: 0.2),
-                          color: context.druid.purityColor,
-                        ),
-                      ),
-                    ),
+    final color = context.colors.onSurface;
+    return pillFrame(
+      context,
+      const EdgeInsets.all(Gaps.s),
+      Column(
+        key: ValueKey('essence-${essence.index}'),
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(date, style: hint),
+          const SizedBox(height: Gaps.xs),
+          VisBadge(essence.vis),
+          const SizedBox(height: Gaps.xs),
+          Tooltip(
+            message: context.l10n.pantryPurity(purity),
+            child: Semantics(
+              label: context.l10n.pantryPurity(purity),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(999),
+                child: SizedBox(
+                  width: 40,
+                  height: 5,
+                  child: LinearProgressIndicator(
+                    value: essence.purity.clamp(0.0, 1.0),
+                    backgroundColor: context.druid.hint.withValues(alpha: 0.2),
+                    color: context.druid.purityColor,
                   ),
                 ),
+              ),
+            ),
+          ),
+          if (traits.isNotEmpty) ...[
+            const SizedBox(height: Gaps.s),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final (i, t) in traits.indexed) ...[
+                  if (i > 0) const SizedBox(width: Gaps.xs),
+                  QualiaIcon(label: context.game.trait(t)),
+                ],
               ],
             ),
-            const Spacer(),
-            for (final t in traits) ...[const SizedBox(width: Gaps.s), QualiaIcon(label: context.game.trait(t))],
           ],
-        ),
-      ],
+        ],
+      ),
+      BoxDecoration(
+        color: color.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color.withValues(alpha: 0.2)),
+      ),
+      radius: BorderRadius.circular(16),
     );
   }
 }

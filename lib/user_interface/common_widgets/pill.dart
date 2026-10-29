@@ -60,8 +60,13 @@ class Pill extends StatelessWidget {
 /// rilievo (come la foto della scheda specie). Valori scelti (effetto minimale): solco depth 0.8 / strength 0.45,
 /// rilievo depth 0.8 / strength 0.35. Variante appena più accennata, provata e da tenere come alternativa: solco
 /// depth 1 / strength 0.6, rilievo depth 1 / strength 0.5. Altrimenti [flat].
-Widget pillFrame(BuildContext context, EdgeInsets padding, Widget child, BoxDecoration flat) {
-  const radius = BorderRadius.all(Radius.circular(999));
+Widget pillFrame(
+  BuildContext context,
+  EdgeInsets padding,
+  Widget child,
+  BoxDecoration flat, {
+  BorderRadius radius = const BorderRadius.all(Radius.circular(999)),
+}) {
   return context.druid.neu
       ? NeuInset(
           radius: radius,
