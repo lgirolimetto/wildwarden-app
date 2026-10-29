@@ -579,7 +579,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get missionFirstEncounterBody =>
-      'Go out Botanizing and photograph one of your Desiderata: once recognised it will appear in the Herbarium. Photograph, don\'t pick.';
+      'Tap Draw in the middle of the bar and photograph a plant: whole, a leaf and the flower if there is one. Once recognised, it appears in the Herbarium with your photo. Photograph, don\'t pick.';
 
   @override
   String get missionFirstLevelTitle => 'Study your first species';
@@ -1457,7 +1457,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeGiftWaiting =>
-      'You can redeem it after an Essence: go out and draw from a station.';
+      'You can redeem it after an Essence: go out and Draw from a Station.';
 
   @override
   String welcomeGiftRedeem(int price) {
@@ -1617,7 +1617,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pantryEmpty =>
-      'The Pantry is empty: the Essences you draw from stations stay here, with their traits, purity and Vis. For now you draw with \"Simulate drawing\" in the species card.';
+      'The Pantry is empty: the Essences you Draw from Stations stay here, with their traits, purity and Vis. For now you Draw with \"Simulate Drawing\" in the species card.';
 
   @override
   String get debugSimulatePantry => 'Simulate a Pantry';
@@ -1848,62 +1848,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip01 =>
-      'Studying a plant makes its Essences purer: from 40% without study to 100% with Mastery.';
+      'The more you study a plant, the purer the Essences you draw from it: purity goes from 40% (a plant you never studied) to 100% (a plant you have Mastery of).';
 
   @override
   String get tip02 =>
-      'The purity of your Essences decides most of a potion\'s Potency: the better you know the plants, the stronger it is.';
+      'A potion\'s Potency depends mostly on the purity of the Essences you use: the better you know the plants in a recipe, the stronger your potions.';
 
   @override
   String get tip03 =>
-      'Commons are learned by studying: pass level 1 of a species and its Common is in the Recipe Book.';
+      'The Common Plates of the Recipe Book are learned by studying: when you pass level 1 of a species, that plant\'s Common Plate enters your Recipe Book.';
 
   @override
   String get tip04 =>
-      'In the Trove of Experience, Uncommon, Rare and Mythic Plates come out incomplete: the missing Components are found in other Trove of Experience.';
+      'Uncommon, Rare and Mythic Plates come out of the Trove of Experience incomplete, with their name in pieces: each missing piece is a Component, found by opening more Trove of Experience.';
 
   @override
-  String get tip05 => 'Mythics only come from the mythic Trove of Experience.';
+  String get tip05 =>
+      'Mythic Plates are only found by opening a mythic-grade Trove of Experience.';
 
   @override
   String get tip06 =>
-      'Duplicates from the Trove of Experience become Recycled: 3 make a Component of the same grade, 9 one of the grade above.';
+      'If the Trove of Experience gives you a Plate or a Component you already have, it\'s a duplicate: recycle it with a little Vis. 3 Recycled make a Component of the same grade, 9 a Component of the grade above.';
 
   @override
   String get tip07 =>
-      'Recycling spends your least precious Essences first: the ones with Traits stay for recipes.';
+      'Recycling a duplicate costs a little Vis, taken from your Essences: the least precious Essences are used first, so the ones with Traits stay for recipes.';
 
   @override
   String get tip08 =>
-      'Put any plant you like in a recipe\'s free slot: it gives the potion its Touch.';
+      'Every recipe has a free slot, “any species”: the plant you put there gives the potion its Touch (Lush, Clear, Prescient or Bountiful).';
 
   @override
   String get tip09 =>
-      'Beware of toxic plants in the free slot of a drinkable recipe: the potion spoils.';
+      'Beware of the free slot in recipes to drink: with a toxic plant the potion spoils and you lose the Vis used, but you learn that plant is toxic.';
 
   @override
   String get tip10 =>
-      'The Laboratory\'s Ready recipes tell you what\'s missing: it\'s the list for your next outing.';
+      'In the Laboratory, the Ready recipes tab shows the recipes you can make now and, for the others, which Essences you are missing: it\'s the list of plants to look for on your next outing.';
 
   @override
   String get tip11 =>
-      'Using a potion gives its effect for 7 days, as strong as its Potency.';
+      'When you use a potion from the Shelf, its effect lasts 7 days and is as strong as its Potency.';
 
   @override
   String get tip12 =>
-      'Traits tell the conditions you drew an Essence in; a recipe\'s name recalls them: \"Full-moon\" wants the Full moon.';
+      'An Essence\'s Traits tell the conditions you drew it in (weather, time of day, moon); a recipe\'s name says which Traits it needs: “Full-moon” asks for an Essence drawn under the Full moon.';
 
   @override
   String get tip13 =>
-      'Study XP stays to Cash in until you draw the first Essence of that species.';
+      'The XP you earn studying a species stays to Cash in until you draw the first Essence of that species: only then does it become real XP.';
 
   @override
   String get tip14 =>
-      'In the Legend (Settings → Legend and glossary) you\'ll find what symbols and colours mean.';
+      'The meaning of symbols, colours and grades is in the Legend: Settings → Legend and glossary.';
 
   @override
   String get tip15 =>
-      '\"Collecting\" in the game means taking photos: plants stay where they are.';
+      'In the game a plant is never picked: you photograph it and draw its Vis. Plants stay where they are, untouched.';
 
   @override
   String get viewToFind => 'To find';
@@ -1951,8 +1952,326 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip16 =>
-      'Mastery has to be kept: after 30 days without questions about a species it falls dormant. Reawaken it with 5 questions, from its page or from Home.';
+      'A species\' Mastery has to be kept: if for 30 days you answer no questions about that species, its Mastery falls dormant. Reawaken it with 5 questions, from the species page or from “Your species” on Home.';
 
   @override
   String get simulateMastery => 'Simulate Mastery';
+
+  @override
+  String get debugFieldTest => 'Field test';
+
+  @override
+  String get fieldTestIntro =>
+      'Each test takes a photo, sends it to Pl@ntNet and measures GPS from the tap for at least 20 seconds (and 10 after the photo). Tests are saved to a CSV to pull with adb.';
+
+  @override
+  String get fieldTestExpected => 'Expected plant';
+
+  @override
+  String get fieldTestExpectedHint =>
+      'e.g. green hellebore, Helleborus viridis';
+
+  @override
+  String get fieldTestPlace => 'Place';
+
+  @override
+  String get fieldTestPlaceHint => 'sun, under trees, town…';
+
+  @override
+  String get fieldTestRun => 'Shoot and measure';
+
+  @override
+  String get fieldTestPhasePhoto => 'Camera…';
+
+  @override
+  String get fieldTestPhaseIdentifying => 'Pl@ntNet is looking at the photo…';
+
+  @override
+  String get fieldTestPhaseLocating => 'GPS: a few more seconds…';
+
+  @override
+  String get fieldTestNoKey =>
+      'The Pl@ntNet key (PLANTNET_API_KEY) is missing: photo and GPS are measured, identification is not.';
+
+  @override
+  String fieldTestOutcome(String outcome) {
+    return 'Outcome: $outcome';
+  }
+
+  @override
+  String fieldTestTimes(String photo, String plantnet, String kb) {
+    return 'Photo in $photo s · Pl@ntNet in $plantnet ms · $kb KB';
+  }
+
+  @override
+  String fieldTestGps(String first, String a5, String a10, String a20) {
+    return 'GPS: first fix after $first s · accuracy at 5 s $a5 m, at 10 s $a10 m, at 20 s $a20 m';
+  }
+
+  @override
+  String fieldTestGpsAfterPhoto(int during, String first, String accuracy) {
+    return 'Fixes during the photo: $during · after the photo the first in $first s, accuracy $accuracy m';
+  }
+
+  @override
+  String fieldTestRemaining(String count) {
+    return 'Identifications left today: $count';
+  }
+
+  @override
+  String fieldTestRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tests saved',
+      one: '1 test saved',
+      zero: 'No tests saved',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get fieldTestCopy => 'Copy the CSV';
+
+  @override
+  String get fieldTestCopied => 'CSV copied';
+
+  @override
+  String get fieldTestClear => 'Delete the tests';
+
+  @override
+  String get fieldTestClearConfirm => 'Tap again to delete them';
+
+  @override
+  String get cameraClose => 'Close the camera';
+
+  @override
+  String get cameraShutter => 'Shoot';
+
+  @override
+  String cameraGps(int metres) {
+    return 'GPS ±$metres m';
+  }
+
+  @override
+  String get cameraGpsSearching => 'GPS…';
+
+  @override
+  String get cameraGpsOff => 'GPS off';
+
+  @override
+  String get cameraDenied =>
+      'To photograph plants the app needs the camera permission: grant it from Android settings, under the app\'s Permissions.';
+
+  @override
+  String cameraError(String error) {
+    return 'The camera did not open ($error).';
+  }
+
+  @override
+  String cameraDebug(
+    String size,
+    String received,
+    String analyzed,
+    String ms,
+    String sharpness,
+    String motion,
+  ) {
+    return '$size · $received fps · analysed $analyzed/s · $ms ms · sharpness $sharpness · motion $motion';
+  }
+
+  @override
+  String get fieldTestSystemCamera => 'System camera (for comparison)';
+
+  @override
+  String fieldTestCamera(
+    String fps,
+    String analyzed,
+    String ms,
+    String capture,
+    String resize,
+  ) {
+    return 'Camera: $fps fps, analysed $analyzed/s in $ms ms · shot $capture ms · resize $resize ms';
+  }
+
+  @override
+  String get cameraFlashOff => 'Flash off';
+
+  @override
+  String get cameraFlashAuto => 'Flash auto';
+
+  @override
+  String get cameraFlashOn => 'Flash on';
+
+  @override
+  String cameraZoom(String zoom) {
+    return 'Zoom $zoom';
+  }
+
+  @override
+  String get cameraGatherHint =>
+      'Frame the whole plant: the Vis rises while you photograph it, faster if you move';
+
+  @override
+  String get cameraShutterLocked =>
+      'Just a moment: the Vis is starting to rise';
+
+  @override
+  String get cameraLeafHint => 'Now get close to a leaf';
+
+  @override
+  String get cameraFlowerHint => 'And a flower, if there is one';
+
+  @override
+  String get cameraNoFlower => 'No flowers';
+
+  @override
+  String get cameraOrganWhole => 'Whole plant';
+
+  @override
+  String get cameraOrganLeaf => 'Leaf';
+
+  @override
+  String get cameraOrganFlower => 'Flower';
+
+  @override
+  String get fieldTestRegional =>
+      'Compare with the regional flora (2 identifications)';
+
+  @override
+  String get fieldTestRegionalResult => 'Regional flora (Southeastern Europe)';
+
+  @override
+  String get cameraZoomSlower => 'Without zoom the Vis rises faster';
+
+  @override
+  String get tip17 =>
+      'When you photograph a plant, its Vis rises as long as you frame it: take your time and move slowly around it, from the whole plant to a leaf to a flower. The patient gather more Vis.';
+
+  @override
+  String get captureNoKey =>
+      'The Pl@ntNet key (PLANTNET_API_KEY) is missing: for now try Encounters with Simulate Encounter.';
+
+  @override
+  String get captureLimitTitle => 'No more new Stations today';
+
+  @override
+  String get captureLimitText =>
+      'A new Station was already born today: tomorrow you can photograph another plant. Stations need their time.';
+
+  @override
+  String get captureGuessTitle => 'Which plant do you think it is?';
+
+  @override
+  String get captureGuessHint => 'Common or scientific name';
+
+  @override
+  String get captureGuessConfirm => 'That\'s my guess';
+
+  @override
+  String get captureGuessSkip => 'I don\'t know';
+
+  @override
+  String get captureIdentifying => 'Pl@ntNet is looking at the photos…';
+
+  @override
+  String captureFailed(String error) {
+    return 'Pl@ntNet did not answer ($error).';
+  }
+
+  @override
+  String get captureRetry => 'Try again';
+
+  @override
+  String get captureNone =>
+      'Pl@ntNet doesn\'t recognise this plant: try again closer, with light on the plant, and photograph a leaf or a flower too.';
+
+  @override
+  String get captureContested =>
+      'Pl@ntNet can\'t decide: which one is in front of you?';
+
+  @override
+  String get captureProposed => 'Pl@ntNet thinks it is:';
+
+  @override
+  String get captureConfirm => 'That\'s it';
+
+  @override
+  String get captureKindDiscovery => 'Discovery';
+
+  @override
+  String get captureKindGuest => 'Guest';
+
+  @override
+  String get captureGuestText =>
+      'It is not native to your places: it is a Guest, and its Vis here is very weak.';
+
+  @override
+  String get captureDiscoveryText =>
+      'It has never been recorded in your Area: it is a Discovery, to be confirmed.';
+
+  @override
+  String get captureGuessExact => 'You got it!';
+
+  @override
+  String captureGuessGenus(String genus) {
+    return 'Close! It is a $genus.';
+  }
+
+  @override
+  String captureGuessWrong(String guess) {
+    return 'Your guess was “$guess”.';
+  }
+
+  @override
+  String get captureStationCreated => 'A new Station is born.';
+
+  @override
+  String get captureStationExisting => 'You are at your Station of this plant.';
+
+  @override
+  String get captureStationNoPosition =>
+      'No position: the Encounter counts, the Station doesn\'t.';
+
+  @override
+  String get captureStationLimit =>
+      'A new Station was already born today: this one counts as an Encounter.';
+
+  @override
+  String captureXp(int xp) {
+    return '+$xp XP';
+  }
+
+  @override
+  String get captureDone => 'Done';
+
+  @override
+  String get captureAction => 'Draw';
+
+  @override
+  String get captureTitle => 'Draw the Vis';
+
+  @override
+  String get captureFromSpecies => 'Draw its Vis';
+
+  @override
+  String get captureFirstPhoto =>
+      'Your photo takes the place of the Herbarium one, with today\'s stamp.';
+
+  @override
+  String ownPhotoStamp(String date) {
+    return 'Your photo · $date';
+  }
+
+  @override
+  String get sectionStations => 'Your Stations';
+
+  @override
+  String stationAccuracy(int meters) {
+    return '± $meters m';
+  }
+
+  @override
+  String get stationsNote =>
+      'Only on your phone: the exact spot is never shown or shared.';
 }

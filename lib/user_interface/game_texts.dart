@@ -123,6 +123,7 @@ class GameTexts {
     l10n.tip14,
     l10n.tip15,
     l10n.tip16,
+    l10n.tip17,
   ];
 
   /// Il grado di un Bottino dell'Esperienza, al maschile ("Bottino dell'Esperienza · raro").

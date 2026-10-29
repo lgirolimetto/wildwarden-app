@@ -540,7 +540,7 @@
   "missionVisitErbarioTitle": "Apri l'Erbario",
   "missionVisitErbarioBody": "L'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.",
   "missionFirstEncounterTitle": "Incontra una specie",
-  "missionFirstEncounterBody": "Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell'Erbario. Fotografa, non raccogliere.",
+  "missionFirstEncounterBody": "Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c'è. Riconosciuta, compare nell'Erbario con la tua foto. Fotografa, non raccogliere.",
   "missionFirstLevelTitle": "Studia la tua prima specie",
   "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.",
   "missionFirstRecipeTitle": "La prima Ricetta",
@@ -892,7 +892,7 @@
   "debugGradePreview": "Anteprima dei Gradi",
   "debugGradeSampleName": "Elisir di Prova",
   "debugGradeSampleIngredient": "Erba d'argento",
-  "debugGradeSampleEffect": "La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).",
+  "debugGradeSampleEffect": "La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).",
   "badgeEncountered": "Incontrata il",
   "badgeProtected": "Specie Protetta",
   "legendTitle": "Legenda",
@@ -909,7 +909,7 @@
   "glossEssenzaTerm": "Essenza",
   "glossEssenzaText": "Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.",
   "glossVisTerm": "Vis",
-  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.",
+  "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.",
   "glossPeDaIncassareTerm": "PE da Incassare",
   "glossPeDaIncassareText": "I Punti Esperienza dello studio di una specie che non hai ancora Attinto. Si Incassano alla prima Essenza di quella specie e da lì contano per il Rango.",
   "glossGradoTerm": "Grado",
@@ -944,7 +944,7 @@
   "legendTraitsMoon": "Luna",
   "legendTraitsWeather": "Meteo",
   "traitWhenFrost": "Quando fa sotto zero: brina e ghiaccio.",
-  "traitWhenRain": "Mentre piove. Con il temporale la Raccolta è sospesa.",
+  "traitWhenRain": "Mentre piove. Con il temporale non si attinge.",
   "traitWhenFog": "Quando c'è nebbia.",
   "traitWhenSun": "Con il sole e poche nuvole.",
   "traitWhenMoon": "Tutto il giorno della luna piena: non serve uscire di notte.",
@@ -1173,7 +1173,7 @@
       }
     }
   },
-  "welcomeGiftWaiting": "Si riscatta dopo un'Essenza: esci e attingi da una stazione.",
+  "welcomeGiftWaiting": "Si riscatta dopo un'Essenza: esci e Attingi da una Stazione.",
   "welcomeGiftRedeem": "Riscatta · {price} PE",
   "@welcomeGiftRedeem": {
     "placeholders": {
@@ -1308,7 +1308,7 @@
     }
   },
   "pantryNoTraits": "Nessun tratto",
-  "pantryEmpty": "La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.",
+  "pantryEmpty": "La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.",
   "debugSimulatePantry": "Simula una Dispensa",
   "debugSimulatePantryDone": "{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa",
   "@debugSimulatePantryDone": {
@@ -1462,21 +1462,21 @@
   "viewMet": "Incontrate",
   "erbarioSpecies": "Specie",
   "tipOfDayTitle": "Consiglio del giorno",
-  "tip01": "Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.",
-  "tip02": "La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.",
-  "tip03": "Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.",
-  "tip04": "Nel Bottino dell'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell'Esperienza.",
-  "tip05": "Le Mitiche escono solo dal Bottino dell'Esperienza mitico.",
-  "tip06": "I doppioni del Bottino dell'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.",
-  "tip07": "Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.",
-  "tip08": "Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.",
-  "tip09": "Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.",
-  "tip10": "Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.",
-  "tip11": "Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.",
-  "tip12": "I Tratti dicono in che condizioni hai attinto un'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.",
-  "tip13": "I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.",
-  "tip14": "Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.",
-  "tip15": "\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.",
+  "tip01": "Più studi una pianta, più sono pure le Essenze che ne attingi: la purezza va dal 40 % (pianta mai studiata) al 100 % (pianta di cui hai la Maestria).",
+  "tip02": "Nella Potenza di una pozione conta soprattutto la purezza delle Essenze che usi: più conosci le piante delle ricette, più le tue pozioni sono potenti.",
+  "tip03": "Le Tavole Comuni del Ricettario si imparano studiando: quando superi il livello 1 di una specie, la Tavola Comune di quella pianta entra nel tuo Ricettario.",
+  "tip04": "Le Tavole Non comuni, Rare e Mitiche escono dal Bottino dell'Esperienza incomplete, con il nome a pezzi: ogni pezzo che manca è un Componente, e lo trovi aprendo altri Bottino dell'Esperienza.",
+  "tip05": "Le Tavole Mitiche si trovano solo aprendo il Bottino dell'Esperienza di grado mitico.",
+  "tip06": "Se il Bottino dell'Esperienza ti dà una Tavola o un Componente che hai già, è un doppione: lo ricicli con un po' di Vis. 3 Riciclati fanno un Componente dello stesso grado, 9 un Componente del grado sopra.",
+  "tip07": "Riciclare un doppione costa un po' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.",
+  "tip08": "Ogni ricetta ha uno slot libero, «qualsiasi specie»: la pianta che ci metti dà alla pozione il suo Tocco (Rigogliosa, Limpida, Presaga o Copiosa).",
+  "tip09": "Attenzione allo slot libero delle ricette da bere: con una pianta tossica la pozione si guasta e perdi la Vis usata, ma impari che quella pianta è tossica.",
+  "tip10": "Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.",
+  "tip11": "Quando usi una pozione dello Scaffale, il suo effetto dura 7 giorni ed è tanto più forte quanto più alta è la sua Potenza.",
+  "tip12": "I Tratti di un'Essenza dicono in che condizioni l'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un'Essenza attinta con la Luna piena.",
+  "tip13": "I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.",
+  "tip14": "Il significato di simboli, colori e gradi è nella Legenda: Impostazioni → Legenda e glossario.",
+  "tip15": "Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.",
   "viewToFind": "Da trovare",
   "levelMasteryDormant": "Maestria sopita",
   "masteryToAwaken": "Maestria da risvegliare",
@@ -1533,6 +1533,255 @@
       }
     }
   },
-  "tip16": "La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.",
-  "simulateMastery": "Simula Maestria"
+  "tip16": "La Maestria di una specie va mantenuta: se per 30 giorni non rispondi a domande su quella specie, la Maestria si assopisce. La risvegli con 5 domande, dalla scheda della specie o da «Le tue specie» in Home.",
+  "simulateMastery": "Simula Maestria",
+  "debugFieldTest": "Prova sul campo",
+  "fieldTestIntro": "Ogni prova scatta una foto, la manda a Pl@ntNet e misura il GPS dal tocco per almeno 20 secondi (e 10 dopo la foto). Le prove finiscono in un CSV da scaricare con adb.",
+  "fieldTestExpected": "Pianta attesa",
+  "fieldTestExpectedHint": "es. elleboro verde, Helleborus viridis",
+  "fieldTestPlace": "Luogo",
+  "fieldTestPlaceHint": "sole, ombra degli alberi, città…",
+  "fieldTestRun": "Scatta e misura",
+  "fieldTestPhasePhoto": "Fotocamera…",
+  "fieldTestPhaseIdentifying": "Pl@ntNet sta guardando la foto…",
+  "fieldTestPhaseLocating": "GPS: ancora qualche secondo…",
+  "fieldTestNoKey": "Manca la chiave Pl@ntNet (PLANTNET_API_KEY): la foto e il GPS si misurano, l'identificazione no.",
+  "fieldTestOutcome": "Esito: {outcome}",
+  "@fieldTestOutcome": {
+    "placeholders": {
+      "outcome": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestTimes": "Foto in {photo} s · Pl@ntNet in {plantnet} ms · {kb} KB",
+  "@fieldTestTimes": {
+    "placeholders": {
+      "photo": {
+        "type": "String"
+      },
+      "plantnet": {
+        "type": "String"
+      },
+      "kb": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestGps": "GPS: prima posizione dopo {first} s · precisione a 5 s {a5} m, a 10 s {a10} m, a 20 s {a20} m",
+  "@fieldTestGps": {
+    "placeholders": {
+      "first": {
+        "type": "String"
+      },
+      "a5": {
+        "type": "String"
+      },
+      "a10": {
+        "type": "String"
+      },
+      "a20": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestGpsAfterPhoto": "Posizioni durante la foto: {during} · dopo la foto la prima in {first} s, precisione {accuracy} m",
+  "@fieldTestGpsAfterPhoto": {
+    "placeholders": {
+      "during": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "accuracy": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestRemaining": "Identificazioni rimaste oggi: {count}",
+  "@fieldTestRemaining": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestRows": "{count, plural, =0{Nessuna prova salvata} =1{1 prova salvata} other{{count} prove salvate}}",
+  "@fieldTestRows": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "fieldTestCopy": "Copia il CSV",
+  "fieldTestCopied": "CSV copiato",
+  "fieldTestClear": "Cancella le prove",
+  "fieldTestClearConfirm": "Tocca di nuovo per cancellarle",
+  "cameraClose": "Chiudi la fotocamera",
+  "cameraShutter": "Scatta",
+  "cameraGps": "GPS ±{metres} m",
+  "@cameraGps": {
+    "placeholders": {
+      "metres": {
+        "type": "int"
+      }
+    }
+  },
+  "cameraGpsSearching": "GPS…",
+  "cameraGpsOff": "GPS spento",
+  "cameraDenied": "Per fotografare le piante serve il permesso della fotocamera: lo dai dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "cameraError": "La fotocamera non si è aperta ({error}).",
+  "@cameraError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraDebug": "{size} · {received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}",
+  "@cameraDebug": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      },
+      "received": {
+        "type": "String"
+      },
+      "analyzed": {
+        "type": "String"
+      },
+      "ms": {
+        "type": "String"
+      },
+      "sharpness": {
+        "type": "String"
+      },
+      "motion": {
+        "type": "String"
+      }
+    }
+  },
+  "fieldTestSystemCamera": "Fotocamera di sistema (per confronto)",
+  "fieldTestCamera": "Fotocamera: {fps} fps, analizzati {analyzed}/s in {ms} ms · scatto {capture} ms · riduzione {resize} ms",
+  "@fieldTestCamera": {
+    "placeholders": {
+      "fps": {
+        "type": "String"
+      },
+      "analyzed": {
+        "type": "String"
+      },
+      "ms": {
+        "type": "String"
+      },
+      "capture": {
+        "type": "String"
+      },
+      "resize": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraFlashOff": "Flash spento",
+  "cameraFlashAuto": "Flash automatico",
+  "cameraFlashOn": "Flash acceso",
+  "cameraZoom": "Zoom {zoom}",
+  "@cameraZoom": {
+    "placeholders": {
+      "zoom": {
+        "type": "String"
+      }
+    }
+  },
+  "cameraGatherHint": "Inquadra tutta la pianta: la Vis sale mentre la fotografi, più in fretta se ti muovi",
+  "cameraShutterLocked": "Ancora un attimo: la Vis comincia a salire",
+  "cameraLeafHint": "Ora avvicinati a una foglia",
+  "cameraFlowerHint": "E un fiore, se c'è",
+  "cameraNoFlower": "Non ha fiori",
+  "cameraOrganWhole": "Pianta intera",
+  "cameraOrganLeaf": "Foglia",
+  "cameraOrganFlower": "Fiore",
+  "fieldTestRegional": "Confronta con la flora regionale (2 identificazioni)",
+  "fieldTestRegionalResult": "Flora regionale (Europa sudorientale)",
+  "cameraZoomSlower": "Senza zoom la Vis sale più in fretta",
+  "tip17": "Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.",
+  "captureNoKey": "Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l'Incontro si prova con Simula Incontro.",
+  "captureLimitTitle": "Per oggi basta Stazioni nuove",
+  "captureLimitText": "Oggi è già nata una Stazione nuova: domani potrai fotografare un'altra pianta. Le Stazioni hanno bisogno del loro tempo.",
+  "captureGuessTitle": "Che pianta pensi che sia?",
+  "captureGuessHint": "Nome comune o scientifico",
+  "captureGuessConfirm": "Ecco la mia ipotesi",
+  "captureGuessSkip": "Non lo so",
+  "captureIdentifying": "Pl@ntNet sta guardando le foto…",
+  "captureFailed": "Pl@ntNet non ha risposto ({error}).",
+  "@captureFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "captureRetry": "Riprova",
+  "captureNone": "Pl@ntNet non riconosce questa pianta: riprova più vicino, con la luce sulla pianta, e fotografa anche una foglia o un fiore.",
+  "captureContested": "Pl@ntNet è indeciso: quale hai davanti?",
+  "captureProposed": "Pl@ntNet pensa che sia:",
+  "captureConfirm": "È questa",
+  "captureKindDiscovery": "Scoperta",
+  "captureKindGuest": "Ospite",
+  "captureGuestText": "Non è originaria dei tuoi luoghi: è un'Ospite, e la sua Vis qui è molto debole.",
+  "captureDiscoveryText": "Nella tua Zona non risulta mai osservata: è una Scoperta, da confermare.",
+  "captureGuessExact": "Ci hai preso!",
+  "captureGuessGenus": "Quasi! È un {genus}.",
+  "@captureGuessGenus": {
+    "placeholders": {
+      "genus": {
+        "type": "String"
+      }
+    }
+  },
+  "captureGuessWrong": "La tua ipotesi era «{guess}».",
+  "@captureGuessWrong": {
+    "placeholders": {
+      "guess": {
+        "type": "String"
+      }
+    }
+  },
+  "captureStationCreated": "È nata una nuova Stazione.",
+  "captureStationExisting": "Sei alla tua Stazione di questa pianta.",
+  "captureStationNoPosition": "Senza posizione: l'Incontro vale, la Stazione no.",
+  "captureStationLimit": "Oggi è già nata una Stazione nuova: questa vale come Incontro.",
+  "captureXp": "+{xp} PE",
+  "@captureXp": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "captureDone": "Fatto",
+  "captureAction": "Attingi",
+  "captureTitle": "Attingi la Vis",
+  "captureFromSpecies": "Attingi la sua Vis",
+  "captureFirstPhoto": "La tua foto prende il posto di quella dell'Erbario, con il timbro di oggi.",
+  "ownPhotoStamp": "La tua foto · {date}",
+  "@ownPhotoStamp": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sectionStations": "Le tue Stazioni",
+  "stationAccuracy": "± {meters} m",
+  "@stationAccuracy": {
+    "placeholders": {
+      "meters": {
+        "type": "int"
+      }
+    }
+  },
+  "stationsNote": "Solo sul tuo telefono: il punto preciso non si mostra e non si condivide."
 }

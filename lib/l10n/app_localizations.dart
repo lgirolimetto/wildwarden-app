@@ -1025,7 +1025,7 @@ abstract class AppLocalizations {
   /// No description provided for @missionFirstEncounterBody.
   ///
   /// In it, this message translates to:
-  /// **'Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell\'Erbario. Fotografa, non raccogliere.'**
+  /// **'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.'**
   String get missionFirstEncounterBody;
 
   /// No description provided for @missionFirstLevelTitle.
@@ -1685,7 +1685,7 @@ abstract class AppLocalizations {
   /// No description provided for @debugGradeSampleEffect.
   ///
   /// In it, this message translates to:
-  /// **'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).'**
+  /// **'La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).'**
   String get debugGradeSampleEffect;
 
   /// No description provided for @badgeEncountered.
@@ -1787,7 +1787,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossVisText.
   ///
   /// In it, this message translates to:
-  /// **'La linfa sottile delle piante: l\'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.'**
+  /// **'La linfa sottile delle piante: l\'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.'**
   String get glossVisText;
 
   /// No description provided for @glossPeDaIncassareTerm.
@@ -1997,7 +1997,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitWhenRain.
   ///
   /// In it, this message translates to:
-  /// **'Mentre piove. Con il temporale la Raccolta è sospesa.'**
+  /// **'Mentre piove. Con il temporale non si attinge.'**
   String get traitWhenRain;
 
   /// No description provided for @traitWhenFog.
@@ -2369,7 +2369,7 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeGiftWaiting.
   ///
   /// In it, this message translates to:
-  /// **'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.'**
+  /// **'Si riscatta dopo un\'Essenza: esci e Attingi da una Stazione.'**
   String get welcomeGiftWaiting;
 
   /// No description provided for @welcomeGiftRedeem.
@@ -2573,7 +2573,7 @@ abstract class AppLocalizations {
   /// No description provided for @pantryEmpty.
   ///
   /// In it, this message translates to:
-  /// **'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.'**
+  /// **'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.'**
   String get pantryEmpty;
 
   /// No description provided for @debugSimulatePantry.
@@ -2915,91 +2915,91 @@ abstract class AppLocalizations {
   /// No description provided for @tip01.
   ///
   /// In it, this message translates to:
-  /// **'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.'**
+  /// **'Più studi una pianta, più sono pure le Essenze che ne attingi: la purezza va dal 40 % (pianta mai studiata) al 100 % (pianta di cui hai la Maestria).'**
   String get tip01;
 
   /// No description provided for @tip02.
   ///
   /// In it, this message translates to:
-  /// **'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.'**
+  /// **'Nella Potenza di una pozione conta soprattutto la purezza delle Essenze che usi: più conosci le piante delle ricette, più le tue pozioni sono potenti.'**
   String get tip02;
 
   /// No description provided for @tip03.
   ///
   /// In it, this message translates to:
-  /// **'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.'**
+  /// **'Le Tavole Comuni del Ricettario si imparano studiando: quando superi il livello 1 di una specie, la Tavola Comune di quella pianta entra nel tuo Ricettario.'**
   String get tip03;
 
   /// No description provided for @tip04.
   ///
   /// In it, this message translates to:
-  /// **'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.'**
+  /// **'Le Tavole Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza incomplete, con il nome a pezzi: ogni pezzo che manca è un Componente, e lo trovi aprendo altri Bottino dell\'Esperienza.'**
   String get tip04;
 
   /// No description provided for @tip05.
   ///
   /// In it, this message translates to:
-  /// **'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.'**
+  /// **'Le Tavole Mitiche si trovano solo aprendo il Bottino dell\'Esperienza di grado mitico.'**
   String get tip05;
 
   /// No description provided for @tip06.
   ///
   /// In it, this message translates to:
-  /// **'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.'**
+  /// **'Se il Bottino dell\'Esperienza ti dà una Tavola o un Componente che hai già, è un doppione: lo ricicli con un po\' di Vis. 3 Riciclati fanno un Componente dello stesso grado, 9 un Componente del grado sopra.'**
   String get tip06;
 
   /// No description provided for @tip07.
   ///
   /// In it, this message translates to:
-  /// **'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.'**
+  /// **'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.'**
   String get tip07;
 
   /// No description provided for @tip08.
   ///
   /// In it, this message translates to:
-  /// **'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.'**
+  /// **'Ogni ricetta ha uno slot libero, «qualsiasi specie»: la pianta che ci metti dà alla pozione il suo Tocco (Rigogliosa, Limpida, Presaga o Copiosa).'**
   String get tip08;
 
   /// No description provided for @tip09.
   ///
   /// In it, this message translates to:
-  /// **'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.'**
+  /// **'Attenzione allo slot libero delle ricette da bere: con una pianta tossica la pozione si guasta e perdi la Vis usata, ma impari che quella pianta è tossica.'**
   String get tip09;
 
   /// No description provided for @tip10.
   ///
   /// In it, this message translates to:
-  /// **'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.'**
+  /// **'Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.'**
   String get tip10;
 
   /// No description provided for @tip11.
   ///
   /// In it, this message translates to:
-  /// **'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.'**
+  /// **'Quando usi una pozione dello Scaffale, il suo effetto dura 7 giorni ed è tanto più forte quanto più alta è la sua Potenza.'**
   String get tip11;
 
   /// No description provided for @tip12.
   ///
   /// In it, this message translates to:
-  /// **'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.'**
+  /// **'I Tratti di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.'**
   String get tip12;
 
   /// No description provided for @tip13.
   ///
   /// In it, this message translates to:
-  /// **'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.'**
+  /// **'I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.'**
   String get tip13;
 
   /// No description provided for @tip14.
   ///
   /// In it, this message translates to:
-  /// **'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.'**
+  /// **'Il significato di simboli, colori e gradi è nella Legenda: Impostazioni → Legenda e glossario.'**
   String get tip14;
 
   /// No description provided for @tip15.
   ///
   /// In it, this message translates to:
-  /// **'\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.'**
+  /// **'Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.'**
   String get tip15;
 
   /// No description provided for @viewToFind.
@@ -3071,7 +3071,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip16.
   ///
   /// In it, this message translates to:
-  /// **'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.'**
+  /// **'La Maestria di una specie va mantenuta: se per 30 giorni non rispondi a domande su quella specie, la Maestria si assopisce. La risvegli con 5 domande, dalla scheda della specie o da «Le tue specie» in Home.'**
   String get tip16;
 
   /// No description provided for @simulateMastery.
@@ -3079,6 +3079,511 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Simula Maestria'**
   String get simulateMastery;
+
+  /// No description provided for @debugFieldTest.
+  ///
+  /// In it, this message translates to:
+  /// **'Prova sul campo'**
+  String get debugFieldTest;
+
+  /// No description provided for @fieldTestIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni prova scatta una foto, la manda a Pl@ntNet e misura il GPS dal tocco per almeno 20 secondi (e 10 dopo la foto). Le prove finiscono in un CSV da scaricare con adb.'**
+  String get fieldTestIntro;
+
+  /// No description provided for @fieldTestExpected.
+  ///
+  /// In it, this message translates to:
+  /// **'Pianta attesa'**
+  String get fieldTestExpected;
+
+  /// No description provided for @fieldTestExpectedHint.
+  ///
+  /// In it, this message translates to:
+  /// **'es. elleboro verde, Helleborus viridis'**
+  String get fieldTestExpectedHint;
+
+  /// No description provided for @fieldTestPlace.
+  ///
+  /// In it, this message translates to:
+  /// **'Luogo'**
+  String get fieldTestPlace;
+
+  /// No description provided for @fieldTestPlaceHint.
+  ///
+  /// In it, this message translates to:
+  /// **'sole, ombra degli alberi, città…'**
+  String get fieldTestPlaceHint;
+
+  /// No description provided for @fieldTestRun.
+  ///
+  /// In it, this message translates to:
+  /// **'Scatta e misura'**
+  String get fieldTestRun;
+
+  /// No description provided for @fieldTestPhasePhoto.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotocamera…'**
+  String get fieldTestPhasePhoto;
+
+  /// No description provided for @fieldTestPhaseIdentifying.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet sta guardando la foto…'**
+  String get fieldTestPhaseIdentifying;
+
+  /// No description provided for @fieldTestPhaseLocating.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS: ancora qualche secondo…'**
+  String get fieldTestPhaseLocating;
+
+  /// No description provided for @fieldTestNoKey.
+  ///
+  /// In it, this message translates to:
+  /// **'Manca la chiave Pl@ntNet (PLANTNET_API_KEY): la foto e il GPS si misurano, l\'identificazione no.'**
+  String get fieldTestNoKey;
+
+  /// No description provided for @fieldTestOutcome.
+  ///
+  /// In it, this message translates to:
+  /// **'Esito: {outcome}'**
+  String fieldTestOutcome(String outcome);
+
+  /// No description provided for @fieldTestTimes.
+  ///
+  /// In it, this message translates to:
+  /// **'Foto in {photo} s · Pl@ntNet in {plantnet} ms · {kb} KB'**
+  String fieldTestTimes(String photo, String plantnet, String kb);
+
+  /// No description provided for @fieldTestGps.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS: prima posizione dopo {first} s · precisione a 5 s {a5} m, a 10 s {a10} m, a 20 s {a20} m'**
+  String fieldTestGps(String first, String a5, String a10, String a20);
+
+  /// No description provided for @fieldTestGpsAfterPhoto.
+  ///
+  /// In it, this message translates to:
+  /// **'Posizioni durante la foto: {during} · dopo la foto la prima in {first} s, precisione {accuracy} m'**
+  String fieldTestGpsAfterPhoto(int during, String first, String accuracy);
+
+  /// No description provided for @fieldTestRemaining.
+  ///
+  /// In it, this message translates to:
+  /// **'Identificazioni rimaste oggi: {count}'**
+  String fieldTestRemaining(String count);
+
+  /// No description provided for @fieldTestRows.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =0{Nessuna prova salvata} =1{1 prova salvata} other{{count} prove salvate}}'**
+  String fieldTestRows(int count);
+
+  /// No description provided for @fieldTestCopy.
+  ///
+  /// In it, this message translates to:
+  /// **'Copia il CSV'**
+  String get fieldTestCopy;
+
+  /// No description provided for @fieldTestCopied.
+  ///
+  /// In it, this message translates to:
+  /// **'CSV copiato'**
+  String get fieldTestCopied;
+
+  /// No description provided for @fieldTestClear.
+  ///
+  /// In it, this message translates to:
+  /// **'Cancella le prove'**
+  String get fieldTestClear;
+
+  /// No description provided for @fieldTestClearConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca di nuovo per cancellarle'**
+  String get fieldTestClearConfirm;
+
+  /// No description provided for @cameraClose.
+  ///
+  /// In it, this message translates to:
+  /// **'Chiudi la fotocamera'**
+  String get cameraClose;
+
+  /// No description provided for @cameraShutter.
+  ///
+  /// In it, this message translates to:
+  /// **'Scatta'**
+  String get cameraShutter;
+
+  /// No description provided for @cameraGps.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS ±{metres} m'**
+  String cameraGps(int metres);
+
+  /// No description provided for @cameraGpsSearching.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS…'**
+  String get cameraGpsSearching;
+
+  /// No description provided for @cameraGpsOff.
+  ///
+  /// In it, this message translates to:
+  /// **'GPS spento'**
+  String get cameraGpsOff;
+
+  /// No description provided for @cameraDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Per fotografare le piante serve il permesso della fotocamera: lo dai dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get cameraDenied;
+
+  /// No description provided for @cameraError.
+  ///
+  /// In it, this message translates to:
+  /// **'La fotocamera non si è aperta ({error}).'**
+  String cameraError(String error);
+
+  /// No description provided for @cameraDebug.
+  ///
+  /// In it, this message translates to:
+  /// **'{size} · {received} fps · analizzati {analyzed}/s · {ms} ms · nitidezza {sharpness} · movimento {motion}'**
+  String cameraDebug(
+    String size,
+    String received,
+    String analyzed,
+    String ms,
+    String sharpness,
+    String motion,
+  );
+
+  /// No description provided for @fieldTestSystemCamera.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotocamera di sistema (per confronto)'**
+  String get fieldTestSystemCamera;
+
+  /// No description provided for @fieldTestCamera.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotocamera: {fps} fps, analizzati {analyzed}/s in {ms} ms · scatto {capture} ms · riduzione {resize} ms'**
+  String fieldTestCamera(
+    String fps,
+    String analyzed,
+    String ms,
+    String capture,
+    String resize,
+  );
+
+  /// No description provided for @cameraFlashOff.
+  ///
+  /// In it, this message translates to:
+  /// **'Flash spento'**
+  String get cameraFlashOff;
+
+  /// No description provided for @cameraFlashAuto.
+  ///
+  /// In it, this message translates to:
+  /// **'Flash automatico'**
+  String get cameraFlashAuto;
+
+  /// No description provided for @cameraFlashOn.
+  ///
+  /// In it, this message translates to:
+  /// **'Flash acceso'**
+  String get cameraFlashOn;
+
+  /// No description provided for @cameraZoom.
+  ///
+  /// In it, this message translates to:
+  /// **'Zoom {zoom}'**
+  String cameraZoom(String zoom);
+
+  /// No description provided for @cameraGatherHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Inquadra tutta la pianta: la Vis sale mentre la fotografi, più in fretta se ti muovi'**
+  String get cameraGatherHint;
+
+  /// No description provided for @cameraShutterLocked.
+  ///
+  /// In it, this message translates to:
+  /// **'Ancora un attimo: la Vis comincia a salire'**
+  String get cameraShutterLocked;
+
+  /// No description provided for @cameraLeafHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Ora avvicinati a una foglia'**
+  String get cameraLeafHint;
+
+  /// No description provided for @cameraFlowerHint.
+  ///
+  /// In it, this message translates to:
+  /// **'E un fiore, se c\'è'**
+  String get cameraFlowerHint;
+
+  /// No description provided for @cameraNoFlower.
+  ///
+  /// In it, this message translates to:
+  /// **'Non ha fiori'**
+  String get cameraNoFlower;
+
+  /// No description provided for @cameraOrganWhole.
+  ///
+  /// In it, this message translates to:
+  /// **'Pianta intera'**
+  String get cameraOrganWhole;
+
+  /// No description provided for @cameraOrganLeaf.
+  ///
+  /// In it, this message translates to:
+  /// **'Foglia'**
+  String get cameraOrganLeaf;
+
+  /// No description provided for @cameraOrganFlower.
+  ///
+  /// In it, this message translates to:
+  /// **'Fiore'**
+  String get cameraOrganFlower;
+
+  /// No description provided for @fieldTestRegional.
+  ///
+  /// In it, this message translates to:
+  /// **'Confronta con la flora regionale (2 identificazioni)'**
+  String get fieldTestRegional;
+
+  /// No description provided for @fieldTestRegionalResult.
+  ///
+  /// In it, this message translates to:
+  /// **'Flora regionale (Europa sudorientale)'**
+  String get fieldTestRegionalResult;
+
+  /// No description provided for @cameraZoomSlower.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza zoom la Vis sale più in fretta'**
+  String get cameraZoomSlower;
+
+  /// No description provided for @tip17.
+  ///
+  /// In it, this message translates to:
+  /// **'Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.'**
+  String get tip17;
+
+  /// No description provided for @captureNoKey.
+  ///
+  /// In it, this message translates to:
+  /// **'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'Incontro si prova con Simula Incontro.'**
+  String get captureNoKey;
+
+  /// No description provided for @captureLimitTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Per oggi basta Stazioni nuove'**
+  String get captureLimitTitle;
+
+  /// No description provided for @captureLimitText.
+  ///
+  /// In it, this message translates to:
+  /// **'Oggi è già nata una Stazione nuova: domani potrai fotografare un\'altra pianta. Le Stazioni hanno bisogno del loro tempo.'**
+  String get captureLimitText;
+
+  /// No description provided for @captureGuessTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Che pianta pensi che sia?'**
+  String get captureGuessTitle;
+
+  /// No description provided for @captureGuessHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Nome comune o scientifico'**
+  String get captureGuessHint;
+
+  /// No description provided for @captureGuessConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'Ecco la mia ipotesi'**
+  String get captureGuessConfirm;
+
+  /// No description provided for @captureGuessSkip.
+  ///
+  /// In it, this message translates to:
+  /// **'Non lo so'**
+  String get captureGuessSkip;
+
+  /// No description provided for @captureIdentifying.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet sta guardando le foto…'**
+  String get captureIdentifying;
+
+  /// No description provided for @captureFailed.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet non ha risposto ({error}).'**
+  String captureFailed(String error);
+
+  /// No description provided for @captureRetry.
+  ///
+  /// In it, this message translates to:
+  /// **'Riprova'**
+  String get captureRetry;
+
+  /// No description provided for @captureNone.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet non riconosce questa pianta: riprova più vicino, con la luce sulla pianta, e fotografa anche una foglia o un fiore.'**
+  String get captureNone;
+
+  /// No description provided for @captureContested.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet è indeciso: quale hai davanti?'**
+  String get captureContested;
+
+  /// No description provided for @captureProposed.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet pensa che sia:'**
+  String get captureProposed;
+
+  /// No description provided for @captureConfirm.
+  ///
+  /// In it, this message translates to:
+  /// **'È questa'**
+  String get captureConfirm;
+
+  /// No description provided for @captureKindDiscovery.
+  ///
+  /// In it, this message translates to:
+  /// **'Scoperta'**
+  String get captureKindDiscovery;
+
+  /// No description provided for @captureKindGuest.
+  ///
+  /// In it, this message translates to:
+  /// **'Ospite'**
+  String get captureKindGuest;
+
+  /// No description provided for @captureGuestText.
+  ///
+  /// In it, this message translates to:
+  /// **'Non è originaria dei tuoi luoghi: è un\'Ospite, e la sua Vis qui è molto debole.'**
+  String get captureGuestText;
+
+  /// No description provided for @captureDiscoveryText.
+  ///
+  /// In it, this message translates to:
+  /// **'Nella tua Zona non risulta mai osservata: è una Scoperta, da confermare.'**
+  String get captureDiscoveryText;
+
+  /// No description provided for @captureGuessExact.
+  ///
+  /// In it, this message translates to:
+  /// **'Ci hai preso!'**
+  String get captureGuessExact;
+
+  /// No description provided for @captureGuessGenus.
+  ///
+  /// In it, this message translates to:
+  /// **'Quasi! È un {genus}.'**
+  String captureGuessGenus(String genus);
+
+  /// No description provided for @captureGuessWrong.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua ipotesi era «{guess}».'**
+  String captureGuessWrong(String guess);
+
+  /// No description provided for @captureStationCreated.
+  ///
+  /// In it, this message translates to:
+  /// **'È nata una nuova Stazione.'**
+  String get captureStationCreated;
+
+  /// No description provided for @captureStationExisting.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei alla tua Stazione di questa pianta.'**
+  String get captureStationExisting;
+
+  /// No description provided for @captureStationNoPosition.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza posizione: l\'Incontro vale, la Stazione no.'**
+  String get captureStationNoPosition;
+
+  /// No description provided for @captureStationLimit.
+  ///
+  /// In it, this message translates to:
+  /// **'Oggi è già nata una Stazione nuova: questa vale come Incontro.'**
+  String get captureStationLimit;
+
+  /// No description provided for @captureXp.
+  ///
+  /// In it, this message translates to:
+  /// **'+{xp} PE'**
+  String captureXp(int xp);
+
+  /// No description provided for @captureDone.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto'**
+  String get captureDone;
+
+  /// No description provided for @captureAction.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi'**
+  String get captureAction;
+
+  /// No description provided for @captureTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi la Vis'**
+  String get captureTitle;
+
+  /// No description provided for @captureFromSpecies.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi la sua Vis'**
+  String get captureFromSpecies;
+
+  /// No description provided for @captureFirstPhoto.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua foto prende il posto di quella dell\'Erbario, con il timbro di oggi.'**
+  String get captureFirstPhoto;
+
+  /// No description provided for @ownPhotoStamp.
+  ///
+  /// In it, this message translates to:
+  /// **'La tua foto · {date}'**
+  String ownPhotoStamp(String date);
+
+  /// No description provided for @sectionStations.
+  ///
+  /// In it, this message translates to:
+  /// **'Le tue Stazioni'**
+  String get sectionStations;
+
+  /// No description provided for @stationAccuracy.
+  ///
+  /// In it, this message translates to:
+  /// **'± {meters} m'**
+  String stationAccuracy(int meters);
+
+  /// No description provided for @stationsNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.'**
+  String get stationsNote;
 }
 
 class _AppLocalizationsDelegate

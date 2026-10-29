@@ -577,7 +577,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get missionFirstEncounterBody =>
-      'Esci a Erborizzare e fotografa una delle tue Desiderata: una volta riconosciuta comparirà nell\'Erbario. Fotografa, non raccogliere.';
+      'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.';
 
   @override
   String get missionFirstLevelTitle => 'Studia la tua prima specie';
@@ -976,7 +976,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get debugGradeSampleEffect =>
-      'La prossima Raccolta con la Luna piena ha un Tratto in più (effetto di gioco).';
+      'La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).';
 
   @override
   String get badgeEncountered => 'Incontrata il';
@@ -1033,7 +1033,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get glossVisText =>
-      'La linfa sottile delle piante: l\'energia che immagazzini a ogni Raccolta. Le Ricette ne chiedono una quantità per Ingrediente.';
+      'La linfa sottile delle piante: l\'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.';
 
   @override
   String get glossPeDaIncassareTerm => 'PE da Incassare';
@@ -1142,8 +1142,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get traitWhenFrost => 'Quando fa sotto zero: brina e ghiaccio.';
 
   @override
-  String get traitWhenRain =>
-      'Mentre piove. Con il temporale la Raccolta è sospesa.';
+  String get traitWhenRain => 'Mentre piove. Con il temporale non si attinge.';
 
   @override
   String get traitWhenFog => 'Quando c\'è nebbia.';
@@ -1464,7 +1463,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get welcomeGiftWaiting =>
-      'Si riscatta dopo un\'Essenza: esci e attingi da una stazione.';
+      'Si riscatta dopo un\'Essenza: esci e Attingi da una Stazione.';
 
   @override
   String welcomeGiftRedeem(int price) {
@@ -1624,7 +1623,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get pantryEmpty =>
-      'La Dispensa è vuota: le Essenze che attingi dalle stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si attinge con \"Simula attingere\" nella scheda della specie.';
+      'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.';
 
   @override
   String get debugSimulatePantry => 'Simula una Dispensa';
@@ -1861,63 +1860,63 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip01 =>
-      'Studiando una pianta, le sue Essenze diventano più pure: dal 40 % senza studio al 100 % con la Maestria.';
+      'Più studi una pianta, più sono pure le Essenze che ne attingi: la purezza va dal 40 % (pianta mai studiata) al 100 % (pianta di cui hai la Maestria).';
 
   @override
   String get tip02 =>
-      'La purezza delle Essenze decide gran parte della Potenza delle pozioni: più conosci le piante, più sono potenti.';
+      'Nella Potenza di una pozione conta soprattutto la purezza delle Essenze che usi: più conosci le piante delle ricette, più le tue pozioni sono potenti.';
 
   @override
   String get tip03 =>
-      'Le Comuni si imparano studiando: superato il livello 1 di una specie, la sua Comune è nel Ricettario.';
+      'Le Tavole Comuni del Ricettario si imparano studiando: quando superi il livello 1 di una specie, la Tavola Comune di quella pianta entra nel tuo Ricettario.';
 
   @override
   String get tip04 =>
-      'Nel Bottino dell\'Esperienza le Tavole Non comuni, Rare e Mitiche escono incomplete: i Componenti che mancano si trovano in altri Bottino dell\'Esperienza.';
+      'Le Tavole Non comuni, Rare e Mitiche escono dal Bottino dell\'Esperienza incomplete, con il nome a pezzi: ogni pezzo che manca è un Componente, e lo trovi aprendo altri Bottino dell\'Esperienza.';
 
   @override
   String get tip05 =>
-      'Le Mitiche escono solo dal Bottino dell\'Esperienza mitico.';
+      'Le Tavole Mitiche si trovano solo aprendo il Bottino dell\'Esperienza di grado mitico.';
 
   @override
   String get tip06 =>
-      'I doppioni del Bottino dell\'Esperienza diventano Riciclati: 3 fanno un Componente dello stesso grado, 9 uno del grado sopra.';
+      'Se il Bottino dell\'Esperienza ti dà una Tavola o un Componente che hai già, è un doppione: lo ricicli con un po\' di Vis. 3 Riciclati fanno un Componente dello stesso grado, 9 un Componente del grado sopra.';
 
   @override
   String get tip07 =>
-      'Il Riciclo spende prima le Essenze meno preziose: quelle con i Tratti restano per le ricette.';
+      'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.';
 
   @override
   String get tip08 =>
-      'Nello slot libero di una ricetta metti la pianta che vuoi: dà alla pozione il suo Tocco.';
+      'Ogni ricetta ha uno slot libero, «qualsiasi specie»: la pianta che ci metti dà alla pozione il suo Tocco (Rigogliosa, Limpida, Presaga o Copiosa).';
 
   @override
   String get tip09 =>
-      'Attenzione alle piante tossiche nello slot libero di una ricetta da bere: la pozione si guasta.';
+      'Attenzione allo slot libero delle ricette da bere: con una pianta tossica la pozione si guasta e perdi la Vis usata, ma impari che quella pianta è tossica.';
 
   @override
   String get tip10 =>
-      'Le Ricette pronte del Laboratorio dicono che cosa ti manca: è la lista per la prossima uscita.';
+      'Nel Laboratorio, la linguetta Ricette pronte mostra le ricette che puoi preparare adesso e, per le altre, quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.';
 
   @override
   String get tip11 =>
-      'Usare una pozione dà il suo effetto per 7 giorni, con la forza della sua Potenza.';
+      'Quando usi una pozione dello Scaffale, il suo effetto dura 7 giorni ed è tanto più forte quanto più alta è la sua Potenza.';
 
   @override
   String get tip12 =>
-      'I Tratti dicono in che condizioni hai attinto un\'Essenza; il nome di una ricetta li ricorda: \"Plenilunare\" vuole la Luna piena.';
+      'I Tratti di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.';
 
   @override
   String get tip13 =>
-      'I PE dello studio restano da Incassare finché non attingi la prima Essenza di quella specie.';
+      'I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.';
 
   @override
   String get tip14 =>
-      'Nella Legenda (Impostazioni → Legenda e glossario) trovi il significato di simboli e colori.';
+      'Il significato di simboli, colori e gradi è nella Legenda: Impostazioni → Legenda e glossario.';
 
   @override
   String get tip15 =>
-      '\"Raccogliere\" nel gioco vuol dire fotografare: le piante restano dove sono.';
+      'Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.';
 
   @override
   String get viewToFind => 'Da trovare';
@@ -1965,8 +1964,325 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get tip16 =>
-      'La Maestria va mantenuta: dopo 30 giorni senza domande su una specie si assopisce. La risvegli con 5 domande, dalla sua scheda o dalla Home.';
+      'La Maestria di una specie va mantenuta: se per 30 giorni non rispondi a domande su quella specie, la Maestria si assopisce. La risvegli con 5 domande, dalla scheda della specie o da «Le tue specie» in Home.';
 
   @override
   String get simulateMastery => 'Simula Maestria';
+
+  @override
+  String get debugFieldTest => 'Prova sul campo';
+
+  @override
+  String get fieldTestIntro =>
+      'Ogni prova scatta una foto, la manda a Pl@ntNet e misura il GPS dal tocco per almeno 20 secondi (e 10 dopo la foto). Le prove finiscono in un CSV da scaricare con adb.';
+
+  @override
+  String get fieldTestExpected => 'Pianta attesa';
+
+  @override
+  String get fieldTestExpectedHint => 'es. elleboro verde, Helleborus viridis';
+
+  @override
+  String get fieldTestPlace => 'Luogo';
+
+  @override
+  String get fieldTestPlaceHint => 'sole, ombra degli alberi, città…';
+
+  @override
+  String get fieldTestRun => 'Scatta e misura';
+
+  @override
+  String get fieldTestPhasePhoto => 'Fotocamera…';
+
+  @override
+  String get fieldTestPhaseIdentifying => 'Pl@ntNet sta guardando la foto…';
+
+  @override
+  String get fieldTestPhaseLocating => 'GPS: ancora qualche secondo…';
+
+  @override
+  String get fieldTestNoKey =>
+      'Manca la chiave Pl@ntNet (PLANTNET_API_KEY): la foto e il GPS si misurano, l\'identificazione no.';
+
+  @override
+  String fieldTestOutcome(String outcome) {
+    return 'Esito: $outcome';
+  }
+
+  @override
+  String fieldTestTimes(String photo, String plantnet, String kb) {
+    return 'Foto in $photo s · Pl@ntNet in $plantnet ms · $kb KB';
+  }
+
+  @override
+  String fieldTestGps(String first, String a5, String a10, String a20) {
+    return 'GPS: prima posizione dopo $first s · precisione a 5 s $a5 m, a 10 s $a10 m, a 20 s $a20 m';
+  }
+
+  @override
+  String fieldTestGpsAfterPhoto(int during, String first, String accuracy) {
+    return 'Posizioni durante la foto: $during · dopo la foto la prima in $first s, precisione $accuracy m';
+  }
+
+  @override
+  String fieldTestRemaining(String count) {
+    return 'Identificazioni rimaste oggi: $count';
+  }
+
+  @override
+  String fieldTestRows(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count prove salvate',
+      one: '1 prova salvata',
+      zero: 'Nessuna prova salvata',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get fieldTestCopy => 'Copia il CSV';
+
+  @override
+  String get fieldTestCopied => 'CSV copiato';
+
+  @override
+  String get fieldTestClear => 'Cancella le prove';
+
+  @override
+  String get fieldTestClearConfirm => 'Tocca di nuovo per cancellarle';
+
+  @override
+  String get cameraClose => 'Chiudi la fotocamera';
+
+  @override
+  String get cameraShutter => 'Scatta';
+
+  @override
+  String cameraGps(int metres) {
+    return 'GPS ±$metres m';
+  }
+
+  @override
+  String get cameraGpsSearching => 'GPS…';
+
+  @override
+  String get cameraGpsOff => 'GPS spento';
+
+  @override
+  String get cameraDenied =>
+      'Per fotografare le piante serve il permesso della fotocamera: lo dai dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String cameraError(String error) {
+    return 'La fotocamera non si è aperta ($error).';
+  }
+
+  @override
+  String cameraDebug(
+    String size,
+    String received,
+    String analyzed,
+    String ms,
+    String sharpness,
+    String motion,
+  ) {
+    return '$size · $received fps · analizzati $analyzed/s · $ms ms · nitidezza $sharpness · movimento $motion';
+  }
+
+  @override
+  String get fieldTestSystemCamera => 'Fotocamera di sistema (per confronto)';
+
+  @override
+  String fieldTestCamera(
+    String fps,
+    String analyzed,
+    String ms,
+    String capture,
+    String resize,
+  ) {
+    return 'Fotocamera: $fps fps, analizzati $analyzed/s in $ms ms · scatto $capture ms · riduzione $resize ms';
+  }
+
+  @override
+  String get cameraFlashOff => 'Flash spento';
+
+  @override
+  String get cameraFlashAuto => 'Flash automatico';
+
+  @override
+  String get cameraFlashOn => 'Flash acceso';
+
+  @override
+  String cameraZoom(String zoom) {
+    return 'Zoom $zoom';
+  }
+
+  @override
+  String get cameraGatherHint =>
+      'Inquadra tutta la pianta: la Vis sale mentre la fotografi, più in fretta se ti muovi';
+
+  @override
+  String get cameraShutterLocked =>
+      'Ancora un attimo: la Vis comincia a salire';
+
+  @override
+  String get cameraLeafHint => 'Ora avvicinati a una foglia';
+
+  @override
+  String get cameraFlowerHint => 'E un fiore, se c\'è';
+
+  @override
+  String get cameraNoFlower => 'Non ha fiori';
+
+  @override
+  String get cameraOrganWhole => 'Pianta intera';
+
+  @override
+  String get cameraOrganLeaf => 'Foglia';
+
+  @override
+  String get cameraOrganFlower => 'Fiore';
+
+  @override
+  String get fieldTestRegional =>
+      'Confronta con la flora regionale (2 identificazioni)';
+
+  @override
+  String get fieldTestRegionalResult => 'Flora regionale (Europa sudorientale)';
+
+  @override
+  String get cameraZoomSlower => 'Senza zoom la Vis sale più in fretta';
+
+  @override
+  String get tip17 =>
+      'Quando fotografi una pianta, la sua Vis sale finché la inquadri: prenditi il tuo tempo e muoviti piano intorno, dalla pianta intera alla foglia al fiore. Chi ha pazienza raccoglie più Vis.';
+
+  @override
+  String get captureNoKey =>
+      'Manca la chiave di Pl@ntNet (PLANTNET_API_KEY): per ora l\'Incontro si prova con Simula Incontro.';
+
+  @override
+  String get captureLimitTitle => 'Per oggi basta Stazioni nuove';
+
+  @override
+  String get captureLimitText =>
+      'Oggi è già nata una Stazione nuova: domani potrai fotografare un\'altra pianta. Le Stazioni hanno bisogno del loro tempo.';
+
+  @override
+  String get captureGuessTitle => 'Che pianta pensi che sia?';
+
+  @override
+  String get captureGuessHint => 'Nome comune o scientifico';
+
+  @override
+  String get captureGuessConfirm => 'Ecco la mia ipotesi';
+
+  @override
+  String get captureGuessSkip => 'Non lo so';
+
+  @override
+  String get captureIdentifying => 'Pl@ntNet sta guardando le foto…';
+
+  @override
+  String captureFailed(String error) {
+    return 'Pl@ntNet non ha risposto ($error).';
+  }
+
+  @override
+  String get captureRetry => 'Riprova';
+
+  @override
+  String get captureNone =>
+      'Pl@ntNet non riconosce questa pianta: riprova più vicino, con la luce sulla pianta, e fotografa anche una foglia o un fiore.';
+
+  @override
+  String get captureContested => 'Pl@ntNet è indeciso: quale hai davanti?';
+
+  @override
+  String get captureProposed => 'Pl@ntNet pensa che sia:';
+
+  @override
+  String get captureConfirm => 'È questa';
+
+  @override
+  String get captureKindDiscovery => 'Scoperta';
+
+  @override
+  String get captureKindGuest => 'Ospite';
+
+  @override
+  String get captureGuestText =>
+      'Non è originaria dei tuoi luoghi: è un\'Ospite, e la sua Vis qui è molto debole.';
+
+  @override
+  String get captureDiscoveryText =>
+      'Nella tua Zona non risulta mai osservata: è una Scoperta, da confermare.';
+
+  @override
+  String get captureGuessExact => 'Ci hai preso!';
+
+  @override
+  String captureGuessGenus(String genus) {
+    return 'Quasi! È un $genus.';
+  }
+
+  @override
+  String captureGuessWrong(String guess) {
+    return 'La tua ipotesi era «$guess».';
+  }
+
+  @override
+  String get captureStationCreated => 'È nata una nuova Stazione.';
+
+  @override
+  String get captureStationExisting =>
+      'Sei alla tua Stazione di questa pianta.';
+
+  @override
+  String get captureStationNoPosition =>
+      'Senza posizione: l\'Incontro vale, la Stazione no.';
+
+  @override
+  String get captureStationLimit =>
+      'Oggi è già nata una Stazione nuova: questa vale come Incontro.';
+
+  @override
+  String captureXp(int xp) {
+    return '+$xp PE';
+  }
+
+  @override
+  String get captureDone => 'Fatto';
+
+  @override
+  String get captureAction => 'Attingi';
+
+  @override
+  String get captureTitle => 'Attingi la Vis';
+
+  @override
+  String get captureFromSpecies => 'Attingi la sua Vis';
+
+  @override
+  String get captureFirstPhoto =>
+      'La tua foto prende il posto di quella dell\'Erbario, con il timbro di oggi.';
+
+  @override
+  String ownPhotoStamp(String date) {
+    return 'La tua foto · $date';
+  }
+
+  @override
+  String get sectionStations => 'Le tue Stazioni';
+
+  @override
+  String stationAccuracy(int meters) {
+    return '± $meters m';
+  }
+
+  @override
+  String get stationsNote =>
+      'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.';
 }

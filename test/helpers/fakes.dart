@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
+import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
+import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -53,6 +55,24 @@ class FakeImageFactory implements RemoteImageFactory {
   @override
   Widget build(BuildContext context, String url, {BoxFit fit = BoxFit.cover}) =>
       ColoredBox(key: ValueKey('image:$url'), color: Colors.grey);
+
+  @override
+  Widget buildFile(BuildContext context, String path, {BoxFit fit = BoxFit.cover}) =>
+      ColoredBox(key: ValueKey('photo:$path'), color: Colors.green);
+}
+
+/// Foto di chi gioca in memoria: i percorsi restano quelli e le cancellazioni si contano.
+class FakePhotoStore implements IPhotoStore {
+  final deleted = <String>[];
+
+  @override
+  String relative(String path) => path;
+
+  @override
+  String absolute(String relative) => relative;
+
+  @override
+  Future<void> delete(Iterable<String> paths) async => deleted.addAll(paths);
 }
 
 class InMemoryGameEventStore implements IGameEventStore {
@@ -91,4 +111,25 @@ class FakeClock implements IClock {
   DateTime now() => current;
 
   void advance(Duration duration) => current = current.add(duration);
+}
+
+/// Registro delle prove sul campo in memoria.
+class InMemoryFieldTestLog implements IFieldTestLog {
+  final rows = <String>[];
+  String? header;
+
+  @override
+  Future<String> location() async => '/prova_sul_campo.csv';
+
+  @override
+  Future<void> append(String header, String row) async {
+    this.header ??= header;
+    rows.add(row);
+  }
+
+  @override
+  Future<String> readAll() async => rows.isEmpty ? '' : '$header\n${rows.join('\n')}\n';
+
+  @override
+  Future<void> clear() async => rows.clear();
 }

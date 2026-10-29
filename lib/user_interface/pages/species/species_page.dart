@@ -7,7 +7,9 @@ import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
+import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
@@ -22,9 +24,11 @@ import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/species_picture.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
+import 'package:druid_app/user_interface/pages/field/capture_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -37,6 +41,7 @@ import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 /// Pagina d'erbario di una specie. Si compila livello per livello: ciò che non hai ancora imparato è chiuso
 /// da un lucchetto che dice a che livello si rivela.
@@ -103,6 +108,13 @@ class _ToFind extends StatelessWidget {
         children: [
           Text(context.game.hint(species)),
           const SizedBox(height: Gaps.m),
+          FilledButton.icon(
+            key: const ValueKey('capture-from-species'),
+            onPressed: () => Get.to<void>(() => const CapturePage()),
+            icon: const Icon(Icons.photo_camera_outlined),
+            label: Text(context.l10n.captureFromSpecies),
+          ),
+          const SizedBox(height: Gaps.s),
           FilledButton.icon(
             key: const ValueKey('toggle-desiderata'),
             onPressed: () => progress.toggleDesiderata(species.sci),
@@ -231,14 +243,17 @@ class _SpeciesSheet extends StatelessWidget {
         : levelName(context.l10n, level);
     final game = context.game;
     final lore = catalog.lore[species.sci];
+    final own = firstPhotoOf(state, species.sci);
+    final stations = stationsOf(state, species.sci);
     Widget locked(int at) => _Locked(level: at);
 
     return ListView(
       padding: const EdgeInsets.only(bottom: Gaps.xl),
       children: [
         SpeciesPhotoHeader(
-          image: RemoteImage(species.images.first.url),
-          credit: '${species.images.first.creator} · ${species.images.first.license}',
+          image: SpeciesPicture(species, photo: own?.photo),
+          credit: own != null ? null : '${species.images.first.creator} · ${species.images.first.license}',
+          stamp: own == null ? null : _OwnPhotoStamp(station: own),
           title: game.name(species),
           subtitle: state.hasEncountered(species.sci) ? levelLabel : '${context.l10n.notEncounteredYet} · $levelLabel',
           level: level,
@@ -252,6 +267,11 @@ class _SpeciesSheet extends StatelessWidget {
             _StudyLadder(species: species, catalog: catalog, state: state),
             _RecipeBookLink(species: species, catalog: catalog, state: state),
             const SizedBox(height: Gaps.l),
+            if (stations.isNotEmpty)
+              _Section(
+                title: context.l10n.sectionStations,
+                child: _StationList(stations: stations),
+              ),
             _Section(
               title: context.l10n.sectionTraits,
               child: game.traitLines(species, level).isEmpty
@@ -375,6 +395,9 @@ class SpeciesPhotoHeader extends StatelessWidget {
   final String subtitle;
   final String? credit;
 
+  /// Il timbro della tua foto (data e tratti dello scatto), al posto dei crediti della foto del catalogo.
+  final Widget? stamp;
+
   /// Livello di studio, per la sfera colorata accanto al nome (`null` se la specie non è ancora incontrata).
   final int? level;
 
@@ -388,6 +411,7 @@ class SpeciesPhotoHeader extends StatelessWidget {
     required this.subtitle,
     required this.level,
     this.credit,
+    this.stamp,
     this.protected = false,
   });
 
@@ -460,6 +484,8 @@ class SpeciesPhotoHeader extends StatelessWidget {
                     bottom: Gaps.m,
                     child: _PhotoLabel(title: title, subtitle: subtitle, level: level, protected: protected),
                   ),
+                  if (stamp != null)
+                    Positioned(right: Gaps.l, top: tokens.neu ? Gaps.l + Gaps.s : statusBar + 70, child: stamp!),
                   if (credit != null)
                     Positioned(
                       right: Gaps.l,
@@ -589,6 +615,114 @@ class _RecipeBookLink extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Il timbro sulla tua foto, come quello di un erbario: data e tratti del cielo e del meteo allo scatto.
+class _OwnPhotoStamp extends StatelessWidget {
+  final Station station;
+
+  const _OwnPhotoStamp({required this.station});
+
+  @override
+  Widget build(BuildContext context) {
+    const shadows = [Shadow(color: Colors.black54, blurRadius: 4)];
+    return Column(
+      key: const ValueKey('own-photo-stamp'),
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          context.l10n.ownPhotoStamp(DateFormat.yMMMd(context.contentLanguage).format(station.createdAt)),
+          style: context.texts.labelMedium?.copyWith(color: Colors.white, shadows: shadows),
+        ),
+        if (station.traits.isNotEmpty) ...[
+          const SizedBox(height: Gaps.xs),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final trait in station.traits)
+                Padding(
+                  padding: const EdgeInsets.only(left: Gaps.s),
+                  child: _TraitGlyph(trait: trait, color: Colors.white, shadows: shadows),
+                ),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+/// L'icona di un tratto con il suo nome come suggerimento.
+class _TraitGlyph extends StatelessWidget {
+  final Trait trait;
+  final Color? color;
+  final List<Shadow>? shadows;
+
+  const _TraitGlyph({required this.trait, this.color, this.shadows});
+
+  @override
+  Widget build(BuildContext context) {
+    final label = context.game.trait(trait);
+    final emoji = label.split(' ').first;
+    final icon = Icon(
+      traitIconOf(emoji) ?? Icons.eco_outlined,
+      size: 18,
+      semanticLabel: label,
+      color: color,
+      shadows: shadows,
+    );
+    return Tooltip(
+      message: label,
+      child: traitIconMirrored(emoji) ? Transform.flip(flipX: true, child: icon) : icon,
+    );
+  }
+}
+
+/// Le tue Stazioni della specie: la foto, la data, i tratti e la precisione del GPS, mai le coordinate (capitolo 02).
+class _StationList extends StatelessWidget {
+  final List<Station> stations;
+
+  const _StationList({required this.stations});
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      for (final station in stations)
+        Padding(
+          key: ValueKey('station-${station.id}'),
+          padding: const EdgeInsets.only(bottom: Gaps.s),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: SizedBox.square(
+                  dimension: 48,
+                  child: station.photo != null
+                      ? OwnPhoto(station.photo!)
+                      : ColoredBox(
+                          color: context.colors.surfaceContainerHigh,
+                          child: Icon(Icons.place_outlined, color: context.druid.hint),
+                        ),
+                ),
+              ),
+              const SizedBox(width: Gaps.m),
+              Expanded(child: Text(DateFormat.yMMMd(context.contentLanguage).format(station.createdAt))),
+              for (final trait in station.traits)
+                Padding(
+                  padding: const EdgeInsets.only(right: Gaps.s),
+                  child: _TraitGlyph(trait: trait, color: context.druid.hint),
+                ),
+              Text(
+                context.l10n.stationAccuracy(station.accuracy.round()),
+                style: context.texts.labelMedium?.copyWith(color: context.druid.hint),
+              ),
+            ],
+          ),
+        ),
+      Text(context.l10n.stationsNote, style: context.texts.labelSmall?.copyWith(color: context.druid.hint)),
+    ],
+  );
 }
 
 class _Section extends StatelessWidget {

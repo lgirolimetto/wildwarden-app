@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// Crea i widget delle immagini remote. È un servizio iniettato perché nei test le immagini
-/// non devono andare in rete: si registra una factory finta.
+/// Crea i widget delle immagini remote e delle foto di chi gioca sul telefono. È un servizio iniettato perché nei test
+/// le immagini non devono andare in rete né sul disco: si registra una factory finta.
 abstract interface class RemoteImageFactory {
   Widget build(BuildContext context, String url, {BoxFit fit});
+
+  /// Una foto sul telefono ([path] assoluto).
+  Widget buildFile(BuildContext context, String path, {BoxFit fit});
 }
 
 /// Immagini con cache su disco: nel campo la rete può mancare.
@@ -18,6 +23,13 @@ class CachedRemoteImageFactory implements RemoteImageFactory {
     fit: fit,
     placeholder: (context, _) => const ColoredBox(color: Colors.transparent),
     errorWidget: (context, _, _) => const Center(child: Icon(Icons.local_florist_outlined)),
+  );
+
+  @override
+  Widget buildFile(BuildContext context, String path, {BoxFit fit = BoxFit.cover}) => Image.file(
+    File(path),
+    fit: fit,
+    errorBuilder: (context, _, _) => const Center(child: Icon(Icons.local_florist_outlined)),
   );
 }
 

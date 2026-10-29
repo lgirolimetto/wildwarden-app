@@ -4,6 +4,7 @@ import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/pages/erbario/erbario_page.dart';
+import 'package:druid_app/user_interface/pages/field/capture_page.dart';
 import 'package:druid_app/user_interface/pages/laboratory/laboratory_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_home_page.dart';
 import 'package:druid_app/user_interface/pages/trove/trove_page.dart';
@@ -42,6 +43,11 @@ class HomePage extends StatelessWidget {
     bottomNavigationBar: ClayNavBar(
       selectedIndex: index,
       onSelected: select,
+      action: (
+        icon: Icons.photo_camera_rounded,
+        label: context.l10n.captureAction,
+        onPressed: () => Get.to<void>(() => const CapturePage()),
+      ),
       items: [
         (Icons.home_rounded, context.l10n.navStudy),
         (Icons.menu_book_rounded, context.l10n.navErbario),

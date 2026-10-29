@@ -83,6 +83,7 @@
  "species": [
   {
    "sci": "Viburnum tinus",
+   "gbifKey": 2888585,
    "name": {
     "it": "Lentaggine"
    },
@@ -259,6 +260,7 @@
   },
   {
    "sci": "Anemone hortensis",
+   "gbifKey": 3925918,
    "name": {
     "it": "Anemone fior di stella"
    },
@@ -440,6 +442,7 @@
   },
   {
    "sci": "Orchis purpurea",
+   "gbifKey": 8794742,
    "name": {
     "it": "Orchide maggiore"
    },
@@ -622,6 +625,7 @@
   },
   {
    "sci": "Euphorbia helioscopia",
+   "gbifKey": 3066367,
    "name": {
     "it": "Euforbia calenzuola"
    },
@@ -804,6 +808,7 @@
   },
   {
    "sci": "Prunus spinosa",
+   "gbifKey": 3023221,
    "name": {
     "it": "Prugnolo"
    },
@@ -984,6 +989,7 @@
   },
   {
    "sci": "Paliurus spina-christi",
+   "gbifKey": 5372457,
    "name": {
     "it": "Marruca"
    },
@@ -1163,6 +1169,7 @@
   },
   {
    "sci": "Alliaria petiolata",
+   "gbifKey": 5376075,
    "name": {
     "it": "Alliaria comune"
    },
@@ -1335,6 +1342,7 @@
   },
   {
    "sci": "Euonymus europaeus",
+   "gbifKey": 3169131,
    "name": {
     "it": "Berretto da prete"
    },
@@ -1511,6 +1519,7 @@
   },
   {
    "sci": "Clematis vitalba",
+   "gbifKey": 3033558,
    "name": {
     "it": "Clematide vitalba"
    },
@@ -1694,6 +1703,7 @@
   },
   {
    "sci": "Ruscus aculeatus",
+   "gbifKey": 2769766,
    "name": {
     "it": "Ruscolo pungitopo"
    },
@@ -1871,6 +1881,7 @@
   },
   {
    "sci": "Cotinus coggygria",
+   "gbifKey": 3190522,
    "name": {
     "it": "Sommacco selvatico"
    },
@@ -2037,6 +2048,7 @@
   },
   {
    "sci": "Laurus nobilis",
+   "gbifKey": 3034015,
    "name": {
     "it": "Alloro"
    },
@@ -2211,6 +2223,7 @@
   },
   {
    "sci": "Cornus sanguinea",
+   "gbifKey": 3082234,
    "name": {
     "it": "Corniolo sanguinello"
    },
@@ -2374,6 +2387,7 @@
   },
   {
    "sci": "Viburnum lantana",
+   "gbifKey": 2888615,
    "name": {
     "it": "Viburno lantana"
    },
@@ -2542,6 +2556,7 @@
   },
   {
    "sci": "Chelidonium majus",
+   "gbifKey": 5334186,
    "name": {
     "it": "Celidonia"
    },
@@ -2714,6 +2729,7 @@
   },
   {
    "sci": "Celtis australis",
+   "gbifKey": 2984492,
    "name": {
     "it": "Bagolaro"
    },
@@ -2879,6 +2895,7 @@
   },
   {
    "sci": "Fraxinus ornus",
+   "gbifKey": 3172347,
    "name": {
     "it": "Frassino da manna"
    },
@@ -3039,6 +3056,7 @@
   },
   {
    "sci": "Corylus avellana",
+   "gbifKey": 2875979,
    "name": {
     "it": "Nocciolo comune"
    },
@@ -3210,6 +3228,7 @@
   },
   {
    "sci": "Melissa officinalis",
+   "gbifKey": 5341501,
    "name": {
     "it": "Melissa vera"
    },
@@ -3386,6 +3405,7 @@
   },
   {
    "sci": "Acer campestre",
+   "gbifKey": 3189863,
    "name": {
     "it": "Acero oppio"
    },
@@ -3571,6 +3591,7 @@
   },
   {
    "sci": "Juglans regia",
+   "gbifKey": 3054368,
    "name": {
     "it": "Noce comune"
    },
@@ -3748,6 +3769,7 @@
   },
   {
    "sci": "Salvia pratensis",
+   "gbifKey": 2927007,
    "name": {
     "it": "Salvia comune"
    },
@@ -3930,6 +3952,7 @@
   },
   {
    "sci": "Borago officinalis",
+   "gbifKey": 2926110,
    "name": {
     "it": "Borragine comune"
    },
@@ -4108,6 +4131,7 @@
   },
   {
    "sci": "Cornus mas",
+   "gbifKey": 3082263,
    "name": {
     "it": "Corniolo maschio"
    },
@@ -4283,6 +4307,7 @@
   },
   {
    "sci": "Melittis melissophyllum",
+   "gbifKey": 8105693,
    "name": {
     "it": "Erba limona comune"
    },
@@ -4454,6 +4479,7 @@
   },
   {
    "sci": "Helleborus viridis",
+   "gbifKey": 3033108,
    "name": {
     "it": "Elleboro verde"
    },
@@ -4633,6 +4659,7 @@
   },
   {
    "sci": "Euphorbia cyparissias",
+   "gbifKey": 3070106,
    "name": {
     "it": "Euforbia cipressina"
    },
@@ -4814,6 +4841,7 @@
   },
   {
    "sci": "Malva sylvestris",
+   "gbifKey": 3152374,
    "name": {
     "it": "Malva selvatica"
    },
@@ -4997,6 +5025,7 @@
   },
   {
    "sci": "Prunus cerasifera",
+   "gbifKey": 3021730,
    "name": {
     "it": "Mirabolano"
    },
@@ -5166,6 +5195,7 @@
   },
   {
    "sci": "Anacamptis pyramidalis",
+   "gbifKey": 2808330,
    "name": {
     "it": "Orchide piramidale"
    },
@@ -5347,6 +5377,7 @@
   },
   {
    "sci": "Ostrya carpinifolia",
+   "gbifKey": 5332305,
    "name": {
     "it": "Carpino nero"
    },
@@ -5521,6 +5552,7 @@
   },
   {
    "sci": "Glechoma hederacea",
+   "gbifKey": 2926557,
    "name": {
     "it": "Edera terrestre"
    },
@@ -5696,6 +5728,7 @@
   },
   {
    "sci": "Linaria vulgaris",
+   "gbifKey": 5415020,
    "name": {
     "it": "Linaiola comune"
    },
@@ -5876,6 +5909,7 @@
   },
   {
    "sci": "Populus alba",
+   "gbifKey": 3040233,
    "name": {
     "it": "Pioppo bianco"
    },
@@ -6059,6 +6093,7 @@
   },
   {
    "sci": "Anacamptis morio",
+   "gbifKey": 2808565,
    "name": {
     "it": "Orchide minore"
    },
@@ -6240,6 +6275,7 @@
   },
   {
    "sci": "Senecio vulgaris",
+   "gbifKey": 3108983,
    "name": {
     "it": "Senecione comune"
    },
@@ -6424,6 +6460,7 @@
   },
   {
    "sci": "Lunaria annua",
+   "gbifKey": 5373324,
    "name": {
     "it": "Erba d'argento"
    },
@@ -6592,6 +6629,7 @@
   },
   {
    "sci": "Eranthis hyemalis",
+   "gbifKey": 3033227,
    "name": {
     "it": "Piè di gallo"
    },
@@ -6764,6 +6802,7 @@
   },
   {
    "sci": "Convolvulus arvensis",
+   "gbifKey": 2928390,
    "name": {
     "it": "Vilucchio comune"
    },
@@ -6947,6 +6986,7 @@
   },
   {
    "sci": "Ligustrum vulgare",
+   "gbifKey": 3172300,
    "name": {
     "it": "Ligustro comune"
    },
@@ -7117,6 +7157,7 @@
   },
   {
    "sci": "Helleborus foetidus",
+   "gbifKey": 6375040,
    "name": {
     "it": "Elleboro puzzolente"
    },
@@ -7297,6 +7338,7 @@
   },
   {
    "sci": "Vinca major",
+   "gbifKey": 3169708,
    "name": {
     "it": "Pervinca maggiore"
    },
@@ -7474,6 +7516,7 @@
   },
   {
    "sci": "Tragopogon porrifolius",
+   "gbifKey": 5386938,
    "name": {
     "it": "Barba di Becco violetta"
    },
@@ -7639,6 +7682,7 @@
   },
   {
    "sci": "Hedera helix",
+   "gbifKey": 8351737,
    "name": {
     "it": "Edera"
    },
@@ -7813,6 +7857,7 @@
   },
   {
    "sci": "Cyclamen hederifolium",
+   "gbifKey": 7127810,
    "name": {
     "it": "Ciclamino napoletano"
    },
@@ -7991,6 +8036,7 @@
   },
   {
    "sci": "Hippocrepis emerus",
+   "gbifKey": 5353705,
    "name": {
     "it": "Erba cornetta"
    },
@@ -8170,6 +8216,7 @@
   },
   {
    "sci": "Fagus sylvatica",
+   "gbifKey": 2882316,
    "name": {
     "it": "Faggio comune"
    },
@@ -8343,6 +8390,7 @@
   },
   {
    "sci": "Althaea cannabina",
+   "gbifKey": 3152519,
    "name": {
     "it": "Altea canapina"
    },
@@ -8521,6 +8569,7 @@
   },
   {
    "sci": "Sambucus ebulus",
+   "gbifKey": 2888722,
    "name": {
     "it": "Sambuco lebbio"
    },
@@ -8689,6 +8738,7 @@
   },
   {
    "sci": "Equisetum telmateia",
+   "gbifKey": 2687943,
    "name": {
     "it": "Equiseto massimo"
    },

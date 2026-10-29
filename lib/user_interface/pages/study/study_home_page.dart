@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
@@ -11,7 +12,7 @@ import 'package:druid_app/user_interface/common_widgets/accent_card.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/diorama.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
-import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
+import 'package:druid_app/user_interface/common_widgets/species_picture.dart';
 import 'package:druid_app/user_interface/common_widgets/status_bar_scrim.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/erbario/level_name.dart';
@@ -377,6 +378,9 @@ class _SpeciesCard extends StatelessWidget {
   final int? level;
   final String? subtitle;
 
+  /// La tua foto della specie, se l'hai fotografata: prende il posto di quella del catalogo.
+  final String? photo;
+
   const _SpeciesCard({
     super.key,
     required this.species,
@@ -388,6 +392,7 @@ class _SpeciesCard extends StatelessWidget {
     this.showStar = true,
     this.level,
     this.subtitle,
+    this.photo,
   });
 
   @override
@@ -406,7 +411,7 @@ class _SpeciesCard extends StatelessWidget {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  RemoteImage(species.images.first.url),
+                  SpeciesPicture(species, photo: photo),
                   // Sulla foto il cerchietto del livello sta su un tondo color pagina, altrimenti non si legge.
                   if (level != null)
                     Positioned(
@@ -499,6 +504,7 @@ class _YourSpecies extends StatelessWidget {
                 _SpeciesCard(
                   key: ValueKey('my-${s.sci}'),
                   species: s,
+                  photo: firstPhotoOf(state, s.sci)?.photo,
                   level: state.levelOf(s.sci),
                   subtitle: dormant(s)
                       ? context.l10n.masteryToAwaken

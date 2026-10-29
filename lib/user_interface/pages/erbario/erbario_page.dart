@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -123,6 +124,7 @@ class _ErbarioContent extends StatelessWidget {
                       level: state.levelOf(s.sci),
                       encounteredAt: state.firstEncounters[s.sci],
                       onStudy: study(s),
+                      photo: firstPhotoOf(state, s.sci)?.photo,
                     ),
                   ),
                 ),

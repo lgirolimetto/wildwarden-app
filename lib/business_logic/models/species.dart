@@ -59,6 +59,9 @@ List<double> climateDays(List<dynamic> days) => [for (final d in days) (d as num
 class Species {
   /// Nome scientifico: è la chiave stabile della specie in tutta l'app.
   final String sci;
+
+  /// Chiave della specie in GBIF: lega le risposte di Pl@ntNet alla specie anche quando il nome è un sinonimo.
+  final int? gbifKey;
   final LocalizedText name;
 
   /// Ordine tassonomico (es. Malvales); `null` se il catalogo non ce l'ha.
@@ -108,6 +111,7 @@ class Species {
 
   const Species({
     required this.sci,
+    this.gbifKey,
     required this.name,
     this.order,
     required this.family,
@@ -133,6 +137,7 @@ class Species {
 
   factory Species.fromJson(Map<String, dynamic> json) => Species(
     sci: json['sci'] as String,
+    gbifKey: json['gbifKey'] as int?,
     name: LocalizedText.fromJson(json['name'] as Map<String, dynamic>),
     order: json['order'] as String?,
     family: json['family'] as String,

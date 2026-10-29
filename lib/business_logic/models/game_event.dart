@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:druid_app/business_logic/models/enums/grade.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
+import 'package:druid_app/business_logic/models/station.dart';
 
 /// Come è avvenuto l'incontro con una specie.
 enum EncounterMethod {
@@ -137,6 +139,26 @@ sealed class GameEvent {
         vis: (d['vis'] as Map<String, dynamic>).map((sci, amount) => MapEntry(sci, amount as int)),
         occurredAt: occurredAt,
       ),
+      StationCreated.typeId => StationCreated(
+        station: Station(
+          id: d['id'] as String,
+          speciesSci: d['species'] as String,
+          kind: StationKind.values.byName(d['kind'] as String),
+          latitude: (d['lat'] as num).toDouble(),
+          longitude: (d['lon'] as num).toDouble(),
+          accuracy: (d['accuracy'] as num).toDouble(),
+          confidence: (d['confidence'] as num).toDouble(),
+          createdAt: occurredAt,
+          commonName: d['name'] as String?,
+          family: d['family'] as String?,
+          // Assenti prima dello step 4 del Campo (la tua foto con il timbro).
+          photo: d['photo'] as String?,
+          traits: [
+            for (final name in (d['traits'] as List<dynamic>? ?? const []).cast<String>())
+              ?Trait.values.asNameMap()[name],
+          ],
+        ),
+      ),
       XpGranted.typeId => XpGranted(xp: d['xp'] as int, reason: d['reason'] as String, occurredAt: occurredAt),
       OnboardingMarked.typeId => OnboardingMarked(
         mark: OnboardingMark.values.byName(d['mark'] as String),
@@ -152,6 +174,32 @@ sealed class GameEvent {
 List<String> _decodeTraits(Map<String, dynamic> d) {
   if (d['traits'] case final List<dynamic> traits) return traits.cast<String>();
   return [?d['trait'] as String?];
+}
+
+/// Nasce una stazione: una pianta riconosciuta da una foto, in un punto (blocco 2).
+class StationCreated extends GameEvent {
+  static const typeId = 'station_created';
+  final Station station;
+
+  StationCreated({required this.station}) : super(occurredAt: station.createdAt);
+
+  @override
+  String get type => typeId;
+
+  @override
+  Map<String, dynamic> payload() => {
+    'id': station.id,
+    'species': station.speciesSci,
+    'kind': station.kind.name,
+    'lat': station.latitude,
+    'lon': station.longitude,
+    'accuracy': station.accuracy,
+    'confidence': station.confidence,
+    if (station.commonName != null) 'name': station.commonName,
+    if (station.family != null) 'family': station.family,
+    'photo': ?station.photo,
+    if (station.traits.isNotEmpty) 'traits': [for (final t in station.traits) t.name],
+  };
 }
 
 /// Il giocatore ha incontrato una specie (la prima volta conta per l'erbario).
