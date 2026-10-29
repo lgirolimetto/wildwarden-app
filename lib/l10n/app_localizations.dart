@@ -1490,12 +1490,6 @@ abstract class AppLocalizations {
   /// **'{name} preferisce un terreno {moisture}.'**
   String factMoisture(String name, String moisture);
 
-  /// No description provided for @sourcesTraits.
-  ///
-  /// In it, this message translates to:
-  /// **'Tratti: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0'**
-  String get sourcesTraits;
-
   /// No description provided for @sectionTraits.
   ///
   /// In it, this message translates to:
@@ -3885,17 +3879,17 @@ abstract class AppLocalizations {
   /// **'Da dove viene'**
   String get sectionOrigin;
 
-  /// No description provided for @sourcesLine.
-  ///
-  /// In it, this message translates to:
-  /// **'Fonte: {sources}'**
-  String sourcesLine(String sources);
-
   /// No description provided for @captureTutorialEssence.
   ///
   /// In it, this message translates to:
   /// **'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.'**
   String get captureTutorialEssence;
+
+  /// No description provided for @sourcesLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Fonte: '**
+  String get sourcesLabel;
 }
 
 class _AppLocalizationsDelegate

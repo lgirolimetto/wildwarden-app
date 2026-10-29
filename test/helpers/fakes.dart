@@ -6,6 +6,7 @@ import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
+import 'package:druid_app/business_logic/interfaces/i_link_opener.dart';
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
@@ -164,6 +165,17 @@ class FakePermissions implements IPermissions {
   @override
   Future<Validation<bool>> openAppSettings() async {
     requests.add('settings');
+    return Valid(true);
+  }
+}
+
+/// Link finti: si contano, non si apre niente.
+class FakeLinkOpener implements ILinkOpener {
+  final opened = <String>[];
+
+  @override
+  Future<Validation<bool>> open(String url) async {
+    opened.add(url);
     return Valid(true);
   }
 }

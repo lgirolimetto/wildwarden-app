@@ -10,14 +10,27 @@ class CuratedFunFact {
   final LocalizedText text;
   final bool verified;
 
-  const CuratedFunFact({required this.level, required this.text, required this.verified});
+  /// Le fonti della curiosità (capitolo 04, "sempre con le fonti").
+  final List<SourceRef> sources;
+
+  const CuratedFunFact({required this.level, required this.text, required this.verified, this.sources = const []});
 
   factory CuratedFunFact.fromJson(Map<String, dynamic> json) => CuratedFunFact(
     level: json['level'] as int,
     text: LocalizedText.fromJson(json['text'] as Map<String, dynamic>),
     verified: json['verified'] as bool,
+    sources: sourcesFromJson(json['sources']),
   );
 }
+
+Map<String, List<SourceRef>> sourceMap(Object? json) => {
+  for (final MapEntry(:key, :value) in ((json as Map<String, dynamic>?) ?? const {}).entries)
+    key: sourcesFromJson(value),
+};
+
+List<SourceRef> sourcesFromJson(Object? json) => [
+  for (final r in ((json as List?) ?? const []).cast<Map<String, dynamic>>()) SourceRef.fromJson(r),
+];
 
 /// Contenuti di gioco di una zona: specie, clima, Mitiche, lore, curiosità, avvisi di sicurezza. Le ricette ad
 /// affissi non sono nel catalogo: le calcolano le regole (`rules/recipes/`).
@@ -41,8 +54,15 @@ class Catalog {
   final Map<String, LocalizedText> lore;
   final Map<String, List<CuratedFunFact>> funFacts;
 
-  /// Avvisi di tossicità o irritazione. ⚠️ Vanno verificati a mano su fonti autorevoli.
+  /// Avvisi di tossicità o irritazione, verificati con due fonti autorevoli indipendenti (capitolo 04).
   final Map<String, LocalizedText> safety;
+
+  /// Le fonti degli avvisi e quelli verificati: un avviso non verificato si mostra "da verificare".
+  final Map<String, List<SourceRef>> safetySources;
+  final Set<String> safetyVerified;
+
+  /// Le fonti dei fatti veri dentro la lore.
+  final Map<String, List<SourceRef>> loreSources;
 
   /// Le aromatiche del tutorial da casa ("dalla cucina", blocco 2b): coltivate, fuori dalla Zona. Non entrano in
   /// [species] (Erbario della Zona, stagione, percentili, compagni delle ricette); si trovano con [speciesBySci].
@@ -73,6 +93,9 @@ class Catalog {
     required this.lore,
     required this.funFacts,
     required this.safety,
+    this.safetySources = const {},
+    this.safetyVerified = const {},
+    this.loreSources = const {},
     this.kitchen = const [],
     this.kitchenGuests = const {},
     this.origins = const {},
@@ -109,6 +132,12 @@ class Catalog {
             MapEntry(sci, (facts as List).map((f) => CuratedFunFact.fromJson(f as Map<String, dynamic>)).toList()),
       ),
       safety: texts('safety'),
+      safetySources: sourceMap(json['safetySources']),
+      safetyVerified: {
+        for (final MapEntry(:key, :value) in ((json['safetyVerified'] as Map<String, dynamic>?) ?? const {}).entries)
+          if (value == true) key,
+      },
+      loreSources: sourceMap(json['loreSources']),
       kitchen: [
         for (final s in (kitchen?['species'] as List?) ?? const []) Species.fromJson(s as Map<String, dynamic>),
       ],
@@ -155,3 +184,9 @@ class SourceRef {
   factory SourceRef.fromJson(Map<String, dynamic> json) =>
       SourceRef(name: json['name'] as String, url: json['url'] as String);
 }
+
+/// Le banche dati dei tratti per lo studio (oltre a WCVP, che ha la sua pagina POWO per specie): CC BY 4.0.
+const traitDatasets = [
+  SourceRef(name: 'EIVE 1.0', url: 'https://zenodo.org/records/7534792'),
+  SourceRef(name: 'EuDiS', url: 'https://doi.org/10.3897/BDJ.11.e104079'),
+];

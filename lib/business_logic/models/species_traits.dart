@@ -22,6 +22,12 @@ class SpeciesTraits {
   final double? nutrients;
   final Set<SeedDispersal> dispersal;
 
+  /// Id della specie in POWO (Plants of the World Online, Kew), da WCVP: la pagina della specie è la fonte dei tratti.
+  final String? powoId;
+
+  /// L'areale nativo come lo scrive POWO, in inglese abbreviato ("Medit.", "Trop. & Subtrop. Asia to N. Australia").
+  final String? nativeRange;
+
   const SpeciesTraits({
     this.growthForm,
     this.lifeCycle,
@@ -30,7 +36,12 @@ class SpeciesTraits {
     this.moisture,
     this.nutrients,
     this.dispersal = const {},
+    this.powoId,
+    this.nativeRange,
   });
+
+  /// La pagina della specie su POWO.
+  String? get powoUrl => powoId == null ? null : 'https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:$powoId';
 
   static const none = SpeciesTraits();
 
@@ -44,6 +55,8 @@ class SpeciesTraits {
       moisture: (ecology['moisture'] as num?)?.toDouble(),
       nutrients: (ecology['nutrients'] as num?)?.toDouble(),
       dispersal: {for (final id in (json['dispersal'] as List?) ?? const []) ?SeedDispersal.values.asNameMap()[id]},
+      powoId: json['powoId'] as String?,
+      nativeRange: json['nativeRange'] as String?,
     );
   }
 }

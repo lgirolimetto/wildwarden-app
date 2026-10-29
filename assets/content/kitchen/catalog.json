@@ -74,7 +74,9 @@
     "lifeCycle": "perennial",
     "introducedInItaly": false,
     "ecology": null,
-    "dispersal": []
+    "dispersal": [],
+    "powoId": "457138-1",
+    "nativeRange": "Medit."
    },
    "protection": [],
    "grade": "common",
@@ -163,7 +165,9 @@
     "lifeCycle": "perennial",
     "introducedInItaly": null,
     "ecology": null,
-    "dispersal": []
+    "dispersal": [],
+    "powoId": "456833-1",
+    "nativeRange": "SW. Germany to S. Europe"
    },
    "protection": [],
    "grade": "common",
@@ -249,7 +253,9 @@
     "lifeCycle": "annual",
     "introducedInItaly": true,
     "ecology": null,
-    "dispersal": []
+    "dispersal": [],
+    "powoId": "452874-1",
+    "nativeRange": "Trop. & Subtrop. Asia to N. Australia"
    },
    "protection": [],
    "grade": "common",

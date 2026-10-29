@@ -863,9 +863,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get sourcesTraits => 'Traits: WCVP (Kew), EIVE 1.0, EuDiS, CC BY 4.0';
-
-  @override
   String get sectionTraits => 'What it is like and how it lives';
 
   @override
@@ -2450,11 +2447,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectionOrigin => 'Where it comes from';
 
   @override
-  String sourcesLine(String sources) {
-    return 'Source: $sources';
-  }
-
-  @override
   String get captureTutorialEssence =>
       'You Drew its first Essence, with the Traits of this moment: you\'ll find it in the Laboratory Pantry.';
+
+  @override
+  String get sourcesLabel => 'Source: ';
 }

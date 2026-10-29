@@ -25,8 +25,16 @@ sealed class FunFact {
 class CuratedFunFactItem extends FunFact {
   final LocalizedText text;
   final bool verified;
+  final List<SourceRef> sources;
 
-  const CuratedFunFactItem(super.species, super.level, super.key, {required this.text, required this.verified});
+  const CuratedFunFactItem(
+    super.species,
+    super.level,
+    super.key, {
+    required this.text,
+    required this.verified,
+    this.sources = const [],
+  });
 }
 
 class ObservationRankFact extends FunFact {
@@ -66,7 +74,14 @@ List<FunFact> funFactsOf(Species species, Catalog catalog) {
   return [
     ObservationRankFact(species, byObservations.indexWhere((s) => s.sci == species.sci) + 1),
     for (var i = 0; i < curated.length; i++)
-      CuratedFunFactItem(species, curated[i].level, 'c$i', text: curated[i].text, verified: curated[i].verified),
+      CuratedFunFactItem(
+        species,
+        curated[i].level,
+        'c$i',
+        text: curated[i].text,
+        verified: curated[i].verified,
+        sources: curated[i].sources,
+      ),
     if (altitudeRank >= 0 && altitudeRank < 5) HighAltitudeFact(species, species.elevationMedian!.round()),
     if (altitudeRank >= 5 && altitudeRank >= byAltitude.length - 5)
       LowlandFact(species, species.elevationMedian!.round()),
