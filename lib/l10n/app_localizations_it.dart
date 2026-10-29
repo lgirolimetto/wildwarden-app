@@ -2717,4 +2717,12 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get intermediateActionFinish => 'Fatto';
+
+  @override
+  String get captureLentSun =>
+      'Il tutorial ti presta il Sole. Fuori, le Qualia le decide il cielo: con le nuvole niente Sole.';
+
+  @override
+  String get potionTouchHint =>
+      'La pianta che hai messo nello slot libero ha dato alla pozione il suo Tocco: quando la usi, aggiunge un piccolo effetto, il suo.';
 }

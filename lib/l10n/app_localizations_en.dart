@@ -2713,4 +2713,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get intermediateActionFinish => 'Done';
+
+  @override
+  String get captureLentSun =>
+      'The tutorial lends you the Sun. Out there, the sky decides the Qualia: with clouds, no Sun.';
+
+  @override
+  String get potionTouchHint =>
+      'The plant you put in the free slot gave the potion its Touch: when you use it, it adds a small effect of its own.';
 }

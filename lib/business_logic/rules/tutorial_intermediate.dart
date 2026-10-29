@@ -99,3 +99,26 @@ IntermediateStep? currentIntermediateStep(Catalog catalog, GameState state) {
   if (intermediateStatus(state) != IntermediateStatus.inProgress) return null;
   return IntermediateStep.values.firstWhere((s) => !isIntermediateStepDone(s, catalog, state));
 }
+
+/// Le regole della cucina (capitolo 03): durante il Base o l'Intermedio un'aromatica fa nascere la Stazione anche in
+/// casa, fuori dal limite del giorno, e la foto dà subito l'Essenza con la Vis piena.
+bool kitchenRuleApplies(GameState state, String? speciesSci) =>
+    tutorialSpecies.contains(speciesSci) &&
+    (tutorialStatus(state) == TutorialStatus.inProgress || intermediateStatus(state) == IntermediateStatus.inProgress);
+
+/// La Stazione di [speciesSci] si sblocca per il passo del momento (capitolo 03, 2026-10-29): l'aromatica al passo del
+/// Sole, il compagno al suo passo. Il tutorial non fa aspettare la rigenerazione.
+bool intermediateUnlocks(Catalog catalog, GameState state, String speciesSci) =>
+    switch (currentIntermediateStep(catalog, state)) {
+      IntermediateStep.drawSun => speciesSci == intermediateHerb(catalog, state),
+      IntermediateStep.companion => speciesSci == intermediateCompanion(catalog, state),
+      _ => false,
+    };
+
+/// Il tutorial presta il Sole (capitolo 03, 2026-10-29): al passo del Sole, se il cielo non lo dà, l'Essenza
+/// dell'aromatica lo prende lo stesso, in più alle sue Qualia vere. `null` se non serve.
+List<String>? withLentSun(Catalog catalog, GameState state, String speciesSci, List<String> traits) {
+  if (currentIntermediateStep(catalog, state) != IntermediateStep.drawSun) return null;
+  if (speciesSci != intermediateHerb(catalog, state) || traits.contains(Trait.sun.name)) return null;
+  return [...traits, Trait.sun.name];
+}

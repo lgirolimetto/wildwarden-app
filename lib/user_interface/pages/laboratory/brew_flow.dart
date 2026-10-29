@@ -6,6 +6,7 @@ import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
 import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/potion_effects.dart';
+import 'package:druid_app/business_logic/rules/tutorial_intermediate.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
@@ -282,6 +283,16 @@ class PotionResultPage extends StatelessWidget {
                             ),
                             style: hint,
                           ),
+                        // Nel tutorial intermedio si scopre il Tocco: una frase che lo spiega (capitolo 03, 2026-10-29).
+                        if (touch != null && intermediateStatus(state) == IntermediateStatus.inProgress) ...[
+                          const SizedBox(height: Gaps.s),
+                          Text(
+                            context.l10n.potionTouchHint,
+                            key: const ValueKey('potion-touch-hint'),
+                            style: context.texts.bodyMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ],
                       if (event.xp > 0) ...[
                         const SizedBox(height: Gaps.m),

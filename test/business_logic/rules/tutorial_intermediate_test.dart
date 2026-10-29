@@ -70,9 +70,9 @@ void main() {
     events.add(drawn('Salvia rosmarinus', traits: ['waxingMoon', 'sun'], vis: 20));
     expect(step(), IntermediateStep.companion);
 
-    events.add(drawn('Salvia officinalis', vis: 10));
-    expect(step(), IntermediateStep.companion, reason: 'la Non comune chiede 20 Vis del compagno');
-    events.add(drawn('Salvia officinalis', vis: 10));
+    events.add(drawn('Salvia officinalis', vis: 5));
+    expect(step(), IntermediateStep.companion, reason: 'la Non comune delle aromatiche chiede 10 Vis del compagno');
+    events.add(drawn('Salvia officinalis', vis: 5));
     expect(step(), IntermediateStep.brew);
 
     final recipe = recipeBookOf(catalog).pageOf('Salvia rosmarinus')!.recipes[1];
@@ -93,5 +93,51 @@ void main() {
     ]);
     expect(intermediateHerb(catalog, state), 'Salvia officinalis');
     expect(intermediateHerb(catalog, play([met('Laurus nobilis')])), isNull);
+  });
+
+  test('la Non comune delle aromatiche chiede 10 Vis per ingrediente: un Attingere a testa', () {
+    final recipe = recipeBookOf(catalog).pageOf('Ocimum basilicum')!.recipes[1];
+    expect(recipe.ingredients.map((i) => i.quantity), [1, 1, 1]);
+    expect(
+      recipeBookOf(catalog).pageOf('Malva sylvestris')!.recipes[1].ingredients.first.quantity,
+      2,
+      reason: 'le Non comuni della Zona restano a 20 Vis',
+    );
+  });
+
+  group('le regole del tutorial intermedio sull\'Attingere', () {
+    final atSun = [
+      ...baseDone,
+      mark(OnboardingMark.intermediateStarted),
+      met('Salvia rosmarinus'),
+      passed('Salvia rosmarinus', 1),
+      passed('Salvia rosmarinus', 2),
+    ];
+
+    test('le regole della cucina valgono nel Base e nell\'Intermedio, solo per le aromatiche', () {
+      expect(kitchenRuleApplies(play(atSun), 'Salvia rosmarinus'), isTrue);
+      expect(kitchenRuleApplies(play(atSun), 'Malva sylvestris'), isFalse);
+      expect(kitchenRuleApplies(play(baseDone), 'Salvia rosmarinus'), isFalse, reason: 'fuori dai tutorial no');
+      expect(kitchenRuleApplies(play([mark(OnboardingMark.tutorialStarted)]), 'Ocimum basilicum'), isTrue);
+    });
+
+    test('la Stazione del passo si sblocca: l\'aromatica al Sole, il compagno al suo passo', () {
+      expect(intermediateUnlocks(catalog, play(atSun), 'Salvia rosmarinus'), isTrue);
+      expect(intermediateUnlocks(catalog, play(atSun), 'Salvia officinalis'), isFalse);
+      final atCompanion = play([
+        ...atSun,
+        drawn('Salvia rosmarinus', traits: ['sun']),
+      ]);
+      expect(intermediateUnlocks(catalog, atCompanion, 'Salvia rosmarinus'), isFalse);
+      expect(intermediateUnlocks(catalog, atCompanion, 'Salvia officinalis'), isTrue);
+    });
+
+    test('il Sole prestato: solo al suo passo, solo all\'aromatica, solo se il cielo non lo dà', () {
+      final state = play(atSun);
+      expect(withLentSun(catalog, state, 'Salvia rosmarinus', ['waningMoon', 'rain']), ['waningMoon', 'rain', 'sun']);
+      expect(withLentSun(catalog, state, 'Salvia rosmarinus', ['waningMoon', 'sun']), isNull);
+      expect(withLentSun(catalog, state, 'Salvia officinalis', ['waningMoon']), isNull);
+      expect(withLentSun(catalog, play(baseDone), 'Salvia rosmarinus', ['waningMoon']), isNull);
+    });
   });
 }

@@ -2028,5 +2028,7 @@
   "intermediateBrewBody": "Nel Laboratorio prepara la Non comune: nello slot libero metti una terza specie e guarda il Tocco che dà alla pozione.",
   "intermediateFinishedTitle": "Hai finito il tutorial intermedio",
   "intermediateFinishedBody": "Sai Attingere alla tua Stazione, leggere le Qualia e usare il Tocco. Fuori ti aspettano le piante della Zona.",
-  "intermediateActionFinish": "Fatto"
+  "intermediateActionFinish": "Fatto",
+  "captureLentSun": "Il tutorial ti presta il Sole. Fuori, le Qualia le decide il cielo: con le nuvole niente Sole.",
+  "potionTouchHint": "La pianta che hai messo nello slot libero ha dato alla pozione il suo Tocco: quando la usi, aggiunge un piccolo effetto, il suo."
 }

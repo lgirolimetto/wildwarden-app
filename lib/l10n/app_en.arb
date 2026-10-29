@@ -700,5 +700,7 @@
   "intermediateBrewBody": "In the Laboratory brew the Uncommon: put a third species in the free slot and see the Touch it gives the potion.",
   "intermediateFinishedTitle": "You finished the intermediate tutorial",
   "intermediateFinishedBody": "You can Draw at your Station, read Qualia and use the Touch. Out there the plants of the Area are waiting.",
-  "intermediateActionFinish": "Done"
+  "intermediateActionFinish": "Done",
+  "captureLentSun": "The tutorial lends you the Sun. Out there, the sky decides the Qualia: with clouds, no Sun.",
+  "potionTouchHint": "The plant you put in the free slot gave the potion its Touch: when you use it, it adds a small effect of its own."
 }

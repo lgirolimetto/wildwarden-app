@@ -119,6 +119,7 @@ void main() {
       expect(state.potions, hasLength(1));
       expect(find.text('Potenza ${state.potions.single.potency}'), findsOneWidget);
       expect(find.text('Prima pozione di questa ricetta: +30 PE'), findsOneWidget);
+      expect(find.byKey(const ValueKey('potion-touch-hint')), findsNothing, reason: 'fuori dal tutorial intermedio');
 
       await tester.tap(find.byKey(const ValueKey('potion-done')));
       await tester.pumpAndSettle();
@@ -140,6 +141,22 @@ void main() {
       expect(find.byKey(const ValueKey('potion-0')), findsNothing);
       expect(find.byKey(const ValueKey('active-effects')), findsOneWidget);
       expect(Get.find<ProgressController>().state.potions.single.onShelf, isFalse);
+    });
+
+    testWidgets('nel tutorial intermedio la pozione spiega il Tocco; fuori no', (tester) async {
+      OnboardingMarked mark(OnboardingMark m) => OnboardingMarked(mark: m, occurredAt: _feb);
+      registerTestDependencies(
+        events: [
+          mark(OnboardingMark.tutorialSkipped),
+          mark(OnboardingMark.intermediateStarted),
+          ...events('Fagus sylvatica'),
+        ],
+      );
+      await openMalvaCommon(tester);
+      await chooseFree(tester, 'Fagus sylvatica');
+      await confirm(tester);
+
+      expect(find.byKey(const ValueKey('potion-touch-hint')), findsOneWidget);
     });
 
     testWidgets('una tossica nello slot libero guasta la pozione', (tester) async {

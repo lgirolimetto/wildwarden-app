@@ -186,11 +186,22 @@ class _Builder {
       plant: plant,
       favouredTraits: favoured,
       vocation: vocation,
-      recipes: [for (final (grade, traits, effect) in cards) _recipe(plant, grade, traits, effect, used)],
+      recipes: [
+        for (final (grade, traits, effect) in cards) _recipe(plant, grade, traits, effect, used, kitchen: kitchen),
+      ],
     );
   }
 
-  PlantRecipe _recipe(Species plant, Grade grade, List<Trait> traits, PotionEffect effect, Set<String> used) {
+  /// [kitchen]: le aromatiche del tutorial chiedono una dose sola per ingrediente anche nella Non comune (10 Vis: un
+  /// Attingere a testa basta, il tutorial intermedio si chiude in una sessione; capitolo 03, 2026-10-29).
+  PlantRecipe _recipe(
+    Species plant,
+    Grade grade,
+    List<Trait> traits,
+    PotionEffect effect,
+    Set<String> used, {
+    bool kitchen = false,
+  }) {
     final sorted = [...traits]..sort((a, b) => a.index.compareTo(b.index));
     final rows = _ingredients(plant, grade, sorted, used);
     final withToxic = rows.any((r) => r.plant != null && toxic.contains(r.plant!.sci));
@@ -203,7 +214,7 @@ class _Builder {
       base: _base(plant, grade, effect, withToxic),
       ingredients: [
         for (final r in rows)
-          RecipeIngredient(speciesSci: r.plant?.sci, quantity: recipeQuantity[grade]!, traits: r.traits),
+          RecipeIngredient(speciesSci: r.plant?.sci, quantity: kitchen ? 1 : recipeQuantity[grade]!, traits: r.traits),
       ],
       months: [for (final m in _window(rows)) m + 1],
     );

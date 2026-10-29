@@ -4322,6 +4322,18 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Fatto'**
   String get intermediateActionFinish;
+
+  /// No description provided for @captureLentSun.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial ti presta il Sole. Fuori, le Qualia le decide il cielo: con le nuvole niente Sole.'**
+  String get captureLentSun;
+
+  /// No description provided for @potionTouchHint.
+  ///
+  /// In it, this message translates to:
+  /// **'La pianta che hai messo nello slot libero ha dato alla pozione il suo Tocco: quando la usi, aggiunge un piccolo effetto, il suo.'**
+  String get potionTouchHint;
 }
 
 class _AppLocalizationsDelegate

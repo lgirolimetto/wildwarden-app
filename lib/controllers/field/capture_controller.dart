@@ -16,6 +16,7 @@ import 'package:druid_app/business_logic/rules/field/suspension.dart';
 import 'package:druid_app/business_logic/rules/harvest.dart';
 import 'package:druid_app/business_logic/services/location/quick_fix.dart';
 import 'package:druid_app/business_logic/rules/tutorial.dart';
+import 'package:druid_app/business_logic/rules/tutorial_intermediate.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:get/get.dart';
 
@@ -122,6 +123,9 @@ class CaptureController extends GetxController {
   /// L'Essenza attinta alla Stazione: quale Stazione, quante Vis.
   ({Station station, int vis})? drawn;
 
+  /// Il tutorial intermedio ha prestato il Sole all'ultima Essenza: il cielo non lo dava (capitolo 03, 2026-10-29).
+  bool lentSun = false;
+
   /// La foto salvata nella stazione nuova: alla chiusura non si cancella.
   String? _kept;
 
@@ -163,8 +167,12 @@ class CaptureController extends GetxController {
   }
 
   /// Lo stato di una Stazione adesso (per la pagina).
-  StationStatus statusOf(Station station) =>
-      _catalog() == null ? StationStatus.ready : stationStatus(station, _catalog()!, _progress.state, _progress.now);
+  /// Il tutorial intermedio sblocca la Stazione del passo del momento: non fa aspettare la rigenerazione.
+  StationStatus statusOf(Station station) => switch (_catalog()) {
+    null => StationStatus.ready,
+    final catalog when intermediateUnlocks(catalog, _progress.state, station.speciesSci) => StationStatus.ready,
+    final catalog => stationStatus(station, catalog, _progress.state, _progress.now),
+  };
 
   DateTime? readyAtOf(Station station) =>
       _catalog() == null ? null : readyAt(station, _catalog()!, _progress.state, _progress.now);
@@ -177,8 +185,10 @@ class CaptureController extends GetxController {
     if (taken.photos.isEmpty) return _go(CapturePhase.atStation);
     // La foto non resta: serve solo al gesto (la tua foto con il timbro è quella della prima Stazione).
     photo = taken;
-    final vis = _visOf(station, taken);
-    final ok = await _progress.drawAtStation(station, vis: vis, traits: [for (final t in taken.traits) t.name]);
+    // Con le regole della cucina la Vis è piena: le aromatiche stanno vicine (isolamento) e il basilico è un'Ospite.
+    final vis = kitchenRuleApplies(_progress.state, station.speciesSci) ? visPerDraw : _visOf(station, taken);
+    final traits = _lendSun(station.speciesSci, [for (final t in taken.traits) t.name]);
+    final ok = await _progress.drawAtStation(station, vis: vis, traits: traits);
     if (!ok) return _go(CapturePhase.atStation);
     drawn = (station: station, vis: _progress.state.essences.last.vis);
     _go(CapturePhase.drawn);
@@ -193,8 +203,11 @@ class CaptureController extends GetxController {
 
   Future<void> _photoFlow() async {
     if (_config.plantNetApiKey.isEmpty) return _go(CapturePhase.noKey);
-    // Durante il tutorial niente limite prima dello scatto: le aromatiche non contano per "una Stazione al giorno".
-    final tutorial = tutorialStatus(_progress.state) == TutorialStatus.inProgress;
+    // Durante il tutorial (Base o intermedio) niente limite prima dello scatto: le aromatiche non contano per "una
+    // Stazione al giorno".
+    final tutorial =
+        tutorialStatus(_progress.state) == TutorialStatus.inProgress ||
+        intermediateStatus(_progress.state) == IntermediateStatus.inProgress;
     if (!tutorial && !canCreateStation(_progress.state, _progress.now)) return _go(CapturePhase.limitReached);
     _go(CapturePhase.shooting);
     final taken = (await _camera.takePhoto()).fold((_) => TakenPhoto.cancelled, (taken) => taken);
@@ -252,10 +265,9 @@ class CaptureController extends GetxController {
     final first = !state.hasEncountered(sci);
     final hadPhoto = firstPhotoOf(state, sci) != null;
     final position = taken.position;
-    // Regola del tutorial (capitolo 03): un'aromatica fa nascere la Stazione anche in casa, fuori dal limite del
-    // giorno, e la foto dà subito l'Essenza.
-    final tutorialRule =
-        tutorialStatus(state) == TutorialStatus.inProgress && tutorialSpecies.contains(choice.species?.sci);
+    // Regola della cucina (capitolo 03): nel Base e nell'Intermedio un'aromatica fa nascere la Stazione anche in casa,
+    // fuori dal limite del giorno, e la foto dà subito l'Essenza.
+    final tutorialRule = kitchenRuleApplies(state, choice.species?.sci);
 
     final StationOutcome station;
     if (position == null) {
@@ -317,7 +329,7 @@ class CaptureController extends GetxController {
     TakenPhoto taken, {
     required bool tutorialRule,
   }) async {
-    final traits = [for (final t in taken.traits) t.name];
+    final traits = _lendSun(sci, [for (final t in taken.traits) t.name]);
     final state = _progress.state;
     final station = position == null
         ? null
@@ -333,6 +345,14 @@ class CaptureController extends GetxController {
     // un'Ospite, ma la Comune si deve poter preparare.
     final vis = tutorialRule ? visPerDraw : _visOf(station, taken);
     return _progress.drawAtStation(station, vis: vis, traits: traits);
+  }
+
+  /// Le Qualia dell'Essenza, con il Sole prestato dal tutorial intermedio se il cielo non lo dà.
+  List<String> _lendSun(String sci, List<String> traits) {
+    final catalog = _catalog();
+    final lent = catalog == null ? null : withLentSun(catalog, _progress.state, sci, traits);
+    lentSun = lent != null;
+    return lent ?? traits;
   }
 
   String? _keep(String? path) {
