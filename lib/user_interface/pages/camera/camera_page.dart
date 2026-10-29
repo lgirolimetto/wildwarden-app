@@ -47,7 +47,10 @@ String zoomLabel(double zoom) {
 /// streaming dei fotogrammi analizzato mentre si inquadra (senza registrare niente), scatto a piena risoluzione
 /// ridotto a 1600 px. Si chiude con la foto ([TakenPhoto]) o senza ([TakenPhoto.cancelled]).
 class CameraPage extends StatefulWidget {
-  const CameraPage({super.key});
+  /// Uno scatto solo, la pianta intera: Attingere alla tua Stazione (blocco 3), senza foglia e fiore per Pl@ntNet.
+  final bool single;
+
+  const CameraPage({super.key, this.single = false});
 
   @override
   State<CameraPage> createState() => _CameraPageState();
@@ -286,7 +289,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
       _vis.shotTaken();
       if (!mounted) return;
       unawaited(HapticFeedback.lightImpact());
-      if (_shots.length == PlantOrgan.values.length) return _finish();
+      if (widget.single || _shots.length == PlantOrgan.values.length) return _finish();
       // Si continua a raccogliere la Vis per il prossimo scatto: lo streaming riparte.
       _sinceAnalysis.reset();
       _streamWatch.start();
@@ -415,6 +418,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                   if (camera != null)
                     Center(
                       child: _Hint(switch (_shots.length) {
+                        _ when widget.single => context.l10n.cameraDrawHint,
                         0 => context.l10n.cameraGatherHint,
                         1 => context.l10n.cameraLeafHint,
                         _ => context.l10n.cameraFlowerHint,
@@ -431,7 +435,7 @@ class _CameraPageState extends State<CameraPage> with WidgetsBindingObserver {
                       ),
                     ),
                   const SizedBox(height: Gaps.m),
-                  if (camera != null) Center(child: _OrganSteps(done: _shots.length)),
+                  if (camera != null && !widget.single) Center(child: _OrganSteps(done: _shots.length)),
                   const SizedBox(height: Gaps.m),
                   if (camera != null && zoomStops(_maxZoom).length > 1)
                     Center(

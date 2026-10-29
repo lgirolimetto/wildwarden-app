@@ -36,13 +36,16 @@ void main() {
     final malva = station('a');
     final grade = gradeOf(malva, catalog);
     final state = play([StationCreated(station: malva), draw(malva, morning)]);
-    expect(statusOf(malva, catalog, GameState.replay([StationCreated(station: malva)]), morning), StationStatus.ready);
-    expect(statusOf(malva, catalog, state, morning.add(const Duration(hours: 2))), StationStatus.exhausted);
+    expect(
+      stationStatus(malva, catalog, GameState.replay([StationCreated(station: malva)]), morning),
+      StationStatus.ready,
+    );
+    expect(stationStatus(malva, catalog, state, morning.add(const Duration(hours: 2))), StationStatus.exhausted);
     final back = readyAt(malva, catalog, state, morning)!;
     expect(back, morning.add(regrowthByGrade[grade]!));
-    expect(statusOf(malva, catalog, state, back), StationStatus.ready);
+    expect(stationStatus(malva, catalog, state, back), StationStatus.ready);
     if (regrowthByGrade[grade]! > const Duration(hours: 24)) {
-      expect(statusOf(malva, catalog, state, morning.add(const Duration(hours: 25))), StationStatus.regrowing);
+      expect(stationStatus(malva, catalog, state, morning.add(const Duration(hours: 25))), StationStatus.regrowing);
     }
   });
 

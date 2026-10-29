@@ -1,17 +1,23 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
+import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/station.dart';
+import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/rules/field/capture.dart';
+import 'package:druid_app/business_logic/rules/field/station_state.dart';
 import 'package:druid_app/controllers/catalog/catalog_controller.dart';
 import 'package:druid_app/controllers/field/capture_controller.dart';
+import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
+import 'package:druid_app/user_interface/pages/stations/station_texts.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +47,8 @@ class _CapturePageState extends State<CapturePage> {
       () => catalog.uiData.fold((_) => null, (c) => c),
       Get.find<AppConfig>(),
       Get.find(),
+      location: Get.find<ILocationSampler>(),
+      weather: Get.find<IWeatherService>(),
     );
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _capture.start();
@@ -70,6 +78,14 @@ class _CapturePageState extends State<CapturePage> {
           children: [
             ...switch (capture.phase) {
               CapturePhase.idle || CapturePhase.shooting || CapturePhase.cancelled => const [],
+              CapturePhase.locating => [
+                const SizedBox(height: Gaps.xl),
+                const Center(child: CircularProgressIndicator()),
+                const SizedBox(height: Gaps.l),
+                Text(context.l10n.captureLocating, textAlign: TextAlign.center),
+              ],
+              CapturePhase.atStation => _atStation(context, capture),
+              CapturePhase.drawn => _drawn(context, capture),
               CapturePhase.noKey => [_Message(context.l10n.captureNoKey)],
               CapturePhase.limitReached => [
                 _Message(context.l10n.captureLimitText, title: context.l10n.captureLimitTitle),
@@ -101,6 +117,98 @@ class _CapturePageState extends State<CapturePage> {
       ),
     ),
   );
+
+  /// "Sei alla tua Stazione": ogni Stazione qui con il suo stato e Attingi; "È un'altra pianta" per una Stazione nuova.
+  List<Widget> _atStation(BuildContext context, CaptureController capture) {
+    final catalog = Get.find<CatalogController>().uiData.fold((_) => null, (c) => c);
+    if (catalog == null) return const [];
+    final now = Get.find<ProgressController>().now;
+    return [
+      Text(context.l10n.captureAtStationTitle, style: context.texts.titleLarge),
+      const SizedBox(height: Gaps.s),
+      Text(context.l10n.captureAtStationText),
+      const SizedBox(height: Gaps.l),
+      for (final station in capture.here) ...[
+        ClayCard(
+          key: ValueKey('here-${station.id}'),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                stationName(context, station, catalog),
+                style: speciesNameStyle(context, context.texts.titleMedium, green: false),
+              ),
+              const SizedBox(height: Gaps.xs),
+              Text(
+                stationStatusText(
+                  context,
+                  status: capture.statusOf(station),
+                  readyAt: capture.readyAtOf(station),
+                  suspension: capture.suspension,
+                  now: now,
+                ),
+                key: ValueKey('here-status-${station.id}'),
+              ),
+              if (capture.suspension == null && capture.statusOf(station) == StationStatus.ready) ...[
+                const SizedBox(height: Gaps.m),
+                ClayButton(
+                  key: ValueKey('draw-${station.id}'),
+                  label: context.l10n.captureAction,
+                  icon: Icons.photo_camera_rounded,
+                  onPressed: () => capture.drawAt(station),
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: Gaps.m),
+      ],
+      Center(
+        child: TextButton(
+          key: const ValueKey('capture-other-plant'),
+          onPressed: capture.otherPlant,
+          child: Text(context.l10n.captureOtherPlant),
+        ),
+      ),
+    ];
+  }
+
+  /// L'Essenza attinta alla Stazione: quante Vis, la purezza, i Tratti.
+  List<Widget> _drawn(BuildContext context, CaptureController capture) {
+    final catalog = Get.find<CatalogController>().uiData.fold((_) => null, (c) => c);
+    final drawn = capture.drawn!;
+    final essence = Get.find<ProgressController>().state.essences.last;
+    return [
+      Text(context.l10n.captureDrawnTitle, style: context.texts.titleLarge),
+      const SizedBox(height: Gaps.s),
+      if (catalog != null)
+        Text(
+          stationName(context, drawn.station, catalog),
+          key: const ValueKey('drawn-name'),
+          style: speciesNameStyle(context, context.texts.headlineSmall),
+        ),
+      const SizedBox(height: Gaps.s),
+      Text(
+        context.l10n.captureDrawnVis(drawn.vis, (essence.purity * 100).round()),
+        key: const ValueKey('drawn-vis'),
+        style: context.texts.titleMedium,
+      ),
+      if (essence.traits.isNotEmpty) ...[
+        const SizedBox(height: Gaps.xs),
+        Text([for (final t in essence.traits) ?Trait.values.asNameMap()[t]].map(context.game.trait).join(' · ')),
+      ],
+      const SizedBox(height: Gaps.s),
+      Text(context.l10n.captureDrawnPantry),
+      const SizedBox(height: Gaps.xl),
+      Center(
+        child: ClayButton(
+          key: const ValueKey('capture-done'),
+          label: context.l10n.captureDone,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+    ];
+  }
 
   List<Widget> _guessing(BuildContext context, CaptureController capture) {
     final catalog = Get.find<CatalogController>().uiData.fold((_) => null, (c) => c);

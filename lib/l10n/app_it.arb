@@ -1844,5 +1844,74 @@
   "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
   "sectionOrigin": "Da dove viene",
   "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.",
-  "sourcesLabel": "Fonte: "
+  "sourcesLabel": "Fonte: ",
+  "cameraDrawHint": "Inquadra la tua pianta: la Vis sale mentre la guardi, più in fretta se ti muovi",
+  "captureLocating": "Cerco dove sei…",
+  "captureAtStationTitle": "Sei alla tua Stazione",
+  "captureAtStationText": "Qui Attingi senza mandare foto a Pl@ntNet: inquadra la pianta e raccogli la Vis.",
+  "captureOtherPlant": "È un'altra pianta",
+  "stationReady": "Pronta",
+  "stationExhausted": "Esaurita: torna pronta {when}",
+  "stationRegrowing": "In rigenerazione: torna pronta {when}",
+  "stationSuspended": "Raccolta sospesa: {reason}, riprende {when}",
+  "suspendedStorm": "temporale",
+  "suspendedHail": "grandine",
+  "suspendedWind": "vento forte",
+  "suspendedSnow": "neve forte",
+  "whenToday": "alle {time}",
+  "whenOtherDay": "{day} alle {time}",
+  "captureDrawnTitle": "Hai Attinto un'Essenza",
+  "captureDrawnVis": "{vis} Vis · purezza {purity} %",
+  "captureDrawnPantry": "La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.",
+  "@stationExhausted": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "@stationRegrowing": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "@stationSuspended": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "@whenToday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "@whenOtherDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "@captureDrawnVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      },
+      "purity": {
+        "type": "int"
+      }
+    }
+  }
 }

@@ -2463,4 +2463,73 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get sourcesLabel => 'Fonte: ';
+
+  @override
+  String get cameraDrawHint =>
+      'Inquadra la tua pianta: la Vis sale mentre la guardi, più in fretta se ti muovi';
+
+  @override
+  String get captureLocating => 'Cerco dove sei…';
+
+  @override
+  String get captureAtStationTitle => 'Sei alla tua Stazione';
+
+  @override
+  String get captureAtStationText =>
+      'Qui Attingi senza mandare foto a Pl@ntNet: inquadra la pianta e raccogli la Vis.';
+
+  @override
+  String get captureOtherPlant => 'È un\'altra pianta';
+
+  @override
+  String get stationReady => 'Pronta';
+
+  @override
+  String stationExhausted(String when) {
+    return 'Esaurita: torna pronta $when';
+  }
+
+  @override
+  String stationRegrowing(String when) {
+    return 'In rigenerazione: torna pronta $when';
+  }
+
+  @override
+  String stationSuspended(String reason, String when) {
+    return 'Raccolta sospesa: $reason, riprende $when';
+  }
+
+  @override
+  String get suspendedStorm => 'temporale';
+
+  @override
+  String get suspendedHail => 'grandine';
+
+  @override
+  String get suspendedWind => 'vento forte';
+
+  @override
+  String get suspendedSnow => 'neve forte';
+
+  @override
+  String whenToday(String time) {
+    return 'alle $time';
+  }
+
+  @override
+  String whenOtherDay(String day, String time) {
+    return '$day alle $time';
+  }
+
+  @override
+  String get captureDrawnTitle => 'Hai Attinto un\'Essenza';
+
+  @override
+  String captureDrawnVis(int vis, int purity) {
+    return '$vis Vis · purezza $purity %';
+  }
+
+  @override
+  String get captureDrawnPantry =>
+      'La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.';
 }

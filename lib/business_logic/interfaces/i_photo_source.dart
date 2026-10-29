@@ -5,7 +5,8 @@ import 'package:druid_app/business_logic/models/plant_identification.dart';
 
 /// Scatto di una foto con la fotocamera.
 abstract interface class IPhotoSource {
-  Future<Validation<TakenPhoto>> takePhoto();
+  /// Con [single] uno scatto solo (la pianta intera): per Attingere alla tua Stazione, senza Pl@ntNet (blocco 3).
+  Future<Validation<TakenPhoto>> takePhoto({bool single = false});
 }
 
 /// Le foto di una pianta (intera, foglia, fiore se c'è), o nessuna se chi gioca è tornato indietro senza scattare.

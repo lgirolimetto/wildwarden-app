@@ -7,6 +7,7 @@ import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_link_opener.dart';
+import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/models/weather_forecast.dart';
@@ -208,5 +209,21 @@ class FakeWeatherService implements IWeatherService {
   Future<Validation<WeatherForecast>> forecast(double latitude, double longitude) async {
     forecasts.add((latitude, longitude));
     return Valid(next ?? WeatherForecast(fetchedAt: DateTime.utc(2027, 2, 14), hours: const []));
+  }
+}
+
+/// GPS finto: spento (nessuna posizione), oppure una posizione subito.
+class FakeLocationSampler implements ILocationSampler {
+  ({double latitude, double longitude, double accuracy})? at;
+
+  FakeLocationSampler({this.at});
+
+  @override
+  Future<Validation<LocationRecording>> start() async {
+    final here = at;
+    if (here == null) return Fail.withError(StateError('GPS spento'), message: 'GPS spento').toInvalid();
+    return Valid(
+      LocationRecording(() async {})..add(latitude: here.latitude, longitude: here.longitude, accuracy: here.accuracy),
+    );
   }
 }

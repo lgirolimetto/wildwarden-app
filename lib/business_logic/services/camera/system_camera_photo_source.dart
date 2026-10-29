@@ -11,7 +11,7 @@ class SystemCameraPhotoSource implements IPhotoSource {
   SystemCameraPhotoSource({ImagePicker? picker}) : _picker = picker ?? ImagePicker();
 
   @override
-  Future<Validation<TakenPhoto>> takePhoto() => _picker
+  Future<Validation<TakenPhoto>> takePhoto({bool single = false}) => _picker
       .pickImage(
         source: ImageSource.camera,
         maxWidth: photoMaxSide.toDouble(),

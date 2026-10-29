@@ -7,9 +7,14 @@ import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
+import 'package:druid_app/business_logic/models/weather_forecast.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/field/capture.dart';
 import 'package:druid_app/business_logic/rules/field/stations.dart';
+import 'package:druid_app/business_logic/rules/field/station_state.dart';
+import 'package:druid_app/business_logic/rules/field/suspension.dart';
+import 'package:druid_app/business_logic/rules/harvest.dart';
+import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
 import 'package:druid_app/controllers/field/capture_controller.dart';
@@ -20,10 +25,14 @@ import '../../helpers/fakes.dart';
 
 class _Camera implements IPhotoSource {
   TakenPhoto photo;
+  final singles = <bool>[];
   _Camera(this.photo);
 
   @override
-  Future<Validation<TakenPhoto>> takePhoto() async => Valid(photo);
+  Future<Validation<TakenPhoto>> takePhoto({bool single = false}) async {
+    singles.add(single);
+    return Valid(photo);
+  }
 }
 
 class _Identifier implements IPlantIdentifier {
@@ -43,6 +52,7 @@ class _Identifier implements IPlantIdentifier {
 
 void main() {
   const config = AppConfig(flavor: 'test', plantNetApiKey: 'chiave', logHttp: false, showDebugTools: true);
+  const noKey = AppConfig(flavor: 'test', plantNetApiKey: '', logHttp: false, showDebugTools: true);
   const here = LocationFix(elapsed: Duration.zero, latitude: 44.483, longitude: 11.353, accuracy: 4);
   const shot = TakenPhoto(
     photos: [PlantPhoto('/foto.jpg', PlantOrgan.whole), PlantPhoto('/foglia.jpg', PlantOrgan.leaf)],
@@ -73,7 +83,19 @@ void main() {
     Map<PlantFlora, Validation<PlantIdentification>> answers = const {},
     AppConfig settings = config,
     Catalog? Function() catalog = smallCatalog,
-  }) => CaptureController(progress, _Camera(photo ?? shot), _Identifier(answers), catalog, settings, photos);
+    _Camera? camera,
+    FakeLocationSampler? location,
+    FakeWeatherService? weather,
+  }) => CaptureController(
+    progress,
+    camera ?? _Camera(photo ?? shot),
+    _Identifier(answers),
+    catalog,
+    settings,
+    photos,
+    location: location,
+    weather: weather,
+  );
 
   test('senza chiave non si apre la fotocamera', () async {
     final c = capture(
@@ -117,7 +139,9 @@ void main() {
     expect(state.hasEncountered('Helleborus viridis'), isTrue);
     expect(state.stations.single.kind, StationKind.zone);
     expect(state.stations.single.confidence, 0.7);
-    expect(state.xp, guessExactXp);
+    // Un gesto solo: la Stazione nuova dà anche la prima Essenza, con i suoi PE.
+    expect(state.essences.single.speciesSci, 'Helleborus viridis');
+    expect(state.xp, guessExactXp + XpRules.essence(drawnToday: 0));
   });
 
   test('niente nella flora regionale: si chiede al mondo, è un\'Ospite con la sua famiglia', () async {
@@ -294,12 +318,23 @@ void main() {
       expect(second.phase, CapturePhase.guessing);
     });
 
-    test('una pianta della Zona durante il tutorial segue le regole normali: niente Essenza', () async {
+    test('una pianta della Zona durante il tutorial segue le regole normali: Stazione vera, Vis del mirino', () async {
       final c = await shoot(id('Helleborus viridis', 0.7));
-      expect(c.result!.essence, isFalse);
-      expect(progress.state.stations.single.tutorial, isFalse);
-      expect(progress.state.essences, isEmpty);
+      expect(c.result!.essence, isTrue);
+      final station = progress.state.stations.single;
+      expect(station.tutorial, isFalse);
+      expect(progress.state.essences.single.vis, visOfDraw(ring: 1, station: station, state: progress.state));
     });
+
+    test(
+      'nel tutorial la prima Essenza ha la Vis piena, anche per il basilico Ospite e le aromatiche vicine',
+      () async {
+        await shoot(id('Salvia officinalis', 0.8));
+        const near = LocationFix(elapsed: Duration.zero, latitude: 44.4831, longitude: 11.3531, accuracy: 8);
+        await shoot(PlantIdentification.none, world: id('Ocimum basilicum', 0.7), at: near);
+        expect(progress.state.essences.map((e) => e.vis), [visPerDraw, visPerDraw]);
+      },
+    );
 
     test('due aromatiche e il Livello 1 della prima: la Comune è pronta da preparare', () async {
       await shoot(id('Salvia rosmarinus', 0.8));
@@ -311,6 +346,87 @@ void main() {
       expect(currentTutorialStep(state), TutorialStep.brew);
       final ready = readyRecipes(withKitchen(), state, clock.now()).where((r) => r.ready);
       expect(ready.map((r) => r.brewable.id), hasLength(1));
+    });
+  });
+
+  group('Attingere alla tua Stazione', () {
+    final gps = FakeLocationSampler(at: (latitude: 44.48301, longitude: 11.35301, accuracy: 6));
+    const drawShot = TakenPhoto(
+      photos: [PlantPhoto('/qui.jpg', PlantOrgan.whole)],
+      traits: [Trait.dew],
+      visGathered: 0.5,
+      verified: true,
+    );
+
+    Future<Station> elleboro() async {
+      final c = capture(answers: {PlantFlora.regional: Valid(id('Helleborus viridis', 0.7))});
+      await c.start();
+      await c.submitGuess(null);
+      await c.confirm();
+      clock.advance(const Duration(days: 1));
+      return progress.state.stations.single;
+    }
+
+    test('alla Stazione pronta: uno scatto, niente Pl@ntNet, Essenza con la Vis del mirino e la Stazione', () async {
+      final station = await elleboro();
+      final camera = _Camera(drawShot);
+      final c = capture(camera: camera, location: gps, weather: FakeWeatherService(), settings: noKey);
+      await c.start();
+      expect(c.phase, CapturePhase.atStation);
+      expect(c.here.single.id, station.id);
+      expect(c.statusOf(station), StationStatus.ready);
+
+      await c.drawAt(station);
+      expect(camera.singles, [true]);
+      expect(c.phase, CapturePhase.drawn);
+      final essence = progress.state.essences.last;
+      expect(essence.traits, ['dew']);
+      expect(essence.vis, visOfDraw(ring: 0.5, station: station, state: progress.state));
+      expect(c.drawn!.vis, essence.vis);
+      expect(progress.state.lastStationDraws[station.id], clock.now());
+      expect(c.statusOf(station), StationStatus.exhausted);
+    });
+
+    test('esaurita: si vede quando torna pronta e non si Attinge', () async {
+      final station = await elleboro();
+      await progress.drawAtStation(station, vis: 5);
+      final c = capture(camera: _Camera(drawShot), location: gps, weather: FakeWeatherService());
+      await c.start();
+      expect(c.statusOf(station), StationStatus.exhausted);
+      expect(c.readyAtOf(station), isNotNull);
+      final before = progress.state.essences.length;
+      await c.drawAt(station);
+      expect(progress.state.essences, hasLength(before));
+    });
+
+    test('col temporale la raccolta è sospesa: non si Attinge e non si consuma la raccolta', () async {
+      final station = await elleboro();
+      final storm = WeatherForecast(
+        fetchedAt: clock.now(),
+        hours: [ForecastHour(time: clock.now(), weatherCode: 95)],
+      );
+      final c = capture(
+        camera: _Camera(drawShot),
+        location: gps,
+        weather: FakeWeatherService(next: storm),
+      );
+      await c.start();
+      expect(c.suspension?.reason, SevereWeather.storm);
+      await c.drawAt(station);
+      expect(progress.state.lastStationDraws[station.id], isNot(clock.now()));
+      expect(c.statusOf(station), StationStatus.ready);
+    });
+
+    test('"È un\'altra pianta" e senza GPS: il flusso della foto', () async {
+      await elleboro();
+      final c = capture(location: gps, weather: FakeWeatherService());
+      await c.start();
+      await c.otherPlant();
+      expect(c.phase, CapturePhase.guessing);
+
+      final noGps = capture(location: FakeLocationSampler(), weather: FakeWeatherService());
+      await noGps.start();
+      expect(noGps.phase, CapturePhase.guessing);
     });
   });
 }

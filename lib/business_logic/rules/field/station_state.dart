@@ -45,7 +45,7 @@ DateTime? readyAt(Station station, Catalog catalog, GameState state, DateTime no
   return last.add(wait);
 }
 
-StationStatus statusOf(Station station, Catalog catalog, GameState state, DateTime now) {
+StationStatus stationStatus(Station station, Catalog catalog, GameState state, DateTime now) {
   final ready = readyAt(station, catalog, state, now);
   if (ready == null || !now.isBefore(ready)) return StationStatus.ready;
   final last = state.lastStationDraws[station.id]!;
