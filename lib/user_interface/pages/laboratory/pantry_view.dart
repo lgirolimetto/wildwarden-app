@@ -158,8 +158,7 @@ class _EssenceRow extends StatelessWidget {
                         child: LinearProgressIndicator(
                           value: essence.purity.clamp(0.0, 1.0),
                           backgroundColor: context.druid.hint.withValues(alpha: 0.2),
-                          // L'oro della luce, come il Sole.
-                          color: context.druid.traitColor(Trait.sun.index),
+                          color: context.druid.purityColor,
                         ),
                       ),
                     ),

@@ -90,7 +90,7 @@ class FeltroLivery extends Livery {
       traitColors: potionTraitColors(brightness),
       plainPotion: plainPotionColor(brightness),
       speciesName: speciesNameColor(brightness),
-      vis: visColor(brightness),
+      purity: purityColor(brightness),
       levelColors: const [Color(0xFFBFCAC5), Color(0xFFA9C2B6), Color(0xFF7FA597), Color(0xFF4F6B66), _terracotta],
       hint: scheme.onSurfaceVariant,
       warning: light ? const Color(0xFF8A4A1A) : const Color(0xFFE6C26E),

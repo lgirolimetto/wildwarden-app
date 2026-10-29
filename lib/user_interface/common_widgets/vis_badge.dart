@@ -3,7 +3,7 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:flutter/material.dart';
 
-/// L'icona della Vis: il fulmine, l'energia della pianta (con la foglia era troppo piena, 2026-10-29).
+/// L'icona della Vis: il fulmine pieno, l'energia della pianta, nel colore dei nomi delle piante (2026-10-29).
 const visIcon = Symbols.bolt_rounded;
 
 /// Le Vis che chiede un ingrediente: la foglia della Vis in una chip, il numero nel badge (capitolo 02, 2026-10-29).
@@ -16,7 +16,8 @@ class VisBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) => IconBadgeChip(
     icon: visIcon,
-    iconColor: context.druid.visColor,
+    iconColor: context.druid.speciesName,
+    iconFill: 1,
     badge: '$vis',
     message: context.l10n.pantryVis(vis),
   );

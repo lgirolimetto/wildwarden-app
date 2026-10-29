@@ -1,5 +1,6 @@
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
+import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -80,8 +81,8 @@ Widget pillFrame(BuildContext context, EdgeInsets padding, Widget child, BoxDeco
       : Container(padding: padding, decoration: flat, child: child);
 }
 
-/// Chip di sola lettura, tonda, con un'icona incisa e un numero nel badge tondo, come le notifiche, incavato come i
-/// cerchietti dei gradi (capitolo 02, 2026-10-29): la beuta con le pozioni che prepari ("2", "2+"), il fulmine della Vis
+/// Chip di sola lettura, tonda, con un'icona incisa e un numero nel badge tondo, come le notifiche, bordato come una
+/// chip (capitolo 02, 2026-10-29): la beuta con le pozioni che prepari ("2", "2+"), il fulmine della Vis
 /// con le Vis ("10").
 class IconBadgeChip extends StatelessWidget {
   final IconData icon;
@@ -93,7 +94,17 @@ class IconBadgeChip extends StatelessWidget {
   /// Il colore dell'icona; `null` = quello del testo.
   final Color? iconColor;
 
-  const IconBadgeChip({super.key, required this.icon, required this.badge, required this.message, this.iconColor});
+  /// Il riempimento dell'icona (1 = piena); `null` = quello dell'icona.
+  final double? iconFill;
+
+  const IconBadgeChip({
+    super.key,
+    required this.icon,
+    required this.badge,
+    required this.message,
+    this.iconColor,
+    this.iconFill,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +113,7 @@ class IconBadgeChip extends StatelessWidget {
     final chip = pillFrame(
       context,
       const EdgeInsets.all(Gaps.s),
-      EngravedIcon(icon, size: 20, color: iconColor ?? color),
+      EngravedIcon(icon, size: 20, color: iconColor ?? color, fill: iconFill),
       BoxDecoration(
         color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(999),
@@ -113,25 +124,18 @@ class IconBadgeChip extends StatelessWidget {
       badge,
       style: context.texts.labelSmall?.copyWith(color: context.colors.onPrimary, fontWeight: FontWeight.w700),
     );
-    const radius = BorderRadius.all(Radius.circular(999));
-    final badgeBox = ConstrainedBox(
+    // Il badge è una piccola chip a sua volta: piena, con il bordo del colore della scheda su cui sta, che la stacca
+    // dalla chip senza incavi (incavato sembrava deforme, 2026-10-29).
+    final badgeBox = Container(
       constraints: const BoxConstraints(minWidth: 22, minHeight: 22),
-      child: context.druid.neu
-          ? NeuInset(
-              radius: radius,
-              color: context.colors.primary,
-              depth: 2,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Center(widthFactor: 1, heightFactor: 1, child: label),
-              ),
-            )
-          : Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(color: context.colors.primary, borderRadius: radius),
-              child: label,
-            ),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: context.colors.primary,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: GradeCard.surfaceOf(context), width: 2),
+      ),
+      child: label,
     );
     return Tooltip(
       message: message,

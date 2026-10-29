@@ -40,6 +40,6 @@ Color plainPotionColor(Brightness brightness) =>
 Color speciesNameColor(Brightness brightness) =>
     brightness == Brightness.light ? const Color(0xFF3E6B47) : const Color(0xFFA9CFA1);
 
-/// Il verde dell'icona della Vis: scuro nel tema chiaro, chiaro nel tema scuro.
-Color visColor(Brightness brightness) =>
-    brightness == Brightness.light ? const Color(0xFF2E7D32) : const Color(0xFF9CD69A);
+/// L'oro della purezza: più caldo del giallo del Sole, verso l'arancio.
+Color purityColor(Brightness brightness) =>
+    brightness == Brightness.light ? const Color(0xFFC8901A) : const Color(0xFFDDAA45);

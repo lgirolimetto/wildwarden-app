@@ -20,7 +20,18 @@ class EngravedIcon extends StatelessWidget {
   /// Specchia il segno da destra a sinistra (vedi [traitIconMirrored]).
   final bool mirrored;
 
-  const EngravedIcon(this.icon, {super.key, this.size = 20, this.color, this.surface, this.mirrored = false});
+  /// Riempimento delle icone Material Symbols (1 = piena); `null` = quello dell'icona.
+  final double? fill;
+
+  const EngravedIcon(
+    this.icon, {
+    super.key,
+    this.size = 20,
+    this.color,
+    this.surface,
+    this.mirrored = false,
+    this.fill,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +42,7 @@ class EngravedIcon extends StatelessWidget {
     final glyph = Icon(
       icon,
       size: size,
+      fill: fill,
       color: (color ?? (dark ? Colors.white : context.colors.onSurface)).withValues(alpha: dark ? 0.9 : 0.7),
       shadows: dark
           ? [
