@@ -4,6 +4,7 @@ import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
 import 'package:druid_app/business_logic/rules/field/station_state.dart';
 import 'package:druid_app/business_logic/rules/tutorial.dart';
+import 'package:druid_app/business_logic/rules/tutorial_intermediate.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -24,6 +25,7 @@ import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_session_page.dart';
 import 'package:druid_app/user_interface/pages/stations/stations_page.dart';
+import 'package:druid_app/user_interface/pages/study/widgets/intermediate_tutorial_card.dart';
 import 'package:druid_app/user_interface/pages/study/widgets/tutorial_card.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
@@ -92,6 +94,11 @@ class _StudyHomePageState extends State<StudyHomePage> {
                 if (tutorial == TutorialStatus.notStarted || tutorial == TutorialStatus.inProgress) ...[
                   const SizedBox(height: Gaps.l),
                   TutorialCard(catalog: catalog, state: state),
+                ],
+                // Il tutorial intermedio, finito o saltato il Base: la Home resta completa (capitolo 03, 2026-10-29).
+                if (intermediateStatus(state) case IntermediateStatus.notStarted || IntermediateStatus.inProgress) ...[
+                  const SizedBox(height: Gaps.l),
+                  IntermediateTutorialCard(catalog: catalog, state: state),
                 ],
                 // Durante il tutorial la Home mostra solo il passo del momento: il resto si nasconde.
                 if (tutorial != TutorialStatus.inProgress) ...[

@@ -4220,6 +4220,108 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Una Qualia che non conosci ancora'**
   String get recipeQualiaUnknown;
+
+  /// No description provided for @intermediateIntroTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial intermedio'**
+  String get intermediateIntroTitle;
+
+  /// No description provided for @intermediateIntroBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Ancora da casa, con le aromatiche: Attingi alla tua Stazione, leggi le Qualia dell\'Essenza e prepari una Ricetta Non comune, con il Tocco dello slot libero.'**
+  String get intermediateIntroBody;
+
+  /// No description provided for @intermediateLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutorial intermedio · passo {step} di {total}'**
+  String intermediateLabel(int step, int total);
+
+  /// No description provided for @intermediateSkip.
+  ///
+  /// In it, this message translates to:
+  /// **'Salta il tutorial intermedio'**
+  String get intermediateSkip;
+
+  /// No description provided for @intermediateHerbTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa un\'aromatica'**
+  String get intermediateHerbTitle;
+
+  /// No description provided for @intermediateHerbBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial intermedio usa le aromatiche di cucina: salvia, rosmarino o basilico, anche in vaso.'**
+  String get intermediateHerbBody;
+
+  /// No description provided for @intermediateStudyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia il Livello 2'**
+  String get intermediateStudyTitle;
+
+  /// No description provided for @intermediateStudyBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Supera il Livello 2 di {plant}: impari la sua Ricetta Non comune, che chiede la pianta attinta con il Sole.'**
+  String intermediateStudyBody(String plant);
+
+  /// No description provided for @intermediateDrawSunTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi con il Sole'**
+  String get intermediateDrawSunTitle;
+
+  /// No description provided for @intermediateDrawSunBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Torna alla Stazione di {plant} e Attingi: uno scatto, senza Pl@ntNet. Le Qualia del momento entrano nell\'Essenza, e la Non comune vuole il Sole.'**
+  String intermediateDrawSunBody(String plant);
+
+  /// No description provided for @intermediateCompanionTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il compagno'**
+  String get intermediateCompanionTitle;
+
+  /// No description provided for @intermediateCompanionBody.
+  ///
+  /// In it, this message translates to:
+  /// **'La Non comune chiede anche {companion}, il suo compagno: Attingi alla sua Stazione o fotografalo, se non l\'hai ancora.'**
+  String intermediateCompanionBody(String companion);
+
+  /// No description provided for @intermediateBrewTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La Non comune e il Tocco'**
+  String get intermediateBrewTitle;
+
+  /// No description provided for @intermediateBrewBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Nel Laboratorio prepara la Non comune: nello slot libero metti una terza specie e guarda il Tocco che dà alla pozione.'**
+  String get intermediateBrewBody;
+
+  /// No description provided for @intermediateFinishedTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai finito il tutorial intermedio'**
+  String get intermediateFinishedTitle;
+
+  /// No description provided for @intermediateFinishedBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Sai Attingere alla tua Stazione, leggere le Qualia e usare il Tocco. Fuori ti aspettano le piante della Zona.'**
+  String get intermediateFinishedBody;
+
+  /// No description provided for @intermediateActionFinish.
+  ///
+  /// In it, this message translates to:
+  /// **'Fatto'**
+  String get intermediateActionFinish;
 }
 
 class _AppLocalizationsDelegate

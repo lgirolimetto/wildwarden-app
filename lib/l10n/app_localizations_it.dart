@@ -2654,4 +2654,67 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get recipeQualiaUnknown => 'Una Qualia che non conosci ancora';
+
+  @override
+  String get intermediateIntroTitle => 'Il tutorial intermedio';
+
+  @override
+  String get intermediateIntroBody =>
+      'Ancora da casa, con le aromatiche: Attingi alla tua Stazione, leggi le Qualia dell\'Essenza e prepari una Ricetta Non comune, con il Tocco dello slot libero.';
+
+  @override
+  String intermediateLabel(int step, int total) {
+    return 'Tutorial intermedio · passo $step di $total';
+  }
+
+  @override
+  String get intermediateSkip => 'Salta il tutorial intermedio';
+
+  @override
+  String get intermediateHerbTitle => 'Fotografa un\'aromatica';
+
+  @override
+  String get intermediateHerbBody =>
+      'Il tutorial intermedio usa le aromatiche di cucina: salvia, rosmarino o basilico, anche in vaso.';
+
+  @override
+  String get intermediateStudyTitle => 'Studia il Livello 2';
+
+  @override
+  String intermediateStudyBody(String plant) {
+    return 'Supera il Livello 2 di $plant: impari la sua Ricetta Non comune, che chiede la pianta attinta con il Sole.';
+  }
+
+  @override
+  String get intermediateDrawSunTitle => 'Attingi con il Sole';
+
+  @override
+  String intermediateDrawSunBody(String plant) {
+    return 'Torna alla Stazione di $plant e Attingi: uno scatto, senza Pl@ntNet. Le Qualia del momento entrano nell\'Essenza, e la Non comune vuole il Sole.';
+  }
+
+  @override
+  String get intermediateCompanionTitle => 'Il compagno';
+
+  @override
+  String intermediateCompanionBody(String companion) {
+    return 'La Non comune chiede anche $companion, il suo compagno: Attingi alla sua Stazione o fotografalo, se non l\'hai ancora.';
+  }
+
+  @override
+  String get intermediateBrewTitle => 'La Non comune e il Tocco';
+
+  @override
+  String get intermediateBrewBody =>
+      'Nel Laboratorio prepara la Non comune: nello slot libero metti una terza specie e guarda il Tocco che dà alla pozione.';
+
+  @override
+  String get intermediateFinishedTitle => 'Hai finito il tutorial intermedio';
+
+  @override
+  String get intermediateFinishedBody =>
+      'Sai Attingere alla tua Stazione, leggere le Qualia e usare il Tocco. Fuori ti aspettano le piante della Zona.';
+
+  @override
+  String get intermediateActionFinish => 'Fatto';
 }

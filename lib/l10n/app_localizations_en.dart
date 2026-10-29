@@ -2649,4 +2649,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get recipeQualiaUnknown => 'A Qualia you don\'t know yet';
+
+  @override
+  String get intermediateIntroTitle => 'The intermediate tutorial';
+
+  @override
+  String get intermediateIntroBody =>
+      'Still from home, with kitchen herbs: Draw at your Station, read the Essence\'s Qualia and brew an Uncommon Recipe, with the Touch of the free slot.';
+
+  @override
+  String intermediateLabel(int step, int total) {
+    return 'Intermediate tutorial · step $step of $total';
+  }
+
+  @override
+  String get intermediateSkip => 'Skip the intermediate tutorial';
+
+  @override
+  String get intermediateHerbTitle => 'Photograph a herb';
+
+  @override
+  String get intermediateHerbBody =>
+      'The intermediate tutorial uses kitchen herbs: sage, rosemary or basil, even in a pot.';
+
+  @override
+  String get intermediateStudyTitle => 'Study level 2';
+
+  @override
+  String intermediateStudyBody(String plant) {
+    return 'Pass level 2 of $plant: you learn its Uncommon Recipe, which asks for the plant drawn under the Sun.';
+  }
+
+  @override
+  String get intermediateDrawSunTitle => 'Draw under the Sun';
+
+  @override
+  String intermediateDrawSunBody(String plant) {
+    return 'Go back to the $plant Station and Draw: one shot, no Pl@ntNet. The Qualia of the moment go into the Essence, and the Uncommon wants the Sun.';
+  }
+
+  @override
+  String get intermediateCompanionTitle => 'The companion';
+
+  @override
+  String intermediateCompanionBody(String companion) {
+    return 'The Uncommon also asks for $companion, its companion: Draw at its Station, or photograph it if you don\'t have it yet.';
+  }
+
+  @override
+  String get intermediateBrewTitle => 'The Uncommon and the Touch';
+
+  @override
+  String get intermediateBrewBody =>
+      'In the Laboratory brew the Uncommon: put a third species in the free slot and see the Touch it gives the potion.';
+
+  @override
+  String get intermediateFinishedTitle =>
+      'You finished the intermediate tutorial';
+
+  @override
+  String get intermediateFinishedBody =>
+      'You can Draw at your Station, read Qualia and use the Touch. Out there the plants of the Area are waiting.';
+
+  @override
+  String get intermediateActionFinish => 'Done';
 }

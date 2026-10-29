@@ -1980,5 +1980,53 @@
   "incompleteWhereTitle": "Dove si trovano",
   "incompleteWhereText": "Nei Bottini dell'Esperienza del suo Grado o più alti: a volte un Bottino dà un Componente invece di una Tavola nuova. Oppure con il Riciclo dei doppioni, in fondo alla pagina del Bottino.",
   "incompleteInfoTooltip": "Che cosa manca",
-  "recipeQualiaUnknown": "Una Qualia che non conosci ancora"
+  "recipeQualiaUnknown": "Una Qualia che non conosci ancora",
+  "intermediateIntroTitle": "Il tutorial intermedio",
+  "intermediateIntroBody": "Ancora da casa, con le aromatiche: Attingi alla tua Stazione, leggi le Qualia dell'Essenza e prepari una Ricetta Non comune, con il Tocco dello slot libero.",
+  "intermediateLabel": "Tutorial intermedio · passo {step} di {total}",
+  "@intermediateLabel": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "intermediateSkip": "Salta il tutorial intermedio",
+  "intermediateHerbTitle": "Fotografa un'aromatica",
+  "intermediateHerbBody": "Il tutorial intermedio usa le aromatiche di cucina: salvia, rosmarino o basilico, anche in vaso.",
+  "intermediateStudyTitle": "Studia il Livello 2",
+  "intermediateStudyBody": "Supera il Livello 2 di {plant}: impari la sua Ricetta Non comune, che chiede la pianta attinta con il Sole.",
+  "@intermediateStudyBody": {
+    "placeholders": {
+      "plant": {
+        "type": "String"
+      }
+    }
+  },
+  "intermediateDrawSunTitle": "Attingi con il Sole",
+  "intermediateDrawSunBody": "Torna alla Stazione di {plant} e Attingi: uno scatto, senza Pl@ntNet. Le Qualia del momento entrano nell'Essenza, e la Non comune vuole il Sole.",
+  "@intermediateDrawSunBody": {
+    "placeholders": {
+      "plant": {
+        "type": "String"
+      }
+    }
+  },
+  "intermediateCompanionTitle": "Il compagno",
+  "intermediateCompanionBody": "La Non comune chiede anche {companion}, il suo compagno: Attingi alla sua Stazione o fotografalo, se non l'hai ancora.",
+  "@intermediateCompanionBody": {
+    "placeholders": {
+      "companion": {
+        "type": "String"
+      }
+    }
+  },
+  "intermediateBrewTitle": "La Non comune e il Tocco",
+  "intermediateBrewBody": "Nel Laboratorio prepara la Non comune: nello slot libero metti una terza specie e guarda il Tocco che dà alla pozione.",
+  "intermediateFinishedTitle": "Hai finito il tutorial intermedio",
+  "intermediateFinishedBody": "Sai Attingere alla tua Stazione, leggere le Qualia e usare il Tocco. Fuori ti aspettano le piante della Zona.",
+  "intermediateActionFinish": "Fatto"
 }

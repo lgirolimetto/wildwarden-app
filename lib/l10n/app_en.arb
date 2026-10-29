@@ -683,5 +683,22 @@
   "incompleteWhereTitle": "Where to find them",
   "incompleteWhereText": "In Troves of Experience of its Grade or higher: sometimes a Trove gives a Component instead of a new Plate. Or by Recycling duplicates, at the bottom of the Trove page.",
   "incompleteInfoTooltip": "What's missing",
-  "recipeQualiaUnknown": "A Qualia you don't know yet"
+  "recipeQualiaUnknown": "A Qualia you don't know yet",
+  "intermediateIntroTitle": "The intermediate tutorial",
+  "intermediateIntroBody": "Still from home, with kitchen herbs: Draw at your Station, read the Essence's Qualia and brew an Uncommon Recipe, with the Touch of the free slot.",
+  "intermediateLabel": "Intermediate tutorial · step {step} of {total}",
+  "intermediateSkip": "Skip the intermediate tutorial",
+  "intermediateHerbTitle": "Photograph a herb",
+  "intermediateHerbBody": "The intermediate tutorial uses kitchen herbs: sage, rosemary or basil, even in a pot.",
+  "intermediateStudyTitle": "Study level 2",
+  "intermediateStudyBody": "Pass level 2 of {plant}: you learn its Uncommon Recipe, which asks for the plant drawn under the Sun.",
+  "intermediateDrawSunTitle": "Draw under the Sun",
+  "intermediateDrawSunBody": "Go back to the {plant} Station and Draw: one shot, no Pl@ntNet. The Qualia of the moment go into the Essence, and the Uncommon wants the Sun.",
+  "intermediateCompanionTitle": "The companion",
+  "intermediateCompanionBody": "The Uncommon also asks for {companion}, its companion: Draw at its Station, or photograph it if you don't have it yet.",
+  "intermediateBrewTitle": "The Uncommon and the Touch",
+  "intermediateBrewBody": "In the Laboratory brew the Uncommon: put a third species in the free slot and see the Touch it gives the potion.",
+  "intermediateFinishedTitle": "You finished the intermediate tutorial",
+  "intermediateFinishedBody": "You can Draw at your Station, read Qualia and use the Touch. Out there the plants of the Area are waiting.",
+  "intermediateActionFinish": "Done"
 }
