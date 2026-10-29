@@ -148,8 +148,8 @@ class IconBadgeChip extends StatelessWidget {
         label: message,
         excludeSemantics: true,
         child: Padding(
-          // Spazio per il badge, che sporge in alto a destra.
-          padding: const EdgeInsets.only(top: 6, right: 8),
+          // Spazio per il badge, che sporge in alto a destra; lo stesso a sinistra, così la chip resta al centro.
+          padding: const EdgeInsets.only(top: 6, left: 8, right: 8),
           child: Stack(
             clipBehavior: Clip.none,
             children: [
