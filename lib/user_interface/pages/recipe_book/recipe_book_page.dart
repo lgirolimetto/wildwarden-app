@@ -69,7 +69,7 @@ class RecipeBookView extends StatelessWidget {
                 child: ClayChip(
                   key: const ValueKey('recipe-book-only-ready'),
                   label: context.l10n.recipeBookOnlyReady,
-                  avatar: const Icon(ReadyMark.icon),
+                  avatar: const ReadyMark(size: 18),
                   selected: onlyReady,
                   onTap: onOnlyReadyChanged == null ? null : () => onOnlyReadyChanged!(!onlyReady),
                 ),
