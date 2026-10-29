@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
+import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/rules/first_run.dart';
 import 'package:druid_app/business_logic/services/dependencies.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
 import 'package:druid_app/controllers/study/study_controller.dart';
@@ -31,8 +33,14 @@ registerTestDependencies({
   int seed = 1,
   IPhotoSource? photoSource,
   IPlantIdentifier? plantIdentifier,
+  IPermissions? permissions,
+  bool firstRunDone = true,
 }) {
-  final prefs = InMemoryPreferences(preferences);
+  // Di solito l'onboarding di primo avvio è già fatto: i test partono dalla Home.
+  final prefs = InMemoryPreferences({
+    if (firstRunDone) ...{termsAcceptedKey: '$termsVersion', firstRunDoneKey: '1'},
+    ...?preferences,
+  });
   final repository = FakeCatalogRepository(catalog ?? Valid(smallCatalog()));
   final eventStore = InMemoryGameEventStore(events);
   final clock = FakeClock();
@@ -48,6 +56,7 @@ registerTestDependencies({
     fieldTestLog: InMemoryFieldTestLog(),
     photoSource: photoSource,
     plantIdentifier: plantIdentifier,
+    permissions: permissions ?? FakePermissions(),
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }

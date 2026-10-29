@@ -44,6 +44,23 @@ class Catalog {
   /// Avvisi di tossicità o irritazione. ⚠️ Vanno verificati a mano su fonti autorevoli.
   final Map<String, LocalizedText> safety;
 
+  /// Le aromatiche del tutorial da casa ("dalla cucina", blocco 2b): coltivate, fuori dalla Zona. Non entrano in
+  /// [species] (Erbario della Zona, stagione, percentili, compagni delle ricette); si trovano con [speciesBySci].
+  final List<Species> kitchen;
+
+  /// Le aromatiche che sono Ospiti (non crescono spontanee in Italia, come il basilico).
+  final Set<String> kitchenGuests;
+
+  /// Da dove viene un'aromatica Ospite: il primo "non lo sapevo" del tutorial.
+  final Map<String, LocalizedText> origins;
+
+  /// Le fonti di [origins] (capitolo 04, "sempre con le fonti").
+  final Map<String, List<SourceRef>> originSources;
+
+  /// Nomi scientifici vecchi (in minuscolo, genere e specie) → il nome del catalogo: Pl@ntNet può rispondere con un
+  /// sinonimo (es. "rosmarinus officinalis" → Salvia rosmarinus).
+  final Map<String, String> synonyms;
+
   final Map<String, Species> _bySci;
 
   Catalog({
@@ -56,9 +73,18 @@ class Catalog {
     required this.lore,
     required this.funFacts,
     required this.safety,
-  }) : _bySci = {for (final s in species) s.sci: s};
+    this.kitchen = const [],
+    this.kitchenGuests = const {},
+    this.origins = const {},
+    this.originSources = const {},
+    this.synonyms = const {},
+  }) : _bySci = {
+         for (final s in [...species, ...kitchen]) s.sci: s,
+       };
 
-  factory Catalog.fromJson(Map<String, dynamic> json) {
+  /// [kitchen]: il catalogo delle aromatiche del tutorial (`assets/content/kitchen/catalog.json`, da
+  /// `tools/content-pipeline/kitchen.py`), facoltativo.
+  factory Catalog.fromJson(Map<String, dynamic> json, {Map<String, dynamic>? kitchen}) {
     final version = json['formatVersion'] as int;
     if (version != supportedFormatVersion) {
       throw FormatException('Formato catalogo $version non supportato (atteso $supportedFormatVersion)');
@@ -83,14 +109,49 @@ class Catalog {
             MapEntry(sci, (facts as List).map((f) => CuratedFunFact.fromJson(f as Map<String, dynamic>)).toList()),
       ),
       safety: texts('safety'),
+      kitchen: [
+        for (final s in (kitchen?['species'] as List?) ?? const []) Species.fromJson(s as Map<String, dynamic>),
+      ],
+      kitchenGuests: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (s['guest'] == true) s['sci'] as String,
+      },
+      origins: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (s['origin'] case final Map<String, dynamic> origin) s['sci'] as String: LocalizedText.fromJson(origin),
+      },
+      synonyms: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          for (final synonym in ((s['synonyms'] as List?) ?? const []).cast<String>())
+            synonym.toLowerCase(): s['sci'] as String,
+      },
+      originSources: {
+        for (final s in ((kitchen?['species'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (s['originSources'] case final List<dynamic> sources)
+            s['sci'] as String: [for (final r in sources.cast<Map<String, dynamic>>()) SourceRef.fromJson(r)],
+      },
     );
   }
 
+  /// Un'aromatica del tutorial ("dalla cucina").
+  bool isKitchen(String sci) => kitchen.any((s) => s.sci == sci);
+
   Species? speciesBySci(String sci) => _bySci[sci];
 
-  Species? speciesByGbifKey(int key) => species.where((s) => s.gbifKey == key).firstOrNull;
+  Species? speciesByGbifKey(int key) => [...species, ...kitchen].where((s) => s.gbifKey == key).firstOrNull;
 
   /// Specie della stessa famiglia presenti nel catalogo, esclusa quella indicata.
   List<Species> relativesOf(Species species) =>
       this.species.where((s) => s.family == species.family && s.sci != species.sci).toList();
+}
+
+/// Una fonte di un'affermazione del catalogo: il nome da mostrare e il link.
+class SourceRef {
+  final String name;
+  final String url;
+
+  const SourceRef({required this.name, required this.url});
+
+  factory SourceRef.fromJson(Map<String, dynamic> json) =>
+      SourceRef(name: json['name'] as String, url: json['url'] as String);
 }

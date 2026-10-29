@@ -998,90 +998,6 @@ abstract class AppLocalizations {
   /// **'Pagine compilate {done}/{total}'**
   String erbarioPages(int done, int total);
 
-  /// No description provided for @missionLabel.
-  ///
-  /// In it, this message translates to:
-  /// **'Missione {index} di {total}'**
-  String missionLabel(int index, int total);
-
-  /// No description provided for @missionVisitErbarioTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Apri l\'Erbario'**
-  String get missionVisitErbarioTitle;
-
-  /// No description provided for @missionVisitErbarioBody.
-  ///
-  /// In it, this message translates to:
-  /// **'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.'**
-  String get missionVisitErbarioBody;
-
-  /// No description provided for @missionFirstEncounterTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Incontra una specie'**
-  String get missionFirstEncounterTitle;
-
-  /// No description provided for @missionFirstEncounterBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.'**
-  String get missionFirstEncounterBody;
-
-  /// No description provided for @missionFirstLevelTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Studia la tua prima specie'**
-  String get missionFirstLevelTitle;
-
-  /// No description provided for @missionFirstLevelBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.'**
-  String get missionFirstLevelBody;
-
-  /// No description provided for @missionFirstRecipeTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'La prima Ricetta'**
-  String get missionFirstRecipeTitle;
-
-  /// No description provided for @missionFirstRecipeBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.'**
-  String get missionFirstRecipeBody;
-
-  /// No description provided for @missionSkip.
-  ///
-  /// In it, this message translates to:
-  /// **'Salta l\'Apprendistato'**
-  String get missionSkip;
-
-  /// No description provided for @missionActionOpenErbario.
-  ///
-  /// In it, this message translates to:
-  /// **'Apri l\'Erbario'**
-  String get missionActionOpenErbario;
-
-  /// No description provided for @missionActionStudy.
-  ///
-  /// In it, this message translates to:
-  /// **'Inizia a studiare'**
-  String get missionActionStudy;
-
-  /// No description provided for @missionActionRecipes.
-  ///
-  /// In it, this message translates to:
-  /// **'Apri il Ricettario'**
-  String get missionActionRecipes;
-
-  /// No description provided for @missionGlossary.
-  ///
-  /// In it, this message translates to:
-  /// **'Glossario'**
-  String get missionGlossary;
-
   /// No description provided for @apprenticeshipComplete.
   ///
   /// In it, this message translates to:
@@ -3584,6 +3500,402 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.'**
   String get stationsNote;
+
+  /// No description provided for @firstRunWelcomeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Benvenuto in Druid'**
+  String get firstRunWelcomeTitle;
+
+  /// No description provided for @firstRunWelcomeIntro.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei un erborista: trovi le piante vere, le fotografi, le studi e con le loro Essenze prepari pozioni di fantasia. Prima di cominciare, le regole del gioco nel mondo vero.'**
+  String get firstRunWelcomeIntro;
+
+  /// No description provided for @firstRunRuleNoPickTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa, non raccogliere'**
+  String get firstRunRuleNoPickTitle;
+
+  /// No description provided for @firstRunRuleNoPickText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le piante non si raccolgono mai: si fotografano e restano dove sono. Non strappare foglie o fiori e non calpestarle.'**
+  String get firstRunRuleNoPickText;
+
+  /// No description provided for @firstRunRuleProtectedTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Specie e aree protette'**
+  String get firstRunRuleProtectedTitle;
+
+  /// No description provided for @firstRunRuleProtectedText.
+  ///
+  /// In it, this message translates to:
+  /// **'Alcune specie sono protette dalla legge. Nei parchi e nelle riserve resta sui sentieri e rispetta i loro regolamenti.'**
+  String get firstRunRuleProtectedText;
+
+  /// No description provided for @firstRunRulePrivateTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Niente proprietà private'**
+  String get firstRunRulePrivateTitle;
+
+  /// No description provided for @firstRunRulePrivateText.
+  ///
+  /// In it, this message translates to:
+  /// **'Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.'**
+  String get firstRunRulePrivateText;
+
+  /// No description provided for @firstRunRuleDaylightTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Con la luce del giorno'**
+  String get firstRunRuleDaylightTitle;
+
+  /// No description provided for @firstRunRuleDaylightText.
+  ///
+  /// In it, this message translates to:
+  /// **'Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.'**
+  String get firstRunRuleDaylightText;
+
+  /// No description provided for @firstRunRuleSafetyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Attenzione a dove metti i piedi'**
+  String get firstRunRuleSafetyTitle;
+
+  /// No description provided for @firstRunRuleSafetyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di\' a qualcuno dove vai.'**
+  String get firstRunRuleSafetyText;
+
+  /// No description provided for @firstRunRuleToxicTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le piante non si mangiano'**
+  String get firstRunRuleToxicTitle;
+
+  /// No description provided for @firstRunRuleToxicText.
+  ///
+  /// In it, this message translates to:
+  /// **'Molte piante sono tossiche. Non mangiarle e non usarle per curarti: le pozioni del gioco sono di fantasia e non danno indicazioni d\'uso reali.'**
+  String get firstRunRuleToxicText;
+
+  /// No description provided for @firstRunRuleIdentifyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il riconoscimento può sbagliare'**
+  String get firstRunRuleIdentifyTitle;
+
+  /// No description provided for @firstRunRuleIdentifyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Pl@ntNet riconosce le piante dalle foto, ma può sbagliare. Gli avvisi di tossicità sono da verificare.'**
+  String get firstRunRuleIdentifyText;
+
+  /// No description provided for @firstRunRulePrivacyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le tue foto e la tua posizione'**
+  String get firstRunRulePrivacyTitle;
+
+  /// No description provided for @firstRunRulePrivacyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Le foto vanno a Pl@ntNet solo per riconoscere la pianta. La posizione delle tue Stazioni resta sul tuo telefono: non si mostra e non si condivide.'**
+  String get firstRunRulePrivacyText;
+
+  /// No description provided for @firstRunTermsFooter.
+  ///
+  /// In it, this message translates to:
+  /// **'Toccando Accetto confermi di aver letto queste regole e di giocare con prudenza e rispetto.'**
+  String get firstRunTermsFooter;
+
+  /// No description provided for @firstRunAccept.
+  ///
+  /// In it, this message translates to:
+  /// **'Accetto'**
+  String get firstRunAccept;
+
+  /// No description provided for @firstRunCameraTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le foto delle piante'**
+  String get firstRunCameraTitle;
+
+  /// No description provided for @firstRunCameraText.
+  ///
+  /// In it, this message translates to:
+  /// **'Per Incontrare una pianta la fotografi con la fotocamera dell\'app: la pianta intera, una foglia e il fiore se c\'è. Così Pl@ntNet la riconosce e la tua foto entra nell\'Erbario.'**
+  String get firstRunCameraText;
+
+  /// No description provided for @firstRunCameraAllow.
+  ///
+  /// In it, this message translates to:
+  /// **'Consenti'**
+  String get firstRunCameraAllow;
+
+  /// No description provided for @firstRunCameraDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza fotocamera non puoi Incontrare le piante. Puoi dare il permesso quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get firstRunCameraDenied;
+
+  /// No description provided for @firstRunLocationTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La posizione'**
+  String get firstRunLocationTitle;
+
+  /// No description provided for @firstRunLocationText.
+  ///
+  /// In it, this message translates to:
+  /// **'Dove fotografi una pianta nasce una Stazione: lì potrai tornare ad Attingere. Serve la posizione precisa, solo mentre usi l\'app. Le tue Stazioni restano sul telefono: non si mostrano e non si condividono.'**
+  String get firstRunLocationText;
+
+  /// No description provided for @firstRunLocationAllow.
+  ///
+  /// In it, this message translates to:
+  /// **'Attiva'**
+  String get firstRunLocationAllow;
+
+  /// No description provided for @firstRunLocationDenied.
+  ///
+  /// In it, this message translates to:
+  /// **'Senza posizione gli Incontri valgono, ma non nascono Stazioni. Puoi attivarla quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get firstRunLocationDenied;
+
+  /// No description provided for @firstRunLocationApproximate.
+  ///
+  /// In it, this message translates to:
+  /// **'Con la posizione approssimativa le Stazioni non sono precise. Puoi scegliere la posizione precisa dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.'**
+  String get firstRunLocationApproximate;
+
+  /// No description provided for @firstRunOpenSettings.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri le impostazioni'**
+  String get firstRunOpenSettings;
+
+  /// No description provided for @firstRunNext.
+  ///
+  /// In it, this message translates to:
+  /// **'Avanti'**
+  String get firstRunNext;
+
+  /// No description provided for @firstRunReadyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei pronto a giocare'**
+  String get firstRunReadyTitle;
+
+  /// No description provided for @firstRunReadyText.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial ti accompagna nel primo giro, tutto da casa: fotografi un\'aromatica di cucina, la studi e prepari la tua prima pozione.'**
+  String get firstRunReadyText;
+
+  /// No description provided for @firstRunStartTutorial.
+  ///
+  /// In it, this message translates to:
+  /// **'Fai il tutorial'**
+  String get firstRunStartTutorial;
+
+  /// No description provided for @firstRunLater.
+  ///
+  /// In it, this message translates to:
+  /// **'Più tardi'**
+  String get firstRunLater;
+
+  /// No description provided for @firstRunLaterNote.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial resta in Home: lo fai quando vuoi.'**
+  String get firstRunLaterNote;
+
+  /// No description provided for @firstRunProgress.
+  ///
+  /// In it, this message translates to:
+  /// **'Passo {step} di {total}'**
+  String firstRunProgress(int step, int total);
+
+  /// No description provided for @rankCurious.
+  ///
+  /// In it, this message translates to:
+  /// **'Curioso'**
+  String get rankCurious;
+
+  /// No description provided for @nextRankCurious.
+  ///
+  /// In it, this message translates to:
+  /// **'Prossimo Rango: Apprendista, alla fine del tutorial'**
+  String get nextRankCurious;
+
+  /// No description provided for @tutorialLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutorial · passo {step} di {total}'**
+  String tutorialLabel(int step, int total);
+
+  /// No description provided for @tutorialIntroTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial'**
+  String get tutorialIntroTitle;
+
+  /// No description provided for @tutorialIntroBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Un giro del gioco tutto da casa, con le aromatiche di cucina: salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Alla fine diventi Apprendista.'**
+  String get tutorialIntroBody;
+
+  /// No description provided for @tutorialStart.
+  ///
+  /// In it, this message translates to:
+  /// **'Inizia'**
+  String get tutorialStart;
+
+  /// No description provided for @tutorialSkip.
+  ///
+  /// In it, this message translates to:
+  /// **'Salta il tutorial'**
+  String get tutorialSkip;
+
+  /// No description provided for @tutorialPhotographTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa un\'aromatica'**
+  String get tutorialPhotographTitle;
+
+  /// No description provided for @tutorialPhotographBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca Attingi al centro della barra e fotografa salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Pl@ntNet la riconosce: la Incontri, nasce la sua Stazione e ne Attingi la prima Essenza. Fotografa, non raccogliere.'**
+  String get tutorialPhotographBody;
+
+  /// No description provided for @tutorialStudyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia la tua aromatica'**
+  String get tutorialStudyTitle;
+
+  /// No description provided for @tutorialStudyBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni pianta si studia a Livelli, con domande che fanno imparare anche quando sbagli. Supera il Livello 1 della pianta che hai fotografato: impari la sua Ricetta Comune. Intanto nella barra si è acceso l\'Erbario.'**
+  String get tutorialStudyBody;
+
+  /// No description provided for @tutorialSecondPhotographTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa un\'altra aromatica'**
+  String get tutorialSecondPhotographTitle;
+
+  /// No description provided for @tutorialSecondPhotographBody.
+  ///
+  /// In it, this message translates to:
+  /// **'La Ricetta Comune vuole la pianta e un\'altra specie qualsiasi: fotografa un\'altra aromatica e ne Attingi una seconda Essenza.'**
+  String get tutorialSecondPhotographBody;
+
+  /// No description provided for @tutorialBrewTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Prepara la prima pozione'**
+  String get tutorialBrewTitle;
+
+  /// No description provided for @tutorialBrewBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.'**
+  String get tutorialBrewBody;
+
+  /// No description provided for @tutorialTroveTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il Bottino dell\'Esperienza'**
+  String get tutorialTroveTitle;
+
+  /// No description provided for @tutorialTroveBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Con i PE compri Bottini dell\'Esperienza: dentro ci sono le Tavole di altre Ricette. Nella barra si è acceso il Bottino: aprilo, c\'è un regalo per te.'**
+  String get tutorialTroveBody;
+
+  /// No description provided for @tutorialApprenticeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei Apprendista'**
+  String get tutorialApprenticeTitle;
+
+  /// No description provided for @tutorialApprenticeBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai fatto il primo giro: fotografare, studiare, Attingere, preparare. Ora esci: le piante della tua Zona ti aspettano nell\'Erbario, alla voce Da trovare.'**
+  String get tutorialApprenticeBody;
+
+  /// No description provided for @tutorialActionCapture.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi'**
+  String get tutorialActionCapture;
+
+  /// No description provided for @tutorialActionStudy.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia'**
+  String get tutorialActionStudy;
+
+  /// No description provided for @tutorialActionLaboratory.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri il Laboratorio'**
+  String get tutorialActionLaboratory;
+
+  /// No description provided for @tutorialActionTrove.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri il Bottino'**
+  String get tutorialActionTrove;
+
+  /// No description provided for @tutorialActionFinish.
+  ///
+  /// In it, this message translates to:
+  /// **'Continua'**
+  String get tutorialActionFinish;
+
+  /// No description provided for @erbarioKitchen.
+  ///
+  /// In it, this message translates to:
+  /// **'Dalla cucina'**
+  String get erbarioKitchen;
+
+  /// No description provided for @kitchenHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Un\'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.'**
+  String get kitchenHint;
+
+  /// No description provided for @sectionOrigin.
+  ///
+  /// In it, this message translates to:
+  /// **'Da dove viene'**
+  String get sectionOrigin;
+
+  /// No description provided for @sourcesLine.
+  ///
+  /// In it, this message translates to:
+  /// **'Fonte: {sources}'**
+  String sourcesLine(String sources);
+
+  /// No description provided for @captureTutorialEssence.
+  ///
+  /// In it, this message translates to:
+  /// **'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.'**
+  String get captureTutorialEssence;
 }
 
 class _AppLocalizationsDelegate

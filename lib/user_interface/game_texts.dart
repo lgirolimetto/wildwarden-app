@@ -9,7 +9,6 @@ import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/models/species_traits.dart';
 import 'package:druid_app/business_logic/rules/erbario_views.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
-import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
 import 'package:druid_app/business_logic/rules/study/questions.dart';
@@ -331,20 +330,6 @@ class GameTexts {
     HighAltitudeFact(:final medianMeters) => l10n.funHigh(name(f.species), medianMeters),
     LowlandFact(:final medianMeters) => l10n.funLow(name(f.species), medianMeters),
     PeakMonthFact(month: final m) => l10n.funPeak(name(f.species), month(m)),
-  };
-
-  String missionTitle(Mission m) => switch (m) {
-    Mission.visitErbario => l10n.missionVisitErbarioTitle,
-    Mission.firstEncounter => l10n.missionFirstEncounterTitle,
-    Mission.firstLevel => l10n.missionFirstLevelTitle,
-    Mission.firstRecipe => l10n.missionFirstRecipeTitle,
-  };
-
-  String missionBody(Mission m) => switch (m) {
-    Mission.visitErbario => l10n.missionVisitErbarioBody,
-    Mission.firstEncounter => l10n.missionFirstEncounterBody,
-    Mission.firstLevel => l10n.missionFirstLevelBody,
-    Mission.firstRecipe => l10n.missionFirstRecipeBody,
   };
 }
 

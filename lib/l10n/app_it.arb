@@ -526,30 +526,6 @@
       }
     }
   },
-  "missionLabel": "Missione {index} di {total}",
-  "@missionLabel": {
-    "placeholders": {
-      "index": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
-  "missionVisitErbarioTitle": "Apri l'Erbario",
-  "missionVisitErbarioBody": "L'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.",
-  "missionFirstEncounterTitle": "Incontra una specie",
-  "missionFirstEncounterBody": "Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c'è. Riconosciuta, compare nell'Erbario con la tua foto. Fotografa, non raccogliere.",
-  "missionFirstLevelTitle": "Studia la tua prima specie",
-  "missionFirstLevelBody": "Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.",
-  "missionFirstRecipeTitle": "La prima Ricetta",
-  "missionFirstRecipeBody": "Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell'Esperienza.",
-  "missionSkip": "Salta l'Apprendistato",
-  "missionActionOpenErbario": "Apri l'Erbario",
-  "missionActionStudy": "Inizia a studiare",
-  "missionActionRecipes": "Apri il Ricettario",
-  "missionGlossary": "Glossario",
   "apprenticeshipComplete": "Apprendistato completato!",
   "glossaryTitle": "Legenda e glossario",
   "glossErbarioTerm": "Erbario",
@@ -1783,5 +1759,98 @@
       }
     }
   },
-  "stationsNote": "Solo sul tuo telefono: il punto preciso non si mostra e non si condivide."
+  "stationsNote": "Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.",
+  "firstRunWelcomeTitle": "Benvenuto in Druid",
+  "firstRunWelcomeIntro": "Sei un erborista: trovi le piante vere, le fotografi, le studi e con le loro Essenze prepari pozioni di fantasia. Prima di cominciare, le regole del gioco nel mondo vero.",
+  "firstRunRuleNoPickTitle": "Fotografa, non raccogliere",
+  "firstRunRuleNoPickText": "Le piante non si raccolgono mai: si fotografano e restano dove sono. Non strappare foglie o fiori e non calpestarle.",
+  "firstRunRuleProtectedTitle": "Specie e aree protette",
+  "firstRunRuleProtectedText": "Alcune specie sono protette dalla legge. Nei parchi e nelle riserve resta sui sentieri e rispetta i loro regolamenti.",
+  "firstRunRulePrivateTitle": "Niente proprietà private",
+  "firstRunRulePrivateText": "Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.",
+  "firstRunRuleDaylightTitle": "Con la luce del giorno",
+  "firstRunRuleDaylightText": "Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.",
+  "firstRunRuleSafetyTitle": "Attenzione a dove metti i piedi",
+  "firstRunRuleSafetyText": "Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di' a qualcuno dove vai.",
+  "firstRunRuleToxicTitle": "Le piante non si mangiano",
+  "firstRunRuleToxicText": "Molte piante sono tossiche. Non mangiarle e non usarle per curarti: le pozioni del gioco sono di fantasia e non danno indicazioni d'uso reali.",
+  "firstRunRuleIdentifyTitle": "Il riconoscimento può sbagliare",
+  "firstRunRuleIdentifyText": "Pl@ntNet riconosce le piante dalle foto, ma può sbagliare. Gli avvisi di tossicità sono da verificare.",
+  "firstRunRulePrivacyTitle": "Le tue foto e la tua posizione",
+  "firstRunRulePrivacyText": "Le foto vanno a Pl@ntNet solo per riconoscere la pianta. La posizione delle tue Stazioni resta sul tuo telefono: non si mostra e non si condivide.",
+  "firstRunTermsFooter": "Toccando Accetto confermi di aver letto queste regole e di giocare con prudenza e rispetto.",
+  "firstRunAccept": "Accetto",
+  "firstRunCameraTitle": "Le foto delle piante",
+  "firstRunCameraText": "Per Incontrare una pianta la fotografi con la fotocamera dell'app: la pianta intera, una foglia e il fiore se c'è. Così Pl@ntNet la riconosce e la tua foto entra nell'Erbario.",
+  "firstRunCameraAllow": "Consenti",
+  "firstRunCameraDenied": "Senza fotocamera non puoi Incontrare le piante. Puoi dare il permesso quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "firstRunLocationTitle": "La posizione",
+  "firstRunLocationText": "Dove fotografi una pianta nasce una Stazione: lì potrai tornare ad Attingere. Serve la posizione precisa, solo mentre usi l'app. Le tue Stazioni restano sul telefono: non si mostrano e non si condividono.",
+  "firstRunLocationAllow": "Attiva",
+  "firstRunLocationDenied": "Senza posizione gli Incontri valgono, ma non nascono Stazioni. Puoi attivarla quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "firstRunLocationApproximate": "Con la posizione approssimativa le Stazioni non sono precise. Puoi scegliere la posizione precisa dalle impostazioni di Android, alla voce Autorizzazioni dell'app.",
+  "firstRunOpenSettings": "Apri le impostazioni",
+  "firstRunNext": "Avanti",
+  "firstRunReadyTitle": "Sei pronto a giocare",
+  "firstRunReadyText": "Il tutorial ti accompagna nel primo giro, tutto da casa: fotografi un'aromatica di cucina, la studi e prepari la tua prima pozione.",
+  "firstRunStartTutorial": "Fai il tutorial",
+  "firstRunLater": "Più tardi",
+  "firstRunLaterNote": "Il tutorial resta in Home: lo fai quando vuoi.",
+  "firstRunProgress": "Passo {step} di {total}",
+  "@firstRunProgress": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "rankCurious": "Curioso",
+  "nextRankCurious": "Prossimo Rango: Apprendista, alla fine del tutorial",
+  "tutorialLabel": "Tutorial · passo {step} di {total}",
+  "@tutorialLabel": {
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tutorialIntroTitle": "Il tutorial",
+  "tutorialIntroBody": "Un giro del gioco tutto da casa, con le aromatiche di cucina: salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Alla fine diventi Apprendista.",
+  "tutorialStart": "Inizia",
+  "tutorialSkip": "Salta il tutorial",
+  "tutorialPhotographTitle": "Fotografa un'aromatica",
+  "tutorialPhotographBody": "Tocca Attingi al centro della barra e fotografa salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Pl@ntNet la riconosce: la Incontri, nasce la sua Stazione e ne Attingi la prima Essenza. Fotografa, non raccogliere.",
+  "tutorialStudyTitle": "Studia la tua aromatica",
+  "tutorialStudyBody": "Ogni pianta si studia a Livelli, con domande che fanno imparare anche quando sbagli. Supera il Livello 1 della pianta che hai fotografato: impari la sua Ricetta Comune. Intanto nella barra si è acceso l'Erbario.",
+  "tutorialSecondPhotographTitle": "Fotografa un'altra aromatica",
+  "tutorialSecondPhotographBody": "La Ricetta Comune vuole la pianta e un'altra specie qualsiasi: fotografa un'altra aromatica e ne Attingi una seconda Essenza.",
+  "tutorialBrewTitle": "Prepara la prima pozione",
+  "tutorialBrewBody": "Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.",
+  "tutorialTroveTitle": "Il Bottino dell'Esperienza",
+  "tutorialTroveBody": "Con i PE compri Bottini dell'Esperienza: dentro ci sono le Tavole di altre Ricette. Nella barra si è acceso il Bottino: aprilo, c'è un regalo per te.",
+  "tutorialApprenticeTitle": "Sei Apprendista",
+  "tutorialApprenticeBody": "Hai fatto il primo giro: fotografare, studiare, Attingere, preparare. Ora esci: le piante della tua Zona ti aspettano nell'Erbario, alla voce Da trovare.",
+  "tutorialActionCapture": "Attingi",
+  "tutorialActionStudy": "Studia",
+  "tutorialActionLaboratory": "Apri il Laboratorio",
+  "tutorialActionTrove": "Apri il Bottino",
+  "tutorialActionFinish": "Continua",
+  "erbarioKitchen": "Dalla cucina",
+  "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
+  "sectionOrigin": "Da dove viene",
+  "sourcesLine": "Fonte: {sources}",
+  "@sourcesLine": {
+    "placeholders": {
+      "sources": {
+        "type": "String"
+      }
+    }
+  },
+  "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio."
 }

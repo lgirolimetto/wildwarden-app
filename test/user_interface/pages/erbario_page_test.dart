@@ -352,4 +352,41 @@ void main() {
     expect(find.byKey(const ValueKey('own-photo-stamp')), findsNothing);
     expect(find.text('LE TUE STAZIONI'), findsNothing);
   });
+
+  testWidgets('"Dalla cucina": le aromatiche del tutorial in un vassoio loro, solo durante il tutorial', (
+    tester,
+  ) async {
+    registerTestDependencies(
+      catalog: Valid(smallCatalog(kitchen: true)),
+      events: [
+        OnboardingMarked(mark: OnboardingMark.tutorialStarted, occurredAt: DateTime(2027, 2, 14)),
+        SpeciesEncountered(
+          speciesSci: 'Ocimum basilicum',
+          method: EncounterMethod.photo,
+          occurredAt: DateTime(2027, 2, 14),
+        ),
+      ],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+
+    // Le aromatiche non contano nella Zona.
+    expect(find.text('0/4 trovate'), findsOneWidget);
+    await scrollTo(tester, find.byKey(const ValueKey('met-Ocimum basilicum')));
+    expect(find.text('Dalla cucina'), findsOneWidget);
+
+    await scrollAndTap(tester, find.byKey(const ValueKey('met-Ocimum basilicum')));
+    expect(find.byKey(const ValueKey('species-origin')), findsOneWidget);
+    expect(find.text('Fonte: POWO (Kew)'), findsOneWidget);
+  });
+
+  testWidgets('senza tutorial e senza aromatiche incontrate niente vassoio "Dalla cucina"', (tester) async {
+    registerTestDependencies(
+      catalog: Valid(smallCatalog(kitchen: true)),
+      events: [OnboardingMarked(mark: OnboardingMark.tutorialSkipped, occurredAt: DateTime(2027, 2, 14))],
+    );
+    await pumpDruidApp(tester);
+    await openTab(tester, 'Erbario');
+    expect(find.byKey(const ValueKey('kitchen-tray'), skipOffstage: false), findsNothing);
+  });
 }

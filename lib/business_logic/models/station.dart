@@ -45,6 +45,9 @@ class Station {
   /// I tratti del cielo e del meteo allo scatto: il timbro della tua foto, con la data.
   final List<Trait> traits;
 
+  /// Nata nel tutorial (un'aromatica, anche in casa): non conta per "una Stazione nuova al giorno".
+  final bool tutorial;
+
   const Station({
     required this.id,
     required this.speciesSci,
@@ -58,5 +61,6 @@ class Station {
     this.family,
     this.photo,
     this.traits = const [],
+    this.tutorial = false,
   });
 }

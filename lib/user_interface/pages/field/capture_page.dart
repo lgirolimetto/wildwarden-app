@@ -196,6 +196,12 @@ class _CapturePageState extends State<CapturePage> {
     ];
   }
 
+  String? _origin(CaptureChoice choice) {
+    final sci = choice.species?.sci;
+    final catalog = Get.find<CatalogController>().uiData.fold((_) => null, (c) => c);
+    return sci == null ? null : catalog?.origins[sci]?.resolve(context.contentLanguage);
+  }
+
   List<Widget> _done(BuildContext context, CaptureResult result) {
     final choice = result.choice;
     final name = choice.species == null
@@ -215,6 +221,14 @@ class _CapturePageState extends State<CapturePage> {
         _KindBadge(choice.kind),
         const SizedBox(height: Gaps.s),
         Text(choice.kind == StationKind.guest ? context.l10n.captureGuestText : context.l10n.captureDiscoveryText),
+        // Il primo "non lo sapevo": da dove viene un'Ospite di cucina (il basilico), con la fonte.
+        if (_origin(choice) case final origin?) ...[
+          const SizedBox(height: Gaps.s),
+          ClayCard(
+            key: const ValueKey('capture-origin'),
+            child: Text(origin, style: context.texts.bodyLarge),
+          ),
+        ],
         const SizedBox(height: Gaps.m),
       ],
       if (switch (result.guess) {
@@ -232,6 +246,10 @@ class _CapturePageState extends State<CapturePage> {
         StationOutcome.limitReached => context.l10n.captureStationLimit,
       }, key: const ValueKey('capture-station')),
       if (result.firstPhoto) Text(context.l10n.captureFirstPhoto, key: const ValueKey('capture-first-photo')),
+      if (result.essence) ...[
+        const SizedBox(height: Gaps.s),
+        Text(context.l10n.captureTutorialEssence, key: const ValueKey('capture-essence')),
+      ],
       if (result.xp > 0) ...[
         const SizedBox(height: Gaps.s),
         Text(

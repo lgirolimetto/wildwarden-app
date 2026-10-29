@@ -40,6 +40,22 @@ void main() {
     });
   });
 
+  test('le aromatiche del tutorial: a parte dalla Zona, con foto e chiave GBIF; il basilico è un\'Ospite', () async {
+    final result = await AssetCatalogRepository().loadCatalog();
+
+    result.fold((failures) => fail('Catalogo non valido: ${failures.join(', ')}'), (catalog) {
+      expect(catalog.kitchen.map((s) => s.sci), ['Salvia rosmarinus', 'Salvia officinalis', 'Ocimum basilicum']);
+      expect(catalog.kitchen.every((s) => s.images.isNotEmpty && s.gbifKey != null), isTrue);
+      expect(catalog.species.where((s) => catalog.isKitchen(s.sci)), isEmpty, reason: 'non entrano nella Zona');
+      expect(catalog.speciesBySci('Ocimum basilicum')?.name.resolve('it'), 'Basilico');
+      expect(catalog.speciesByGbifKey(catalog.kitchen.last.gbifKey!)?.sci, 'Ocimum basilicum');
+      expect(catalog.kitchenGuests, {'Ocimum basilicum'});
+      expect(catalog.origins['Ocimum basilicum']?.resolve('it'), contains('Asia'));
+      expect(catalog.originSources['Ocimum basilicum']?.single.url, startsWith('https://powo.science.kew.org/'));
+      expect(catalog.speciesBySci('Laurus nobilis'), isNotNull, reason: "l'alloro è della Zona");
+    });
+  });
+
   test('un JSON non valido diventa un Fail, non un\'eccezione', () async {
     final result = await AssetCatalogRepository(bundle: _StringBundle('{rotto')).loadCatalog();
     expect(result.isValid, isFalse);

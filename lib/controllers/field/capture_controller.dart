@@ -8,6 +8,7 @@ import 'package:druid_app/business_logic/models/plant_identification.dart';
 import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/field/capture.dart';
 import 'package:druid_app/business_logic/rules/field/stations.dart';
+import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:get/get.dart';
 
@@ -52,6 +53,9 @@ class CaptureResult {
   /// La foto è la prima di una specie del catalogo: prende il posto di quella dell'Erbario, con il timbro.
   final bool firstPhoto;
 
+  /// Regola del tutorial: la foto di un'aromatica ha dato subito un'Essenza.
+  final bool essence;
+
   const CaptureResult({
     required this.choice,
     required this.guess,
@@ -59,6 +63,7 @@ class CaptureResult {
     required this.station,
     required this.firstEncounter,
     this.firstPhoto = false,
+    this.essence = false,
   });
 
   String get speciesSci => choice.species?.sci ?? choice.candidate.scientificName;
@@ -95,7 +100,9 @@ class CaptureController extends GetxController {
 
   Future<void> start() async {
     if (_config.plantNetApiKey.isEmpty) return _go(CapturePhase.noKey);
-    if (!canCreateStation(_progress.state, _progress.now)) return _go(CapturePhase.limitReached);
+    // Durante il tutorial niente limite prima dello scatto: le aromatiche non contano per "una Stazione al giorno".
+    final tutorial = tutorialStatus(_progress.state) == TutorialStatus.inProgress;
+    if (!tutorial && !canCreateStation(_progress.state, _progress.now)) return _go(CapturePhase.limitReached);
     _go(CapturePhase.shooting);
     final taken = (await _camera.takePhoto()).fold((_) => TakenPhoto.cancelled, (taken) => taken);
     if (taken.photos.isEmpty) return _go(CapturePhase.cancelled);
@@ -152,13 +159,17 @@ class CaptureController extends GetxController {
     final first = !state.hasEncountered(sci);
     final hadPhoto = firstPhotoOf(state, sci) != null;
     final position = taken.position;
+    // Regola del tutorial (capitolo 03): un'aromatica fa nascere la Stazione anche in casa, fuori dal limite del
+    // giorno, e la foto dà subito l'Essenza.
+    final tutorialRule =
+        tutorialStatus(state) == TutorialStatus.inProgress && tutorialSpecies.contains(choice.species?.sci);
 
     final StationOutcome station;
     if (position == null) {
       station = StationOutcome.noPosition;
     } else if (sameStation(state, sci, position.latitude, position.longitude) != null) {
       station = StationOutcome.existing;
-    } else if (!canCreateStation(state, now)) {
+    } else if (!tutorialRule && !canCreateStation(state, now)) {
       station = StationOutcome.limitReached;
     } else {
       station = StationOutcome.created;
@@ -179,6 +190,7 @@ class CaptureController extends GetxController {
             createdAt: now,
             photo: _keep(taken.path),
             traits: taken.traits,
+            tutorial: tutorialRule,
             commonName: choice.species == null && choice.candidate.commonNames.isNotEmpty
                 ? choice.candidate.commonNames.first
                 : null,
@@ -188,6 +200,7 @@ class CaptureController extends GetxController {
       );
     }
     if (xp > 0) await _progress.record(XpGranted(xp: xp, reason: 'capture', occurredAt: now));
+    final essence = tutorialRule && await _progress.drawFromPhoto(sci, traits: [for (final t in taken.traits) t.name]);
     result = CaptureResult(
       choice: choice,
       guess: guessResult,
@@ -195,6 +208,7 @@ class CaptureController extends GetxController {
       station: station,
       firstEncounter: first,
       firstPhoto: station == StationOutcome.created && _kept != null && choice.species != null && !hadPhoto,
+      essence: essence,
     );
     _go(CapturePhase.done);
   }

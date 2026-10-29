@@ -6,6 +6,7 @@ import 'package:druid_app/business_logic/interfaces/i_catalog_repository.dart';
 import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
+import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -14,13 +15,19 @@ import 'package:druid_app/user_interface/common_widgets/remote_image.dart';
 import 'package:flutter/material.dart';
 
 /// Catalogo ridotto a 4 specie: elleboro verde, malva, piè di gallo, faggio.
-Catalog smallCatalog({Map<String, List<String>> protection = const {}}) {
+/// Con [kitchen] anche le aromatiche del tutorial, dal catalogo vero dell'app.
+Catalog smallCatalog({Map<String, List<String>> protection = const {}, bool kitchen = false}) {
   final json = jsonDecode(File('test/fixtures/catalog_small.json').readAsStringSync()) as Map<String, dynamic>;
   // Nel catalogo ridotto nessuna specie è protetta: i test che servono la proteggono qui.
   for (final species in (json['species'] as List).cast<Map<String, dynamic>>()) {
     if (protection.containsKey(species['sci'])) species['protection'] = protection[species['sci']];
   }
-  return Catalog.fromJson(json);
+  return Catalog.fromJson(
+    json,
+    kitchen: kitchen
+        ? jsonDecode(File('assets/content/kitchen/catalog.json').readAsStringSync()) as Map<String, dynamic>
+        : null,
+  );
 }
 
 class InMemoryPreferences implements IPreferences {
@@ -132,4 +139,31 @@ class InMemoryFieldTestLog implements IFieldTestLog {
 
   @override
   Future<void> clear() async => rows.clear();
+}
+
+/// Permessi finti: rispondono come si chiede e contano le richieste.
+class FakePermissions implements IPermissions {
+  PermissionOutcome camera;
+  PermissionOutcome location;
+  final requests = <String>[];
+
+  FakePermissions({this.camera = PermissionOutcome.granted, this.location = PermissionOutcome.granted});
+
+  @override
+  Future<Validation<PermissionOutcome>> requestCamera() async {
+    requests.add('camera');
+    return Valid(camera);
+  }
+
+  @override
+  Future<Validation<PermissionOutcome>> requestLocation() async {
+    requests.add('location');
+    return Valid(location);
+  }
+
+  @override
+  Future<Validation<bool>> openAppSettings() async {
+    requests.add('settings');
+    return Valid(true);
+  }
 }

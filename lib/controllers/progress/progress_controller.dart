@@ -83,7 +83,15 @@ class ProgressController extends LoadableController<GameState> {
   /// Essenza attinta simulata (strumento di debug finché non c'è il campo): immagazzina Vis, dà PE e, se è la
   /// prima della specie, incassa i suoi PE virtuali. Restituisce `false` se oggi la specie è già stata attinta o non
   /// è ancora incontrata.
-  Future<bool> drawSimulated(String speciesSci, {List<String> traits = const []}) async {
+  Future<bool> drawSimulated(String speciesSci, {List<String> traits = const []}) =>
+      _draw(speciesSci, traits: traits, simulated: true);
+
+  /// Essenza attinta dalla foto (regola del tutorial, capitolo 03: la foto di un'aromatica dà subito l'Essenza, con i
+  /// tratti dello scatto). Attingere sul posto per tutti arriva con il blocco 3.
+  Future<bool> drawFromPhoto(String speciesSci, {List<String> traits = const []}) =>
+      _draw(speciesSci, traits: traits, simulated: false);
+
+  Future<bool> _draw(String speciesSci, {required List<String> traits, required bool simulated}) async {
     if (!canDraw(state, speciesSci, now)) return false;
     // Gli effetti delle pozioni usate: Abbondanza (Vis), Limpidezza (purezza), Presagio (un tratto d'elezione).
     final effects = activeEffects(state, now);
@@ -97,7 +105,7 @@ class ProgressController extends LoadableController<GameState> {
       EssenceDrawn(
         speciesSci: speciesSci,
         traits: withOmen,
-        simulated: true,
+        simulated: simulated,
         vis: effects[PotionEffect.abundance] == null
             ? visPerDraw
             : visWithAbundance(visPerDraw, effects[PotionEffect.abundance]!),

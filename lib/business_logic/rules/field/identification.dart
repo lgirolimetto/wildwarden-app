@@ -50,7 +50,9 @@ Species? catalogSpeciesOf(PlantCandidate candidate, Catalog catalog) {
   final byKey = candidate.gbifKey == null ? null : catalog.speciesByGbifKey(candidate.gbifKey!);
   if (byKey != null) return byKey;
   final wanted = binomial(candidate.scientificName);
-  return catalog.species.where((s) => binomial(s.sci) == wanted).firstOrNull;
+  final bySynonym = catalog.synonyms[wanted];
+  if (bySynonym != null) return catalog.speciesBySci(bySynonym);
+  return [...catalog.species, ...catalog.kitchen].where((s) => binomial(s.sci) == wanted).firstOrNull;
 }
 
 /// "Helleborus viridis subsp. occidentalis" → "helleborus viridis"; "Mentha × piperita" → "mentha piperita".

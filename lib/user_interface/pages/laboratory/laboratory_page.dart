@@ -8,6 +8,7 @@ import 'package:druid_app/user_interface/pages/laboratory/ready_view.dart';
 import 'package:druid_app/user_interface/pages/laboratory/shelf_view.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/recipe_book_page.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,6 +32,9 @@ class _LaboratoryPageState extends State<LaboratoryPage> {
     child: GameDataBuilder(
       builder: (context, catalog, state, _) {
         final essences = state.essences.where((e) => e.vis > 0).length;
+        // Al passo della pozione del tutorial il Laboratorio mostra solo le Ricette pronte (si nasconde il resto).
+        final brewing = currentTutorialStep(state) == TutorialStep.brew;
+        final tab = brewing ? 2 : _tab;
         final now = Get.find<ProgressController>().now;
         final header = Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,7 +43,7 @@ class _LaboratoryPageState extends State<LaboratoryPage> {
               title: context.l10n.labTitle,
               icon: Icons.science_rounded,
               iconColor: context.druid.levelColor(4),
-              trailing: switch (_tab) {
+              trailing: switch (tab) {
                 0 => Pill(
                   context.l10n.recipeBookPlates(RecipeBookView.platesOf(catalog, state)),
                   key: const ValueKey('recipe-book-count'),
@@ -55,20 +59,21 @@ class _LaboratoryPageState extends State<LaboratoryPage> {
                 ),
               },
             ),
-            ClayTabs(
-              tabs: [
-                ClayTab(key: const ValueKey('lab-tab-recipe-book'), label: context.l10n.recipeBookTitle),
-                ClayTab(key: const ValueKey('lab-tab-pantry'), label: context.l10n.pantryTitle),
-                ClayTab(key: const ValueKey('lab-tab-ready'), label: context.l10n.labTabReady),
-                ClayTab(key: const ValueKey('lab-tab-shelf'), label: context.l10n.labTabShelf),
-              ],
-              scrollable: true,
-              selected: _tab,
-              onChanged: (tab) => setState(() => _tab = tab),
-            ),
+            if (!brewing)
+              ClayTabs(
+                tabs: [
+                  ClayTab(key: const ValueKey('lab-tab-recipe-book'), label: context.l10n.recipeBookTitle),
+                  ClayTab(key: const ValueKey('lab-tab-pantry'), label: context.l10n.pantryTitle),
+                  ClayTab(key: const ValueKey('lab-tab-ready'), label: context.l10n.labTabReady),
+                  ClayTab(key: const ValueKey('lab-tab-shelf'), label: context.l10n.labTabShelf),
+                ],
+                scrollable: true,
+                selected: _tab,
+                onChanged: (tab) => setState(() => _tab = tab),
+              ),
           ],
         );
-        return switch (_tab) {
+        return switch (tab) {
           0 => RecipeBookView(catalog: catalog, state: state, header: header),
           1 => PantryView(catalog: catalog, state: state, header: header),
           2 => ReadyView(catalog: catalog, state: state, header: header),

@@ -563,54 +563,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String missionLabel(int index, int total) {
-    return 'Quest $index of $total';
-  }
-
-  @override
-  String get missionVisitErbarioTitle => 'Open the Herbarium';
-
-  @override
-  String get missionVisitErbarioBody =>
-      'The Herbarium gathers the species of the area, each with photo and name. The rest you discover by studying and Meeting them.';
-
-  @override
-  String get missionFirstEncounterTitle => 'Meet a species';
-
-  @override
-  String get missionFirstEncounterBody =>
-      'Tap Draw in the middle of the bar and photograph a plant: whole, a leaf and the flower if there is one. Once recognised, it appears in the Herbarium with your photo. Photograph, don\'t pick.';
-
-  @override
-  String get missionFirstLevelTitle => 'Study your first species';
-
-  @override
-  String get missionFirstLevelBody =>
-      'Pick a species in season and pass its first study Level: you can start from home. Mistakes teach too, and they earn XP.';
-
-  @override
-  String get missionFirstRecipeTitle => 'Your first Recipe';
-
-  @override
-  String get missionFirstRecipeBody =>
-      'Studying a species teaches you its Common Recipe: you\'ll find it in the Recipe Book, on the plant\'s Page. The other Plates on the Page come from the Trove of Experience.';
-
-  @override
-  String get missionSkip => 'Skip the Apprenticeship';
-
-  @override
-  String get missionActionOpenErbario => 'Open the Herbarium';
-
-  @override
-  String get missionActionStudy => 'Start studying';
-
-  @override
-  String get missionActionRecipes => 'Open the Recipe Book';
-
-  @override
-  String get missionGlossary => 'Glossary';
-
-  @override
   String get apprenticeshipComplete => 'Apprenticeship complete!';
 
   @override
@@ -2274,4 +2226,235 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get stationsNote =>
       'Only on your phone: the exact spot is never shown or shared.';
+
+  @override
+  String get firstRunWelcomeTitle => 'Welcome to Druid';
+
+  @override
+  String get firstRunWelcomeIntro =>
+      'You are a herbalist: you find real plants, photograph them, study them and brew fantasy potions with their Essences. Before you start, the rules of the game in the real world.';
+
+  @override
+  String get firstRunRuleNoPickTitle => 'Photograph, don\'t pick';
+
+  @override
+  String get firstRunRuleNoPickText =>
+      'Plants are never picked: you photograph them and they stay where they are. Don\'t tear off leaves or flowers and don\'t trample them.';
+
+  @override
+  String get firstRunRuleProtectedTitle => 'Protected species and areas';
+
+  @override
+  String get firstRunRuleProtectedText =>
+      'Some species are protected by law. In parks and reserves stay on the paths and respect their rules.';
+
+  @override
+  String get firstRunRulePrivateTitle => 'No private property';
+
+  @override
+  String get firstRunRulePrivateText =>
+      'Don\'t enter private gardens, fields or land without permission: photograph from where you are allowed to be.';
+
+  @override
+  String get firstRunRuleDaylightTitle => 'In daylight';
+
+  @override
+  String get firstRunRuleDaylightText =>
+      'Don\'t go out to play at night or in poor light. Moon Traits last all day: you never need to.';
+
+  @override
+  String get firstRunRuleSafetyTitle => 'Watch your step';
+
+  @override
+  String get firstRunRuleSafetyText =>
+      'Mind the ground and the traffic: don\'t take photos while crossing the road or driving. If you go far, tell someone where you are going.';
+
+  @override
+  String get firstRunRuleToxicTitle => 'Plants are not food';
+
+  @override
+  String get firstRunRuleToxicText =>
+      'Many plants are toxic. Don\'t eat them and don\'t use them as remedies: the game\'s potions are fantasy and give no real instructions for use.';
+
+  @override
+  String get firstRunRuleIdentifyTitle => 'Identification can be wrong';
+
+  @override
+  String get firstRunRuleIdentifyText =>
+      'Pl@ntNet recognises plants from photos, but it can be wrong. Toxicity warnings are to be checked.';
+
+  @override
+  String get firstRunRulePrivacyTitle => 'Your photos and your location';
+
+  @override
+  String get firstRunRulePrivacyText =>
+      'Photos go to Pl@ntNet only to recognise the plant. The location of your Stations stays on your phone: it is never shown or shared.';
+
+  @override
+  String get firstRunTermsFooter =>
+      'By tapping I agree you confirm you have read these rules and will play carefully and respectfully.';
+
+  @override
+  String get firstRunAccept => 'I agree';
+
+  @override
+  String get firstRunCameraTitle => 'Photos of plants';
+
+  @override
+  String get firstRunCameraText =>
+      'To Meet a plant you photograph it with the app\'s camera: the whole plant, a leaf and the flower if there is one. Pl@ntNet recognises it and your photo goes into the Herbarium.';
+
+  @override
+  String get firstRunCameraAllow => 'Allow';
+
+  @override
+  String get firstRunCameraDenied =>
+      'Without the camera you can\'t Meet plants. You can grant the permission at any time in Android settings, under App permissions.';
+
+  @override
+  String get firstRunLocationTitle => 'Location';
+
+  @override
+  String get firstRunLocationText =>
+      'Where you photograph a plant a Station is born: you can come back there to Draw. The app needs your precise location, only while you use it. Your Stations stay on your phone: they are never shown or shared.';
+
+  @override
+  String get firstRunLocationAllow => 'Turn on';
+
+  @override
+  String get firstRunLocationDenied =>
+      'Without location Encounters count, but no Stations are born. You can turn it on at any time in Android settings, under App permissions.';
+
+  @override
+  String get firstRunLocationApproximate =>
+      'With approximate location Stations are not precise. You can choose precise location in Android settings, under App permissions.';
+
+  @override
+  String get firstRunOpenSettings => 'Open settings';
+
+  @override
+  String get firstRunNext => 'Next';
+
+  @override
+  String get firstRunReadyTitle => 'You\'re ready to play';
+
+  @override
+  String get firstRunReadyText =>
+      'The tutorial guides you through your first round, all from home: you photograph a kitchen herb, study it and brew your first potion.';
+
+  @override
+  String get firstRunStartTutorial => 'Play the tutorial';
+
+  @override
+  String get firstRunLater => 'Later';
+
+  @override
+  String get firstRunLaterNote =>
+      'The tutorial stays on Home: play it whenever you like.';
+
+  @override
+  String firstRunProgress(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get rankCurious => 'Curious';
+
+  @override
+  String get nextRankCurious =>
+      'Next Rank: Apprentice, at the end of the tutorial';
+
+  @override
+  String tutorialLabel(int step, int total) {
+    return 'Tutorial · step $step of $total';
+  }
+
+  @override
+  String get tutorialIntroTitle => 'The tutorial';
+
+  @override
+  String get tutorialIntroBody =>
+      'A round of the game all from home, with kitchen herbs: sage, rosemary, bay or basil, even in a pot or from the supermarket. At the end you become an Apprentice.';
+
+  @override
+  String get tutorialStart => 'Start';
+
+  @override
+  String get tutorialSkip => 'Skip the tutorial';
+
+  @override
+  String get tutorialPhotographTitle => 'Photograph a herb';
+
+  @override
+  String get tutorialPhotographBody =>
+      'Tap Draw in the middle of the bar and photograph sage, rosemary, bay or basil, even in a pot or from the supermarket. Pl@ntNet recognises it: you Meet it, its Station is born and you Draw its first Essence. Photograph, don\'t pick.';
+
+  @override
+  String get tutorialStudyTitle => 'Study your herb';
+
+  @override
+  String get tutorialStudyBody =>
+      'Every plant is studied in Levels, with questions that teach even when you get them wrong. Pass Level 1 of the plant you photographed: you learn its Common Recipe. Meanwhile the Herbarium has lit up in the bar.';
+
+  @override
+  String get tutorialSecondPhotographTitle => 'Photograph another herb';
+
+  @override
+  String get tutorialSecondPhotographBody =>
+      'The Common Recipe needs the plant and any other species: photograph another herb and Draw a second Essence.';
+
+  @override
+  String get tutorialBrewTitle => 'Brew your first potion';
+
+  @override
+  String get tutorialBrewBody =>
+      'The Laboratory has lit up in the bar: open Ready recipes and brew the Common Recipe with your two Essences. Potions are fantasy.';
+
+  @override
+  String get tutorialTroveTitle => 'The Trove of Experience';
+
+  @override
+  String get tutorialTroveBody =>
+      'With XP you buy Troves of Experience: inside are the Plates of other Recipes. The Trove has lit up in the bar: open it, there\'s a gift for you.';
+
+  @override
+  String get tutorialApprenticeTitle => 'You\'re an Apprentice';
+
+  @override
+  String get tutorialApprenticeBody =>
+      'You did your first round: photograph, study, Draw, brew. Now go out: the plants of your Area are waiting in the Herbarium, under To find.';
+
+  @override
+  String get tutorialActionCapture => 'Draw';
+
+  @override
+  String get tutorialActionStudy => 'Study';
+
+  @override
+  String get tutorialActionLaboratory => 'Open the Laboratory';
+
+  @override
+  String get tutorialActionTrove => 'Open the Trove';
+
+  @override
+  String get tutorialActionFinish => 'Continue';
+
+  @override
+  String get erbarioKitchen => 'From the kitchen';
+
+  @override
+  String get kitchenHint =>
+      'A kitchen herb: you\'ll find it in a pot, on the balcony or at the supermarket. Photograph it from home, even just a leaf.';
+
+  @override
+  String get sectionOrigin => 'Where it comes from';
+
+  @override
+  String sourcesLine(String sources) {
+    return 'Source: $sources';
+  }
+
+  @override
+  String get captureTutorialEssence =>
+      'You Drew its first Essence, with the Traits of this moment: you\'ll find it in the Laboratory Pantry.';
 }

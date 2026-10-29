@@ -1,4 +1,6 @@
+import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:druid_app/controllers/home/home_controller.dart';
+import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:druid_app/controllers/theme/theme_controller.dart';
 import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
@@ -20,10 +22,22 @@ class HomePage extends StatelessWidget {
   static const _pages = [StudyHomePage(), ErbarioPage(), LaboratoryPage(), TrovePage()];
 
   @override
-  Widget build(BuildContext context) =>
-      GetBuilder<HomeController>(builder: (home) => _scaffold(context, home.tab, home.select));
+  Widget build(BuildContext context) => GetBuilder<ProgressController>(
+    builder: (progress) => GetBuilder<HomeController>(
+      builder: (home) {
+        // Durante il tutorial le sezioni si accendono man mano; una sezione spenta non si mostra mai.
+        final visible = visibleSections(progress.state);
+        final hidden = {
+          for (final section in HomeSection.values)
+            if (!visible.contains(section)) section.index,
+        };
+        final index = hidden.contains(home.tab) ? HomeController.studyTab : home.tab;
+        return _scaffold(context, index, home.select, hidden);
+      },
+    ),
+  );
 
-  Widget _scaffold(BuildContext context, int index, void Function(int) select) => Scaffold(
+  Widget _scaffold(BuildContext context, int index, void Function(int) select, Set<int> hidden) => Scaffold(
     // La barra galleggia sopra il contenuto: le pagine lasciano spazio in fondo (`homeBottomInset`).
     extendBody: true,
     // Niente SafeArea in alto: la pagina Studio fa arrivare il diorama sotto la barra di stato, le altre la
@@ -43,6 +57,7 @@ class HomePage extends StatelessWidget {
     bottomNavigationBar: ClayNavBar(
       selectedIndex: index,
       onSelected: select,
+      hidden: hidden,
       action: (
         icon: Icons.photo_camera_rounded,
         label: context.l10n.captureAction,

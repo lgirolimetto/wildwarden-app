@@ -66,7 +66,7 @@ List<CollectedPage> collectedPages(Catalog catalog, GameState state) {
   final known = knownRecipeIds(catalog, state);
   bool has(PlantRecipe r) => known.contains(r.id) || state.missingPieces.containsKey(r.id);
   final pages = [
-    for (final page in recipeBookOf(catalog).pages)
+    for (final page in [...recipeBookOf(catalog).pages, ...recipeBookOf(catalog).kitchenPages])
       if (page.recipes.any(has))
         CollectedPage(
           page: page,

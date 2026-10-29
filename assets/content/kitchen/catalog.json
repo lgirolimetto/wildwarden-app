@@ -1,0 +1,277 @@
+{
+ "formatVersion": 1,
+ "species": [
+  {
+   "sci": "Salvia rosmarinus",
+   "gbifKey": 10902460,
+   "name": {
+    "it": "Rosmarino",
+    "en": "Rosemary"
+   },
+   "order": "Lamiales",
+   "family": "Lamiaceae",
+   "genus": "Salvia",
+   "congeners": [],
+   "observations": 1099,
+   "monthsRelative": [
+    0.056,
+    0.066,
+    0.115,
+    0.235,
+    0.128,
+    0.078,
+    0.048,
+    0.054,
+    0.07,
+    0.083,
+    0.03,
+    0.037
+   ],
+   "bestMonths": [
+    3,
+    4,
+    5
+   ],
+   "seasonShare": {
+    "winter": 0.25,
+    "spring": 0.25,
+    "summer": 0.25,
+    "autumn": 0.25
+   },
+   "peakSeason": "summer",
+   "elevationMedian": null,
+   "elevationSamples": 0,
+   "bandShare": {
+    "plain": 1.0,
+    "hill": 0.0,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/605303065/medium.jpg",
+     "creator": "Riccardo Riva",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5938647768,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/613999504/medium.jpg",
+     "creator": "etrusko25",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6185926551,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/634932422/medium.jpg",
+     "creator": "Jonathan Hughes",
+     "license": "CC0",
+     "gbifOccurrence": 6518434433,
+     "local": true
+    }
+   ],
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": "perennial",
+    "introducedInItaly": false,
+    "ecology": null,
+    "dispersal": []
+   },
+   "protection": [],
+   "grade": "common",
+   "favouredTraits": [
+    "sun",
+    "dew",
+    "dawn"
+   ],
+   "vocation": [
+    "clarity"
+   ],
+   "synonyms": [
+    "Rosmarinus officinalis"
+   ]
+  },
+  {
+   "sci": "Salvia officinalis",
+   "gbifKey": 2927004,
+   "name": {
+    "it": "Salvia",
+    "en": "Sage"
+   },
+   "order": "Lamiales",
+   "family": "Lamiaceae",
+   "genus": "Salvia",
+   "congeners": [],
+   "observations": 1837,
+   "monthsRelative": [
+    0.014,
+    0.009,
+    0.02,
+    0.139,
+    0.226,
+    0.162,
+    0.106,
+    0.12,
+    0.091,
+    0.071,
+    0.029,
+    0.013
+   ],
+   "bestMonths": [
+    4,
+    5,
+    6
+   ],
+   "seasonShare": {
+    "winter": 0.25,
+    "spring": 0.25,
+    "summer": 0.25,
+    "autumn": 0.25
+   },
+   "peakSeason": "summer",
+   "elevationMedian": null,
+   "elevationSamples": 0,
+   "bandShare": {
+    "plain": 1.0,
+    "hill": 0.0,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/659654018/medium.jpg",
+     "creator": "Yi CHEN",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6552725844,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/478933697/medium.jpeg",
+     "creator": "Malte Krömer",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5104529016,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/571663483/medium.jpg",
+     "creator": "Ioannis Magouras",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6422248414,
+     "local": true
+    }
+   ],
+   "traits": {
+    "growthForm": "shrub",
+    "lifeCycle": "perennial",
+    "introducedInItaly": null,
+    "ecology": null,
+    "dispersal": []
+   },
+   "protection": [],
+   "grade": "common",
+   "favouredTraits": [
+    "sun",
+    "dusk",
+    "waningMoon"
+   ],
+   "vocation": [
+    "regrowth"
+   ]
+  },
+  {
+   "sci": "Ocimum basilicum",
+   "gbifKey": 2927096,
+   "name": {
+    "it": "Basilico",
+    "en": "Basil"
+   },
+   "order": "Lamiales",
+   "family": "Lamiaceae",
+   "genus": "Ocimum",
+   "congeners": [],
+   "observations": 142,
+   "monthsRelative": [
+    0.035,
+    0.0,
+    0.0,
+    0.127,
+    0.12,
+    0.085,
+    0.254,
+    0.218,
+    0.134,
+    0.014,
+    0.014,
+    0.0
+   ],
+   "bestMonths": [
+    7,
+    8,
+    9
+   ],
+   "seasonShare": {
+    "winter": 0.25,
+    "spring": 0.25,
+    "summer": 0.25,
+    "autumn": 0.25
+   },
+   "peakSeason": "summer",
+   "elevationMedian": null,
+   "elevationSamples": 0,
+   "bandShare": {
+    "plain": 1.0,
+    "hill": 0.0,
+    "mountain": 0.0
+   },
+   "images": [
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/570765836/medium.jpg",
+     "creator": "Ryan Donnelly",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 5838024082,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/591889275/medium.jpg",
+     "creator": "Pietro Maiorana Montes",
+     "license": "CC0",
+     "gbifOccurrence": 6163084977,
+     "local": true
+    },
+    {
+     "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/643584612/medium.jpg",
+     "creator": "Guillaume Delaitre",
+     "license": "CC BY 4.0",
+     "gbifOccurrence": 6235849867,
+     "local": false
+    }
+   ],
+   "traits": {
+    "growthForm": "herb",
+    "lifeCycle": "annual",
+    "introducedInItaly": true,
+    "ecology": null,
+    "dispersal": []
+   },
+   "protection": [],
+   "grade": "common",
+   "favouredTraits": [
+    "sun",
+    "dawn",
+    "waxingMoon"
+   ],
+   "vocation": [
+    "abundance"
+   ],
+   "guest": true,
+   "origin": {
+    "it": "Il basilico non cresce spontaneo in Italia: viene dalle zone tropicali e subtropicali dell'Asia, fino al nord dell'Australia, e si coltiva da migliaia di anni. Il simbolo della cucina mediterranea è un'Ospite.",
+    "en": "Basil doesn't grow wild in Italy: it comes from the tropics and subtropics of Asia, down to northern Australia, and has been grown for thousands of years. The symbol of Mediterranean cooking is a Guest."
+   },
+   "originSources": [
+    {
+     "name": "POWO (Kew)",
+     "url": "https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:452874-1"
+    }
+   ]
+  }
+ ]
+}

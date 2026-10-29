@@ -191,4 +191,21 @@ void main() {
     expect(state.pendingXp['Helleborus viridis'], 3 * XpRules.correctFirstTry + XpRules.levelPassed);
     expect(state.xp, 0);
   });
+
+  test("il Livello 1 di un'aromatica del tutorial: foto, nome scientifico, forma di crescita", () {
+    final withKitchen = smallCatalog(kitchen: true);
+    final basil = withKitchen.speciesBySci('Ocimum basilicum')!;
+    expect(factsAtLevel(basil, withKitchen, 1).map((f) => f.kind).toSet(), {
+      FactKind.appearance,
+      FactKind.scientificName,
+      FactKind.growthForm,
+    });
+    final session = StudySession.learning(speciesSci: basil.sci, level: 1, catalog: withKitchen, random: Random(1));
+    expect(session.totalFacts, 3);
+    expect(
+      session.current.options,
+      hasLength(greaterThan(1)),
+      reason: 'le domande si costruiscono anche fuori dalla Zona',
+    );
+  });
 }

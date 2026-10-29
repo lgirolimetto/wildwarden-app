@@ -561,54 +561,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String missionLabel(int index, int total) {
-    return 'Missione $index di $total';
-  }
-
-  @override
-  String get missionVisitErbarioTitle => 'Apri l\'Erbario';
-
-  @override
-  String get missionVisitErbarioBody =>
-      'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.';
-
-  @override
-  String get missionFirstEncounterTitle => 'Incontra una specie';
-
-  @override
-  String get missionFirstEncounterBody =>
-      'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.';
-
-  @override
-  String get missionFirstLevelTitle => 'Studia la tua prima specie';
-
-  @override
-  String get missionFirstLevelBody =>
-      'Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.';
-
-  @override
-  String get missionFirstRecipeTitle => 'La prima Ricetta';
-
-  @override
-  String get missionFirstRecipeBody =>
-      'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.';
-
-  @override
-  String get missionSkip => 'Salta l\'Apprendistato';
-
-  @override
-  String get missionActionOpenErbario => 'Apri l\'Erbario';
-
-  @override
-  String get missionActionStudy => 'Inizia a studiare';
-
-  @override
-  String get missionActionRecipes => 'Apri il Ricettario';
-
-  @override
-  String get missionGlossary => 'Glossario';
-
-  @override
   String get apprenticeshipComplete => 'Apprendistato completato!';
 
   @override
@@ -2285,4 +2237,235 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get stationsNote =>
       'Solo sul tuo telefono: il punto preciso non si mostra e non si condivide.';
+
+  @override
+  String get firstRunWelcomeTitle => 'Benvenuto in Druid';
+
+  @override
+  String get firstRunWelcomeIntro =>
+      'Sei un erborista: trovi le piante vere, le fotografi, le studi e con le loro Essenze prepari pozioni di fantasia. Prima di cominciare, le regole del gioco nel mondo vero.';
+
+  @override
+  String get firstRunRuleNoPickTitle => 'Fotografa, non raccogliere';
+
+  @override
+  String get firstRunRuleNoPickText =>
+      'Le piante non si raccolgono mai: si fotografano e restano dove sono. Non strappare foglie o fiori e non calpestarle.';
+
+  @override
+  String get firstRunRuleProtectedTitle => 'Specie e aree protette';
+
+  @override
+  String get firstRunRuleProtectedText =>
+      'Alcune specie sono protette dalla legge. Nei parchi e nelle riserve resta sui sentieri e rispetta i loro regolamenti.';
+
+  @override
+  String get firstRunRulePrivateTitle => 'Niente proprietà private';
+
+  @override
+  String get firstRunRulePrivateText =>
+      'Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.';
+
+  @override
+  String get firstRunRuleDaylightTitle => 'Con la luce del giorno';
+
+  @override
+  String get firstRunRuleDaylightText =>
+      'Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.';
+
+  @override
+  String get firstRunRuleSafetyTitle => 'Attenzione a dove metti i piedi';
+
+  @override
+  String get firstRunRuleSafetyText =>
+      'Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di\' a qualcuno dove vai.';
+
+  @override
+  String get firstRunRuleToxicTitle => 'Le piante non si mangiano';
+
+  @override
+  String get firstRunRuleToxicText =>
+      'Molte piante sono tossiche. Non mangiarle e non usarle per curarti: le pozioni del gioco sono di fantasia e non danno indicazioni d\'uso reali.';
+
+  @override
+  String get firstRunRuleIdentifyTitle => 'Il riconoscimento può sbagliare';
+
+  @override
+  String get firstRunRuleIdentifyText =>
+      'Pl@ntNet riconosce le piante dalle foto, ma può sbagliare. Gli avvisi di tossicità sono da verificare.';
+
+  @override
+  String get firstRunRulePrivacyTitle => 'Le tue foto e la tua posizione';
+
+  @override
+  String get firstRunRulePrivacyText =>
+      'Le foto vanno a Pl@ntNet solo per riconoscere la pianta. La posizione delle tue Stazioni resta sul tuo telefono: non si mostra e non si condivide.';
+
+  @override
+  String get firstRunTermsFooter =>
+      'Toccando Accetto confermi di aver letto queste regole e di giocare con prudenza e rispetto.';
+
+  @override
+  String get firstRunAccept => 'Accetto';
+
+  @override
+  String get firstRunCameraTitle => 'Le foto delle piante';
+
+  @override
+  String get firstRunCameraText =>
+      'Per Incontrare una pianta la fotografi con la fotocamera dell\'app: la pianta intera, una foglia e il fiore se c\'è. Così Pl@ntNet la riconosce e la tua foto entra nell\'Erbario.';
+
+  @override
+  String get firstRunCameraAllow => 'Consenti';
+
+  @override
+  String get firstRunCameraDenied =>
+      'Senza fotocamera non puoi Incontrare le piante. Puoi dare il permesso quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String get firstRunLocationTitle => 'La posizione';
+
+  @override
+  String get firstRunLocationText =>
+      'Dove fotografi una pianta nasce una Stazione: lì potrai tornare ad Attingere. Serve la posizione precisa, solo mentre usi l\'app. Le tue Stazioni restano sul telefono: non si mostrano e non si condividono.';
+
+  @override
+  String get firstRunLocationAllow => 'Attiva';
+
+  @override
+  String get firstRunLocationDenied =>
+      'Senza posizione gli Incontri valgono, ma non nascono Stazioni. Puoi attivarla quando vuoi dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String get firstRunLocationApproximate =>
+      'Con la posizione approssimativa le Stazioni non sono precise. Puoi scegliere la posizione precisa dalle impostazioni di Android, alla voce Autorizzazioni dell\'app.';
+
+  @override
+  String get firstRunOpenSettings => 'Apri le impostazioni';
+
+  @override
+  String get firstRunNext => 'Avanti';
+
+  @override
+  String get firstRunReadyTitle => 'Sei pronto a giocare';
+
+  @override
+  String get firstRunReadyText =>
+      'Il tutorial ti accompagna nel primo giro, tutto da casa: fotografi un\'aromatica di cucina, la studi e prepari la tua prima pozione.';
+
+  @override
+  String get firstRunStartTutorial => 'Fai il tutorial';
+
+  @override
+  String get firstRunLater => 'Più tardi';
+
+  @override
+  String get firstRunLaterNote =>
+      'Il tutorial resta in Home: lo fai quando vuoi.';
+
+  @override
+  String firstRunProgress(int step, int total) {
+    return 'Passo $step di $total';
+  }
+
+  @override
+  String get rankCurious => 'Curioso';
+
+  @override
+  String get nextRankCurious =>
+      'Prossimo Rango: Apprendista, alla fine del tutorial';
+
+  @override
+  String tutorialLabel(int step, int total) {
+    return 'Tutorial · passo $step di $total';
+  }
+
+  @override
+  String get tutorialIntroTitle => 'Il tutorial';
+
+  @override
+  String get tutorialIntroBody =>
+      'Un giro del gioco tutto da casa, con le aromatiche di cucina: salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Alla fine diventi Apprendista.';
+
+  @override
+  String get tutorialStart => 'Inizia';
+
+  @override
+  String get tutorialSkip => 'Salta il tutorial';
+
+  @override
+  String get tutorialPhotographTitle => 'Fotografa un\'aromatica';
+
+  @override
+  String get tutorialPhotographBody =>
+      'Tocca Attingi al centro della barra e fotografa salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Pl@ntNet la riconosce: la Incontri, nasce la sua Stazione e ne Attingi la prima Essenza. Fotografa, non raccogliere.';
+
+  @override
+  String get tutorialStudyTitle => 'Studia la tua aromatica';
+
+  @override
+  String get tutorialStudyBody =>
+      'Ogni pianta si studia a Livelli, con domande che fanno imparare anche quando sbagli. Supera il Livello 1 della pianta che hai fotografato: impari la sua Ricetta Comune. Intanto nella barra si è acceso l\'Erbario.';
+
+  @override
+  String get tutorialSecondPhotographTitle => 'Fotografa un\'altra aromatica';
+
+  @override
+  String get tutorialSecondPhotographBody =>
+      'La Ricetta Comune vuole la pianta e un\'altra specie qualsiasi: fotografa un\'altra aromatica e ne Attingi una seconda Essenza.';
+
+  @override
+  String get tutorialBrewTitle => 'Prepara la prima pozione';
+
+  @override
+  String get tutorialBrewBody =>
+      'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.';
+
+  @override
+  String get tutorialTroveTitle => 'Il Bottino dell\'Esperienza';
+
+  @override
+  String get tutorialTroveBody =>
+      'Con i PE compri Bottini dell\'Esperienza: dentro ci sono le Tavole di altre Ricette. Nella barra si è acceso il Bottino: aprilo, c\'è un regalo per te.';
+
+  @override
+  String get tutorialApprenticeTitle => 'Sei Apprendista';
+
+  @override
+  String get tutorialApprenticeBody =>
+      'Hai fatto il primo giro: fotografare, studiare, Attingere, preparare. Ora esci: le piante della tua Zona ti aspettano nell\'Erbario, alla voce Da trovare.';
+
+  @override
+  String get tutorialActionCapture => 'Attingi';
+
+  @override
+  String get tutorialActionStudy => 'Studia';
+
+  @override
+  String get tutorialActionLaboratory => 'Apri il Laboratorio';
+
+  @override
+  String get tutorialActionTrove => 'Apri il Bottino';
+
+  @override
+  String get tutorialActionFinish => 'Continua';
+
+  @override
+  String get erbarioKitchen => 'Dalla cucina';
+
+  @override
+  String get kitchenHint =>
+      'Un\'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.';
+
+  @override
+  String get sectionOrigin => 'Da dove viene';
+
+  @override
+  String sourcesLine(String sources) {
+    return 'Fonte: $sources';
+  }
+
+  @override
+  String get captureTutorialEssence =>
+      'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.';
 }
