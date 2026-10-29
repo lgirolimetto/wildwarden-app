@@ -30,6 +30,9 @@ class GameState {
   /// Ultima raccolta di ogni specie: una al giorno.
   final Map<String, DateTime> lastDraws;
 
+  /// L'ultima raccolta di ogni Stazione (per id): una al giorno, poi la rigenerazione (blocco 3).
+  final Map<String, DateTime> lastStationDraws;
+
   /// Livello di studio più alto superato con le domande (1-3), per specie.
   final Map<String, int> passedLevels;
   final Set<String> mastered;
@@ -102,6 +105,7 @@ class GameState {
     this.spentXp = 0,
     this.essences = const [],
     this.lastDraws = const {},
+    this.lastStationDraws = const {},
     this.passedLevels = const {},
     this.mastered = const {},
     this.lastQuestions = const {},
@@ -207,28 +211,37 @@ class GameState {
         lastQuestions: {...lastQuestions, speciesSci: occurredAt},
       ),
       // La prima essenza di una specie incassa i suoi PE virtuali.
-      EssenceDrawn(:final speciesSci, :final traits, :final occurredAt, :final purity, vis: final gained) => next._copy(
-        xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
-        pendingXp: {...next.pendingXp}..remove(speciesSci),
-        draws: {
-          ...draws,
-          speciesSci: [...?draws[speciesSci], traits],
-        },
-        essences: [
-          ...essences,
-          Essence(
-            index: essences.length,
-            speciesSci: speciesSci,
-            traits: traits,
-            // Gli eventi di prima della Dispensa non hanno la purezza: quella del livello di studio di allora.
-            purity: purity ?? purityOfLevel(levelOf(speciesSci)),
-            vis: gained,
-            drawnAt: occurredAt,
-          ),
-        ],
-        lastDraws: {...lastDraws, speciesSci: occurredAt},
-        essenceTimes: [...essenceTimes, occurredAt],
-      ),
+      EssenceDrawn(
+        :final speciesSci,
+        :final traits,
+        :final occurredAt,
+        :final purity,
+        :final stationId,
+        vis: final gained,
+      ) =>
+        next._copy(
+          xp: next.xp + (next.pendingXp[speciesSci] ?? 0),
+          pendingXp: {...next.pendingXp}..remove(speciesSci),
+          draws: {
+            ...draws,
+            speciesSci: [...?draws[speciesSci], traits],
+          },
+          essences: [
+            ...essences,
+            Essence(
+              index: essences.length,
+              speciesSci: speciesSci,
+              traits: traits,
+              // Gli eventi di prima della Dispensa non hanno la purezza: quella del livello di studio di allora.
+              purity: purity ?? purityOfLevel(levelOf(speciesSci)),
+              vis: gained,
+              drawnAt: occurredAt,
+            ),
+          ],
+          lastDraws: {...lastDraws, speciesSci: occurredAt},
+          lastStationDraws: stationId == null ? lastStationDraws : {...lastStationDraws, stationId: occurredAt},
+          essenceTimes: [...essenceTimes, occurredAt],
+        ),
       DesiderataChanged(:final speciesSci, :final marked) => next._copy(
         desiderata: marked ? {...desiderata, speciesSci} : ({...desiderata}..remove(speciesSci)),
       ),
@@ -374,6 +387,7 @@ class GameState {
     int? spentXp,
     List<Essence>? essences,
     Map<String, DateTime>? lastDraws,
+    Map<String, DateTime>? lastStationDraws,
     Map<String, int>? passedLevels,
     Set<String>? mastered,
     Map<String, DateTime>? lastQuestions,
@@ -406,6 +420,7 @@ class GameState {
     spentXp: spentXp ?? this.spentXp,
     essences: essences ?? this.essences,
     lastDraws: lastDraws ?? this.lastDraws,
+    lastStationDraws: lastStationDraws ?? this.lastStationDraws,
     passedLevels: passedLevels ?? this.passedLevels,
     mastered: mastered ?? this.mastered,
     lastQuestions: lastQuestions ?? this.lastQuestions,

@@ -3890,6 +3890,192 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Fonte: '**
   String get sourcesLabel;
+
+  /// No description provided for @cameraDrawHint.
+  ///
+  /// In it, this message translates to:
+  /// **'Inquadra la tua pianta: la Vis sale mentre la guardi, più in fretta se ti muovi'**
+  String get cameraDrawHint;
+
+  /// No description provided for @captureLocating.
+  ///
+  /// In it, this message translates to:
+  /// **'Cerco dove sei…'**
+  String get captureLocating;
+
+  /// No description provided for @captureAtStationTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei alla tua Stazione'**
+  String get captureAtStationTitle;
+
+  /// No description provided for @captureAtStationText.
+  ///
+  /// In it, this message translates to:
+  /// **'Qui Attingi senza mandare foto a Pl@ntNet: inquadra la pianta e raccogli la Vis.'**
+  String get captureAtStationText;
+
+  /// No description provided for @captureOtherPlant.
+  ///
+  /// In it, this message translates to:
+  /// **'È un\'altra pianta'**
+  String get captureOtherPlant;
+
+  /// No description provided for @stationReady.
+  ///
+  /// In it, this message translates to:
+  /// **'Pronta'**
+  String get stationReady;
+
+  /// No description provided for @stationExhausted.
+  ///
+  /// In it, this message translates to:
+  /// **'Esaurita: torna pronta {when}'**
+  String stationExhausted(String when);
+
+  /// No description provided for @stationRegrowing.
+  ///
+  /// In it, this message translates to:
+  /// **'In rigenerazione: torna pronta {when}'**
+  String stationRegrowing(String when);
+
+  /// No description provided for @stationSuspended.
+  ///
+  /// In it, this message translates to:
+  /// **'Raccolta sospesa: {reason}, riprende {when}'**
+  String stationSuspended(String reason, String when);
+
+  /// No description provided for @suspendedStorm.
+  ///
+  /// In it, this message translates to:
+  /// **'temporale'**
+  String get suspendedStorm;
+
+  /// No description provided for @suspendedHail.
+  ///
+  /// In it, this message translates to:
+  /// **'grandine'**
+  String get suspendedHail;
+
+  /// No description provided for @suspendedWind.
+  ///
+  /// In it, this message translates to:
+  /// **'vento forte'**
+  String get suspendedWind;
+
+  /// No description provided for @suspendedSnow.
+  ///
+  /// In it, this message translates to:
+  /// **'neve forte'**
+  String get suspendedSnow;
+
+  /// No description provided for @whenToday.
+  ///
+  /// In it, this message translates to:
+  /// **'alle {time}'**
+  String whenToday(String time);
+
+  /// No description provided for @whenOtherDay.
+  ///
+  /// In it, this message translates to:
+  /// **'{day} alle {time}'**
+  String whenOtherDay(String day, String time);
+
+  /// No description provided for @captureDrawnTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai Attinto un\'Essenza'**
+  String get captureDrawnTitle;
+
+  /// No description provided for @captureDrawnVis.
+  ///
+  /// In it, this message translates to:
+  /// **'{vis} Vis · purezza {purity} %'**
+  String captureDrawnVis(int vis, int purity);
+
+  /// No description provided for @captureDrawnPantry.
+  ///
+  /// In it, this message translates to:
+  /// **'La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.'**
+  String get captureDrawnPantry;
+
+  /// No description provided for @stationsTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Le tue Stazioni'**
+  String get stationsTitle;
+
+  /// No description provided for @stationsSummary.
+  ///
+  /// In it, this message translates to:
+  /// **'{ready} pronte su {total}'**
+  String stationsSummary(int ready, int total);
+
+  /// No description provided for @stationsEmpty.
+  ///
+  /// In it, this message translates to:
+  /// **'Non hai ancora Stazioni: nascono quando fotografi una pianta con Attingi.'**
+  String get stationsEmpty;
+
+  /// No description provided for @stationExpectedVis.
+  ///
+  /// In it, this message translates to:
+  /// **'Fino a {vis} Vis'**
+  String stationExpectedVis(int vis);
+
+  /// No description provided for @stationStormSoon.
+  ///
+  /// In it, this message translates to:
+  /// **'Previsto {reason}: al tuo arrivo la raccolta potrebbe essere sospesa, fino {when}'**
+  String stationStormSoon(String reason, String when);
+
+  /// No description provided for @homeStationsOpen.
+  ///
+  /// In it, this message translates to:
+  /// **'Vedi'**
+  String get homeStationsOpen;
+
+  /// No description provided for @dykTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Lo sapevi che…'**
+  String get dykTitle;
+
+  /// No description provided for @dykStorm.
+  ///
+  /// In it, this message translates to:
+  /// **'Con il temporale e i fenomeni intensi previsti la raccolta è sospesa nei dintorni, da un\'ora prima a un\'ora dopo.'**
+  String get dykStorm;
+
+  /// No description provided for @dykDaylight.
+  ///
+  /// In it, this message translates to:
+  /// **'Alba e Tramonto valgono solo con la luce: non serve mai Attingere al buio.'**
+  String get dykDaylight;
+
+  /// No description provided for @dykMoon.
+  ///
+  /// In it, this message translates to:
+  /// **'I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.'**
+  String get dykMoon;
+
+  /// No description provided for @dykNoPicking.
+  ///
+  /// In it, this message translates to:
+  /// **'Le piante non si raccolgono mai: si fotografano e se ne Attinge la Vis. Fotografa, non raccogliere.'**
+  String get dykNoPicking;
+
+  /// No description provided for @dykOneDrawPerDay.
+  ///
+  /// In it, this message translates to:
+  /// **'Da ogni Stazione si Attinge una volta al giorno; le piante rare ci mettono giorni a rigenerarsi.'**
+  String get dykOneDrawPerDay;
+
+  /// No description provided for @dykIsolation.
+  ///
+  /// In it, this message translates to:
+  /// **'Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis.'**
+  String get dykIsolation;
 }
 
 class _AppLocalizationsDelegate

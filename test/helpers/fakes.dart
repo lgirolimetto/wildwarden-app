@@ -7,7 +7,11 @@ import 'package:druid_app/business_logic/interfaces/i_clock.dart';
 import 'package:druid_app/business_logic/interfaces/i_field_test_log.dart';
 import 'package:druid_app/business_logic/interfaces/i_game_event_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_link_opener.dart';
+import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
+import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
+import 'package:druid_app/business_logic/models/weather_forecast.dart';
+import 'package:druid_app/business_logic/models/weather_now.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_store.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
@@ -177,5 +181,49 @@ class FakeLinkOpener implements ILinkOpener {
   Future<Validation<bool>> open(String url) async {
     opened.add(url);
     return Valid(true);
+  }
+}
+
+/// Meteo finto: sereno, senza previsioni di temporale, salvo quella che il test sceglie.
+class FakeWeatherService implements IWeatherService {
+  WeatherForecast? next;
+  final forecasts = <(double, double)>[];
+
+  FakeWeatherService({this.next});
+
+  @override
+  Future<Validation<WeatherNow>> now(double latitude, double longitude) async => Valid(
+    WeatherNow(
+      time: DateTime.utc(2027, 2, 14, 9),
+      temperature: 10,
+      dewPoint: 2,
+      precipitation: 0,
+      weatherCode: 0,
+      cloudCover: 10,
+      windSpeed: 5,
+      isDay: true,
+    ),
+  );
+
+  @override
+  Future<Validation<WeatherForecast>> forecast(double latitude, double longitude) async {
+    forecasts.add((latitude, longitude));
+    return Valid(next ?? WeatherForecast(fetchedAt: DateTime.utc(2027, 2, 14), hours: const []));
+  }
+}
+
+/// GPS finto: spento (nessuna posizione), oppure una posizione subito.
+class FakeLocationSampler implements ILocationSampler {
+  ({double latitude, double longitude, double accuracy})? at;
+
+  FakeLocationSampler({this.at});
+
+  @override
+  Future<Validation<LocationRecording>> start() async {
+    final here = at;
+    if (here == null) return Fail.withError(StateError('GPS spento'), message: 'GPS spento').toInvalid();
+    return Valid(
+      LocationRecording(() async {})..add(latitude: here.latitude, longitude: here.longitude, accuracy: here.accuracy),
+    );
   }
 }

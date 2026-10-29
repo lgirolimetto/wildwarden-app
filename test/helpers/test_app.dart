@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:bitapp_functional_dart/bitapp_functional_dart.dart';
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
+import 'package:druid_app/business_logic/interfaces/i_location_sampler.dart';
 import 'package:druid_app/business_logic/interfaces/i_photo_source.dart';
 import 'package:druid_app/business_logic/interfaces/i_plant_identifier.dart';
+import 'package:druid_app/business_logic/interfaces/i_weather_service.dart';
 import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
@@ -34,7 +36,10 @@ registerTestDependencies({
   IPhotoSource? photoSource,
   IPlantIdentifier? plantIdentifier,
   IPermissions? permissions,
+  IWeatherService? weatherService,
+  ILocationSampler? locationSampler,
   bool firstRunDone = true,
+  bool didYouKnow = false,
 }) {
   // Di solito l'onboarding di primo avvio è già fatto: i test partono dalla Home.
   final prefs = InMemoryPreferences({
@@ -58,6 +63,10 @@ registerTestDependencies({
     plantIdentifier: plantIdentifier,
     permissions: permissions ?? FakePermissions(),
     linkOpener: FakeLinkOpener(),
+    weatherService: weatherService ?? FakeWeatherService(),
+    locationSampler: locationSampler ?? FakeLocationSampler(),
+    // Il toast dei "Lo sapevi che…" coprirebbe i tocchi: acceso solo dove lo si prova.
+    didYouKnow: didYouKnow,
   );
   return (preferences: prefs, catalog: repository, events: eventStore, clock: clock);
 }

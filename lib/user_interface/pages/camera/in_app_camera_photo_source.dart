@@ -8,6 +8,6 @@ class InAppCameraPhotoSource implements IPhotoSource {
   const InAppCameraPhotoSource();
 
   @override
-  Future<Validation<TakenPhoto>> takePhoto() async =>
-      Valid(await Get.to<TakenPhoto>(() => const CameraPage()) ?? TakenPhoto.cancelled);
+  Future<Validation<TakenPhoto>> takePhoto({bool single = false}) async =>
+      Valid(await Get.to<TakenPhoto>(() => CameraPage(single: single)) ?? TakenPhoto.cancelled);
 }

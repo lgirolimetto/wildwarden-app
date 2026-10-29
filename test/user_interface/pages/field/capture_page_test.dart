@@ -7,6 +7,7 @@ import 'package:druid_app/business_logic/models/app_config.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/models/location_fix.dart';
 import 'package:druid_app/business_logic/models/plant_identification.dart';
+import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -20,7 +21,7 @@ class _Camera implements IPhotoSource {
   _Camera(this.path);
 
   @override
-  Future<Validation<TakenPhoto>> takePhoto() async => Valid(
+  Future<Validation<TakenPhoto>> takePhoto({bool single = false}) async => Valid(
     TakenPhoto(
       photos: [PlantPhoto(path, PlantOrgan.whole)],
       position: const LocationFix(elapsed: Duration.zero, latitude: 44.48, longitude: 11.35, accuracy: 5),
@@ -149,5 +150,42 @@ void main() {
     await scrollTo(tester, find.byKey(const ValueKey('capture-essence')));
     expect(find.byKey(const ValueKey('capture-essence')), findsOneWidget);
     expect(Get.find<ProgressController>().state.essences, hasLength(1));
+  });
+
+  testWidgets('alla tua Stazione: "Sei alla tua Stazione", Attingi e l\'Essenza, senza Pl@ntNet', (tester) async {
+    final station = Station(
+      id: 's1',
+      speciesSci: 'Helleborus viridis',
+      kind: StationKind.zone,
+      latitude: 44.48,
+      longitude: 11.35,
+      accuracy: 5,
+      confidence: 0.7,
+      createdAt: DateTime(2027, 2, 10),
+    );
+    registerTestDependencies(
+      events: [
+        SpeciesEncountered(
+          speciesSci: station.speciesSci,
+          method: EncounterMethod.photo,
+          occurredAt: DateTime(2027, 2, 10),
+        ),
+        StationCreated(station: station),
+      ],
+      photoSource: _Camera(photo),
+      locationSampler: FakeLocationSampler(at: (latitude: 44.48001, longitude: 11.35, accuracy: 5)),
+    );
+    await pumpDruidApp(tester);
+    await tester.tap(find.byKey(const ValueKey('nav-action')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Sei alla tua Stazione'), findsOneWidget);
+    expect(find.text('Pronta'), findsOneWidget);
+    await tester.tap(find.byKey(const ValueKey('draw-s1')));
+    await tester.pumpAndSettle();
+
+    expect(find.text("Hai Attinto un'Essenza"), findsOneWidget);
+    expect(find.byKey(const ValueKey('drawn-vis')), findsOneWidget);
+    expect(Get.find<ProgressController>().state.lastStationDraws.keys, ['s1']);
   });
 }

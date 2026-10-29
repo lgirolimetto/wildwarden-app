@@ -7,6 +7,7 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/enums/potion_effect.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
+import 'package:druid_app/business_logic/models/station.dart';
 import 'package:druid_app/business_logic/rules/economy.dart';
 import 'package:druid_app/business_logic/rules/essences.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
@@ -91,8 +92,21 @@ class ProgressController extends LoadableController<GameState> {
   Future<bool> drawFromPhoto(String speciesSci, {List<String> traits = const []}) =>
       _draw(speciesSci, traits: traits, simulated: false);
 
-  Future<bool> _draw(String speciesSci, {required List<String> traits, required bool simulated}) async {
-    if (!canDraw(state, speciesSci, now)) return false;
+  /// Essenza attinta alla tua Stazione (blocco 3): con le Vis raccolte nel mirino (`visOfDraw`) e i tratti del
+  /// momento. Chi chiama ha già guardato che la Stazione sia pronta e la raccolta non sospesa.
+  Future<bool> drawAtStation(Station station, {required int vis, List<String> traits = const []}) =>
+      _draw(station.speciesSci, traits: traits, simulated: false, vis: vis, stationId: station.id);
+
+  Future<bool> _draw(
+    String speciesSci, {
+    required List<String> traits,
+    required bool simulated,
+    int vis = visPerDraw,
+    String? stationId,
+  }) async {
+    // Le Stazioni hanno il loro stato (una raccolta al giorno, poi la rigenerazione); senza Stazione una al giorno per
+    // specie.
+    if (stationId == null ? !canDraw(state, speciesSci, now) : !state.hasEncountered(speciesSci)) return false;
     // Gli effetti delle pozioni usate: Abbondanza (Vis), Limpidezza (purezza), Presagio (un tratto d'elezione).
     final effects = activeEffects(state, now);
     final omen = effects[PotionEffect.omen];
@@ -106,13 +120,12 @@ class ProgressController extends LoadableController<GameState> {
         speciesSci: speciesSci,
         traits: withOmen,
         simulated: simulated,
-        vis: effects[PotionEffect.abundance] == null
-            ? visPerDraw
-            : visWithAbundance(visPerDraw, effects[PotionEffect.abundance]!),
+        vis: effects[PotionEffect.abundance] == null ? vis : visWithAbundance(vis, effects[PotionEffect.abundance]!),
         purity: effects[PotionEffect.clarity] == null
             ? purity
             : purityWithClarity(purity, effects[PotionEffect.clarity]!),
         xp: XpRules.essence(drawnToday: drawsToday(state, now)),
+        stationId: stationId,
         occurredAt: now,
       ),
     );

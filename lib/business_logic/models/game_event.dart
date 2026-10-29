@@ -99,6 +99,8 @@ sealed class GameEvent {
         // Assente prima della Dispensa (step 7 della tappa C): la si ricava dal livello di studio di allora.
         purity: (d['purity'] as num?)?.toDouble(),
         xp: d['xp'] as int? ?? 0,
+        // Assente prima del blocco 3 (Attingere sul posto): un'Essenza simulata o del tutorial senza Stazione.
+        stationId: d['station'] as String?,
         occurredAt: occurredAt,
       ),
       DesiderataChanged.typeId => DesiderataChanged(
@@ -323,6 +325,9 @@ class EssenceDrawn extends GameEvent {
   @override
   final int xp;
 
+  /// La Stazione da cui è attinta (blocco 3): conta per "una raccolta al giorno per Stazione" e la rigenerazione.
+  final String? stationId;
+
   const EssenceDrawn({
     required this.speciesSci,
     this.traits = const [],
@@ -330,6 +335,7 @@ class EssenceDrawn extends GameEvent {
     this.vis = 0,
     this.purity,
     this.xp = 0,
+    this.stationId,
     required super.occurredAt,
   });
 
@@ -344,6 +350,7 @@ class EssenceDrawn extends GameEvent {
     'vis': vis,
     'purity': ?purity,
     'xp': xp,
+    'station': ?stationId,
   };
 }
 

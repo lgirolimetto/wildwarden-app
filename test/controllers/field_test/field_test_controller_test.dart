@@ -17,7 +17,7 @@ class _Camera implements IPhotoSource {
   _Camera(this.result);
 
   @override
-  Future<Validation<TakenPhoto>> takePhoto() async => Valid(result);
+  Future<Validation<TakenPhoto>> takePhoto({bool single = false}) async => Valid(result);
 }
 
 class _Identifier implements IPlantIdentifier {

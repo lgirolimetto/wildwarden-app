@@ -2452,4 +2452,125 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sourcesLabel => 'Source: ';
+
+  @override
+  String get cameraDrawHint =>
+      'Frame your plant: the Vis rises while you look at it, faster if you move';
+
+  @override
+  String get captureLocating => 'Finding where you are…';
+
+  @override
+  String get captureAtStationTitle => 'You\'re at your Station';
+
+  @override
+  String get captureAtStationText =>
+      'Here you Draw without sending photos to Pl@ntNet: frame the plant and gather the Vis.';
+
+  @override
+  String get captureOtherPlant => 'It\'s another plant';
+
+  @override
+  String get stationReady => 'Ready';
+
+  @override
+  String stationExhausted(String when) {
+    return 'Exhausted: ready again $when';
+  }
+
+  @override
+  String stationRegrowing(String when) {
+    return 'Regrowing: ready again $when';
+  }
+
+  @override
+  String stationSuspended(String reason, String when) {
+    return 'Drawing suspended: $reason, resumes $when';
+  }
+
+  @override
+  String get suspendedStorm => 'thunderstorm';
+
+  @override
+  String get suspendedHail => 'hail';
+
+  @override
+  String get suspendedWind => 'strong wind';
+
+  @override
+  String get suspendedSnow => 'heavy snow';
+
+  @override
+  String whenToday(String time) {
+    return 'at $time';
+  }
+
+  @override
+  String whenOtherDay(String day, String time) {
+    return '$day at $time';
+  }
+
+  @override
+  String get captureDrawnTitle => 'You Drew an Essence';
+
+  @override
+  String captureDrawnVis(int vis, int purity) {
+    return '$vis Vis · purity $purity %';
+  }
+
+  @override
+  String get captureDrawnPantry =>
+      'You\'ll find it in the Laboratory Pantry, with the Traits of this moment.';
+
+  @override
+  String get stationsTitle => 'Your Stations';
+
+  @override
+  String stationsSummary(int ready, int total) {
+    return '$ready ready out of $total';
+  }
+
+  @override
+  String get stationsEmpty =>
+      'You have no Stations yet: they are born when you photograph a plant with Draw.';
+
+  @override
+  String stationExpectedVis(int vis) {
+    return 'Up to $vis Vis';
+  }
+
+  @override
+  String stationStormSoon(String reason, String when) {
+    return 'Forecast: $reason; when you arrive, drawing may be suspended, until $when';
+  }
+
+  @override
+  String get homeStationsOpen => 'See';
+
+  @override
+  String get dykTitle => 'Did you know…';
+
+  @override
+  String get dykStorm =>
+      'When thunderstorms or severe weather are forecast, drawing is suspended nearby, from an hour before to an hour after.';
+
+  @override
+  String get dykDaylight =>
+      'Dawn and Dusk only count in daylight: you never need to Draw in the dark.';
+
+  @override
+  String get dykMoon =>
+      'Moon Traits last the whole day of the phase: you never need to go out at night.';
+
+  @override
+  String get dykNoPicking =>
+      'Plants are never picked: you photograph them and Draw their Vis. Photograph, don\'t pick.';
+
+  @override
+  String get dykOneDrawPerDay =>
+      'You Draw from each Station once a day; rare plants take days to regrow.';
+
+  @override
+  String get dykIsolation =>
+      'Stations far from each other yield more: many plants in the same spot share their Vis.';
 }

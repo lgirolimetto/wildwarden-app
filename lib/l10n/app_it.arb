@@ -1844,5 +1844,114 @@
   "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
   "sectionOrigin": "Da dove viene",
   "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.",
-  "sourcesLabel": "Fonte: "
+  "sourcesLabel": "Fonte: ",
+  "cameraDrawHint": "Inquadra la tua pianta: la Vis sale mentre la guardi, più in fretta se ti muovi",
+  "captureLocating": "Cerco dove sei…",
+  "captureAtStationTitle": "Sei alla tua Stazione",
+  "captureAtStationText": "Qui Attingi senza mandare foto a Pl@ntNet: inquadra la pianta e raccogli la Vis.",
+  "captureOtherPlant": "È un'altra pianta",
+  "stationReady": "Pronta",
+  "stationExhausted": "Esaurita: torna pronta {when}",
+  "stationRegrowing": "In rigenerazione: torna pronta {when}",
+  "stationSuspended": "Raccolta sospesa: {reason}, riprende {when}",
+  "suspendedStorm": "temporale",
+  "suspendedHail": "grandine",
+  "suspendedWind": "vento forte",
+  "suspendedSnow": "neve forte",
+  "whenToday": "alle {time}",
+  "whenOtherDay": "{day} alle {time}",
+  "captureDrawnTitle": "Hai Attinto un'Essenza",
+  "captureDrawnVis": "{vis} Vis · purezza {purity} %",
+  "captureDrawnPantry": "La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.",
+  "@stationExhausted": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "@stationRegrowing": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "@stationSuspended": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "@whenToday": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "@whenOtherDay": {
+    "placeholders": {
+      "day": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "@captureDrawnVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      },
+      "purity": {
+        "type": "int"
+      }
+    }
+  },
+  "stationsTitle": "Le tue Stazioni",
+  "stationsSummary": "{ready} pronte su {total}",
+  "stationsEmpty": "Non hai ancora Stazioni: nascono quando fotografi una pianta con Attingi.",
+  "stationExpectedVis": "Fino a {vis} Vis",
+  "stationStormSoon": "Previsto {reason}: al tuo arrivo la raccolta potrebbe essere sospesa, fino {when}",
+  "homeStationsOpen": "Vedi",
+  "@stationsSummary": {
+    "placeholders": {
+      "ready": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "@stationExpectedVis": {
+    "placeholders": {
+      "vis": {
+        "type": "int"
+      }
+    }
+  },
+  "@stationStormSoon": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      },
+      "when": {
+        "type": "String"
+      }
+    }
+  },
+  "dykTitle": "Lo sapevi che…",
+  "dykStorm": "Con il temporale e i fenomeni intensi previsti la raccolta è sospesa nei dintorni, da un'ora prima a un'ora dopo.",
+  "dykDaylight": "Alba e Tramonto valgono solo con la luce: non serve mai Attingere al buio.",
+  "dykMoon": "I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.",
+  "dykNoPicking": "Le piante non si raccolgono mai: si fotografano e se ne Attinge la Vis. Fotografa, non raccogliere.",
+  "dykOneDrawPerDay": "Da ogni Stazione si Attinge una volta al giorno; le piante rare ci mettono giorni a rigenerarsi.",
+  "dykIsolation": "Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis."
 }
