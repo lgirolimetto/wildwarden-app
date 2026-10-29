@@ -5,8 +5,8 @@ import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
 
 /// Il recipiente di una Tavola: la forma della base, uno strato di liquido per tratto (le Comuni, senza tratti, un
-/// verde d'erba). [empty]: solo il contorno. Con [missing] componenti da trovare, lo strato del tratto che non sai
-/// ancora resta del colore degli indizi.
+/// verde d'erba). [empty]: solo il contorno. Con [missing] componenti da trovare il liquido è grigio: la Tavola non si
+/// prepara ancora.
 class RecipeVessel extends StatelessWidget {
   final PlantRecipe recipe;
   final double size;
@@ -24,10 +24,11 @@ class RecipeVessel extends StatelessWidget {
       liquids: empty
           ? const []
           : recipe.traits.isEmpty
-          ? [context.druid.plainPotion ?? context.druid.hint]
+          ? [missing > 0 ? context.druid.hint.withValues(alpha: 0.35) : context.druid.plainPotion ?? context.druid.hint]
           : [
-              for (final (i, t) in recipe.traits.indexed)
-                i == 1 && secondHidden ? context.druid.hint.withValues(alpha: 0.35) : context.druid.traitColor(t.index),
+              // Incompleta: tutto il liquido grigio, perché non si prepara (2026-10-29).
+              for (final t in recipe.traits)
+                missing > 0 ? context.druid.hint.withValues(alpha: 0.35) : context.druid.traitColor(t.index),
             ],
       size: size,
       semanticLabel: empty

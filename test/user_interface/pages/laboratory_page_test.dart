@@ -40,7 +40,7 @@ void main() {
     expect(find.text('0 Essenze'), findsOneWidget);
   });
 
-  testWidgets('la Dispensa: le Essenze per specie, con tratti, purezza e Vis', (tester) async {
+  testWidgets('la Dispensa: le Essenze per specie, con Vis, purezza e Qualia', (tester) async {
     registerTestDependencies(
       events: [
         EssenceDrawn(
@@ -58,10 +58,18 @@ void main() {
 
     expect(find.text('2 Essenze'), findsOneWidget);
     expect(find.text('2 Essenze · 20 Vis'), findsOneWidget);
-    expect(find.text('Purezza 75 % · 10 Vis'), findsOneWidget);
-    expect(find.text('Purezza 40 % · 10 Vis'), findsOneWidget, reason: 'senza purezza: quella del livello 0');
-    expect(find.text('Nessun tratto'), findsOneWidget);
-    expect(find.textContaining('Rugiada'), findsOneWidget);
+    // Ogni Essenza: la data, la Vis con l'anello della purezza, le Qualia come icone (il nome tenendo premuto).
+    expect(find.text('10 Vis'), findsNWidgets(2));
+    expect(find.byTooltip('Purezza 75 %'), findsOneWidget);
+    expect(find.byTooltip('Purezza 40 %'), findsOneWidget, reason: 'senza purezza: quella del livello 0');
+    expect(find.byTooltip('Rugiada'), findsOneWidget);
+    expect(find.byTooltip('Luna piena'), findsOneWidget);
+    final sameYear = Get.find<ProgressController>().now.year == _feb.year;
+    expect(
+      find.text(sameYear ? '1 feb' : '1 feb 2027'),
+      findsNWidgets(2),
+      reason: 'l\'anno solo se non è quello in corso',
+    );
   });
 
   group('preparare', () {
@@ -179,7 +187,9 @@ void main() {
 
       final malva = find.byKey(const ValueKey('recipe-book-page-Malva sylvestris'));
       final fagus = find.byKey(const ValueKey('recipe-book-page-Fagus sylvatica'));
-      expect(find.descendant(of: malva, matching: find.byType(ReadyMark)), findsOneWidget);
+      // Sulla riga quante pozioni prepari comunque: una sola Comune pronta, quindi "1" senza "+".
+      expect(find.descendant(of: malva, matching: find.byType(ReadyCount)), findsOneWidget);
+      expect(find.descendant(of: malva, matching: find.text('1')), findsOneWidget);
       expect(fagus, findsOneWidget);
 
       await tester.tap(find.byKey(const ValueKey('recipe-book-only-ready')));

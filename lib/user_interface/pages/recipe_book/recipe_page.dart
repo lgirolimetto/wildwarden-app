@@ -19,6 +19,11 @@ import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/business_logic/rules/recipes/affixes.dart';
+import 'package:druid_app/business_logic/rules/economy.dart';
+import 'package:druid_app/user_interface/common_widgets/engraved_icon.dart';
+import 'package:druid_app/user_interface/common_widgets/vis_badge.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/incomplete_info.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -48,11 +53,18 @@ class PlantRecipePage extends StatelessWidget {
         subtitle: missing > 0 ? context.l10n.recipeMissingPieces(missing) : null,
         ingredients: [
           for (final i in recipe.ingredients)
-            (speciesSci: i.speciesSci, quantity: i.quantity, traits: i.traits, hidden: hiddenTraits),
+            (
+              speciesSci: i.speciesSci,
+              vis: i.quantity * EconomyRules.visPerQuantity,
+              traits: i.traits,
+              hidden: hiddenTraits,
+            ),
         ],
         effect: hidden.contains(NamePiece.effect)
             ? context.l10n.recipeEffectUnknown
             : context.game.effectText(recipe.effect),
+        effectIcon: hidden.contains(NamePiece.effect) ? null : effectIconOf(recipe.effect),
+        incomplete: missing > 0,
         catalog: catalog,
       );
     },
@@ -90,9 +102,16 @@ class MythicRecipePage extends StatelessWidget {
         story: mythic.story.resolve(lang),
         ingredients: [
           for (final i in mythic.ingredients)
-            (speciesSci: i.speciesSci, quantity: i.quantity, traits: [?i.trait], hidden: const <Trait>{}),
+            (
+              speciesSci: i.speciesSci,
+              vis: i.quantity * EconomyRules.visPerQuantity,
+              traits: [?i.trait],
+              hidden: const <Trait>{},
+            ),
         ],
         effect: mythic.effectText.resolve(lang),
+        effectIcon: missing > 0 ? null : effectIconOf(mythic.effect),
+        incomplete: missing > 0,
         catalog: catalog,
       );
     },
@@ -131,7 +150,8 @@ class _RecipeScaffold extends StatelessWidget {
 }
 
 /// [hidden]: i tratti che non sai ancora (il secondo tratto di una Rara incompleta), mostrati come "?".
-typedef _IngredientView = ({String? speciesSci, int quantity, List<Trait> traits, Set<Trait> hidden});
+/// [vis]: le Vis che chiede (le quantità della ricetta per [EconomyRules.visPerQuantity]).
+typedef _IngredientView = ({String? speciesSci, int vis, List<Trait> traits, Set<Trait> hidden});
 
 class _RecipeCard extends StatelessWidget {
   final Grade grade;
@@ -144,6 +164,12 @@ class _RecipeCard extends StatelessWidget {
   final String? story;
   final List<_IngredientView> ingredients;
   final String effect;
+
+  /// L'icona dell'effetto, accanto al suo testo; `null` se l'effetto non si sa ancora.
+  final IconData? effectIcon;
+
+  /// Mancano dei Componenti: accanto al sottotitolo la ⓘ che spiega dove trovarli.
+  final bool incomplete;
   final Catalog catalog;
 
   const _RecipeCard({
@@ -156,6 +182,8 @@ class _RecipeCard extends StatelessWidget {
     this.story,
     required this.ingredients,
     required this.effect,
+    this.effectIcon,
+    this.incomplete = false,
     required this.catalog,
   });
 
@@ -176,15 +204,27 @@ class _RecipeCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: Gaps.s),
-          TextWithSpecies(title, plant: titlePlant, style: context.texts.titleLarge),
-          if (subtitle != null) Text(subtitle!, style: hint),
+          RecipeTitle(title, plant: titlePlant, style: context.texts.titleLarge),
+          if (subtitle != null)
+            Row(
+              children: [
+                Flexible(child: Text(subtitle!, style: hint)),
+                if (incomplete) ...[const SizedBox(width: Gaps.xs), const IncompleteInfoButton()],
+              ],
+            ),
           if (story != null) ...[const SizedBox(height: Gaps.s), Text(story!)],
           const SizedBox(height: Gaps.m),
           for (final ingredient in ingredients) _IngredientRow(ingredient: ingredient, catalog: catalog),
           const SizedBox(height: Gaps.m),
           Text(context.l10n.recipeEffect, style: context.texts.labelMedium),
           const SizedBox(height: Gaps.xs),
-          Text(effect),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (effectIcon != null) ...[EngravedIcon(effectIcon!, size: 18), const SizedBox(width: Gaps.s)],
+              Expanded(child: Text(effect)),
+            ],
+          ),
         ],
       ),
     );
@@ -212,22 +252,15 @@ class _IngredientRow extends StatelessWidget {
             runSpacing: Gaps.chipRun,
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(text: '${ingredient.quantity} × '),
-                    TextSpan(
-                      text: name,
-                      style: species == null ? null : speciesNameStyle(context, context.texts.bodyLarge),
-                    ),
-                  ],
-                ),
-                style: context.texts.bodyLarge,
+              VisBadge(ingredient.vis),
+              Text(
+                name,
+                style: species == null ? context.texts.bodyLarge : speciesNameStyle(context, context.texts.bodyLarge),
               ),
               for (final t in ingredient.traits) Pill(ingredient.hidden.contains(t) ? '?' : context.game.trait(t)),
             ],
           ),
-          // Chi legge la ricetta scopre quando vale il tratto che chiede.
+          // Chi legge la ricetta scopre quando vale la Qualia che chiede.
           for (final t in ingredient.traits)
             if (!ingredient.hidden.contains(t)) Text(context.game.traitWhen(t), style: context.texts.bodySmall),
         ],

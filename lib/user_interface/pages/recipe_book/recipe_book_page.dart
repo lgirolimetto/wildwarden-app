@@ -50,6 +50,11 @@ class RecipeBookView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ready = preparableIds(catalog, state, Get.find<ProgressController>().now);
+    // Quante pozioni prepari comunque con le Vis condivise tra le Tavole di una pagina (o tra le Mitiche): "2+".
+    ({int least, bool more}) brewsOf(Iterable<String> ids) => groupBrews([
+      for (final id in ids)
+        if (ready.contains(id)) ?brewableOf(catalog, id),
+    ], state.essences);
     final all = collectedPages(catalog, state);
     final pages = onlyReady ? all.where((p) => p.page.recipes.any((r) => ready.contains(r.id))).toList() : all;
     final mythicsReady = catalog.mythics.any((m) => ready.contains(m.id));
@@ -80,7 +85,11 @@ class RecipeBookView extends StatelessWidget {
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(Gaps.l, 0, Gaps.l, Gaps.l),
             sliver: SliverToBoxAdapter(
-              child: _MythicsRow(catalog: catalog, state: state, ready: mythicsReady),
+              child: _MythicsRow(
+                catalog: catalog,
+                state: state,
+                brews: mythicsReady ? brewsOf(catalog.mythics.map((m) => m.id)) : null,
+              ),
             ),
           ),
         if (pages.isEmpty)
@@ -119,7 +128,9 @@ class RecipeBookView extends StatelessWidget {
               itemBuilder: (context, i) => RepaintBoundary(
                 child: _PageRow(
                   collected: pages[i],
-                  ready: pages[i].page.recipes.any((r) => ready.contains(r.id)),
+                  brews: pages[i].page.recipes.any((r) => ready.contains(r.id))
+                      ? brewsOf(pages[i].page.recipes.map((r) => r.id))
+                      : null,
                   onlyReady: onlyReady,
                 ),
               ),
@@ -136,10 +147,10 @@ class _MythicsRow extends StatelessWidget {
   final Catalog catalog;
   final GameState state;
 
-  /// Almeno una Mitica è preparabile adesso.
-  final bool ready;
+  /// Le pozioni che prepari con le Mitiche; `null` se nessuna è preparabile.
+  final ({int least, bool more})? brews;
 
-  const _MythicsRow({required this.catalog, required this.state, required this.ready});
+  const _MythicsRow({required this.catalog, required this.state, required this.brews});
 
   @override
   Widget build(BuildContext context) {
@@ -175,8 +186,7 @@ class _MythicsRow extends StatelessWidget {
               ],
             ),
           ),
-          if (ready) ...[const ReadyMark(), const SizedBox(width: Gaps.s)],
-          Text(context.l10n.recipeBookMythicsCount(known.length, catalog.mythics.length)),
+          if (brews case final b?) ReadyCount(count: b.least, more: b.more),
         ],
       ),
     );
@@ -187,13 +197,13 @@ class _MythicsRow extends StatelessWidget {
 class _PageRow extends StatelessWidget {
   final CollectedPage collected;
 
-  /// Almeno una Tavola della pagina è preparabile adesso.
-  final bool ready;
+  /// Le pozioni che prepari con le Tavole della pagina; `null` se nessuna è preparabile.
+  final ({int least, bool more})? brews;
 
   /// Il filtro è acceso: le pagine da sfogliare sono solo quelle con una Tavola preparabile.
   final bool onlyReady;
 
-  const _PageRow({required this.collected, required this.ready, required this.onlyReady});
+  const _PageRow({required this.collected, required this.brews, required this.onlyReady});
 
   @override
   Widget build(BuildContext context) {
@@ -222,9 +232,8 @@ class _PageRow extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: Gaps.s),
-          if (ready) ...[const ReadyMark(), const SizedBox(width: Gaps.s)],
-          Text(context.l10n.recipeBookPageCount(collected.knownCount, collected.page.recipes.length)),
+          // Quante pozioni prepari, non quante Tavole hai: quelle le dicono i cerchietti (2026-10-29).
+          if (brews case final b?) ...[const SizedBox(width: Gaps.s), ReadyCount(count: b.least, more: b.more)],
         ],
       ),
     );

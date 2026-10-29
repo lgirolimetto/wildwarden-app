@@ -87,7 +87,7 @@ void main() {
     expect(state.troves.single.$1, Grade.rare);
   });
 
-  testWidgets('una Rara incompleta nel Ricettario: nome parziale, tratto "?" ed effetto da scoprire', (tester) async {
+  testWidgets('una Rara incompleta nel Ricettario: pezzi "?", Qualia "?", effetto da scoprire e la ⓘ', (tester) async {
     final page = recipeBookOf(smallCatalog()).pageOf('Eranthis hyemalis')!;
     final rare = page.recipes.firstWhere((r) => r.grade == Grade.rare);
     registerTestDependencies(
@@ -104,11 +104,20 @@ void main() {
     await openTab(tester, 'Laboratorio');
     await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
 
-    expect(find.text(rare.name('it', missing: 2)), findsOneWidget);
+    // I pezzi che mancano sono pillole "?", non "…"; il recipiente grigio e la ⓘ dicono che è incompleta.
+    final plate = find.byKey(ValueKey('plate-${rare.id}'));
+    expect(find.descendant(of: plate, matching: find.byKey(const ValueKey('missing-piece'))), findsNWidgets(2));
+    expect(find.textContaining('…'), findsNothing);
     expect(find.text('Mancano 2 componenti'), findsOneWidget);
-    await scrollAndTap(tester, find.byKey(ValueKey('plate-${rare.id}')));
-    expect(find.text('?'), findsOneWidget);
+    expect(find.descendant(of: plate, matching: find.byKey(const ValueKey('incomplete-info'))), findsOneWidget);
+    await scrollAndTap(tester, plate);
+    expect(find.text('?'), findsNWidgets(3), reason: 'i 2 pezzi del nome e la Qualia dell\'ingrediente');
     expect(find.text('Da scoprire: manca un componente del nome.'), findsOneWidget);
+
+    await tester.tap(find.byKey(const ValueKey('incomplete-info')));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('incomplete-info-sheet')), findsOneWidget);
+    expect(find.text('Dove si trovano'), findsOneWidget);
   });
 
   testWidgets('riciclo: 3 doppioni Non comuni e 10 Vis completano la Non comune', (tester) async {

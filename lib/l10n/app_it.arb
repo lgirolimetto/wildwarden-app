@@ -485,7 +485,7 @@
       }
     }
   },
-  "masteryDraws": "Essenze Attinte: {done}/{total} · Tratti diversi: {traits}/{needed}",
+  "masteryDraws": "Essenze Attinte: {done}/{total} · Qualia diverse: {traits}/{needed}",
   "@masteryDraws": {
     "placeholders": {
       "done": {
@@ -505,11 +505,11 @@
   "masteryOnlyField": "Con il solo studio non si arriva alla Maestria: servono anche le Essenze Attinte sul campo.",
   "masteryReached": "Maestria raggiunta",
   "simulateDraw": "Simula Attingere",
-  "noTrait": "Nessun Tratto",
+  "noTrait": "Nessuna Qualia",
   "traitFrost": "❄️ Gelo",
   "traitRain": "🌧 Pioggia",
   "traitFog": "🌫 Nebbia",
-  "traitSun": "☀️ Solare",
+  "traitSun": "☀️ Sole",
   "traitMoon": "🌕 Luna piena",
   "traitDew": "💧 Rugiada",
   "traitDusk": "🌅 Tramonto",
@@ -536,8 +536,8 @@
   "glossErborizzareText": "Andare per campi e boschi a osservare e studiare le piante: è il verbo storico dei botanici in escursione.",
   "glossStazioneTerm": "Stazione",
   "glossStazioneText": "In botanica, il luogo preciso in cui cresce una popolazione di una specie, con le sue condizioni di suolo, esposizione e quota. Qui è il punto in cui hai Incontrato una specie e dove potrai tornare ad Attingere.",
-  "glossTrattoTerm": "Tratto",
-  "glossTrattoText": "Una condizione del momento in cui Attingi un'Essenza (Luna piena, Pioggia, Nebbia, Rugiada…): un'Essenza le porta tutte. Le Ricette chiedono Tratti diversi: la stessa pianta in giorni diversi dà Essenze diverse.",
+  "glossTrattoTerm": "Qualia",
+  "glossTrattoText": "Una condizione del momento in cui Attingi un'Essenza (Sole, Luna piena, Pioggia, Nebbia, Rugiada…): un'Essenza le porta tutte. Le Ricette chiedono Qualia diverse: la stessa pianta in giorni diversi dà Essenze diverse. Si dice «una Qualia», «le Qualia», come la Vis.",
   "glossAttingereTerm": "Attingere",
   "glossAttingereText": "Trarre l'Essenza da una Stazione senza toccare la pianta: si fotografa e si osserva, non si raccoglie.",
   "glossMaestriaTerm": "Maestria",
@@ -867,7 +867,7 @@
   "debugGradePreview": "Anteprima dei Gradi",
   "debugGradeSampleName": "Elisir di Prova",
   "debugGradeSampleIngredient": "Erba d'argento",
-  "debugGradeSampleEffect": "La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).",
+  "debugGradeSampleEffect": "La prossima volta che attingi con la Luna piena ha una Qualia in più (effetto di gioco).",
   "badgeEncountered": "Incontrata il",
   "badgeProtected": "Specie Protetta",
   "legendTitle": "Legenda",
@@ -878,11 +878,11 @@
   "legendEncountered": "Specie Incontrata, con la data dell'Incontro",
   "legendXpToCash": "PE da Incassare alla prima Essenza della specie",
   "legendLevels": "Livelli di studio",
-  "legendTraits": "Tratti delle Essenze",
+  "legendTraits": "Qualia delle Essenze",
   "glossProtettaTerm": "Protetta",
   "glossProtettaText": "Specie protetta dalla Direttiva Habitat o da una legge regionale. Si guarda e si fotografa: non si raccoglie, non si calpesta, si resta sul sentiero.",
   "glossEssenzaTerm": "Essenza",
-  "glossEssenzaText": "Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.",
+  "glossEssenzaText": "Ciò che Attingi da una Stazione: ha le sue Vis, una Purezza, che cresce con la conoscenza della specie, e delle Qualia, date dalle condizioni del momento.",
   "glossVisTerm": "Vis",
   "glossVisText": "La linfa sottile delle piante: l'energia che immagazzini ogni volta che attingi. Le Ricette ne chiedono una quantità per Ingrediente.",
   "glossPeDaIncassareTerm": "PE da Incassare",
@@ -963,7 +963,7 @@
       }
     }
   },
-  "recipeBookFavouredTraits": "Tratti d'elezione",
+  "recipeBookFavouredTraits": "Affinità",
   "recipeBookVocation": "Vocazione",
   "recipeBookMissingPlate": "Tavola da trovare",
   "recipeBookSwipeHint": "Scorri per sfogliare le Pagine",
@@ -985,7 +985,7 @@
   "effectAbundance": "Abbondanza",
   "effectRegrowthText": "Per 7 giorni le specie tornano pronte prima, fino a 12 ore dopo (effetto di gioco).",
   "effectClarityText": "Per 7 giorni purezza in più a ogni Essenza (effetto di gioco).",
-  "effectOmenText": "Per 7 giorni un'Essenza senza tratti può prendere il tratto d'elezione della pianta (effetto di gioco).",
+  "effectOmenText": "Per 7 giorni un'Essenza senza Qualia può prendere la prima Affinità della pianta (effetto di gioco).",
   "effectAbundanceText": "Per 7 giorni Vis in più a ogni Essenza, fino a +50 % (effetto di gioco).",
   "mythicNumber": "Tavola n. {number}",
   "@mythicNumber": {
@@ -1014,17 +1014,6 @@
     "placeholders": {
       "zone": {
         "type": "String"
-      }
-    }
-  },
-  "recipeBookMythicsCount": "{known} su {total}",
-  "@recipeBookMythicsCount": {
-    "placeholders": {
-      "known": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
       }
     }
   },
@@ -1280,8 +1269,7 @@
       }
     }
   },
-  "pantryNoTraits": "Nessun tratto",
-  "pantryEmpty": "La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.",
+  "pantryEmpty": "La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con le loro Vis, la purezza e le Qualia. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.",
   "debugSimulatePantry": "Simula una Dispensa",
   "debugSimulatePantryDone": "{count, plural, =1{1 Essenza aggiunta} other{{count} Essenze aggiunte}} alla Dispensa",
   "@debugSimulatePantryDone": {
@@ -1425,7 +1413,7 @@
   "glossRiciclatoTerm": "Riciclato",
   "glossRiciclatoText": "Un doppione uscito dal Bottino dell'Esperienza: 3 riciclati di un grado fanno un componente dello stesso grado, 9 uno del grado sopra, con un po' di Vis.",
   "glossDispensaTerm": "Dispensa",
-  "glossDispensaText": "Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l'hai attinta) e le sue Vis.",
+  "glossDispensaText": "Le Essenze attinte, ognuna con le sue Vis, la purezza (dal livello di studio della pianta quando l'hai attinta) e le sue Qualia.",
   "glossPozioneTerm": "Pozione",
   "glossPozioneText": "Si prepara da una ricetta con le Vis delle Essenze. Ha una potenza da 1 a 10, che viene soprattutto dalla purezza: più conosci le piante, più è potente. Si tiene sullo Scaffale o si usa.",
   "glossToccoTerm": "Tocco",
@@ -1435,7 +1423,7 @@
   "glossScaffaleTerm": "Scaffale",
   "glossScaffaleText": "Le pozioni che hai: tienile per la collezione o usale. L'effetto vale 7 giorni, con la forza della potenza.",
   "legendPotions": "Pozioni",
-  "legendVessel": "Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L'icona in alto a destra è l'effetto.",
+  "legendVessel": "Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido le Qualia: uno strato per Qualia. Grigio se la Tavola è incompleta.",
   "viewMet": "Incontrate",
   "erbarioSpecies": "Specie",
   "tipOfDayTitle": "Consiglio del giorno",
@@ -1445,12 +1433,12 @@
   "tip04": "Le Tavole Non comuni, Rare e Mitiche escono dal Bottino dell'Esperienza incomplete, con il nome a pezzi: ogni pezzo che manca è un Componente, e lo trovi aprendo altri Bottino dell'Esperienza.",
   "tip05": "Le Tavole Mitiche si trovano solo aprendo il Bottino dell'Esperienza di grado mitico.",
   "tip06": "Se il Bottino dell'Esperienza ti dà una Tavola o un Componente che hai già, è un doppione: lo ricicli con un po' di Vis. 3 Riciclati fanno un Componente dello stesso grado, 9 un Componente del grado sopra.",
-  "tip07": "Riciclare un doppione costa un po' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.",
+  "tip07": "Riciclare un doppione costa un po' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con le Qualia restano per le ricette.",
   "tip08": "Ogni ricetta ha uno slot libero, «qualsiasi specie»: la pianta che ci metti dà alla pozione il suo Tocco (Rigogliosa, Limpida, Presaga o Copiosa).",
   "tip09": "Attenzione allo slot libero delle ricette da bere: con una pianta tossica la pozione si guasta e perdi la Vis usata, ma impari che quella pianta è tossica.",
   "tip10": "Nel Ricettario, il filtro \"Mostra solo preparabili\" lascia le Tavole che puoi preparare adesso; aprendo le altre vedi quali Essenze ti mancano: è la lista delle piante da cercare alla prossima uscita.",
   "tip11": "Quando usi una pozione dello Scaffale, il suo effetto dura 7 giorni ed è tanto più forte quanto più alta è la sua Potenza.",
-  "tip12": "I Tratti di un'Essenza dicono in che condizioni l'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un'Essenza attinta con la Luna piena.",
+  "tip12": "Le Qualia di un'Essenza dicono in che condizioni l'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Qualia servono: «Plenilunare» chiede un'Essenza attinta con la Luna piena.",
   "tip13": "I PE che guadagni studiando una specie restano da Incassare finché non attingi la prima Essenza di quella specie: solo allora diventano PE veri.",
   "tip14": "Il significato di simboli, colori e gradi è nella Legenda: Impostazioni → Legenda e glossario.",
   "tip15": "Nel gioco una pianta non si raccoglie mai: la si fotografa e se ne attinge la Vis. Le piante restano dove sono, intatte.",
@@ -1770,7 +1758,7 @@
   "firstRunRulePrivateTitle": "Niente proprietà private",
   "firstRunRulePrivateText": "Non entrare in giardini, campi o terreni privati senza permesso: fotografa da dove puoi stare.",
   "firstRunRuleDaylightTitle": "Con la luce del giorno",
-  "firstRunRuleDaylightText": "Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.",
+  "firstRunRuleDaylightText": "Non uscire a giocare di notte o con poca luce. Le Qualia della luna valgono tutto il giorno: non serve mai.",
   "firstRunRuleSafetyTitle": "Attenzione a dove metti i piedi",
   "firstRunRuleSafetyText": "Guarda il terreno e il traffico: non fotografare mentre attraversi la strada o guidi. Se vai lontano, di' a qualcuno dove vai.",
   "firstRunRuleToxicTitle": "Le piante non si mangiano",
@@ -1845,7 +1833,7 @@
   "erbarioKitchen": "Dalla cucina",
   "kitchenHint": "Un'aromatica di cucina: la trovi in vaso, sul balcone o al supermercato. Fotografala da casa, anche solo una foglia.",
   "sectionOrigin": "Da dove viene",
-  "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.",
+  "captureTutorialEssence": "Ne hai Attinto la prima Essenza, con le Qualia di questo momento: la trovi nella Dispensa del Laboratorio.",
   "sourcesLabel": "Fonte: ",
   "cameraDrawHint": "Inquadra la tua pianta: la Vis sale mentre la guardi, più in fretta se ti muovi",
   "captureLocating": "Cerco dove sei…",
@@ -1864,7 +1852,7 @@
   "whenOtherDay": "{day} alle {time}",
   "captureDrawnTitle": "Hai Attinto un'Essenza",
   "captureDrawnVis": "{vis} Vis · purezza {purity} %",
-  "captureDrawnPantry": "La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.",
+  "captureDrawnPantry": "La trovi nella Dispensa del Laboratorio, con le Qualia di questo momento.",
   "@stationExhausted": {
     "placeholders": {
       "when": {
@@ -1952,8 +1940,60 @@
   "dykTitle": "Lo sapevi che…",
   "dykStorm": "Con il temporale e i fenomeni intensi previsti la raccolta è sospesa nei dintorni, da un'ora prima a un'ora dopo.",
   "dykDaylight": "Alba e Tramonto valgono solo con la luce: non serve mai Attingere al buio.",
-  "dykMoon": "I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.",
+  "dykMoon": "Le Qualia della luna valgono tutto il giorno della fase: non serve uscire di notte.",
   "dykNoPicking": "Le piante non si raccolgono mai: si fotografano e se ne Attinge la Vis. Fotografa, non raccogliere.",
   "dykOneDrawPerDay": "Da ogni Stazione si Attinge una volta al giorno; le piante rare ci mettono giorni a rigenerarsi.",
-  "dykIsolation": "Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis."
+  "dykIsolation": "Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis.",
+  "tip18": "Attingi con lune e meteo diversi: non sai mai quali Qualia ti serviranno.",
+  "glossAffinitaTerm": "Affinità",
+  "glossAffinitaText": "Come vive una pianta: la luce, l'umidità, la quota. Ogni pianta ha anche 3 Qualia sue, che le sue Tavole Non comuni e Rare chiedono: le scopri trovando le Tavole.",
+  "affinityLightFull": "Ama la luce piena.",
+  "affinityLightHalf": "Sta bene a mezz'ombra.",
+  "affinityLightShade": "Ama l'ombra.",
+  "affinityMoistureDry": "Preferisce i terreni asciutti.",
+  "affinityMoistureDamp": "Preferisce i terreni umidi.",
+  "affinityBands": "Cresce {bands}.",
+  "@affinityBands": {
+    "placeholders": {
+      "bands": {
+        "type": "String"
+      }
+    }
+  },
+  "affinityBandPlain": "in pianura",
+  "affinityBandHill": "in collina",
+  "affinityBandMountain": "in montagna",
+  "affinityAnd": " e ",
+  "recipePotionsLeast": "{count, plural, =1{Prepari almeno 1 pozione} other{Prepari almeno {count} pozioni}}",
+  "@recipePotionsLeast": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipePotionsExact": "{count, plural, =1{Prepari 1 pozione} other{Prepari {count} pozioni}}",
+  "@recipePotionsExact": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recipeTimes": "×{count}",
+  "@recipeTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "incompleteInfoTitle": "La Tavola è incompleta",
+  "incompleteWhatTitle": "I «?»",
+  "incompleteWhatText": "Sono i pezzi del nome che non conosci ancora, i Componenti: alla Non comune manca l'effetto, alla Rara l'effetto e una Qualia, alla Mitica le sue parole.",
+  "incompleteBrewTitle": "Non si prepara ancora",
+  "incompleteBrewText": "Finché manca un Componente la Tavola resta nel Ricettario, ma non si prepara.",
+  "incompleteWhereTitle": "Dove si trovano",
+  "incompleteWhereText": "Nei Bottini dell'Esperienza del suo Grado o più alti: a volte un Bottino dà un Componente invece di una Tavola nuova. Oppure con il Riciclo dei doppioni, in fondo alla pagina del Bottino.",
+  "incompleteInfoTooltip": "Che cosa manca"
 }

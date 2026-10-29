@@ -514,7 +514,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String masteryDraws(int done, int total, int traits, int needed) {
-    return 'Essences Drawn: $done/$total · different Traits: $traits/$needed';
+    return 'Essences Drawn: $done/$total · different Qualia: $traits/$needed';
   }
 
   @override
@@ -528,7 +528,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get simulateDraw => 'Simulate Drawing';
 
   @override
-  String get noTrait => 'No Trait';
+  String get noTrait => 'No Qualia';
 
   @override
   String get traitFrost => '❄️ Frost';
@@ -597,11 +597,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'In botany, the precise place where a population of a species grows, with its soil, exposure and altitude. Here, the spot where you Met a species and where you can return to Draw from it.';
 
   @override
-  String get glossTrattoTerm => 'Trait';
+  String get glossTrattoTerm => 'Qualia';
 
   @override
   String get glossTrattoText =>
-      'A condition of the moment when you Draw an Essence (Full moon, Rain, Fog, Dew…): an Essence carries all of them. Recipes ask for different Traits: the same plant on different days gives different Essences.';
+      'A condition of the moment when you Draw an Essence (Sun, Full moon, Rain, Fog, Dew…): an Essence carries all of them. Recipes ask for different Qualia: the same plant on different days gives different Essences. One Qualia, many Qualia, like Vis.';
 
   @override
   String get glossAttingereTerm => 'Draw';
@@ -926,7 +926,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get debugGradeSampleEffect =>
-      'The next Draw under a Full moon gets an extra Trait (game effect).';
+      'The next Draw under a Full moon gets an extra Qualia (game effect).';
 
   @override
   String get badgeEncountered => 'Met on';
@@ -960,7 +960,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legendLevels => 'Study levels';
 
   @override
-  String get legendTraits => 'Essence Traits';
+  String get legendTraits => 'Essence Qualia';
 
   @override
   String get glossProtettaTerm => 'Protected';
@@ -974,7 +974,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossEssenzaText =>
-      'What you Draw from a Station: it has a Purity, which grows with your knowledge of the species, and Traits, given by the conditions of the moment.';
+      'What you Draw from a Station: it has its Vis, a Purity, which grows with your knowledge of the species, and Qualia, given by the conditions of the moment.';
 
   @override
   String get glossVisTerm => 'Vis';
@@ -1164,7 +1164,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get recipeBookFavouredTraits => 'Favoured traits';
+  String get recipeBookFavouredTraits => 'Affinities';
 
   @override
   String get recipeBookVocation => 'Vocation';
@@ -1211,7 +1211,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get effectOmenText =>
-      'For 7 days an Essence without traits can take the plant\'s favoured trait (game effect).';
+      'For 7 days an Essence without Qualia can take the plant\'s first Affinity (game effect).';
 
   @override
   String get effectAbundanceText =>
@@ -1240,11 +1240,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String recipeBookMythicsRow(String zone) {
     return 'Mythics · $zone';
-  }
-
-  @override
-  String recipeBookMythicsCount(int known, int total) {
-    return '$known of $total';
   }
 
   @override
@@ -1555,11 +1550,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get pantryNoTraits => 'No traits';
-
-  @override
   String get pantryEmpty =>
-      'The Pantry is empty: the Essences you Draw from Stations stay here, with their traits, purity and Vis. For now you Draw with \"Simulate Drawing\" in the species card.';
+      'The Pantry is empty: the Essences you Draw from Stations stay here, with their Vis, purity and Qualia. For now you Draw with \"Simulate Drawing\" in the species card.';
 
   @override
   String get debugSimulatePantry => 'Simulate a Pantry';
@@ -1749,7 +1741,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glossDispensaText =>
-      'The Essences you\'ve drawn, each with its traits, purity (from the plant\'s study level when you drew it) and its Vis.';
+      'The Essences you\'ve drawn, each with its Vis, purity (from the plant\'s study level when you drew it) and its Qualia.';
 
   @override
   String get glossPozioneTerm => 'Potion';
@@ -1784,7 +1776,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legendVessel =>
-      'The vessel shows the recipe\'s base (Infusion, Tincture, Philtre…), the colour of the liquid its traits: one layer per trait. The icon at the top right is the effect.';
+      'The vessel shows the recipe\'s base (Infusion, Tincture, Philtre…), the colour of the liquid its Qualia: one layer per Qualia. Grey if the Plate is incomplete.';
 
   @override
   String get viewMet => 'Met';
@@ -1821,7 +1813,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip07 =>
-      'Recycling a duplicate costs a little Vis, taken from your Essences: the least precious Essences are used first, so the ones with Traits stay for recipes.';
+      'Recycling a duplicate costs a little Vis, taken from your Essences: the least precious Essences are used first, so the ones with Qualia stay for recipes.';
 
   @override
   String get tip08 =>
@@ -1841,7 +1833,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tip12 =>
-      'An Essence\'s Traits tell the conditions you drew it in (weather, time of day, moon); a recipe\'s name says which Traits it needs: “Full-moon” asks for an Essence drawn under the Full moon.';
+      'An Essence\'s Qualia tell the conditions you drew it in (weather, time of day, moon); a recipe\'s name says which Qualia it needs: “Full-moon” asks for an Essence drawn under the Full moon.';
 
   @override
   String get tip13 =>
@@ -2257,7 +2249,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get firstRunRuleDaylightText =>
-      'Don\'t go out to play at night or in poor light. Moon Traits last all day: you never need to.';
+      'Don\'t go out to play at night or in poor light. Moon Qualia last all day: you never need to.';
 
   @override
   String get firstRunRuleSafetyTitle => 'Watch your step';
@@ -2448,7 +2440,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get captureTutorialEssence =>
-      'You Drew its first Essence, with the Traits of this moment: you\'ll find it in the Laboratory Pantry.';
+      'You Drew its first Essence, with the Qualia of this moment: you\'ll find it in the Laboratory Pantry.';
 
   @override
   String get sourcesLabel => 'Source: ';
@@ -2520,7 +2512,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get captureDrawnPantry =>
-      'You\'ll find it in the Laboratory Pantry, with the Traits of this moment.';
+      'You\'ll find it in the Laboratory Pantry, with the Qualia of this moment.';
 
   @override
   String get stationsTitle => 'Your Stations';
@@ -2560,7 +2552,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dykMoon =>
-      'Moon Traits last the whole day of the phase: you never need to go out at night.';
+      'Moon Qualia last the whole day of the phase: you never need to go out at night.';
 
   @override
   String get dykNoPicking =>
@@ -2573,4 +2565,101 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dykIsolation =>
       'Stations far from each other yield more: many plants in the same spot share their Vis.';
+
+  @override
+  String get tip18 =>
+      'Draw under different moons and weather: you never know which Qualia you\'ll need.';
+
+  @override
+  String get glossAffinitaTerm => 'Affinities';
+
+  @override
+  String get glossAffinitaText =>
+      'How a plant lives: light, moisture, altitude. Each plant also has 3 Qualia of its own, which its Uncommon and Rare Plates ask for: you discover them by finding the Plates.';
+
+  @override
+  String get affinityLightFull => 'Loves full light.';
+
+  @override
+  String get affinityLightHalf => 'Does well in half shade.';
+
+  @override
+  String get affinityLightShade => 'Loves the shade.';
+
+  @override
+  String get affinityMoistureDry => 'Prefers dry soils.';
+
+  @override
+  String get affinityMoistureDamp => 'Prefers damp soils.';
+
+  @override
+  String affinityBands(String bands) {
+    return 'Grows $bands.';
+  }
+
+  @override
+  String get affinityBandPlain => 'in the plains';
+
+  @override
+  String get affinityBandHill => 'in the hills';
+
+  @override
+  String get affinityBandMountain => 'in the mountains';
+
+  @override
+  String get affinityAnd => ' and ';
+
+  @override
+  String recipePotionsLeast(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'You can brew at least $count potions',
+      one: 'You can brew at least 1 potion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recipePotionsExact(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'You can brew $count potions',
+      one: 'You can brew 1 potion',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String recipeTimes(int count) {
+    return '×$count';
+  }
+
+  @override
+  String get incompleteInfoTitle => 'The Plate is incomplete';
+
+  @override
+  String get incompleteWhatTitle => 'The “?”';
+
+  @override
+  String get incompleteWhatText =>
+      'They are the pieces of the name you don\'t know yet, the Components: an Uncommon is missing its effect, a Rare its effect and one Qualia, a Mythic its words.';
+
+  @override
+  String get incompleteBrewTitle => 'Not brewable yet';
+
+  @override
+  String get incompleteBrewText =>
+      'While a Component is missing the Plate stays in the Recipe Book, but you can\'t brew it.';
+
+  @override
+  String get incompleteWhereTitle => 'Where to find them';
+
+  @override
+  String get incompleteWhereText =>
+      'In Troves of Experience of its Grade or higher: sometimes a Trove gives a Component instead of a new Plate. Or by Recycling duplicates, at the bottom of the Trove page.';
+
+  @override
+  String get incompleteInfoTooltip => 'What\'s missing';
 }

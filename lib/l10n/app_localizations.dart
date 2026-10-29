@@ -911,7 +911,7 @@ abstract class AppLocalizations {
   /// No description provided for @masteryDraws.
   ///
   /// In it, this message translates to:
-  /// **'Essenze Attinte: {done}/{total} · Tratti diversi: {traits}/{needed}'**
+  /// **'Essenze Attinte: {done}/{total} · Qualia diverse: {traits}/{needed}'**
   String masteryDraws(int done, int total, int traits, int needed);
 
   /// No description provided for @masteryOnlyField.
@@ -935,7 +935,7 @@ abstract class AppLocalizations {
   /// No description provided for @noTrait.
   ///
   /// In it, this message translates to:
-  /// **'Nessun Tratto'**
+  /// **'Nessuna Qualia'**
   String get noTrait;
 
   /// No description provided for @traitFrost.
@@ -959,7 +959,7 @@ abstract class AppLocalizations {
   /// No description provided for @traitSun.
   ///
   /// In it, this message translates to:
-  /// **'☀️ Solare'**
+  /// **'☀️ Sole'**
   String get traitSun;
 
   /// No description provided for @traitMoon.
@@ -1061,13 +1061,13 @@ abstract class AppLocalizations {
   /// No description provided for @glossTrattoTerm.
   ///
   /// In it, this message translates to:
-  /// **'Tratto'**
+  /// **'Qualia'**
   String get glossTrattoTerm;
 
   /// No description provided for @glossTrattoText.
   ///
   /// In it, this message translates to:
-  /// **'Una condizione del momento in cui Attingi un\'Essenza (Luna piena, Pioggia, Nebbia, Rugiada…): un\'Essenza le porta tutte. Le Ricette chiedono Tratti diversi: la stessa pianta in giorni diversi dà Essenze diverse.'**
+  /// **'Una condizione del momento in cui Attingi un\'Essenza (Sole, Luna piena, Pioggia, Nebbia, Rugiada…): un\'Essenza le porta tutte. Le Ricette chiedono Qualia diverse: la stessa pianta in giorni diversi dà Essenze diverse. Si dice «una Qualia», «le Qualia», come la Vis.'**
   String get glossTrattoText;
 
   /// No description provided for @glossAttingereTerm.
@@ -1595,7 +1595,7 @@ abstract class AppLocalizations {
   /// No description provided for @debugGradeSampleEffect.
   ///
   /// In it, this message translates to:
-  /// **'La prossima volta che attingi con la Luna piena ha un Tratto in più (effetto di gioco).'**
+  /// **'La prossima volta che attingi con la Luna piena ha una Qualia in più (effetto di gioco).'**
   String get debugGradeSampleEffect;
 
   /// No description provided for @badgeEncountered.
@@ -1661,7 +1661,7 @@ abstract class AppLocalizations {
   /// No description provided for @legendTraits.
   ///
   /// In it, this message translates to:
-  /// **'Tratti delle Essenze'**
+  /// **'Qualia delle Essenze'**
   String get legendTraits;
 
   /// No description provided for @glossProtettaTerm.
@@ -1685,7 +1685,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossEssenzaText.
   ///
   /// In it, this message translates to:
-  /// **'Ciò che Attingi da una Stazione: ha una Purezza, che cresce con la conoscenza della specie, e dei Tratti, dati dalle condizioni del momento.'**
+  /// **'Ciò che Attingi da una Stazione: ha le sue Vis, una Purezza, che cresce con la conoscenza della specie, e delle Qualia, date dalle condizioni del momento.'**
   String get glossEssenzaText;
 
   /// No description provided for @glossVisTerm.
@@ -1991,7 +1991,7 @@ abstract class AppLocalizations {
   /// No description provided for @recipeBookFavouredTraits.
   ///
   /// In it, this message translates to:
-  /// **'Tratti d\'elezione'**
+  /// **'Affinità'**
   String get recipeBookFavouredTraits;
 
   /// No description provided for @recipeBookVocation.
@@ -2063,7 +2063,7 @@ abstract class AppLocalizations {
   /// No description provided for @effectOmenText.
   ///
   /// In it, this message translates to:
-  /// **'Per 7 giorni un\'Essenza senza tratti può prendere il tratto d\'elezione della pianta (effetto di gioco).'**
+  /// **'Per 7 giorni un\'Essenza senza Qualia può prendere la prima Affinità della pianta (effetto di gioco).'**
   String get effectOmenText;
 
   /// No description provided for @effectAbundanceText.
@@ -2107,12 +2107,6 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Mitiche · {zone}'**
   String recipeBookMythicsRow(String zone);
-
-  /// No description provided for @recipeBookMythicsCount.
-  ///
-  /// In it, this message translates to:
-  /// **'{known} su {total}'**
-  String recipeBookMythicsCount(int known, int total);
 
   /// No description provided for @debugSimulateRecipeBook.
   ///
@@ -2462,16 +2456,10 @@ abstract class AppLocalizations {
   /// **'{vis} Vis'**
   String pantryVis(int vis);
 
-  /// No description provided for @pantryNoTraits.
-  ///
-  /// In it, this message translates to:
-  /// **'Nessun tratto'**
-  String get pantryNoTraits;
-
   /// No description provided for @pantryEmpty.
   ///
   /// In it, this message translates to:
-  /// **'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con i loro tratti, la purezza e le Vis. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.'**
+  /// **'La Dispensa è vuota: le Essenze che Attingi dalle Stazioni restano qui, con le loro Vis, la purezza e le Qualia. Per ora si Attinge con \"Simula Attingere\" nella scheda della specie.'**
   String get pantryEmpty;
 
   /// No description provided for @debugSimulatePantry.
@@ -2759,7 +2747,7 @@ abstract class AppLocalizations {
   /// No description provided for @glossDispensaText.
   ///
   /// In it, this message translates to:
-  /// **'Le Essenze attinte, ognuna con i suoi tratti, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Vis.'**
+  /// **'Le Essenze attinte, ognuna con le sue Vis, la purezza (dal livello di studio della pianta quando l\'hai attinta) e le sue Qualia.'**
   String get glossDispensaText;
 
   /// No description provided for @glossPozioneTerm.
@@ -2819,7 +2807,7 @@ abstract class AppLocalizations {
   /// No description provided for @legendVessel.
   ///
   /// In it, this message translates to:
-  /// **'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido i tratti: uno strato per tratto. L\'icona in alto a destra è l\'effetto.'**
+  /// **'Il recipiente dice la base della ricetta (Infuso, Tintura, Filtro…), il colore del liquido le Qualia: uno strato per Qualia. Grigio se la Tavola è incompleta.'**
   String get legendVessel;
 
   /// No description provided for @viewMet.
@@ -2879,7 +2867,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip07.
   ///
   /// In it, this message translates to:
-  /// **'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con i Tratti restano per le ricette.'**
+  /// **'Riciclare un doppione costa un po\' di Vis, presa dalle tue Essenze: si usano prima le Essenze meno preziose, così quelle con le Qualia restano per le ricette.'**
   String get tip07;
 
   /// No description provided for @tip08.
@@ -2909,7 +2897,7 @@ abstract class AppLocalizations {
   /// No description provided for @tip12.
   ///
   /// In it, this message translates to:
-  /// **'I Tratti di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Tratti servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.'**
+  /// **'Le Qualia di un\'Essenza dicono in che condizioni l\'hai attinta (meteo, ora del giorno, luna); il nome di una ricetta dice quali Qualia servono: «Plenilunare» chiede un\'Essenza attinta con la Luna piena.'**
   String get tip12;
 
   /// No description provided for @tip13.
@@ -3570,7 +3558,7 @@ abstract class AppLocalizations {
   /// No description provided for @firstRunRuleDaylightText.
   ///
   /// In it, this message translates to:
-  /// **'Non uscire a giocare di notte o con poca luce. I Tratti della luna valgono tutto il giorno: non serve mai.'**
+  /// **'Non uscire a giocare di notte o con poca luce. Le Qualia della luna valgono tutto il giorno: non serve mai.'**
   String get firstRunRuleDaylightText;
 
   /// No description provided for @firstRunRuleSafetyTitle.
@@ -3900,7 +3888,7 @@ abstract class AppLocalizations {
   /// No description provided for @captureTutorialEssence.
   ///
   /// In it, this message translates to:
-  /// **'Ne hai Attinto la prima Essenza, con i Tratti di questo momento: la trovi nella Dispensa del Laboratorio.'**
+  /// **'Ne hai Attinto la prima Essenza, con le Qualia di questo momento: la trovi nella Dispensa del Laboratorio.'**
   String get captureTutorialEssence;
 
   /// No description provided for @sourcesLabel.
@@ -4014,7 +4002,7 @@ abstract class AppLocalizations {
   /// No description provided for @captureDrawnPantry.
   ///
   /// In it, this message translates to:
-  /// **'La trovi nella Dispensa del Laboratorio, con i Tratti di questo momento.'**
+  /// **'La trovi nella Dispensa del Laboratorio, con le Qualia di questo momento.'**
   String get captureDrawnPantry;
 
   /// No description provided for @stationsTitle.
@@ -4074,7 +4062,7 @@ abstract class AppLocalizations {
   /// No description provided for @dykMoon.
   ///
   /// In it, this message translates to:
-  /// **'I Tratti della luna valgono tutto il giorno della fase: non serve uscire di notte.'**
+  /// **'Le Qualia della luna valgono tutto il giorno della fase: non serve uscire di notte.'**
   String get dykMoon;
 
   /// No description provided for @dykNoPicking.
@@ -4094,6 +4082,150 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Le Stazioni lontane tra loro rendono di più: tante piante nello stesso posto si dividono la Vis.'**
   String get dykIsolation;
+
+  /// No description provided for @tip18.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi con lune e meteo diversi: non sai mai quali Qualia ti serviranno.'**
+  String get tip18;
+
+  /// No description provided for @glossAffinitaTerm.
+  ///
+  /// In it, this message translates to:
+  /// **'Affinità'**
+  String get glossAffinitaTerm;
+
+  /// No description provided for @glossAffinitaText.
+  ///
+  /// In it, this message translates to:
+  /// **'Come vive una pianta: la luce, l\'umidità, la quota. Ogni pianta ha anche 3 Qualia sue, che le sue Tavole Non comuni e Rare chiedono: le scopri trovando le Tavole.'**
+  String get glossAffinitaText;
+
+  /// No description provided for @affinityLightFull.
+  ///
+  /// In it, this message translates to:
+  /// **'Ama la luce piena.'**
+  String get affinityLightFull;
+
+  /// No description provided for @affinityLightHalf.
+  ///
+  /// In it, this message translates to:
+  /// **'Sta bene a mezz\'ombra.'**
+  String get affinityLightHalf;
+
+  /// No description provided for @affinityLightShade.
+  ///
+  /// In it, this message translates to:
+  /// **'Ama l\'ombra.'**
+  String get affinityLightShade;
+
+  /// No description provided for @affinityMoistureDry.
+  ///
+  /// In it, this message translates to:
+  /// **'Preferisce i terreni asciutti.'**
+  String get affinityMoistureDry;
+
+  /// No description provided for @affinityMoistureDamp.
+  ///
+  /// In it, this message translates to:
+  /// **'Preferisce i terreni umidi.'**
+  String get affinityMoistureDamp;
+
+  /// No description provided for @affinityBands.
+  ///
+  /// In it, this message translates to:
+  /// **'Cresce {bands}.'**
+  String affinityBands(String bands);
+
+  /// No description provided for @affinityBandPlain.
+  ///
+  /// In it, this message translates to:
+  /// **'in pianura'**
+  String get affinityBandPlain;
+
+  /// No description provided for @affinityBandHill.
+  ///
+  /// In it, this message translates to:
+  /// **'in collina'**
+  String get affinityBandHill;
+
+  /// No description provided for @affinityBandMountain.
+  ///
+  /// In it, this message translates to:
+  /// **'in montagna'**
+  String get affinityBandMountain;
+
+  /// No description provided for @affinityAnd.
+  ///
+  /// In it, this message translates to:
+  /// **' e '**
+  String get affinityAnd;
+
+  /// No description provided for @recipePotionsLeast.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Prepari almeno 1 pozione} other{Prepari almeno {count} pozioni}}'**
+  String recipePotionsLeast(int count);
+
+  /// No description provided for @recipePotionsExact.
+  ///
+  /// In it, this message translates to:
+  /// **'{count, plural, =1{Prepari 1 pozione} other{Prepari {count} pozioni}}'**
+  String recipePotionsExact(int count);
+
+  /// No description provided for @recipeTimes.
+  ///
+  /// In it, this message translates to:
+  /// **'×{count}'**
+  String recipeTimes(int count);
+
+  /// No description provided for @incompleteInfoTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'La Tavola è incompleta'**
+  String get incompleteInfoTitle;
+
+  /// No description provided for @incompleteWhatTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'I «?»'**
+  String get incompleteWhatTitle;
+
+  /// No description provided for @incompleteWhatText.
+  ///
+  /// In it, this message translates to:
+  /// **'Sono i pezzi del nome che non conosci ancora, i Componenti: alla Non comune manca l\'effetto, alla Rara l\'effetto e una Qualia, alla Mitica le sue parole.'**
+  String get incompleteWhatText;
+
+  /// No description provided for @incompleteBrewTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Non si prepara ancora'**
+  String get incompleteBrewTitle;
+
+  /// No description provided for @incompleteBrewText.
+  ///
+  /// In it, this message translates to:
+  /// **'Finché manca un Componente la Tavola resta nel Ricettario, ma non si prepara.'**
+  String get incompleteBrewText;
+
+  /// No description provided for @incompleteWhereTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Dove si trovano'**
+  String get incompleteWhereTitle;
+
+  /// No description provided for @incompleteWhereText.
+  ///
+  /// In it, this message translates to:
+  /// **'Nei Bottini dell\'Esperienza del suo Grado o più alti: a volte un Bottino dà un Componente invece di una Tavola nuova. Oppure con il Riciclo dei doppioni, in fondo alla pagina del Bottino.'**
+  String get incompleteWhereText;
+
+  /// No description provided for @incompleteInfoTooltip.
+  ///
+  /// In it, this message translates to:
+  /// **'Che cosa manca'**
+  String get incompleteInfoTooltip;
 }
 
 class _AppLocalizationsDelegate

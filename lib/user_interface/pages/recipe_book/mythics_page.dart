@@ -11,6 +11,7 @@ import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/recipe_page.dart';
 import 'package:druid_app/user_interface/pages/recipe_book/widgets/ready_mark.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:flutter/material.dart';
@@ -85,10 +86,14 @@ class _MythicRow extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(context.l10n.mythicNumber(mythic.number.toString()), style: context.texts.labelLarge),
-              Text(
-                known ? mythic.name(context.contentLanguage, missing: missing) : context.l10n.mythicToFind,
-                style: known ? context.texts.titleMedium : TextStyle(color: context.druid.hint),
-              ),
+              if (known)
+                RecipeTitle(
+                  mythic.name(context.contentLanguage, missing: missing),
+                  plant: null,
+                  style: context.texts.titleMedium,
+                )
+              else
+                Text(context.l10n.mythicToFind, style: TextStyle(color: context.druid.hint)),
             ],
           ),
         ),

@@ -1,3 +1,6 @@
+import 'package:druid_app/business_logic/models/enums/altitude_band.dart';
+import 'package:druid_app/business_logic/models/species.dart';
+import 'package:druid_app/business_logic/rules/recipes/affinity.dart';
 import 'package:druid_app/business_logic/rules/recipes/brewing.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/business_logic/rules/recipes/recipe_book.dart';
@@ -48,7 +51,12 @@ class _PlantPagesPageState extends State<PlantPagesPage> {
         belowAppBar: true,
         child: GameDataBuilder(
           builder: (context, catalog, state, progress) {
+            // Quante pozioni prepari di ogni Tavola, con le Vis che hai (solo quelle preparabili adesso).
             final ready = preparableIds(catalog, state, progress.now);
+            final brews = {
+              for (final id in ready)
+                if (brewableOf(catalog, id) case final brewable?) id: brewsOf(brewable, state.essences),
+            };
             final pages = [
               for (final p in collectedPages(catalog, state))
                 if (!widget.onlyReady || p.page.recipes.any((r) => ready.contains(r.id))) p,
@@ -63,7 +71,7 @@ class _PlantPagesPageState extends State<PlantPagesPage> {
                 collected: pages[i],
                 showSwipeHint: pages.length > 1,
                 bestPotency: state.bestPotency,
-                ready: ready,
+                brews: brews,
               ),
             );
           },
@@ -80,14 +88,14 @@ class _PlantPageView extends StatelessWidget {
   /// La potenza migliore di ogni ricetta preparata.
   final Map<String, int> bestPotency;
 
-  /// Gli id delle ricette preparabili adesso.
-  final Set<String> ready;
+  /// Quante pozioni prepari adesso di ogni Tavola preparabile.
+  final Map<String, int> brews;
 
   const _PlantPageView({
     required this.collected,
     required this.showSwipeHint,
     required this.bestPotency,
-    required this.ready,
+    required this.brews,
   });
 
   @override
@@ -115,7 +123,8 @@ class _PlantPageView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: Gaps.m),
-        _PillRow(label: context.l10n.recipeBookFavouredTraits, pills: page.favouredTraits.map(context.game.trait)),
+        // Le Affinità solo a parole (2026-10-29): come vive la pianta, non quali Qualia chiederanno le Tavole.
+        _Affinity(plant: plant),
         const SizedBox(height: Gaps.m),
         _PillRow(label: context.l10n.recipeBookVocation, pills: page.vocation.map(context.game.effect)),
         const SizedBox(height: Gaps.l),
@@ -133,7 +142,7 @@ class _PlantPageView extends StatelessWidget {
                       recipe: recipe,
                       missing: collected.missingOf(recipe),
                       bestPotency: bestPotency[recipe.id],
-                      ready: ready.contains(recipe.id),
+                      brews: brews[recipe.id] ?? 0,
                     )
                   : _EmptySlot(recipe: recipe),
           ],
@@ -179,10 +188,10 @@ class _Plate extends StatelessWidget {
   /// La potenza migliore raggiunta, se l'hai preparata.
   final int? bestPotency;
 
-  /// Preparabile adesso.
-  final bool ready;
+  /// Quante pozioni ne prepari adesso.
+  final int brews;
 
-  const _Plate({required this.recipe, required this.missing, this.bestPotency, required this.ready});
+  const _Plate({required this.recipe, required this.missing, this.bestPotency, required this.brews});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -193,7 +202,7 @@ class _Plate extends StatelessWidget {
       child: PlateFace(
         recipe: recipe,
         missing: missing,
-        ready: ready,
+        brews: brews,
         caption: switch (bestPotency) {
           final int best when missing == 0 => context.l10n.recipeBestPotency(best),
           _ => null,
@@ -230,4 +239,49 @@ class _EmptySlot extends StatelessWidget {
       ),
     ),
   );
+}
+
+/// Le Affinità della pianta: il titolo e una frase dai dati del catalogo (luce, umidità, quota).
+class _Affinity extends StatelessWidget {
+  final Species plant;
+
+  const _Affinity({required this.plant});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final profile = affinityProfile(plant);
+    final bands = [
+      for (final b in profile.bands)
+        switch (b) {
+          AltitudeBand.plain => l10n.affinityBandPlain,
+          AltitudeBand.hill => l10n.affinityBandHill,
+          AltitudeBand.mountain => l10n.affinityBandMountain,
+        },
+    ];
+    final sentence = [
+      ?switch (profile.light) {
+        LightLiking.full => l10n.affinityLightFull,
+        LightLiking.half => l10n.affinityLightHalf,
+        LightLiking.shade => l10n.affinityLightShade,
+        null => null,
+      },
+      ?switch (profile.moisture) {
+        MoistureLiking.dry => l10n.affinityMoistureDry,
+        MoistureLiking.damp => l10n.affinityMoistureDamp,
+        null => null,
+      },
+      if (bands.isNotEmpty) l10n.affinityBands(bands.join(l10n.affinityAnd)),
+    ].join(' ');
+    if (sentence.isEmpty) return const SizedBox.shrink();
+    return Column(
+      key: const ValueKey('plant-affinity'),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(l10n.recipeBookFavouredTraits, style: context.texts.labelMedium?.copyWith(color: context.druid.hint)),
+        const SizedBox(height: Gaps.xs),
+        Text(sentence, style: context.texts.bodyMedium),
+      ],
+    );
+  }
 }
