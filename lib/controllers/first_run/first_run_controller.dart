@@ -1,6 +1,8 @@
 import 'package:druid_app/business_logic/interfaces/i_permissions.dart';
 import 'package:druid_app/business_logic/interfaces/i_preferences.dart';
+import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/first_run.dart';
+import 'package:druid_app/controllers/progress/progress_controller.dart';
 import 'package:get/get.dart';
 
 /// Le pagine dell'onboarding di primo avvio, in ordine.
@@ -11,8 +13,9 @@ enum FirstRunStep { terms, camera, location, ready }
 class FirstRunController extends GetxController {
   final IPreferences _preferences;
   final IPermissions _permissions;
+  final ProgressController _progress;
 
-  FirstRunController(this._preferences, this._permissions);
+  FirstRunController(this._preferences, this._permissions, this._progress);
 
   FirstRunStep step = FirstRunStep.terms;
   bool busy = false;
@@ -52,6 +55,9 @@ class FirstRunController extends GetxController {
 
   Future<void> openSettings() => _permissions.openAppSettings();
 
-  /// Fine dell'onboarding (con il tutorial o "Più tardi").
-  Future<void> finish() => _preferences.setString(firstRunDoneKey, '1');
+  /// Fine dell'onboarding: con [tutorial] il tutorial comincia; con "Più tardi" resta proposto in Home.
+  Future<void> finish({required bool tutorial}) async {
+    await _preferences.setString(firstRunDoneKey, '1');
+    if (tutorial) await _progress.markOnboarding(OnboardingMark.tutorialStarted);
+  }
 }

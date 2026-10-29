@@ -561,54 +561,6 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String missionLabel(int index, int total) {
-    return 'Missione $index di $total';
-  }
-
-  @override
-  String get missionVisitErbarioTitle => 'Apri l\'Erbario';
-
-  @override
-  String get missionVisitErbarioBody =>
-      'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.';
-
-  @override
-  String get missionFirstEncounterTitle => 'Incontra una specie';
-
-  @override
-  String get missionFirstEncounterBody =>
-      'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.';
-
-  @override
-  String get missionFirstLevelTitle => 'Studia la tua prima specie';
-
-  @override
-  String get missionFirstLevelBody =>
-      'Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.';
-
-  @override
-  String get missionFirstRecipeTitle => 'La prima Ricetta';
-
-  @override
-  String get missionFirstRecipeBody =>
-      'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.';
-
-  @override
-  String get missionSkip => 'Salta l\'Apprendistato';
-
-  @override
-  String get missionActionOpenErbario => 'Apri l\'Erbario';
-
-  @override
-  String get missionActionStudy => 'Inizia a studiare';
-
-  @override
-  String get missionActionRecipes => 'Apri il Ricettario';
-
-  @override
-  String get missionGlossary => 'Glossario';
-
-  @override
   String get apprenticeshipComplete => 'Apprendistato completato!';
 
   @override
@@ -2415,4 +2367,86 @@ class AppLocalizationsIt extends AppLocalizations {
   String firstRunProgress(int step, int total) {
     return 'Passo $step di $total';
   }
+
+  @override
+  String get rankCurious => 'Curioso';
+
+  @override
+  String get nextRankCurious =>
+      'Prossimo Rango: Apprendista, alla fine del tutorial';
+
+  @override
+  String tutorialLabel(int step, int total) {
+    return 'Tutorial · passo $step di $total';
+  }
+
+  @override
+  String get tutorialIntroTitle => 'Il tutorial';
+
+  @override
+  String get tutorialIntroBody =>
+      'Un giro del gioco tutto da casa, con le aromatiche di cucina: salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Alla fine diventi Apprendista.';
+
+  @override
+  String get tutorialStart => 'Inizia';
+
+  @override
+  String get tutorialSkip => 'Salta il tutorial';
+
+  @override
+  String get tutorialPhotographTitle => 'Fotografa un\'aromatica';
+
+  @override
+  String get tutorialPhotographBody =>
+      'Tocca Attingi al centro della barra e fotografa salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Pl@ntNet la riconosce: la Incontri, nasce la sua Stazione e ne Attingi la prima Essenza. Fotografa, non raccogliere.';
+
+  @override
+  String get tutorialStudyTitle => 'Studia la tua aromatica';
+
+  @override
+  String get tutorialStudyBody =>
+      'Ogni pianta si studia a Livelli, con domande che fanno imparare anche quando sbagli. Supera il Livello 1 della pianta che hai fotografato: impari la sua Ricetta Comune. Intanto nella barra si è acceso l\'Erbario.';
+
+  @override
+  String get tutorialSecondPhotographTitle => 'Fotografa un\'altra aromatica';
+
+  @override
+  String get tutorialSecondPhotographBody =>
+      'La Ricetta Comune vuole la pianta e un\'altra specie qualsiasi: fotografa un\'altra aromatica e ne Attingi una seconda Essenza.';
+
+  @override
+  String get tutorialBrewTitle => 'Prepara la prima pozione';
+
+  @override
+  String get tutorialBrewBody =>
+      'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.';
+
+  @override
+  String get tutorialTroveTitle => 'Il Bottino dell\'Esperienza';
+
+  @override
+  String get tutorialTroveBody =>
+      'Con i PE compri Bottini dell\'Esperienza: dentro ci sono le Tavole di altre Ricette. Nella barra si è acceso il Bottino: aprilo, c\'è un regalo per te.';
+
+  @override
+  String get tutorialApprenticeTitle => 'Sei Apprendista';
+
+  @override
+  String get tutorialApprenticeBody =>
+      'Hai fatto il primo giro: fotografare, studiare, Attingere, preparare. Ora esci: le piante della tua Zona ti aspettano nell\'Erbario, alla voce Da trovare.';
+
+  @override
+  String get tutorialActionCapture => 'Attingi';
+
+  @override
+  String get tutorialActionStudy => 'Studia';
+
+  @override
+  String get tutorialActionLaboratory => 'Apri il Laboratorio';
+
+  @override
+  String get tutorialActionTrove => 'Apri il Bottino';
+
+  @override
+  String get tutorialActionFinish => 'Continua';
 }

@@ -18,7 +18,7 @@ class FirstRunPage extends StatelessWidget {
     body: DruidBackground(
       child: SafeArea(
         child: GetBuilder<FirstRunController>(
-          init: FirstRunController(Get.find(), Get.find()),
+          init: FirstRunController(Get.find(), Get.find(), Get.find()),
           global: false,
           builder: (run) => Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -247,9 +247,9 @@ class _Ready extends StatelessWidget {
 
   const _Ready(this.run);
 
-  Future<void> _finish(BuildContext context) async {
+  Future<void> _finish(BuildContext context, {required bool tutorial}) async {
     final navigator = Navigator.of(context);
-    await run.finish();
+    await run.finish(tutorial: tutorial);
     await navigator.pushNamedAndRemoveUntil<void>(Routes.home, (_) => false);
   }
 
@@ -264,14 +264,14 @@ class _Ready extends StatelessWidget {
           key: const ValueKey('first-run-tutorial'),
           label: context.l10n.firstRunStartTutorial,
           icon: Icons.school_outlined,
-          onPressed: () => _finish(context),
+          onPressed: () => _finish(context, tutorial: true),
         ),
       ),
       const SizedBox(height: Gaps.m),
       Center(
         child: TextButton(
           key: const ValueKey('first-run-later'),
-          onPressed: () => _finish(context),
+          onPressed: () => _finish(context, tutorial: false),
           child: Text(context.l10n.firstRunLater),
         ),
       ),

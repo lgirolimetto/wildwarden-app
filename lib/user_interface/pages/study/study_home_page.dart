@@ -2,7 +2,7 @@ import 'package:druid_app/business_logic/rules/field/stations.dart';
 import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/species.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
-import 'package:druid_app/business_logic/rules/onboarding.dart';
+import 'package:druid_app/business_logic/rules/tutorial.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/study/xp_rules.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
@@ -20,7 +20,7 @@ import 'package:druid_app/user_interface/pages/settings/settings_page.dart';
 import 'package:druid_app/user_interface/pages/notebook/notebook_page.dart';
 import 'package:druid_app/user_interface/pages/species/species_page.dart';
 import 'package:druid_app/user_interface/pages/study/study_session_page.dart';
-import 'package:druid_app/user_interface/pages/study/widgets/mission_banner.dart';
+import 'package:druid_app/user_interface/pages/study/widgets/tutorial_card.dart';
 import 'package:druid_app/user_interface/theme/druid_tokens.dart';
 import 'package:druid_app/user_interface/theme/theme_context.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
@@ -59,20 +59,20 @@ class _StudyHomePageState extends State<StudyHomePage> {
   Widget _content(BuildContext context) => GameDataBuilder(
     builder: (context, catalog, state, progress) {
       final now = progress.now;
-      final mission = currentMission(state, catalog);
+      final tutorial = tutorialStatus(state);
       return ListView(
         key: const ValueKey('study-home-list'),
         padding: const EdgeInsets.only(bottom: homeBottomInset),
         children: [
-          _DioramaHeader(now: now, xp: state.xp, xpToCash: state.xpToCash),
+          _DioramaHeader(now: now, xp: state.xp, xpToCash: state.xpToCash, curious: isCurious(state)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Gaps.l),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (mission != null) ...[
+                if (tutorial == TutorialStatus.notStarted || tutorial == TutorialStatus.inProgress) ...[
                   const SizedBox(height: Gaps.l),
-                  MissionBanner(mission: mission, catalog: catalog, state: state, now: now),
+                  TutorialCard(catalog: catalog, state: state),
                 ],
                 const SizedBox(height: Gaps.xl),
                 _SeasonalSection(catalog: catalog, state: state, now: now, progress: progress),
@@ -101,8 +101,9 @@ class _DioramaHeader extends StatelessWidget {
   final DateTime now;
   final int xp;
   final int xpToCash;
+  final bool curious;
 
-  const _DioramaHeader({required this.now, required this.xp, required this.xpToCash});
+  const _DioramaHeader({required this.now, required this.xp, required this.xpToCash, required this.curious});
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +153,7 @@ class _DioramaHeader extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: dioramaHeight - 120),
-              _RankCard(xp: xp, xpToCash: xpToCash),
+              _RankCard(xp: xp, xpToCash: xpToCash, curious: curious),
             ],
           ),
         ),
@@ -168,7 +169,10 @@ class _RankCard extends StatelessWidget {
   final int xp;
   final int xpToCash;
 
-  const _RankCard({required this.xp, required this.xpToCash});
+  /// Curioso: prima della fine (o dello skip) del tutorial, al posto di Apprendista.
+  final bool curious;
+
+  const _RankCard({required this.xp, required this.xpToCash, this.curious = false});
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +209,10 @@ class _RankCard extends StatelessWidget {
                 ),
                 const SizedBox(width: Gaps.m),
                 Expanded(
-                  child: Text(context.game.rank(rank), style: context.texts.headlineSmall?.copyWith(color: onHero)),
+                  child: Text(
+                    curious ? context.l10n.rankCurious : context.game.rank(rank),
+                    style: context.texts.headlineSmall?.copyWith(color: onHero),
+                  ),
                 ),
                 Text(context.l10n.xpTotal(xp), style: context.texts.titleMedium?.copyWith(color: onHero)),
               ],
@@ -220,7 +227,11 @@ class _RankCard extends StatelessWidget {
             ),
             const SizedBox(height: Gaps.s),
             Text(
-              next == null ? context.l10n.maxRankReached : context.l10n.nextRank(context.game.rank(next), next.minXp),
+              curious
+                  ? context.l10n.nextRankCurious
+                  : next == null
+                  ? context.l10n.maxRankReached
+                  : context.l10n.nextRank(context.game.rank(next), next.minXp),
               style: context.texts.bodySmall?.copyWith(color: onHero.withValues(alpha: 0.85)),
             ),
             if (xpToCash > 0) ...[

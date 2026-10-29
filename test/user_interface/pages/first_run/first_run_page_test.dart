@@ -37,6 +37,19 @@ void main() {
 
     expect(app.preferences.values[firstRunDoneKey], '1');
     expect(find.byType(ClayNavBar), findsOneWidget);
+    // "Più tardi": il tutorial resta proposto in Home.
+    expect(find.byKey(const ValueKey('tutorial-intro')), findsOneWidget);
+  });
+
+  testWidgets('"Fai il tutorial": in Home il primo passo', (tester) async {
+    registerTestDependencies(firstRunDone: false);
+    await pumpDruidApp(tester);
+    await tap(tester, 'first-run-accept');
+    await tap(tester, 'first-run-allow');
+    await tap(tester, 'first-run-allow');
+    await tap(tester, 'first-run-tutorial');
+
+    expect(find.byKey(const ValueKey('tutorial-photograph')), findsOneWidget);
   });
 
   testWidgets('permessi negati: si spiega che cosa non funziona, si aprono le impostazioni, si va avanti', (

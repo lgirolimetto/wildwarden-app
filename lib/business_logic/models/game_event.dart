@@ -24,9 +24,25 @@ enum AnswerMode { learning, review, awakening }
 /// Da dove arriva una ricetta imparata: dallo studio (la Comune di una pianta) o dal Bottino dell'Esperienza.
 enum RecipeOrigin { study, trove }
 
-/// Passi dell'onboarding che non si deducono dallo stato di gioco. [albumVisited] è il Ricettario aperto (si chiamava
-/// Album: il nome è salvato negli eventi e non si rinomina).
-enum OnboardingMark { erbarioVisited, albumVisited, skipped }
+/// Passi dell'onboarding che non si deducono dallo stato di gioco. ⚠️ Il nome di ogni valore viene salvato negli eventi: non si rinomina. [erbarioVisited],
+/// [albumVisited] e [skipped] erano dell'Apprendistato (sostituito dal tutorial): restano per rileggere gli eventi.
+enum OnboardingMark {
+  erbarioVisited,
+  albumVisited,
+  skipped,
+
+  /// Tutorial iniziato ("Fai il tutorial" alla fine dell'onboarding o "Inizia" nella card in Home).
+  tutorialStarted,
+
+  /// Tutorial saltato: si diventa Apprendista lo stesso.
+  tutorialSkipped,
+
+  /// Tutorial finito: "Sei Apprendista".
+  tutorialFinished,
+
+  /// Il Bottino aperto almeno una volta (passo del tutorial).
+  troveVisited,
+}
 
 /// Evento di gioco. Si salvano solo eventi: livelli, PE ed erbario si ricalcolano rileggendoli
 /// (vedi `GameState.replay`). È lo stesso formato che un giorno verrà inviato al server.

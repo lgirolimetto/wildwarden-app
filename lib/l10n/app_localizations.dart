@@ -998,90 +998,6 @@ abstract class AppLocalizations {
   /// **'Pagine compilate {done}/{total}'**
   String erbarioPages(int done, int total);
 
-  /// No description provided for @missionLabel.
-  ///
-  /// In it, this message translates to:
-  /// **'Missione {index} di {total}'**
-  String missionLabel(int index, int total);
-
-  /// No description provided for @missionVisitErbarioTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Apri l\'Erbario'**
-  String get missionVisitErbarioTitle;
-
-  /// No description provided for @missionVisitErbarioBody.
-  ///
-  /// In it, this message translates to:
-  /// **'L\'Erbario raccoglie le specie della zona, ognuna con foto e nome. Il resto si scopre studiandole e Incontrandole.'**
-  String get missionVisitErbarioBody;
-
-  /// No description provided for @missionFirstEncounterTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Incontra una specie'**
-  String get missionFirstEncounterTitle;
-
-  /// No description provided for @missionFirstEncounterBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Tocca Attingi al centro della barra e fotografa una pianta: intera, una foglia e il fiore se c\'è. Riconosciuta, compare nell\'Erbario con la tua foto. Fotografa, non raccogliere.'**
-  String get missionFirstEncounterBody;
-
-  /// No description provided for @missionFirstLevelTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'Studia la tua prima specie'**
-  String get missionFirstLevelTitle;
-
-  /// No description provided for @missionFirstLevelBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Scegli una specie in stagione e supera il primo Livello di studio: si comincia anche da casa. Anche gli errori insegnano e danno Punti Esperienza.'**
-  String get missionFirstLevelBody;
-
-  /// No description provided for @missionFirstRecipeTitle.
-  ///
-  /// In it, this message translates to:
-  /// **'La prima Ricetta'**
-  String get missionFirstRecipeTitle;
-
-  /// No description provided for @missionFirstRecipeBody.
-  ///
-  /// In it, this message translates to:
-  /// **'Studiando una specie impari la sua Ricetta Comune: la trovi nel Ricettario, sulla Pagina della pianta. Le altre Tavole della Pagina si trovano nel Bottino dell\'Esperienza.'**
-  String get missionFirstRecipeBody;
-
-  /// No description provided for @missionSkip.
-  ///
-  /// In it, this message translates to:
-  /// **'Salta l\'Apprendistato'**
-  String get missionSkip;
-
-  /// No description provided for @missionActionOpenErbario.
-  ///
-  /// In it, this message translates to:
-  /// **'Apri l\'Erbario'**
-  String get missionActionOpenErbario;
-
-  /// No description provided for @missionActionStudy.
-  ///
-  /// In it, this message translates to:
-  /// **'Inizia a studiare'**
-  String get missionActionStudy;
-
-  /// No description provided for @missionActionRecipes.
-  ///
-  /// In it, this message translates to:
-  /// **'Apri il Ricettario'**
-  String get missionActionRecipes;
-
-  /// No description provided for @missionGlossary.
-  ///
-  /// In it, this message translates to:
-  /// **'Glossario'**
-  String get missionGlossary;
-
   /// No description provided for @apprenticeshipComplete.
   ///
   /// In it, this message translates to:
@@ -3806,6 +3722,150 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Passo {step} di {total}'**
   String firstRunProgress(int step, int total);
+
+  /// No description provided for @rankCurious.
+  ///
+  /// In it, this message translates to:
+  /// **'Curioso'**
+  String get rankCurious;
+
+  /// No description provided for @nextRankCurious.
+  ///
+  /// In it, this message translates to:
+  /// **'Prossimo Rango: Apprendista, alla fine del tutorial'**
+  String get nextRankCurious;
+
+  /// No description provided for @tutorialLabel.
+  ///
+  /// In it, this message translates to:
+  /// **'Tutorial · passo {step} di {total}'**
+  String tutorialLabel(int step, int total);
+
+  /// No description provided for @tutorialIntroTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il tutorial'**
+  String get tutorialIntroTitle;
+
+  /// No description provided for @tutorialIntroBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Un giro del gioco tutto da casa, con le aromatiche di cucina: salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Alla fine diventi Apprendista.'**
+  String get tutorialIntroBody;
+
+  /// No description provided for @tutorialStart.
+  ///
+  /// In it, this message translates to:
+  /// **'Inizia'**
+  String get tutorialStart;
+
+  /// No description provided for @tutorialSkip.
+  ///
+  /// In it, this message translates to:
+  /// **'Salta il tutorial'**
+  String get tutorialSkip;
+
+  /// No description provided for @tutorialPhotographTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa un\'aromatica'**
+  String get tutorialPhotographTitle;
+
+  /// No description provided for @tutorialPhotographBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Tocca Attingi al centro della barra e fotografa salvia, rosmarino, alloro o basilico, anche in vaso o dal supermercato. Pl@ntNet la riconosce: la Incontri, nasce la sua Stazione e ne Attingi la prima Essenza. Fotografa, non raccogliere.'**
+  String get tutorialPhotographBody;
+
+  /// No description provided for @tutorialStudyTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia la tua aromatica'**
+  String get tutorialStudyTitle;
+
+  /// No description provided for @tutorialStudyBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Ogni pianta si studia a Livelli, con domande che fanno imparare anche quando sbagli. Supera il Livello 1 della pianta che hai fotografato: impari la sua Ricetta Comune. Intanto nella barra si è acceso l\'Erbario.'**
+  String get tutorialStudyBody;
+
+  /// No description provided for @tutorialSecondPhotographTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Fotografa un\'altra aromatica'**
+  String get tutorialSecondPhotographTitle;
+
+  /// No description provided for @tutorialSecondPhotographBody.
+  ///
+  /// In it, this message translates to:
+  /// **'La Ricetta Comune vuole la pianta e un\'altra specie qualsiasi: fotografa un\'altra aromatica e ne Attingi una seconda Essenza.'**
+  String get tutorialSecondPhotographBody;
+
+  /// No description provided for @tutorialBrewTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Prepara la prima pozione'**
+  String get tutorialBrewTitle;
+
+  /// No description provided for @tutorialBrewBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Nella barra si è acceso il Laboratorio: apri le Ricette pronte e prepara la Ricetta Comune con le tue due Essenze. Le pozioni sono di fantasia.'**
+  String get tutorialBrewBody;
+
+  /// No description provided for @tutorialTroveTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Il Bottino dell\'Esperienza'**
+  String get tutorialTroveTitle;
+
+  /// No description provided for @tutorialTroveBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Con i PE compri Bottini dell\'Esperienza: dentro ci sono le Tavole di altre Ricette. Nella barra si è acceso il Bottino: aprilo, c\'è un regalo per te.'**
+  String get tutorialTroveBody;
+
+  /// No description provided for @tutorialApprenticeTitle.
+  ///
+  /// In it, this message translates to:
+  /// **'Sei Apprendista'**
+  String get tutorialApprenticeTitle;
+
+  /// No description provided for @tutorialApprenticeBody.
+  ///
+  /// In it, this message translates to:
+  /// **'Hai fatto il primo giro: fotografare, studiare, Attingere, preparare. Ora esci: le piante della tua Zona ti aspettano nell\'Erbario, alla voce Da trovare.'**
+  String get tutorialApprenticeBody;
+
+  /// No description provided for @tutorialActionCapture.
+  ///
+  /// In it, this message translates to:
+  /// **'Attingi'**
+  String get tutorialActionCapture;
+
+  /// No description provided for @tutorialActionStudy.
+  ///
+  /// In it, this message translates to:
+  /// **'Studia'**
+  String get tutorialActionStudy;
+
+  /// No description provided for @tutorialActionLaboratory.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri il Laboratorio'**
+  String get tutorialActionLaboratory;
+
+  /// No description provided for @tutorialActionTrove.
+  ///
+  /// In it, this message translates to:
+  /// **'Apri il Bottino'**
+  String get tutorialActionTrove;
+
+  /// No description provided for @tutorialActionFinish.
+  ///
+  /// In it, this message translates to:
+  /// **'Continua'**
+  String get tutorialActionFinish;
 }
 
 class _AppLocalizationsDelegate

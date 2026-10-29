@@ -2,7 +2,6 @@ import 'package:druid_app/business_logic/models/catalog.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/fun_facts.dart';
 import 'package:druid_app/business_logic/rules/game_state.dart';
-import 'package:druid_app/business_logic/rules/onboarding.dart';
 import 'package:druid_app/business_logic/rules/progression.dart';
 import 'package:druid_app/business_logic/rules/species_rules.dart';
 import 'package:druid_app/business_logic/rules/study/facts.dart';
@@ -266,50 +265,6 @@ void main() {
 
       final atOne = availableFunFacts(catalog, play([met('Eranthis hyemalis'), passed('Eranthis hyemalis', 1)]));
       expect(atOne.whereType<CuratedFunFactItem>(), isNotEmpty);
-    });
-  });
-
-  group('apprendistato', () {
-    test('le missioni si completano in ordine, guardando lo stato: prima lo studio, da casa', () {
-      expect(currentMission(GameState.empty, catalog), Mission.firstLevel);
-
-      var state = play([passed('Eranthis hyemalis', 1)]);
-      expect(currentMission(state, catalog), Mission.visitErbario);
-
-      state = state.apply(OnboardingMarked(mark: OnboardingMark.erbarioVisited, occurredAt: feb));
-      expect(currentMission(state, catalog), Mission.firstEncounter, reason: 'le Desiderata non sono più un passo');
-
-      state = state.apply(met('Eranthis hyemalis'));
-      expect(currentMission(state, catalog), Mission.firstRecipe);
-
-      // La Comune c'è già (livello 1): si completa aprendo il Ricettario.
-      state = state.apply(OnboardingMarked(mark: OnboardingMark.albumVisited, occurredAt: feb));
-      expect(currentMission(state, catalog), isNull);
-      expect(isApprenticeshipComplete(state, catalog), isTrue);
-    });
-
-    test('"Studia la tua prima specie": prima le specie in studio, poi le proposte in stagione', () {
-      expect(speciesToStudyFirst(GameState.empty, catalog, feb), 'Malva sylvestris');
-
-      final earlier = SpeciesEncountered(
-        speciesSci: 'Fagus sylvatica',
-        method: EncounterMethod.simulated,
-        occurredAt: feb.subtract(const Duration(days: 1)),
-      );
-      var state = play([met('Eranthis hyemalis'), earlier]);
-      expect(speciesToStudyFirst(state, catalog, feb), 'Fagus sylvatica');
-
-      // Livelli finiti: si passa alla specie successiva.
-      for (var level = 1; level <= maxStudyLevel; level++) {
-        state = state.apply(passed('Fagus sylvatica', level));
-      }
-      expect(speciesToStudyFirst(state, catalog, feb), 'Eranthis hyemalis');
-    });
-
-    test('saltare l\'apprendistato lo nasconde', () {
-      final state = play([OnboardingMarked(mark: OnboardingMark.skipped, occurredAt: feb)]);
-      expect(currentMission(state, catalog), isNull);
-      expect(isApprenticeshipComplete(state, catalog), isFalse);
     });
   });
 }

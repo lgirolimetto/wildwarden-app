@@ -621,12 +621,17 @@ class ClayNavBar extends StatelessWidget {
   /// pagina. L'etichetta è solo per l'accessibilità.
   final ({IconData icon, String label, VoidCallback onPressed})? action;
 
+  /// Voci non ancora accese (durante il tutorial): restano come spazio vuoto, così le altre non si spostano quando
+  /// compaiono.
+  final Set<int> hidden;
+
   const ClayNavBar({
     super.key,
     required this.selectedIndex,
     required this.onSelected,
     required this.items,
     this.action,
+    this.hidden = const {},
   });
 
   @override
@@ -643,56 +648,59 @@ class ClayNavBar extends StatelessWidget {
           children: [
             for (final (i, (icon, label)) in items.indexed) ...[
               if (action case final action? when i == items.length ~/ 2) _NavAction(action: action),
-              Expanded(
-                child: Semantics(
-                  selected: i == selectedIndex,
-                  button: true,
-                  child: InkResponse(
-                    onTap: () => onSelected(i),
-                    radius: 36,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedScale(
-                          scale: i == selectedIndex ? 1 : 0.82,
-                          duration: const Duration(milliseconds: 160),
-                          child: i == selectedIndex
-                              ? ClayCircle(
-                                  color: colors.primary,
-                                  icon: icon,
-                                  iconColor: colors.onPrimary,
-                                  size: 40,
-                                  concave: true,
-                                  // La voce scelta resta colorata: il colore dice dove sei.
-                                  keepColor: true,
-                                  pressable: true,
-                                )
-                              // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
-                              : context.druid.neu
-                              ? ClayCircle(
-                                  color: colors.surface,
-                                  icon: icon,
-                                  iconColor: colors.onSurfaceVariant,
-                                  size: 40,
-                                  pressable: true,
-                                )
-                              : SizedBox(width: 40, height: 40, child: Icon(icon, color: colors.onSurfaceVariant)),
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          label,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: context.texts.labelSmall?.copyWith(
-                            color: i == selectedIndex ? colors.onSurface : colors.onSurfaceVariant,
-                            fontWeight: i == selectedIndex ? FontWeight.w700 : FontWeight.w500,
+              if (hidden.contains(i))
+                const Expanded(child: SizedBox())
+              else
+                Expanded(
+                  child: Semantics(
+                    selected: i == selectedIndex,
+                    button: true,
+                    child: InkResponse(
+                      onTap: () => onSelected(i),
+                      radius: 36,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AnimatedScale(
+                            scale: i == selectedIndex ? 1 : 0.82,
+                            duration: const Duration(milliseconds: 160),
+                            child: i == selectedIndex
+                                ? ClayCircle(
+                                    color: colors.primary,
+                                    icon: icon,
+                                    iconColor: colors.onPrimary,
+                                    size: 40,
+                                    concave: true,
+                                    // La voce scelta resta colorata: il colore dice dove sei.
+                                    keepColor: true,
+                                    pressable: true,
+                                  )
+                                // Nelle livree neumorfiche anche le voci non scelte sono bottoni in rilievo.
+                                : context.druid.neu
+                                ? ClayCircle(
+                                    color: colors.surface,
+                                    icon: icon,
+                                    iconColor: colors.onSurfaceVariant,
+                                    size: 40,
+                                    pressable: true,
+                                  )
+                                : SizedBox(width: 40, height: 40, child: Icon(icon, color: colors.onSurfaceVariant)),
                           ),
-                        ),
-                      ],
+                          const SizedBox(height: 2),
+                          Text(
+                            label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: context.texts.labelSmall?.copyWith(
+                              color: i == selectedIndex ? colors.onSurface : colors.onSurfaceVariant,
+                              fontWeight: i == selectedIndex ? FontWeight.w700 : FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ],
         ),
