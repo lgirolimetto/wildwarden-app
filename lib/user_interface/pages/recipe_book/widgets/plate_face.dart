@@ -29,7 +29,8 @@ class PlateFace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final note = caption ?? (missing > 0 ? context.l10n.recipeMissingPieces(missing) : null);
+    // Quanti Componenti mancano lo dice la Tavola aperta: fuori bastano le rune del nome (2026-10-29).
+    final note = caption;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -49,6 +50,7 @@ class PlateFace extends StatelessWidget {
         ),
         RecipeTitle(
           recipe.name(context.contentLanguage, missing: missing),
+          full: recipe.name(context.contentLanguage),
           plant: plantWord(recipe.plant.name.resolve(context.contentLanguage)),
           style: context.texts.titleMedium,
           maxLines: 4,
@@ -72,7 +74,7 @@ class MythicFace extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final note = caption ?? (missing > 0 ? context.l10n.recipeMissingPieces(missing) : null);
+    final note = caption;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,6 +101,7 @@ class MythicFace extends StatelessWidget {
         RecipeTitle(
           mythic.name(context.contentLanguage, missing: missing),
           plant: null,
+          full: mythic.name(context.contentLanguage),
           style: context.texts.titleMedium,
           maxLines: 4,
         ),

@@ -90,6 +90,7 @@ class _MythicRow extends StatelessWidget {
                 RecipeTitle(
                   mythic.name(context.contentLanguage, missing: missing),
                   plant: null,
+                  full: mythic.name(context.contentLanguage),
                   style: context.texts.titleMedium,
                 )
               else

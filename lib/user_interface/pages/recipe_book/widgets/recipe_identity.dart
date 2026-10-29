@@ -46,6 +46,7 @@ class RecipeNameText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => RecipeTitle(
     recipeNameOf(context, catalog, state, recipeId),
+    full: recipeNameOf(context, catalog, GameState.empty, recipeId),
     plant: recipePlantNameOf(context, catalog, recipeId),
     style: style,
     textAlign: textAlign,
@@ -83,21 +84,26 @@ class RecipeIdVessel extends StatelessWidget {
   }
 }
 
-/// Il nome di una ricetta con il nome della pianta nello stile delle specie e, al posto di ogni pezzo che manca
-/// ([missingPiece]), una pillola "?" (capitolo 02, 2026-10-29: come la Qualia mancante nell'ingrediente).
+/// Il nome di una ricetta con il nome della pianta nello stile delle specie e i pezzi che mancano ([missingPiece])
+/// **criptati in rune** (capitolo 02, 2026-10-29): lunghi quanto il pezzo vero di [full], ma non si leggono. Si capisce
+/// che mancano delle parole del nome e quante sono.
 class RecipeTitle extends StatelessWidget {
   final String text;
   final String? plant;
+
+  /// Il nome intero, per la lunghezza dei pezzi criptati; `null` = una parola di 5 rune per pezzo.
+  final String? full;
   final TextStyle? style;
   final int? maxLines;
   final TextAlign? textAlign;
 
-  const RecipeTitle(this.text, {super.key, required this.plant, this.style, this.maxLines, this.textAlign});
+  const RecipeTitle(this.text, {super.key, required this.plant, this.full, this.style, this.maxLines, this.textAlign});
 
   @override
   Widget build(BuildContext context) {
     final base = style ?? DefaultTextStyle.of(context).style;
     final pieces = text.split(missingPiece);
+    final hidden = _hiddenPieces(pieces, full);
     var plantDone = false;
     List<InlineSpan> segment(String part) {
       final at = plantDone || plant == null || plant!.isEmpty ? -1 : part.indexOf(plant!);
@@ -110,15 +116,12 @@ class RecipeTitle extends StatelessWidget {
       ];
     }
 
+    final cipher = base.copyWith(color: context.druid.hint, letterSpacing: 1);
     return Text.rich(
       TextSpan(
         children: [
           for (final (i, part) in pieces.indexed) ...[
-            if (i > 0)
-              WidgetSpan(
-                alignment: PlaceholderAlignment.middle,
-                child: _MissingMark(size: base.fontSize ?? 14),
-              ),
+            if (i > 0) TextSpan(text: cipherWord(hidden[i - 1], (full ?? text).hashCode + i), style: cipher),
             ...segment(part),
           ],
         ],
@@ -131,24 +134,41 @@ class RecipeTitle extends StatelessWidget {
   }
 }
 
-/// Il "?" di un pezzo che manca, in una pillola del colore degli indizi.
-class _MissingMark extends StatelessWidget {
-  final double size;
+/// I pezzi che mancano, presi dal nome intero tra i pezzi noti ([known] è il nome parziale diviso dove mancano).
+List<String> _hiddenPieces(List<String> known, String? full) {
+  final count = known.length - 1;
+  if (full == null) return List.filled(count, 'xxxxx');
+  final hidden = <String>[];
+  var pos = known.first.length;
+  for (var i = 1; i < known.length; i++) {
+    final part = known[i];
+    final last = i == known.length - 1;
+    final at = last ? full.length - part.length : full.indexOf(part.isEmpty ? ' ' : part, pos);
+    if (at < pos) return List.filled(count, 'xxxxx');
+    hidden.add(full.substring(pos, at));
+    pos = at + part.length;
+  }
+  return hidden;
+}
 
-  const _MissingMark({required this.size});
+const _runes = [
+  'ᚠ', 'ᚢ', 'ᚦ', 'ᚨ', 'ᚱ', 'ᚲ', 'ᚷ', 'ᚹ', 'ᚺ', 'ᚾ', 'ᛁ', 'ᛃ', //
+  'ᛇ', 'ᛈ', 'ᛉ', 'ᛊ', 'ᛏ', 'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛞ', 'ᛟ',
+];
 
-  @override
-  Widget build(BuildContext context) => Container(
-    key: const ValueKey('missing-piece'),
-    margin: const EdgeInsets.symmetric(horizontal: 2),
-    padding: EdgeInsets.symmetric(horizontal: size * 0.45),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(999),
-      border: Border.all(color: context.druid.hint),
-    ),
-    child: Text(
-      '?',
-      style: TextStyle(fontSize: size * 0.8, fontWeight: FontWeight.w700, color: context.druid.hint, height: 1.3),
-    ),
-  );
+/// Una parola in rune lunga quanto [word] (spazi e apostrofi restano), con rune a caso ma fisse per [seed]: non lettera
+/// per lettera, altrimenti chi conosce le rune leggerebbe il pezzo.
+String cipherWord(String word, int seed) {
+  var h = seed & 0x7fffffff;
+  final out = StringBuffer();
+  for (final c in word.runes) {
+    final ch = String.fromCharCode(c);
+    if (ch == ' ' || ch == "'" || ch == '’') {
+      out.write(ch);
+      continue;
+    }
+    h = (h * 1103515245 + 12345) & 0x7fffffff;
+    out.write(_runes[h % _runes.length]);
+  }
+  return out.toString();
 }

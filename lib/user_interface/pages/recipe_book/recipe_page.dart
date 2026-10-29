@@ -9,7 +9,6 @@ import 'package:druid_app/user_interface/common_widgets/dense_area.dart';
 import 'package:druid_app/user_interface/common_widgets/druid_background.dart';
 import 'package:druid_app/user_interface/common_widgets/game_data_builder.dart';
 import 'package:druid_app/user_interface/common_widgets/grade_card.dart';
-import 'package:druid_app/user_interface/common_widgets/pill.dart';
 import 'package:druid_app/user_interface/common_widgets/species_name.dart';
 import 'package:druid_app/user_interface/common_widgets/potion_vessel.dart';
 import 'package:druid_app/user_interface/game_texts.dart';
@@ -49,6 +48,7 @@ class PlantRecipePage extends StatelessWidget {
         grade: recipe.grade,
         vessel: RecipeVessel(recipe: recipe, size: 80, missing: missing),
         title: recipe.name(context.contentLanguage, missing: missing),
+        fullTitle: recipe.name(context.contentLanguage),
         titlePlant: plantWord(recipe.plant.name.resolve(context.contentLanguage)),
         subtitle: missing > 0 ? context.l10n.recipeMissingPieces(missing) : null,
         ingredients: [
@@ -95,6 +95,7 @@ class MythicRecipePage extends StatelessWidget {
           size: 80,
         ),
         title: mythic.name(lang, missing: missing),
+        fullTitle: mythic.name(lang),
         subtitle:
             '${context.l10n.mythicNumber(mythic.number.toString())} · '
             '${window == null ? context.l10n.mythicAllYear : context.l10n.mythicWindow(day(window.fromMonth, window.fromDay), day(window.toMonth, window.toDay))}'
@@ -158,6 +159,9 @@ class _RecipeCard extends StatelessWidget {
   final Widget vessel;
   final String title;
 
+  /// Il nome intero, per la lunghezza dei pezzi criptati.
+  final String fullTitle;
+
   /// Il nome della pianta dentro [title], nello stile delle specie (`null` per le Mitiche).
   final String? titlePlant;
   final String? subtitle;
@@ -177,6 +181,7 @@ class _RecipeCard extends StatelessWidget {
     required this.grade,
     required this.vessel,
     required this.title,
+    required this.fullTitle,
     this.titlePlant,
     this.subtitle,
     this.story,
@@ -204,7 +209,7 @@ class _RecipeCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: Gaps.s),
-          RecipeTitle(title, plant: titlePlant, style: context.texts.titleLarge),
+          RecipeTitle(title, plant: titlePlant, full: fullTitle, style: context.texts.titleLarge),
           if (subtitle != null)
             Row(
               children: [
@@ -257,12 +262,17 @@ class _IngredientRow extends StatelessWidget {
                 name,
                 style: species == null ? context.texts.bodyLarge : speciesNameStyle(context, context.texts.bodyLarge),
               ),
-              for (final t in ingredient.traits) Pill(ingredient.hidden.contains(t) ? '?' : context.game.trait(t)),
+              // La Qualia come icona incisa, senza spiegazione (sta nella legenda e nel glossario); quella che non sai
+              // ancora, di una Rara incompleta, è un "?".
+              for (final t in ingredient.traits)
+                ingredient.hidden.contains(t)
+                    ? Tooltip(
+                        message: context.l10n.recipeQualiaUnknown,
+                        child: const EngravedIcon(Icons.question_mark_rounded, size: 22),
+                      )
+                    : QualiaIcon(label: context.game.trait(t)),
             ],
           ),
-          // Chi legge la ricetta scopre quando vale la Qualia che chiede.
-          for (final t in ingredient.traits)
-            if (!ingredient.hidden.contains(t)) Text(context.game.traitWhen(t), style: context.texts.bodySmall),
         ],
       ),
     );

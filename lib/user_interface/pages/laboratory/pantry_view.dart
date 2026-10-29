@@ -167,7 +167,7 @@ class _EssenceRow extends StatelessWidget {
             const SizedBox(width: Gaps.s),
             Text(context.l10n.pantryVis(essence.vis), style: context.texts.labelLarge),
             const Spacer(),
-            for (final t in traits) ...[const SizedBox(width: Gaps.s), _QualiaIcon(label: context.game.trait(t))],
+            for (final t in traits) ...[const SizedBox(width: Gaps.s), QualiaIcon(label: context.game.trait(t))],
           ],
         ),
       ],
@@ -220,29 +220,4 @@ class _RingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_RingPainter old) => old.progress != progress || old.track != track || old.fill != fill;
-}
-
-/// Una Qualia come icona incisa, senza testo: il nome tenendo premuto.
-class _QualiaIcon extends StatelessWidget {
-  /// Il nome con l'emoji davanti ("☀️ Sole"), come lo scrivono i testi.
-  final String label;
-
-  const _QualiaIcon({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    final emoji = leadingEmoji(label);
-    final name = emoji == null ? label : label.substring(emoji.length).trim();
-    return Tooltip(
-      message: name,
-      child: Semantics(
-        label: name,
-        child: EngravedIcon(
-          (emoji == null ? null : traitIconOf(emoji)) ?? Icons.eco_outlined,
-          size: 22,
-          mirrored: emoji != null && traitIconMirrored(emoji),
-        ),
-      ),
-    );
-  }
 }

@@ -1147,14 +1147,6 @@
   },
   "troveTapToTurn": "Tocca le Tavole per girarle",
   "troveFindNew": "Nuova Tavola",
-  "troveFindIncomplete": "Nuova Tavola · {count, plural, =1{manca 1 componente} other{mancano {count} componenti}}",
-  "@troveFindIncomplete": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
   "troveFindPiece": "Un componente trovato",
   "troveFindCompleted": "Tavola completata",
   "troveFindRecycled": "Doppione: 1 riciclato {grade}",
@@ -1168,7 +1160,7 @@
   "troveFindTaste": "Assaggio del grado sopra",
   "troveNothing": "Questa volta non è uscito niente di nuovo.",
   "troveDone": "Fatto",
-  "recipeMissingPieces": "{count, plural, =1{Manca 1 componente} other{Mancano {count} componenti}}",
+  "recipeMissingPieces": "{count, plural, =1{Non si conosce ancora 1 Componente} other{Non si conoscono ancora {count} Componenti}}",
   "@recipeMissingPieces": {
     "placeholders": {
       "count": {
@@ -1987,5 +1979,6 @@
   "incompleteBrewText": "Finché manca un Componente la Tavola resta nel Ricettario, ma non si prepara.",
   "incompleteWhereTitle": "Dove si trovano",
   "incompleteWhereText": "Nei Bottini dell'Esperienza del suo Grado o più alti: a volte un Bottino dà un Componente invece di una Tavola nuova. Oppure con il Riciclo dei doppioni, in fondo alla pagina del Bottino.",
-  "incompleteInfoTooltip": "Che cosa manca"
+  "incompleteInfoTooltip": "Che cosa manca",
+  "recipeQualiaUnknown": "Una Qualia che non conosci ancora"
 }

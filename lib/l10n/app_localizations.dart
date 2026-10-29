@@ -2282,12 +2282,6 @@ abstract class AppLocalizations {
   /// **'Nuova Tavola'**
   String get troveFindNew;
 
-  /// No description provided for @troveFindIncomplete.
-  ///
-  /// In it, this message translates to:
-  /// **'Nuova Tavola · {count, plural, =1{manca 1 componente} other{mancano {count} componenti}}'**
-  String troveFindIncomplete(int count);
-
   /// No description provided for @troveFindPiece.
   ///
   /// In it, this message translates to:
@@ -2327,7 +2321,7 @@ abstract class AppLocalizations {
   /// No description provided for @recipeMissingPieces.
   ///
   /// In it, this message translates to:
-  /// **'{count, plural, =1{Manca 1 componente} other{Mancano {count} componenti}}'**
+  /// **'{count, plural, =1{Non si conosce ancora 1 Componente} other{Non si conoscono ancora {count} Componenti}}'**
   String recipeMissingPieces(int count);
 
   /// No description provided for @recipeEffectUnknown.
@@ -4220,6 +4214,12 @@ abstract class AppLocalizations {
   /// In it, this message translates to:
   /// **'Che cosa manca'**
   String get incompleteInfoTooltip;
+
+  /// No description provided for @recipeQualiaUnknown.
+  ///
+  /// In it, this message translates to:
+  /// **'Una Qualia che non conosci ancora'**
+  String get recipeQualiaUnknown;
 }
 
 class _AppLocalizationsDelegate

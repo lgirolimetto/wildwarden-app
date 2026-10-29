@@ -2,6 +2,7 @@ import 'package:druid_app/business_logic/models/enums/grade.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
 import 'package:druid_app/controllers/progress/progress_controller.dart';
+import 'package:druid_app/user_interface/pages/recipe_book/widgets/recipe_identity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
@@ -50,7 +51,11 @@ void main() {
     await tester.pumpAndSettle();
     await scrollAndTap(tester, find.byKey(const ValueKey('trove-find-1')));
     await tester.pumpAndSettle();
-    expect(find.text('Assaggio del grado sopra · Mancano 2 componenti'), findsOneWidget);
+    expect(
+      find.text('Assaggio del grado sopra'),
+      findsOneWidget,
+      reason: 'quanti Componenti mancano lo dice la Tavola aperta',
+    );
 
     final catalog = smallCatalog();
     final owned = collectedPages(catalog, progress.state).expand((p) => p.knownIds);
@@ -87,7 +92,9 @@ void main() {
     expect(state.troves.single.$1, Grade.rare);
   });
 
-  testWidgets('una Rara incompleta nel Ricettario: pezzi "?", Qualia "?", effetto da scoprire e la ⓘ', (tester) async {
+  testWidgets('una Rara incompleta nel Ricettario: nome criptato, Qualia ignota, effetto da scoprire e la ⓘ', (
+    tester,
+  ) async {
     final page = recipeBookOf(smallCatalog()).pageOf('Eranthis hyemalis')!;
     final rare = page.recipes.firstWhere((r) => r.grade == Grade.rare);
     registerTestDependencies(
@@ -106,12 +113,19 @@ void main() {
 
     // I pezzi che mancano sono pillole "?", non "…"; il recipiente grigio e la ⓘ dicono che è incompleta.
     final plate = find.byKey(ValueKey('plate-${rare.id}'));
-    expect(find.descendant(of: plate, matching: find.byKey(const ValueKey('missing-piece'))), findsNWidgets(2));
-    expect(find.textContaining('…'), findsNothing);
-    expect(find.text('Mancano 2 componenti'), findsOneWidget);
+    // I pezzi che mancano sono criptati in rune, lunghi quanto quelli veri; fuori non si dice quanti sono.
+    final full = rare.name('it');
+    final known = rare.name('it', missing: 2).split('…').first;
+    final title = tester.widget<RecipeTitle>(find.descendant(of: plate, matching: find.byType(RecipeTitle)));
+    expect(title.full, full);
+    expect(find.descendant(of: plate, matching: find.textContaining(known, findRichText: true)), findsOneWidget);
+    expect(find.textContaining('…', findRichText: true), findsNothing);
+    expect(find.textContaining(full.substring(known.length), findRichText: true), findsNothing);
+    expect(find.text('Non si conoscono ancora 2 Componenti'), findsNothing);
     expect(find.descendant(of: plate, matching: find.byKey(const ValueKey('incomplete-info'))), findsOneWidget);
     await scrollAndTap(tester, plate);
-    expect(find.text('?'), findsNWidgets(3), reason: 'i 2 pezzi del nome e la Qualia dell\'ingrediente');
+    expect(find.text('Non si conoscono ancora 2 Componenti'), findsOneWidget);
+    expect(find.byTooltip('Una Qualia che non conosci ancora'), findsOneWidget);
     expect(find.text('Da scoprire: manca un componente del nome.'), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('incomplete-info')));

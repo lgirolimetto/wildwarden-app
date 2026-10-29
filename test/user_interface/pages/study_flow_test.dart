@@ -336,7 +336,7 @@ void main() {
       expect(find.byKey(const ValueKey('ingredient-Malva sylvestris')), findsOneWidget);
     });
 
-    testWidgets('un ingrediente con un tratto spiega quando vale', (tester) async {
+    testWidgets('un ingrediente con una Qualia: l\'icona, il nome tenendo premuto, niente spiegazione', (tester) async {
       final eranthis = recipeBookOf(smallCatalog()).pageOf('Eranthis hyemalis')!;
       final frosty = eranthis.recipes.firstWhere((r) => r.traits.contains(Trait.frost));
       registerTestDependencies(
@@ -347,7 +347,12 @@ void main() {
 
       await scrollAndTap(tester, find.byKey(const ValueKey('recipe-book-page-Eranthis hyemalis')));
       await scrollAndTap(tester, find.byKey(ValueKey('plate-${frosty.id}')));
-      expect(find.text('Quando fa sotto zero: brina e ghiaccio.'), findsOneWidget);
+      expect(find.byTooltip('Gelo'), findsOneWidget);
+      expect(
+        find.text('Quando fa sotto zero: brina e ghiaccio.'),
+        findsNothing,
+        reason: 'sta nella legenda e nel glossario',
+      );
     });
 
     testWidgets('nessuna ricetta conosciuta: il Ricettario spiega come impararle; le Mitiche della Zona in cima', (

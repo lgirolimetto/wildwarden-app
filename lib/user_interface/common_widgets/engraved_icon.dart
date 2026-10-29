@@ -1,4 +1,5 @@
 import 'package:druid_app/user_interface/theme/theme_context.dart';
+import 'package:druid_app/user_interface/common_widgets/clay.dart';
 import 'package:flutter/material.dart';
 
 /// Icona "incisa", come stampata a secco: un filo d'ombra in alto a sinistra e uno di luce in basso a destra sotto il
@@ -64,3 +65,28 @@ IconData? traitIconOf(String emoji) => switch (emoji) {
 /// Le icone delle mezze lune sono la stessa, specchiata: [Icons.contrast] ha la metà sinistra piena come 🌗 (luna
 /// calante), 🌓 (crescente) la vuole a destra.
 bool traitIconMirrored(String emoji) => emoji == '🌓';
+
+/// Una Qualia come icona incisa, senza testo: il nome tenendo premuto.
+class QualiaIcon extends StatelessWidget {
+  /// Il nome con l'emoji davanti ("☀️ Sole"), come lo scrivono i testi.
+  final String label;
+
+  const QualiaIcon({super.key, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    final emoji = leadingEmoji(label);
+    final name = emoji == null ? label : label.substring(emoji.length).trim();
+    return Tooltip(
+      message: name,
+      child: Semantics(
+        label: name,
+        child: EngravedIcon(
+          (emoji == null ? null : traitIconOf(emoji)) ?? Icons.eco_outlined,
+          size: 22,
+          mirrored: emoji != null && traitIconMirrored(emoji),
+        ),
+      ),
+    );
+  }
+}

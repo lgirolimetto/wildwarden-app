@@ -157,8 +157,9 @@ class _FindFront extends StatelessWidget {
     final l10n = context.l10n;
     final missing = state.missingPieces[find.recipeId] ?? 0;
     final caption = switch (find.kind) {
-      TroveFindKind.recipe when find.taste => '${l10n.troveFindTaste} · ${l10n.recipeMissingPieces(find.missing)}',
-      TroveFindKind.recipe => find.missing > 0 ? l10n.troveFindIncomplete(find.missing) : l10n.troveFindNew,
+      // Quanti Componenti mancano lo dice la Tavola aperta: qui bastano le rune del nome (2026-10-29).
+      TroveFindKind.recipe when find.taste => l10n.troveFindTaste,
+      TroveFindKind.recipe => l10n.troveFindNew,
       TroveFindKind.piece => missing == 0 ? l10n.troveFindCompleted : l10n.troveFindPiece,
       TroveFindKind.recycled => l10n.troveFindRecycled(context.game.troveGrade(find.grade)),
     };

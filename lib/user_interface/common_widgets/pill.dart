@@ -94,9 +94,10 @@ class IconBadgeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = context.colors.onSurface;
+    // Tonda, non ovale (2026-10-29): stessa larghezza e altezza intorno all'icona.
     final chip = pillFrame(
       context,
-      const EdgeInsets.symmetric(horizontal: Gaps.m, vertical: Gaps.xs),
+      const EdgeInsets.all(Gaps.s),
       EngravedIcon(icon, size: 20, color: color),
       BoxDecoration(
         color: color.withValues(alpha: 0.12),

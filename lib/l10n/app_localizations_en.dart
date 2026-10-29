@@ -1412,17 +1412,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get troveFindNew => 'New Plate';
 
   @override
-  String troveFindIncomplete(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count components missing',
-      one: '1 component missing',
-    );
-    return 'New Plate · $_temp0';
-  }
-
-  @override
   String get troveFindPiece => 'A component found';
 
   @override
@@ -1447,8 +1436,8 @@ class AppLocalizationsEn extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count components missing',
-      one: '1 component missing',
+      other: '$count Components still unknown',
+      one: '1 Component still unknown',
     );
     return '$_temp0';
   }
@@ -2657,4 +2646,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get incompleteInfoTooltip => 'What\'s missing';
+
+  @override
+  String get recipeQualiaUnknown => 'A Qualia you don\'t know yet';
 }

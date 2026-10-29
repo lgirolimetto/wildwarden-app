@@ -364,14 +364,13 @@
   "welcomeGiftRedeem": "Redeem · {price} XP",
   "troveTapToTurn": "Tap the Plates to turn them",
   "troveFindNew": "New Plate",
-  "troveFindIncomplete": "New Plate · {count, plural, =1{1 component missing} other{{count} components missing}}",
   "troveFindPiece": "A component found",
   "troveFindCompleted": "Plate completed",
   "troveFindRecycled": "Duplicate: 1 {grade} recycled",
   "troveFindTaste": "A taste of the grade above",
   "troveNothing": "Nothing new this time.",
   "troveDone": "Done",
-  "recipeMissingPieces": "{count, plural, =1{1 component missing} other{{count} components missing}}",
+  "recipeMissingPieces": "{count, plural, =1{1 Component still unknown} other{{count} Components still unknown}}",
   "recipeEffectUnknown": "Still to discover: a component of the name is missing.",
   "debugGrantXp": "Add 5,000 XP",
   "recycleTitle": "Recycling",
@@ -683,5 +682,6 @@
   "incompleteBrewText": "While a Component is missing the Plate stays in the Recipe Book, but you can't brew it.",
   "incompleteWhereTitle": "Where to find them",
   "incompleteWhereText": "In Troves of Experience of its Grade or higher: sometimes a Trove gives a Component instead of a new Plate. Or by Recycling duplicates, at the bottom of the Trove page.",
-  "incompleteInfoTooltip": "What's missing"
+  "incompleteInfoTooltip": "What's missing",
+  "recipeQualiaUnknown": "A Qualia you don't know yet"
 }
