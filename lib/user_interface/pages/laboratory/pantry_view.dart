@@ -146,7 +146,6 @@ class _EssenceCard extends StatelessWidget {
       Column(
         key: ValueKey('essence-${essence.index}'),
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(date, style: hint),
           const SizedBox(height: Gaps.xs),

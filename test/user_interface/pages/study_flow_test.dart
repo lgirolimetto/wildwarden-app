@@ -1,3 +1,4 @@
+import 'package:druid_app/business_logic/rules/field/sky.dart';
 import 'package:druid_app/business_logic/models/enums/trait.dart';
 import 'package:druid_app/business_logic/models/game_event.dart';
 import 'package:druid_app/business_logic/rules/recipes/collection.dart';
@@ -90,16 +91,16 @@ void main() {
       await openTab(tester, 'Erbario');
       await scrollAndTap(tester, find.byKey(const ValueKey('met-Helleborus viridis')));
       await scrollTo(tester, find.byKey(const ValueKey('species-xp-to-cash')));
-      // Un'essenza porta tutti i tratti veri in quel momento: se ne scelgono più d'uno.
+      // Un'essenza porta tutte le Qualia vere in quel momento: luce e meteo si scelgono, la luna del giorno c'è sempre.
+      expect(find.byKey(const ValueKey('draw-trait-moon')), findsNothing);
       await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-rain')));
       await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-dusk')));
-      await scrollAndTap(tester, find.byKey(const ValueKey('draw-trait-moon')));
       await scrollAndTap(tester, find.byKey(const ValueKey('simulate-draw')));
 
       final state = Get.find<ProgressController>().state;
-      // I tratti si salvano nell'ordine in cui si mostrano: luce, luna, meteo.
+      // Le Qualia si salvano nell'ordine in cui si mostrano: luce, luna, meteo.
       expect(state.draws['Helleborus viridis'], [
-        ['dusk', 'moon', 'rain'],
+        ['dusk', moonTrait(Get.find<ProgressController>().now).name, 'rain'],
       ]);
       // Tre tratti distinti, ma il contatore si ferma al traguardo.
       expect(find.text('Essenze Attinte: 1/3 · Qualia diverse: 2/2'), findsOneWidget);
